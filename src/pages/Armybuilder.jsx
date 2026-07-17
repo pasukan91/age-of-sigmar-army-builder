@@ -3,30 +3,24 @@ import BuilderOption from "../components/ArmyBuilder/BuilderOption";
 import RegimentSection from "../components/ArmyBuilder/RegimentSection";
 import EmptyState from "../components/ArmyBuilder/EmptyState";
 
-import { useArmy } from "../context/ArmyContext";
-
-function ArmyBuilder() {
-
-  const {
-    currentList,
-    setCurrentList,
-    setSelector,
-    setPage,
-  } = useArmy();
-
+function ArmyBuilder({
+  list,
+  setCurrentList,
+  setSelector,
+  setPage,
+}) {
   return (
     <div>
-
-      <BuilderHeader list={currentList} />
+      <BuilderHeader list={list} />
 
       <BuilderOption
         title="Battle Formation"
-        value={currentList.battleFormation?.name}
+        value={list.battleFormation?.name || "No seleccionada"}
         onClick={() => {
           setSelector({
             title: "Battle Formation",
             property: "battleFormation",
-            options: currentList.faction.battleFormations,
+            options: list.faction.battleFormations,
           });
 
           setPage("selector");
@@ -35,23 +29,26 @@ function ArmyBuilder() {
 
       <BuilderOption
         title="Spell Lore"
-        value={currentList.spellLore?.name}
+        value={list.spellLore?.name || "No seleccionada"}
       />
 
       <BuilderOption
         title="Prayer Lore"
-        value={currentList.prayerLore?.name}
+        value={list.prayerLore?.name || "No seleccionada"}
       />
 
       <BuilderOption
         title="Manifestation Lore"
-        value={currentList.manifestationLore?.name}
+        value={list.manifestationLore?.name || "No seleccionada"}
       />
 
-      <RegimentSection />
+      <RegimentSection
+        list={list}
+        setSelector={setSelector}
+        setPage={setPage}
+      />
 
       <EmptyState />
-
     </div>
   );
 }

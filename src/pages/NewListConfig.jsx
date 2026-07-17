@@ -1,11 +1,13 @@
 import { createArmyList } from "../models/ArmyList";
 
-
-function NewListConfig({ army, setArmy }) {
-
-
+function NewListConfig({
+  army,
+  setArmy,
+  setLists,
+  setCurrentList,
+  setPage,
+}) {
   function handleCreateList() {
-
     const newList = createArmyList({
       name: army.name || "Nueva Lista",
       faction: army.faction,
@@ -24,12 +26,10 @@ function NewListConfig({ army, setArmy }) {
     <div style={{ textAlign: "center" }}>
       <h1>{army.faction.name}</h1>
 
-      <br />
-
       <input
         type="text"
-        placeholder="Nombre de la lista"
         value={army.name}
+        placeholder="Nombre de la lista"
         onChange={(e) =>
           setArmy({
             ...army,

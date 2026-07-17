@@ -6,6 +6,7 @@ import SelectAlliance from "./pages/SelectAlliance";
 import SelectFaction from "./pages/SelectFaction";
 import NewListConfig from "./pages/NewListConfig";
 import ArmyBuilder from "./pages/ArmyBuilder";
+import OptionSelector from "./pages/OptionSelector";
 
 function App() {
   const [page, setPage] = useState("home");
@@ -98,19 +99,43 @@ function App() {
         <OptionSelector
           title={selector.title}
           options={selector.options}
-
           goBack={() => setPage("builder")}
-
           onSelect={(option) => {
 
-            setCurrentList({
-              ...currentList,
+            let updatedList;
 
-              [selector.property]: option
-            });
+            if (selector.property === "newRegiment") {
+
+              updatedList = {
+                ...currentList,
+                regiments: [
+                  ...currentList.regiments,
+                  {
+                    id: crypto.randomUUID(),
+                    hero: option,
+                    units: [],
+                  },
+                ],
+              };
+
+            } else {
+
+              updatedList = {
+                ...currentList,
+                [selector.property]: option,
+              };
+
+            }
+
+            setCurrentList(updatedList);
+
+            setLists((previous) =>
+              previous.map((list) =>
+                list.id === updatedList.id ? updatedList : list
+              )
+            );
 
             setPage("builder");
-
           }}
         />
       );
@@ -131,6 +156,8 @@ function App() {
           onMyLists={() => setPage("lists")}
         />
       );
+
+
   }
 }
 
