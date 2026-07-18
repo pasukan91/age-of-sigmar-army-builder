@@ -1,30 +1,24 @@
-const heroicTraits = [
+export const heroicTraits = [
   {
     id: "backstabba",
-
     name: "Backstabba",
-
-    description: "",
-
+    points: 0,
+    description: ""
   },
 
   {
     id: "egomaniak",
-
     name: "Egomaniak",
-
-    description: "",
-
-    points: 10,
+    points: 0,
+    description: ""
   },
 
   {
     id: "slippery-skumbag",
-
     name: "Slippery Skumbag",
-
-    description: "",
-  },
+    points: 0,
+    description: ""
+  }
 ];
 
 export default heroicTraits;

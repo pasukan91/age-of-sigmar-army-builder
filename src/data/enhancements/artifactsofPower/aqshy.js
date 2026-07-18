@@ -1,27 +1,22 @@
-const artefacts = [
+const aqshyArtefacts = [
   {
     id: "tattermask",
-
     name: "Tattermask",
-
-    description: "",
+    points: 0,
+    description: ""
   },
-
   {
     id: "spell-in-a-rattle",
-
     name: "Spell in a Rattle",
-
-    description: "",
+    points: 0,
+    description: ""
   },
-
   {
     id: "woggly-bogstikk",
-
     name: "Woggly Bogstikk",
-
-    description: "",
-  },
+    points: 0,
+    description: ""
+  }
 ];
 
-export default artefacts;
+export default aqshyArtefacts;
