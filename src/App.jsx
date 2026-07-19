@@ -112,7 +112,11 @@ function App() {
                   ...currentList.regiments,
                   {
                     id: crypto.randomUUID(),
-                    hero: option,
+
+                    hero: {
+                      ...option,
+                    },
+
                     units: [],
                   },
                 ],

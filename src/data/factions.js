@@ -1,6 +1,11 @@
+import kruleboyz from "./factions/kruleboyz";
+export default [
+  kruleboyz,
+];
 const factions = [
-  // ORDEN
+  orruks,
 
+  // ORDEN
   {
     id: "stormcast",
     alliance: "order",
@@ -48,7 +53,6 @@ const factions = [
   },
 
   // MUERTE
-
   {
     id: "soulblight",
     alliance: "death",
@@ -71,7 +75,6 @@ const factions = [
   },
 
   // CAOS
-
   {
     id: "hashut",
     alliance: "chaos",
@@ -109,12 +112,6 @@ const factions = [
   },
 
   // DESTRUCCIÓN
-
-  {
-    id: "orruks",
-    alliance: "destruction",
-    name: "Orruk Warclans",
-  },
   {
     id: "gloomspite",
     alliance: "destruction",
@@ -129,6 +126,11 @@ const factions = [
     id: "behemat",
     alliance: "destruction",
     name: "Sons of Behemat",
+  },
+  {
+    id: "kruleboyz",
+    alliance: "destruction",
+    name: "Kruleboyz",
   },
 ];
 

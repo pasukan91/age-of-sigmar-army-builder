@@ -211,10 +211,143 @@ const units = [
     ],
 
     rules: {
+      hero: true,
+      unique: true,
+      monster: true,
       wizard: 2,
       priest: 0,
       ward: "6+",
       warmaster: true,
+      companion: true
+    }
+  },
+
+  {
+    id: "killaboss-on-great-gnashtoof",
+
+    name: "Killaboss on Great Gnashtoof",
+
+    image: "killaboss-on-great-gnashtoof.png",
+
+    points: 130,
+
+    profile: {
+      move: '10"',
+      health: 10,
+      control: 2,
+      save: "3+",
+      ward: null
+    },
+
+    weapons: [
+      {
+        name: "Boss-stikka",
+
+        attacks: 5,
+
+        hit: "4+",
+
+        wound: "3+",
+
+        rend: "1",
+
+        damage: "2",
+
+        abilities: [
+          "Crit (Mortal)"
+        ]
+      },
+
+      {
+        name: "Great Gnashtoof's Jaws",
+
+        attacks: 5,
+
+        hit: "4+",
+
+        wound: "3+",
+
+        rend: "1",
+
+        damage: "2",
+
+        abilities: [
+          "Companion"
+        ]
+      }
+    ],
+
+    abilities: [
+      {
+        type: "Your Hero Phase",
+
+        icon: "sun",
+
+        color: "gold",
+
+        phase: "Your Hero Phase",
+
+        castingValue: null,
+
+        keywords: [],
+
+        lore: null,
+
+        name: "All Part of Da Plan",
+
+        description:
+          "Declare: Pick another friendly KRULEBOYZ unit wholly within 9\" of this unit to be the target.\n\nEffect: Add 3 to the target's Control characteristic until the start of your next turn."
+      },
+
+      {
+        type: "Passive",
+
+        icon: "combat",
+
+        color: "gold",
+
+        phase: null,
+
+        castingValue: null,
+
+        keywords: [],
+
+        lore: null,
+
+        name: "That's Ours, Ya Gitz!",
+
+        description:
+          "While this unit is contesting an objective you do not control, add 1 to hit rolls for combat attacks made by friendly KRULEBOYZ units wholly within 12\" of this unit."
+      }
+    ],
+
+    details: {
+      models: 1,
+
+      baseSize: "105 × 70mm",
+
+      regimentOptions: [
+        "0-1 Mob Wrangler",
+        "Any Kruleboyz"
+      ]
+    },
+
+    keywords: [
+      "Hero",
+      "Monster",
+      "Cavalry",
+      "Destruction",
+      "Kruleboyz"
+    ],
+
+    rules: {
+      hero: true,
+      unique: false,
+      monster: true,
+      wizard: 0,
+      priest: 0,
+      ward: null,
+      warmaster: false,
       companion: true
     }
   }
