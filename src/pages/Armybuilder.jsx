@@ -5,7 +5,6 @@ import EmptyState from "../components/ArmyBuilder/EmptyState";
 
 function ArmyBuilder({
   list,
-  setCurrentList,
   setSelector,
   setPage,
 }) {

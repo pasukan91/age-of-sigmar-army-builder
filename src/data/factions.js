@@ -1,9 +1,9 @@
-import kruleboyz from "./factions/kruleboyz";
-export default [
-  kruleboyz,
-];
+import kruleboyz from "./kruleboyz";
+import hedonites from "./hedonites";
+
 const factions = [
-  orruks,
+  kruleboyz,
+  hedonites,
 
   // ORDEN
   {
@@ -126,11 +126,6 @@ const factions = [
     id: "behemat",
     alliance: "destruction",
     name: "Sons of Behemat",
-  },
-  {
-    id: "kruleboyz",
-    alliance: "destruction",
-    name: "Kruleboyz",
   },
 ];
 

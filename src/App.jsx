@@ -88,7 +88,6 @@ function App() {
       return (
         <ArmyBuilder
           list={currentList}
-          setCurrentList={setCurrentList}
           setSelector={setSelector}
           setPage={setPage}
         />
