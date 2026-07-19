@@ -2,49 +2,83 @@ import { useState } from "react";
 
 function Accordion({
   title,
+  subtitle,
   children,
   defaultOpen = false,
-  subtitle = null,
+  variant = "light",
 }) {
-  const [isOpen, setIsOpen] =
+  const [open, setOpen] =
     useState(defaultOpen);
+
+  const isDark = variant === "dark";
 
   return (
     <section
       style={{
-        marginBottom: 14,
-        border: "1px solid #d0d0d0",
-        borderRadius: 10,
+        marginBottom: 12,
+
+        border: isDark
+          ? "1px solid #414249"
+          : "1px solid #d2cec5",
+
+        borderRadius: 6,
+
+        backgroundColor: isDark
+          ? "#292a30"
+          : "#ffffff",
+
+        color: isDark
+          ? "#f6f3ea"
+          : "#17171a",
+
         overflow: "hidden",
-        backgroundColor: "#ffffff",
-        color: "#111111",
+
+        boxShadow:
+          "0 1px 2px rgba(0,0,0,0.14)",
       }}
     >
       <button
         type="button"
         onClick={() =>
-          setIsOpen((previous) => !previous)
+          setOpen((previous) => !previous)
         }
-        aria-expanded={isOpen}
+        aria-expanded={open}
         style={{
+          width: "100%",
+
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: 16,
-          width: "100%",
-          padding: 16,
+          gap: 14,
+
+          padding: "14px 16px",
+
           border: "none",
-          backgroundColor: "#ffffff",
-          color: "#111111",
+
+          backgroundColor: isDark
+            ? "#292a30"
+            : "#ffffff",
+
+          color: "inherit",
+
           textAlign: "left",
           cursor: "pointer",
         }}
       >
-        <div>
+        <div
+          style={{
+            flex: 1,
+            minWidth: 0,
+          }}
+        >
           <strong
             style={{
               display: "block",
-              fontSize: 18,
+
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: "0.025em",
+              textTransform: "uppercase",
             }}
           >
             {title}
@@ -54,9 +88,14 @@ function Accordion({
             <span
               style={{
                 display: "block",
-                marginTop: 4,
-                color: "#666666",
-                fontSize: 14,
+                marginTop: 3,
+
+                color: isDark
+                  ? "#b8b6bc"
+                  : "#68666a",
+
+                fontSize: 13,
+                fontWeight: 600,
               }}
             >
               {subtitle}
@@ -67,28 +106,48 @@ function Accordion({
         <span
           aria-hidden="true"
           style={{
-            flexShrink: 0,
-            fontSize: 22,
-            fontWeight: 700,
-            transform: isOpen
+            width: 28,
+            height: 28,
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            borderRadius: 999,
+
+            backgroundColor: open
+              ? "#17171a"
+              : "#dedbd3",
+
+            color: open
+              ? "#ffffff"
+              : "#17171a",
+
+            fontSize: 19,
+            fontWeight: 800,
+
+            transform: open
               ? "rotate(180deg)"
               : "rotate(0deg)",
+
             transition:
-              "transform 0.2s ease",
+              "transform 160ms ease",
           }}
         >
-          ▼
+         ⌄
         </span>
       </button>
 
-      {isOpen && (
+      {open && (
         <div
           style={{
-            padding: 16,
-            borderTop:
-              "1px solid #d0d0d0",
-            lineHeight: 1.6,
-            whiteSpace: "pre-line",
+            padding: "4px 16px 16px",
+
+            borderTop: isDark
+              ? "1px solid #414249"
+              : "1px solid #e0ddd6",
+
+            lineHeight: 1.55,
           }}
         >
           {children}

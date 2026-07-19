@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import Accordion from "../components/Accordion";
 import BackButton from "../components/BackButton";
 
 function UnitConfig({
@@ -11,37 +10,66 @@ function UnitConfig({
   onConfirm,
 }) {
   const [reinforced, setReinforced] =
-    useState(unit?.reinforced ?? false);
+    useState(false);
 
   const [heroicTrait, setHeroicTrait] =
-    useState(unit?.heroicTrait ?? null);
+    useState(null);
 
   const [monstrousTrait, setMonstrousTrait] =
-    useState(unit?.monstrousTrait ?? null);
+    useState(null);
 
   const [artefact, setArtefact] =
-    useState(unit?.artefact ?? null);
+    useState(null);
+
+  /*
+   * Si cambiamos de unidad sin desmontar el
+   * componente, sincronizamos el formulario.
+   */
+  useEffect(() => {
+    setReinforced(
+      Boolean(unit?.reinforced)
+    );
+
+    setHeroicTrait(
+      unit?.heroicTrait ?? null
+    );
+
+    setMonstrousTrait(
+      unit?.monstrousTrait ?? null
+    );
+
+    setArtefact(
+      unit?.artefact ?? null
+    );
+  }, [unit]);
 
   if (!unit) {
     return (
-      <div style={{ padding: 20 }}>
+      <main style={styles.page}>
         <BackButton onClick={goBack} />
 
         <p>
-          No se ha seleccionado ninguna unidad.
+          No hay ninguna unidad seleccionada.
         </p>
-      </div>
+      </main>
     );
   }
 
-  const keywords = Array.isArray(unit.keywords)
+  const keywords = Array.isArray(
+    unit.keywords
+  )
     ? unit.keywords.map((keyword) =>
-        String(keyword).toLowerCase()
+        String(keyword)
+          .trim()
+          .toLowerCase()
       )
     : [];
 
   const baseModels =
     Number(unit.details?.models) || 1;
+
+  const basePoints =
+    Number(unit.points) || 0;
 
   const isHero =
     unit.rules?.hero === true ||
@@ -55,38 +83,37 @@ function UnitConfig({
     unit.rules?.monster === true ||
     keywords.includes("monster");
 
-  /*
-   * Una unidad solamente puede reforzarse cuando:
-   *
-   * 1. No es Hero.
-   * 2. Su tamaño inicial es mayor de 1.
-   * 3. No está marcada explícitamente como no reforzable.
-   */
   const canBeReinforced =
     !isHero &&
     baseModels > 1 &&
     unit.rules?.canBeReinforced !== false;
 
-  const canSelectHeroicTrait =
-    isHero && !isUnique;
-
   const canSelectArtefact =
     isHero && !isUnique;
 
-  const canSelectMonsterTrait =
-    isMonster && !isUnique;
+  const canSelectHeroicTrait =
+    isHero && !isUnique;
+
+  const canSelectMonstrousTrait =
+    isHero &&
+    isMonster &&
+    !isUnique;
 
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
   ];
 
-  const totalModels = canBeReinforced && reinforced
-    ? baseModels * 2
-    : baseModels;
+  const heroicTraitOptions =
+    faction?.heroicTraits ?? [];
 
-  const basePoints =
-    Number(unit.points) || 0;
+  const monstrousTraitOptions =
+    faction?.monsterTraits ?? [];
+
+  const totalModels =
+    canBeReinforced && reinforced
+      ? baseModels * 2
+      : baseModels;
 
   const totalPoints =
     canBeReinforced && reinforced
@@ -94,235 +121,226 @@ function UnitConfig({
       : basePoints;
 
   function handleConfirm() {
+    if (
+      typeof onConfirm !== "function"
+    ) {
+      return;
+    }
+
     onConfirm({
       ...unit,
 
       reinforced:
-        canBeReinforced && reinforced,
+        canBeReinforced &&
+        reinforced,
 
-      heroicTrait: canSelectHeroicTrait
-        ? heroicTrait
-        : null,
+      configuredModels:
+        totalModels,
 
-      monstrousTrait: canSelectMonsterTrait
-        ? monstrousTrait
-        : null,
+      artefact:
+        canSelectArtefact
+          ? artefact
+          : null,
 
-      artefact: canSelectArtefact
-        ? artefact
-        : null,
+      heroicTrait:
+        canSelectHeroicTrait
+          ? heroicTrait
+          : null,
 
-      configuredModels: totalModels,
+      monstrousTrait:
+        canSelectMonstrousTrait
+          ? monstrousTrait
+          : null,
     });
   }
 
+  function toggleExclusiveOption(
+    setter,
+    option
+  ) {
+    setter((previous) =>
+      previous?.id === option.id
+        ? null
+        : option
+    );
+  }
+
+  function getConfirmText() {
+    if (mode === "editUnit") {
+      return "Guardar configuración";
+    }
+
+    if (mode === "newRegiment") {
+      return "Crear regimiento";
+    }
+
+    return "Añadir unidad";
+  }
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: 20,
-        backgroundColor: "#eeeeee",
-        color: "#111111",
-      }}
-    >
+    <main style={styles.page}>
       <BackButton onClick={goBack} />
 
-      <h1>{unit.name}</h1>
-
-      <Accordion
-        title="Resumen"
-        defaultOpen
-      >
-        <p>
-          <strong>Puntos:</strong>{" "}
-          {totalPoints}
-        </p>
-
-        <p>
-          <strong>Modelos:</strong>{" "}
-          {totalModels}
-        </p>
-
-        <p>
-          <strong>Salud:</strong>{" "}
-          {unit.profile?.health ?? "-"}
-        </p>
-
-        <p>
-          <strong>Salvación:</strong>{" "}
-          {unit.profile?.save ?? "-"}
-        </p>
-
-        {isHero && (
-          <p>
-            <strong>Tipo:</strong> Héroe
+      <header style={styles.header}>
+        <div>
+          <p style={styles.eyebrow}>
+            Configuración
           </p>
-        )}
 
-        {isUnique && (
-          <p>
-            <strong>Tipo:</strong> Única
-          </p>
-        )}
-      </Accordion>
+          <h1 style={styles.title}>
+            {unit.name}
+          </h1>
+        </div>
+
+        <div style={styles.pointsBox}>
+          <strong>{totalPoints}</strong>
+
+          <span>
+            {totalPoints === 1
+              ? " punto"
+              : " puntos"}
+          </span>
+        </div>
+      </header>
+
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>
+          Resumen
+        </h2>
+
+        <div style={styles.summaryGrid}>
+          <SummaryItem
+            label="Modelos"
+            value={totalModels}
+          />
+
+          <SummaryItem
+            label="Movimiento"
+            value={
+              unit.profile?.move ?? "-"
+            }
+          />
+
+          <SummaryItem
+            label="Salud"
+            value={
+              unit.profile?.health ?? "-"
+            }
+          />
+
+          <SummaryItem
+            label="Salvación"
+            value={
+              unit.profile?.save ?? "-"
+            }
+          />
+        </div>
+      </section>
 
       {canBeReinforced && (
-        <Accordion
-          title="Tamaño de unidad"
-          subtitle={
-            reinforced
-              ? `${totalModels} miniaturas`
-              : `${baseModels} miniaturas`
-          }
-          defaultOpen
-        >
-          <label
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 20,
-              padding: 12,
-              border: "1px solid #cccccc",
-              borderRadius: 8,
-              cursor: "pointer",
-            }}
-          >
-            <div>
-              <strong>Unidad reforzada</strong>
+        <section style={styles.section}>
+          <h2 style={styles.sectionTitle}>
+            Tamaño de unidad
+          </h2>
 
-              <p
-                style={{
-                  margin: "5px 0 0",
-                  color: "#555555",
-                }}
-              >
-                Duplica el tamaño y el coste de la
-                unidad.
-              </p>
-            </div>
-
-            <input
-              type="checkbox"
-              checked={reinforced}
-              onChange={(event) =>
-                setReinforced(
-                  event.target.checked
-                )
-              }
-              style={{
-                width: 28,
-                height: 28,
-              }}
-            />
-          </label>
-
-          <div
-            style={{
-              marginTop: 14,
-              padding: 12,
-              borderRadius: 8,
-              backgroundColor: "#f3f3f3",
-            }}
-          >
-            <p style={{ marginTop: 0 }}>
-              <strong>
-                Tamaño inicial:
-              </strong>{" "}
-              {baseModels} miniaturas
-            </p>
-
-            <p>
-              <strong>
-                Tamaño seleccionado:
-              </strong>{" "}
-              {totalModels} miniaturas
-            </p>
-
-            <p style={{ marginBottom: 0 }}>
-              <strong>
-                Coste seleccionado:
-              </strong>{" "}
-              {totalPoints} puntos
-            </p>
-          </div>
-        </Accordion>
+          <CheckboxOption
+            title="Unidad reforzada"
+            description={
+              `Duplica el tamaño de ` +
+              `${baseModels} a ` +
+              `${baseModels * 2} modelos.`
+            }
+            checked={reinforced}
+            onChange={() =>
+              setReinforced(
+                (previous) => !previous
+              )
+            }
+          />
+        </section>
       )}
-
-      {!isHero &&
-        baseModels <= 1 && (
-          <Accordion title="Tamaño de unidad">
-            <p style={{ margin: 0 }}>
-              Esta unidad tiene un tamaño inicial
-              de una miniatura y no puede
-              reforzarse.
-            </p>
-          </Accordion>
-        )}
 
       {canSelectArtefact && (
         <SelectionSection
           title="Artefacto de poder"
           options={artefactOptions}
           selected={artefact}
-          onSelect={setArtefact}
+          onToggle={(option) =>
+            toggleExclusiveOption(
+              setArtefact,
+              option
+            )
+          }
         />
       )}
 
       {canSelectHeroicTrait && (
         <SelectionSection
           title="Rasgo heroico"
-          options={
-            faction?.heroicTraits ?? []
-          }
+          options={heroicTraitOptions}
           selected={heroicTrait}
-          onSelect={setHeroicTrait}
+          onToggle={(option) =>
+            toggleExclusiveOption(
+              setHeroicTrait,
+              option
+            )
+          }
         />
       )}
 
-      {canSelectMonsterTrait && (
+      {canSelectMonstrousTrait && (
         <SelectionSection
           title="Rasgo monstruoso"
           options={
-            faction?.monsterTraits ?? []
+            monstrousTraitOptions
           }
           selected={monstrousTrait}
-          onSelect={setMonstrousTrait}
+          onToggle={(option) =>
+            toggleExclusiveOption(
+              setMonstrousTrait,
+              option
+            )
+          }
         />
       )}
 
       {isUnique && (
-        <Accordion
-          title="Mejoras"
-          defaultOpen
-        >
-          <p style={{ margin: 0 }}>
-            Esta unidad es{" "}
-            <strong>Unique</strong> y no puede
+        <section style={styles.section}>
+          <h2 style={styles.sectionTitle}>
+            Mejoras
+          </h2>
+
+          <p style={styles.emptyText}>
+            Esta unidad es única y no puede
             recibir artefactos ni rasgos.
           </p>
-        </Accordion>
+        </section>
       )}
 
       <button
         type="button"
         onClick={handleConfirm}
-        style={{
-          width: "100%",
-          padding: 16,
-          border: "none",
-          borderRadius: 10,
-          backgroundColor: "#000000",
-          color: "#ffffff",
-          fontSize: 18,
-          fontWeight: 700,
-          cursor: "pointer",
-        }}
+        style={styles.confirmButton}
       >
-        {mode === "newRegiment"
-          ? "Crear regimiento"
-          : "Añadir unidad"}
+        {getConfirmText()}
       </button>
+    </main>
+  );
+}
+
+function SummaryItem({
+  label,
+  value,
+}) {
+  return (
+    <div style={styles.summaryItem}>
+      <span style={styles.summaryLabel}>
+        {label}
+      </span>
+
+      <strong style={styles.summaryValue}>
+        {value}
+      </strong>
     </div>
   );
 }
@@ -331,119 +349,224 @@ function SelectionSection({
   title,
   options = [],
   selected,
-  onSelect,
+  onToggle,
 }) {
   return (
-    <Accordion
-      title={title}
-      subtitle={
-        selected
-          ? selected.name
-          : "Ninguno seleccionado"
-      }
-    >
+    <section style={styles.section}>
+      <h2 style={styles.sectionTitle}>
+        {title}
+      </h2>
+
       {options.length === 0 && (
-        <p>No hay opciones disponibles.</p>
+        <p style={styles.emptyText}>
+          No hay opciones disponibles.
+        </p>
       )}
 
-      <button
-        type="button"
-        onClick={() => onSelect(null)}
-        style={{
-          width: "100%",
-          padding: 12,
-          marginBottom: 10,
-          border: "1px solid #cccccc",
-          borderRadius: 8,
-          backgroundColor:
-            selected === null
-              ? "#e5e5e5"
-              : "#ffffff",
-          color: "#111111",
-          textAlign: "left",
-          cursor: "pointer",
-        }}
-      >
-        Ninguno
-      </button>
-
       {options.map((option) => (
-        <div
+        <CheckboxOption
           key={option.id}
-          style={{
-            marginBottom: 10,
-            border: "1px solid #cccccc",
-            borderRadius: 8,
-            overflow: "hidden",
-            backgroundColor: "#ffffff",
-          }}
-        >
-          <label
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 16,
-              padding: 12,
-              backgroundColor:
-                selected?.id === option.id
-                  ? "#e5e5e5"
-                  : "#ffffff",
-              cursor: "pointer",
-            }}
-          >
-            <div>
-              <strong>{option.name}</strong>
-
-              {Number(option.points) > 0 && (
-                <p
-                  style={{
-                    margin: "4px 0 0",
-                  }}
-                >
-                  {Number(option.points)} puntos
-                </p>
-              )}
-            </div>
-
-            <input
-              type="radio"
-              name={title}
-              checked={
-                selected?.id === option.id
-              }
-              onChange={() =>
-                onSelect(option)
-              }
-              style={{
-                width: 24,
-                height: 24,
-              }}
-            />
-          </label>
-
-          {option.description && (
-            <div
-              style={{
-                padding: "0 10px 10px",
-              }}
-            >
-              <Accordion title="Descripción">
-                <p
-                  style={{
-                    margin: 0,
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {option.description}
-                </p>
-              </Accordion>
-            </div>
-          )}
-        </div>
+          title={option.name}
+          description={
+            option.description
+          }
+          checked={
+            selected?.id === option.id
+          }
+          onChange={() =>
+            onToggle(option)
+          }
+        />
       ))}
-    </Accordion>
+    </section>
   );
 }
+
+function CheckboxOption({
+  title,
+  description,
+  checked,
+  onChange,
+}) {
+  return (
+    <label
+      style={{
+        ...styles.optionCard,
+
+        ...(checked
+          ? styles.selectedOptionCard
+          : {}),
+      }}
+    >
+      <div style={styles.optionContent}>
+        <strong style={styles.optionTitle}>
+          {title}
+        </strong>
+
+        {description && (
+          <p
+            style={
+              styles.optionDescription
+            }
+          >
+            {description}
+          </p>
+        )}
+      </div>
+
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        style={styles.checkbox}
+      />
+    </label>
+  );
+}
+
+const styles = {
+  page: {
+    minHeight: "100vh",
+    padding: 20,
+    backgroundColor: "#eeeeee",
+    color: "#111111",
+  },
+
+  header: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: 20,
+    marginBottom: 20,
+  },
+
+  eyebrow: {
+    margin: "0 0 4px",
+    color: "#666666",
+    fontSize: 13,
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  },
+
+  title: {
+    margin: 0,
+  },
+
+  pointsBox: {
+    minWidth: 90,
+    padding: 12,
+    borderRadius: 10,
+    backgroundColor: "#ffffff",
+    textAlign: "center",
+  },
+
+  section: {
+    padding: 18,
+    marginBottom: 18,
+    borderRadius: 12,
+    backgroundColor: "#ffffff",
+  },
+
+  sectionTitle: {
+    margin: "0 0 14px",
+    textAlign: "center",
+    fontSize: 22,
+  },
+
+  summaryGrid: {
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit, minmax(120px, 1fr))",
+    gap: 10,
+  },
+
+  summaryItem: {
+    padding: 12,
+    border: "1px solid #dddddd",
+    borderRadius: 8,
+    backgroundColor: "#fafafa",
+    textAlign: "center",
+  },
+
+  summaryLabel: {
+    display: "block",
+    marginBottom: 4,
+    color: "#666666",
+    fontSize: 12,
+    fontWeight: 700,
+    textTransform: "uppercase",
+  },
+
+  summaryValue: {
+    fontSize: 18,
+  },
+
+  optionCard: {
+    width: "100%",
+    boxSizing: "border-box",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 18,
+    padding: 16,
+    marginBottom: 10,
+    border: "1px solid #cccccc",
+    borderRadius: 9,
+    backgroundColor: "#ffffff",
+    color: "#111111",
+    cursor: "pointer",
+  },
+
+  selectedOptionCard: {
+    border: "2px solid #111111",
+    backgroundColor: "#f3f3f3",
+  },
+
+  optionContent: {
+    flex: 1,
+    minWidth: 0,
+    textAlign: "center",
+  },
+
+  optionTitle: {
+    display: "block",
+    fontSize: 17,
+  },
+
+  optionDescription: {
+    margin: "8px 0 0",
+    whiteSpace: "pre-line",
+    lineHeight: 1.5,
+    fontSize: 16,
+  },
+
+  checkbox: {
+    width: 26,
+    height: 26,
+    flexShrink: 0,
+    accentColor: "#111111",
+    cursor: "pointer",
+  },
+
+  emptyText: {
+    margin: 0,
+    textAlign: "center",
+    color: "#555555",
+  },
+
+  confirmButton: {
+    width: "100%",
+    padding: 16,
+    marginTop: 4,
+    border: "none",
+    borderRadius: 10,
+    backgroundColor: "#000000",
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: 700,
+    cursor: "pointer",
+  },
+};
 
 export default UnitConfig;

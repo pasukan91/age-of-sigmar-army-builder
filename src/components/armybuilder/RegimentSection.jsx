@@ -2,315 +2,807 @@ function RegimentSection({
   list,
   setSelector,
   setPage,
+  onViewWarscroll,
+  onConfigureUnit,
+  onRemoveUnit,
+  onRemoveRegiment,
 }) {
-  const factionUnits = Array.isArray(list.faction?.units)
+  const regiments = Array.isArray(
+    list?.regiments
+  )
+    ? list.regiments
+    : [];
+
+  const factionUnits = Array.isArray(
+    list?.faction?.units
+  )
     ? list.faction.units
     : [];
 
-  const availableHeroes = factionUnits.filter(
-    (unit) => unit.rules?.hero === true
-  );
+  const availableHeroes =
+    factionUnits.filter(
+      (unit) =>
+        unit.rules?.hero === true
+    );
 
   function isWarmaster(unit) {
-    return (
-      unit.rules?.warmaster === true ||
-      unit.keywords?.includes("Warmaster")
+    if (
+      unit?.rules?.warmaster === true
+    ) {
+      return true;
+    }
+
+    return unit?.keywords?.some(
+      (keyword) =>
+        String(keyword)
+          .trim()
+          .toLowerCase() ===
+        "warmaster"
     );
   }
 
-  function getRegimentLimit(regimentIndex) {
-    return regimentIndex === 0 ? 4 : 3;
+  function getRegimentLimit(index) {
+    return index === 0 ? 4 : 3;
   }
 
-  function unitMatchesOption(unit, option) {
-    const normalizedOption = option
-      .toLowerCase()
-      .trim();
+  function unitMatchesOption(
+    unit,
+    option
+  ) {
+    const normalizedOption =
+      String(option)
+        .trim()
+        .toLowerCase();
 
-    const keywords = Array.isArray(unit.keywords)
-      ? unit.keywords.map((keyword) =>
-          keyword.toLowerCase()
+    const keywords =
+      Array.isArray(unit?.keywords)
+        ? unit.keywords.map(
+            (keyword) =>
+              String(keyword)
+                .trim()
+                .toLowerCase()
+          )
+        : [];
+
+    if (
+      normalizedOption ===
+        "any faction unit" ||
+      normalizedOption ===
+        "any kruleboyz" ||
+      normalizedOption ===
+        "any hedonites of slaanesh"
+    ) {
+      return true;
+    }
+
+    return keywords.some(
+      (keyword) =>
+        normalizedOption.includes(
+          keyword
+        ) ||
+        keyword.includes(
+          normalizedOption
         )
-      : [];
-
-    if (
-      normalizedOption === "any faction unit" ||
-      normalizedOption === "any kruleboyz" ||
-      normalizedOption === "any hedonites of slaanesh"
-    ) {
-      return true;
-    }
-
-    if (
-      normalizedOption.includes("kruleboyz") &&
-      keywords.includes("kruleboyz")
-    ) {
-      return true;
-    }
-
-    if (
-      normalizedOption.includes("hedonites of slaanesh") &&
-      keywords.includes("hedonites of slaanesh")
-    ) {
-      return true;
-    }
-
-    return keywords.some((keyword) =>
-      normalizedOption.includes(keyword)
     );
   }
 
-  function getAvailableUnits(regiment) {
+  function getAvailableUnits(
+    regiment
+  ) {
     const regimentOptions =
-      regiment.hero.details?.regimentOptions ?? [];
+      Array.isArray(
+        regiment?.hero?.details
+          ?.regimentOptions
+      )
+        ? regiment.hero.details
+            .regimentOptions
+        : [];
 
-    return factionUnits.filter((unit) => {
-      /*
-       * El líder del regimiento no puede volver
-       * a añadirse dentro del mismo regimiento.
-       */
-      if (unit.id === regiment.hero.id) {
-        return false;
+    return factionUnits.filter(
+      (unit) => {
+        if (
+          unit.id === regiment.hero?.id
+        ) {
+          return false;
+        }
+
+        if (isWarmaster(unit)) {
+          return false;
+        }
+
+        if (
+          regimentOptions.length === 0
+        ) {
+          return true;
+        }
+
+        return regimentOptions.some(
+          (option) =>
+            unitMatchesOption(
+              unit,
+              option
+            )
+        );
       }
+    );
+  }
 
-      /*
-       * Los Warmaster no pueden añadirse como
-       * unidades subordinadas.
-       */
-      if (isWarmaster(unit)) {
-        return false;
-      }
+  function getUnitPoints(unit) {
+    const basePoints =
+      Number(unit?.points) || 0;
 
-      /*
-       * Hasta que rellenemos las opciones de
-       * regimiento, permitimos cualquier unidad
-       * de la facción excepto las bloqueadas arriba.
-       */
-      if (regimentOptions.length === 0) {
-        return true;
-      }
+    return unit?.reinforced
+      ? basePoints * 2
+      : basePoints;
+  }
 
-      return regimentOptions.some((option) =>
-        unitMatchesOption(unit, option)
+  function getUnitModels(unit) {
+    const baseModels =
+      Number(
+        unit?.details?.models
+      ) || 1;
+
+    return unit?.reinforced
+      ? baseModels * 2
+      : baseModels;
+  }
+
+  function requestRemoveUnit(
+    regiment,
+    unit
+  ) {
+    if (
+      typeof onRemoveUnit !==
+      "function"
+    ) {
+      console.error(
+        "RegimentSection no ha recibido onRemoveUnit."
       );
+
+      return;
+    }
+
+    if (!unit.instanceId) {
+      console.error(
+        "La unidad no tiene instanceId.",
+        unit
+      );
+
+      return;
+    }
+
+    const confirmed =
+      window.confirm(
+        `¿Eliminar ${unit.name} del regimiento de ${regiment.hero.name}?`
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    onRemoveUnit({
+      regimentId: regiment.id,
+      unitInstanceId:
+        unit.instanceId,
     });
   }
 
-  return (
-    <div
-      style={{
-        padding: 20,
-      }}
-    >
-      <h2>Regimientos</h2>
+  function requestRemoveRegiment(
+    regiment,
+    regimentIndex
+  ) {
+    if (
+      typeof onRemoveRegiment !==
+      "function"
+    ) {
+      console.error(
+        "RegimentSection no ha recibido onRemoveRegiment."
+      );
 
-      {list.regiments.length === 0 && (
-        <p>No hay ningún regimiento añadido.</p>
+      return;
+    }
+
+    const description =
+      regimentIndex === 0
+        ? "el regimiento del general"
+        : `el regimiento de ${regiment.hero.name}`;
+
+    const confirmed =
+      window.confirm(
+        `¿Eliminar ${description}?\n\nSe eliminarán también todas sus unidades.`
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    onRemoveRegiment(
+      regiment.id
+    );
+  }
+
+  return (
+    <section style={styles.section}>
+      <h2 style={styles.title}>
+        Regimientos
+      </h2>
+
+      {regiments.length === 0 && (
+        <div style={styles.emptyCard}>
+          No hay ningún regimiento.
+        </div>
       )}
 
-      {list.regiments.map(
-        (regiment, regimentIndex) => {
-          const regimentLimit =
-            getRegimentLimit(regimentIndex);
+      {regiments.map(
+        (
+          regiment,
+          regimentIndex
+        ) => {
+          const units =
+            Array.isArray(
+              regiment.units
+            )
+              ? regiment.units
+              : [];
 
-          const occupiedSlots =
-            regiment.units.length;
+          const limit =
+            getRegimentLimit(
+              regimentIndex
+            );
 
           const availableSlots =
-            regimentLimit - occupiedSlots;
+            Math.max(
+              limit - units.length,
+              0
+            );
 
-          const isGeneralRegiment =
-            regimentIndex === 0;
-
-          const regimentIsFull =
-            availableSlots <= 0;
+          const full =
+            units.length >= limit;
 
           const selectableUnits =
-            getAvailableUnits(regiment);
+            getAvailableUnits(
+              regiment
+            );
 
           return (
-            <div
+            <article
               key={regiment.id}
-              style={{
-                border: "1px solid gray",
-                borderRadius: 8,
-                padding: 15,
-                marginBottom: 20,
-              }}
+              style={
+                styles.regimentCard
+              }
             >
-              <h3>
-                Regimiento {regimentIndex + 1}
-                {isGeneralRegiment
-                  ? " — General"
-                  : ""}
-              </h3>
+              <header
+                style={
+                  styles.regimentHeader
+                }
+              >
+                <div>
+                  <h3
+                    style={
+                      styles.regimentTitle
+                    }
+                  >
+                    Regimiento{" "}
+                    {regimentIndex + 1}
+                  </h3>
 
-              <p>
-                Unidades: {occupiedSlots}/
-                {regimentLimit}
+                  <p
+                    style={
+                      styles.regimentSubtitle
+                    }
+                  >
+                    {regimentIndex === 0
+                      ? "Regimiento del general"
+                      : `Liderado por ${regiment.hero.name}`}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    requestRemoveRegiment(
+                      regiment,
+                      regimentIndex
+                    )
+                  }
+                  style={
+                    styles.deleteRegimentButton
+                  }
+                >
+                  Eliminar regimiento
+                </button>
+              </header>
+
+              <div style={styles.slotsRow}>
+                <span>
+                  Unidades:{" "}
+                  {units.length}/{limit}
+                </span>
+
+                <span>
+                  {availableSlots}{" "}
+                  {availableSlots === 1
+                    ? "plaza disponible"
+                    : "plazas disponibles"}
+                </span>
+              </div>
+
+              <p
+                style={
+                  styles.sectionLabel
+                }
+              >
+                Líder
               </p>
 
-              <div
-                style={{
-                  border: "1px solid lightgray",
-                  borderRadius: 8,
-                  padding: 12,
-                  marginBottom: 15,
+              <UnitCard
+                unit={regiment.hero}
+                isLeader
+                points={getUnitPoints(
+                  regiment.hero
+                )}
+                models={getUnitModels(
+                  regiment.hero
+                )}
+                onView={() => {
+                  if (
+                    typeof onViewWarscroll ===
+                    "function"
+                  ) {
+                    onViewWarscroll({
+                      unit:
+                        regiment.hero,
+                      regimentId:
+                        regiment.id,
+                      isLeader: true,
+                    });
+                  }
                 }}
+                onConfigure={() => {
+                  if (
+                    typeof onConfigureUnit ===
+                    "function"
+                  ) {
+                    onConfigureUnit({
+                      unit:
+                        regiment.hero,
+                      regimentId:
+                        regiment.id,
+                      isLeader: true,
+                    });
+                  }
+                }}
+              />
+
+              <p
+                style={
+                  styles.sectionLabel
+                }
               >
-                <strong>
-                  {regiment.hero.name}
-                </strong>
+                Unidades
+              </p>
 
-                <p style={{ marginBottom: 0 }}>
-                  {regiment.hero.points} pts
-                </p>
+              {units.length === 0 && (
+                <div
+                  style={
+                    styles.emptyUnitCard
+                  }
+                >
+                  Todavía no hay unidades.
+                </div>
+              )}
 
-                {isWarmaster(regiment.hero) && (
-                  <p>
-                    <strong>Warmaster</strong>
-                  </p>
-                )}
-
-                {regiment.hero.heroicTrait && (
-                  <p>
-                    Rasgo heroico:{" "}
-                    {regiment.hero.heroicTrait.name}
-                  </p>
-                )}
-
-                {regiment.hero.artefact && (
-                  <p>
-                    Artefacto:{" "}
-                    {regiment.hero.artefact.name}
-                  </p>
-                )}
-
-                {regiment.hero.monstrousTrait && (
-                  <p>
-                    Rasgo monstruoso:{" "}
-                    {
-                      regiment.hero
-                        .monstrousTrait.name
+              {units.map((unit) => (
+                <UnitCard
+                  key={unit.instanceId}
+                  unit={unit}
+                  points={getUnitPoints(
+                    unit
+                  )}
+                  models={getUnitModels(
+                    unit
+                  )}
+                  onView={() => {
+                    if (
+                      typeof onViewWarscroll ===
+                      "function"
+                    ) {
+                      onViewWarscroll({
+                        unit,
+                        regimentId:
+                          regiment.id,
+                        isLeader: false,
+                      });
                     }
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <h4>Unidades</h4>
-
-                {regiment.units.length === 0 && (
-                  <p>
-                    No hay unidades en este
-                    regimiento.
-                  </p>
-                )}
-
-                {regiment.units.map((unit) => (
-                  <div
-                    key={unit.instanceId}
-                    style={{
-                      border:
-                        "1px solid lightgray",
-                      borderRadius: 8,
-                      padding: 12,
-                      marginBottom: 10,
-                    }}
-                  >
-                    <strong>{unit.name}</strong>
-
-                    <p style={{ marginBottom: 0 }}>
-                      {unit.points} pts
-                    </p>
-
-                    {unit.rules?.hero && (
-                      <p style={{ marginBottom: 0 }}>
-                        Héroe
-                      </p>
-                    )}
-
-                    {unit.reinforced && (
-                      <p style={{ marginBottom: 0 }}>
-                        Reforzada
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
+                  }}
+                  onConfigure={() => {
+                    if (
+                      typeof onConfigureUnit ===
+                      "function"
+                    ) {
+                      onConfigureUnit({
+                        unit,
+                        regimentId:
+                          regiment.id,
+                        isLeader: false,
+                      });
+                    }
+                  }}
+                  onRemove={() =>
+                    requestRemoveUnit(
+                      regiment,
+                      unit
+                    )
+                  }
+                />
+              ))}
 
               <button
                 type="button"
                 disabled={
-                  regimentIsFull ||
-                  selectableUnits.length === 0
+                  full ||
+                  selectableUnits.length ===
+                    0
                 }
                 onClick={() => {
                   setSelector({
-                    title: `Añadir unidad a ${regiment.hero.name}`,
+                    title:
+                      `Añadir unidad a ` +
+                      regiment.hero.name,
 
-                    property: "newUnit",
+                    property:
+                      "newUnit",
 
-                    regimentId: regiment.id,
+                    regimentId:
+                      regiment.id,
 
-                    options: selectableUnits,
+                    options:
+                      selectableUnits,
                   });
 
-                  setPage("selector");
+                  navigate("selector");
                 }}
                 style={{
+                  ...styles.addUnitButton,
+
                   opacity:
-                    regimentIsFull ||
-                    selectableUnits.length === 0
+                    full ||
+                    selectableUnits.length ===
+                      0
                       ? 0.5
                       : 1,
 
                   cursor:
-                    regimentIsFull ||
-                    selectableUnits.length === 0
+                    full ||
+                    selectableUnits.length ===
+                      0
                       ? "not-allowed"
                       : "pointer",
                 }}
               >
-                {regimentIsFull
+                {full
                   ? "Regimiento completo"
-                  : selectableUnits.length === 0
-                    ? "No hay unidades disponibles"
-                    : `+ Añadir Unidad (${availableSlots} plazas)`}
+                  : "+ Añadir unidad"}
               </button>
-            </div>
+            </article>
           );
         }
       )}
 
       <button
         type="button"
+        disabled={
+          availableHeroes.length === 0
+        }
         onClick={() => {
           setSelector({
-            title: "Selecciona un héroe",
+            title:
+              "Selecciona el líder del regimiento",
 
-            property: "newRegiment",
+            property:
+              "newRegiment",
 
             regimentId: null,
 
-            options: availableHeroes,
+            options:
+              availableHeroes,
           });
 
-          setPage("selector");
+          navigate("selector");
         }}
-        disabled={availableHeroes.length === 0}
+        style={
+          styles.addRegimentButton
+        }
       >
-        + Añadir Regimiento
+        + Añadir regimiento
       </button>
-
-      {availableHeroes.length === 0 && (
-        <p>
-          Esta facción todavía no tiene héroes
-          disponibles en su archivo units.js.
-        </p>
-      )}
-    </div>
+    </section>
   );
 }
+
+function UnitCard({
+  unit,
+  isLeader = false,
+  points,
+  models,
+  onView,
+  onConfigure,
+  onRemove,
+}) {
+  return (
+    <article style={styles.unitCard}>
+      <div style={styles.unitInfo}>
+        <strong style={styles.unitName}>
+          {unit.name}
+        </strong>
+
+        <div style={styles.badges}>
+          {isLeader && (
+            <span style={styles.badge}>
+              Líder
+            </span>
+          )}
+
+          {unit.rules?.hero && (
+            <span style={styles.badge}>
+              Héroe
+            </span>
+          )}
+
+          {unit.reinforced && (
+            <span style={styles.badge}>
+              Reforzada
+            </span>
+          )}
+        </div>
+
+        <p style={styles.summary}>
+          {models}{" "}
+          {models === 1
+            ? "miniatura"
+            : "miniaturas"}{" "}
+          · {points} puntos
+        </p>
+
+        {unit.artefact && (
+          <p style={styles.upgrade}>
+            <strong>
+              Artefacto:
+            </strong>{" "}
+            {unit.artefact.name}
+          </p>
+        )}
+
+        {unit.heroicTrait && (
+          <p style={styles.upgrade}>
+            <strong>
+              Rasgo heroico:
+            </strong>{" "}
+            {unit.heroicTrait.name}
+          </p>
+        )}
+
+        {unit.monstrousTrait && (
+          <p style={styles.upgrade}>
+            <strong>
+              Rasgo monstruoso:
+            </strong>{" "}
+            {
+              unit.monstrousTrait
+                .name
+            }
+          </p>
+        )}
+      </div>
+
+      <div style={styles.actions}>
+        <button
+          type="button"
+          onClick={onView}
+          style={
+            styles.secondaryButton
+          }
+        >
+          Warscroll
+        </button>
+
+        <button
+          type="button"
+          onClick={onConfigure}
+          style={styles.primaryButton}
+        >
+          Configuración
+        </button>
+
+        {!isLeader && (
+          <button
+            type="button"
+            onClick={onRemove}
+            style={
+              styles.deleteUnitButton
+            }
+          >
+            Eliminar
+          </button>
+        )}
+      </div>
+    </article>
+  );
+}
+
+const styles = {
+  section: {
+    padding: 20,
+  },
+
+  title: {
+    marginTop: 0,
+  },
+
+  emptyCard: {
+    padding: 18,
+    marginBottom: 20,
+    borderRadius: 10,
+    backgroundColor: "#ffffff",
+  },
+
+  regimentCard: {
+    padding: 16,
+    marginBottom: 20,
+    border: "1px solid #bbbbbb",
+    borderRadius: 12,
+    backgroundColor: "#ffffff",
+  },
+
+  regimentHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: 14,
+    marginBottom: 12,
+  },
+
+  regimentTitle: {
+    margin: 0,
+  },
+
+  regimentSubtitle: {
+    margin: "4px 0 0",
+    color: "#666666",
+  },
+
+  slotsRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 10,
+    padding: 10,
+    marginBottom: 16,
+    borderRadius: 8,
+    backgroundColor: "#eeeeee",
+  },
+
+  sectionLabel: {
+    margin: "15px 0 8px",
+    color: "#666666",
+    fontSize: 13,
+    fontWeight: 700,
+    textTransform: "uppercase",
+  },
+
+  unitCard: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 14,
+    padding: 14,
+    marginBottom: 10,
+    border: "1px solid #d0d0d0",
+    borderRadius: 9,
+    backgroundColor: "#fafafa",
+  },
+
+  unitInfo: {
+    flex: "1 1 260px",
+  },
+
+  unitName: {
+    fontSize: 17,
+  },
+
+  badges: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 5,
+    marginTop: 7,
+  },
+
+  badge: {
+    padding: "3px 7px",
+    borderRadius: 999,
+    backgroundColor: "#dddddd",
+    fontSize: 11,
+    fontWeight: 700,
+  },
+
+  summary: {
+    margin: "8px 0 0",
+    color: "#555555",
+  },
+
+  upgrade: {
+    margin: "6px 0 0",
+    fontSize: 14,
+  },
+
+  actions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+
+  secondaryButton: {
+    padding: "9px 12px",
+    border: "1px solid #111111",
+    borderRadius: 7,
+    backgroundColor: "#ffffff",
+    cursor: "pointer",
+  },
+
+  primaryButton: {
+    padding: "9px 12px",
+    border: "1px solid #111111",
+    borderRadius: 7,
+    backgroundColor: "#111111",
+    color: "#ffffff",
+    cursor: "pointer",
+  },
+
+  deleteUnitButton: {
+    padding: "9px 12px",
+    border: "1px solid #a40000",
+    borderRadius: 7,
+    backgroundColor: "#ffffff",
+    color: "#a40000",
+    cursor: "pointer",
+  },
+
+  deleteRegimentButton: {
+    padding: "8px 10px",
+    border: "1px solid #a40000",
+    borderRadius: 7,
+    backgroundColor: "#ffffff",
+    color: "#a40000",
+    cursor: "pointer",
+  },
+
+  addUnitButton: {
+    width: "100%",
+    padding: 13,
+    border: "1px solid #111111",
+    borderRadius: 8,
+    backgroundColor: "#ffffff",
+    fontWeight: 700,
+  },
+
+  addRegimentButton: {
+    width: "100%",
+    padding: 15,
+    border: "none",
+    borderRadius: 9,
+    backgroundColor: "#111111",
+    color: "#ffffff",
+    fontWeight: 700,
+    cursor: "pointer",
+  },
+
+  emptyUnitCard: {
+    padding: 14,
+    marginBottom: 10,
+    border: "1px dashed #cccccc",
+    borderRadius: 8,
+    color: "#666666",
+  },
+};
 
 export default RegimentSection;

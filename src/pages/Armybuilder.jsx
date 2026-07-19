@@ -2,78 +2,67 @@ import BuilderHeader from "../components/ArmyBuilder/BuilderHeader";
 import BuilderOption from "../components/ArmyBuilder/BuilderOption";
 import RegimentSection from "../components/ArmyBuilder/RegimentSection";
 import EmptyState from "../components/ArmyBuilder/EmptyState";
-import BackButton from "../components/BackButton";
+
+import {
+  calculateArmyPoints,
+} from "../utils/armyPoints";
+
+import "../styles/aos-app.css";
 
 function ArmyBuilder({
   list,
   setSelector,
-  setPage,
+  navigate,
+  onBack,
+  onViewWarscroll,
+  onConfigureUnit,
+  onRemoveUnit,
+  onRemoveRegiment,
 }) {
-  const battleFormations = Array.isArray(
-    list.faction?.battleFormations
-  )
-    ? list.faction.battleFormations
-    : [];
+  const faction =
+    list?.faction ?? {};
 
-  const spellLores = Array.isArray(
-    list.faction?.spellLores
-  )
-    ? list.faction.spellLores
-    : [];
+  const battleFormations =
+    getArray(
+      faction.battleFormations
+    );
 
-  const prayerLores = Array.isArray(
-    list.faction?.prayerLores
-  )
-    ? list.faction.prayerLores
-    : [];
+  const spellLores =
+    getArray(faction.spellLores);
 
-  const factionTerrain = Array.isArray(
-    list.faction?.terrain
-  )
-    ? list.faction.terrain
-    : [];
+  const prayerLores =
+    getArray(faction.prayerLores);
 
-  const factionManifestations = Array.isArray(
-    list.faction?.manifestations
-  )
-    ? list.faction.manifestations
-    : [];
+  const terrain =
+    getArray(faction.terrain);
 
-  const manifestationLores = Array.isArray(
-    list.faction?.manifestationLores
-  )
-    ? list.faction.manifestationLores
-    : [];
+  const manifestations =
+    getArray(faction.manifestations);
+
+  const manifestationLores =
+    getArray(
+      faction.manifestationLores
+    );
+
+  const regiments =
+    getArray(list?.regiments);
 
   const manifestationOptions =
     manifestationLores.length > 0
       ? manifestationLores
-      : factionManifestations.length > 0
-        ? [
-            {
-              id: `${list.faction.id}-manifestation-lore`,
+      : createManifestationOptions({
+          faction,
+          manifestations,
+        });
 
-              name:
-                list.faction.id === "hedonites"
-                  ? "Manifestations of Depravity"
-                  : "Manifestation Lore",
+  const currentPoints =
+    calculateArmyPoints(list);
 
-              points: 0,
-
-              description:
-                "Esta manifestación incluye:\n\n" +
-                factionManifestations
-                  .map(
-                    (manifestation) =>
-                      `• ${manifestation.name}`
-                  )
-                  .join("\n"),
-
-              manifestations:
-                factionManifestations,
-            },
-          ]
-        : [];
+  const pointsLimit =
+    Number(
+      list?.pointsLimit ??
+        list?.points
+    ) || 0;
 
   function openSelector({
     title,
@@ -87,110 +76,241 @@ function ArmyBuilder({
       options,
     });
 
-    setPage("selector");
+    navigate("selector");
+  }
+
+  function openNewRegimentSelector() {
+    const heroes =
+      getArray(faction.units).filter(
+        (unit) =>
+          unit.rules?.hero === true
+      );
+
+    setSelector({
+      title:
+        "Selecciona el líder del regimiento",
+      property: "newRegiment",
+      regimentId: null,
+      options: heroes,
+    });
+
+    navigate("selector");
   }
 
   return (
-    <div>
-      <div style={{ padding: "20px 20px 0" }}>
-        <BackButton
-          onClick={() => setPage("lists")}
-          label="Mis listas"
-        />
-      </div>
+    <main className="aos-page aos-builder-page">
+      <header className="aos-topbar">
+        <button
+          type="button"
+          className="aos-icon-button"
+          onClick={onBack}
+          aria-label="Volver"
+        >
+          ‹
+        </button>
+
+        <h1 className="aos-topbar__title">
+          {list?.name ?? "Army Builder"}
+        </h1>
+
+        <span aria-hidden="true" />
+      </header>
 
       <BuilderHeader list={list} />
 
-      <BuilderOption
-        title="Battle Formation"
-        value={
-          list.battleFormation?.name ||
-          "No seleccionada"
-        }
-        onClick={() =>
-          openSelector({
-            title: "Battle Formation",
-            property: "battleFormation",
-            options: battleFormations,
-          })
-        }
-      />
-
-      <BuilderOption
-        title="Spell Lore"
-        value={
-          list.spellLore?.name ||
-          "No seleccionada"
-        }
-        onClick={() =>
-          openSelector({
-            title: "Spell Lore",
-            property: "spellLore",
-            options: spellLores,
-          })
-        }
-      />
-
-      {prayerLores.length > 0 && (
+      <section className="aos-builder-options">
         <BuilderOption
-          title="Prayer Lore"
+          title="Battle Formation"
           value={
-            list.prayerLore?.name ||
+            list.battleFormation?.name ??
             "No seleccionada"
           }
           onClick={() =>
             openSelector({
-              title: "Prayer Lore",
-              property: "prayerLore",
-              options: prayerLores,
+              title:
+                "Battle Formation",
+              property:
+                "battleFormation",
+              options:
+                battleFormations,
             })
           }
         />
-      )}
 
-      <BuilderOption
-        title="Manifestation Lore"
-        value={
-          list.manifestationLore?.name ||
-          "No seleccionada"
-        }
-        onClick={() =>
-          openSelector({
-            title: "Manifestation Lore",
-            property: "manifestationLore",
-            options: manifestationOptions,
-          })
-        }
-      />
-
-      {factionTerrain.length > 0 && (
         <BuilderOption
-          title="Faction Terrain"
+          title="Spell Lore"
           value={
-            list.terrain?.name ||
-            "No seleccionado"
+            list.spellLore?.name ??
+            "No seleccionada"
           }
           onClick={() =>
             openSelector({
-              title: "Faction Terrain",
-              property: "terrain",
-              options: factionTerrain,
+              title: "Spell Lore",
+              property: "spellLore",
+              options: spellLores,
             })
           }
         />
-      )}
+
+        {prayerLores.length > 0 && (
+          <BuilderOption
+            title="Prayer Lore"
+            value={
+              list.prayerLore?.name ??
+              "No seleccionada"
+            }
+            onClick={() =>
+              openSelector({
+                title:
+                  "Prayer Lore",
+                property:
+                  "prayerLore",
+                options:
+                  prayerLores,
+              })
+            }
+          />
+        )}
+
+        <BuilderOption
+          title="Manifestation Lore"
+          value={
+            list.manifestationLore
+              ?.name ??
+            "No seleccionada"
+          }
+          onClick={() =>
+            openSelector({
+              title:
+                "Manifestation Lore",
+              property:
+                "manifestationLore",
+              options:
+                manifestationOptions,
+            })
+          }
+        />
+
+        {terrain.length > 0 && (
+          <BuilderOption
+            title="Faction Terrain"
+            value={
+              list.terrain?.name ??
+              "No seleccionado"
+            }
+            onClick={() =>
+              openSelector({
+                title:
+                  "Faction Terrain",
+                property: "terrain",
+                options: terrain,
+              })
+            }
+          />
+        )}
+      </section>
+
+      <h2 className="aos-builder-section-title">
+        Regimientos
+      </h2>
 
       <RegimentSection
         list={list}
         setSelector={setSelector}
-        setPage={setPage}
+        setPage={navigate}
+        onViewWarscroll={
+          onViewWarscroll
+        }
+        onConfigureUnit={
+          onConfigureUnit
+        }
+        onRemoveUnit={
+          onRemoveUnit
+        }
+        onRemoveRegiment={
+          onRemoveRegiment
+        }
       />
 
-      {list.regiments.length === 0 && (
+      {regiments.length === 0 && (
         <EmptyState />
       )}
-    </div>
+
+      <footer className="aos-builder-footer">
+        <div className="aos-points-summary">
+          <div className="aos-points-summary__icon">
+            ✓
+          </div>
+
+          <div>
+            <div className="aos-points-summary__value">
+              {currentPoints}
+
+              <span className="aos-points-summary__limit">
+                /{pointsLimit}
+              </span>
+            </div>
+
+            <span className="aos-points-summary__label">
+              Puntos totales
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="aos-floating-add"
+          onClick={
+            openNewRegimentSelector
+          }
+          aria-label="Añadir regimiento"
+        >
+          +
+        </button>
+      </footer>
+    </main>
   );
+}
+
+function getArray(value) {
+  return Array.isArray(value)
+    ? value
+    : [];
+}
+
+function createManifestationOptions({
+  faction,
+  manifestations,
+}) {
+  if (manifestations.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      id:
+        `${faction.id}-` +
+        "manifestation-lore",
+
+      name:
+        faction.id === "hedonites"
+          ? "Manifestations of Depravity"
+          : "Manifestation Lore",
+
+      points: 0,
+
+      description:
+        "Esta manifestación incluye:\n\n" +
+        manifestations
+          .map(
+            (item) =>
+              `• ${item.name}`
+          )
+          .join("\n"),
+
+      manifestations,
+    },
+  ];
 }
 
 export default ArmyBuilder;

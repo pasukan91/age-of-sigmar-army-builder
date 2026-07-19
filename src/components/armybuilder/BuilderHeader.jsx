@@ -8,77 +8,169 @@ function BuilderHeader({ list }) {
     calculateArmyPoints(list);
 
   const pointsLimit =
-    Number(list.pointsLimit) || 0;
+    Number(
+      list?.pointsLimit ??
+        list?.points
+    ) || 0;
 
-  const hasExceededLimit =
+  const exceeded =
     hasExceededPointsLimit(list);
 
   return (
-    <header
-      style={{
-        padding: 20,
-        marginBottom: 20,
-        borderBottom: "1px solid #cccccc",
-        backgroundColor: "#ffffff",
-        color: "#111111",
-      }}
-    >
-      <h1
-        style={{
-          marginTop: 0,
-          marginBottom: 8,
-        }}
-      >
-        {list.name}
-      </h1>
+    <header style={styles.header}>
+      <div style={styles.overlay}>
+        <p style={styles.factionLabel}>
+          {list.faction?.name ??
+            "Age of Sigmar"}
+        </p>
 
-      <p
-        style={{
-          marginTop: 0,
-          marginBottom: 8,
-          fontSize: 18,
-        }}
-      >
-        {list.faction?.name}
-      </p>
+        <h1 style={styles.title}>
+          {list.name}
+        </h1>
 
-      <div
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "10px 14px",
-          borderRadius: 8,
-          backgroundColor: hasExceededLimit
-            ? "#991b1b"
-            : "#1f7a1f",
-          color: "#ffffff",
-          fontSize: 18,
-          fontWeight: 700,
-        }}
-      >
-        {currentPoints}/{pointsLimit} puntos
-      </div>
+        <div style={styles.divider} />
 
-      {hasExceededLimit && (
-        <div
-          role="alert"
-          style={{
-            padding: 14,
-            marginTop: 14,
-            border: "1px solid #991b1b",
-            borderRadius: 8,
-            backgroundColor: "#fee2e2",
-            color: "#7f1d1d",
-            fontWeight: 700,
-          }}
-        >
-          Has superado el límite de puntos por{" "}
-          {currentPoints - pointsLimit} puntos.
+        <div style={styles.pointsRow}>
+          <div>
+            <span style={styles.pointsLabel}>
+              Puntos
+            </span>
+
+            <div
+              style={{
+                ...styles.pointsValue,
+
+                color: exceeded
+                  ? "#ffd0cb"
+                  : "#ffffff",
+              }}
+            >
+              {currentPoints}
+              <span style={styles.limit}>
+                {" "}
+                / {pointsLimit}
+              </span>
+            </div>
+          </div>
+
+          <div
+            style={{
+              ...styles.statusBadge,
+
+              backgroundColor: exceeded
+                ? "#9c2923"
+                : "#426547",
+            }}
+          >
+            {exceeded
+              ? "Límite superado"
+              : "Lista válida"}
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
+
+const styles = {
+  header: {
+    margin: 16,
+    borderRadius: 8,
+
+    background:
+      "linear-gradient(135deg, #5d120e 0%, #8d2018 58%, #32100e 100%)",
+
+    color: "#ffffff",
+
+    overflow: "hidden",
+
+    boxShadow:
+      "0 8px 22px rgba(0,0,0,0.28)",
+  },
+
+  overlay: {
+    padding: "24px 20px",
+
+    background:
+      "linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.04))",
+  },
+
+  factionLabel: {
+    margin: "0 0 5px",
+
+    color: "#e0c489",
+
+    fontSize: 12,
+    fontWeight: 900,
+    letterSpacing: "0.13em",
+    textTransform: "uppercase",
+  },
+
+  title: {
+    margin: 0,
+
+    fontSize: 28,
+    lineHeight: 1.05,
+    fontWeight: 900,
+    letterSpacing: "0.02em",
+    textTransform: "uppercase",
+  },
+
+  divider: {
+    width: 56,
+    height: 3,
+
+    margin: "15px 0",
+
+    backgroundColor: "#c6a15b",
+  },
+
+  pointsRow: {
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: 15,
+  },
+
+  pointsLabel: {
+    display: "block",
+
+    color: "#dfd9cf",
+
+    fontSize: 11,
+    fontWeight: 900,
+    letterSpacing: "0.11em",
+    textTransform: "uppercase",
+  },
+
+  pointsValue: {
+    marginTop: 2,
+
+    fontSize: 27,
+    fontWeight: 900,
+  },
+
+  limit: {
+    color: "#dfd9cf",
+    fontSize: 18,
+  },
+
+  statusBadge: {
+    padding: "7px 10px",
+
+    border:
+      "1px solid rgba(255,255,255,0.25)",
+
+    borderRadius: 4,
+
+    color: "#ffffff",
+
+    fontSize: 11,
+    fontWeight: 900,
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+  },
+};
 
 export default BuilderHeader;

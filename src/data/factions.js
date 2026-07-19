@@ -86,9 +86,11 @@ const factions = [
     name: "Skaven",
   },
   {
-    id: "slaanesh",
-    alliance: "chaos",
+    id: "hedonites",
     name: "Hedonites of Slaanesh",
+    alliance: "chaos",
+    image:
+      "/images/factions/hedonites.webp",
   },
   {
     id: "tzeentch",
@@ -127,6 +129,15 @@ const factions = [
     alliance: "destruction",
     name: "Sons of Behemat",
   },
+  {
+    id: "kruleboyz",
+    alliance: "destruction",
+    name: "kruleboyz",
+    image:
+      "/images/factions/kruleboyz.webp",
+
+  },
+  
 ];
 
 export default factions;

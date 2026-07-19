@@ -1,0 +1,96 @@
+:root {
+  font-family:
+    "Arial Narrow",
+    "Roboto Condensed",
+    Arial,
+    sans-serif;
+
+  color: #f6f3ea;
+  background: #15161b;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: #15161b;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #15161b 0%,
+      #202127 100%
+    );
+
+  color: #f6f3ea;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid
+    rgba(198, 161, 91, 0.55);
+
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/*
+ * Oculta el estilo azul predeterminado de
+ * algunos navegadores para checkbox.
+ */
+input[type="checkbox"] {
+  accent-color: #17171a;
+}
+
+/*
+ * Scrollbar oscura, cercana a la aplicación.
+ */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #15161b;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid #15161b;
+  border-radius: 10px;
+  background: #55565d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #74757d;
+}

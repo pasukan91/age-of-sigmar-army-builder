@@ -1,356 +1,644 @@
 import Accordion from "../components/Accordion";
-import BackButton from "../components/BackButton";
+
+import "../styles/aos-app.css";
 
 function UnitWarscroll({
   unit,
-  goBack,
+  onBack,
   onConfigure,
 }) {
   if (!unit) {
     return (
-      <div style={{ padding: 20 }}>
-        <BackButton onClick={goBack} />
+      <main className="aos-page aos-warscroll-page">
+        <header className="aos-topbar">
+          <button
+            type="button"
+            className="aos-icon-button"
+            onClick={onBack}
+            aria-label="Volver"
+          >
+            ‹
+          </button>
 
-        <p>
-          No se ha seleccionado ninguna unidad.
-        </p>
-      </div>
+          <h1 className="aos-topbar__title">
+            Warscroll
+          </h1>
+
+          <span aria-hidden="true" />
+        </header>
+
+        <div className="aos-warscroll-content">
+          <p>
+            No se ha seleccionado ninguna
+            unidad.
+          </p>
+        </div>
+      </main>
     );
   }
 
+  const displayedPoints =
+    getDisplayedPoints(unit);
+
+  const displayedModels =
+    getDisplayedModels(unit);
+
+  const unitImage =
+    unit.image ??
+    `/images/units/${unit.id}.webp`;
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#eeeeee",
-        color: "#111111",
-      }}
-    >
-      <header
-        style={{
-          padding: 20,
-          backgroundColor: "#841c13",
-          color: "#ffffff",
-        }}
-      >
+    <main className="aos-page aos-warscroll-page">
+      <header className="aos-topbar">
         <button
           type="button"
-          onClick={goBack}
-          style={{
-            border: "none",
-            background: "transparent",
-            color: "#ffffff",
-            fontSize: 18,
-            fontWeight: 700,
-            cursor: "pointer",
-          }}
+          className="aos-icon-button"
+          onClick={onBack}
+          aria-label="Volver"
         >
-          ← Volver
+          ‹
         </button>
 
-        <h1 style={{ marginBottom: 0 }}>
+        <h1 className="aos-topbar__title">
           {unit.name}
         </h1>
+
+        <span aria-hidden="true" />
       </header>
 
-      <main style={{ padding: 20 }}>
-        <section
-          style={{
-            padding: 18,
-            marginBottom: 20,
-            borderRadius: 10,
-            backgroundColor: "#ffffff",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent:
-                "space-between",
-              alignItems: "center",
-              gap: 20,
-              flexWrap: "wrap",
-            }}
-          >
-            <h2 style={{ margin: 0 }}>
+      <section
+        className="aos-warscroll-hero"
+        style={{
+          "--aos-unit-image":
+            `url("${unitImage}")`,
+        }}
+        aria-label={
+          `Imagen de ${unit.name}`
+        }
+      />
+
+      <section className="aos-profile-strip">
+        <Stat
+          label="Move"
+          value={unit.profile?.move}
+        />
+
+        <Stat
+          label="Health"
+          value={unit.profile?.health}
+        />
+
+        <Stat
+          label="Control"
+          value={unit.profile?.control}
+        />
+
+        <Stat
+          label="Save"
+          value={unit.profile?.save}
+          variant="save"
+        />
+      </section>
+
+      <div className="aos-warscroll-content">
+        <section className="aos-warscroll-meta">
+          <div>
+            <h2 className="aos-warscroll-meta__name">
               {unit.name}
             </h2>
 
-            <strong
-              style={{
-                padding: "6px 12px",
-                borderRadius: 6,
-                backgroundColor: "#841c13",
-                color: "#ffffff",
-              }}
-            >
-              {unit.points} pts
-            </strong>
+            <span>
+              {displayedModels}{" "}
+              {displayedModels === 1
+                ? "miniatura"
+                : "miniaturas"}
+            </span>
           </div>
+
+          <strong className="aos-warscroll-meta__points">
+            {displayedPoints} pts
+          </strong>
         </section>
 
-        <Accordion
-          title="Perfil"
-          defaultOpen
-        >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fit, minmax(120px, 1fr))",
-              gap: 12,
-            }}
-          >
-            <Stat
-              label="Movimiento"
-              value={unit.profile?.move}
-            />
-
-            <Stat
-              label="Salud"
-              value={unit.profile?.health}
-            />
-
-            <Stat
-              label="Control"
-              value={unit.profile?.control}
-            />
-
-            <Stat
-              label="Salvación"
-              value={unit.profile?.save}
-            />
-
-            <Stat
-              label="Ward"
-              value={unit.profile?.ward}
-            />
+        {unit.reinforced && (
+          <div style={styles.reinforced}>
+            Unidad reforzada
           </div>
+        )}
+
+        <Accordion
+          title="Melee Weapons"
+          subtitle={
+            getWeaponCount(
+              unit,
+              "Melee"
+            )
+          }
+        >
+          <WeaponList
+            weapons={unit.weapons}
+            type="Melee"
+          />
         </Accordion>
 
         <Accordion
-          title="Armas"
-          subtitle={`${unit.weapons?.length ?? 0} perfiles`}
-        >
-          {(!unit.weapons ||
-            unit.weapons.length === 0) && (
-            <p>
-              Esta unidad no tiene armas
-              registradas.
-            </p>
-          )}
-
-          {unit.weapons?.map(
-            (weapon, index) => (
-              <Accordion
-                key={`${weapon.name}-${index}`}
-                title={weapon.name}
-                subtitle={
-                  weapon.type || "Melee"
-                }
-              >
-                {weapon.type ===
-                  "Ranged" && (
-                  <p>
-                    <strong>
-                      Alcance:
-                    </strong>{" "}
-                    {weapon.range}
-                  </p>
-                )}
-
-                <p>
-                  <strong>Ataques:</strong>{" "}
-                  {weapon.attacks}
-                </p>
-
-                <p>
-                  <strong>
-                    Impactar:
-                  </strong>{" "}
-                  {weapon.hit}
-                </p>
-
-                <p>
-                  <strong>Herir:</strong>{" "}
-                  {weapon.wound}
-                </p>
-
-                <p>
-                  <strong>Rend:</strong>{" "}
-                  {weapon.rend}
-                </p>
-
-                <p>
-                  <strong>Daño:</strong>{" "}
-                  {weapon.damage}
-                </p>
-
-                {weapon.abilities?.length >
-                  0 && (
-                  <Accordion title="Habilidades del arma">
-                    {weapon.abilities.map(
-                      (
-                        weaponAbility,
-                        abilityIndex
-                      ) => (
-                        <p
-                          key={`${weaponAbility}-${abilityIndex}`}
-                          style={{
-                            margin:
-                              abilityIndex === 0
-                                ? 0
-                                : "10px 0 0",
-                          }}
-                        >
-                          {weaponAbility}
-                        </p>
-                      )
-                    )}
-                  </Accordion>
-                )}
-              </Accordion>
+          title="Ranged Weapons"
+          subtitle={
+            getWeaponCount(
+              unit,
+              "Ranged"
             )
-          )}
+          }
+        >
+          <WeaponList
+            weapons={unit.weapons}
+            type="Ranged"
+          />
         </Accordion>
 
         <Accordion
-          title="Habilidades"
-          subtitle={`${unit.abilities?.length ?? 0} habilidades`}
+          title="Abilities"
+          subtitle={
+            `${unit.abilities?.length ?? 0}`
+          }
         >
-          {(!unit.abilities ||
-            unit.abilities.length === 0) && (
-            <p>
-              Esta unidad no tiene habilidades
-              registradas.
-            </p>
-          )}
-
-          {unit.abilities?.map(
-            (ability, index) => (
-              <Accordion
-                key={`${ability.name}-${index}`}
-                title={ability.name}
-                subtitle={
-                  ability.phase ||
-                  ability.type
-                }
-              >
-                {ability.castingValue && (
-                  <p>
-                    <strong>
-                      Valor de lanzamiento:
-                    </strong>{" "}
-                    {ability.castingValue}
-                  </p>
-                )}
-
-                <Accordion
-                  title="Descripción"
-                  defaultOpen
-                >
-                  <p
-                    style={{
-                      margin: 0,
-                      whiteSpace: "pre-line",
-                    }}
-                  >
-                    {ability.description}
-                  </p>
-                </Accordion>
-
-                {ability.keywords?.length >
-                  0 && (
-                  <Accordion title="Keywords">
-                    <p style={{ margin: 0 }}>
-                      {ability.keywords.join(
-                        ", "
-                      )}
-                    </p>
-                  </Accordion>
-                )}
-              </Accordion>
-            )
-          )}
+          <AbilityList
+            abilities={unit.abilities}
+          />
         </Accordion>
 
-        <Accordion title="Detalles">
-          <p>
-            <strong>Modelos:</strong>{" "}
-            {unit.details?.models ?? "-"}
-          </p>
+        <Accordion title="Unit Details">
+          <DetailRow
+            label="Modelos"
+            value={displayedModels}
+          />
 
-          <p>
-            <strong>Peana:</strong>{" "}
-            {unit.details?.baseSize ?? "-"}
-          </p>
+          <DetailRow
+            label="Peana"
+            value={
+              unit.details?.baseSize ??
+              "-"
+            }
+          />
+
+          {unit.profile?.ward && (
+            <DetailRow
+              label="Ward"
+              value={
+                unit.profile.ward
+              }
+            />
+          )}
 
           {unit.details?.notes && (
-            <Accordion title="Notas">
-              <p
-                style={{
-                  margin: 0,
-                  whiteSpace: "pre-line",
-                }}
-              >
-                {unit.details.notes}
-              </p>
-            </Accordion>
+            <p style={styles.preservedText}>
+              {unit.details.notes}
+            </p>
           )}
         </Accordion>
 
         <Accordion title="Keywords">
-          <p style={{ margin: 0 }}>
-            {unit.keywords?.join(", ")}
-          </p>
+          <div style={styles.keywordList}>
+            {(unit.keywords ?? []).map(
+              (keyword) => (
+                <span
+                  key={keyword}
+                  style={styles.keyword}
+                >
+                  {keyword}
+                </span>
+              )
+            )}
+
+            {(unit.keywords ?? [])
+              .length === 0 && (
+              <p>
+                Sin keywords.
+              </p>
+            )}
+          </div>
         </Accordion>
 
-        <button
-          type="button"
-          onClick={() => onConfigure(unit)}
-          style={{
-            width: "100%",
-            padding: 16,
-            border: "none",
-            borderRadius: 10,
-            backgroundColor: "#000000",
-            color: "#ffffff",
-            fontSize: 18,
-            fontWeight: 700,
-            cursor: "pointer",
-          }}
-        >
-          Añadir a la lista
-        </button>
-      </main>
-    </div>
+        {unit.artefact && (
+          <EnhancementAccordion
+            title="Artefacto"
+            enhancement={
+              unit.artefact
+            }
+          />
+        )}
+
+        {unit.heroicTrait && (
+          <EnhancementAccordion
+            title="Rasgo heroico"
+            enhancement={
+              unit.heroicTrait
+            }
+          />
+        )}
+
+        {unit.monstrousTrait && (
+          <EnhancementAccordion
+            title="Rasgo monstruoso"
+            enhancement={
+              unit.monstrousTrait
+            }
+          />
+        )}
+
+        {typeof onConfigure ===
+          "function" && (
+          <button
+            type="button"
+            className="aos-configure-button"
+            onClick={onConfigure}
+          >
+            Configuración
+          </button>
+        )}
+      </div>
+    </main>
   );
 }
 
-function Stat({ label, value }) {
+function Stat({
+  label,
+  value,
+  variant,
+}) {
   return (
     <div
-      style={{
-        padding: 12,
-        borderRadius: 8,
-        backgroundColor: "#222222",
-        color: "#ffffff",
-        textAlign: "center",
-      }}
+      className={
+        variant === "save"
+          ? "aos-stat aos-stat--save"
+          : "aos-stat"
+      }
     >
-      <strong
-        style={{
-          display: "block",
-          marginBottom: 4,
-          fontSize: 20,
-        }}
-      >
+      <div className="aos-stat__circle">
         {value ?? "-"}
-      </strong>
+      </div>
 
-      <span>{label}</span>
+      <span className="aos-stat__label">
+        {label}
+      </span>
     </div>
   );
 }
+
+function WeaponList({
+  weapons = [],
+  type,
+}) {
+  const filteredWeapons =
+    weapons.filter((weapon) => {
+      const weaponType =
+        weapon.type ?? "Melee";
+
+      return weaponType === type;
+    });
+
+  if (filteredWeapons.length === 0) {
+    return (
+      <p>
+        No hay perfiles registrados.
+      </p>
+    );
+  }
+
+  return filteredWeapons.map(
+    (weapon, index) => (
+      <article
+        key={`${weapon.name}-${index}`}
+        style={styles.weapon}
+      >
+        <h3 style={styles.weaponName}>
+          {weapon.name}
+        </h3>
+
+        <div style={styles.weaponGrid}>
+          {type === "Ranged" && (
+            <WeaponStat
+              label="Alcance"
+              value={weapon.range}
+            />
+          )}
+
+          <WeaponStat
+            label="Ataques"
+            value={weapon.attacks}
+          />
+
+          <WeaponStat
+            label="Impactar"
+            value={weapon.hit}
+          />
+
+          <WeaponStat
+            label="Herir"
+            value={weapon.wound}
+          />
+
+          <WeaponStat
+            label="Rend"
+            value={weapon.rend}
+          />
+
+          <WeaponStat
+            label="Daño"
+            value={weapon.damage}
+          />
+        </div>
+
+        {weapon.abilities?.length >
+          0 && (
+          <div style={styles.weaponAbilities}>
+            {weapon.abilities.join(
+              " · "
+            )}
+          </div>
+        )}
+      </article>
+    )
+  );
+}
+
+function WeaponStat({
+  label,
+  value,
+}) {
+  return (
+    <div style={styles.weaponStat}>
+      <span style={styles.weaponStatLabel}>
+        {label}
+      </span>
+
+      <strong>
+        {value ?? "-"}
+      </strong>
+    </div>
+  );
+}
+
+function AbilityList({
+  abilities = [],
+}) {
+  if (abilities.length === 0) {
+    return (
+      <p>
+        Esta unidad no tiene habilidades
+        registradas.
+      </p>
+    );
+  }
+
+  return abilities.map(
+    (ability, index) => (
+      <article
+        key={`${ability.name}-${index}`}
+        style={styles.ability}
+      >
+        <div style={styles.abilityHeader}>
+          <h3 style={styles.abilityName}>
+            {ability.name}
+          </h3>
+
+          {(ability.phase ||
+            ability.type) && (
+            <span style={styles.abilityType}>
+              {ability.phase ??
+                ability.type}
+            </span>
+          )}
+        </div>
+
+        {ability.castingValue != null && (
+          <p>
+            <strong>
+              Valor de lanzamiento:
+            </strong>{" "}
+            {ability.castingValue}
+          </p>
+        )}
+
+        <p style={styles.preservedText}>
+          {ability.description}
+        </p>
+
+        {ability.keywords?.length >
+          0 && (
+          <div style={styles.keywordList}>
+            {ability.keywords.map(
+              (keyword) => (
+                <span
+                  key={keyword}
+                  style={styles.keyword}
+                >
+                  {keyword}
+                </span>
+              )
+            )}
+          </div>
+        )}
+      </article>
+    )
+  );
+}
+
+function DetailRow({
+  label,
+  value,
+}) {
+  return (
+    <div style={styles.detailRow}>
+      <span>{label}</span>
+
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function EnhancementAccordion({
+  title,
+  enhancement,
+}) {
+  return (
+    <Accordion title={title}>
+      <h3 style={styles.enhancementName}>
+        {enhancement.name}
+      </h3>
+
+      <p style={styles.preservedText}>
+        {enhancement.description}
+      </p>
+    </Accordion>
+  );
+}
+
+function getWeaponCount(
+  unit,
+  type
+) {
+  const count =
+    (unit.weapons ?? []).filter(
+      (weapon) =>
+        (weapon.type ?? "Melee") ===
+        type
+    ).length;
+
+  return `${count} ${
+    count === 1
+      ? "perfil"
+      : "perfiles"
+  }`;
+}
+
+function getDisplayedPoints(unit) {
+  const basePoints =
+    Number(unit?.points) || 0;
+
+  return unit?.reinforced
+    ? basePoints * 2
+    : basePoints;
+}
+
+function getDisplayedModels(unit) {
+  const baseModels =
+    Number(unit?.details?.models) ||
+    1;
+
+  return unit?.reinforced
+    ? baseModels * 2
+    : baseModels;
+}
+
+const styles = {
+  reinforced: {
+    padding: 10,
+    marginBottom: 10,
+    borderLeft:
+      "5px solid #d8b354",
+    backgroundColor: "#272d2e",
+    color: "#ffffff",
+    fontWeight: 700,
+    textAlign: "center",
+    textTransform: "uppercase",
+  },
+
+  weapon: {
+    padding: 13,
+    marginBottom: 10,
+    border: "1px solid #d2c9ae",
+    backgroundColor: "#f5f0e2",
+  },
+
+  weaponName: {
+    margin: "0 0 11px",
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 18,
+    textTransform: "uppercase",
+  },
+
+  weaponGrid: {
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit, minmax(72px, 1fr))",
+    gap: 7,
+  },
+
+  weaponStat: {
+    padding: 8,
+    border:
+      "1px solid rgba(0,0,0,0.13)",
+    backgroundColor: "#ffffff",
+    textAlign: "center",
+  },
+
+  weaponStatLabel: {
+    display: "block",
+    marginBottom: 3,
+    color: "#666666",
+    fontSize: 10,
+    fontWeight: 700,
+    textTransform: "uppercase",
+  },
+
+  weaponAbilities: {
+    paddingTop: 10,
+    color: "#6e120c",
+    fontSize: 13,
+    fontWeight: 700,
+  },
+
+  ability: {
+    padding: 13,
+    marginBottom: 10,
+    borderLeft:
+      "4px solid #8e1b13",
+    backgroundColor: "#f4f1e8",
+  },
+
+  abilityHeader: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  abilityName: {
+    margin: 0,
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 19,
+    textTransform: "uppercase",
+  },
+
+  abilityType: {
+    flexShrink: 0,
+    padding: "4px 7px",
+    backgroundColor: "#8e1b13",
+    color: "#ffffff",
+    fontSize: 10,
+    fontWeight: 700,
+    textTransform: "uppercase",
+  },
+
+  detailRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 20,
+    padding: "10px 0",
+    borderBottom:
+      "1px solid #dddddd",
+  },
+
+  keywordList: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 7,
+  },
+
+  keyword: {
+    padding: "5px 8px",
+    borderRadius: 2,
+    backgroundColor: "#252b2c",
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: 700,
+    textTransform: "uppercase",
+  },
+
+  enhancementName: {
+    marginBottom: 8,
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    textTransform: "uppercase",
+  },
+
+  preservedText: {
+    whiteSpace: "pre-line",
+    lineHeight: 1.55,
+  },
+};
 
 export default UnitWarscroll;
