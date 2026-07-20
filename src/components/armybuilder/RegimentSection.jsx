@@ -460,7 +460,7 @@ function RegimentSection({
                       selectableUnits,
                   });
 
-                  navigate("selector");
+                  setPage("selector");
                 }}
                 style={{
                   ...styles.addUnitButton,
@@ -508,7 +508,7 @@ function RegimentSection({
               availableHeroes,
           });
 
-          navigate("selector");
+          setPage("selector");
         }}
         style={
           styles.addRegimentButton

@@ -6,7 +6,7 @@ const units = [
 
         image: "shalaxi-helbane.png",
 
-        points: 0,
+        points: 410,
 
         profile: {
             move: '12"',
@@ -155,7 +155,7 @@ const units = [
 
         image: "keeper-of-secrets.png",
 
-        points: 0,
+        points: 420,
 
         profile: {
             move: '12"',
@@ -295,7 +295,7 @@ const units = [
 
         image: "dexcessa.png",
 
-        points: 0,
+        points: 280,
 
         profile: {
             move: '12"',
@@ -414,7 +414,7 @@ const units = [
 
         image: "synessa.png",
 
-        points: 0,
+        points: 250,
 
         profile: {
             move: '12"',
@@ -535,7 +535,7 @@ const units = [
 
         image: "the-masque.png",
 
-        points: 0,
+        points: 120,
 
         profile: {
             move: '8"',
@@ -625,7 +625,7 @@ const units = [
 
         image: "syllesske.png",
 
-        points: 0,
+        points: 250,
 
         profile: {
             move: '8"',
@@ -740,7 +740,7 @@ const units = [
 
         image: "thricefold-discord.png",
 
-        points: 0,
+        points: 180,
 
         profile: {
             move: '6"',
@@ -834,7 +834,7 @@ const units = [
 
         image: "infernal-enrapturess.png",
 
-        points: 0,
+        points: 100,
 
         profile: {
             move: '6"',
@@ -923,7 +923,7 @@ const units = [
 
         image: "contorted-epitome.png",
 
-        points: 0,
+        points: 150,
 
         profile: {
             move: '9"',
@@ -1015,7 +1015,7 @@ const units = [
 
         image: "glutos-orscollion.png",
 
-        points: 0,
+        points: 460,
 
         profile: {
             move: '8"',
@@ -1160,7 +1160,7 @@ const units = [
 
         image: "sigvald.png",
 
-        points: 0,
+        points: 240,
 
         profile: {
             move: '6"',
@@ -1268,7 +1268,7 @@ const units = [
 
         image: "lord-of-hysteria.png",
 
-        points: 0,
+        points: 120,
 
         profile: {
             move: '6"',
@@ -1363,7 +1363,7 @@ const units = [
 
         image: "slaangor-fiendbloods.png",
 
-        points: 0,
+        points: 140,
 
         profile: {
             move: '8"',
@@ -1469,7 +1469,7 @@ const units = [
 
         image: "myrmidesh-painbringers.png",
 
-        points: 0,
+        points: 120,
 
         profile: {
             move: '6"',
@@ -1558,7 +1558,7 @@ const units = [
 
         image: "symbaresh-twinsouls.png",
 
-        points: 0,
+        points: 120,
 
         profile: {
             move: '6"',
@@ -1647,7 +1647,7 @@ const units = [
 
         image: "slickblade-seekers.png",
 
-        points: 0,
+        points: 170,
 
         profile: {
             move: '14"',
@@ -1739,7 +1739,7 @@ const units = [
 
         image: "blissbarb-archers.png",
 
-        points: 0,
+        points: 140,
 
         profile: {
             move: '6"',
