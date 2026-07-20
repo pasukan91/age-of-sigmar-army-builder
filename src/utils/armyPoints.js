@@ -68,7 +68,14 @@ export function calculateArmyPoints(list) {
     getNumericPoints(list.manifestationLore) +
     getNumericPoints(list.terrain);
 
-  return regimentsPoints + armyOptionsPoints;
+  const renownPoints = Array.isArray(list.regimentsOfRenown)
+    ? list.regimentsOfRenown.reduce(
+        (total, regiment) => total + getNumericPoints(regiment),
+        0
+      )
+    : 0;
+
+  return regimentsPoints + armyOptionsPoints + renownPoints;
 }
 
 export function hasExceededPointsLimit(list) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import BackButton from "../components/BackButton";
 
@@ -10,47 +10,43 @@ function UnitConfig({
   onConfirm,
 }) {
   const [reinforced, setReinforced] =
-    useState(false);
-
-  const [heroicTrait, setHeroicTrait] =
-    useState(null);
-
-  const [monstrousTrait, setMonstrousTrait] =
-    useState(null);
-
-  const [artefact, setArtefact] =
-    useState(null);
-
-  /*
-   * Si cambiamos de unidad sin desmontar el
-   * componente, sincronizamos el formulario.
-   */
-  useEffect(() => {
-    setReinforced(
+    useState(
       Boolean(unit?.reinforced)
     );
 
-    setHeroicTrait(
+  const [heroicTrait, setHeroicTrait] =
+    useState(
       unit?.heroicTrait ?? null
     );
 
-    setMonstrousTrait(
+  const [monstrousTrait, setMonstrousTrait] =
+    useState(
       unit?.monstrousTrait ?? null
     );
 
-    setArtefact(
-      unit?.artefact ?? null
-    );
-  }, [unit]);
+  const [artefact, setArtefact] =
+    useState(unit?.artefact ?? null);
 
   if (!unit) {
     return (
-      <main style={styles.page}>
-        <BackButton onClick={goBack} />
+      <main className="aos-shell">
+        <header className="aos-screen-header">
+          <BackButton
+            onClick={goBack}
+            light
+            compact
+          />
+          <h1 className="aos-screen-header__title">
+            Configuración
+          </h1>
+          <span aria-hidden="true" />
+        </header>
 
-        <p>
-          No hay ninguna unidad seleccionada.
-        </p>
+        <div className="aos-screen-content">
+          <p className="aos-empty-message">
+            No hay ninguna unidad seleccionada.
+          </p>
+        </div>
       </main>
     );
   }
@@ -178,8 +174,22 @@ function UnitConfig({
   }
 
   return (
-    <main style={styles.page}>
-      <BackButton onClick={goBack} />
+    <main className="aos-shell">
+      <header className="aos-screen-header">
+        <BackButton
+          onClick={goBack}
+          light
+          compact
+        />
+
+        <h1 className="aos-screen-header__title">
+          Configuración
+        </h1>
+
+        <span aria-hidden="true" />
+      </header>
+
+      <div className="aos-screen-content">
 
       <header style={styles.header}>
         <div>
@@ -324,6 +334,7 @@ function UnitConfig({
       >
         {getConfirmText()}
       </button>
+      </div>
     </main>
   );
 }
@@ -425,24 +436,17 @@ function CheckboxOption({
 }
 
 const styles = {
-  page: {
-    minHeight: "100vh",
-    padding: 20,
-    backgroundColor: "#eeeeee",
-    color: "#111111",
-  },
-
   header: {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "space-between",
     gap: 20,
-    marginBottom: 20,
+    marginBottom: 22,
   },
 
   eyebrow: {
     margin: "0 0 4px",
-    color: "#666666",
+    color: "#891f18",
     fontSize: 13,
     fontWeight: 700,
     letterSpacing: "0.08em",
@@ -451,27 +455,42 @@ const styles = {
 
   title: {
     margin: 0,
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: "clamp(30px, 6vw, 42px)",
+    lineHeight: 1.05,
+    textTransform: "uppercase",
   },
 
   pointsBox: {
     minWidth: 90,
     padding: 12,
-    borderRadius: 10,
-    backgroundColor: "#ffffff",
+    border: "1px solid #8f6c2e",
+    borderRadius: 3,
+    color: "#ffffff",
+    backgroundColor: "#891f18",
     textAlign: "center",
   },
 
   section: {
     padding: 18,
     marginBottom: 18,
-    borderRadius: 12,
-    backgroundColor: "#ffffff",
+    border: "1px solid #d4cec1",
+    borderTop: "4px solid #8f6c2e",
+    borderRadius: 3,
+    backgroundColor: "#faf8f3",
+    boxShadow:
+      "0 4px 14px rgba(47,38,28,0.11)",
   },
 
   sectionTitle: {
     margin: "0 0 14px",
-    textAlign: "center",
+    color: "#39322c",
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    textAlign: "left",
     fontSize: 22,
+    textTransform: "uppercase",
   },
 
   summaryGrid: {
@@ -484,8 +503,8 @@ const styles = {
   summaryItem: {
     padding: 12,
     border: "1px solid #dddddd",
-    borderRadius: 8,
-    backgroundColor: "#fafafa",
+    borderRadius: 999,
+    backgroundColor: "#eee8dc",
     textAlign: "center",
   },
 
@@ -512,21 +531,21 @@ const styles = {
     padding: 16,
     marginBottom: 10,
     border: "1px solid #cccccc",
-    borderRadius: 9,
-    backgroundColor: "#ffffff",
+    borderRadius: 3,
+    backgroundColor: "#fffefa",
     color: "#111111",
     cursor: "pointer",
   },
 
   selectedOptionCard: {
-    border: "2px solid #111111",
-    backgroundColor: "#f3f3f3",
+    border: "2px solid #891f18",
+    backgroundColor: "#f4e9e3",
   },
 
   optionContent: {
     flex: 1,
     minWidth: 0,
-    textAlign: "center",
+    textAlign: "left",
   },
 
   optionTitle: {
@@ -545,7 +564,7 @@ const styles = {
     width: 26,
     height: 26,
     flexShrink: 0,
-    accentColor: "#111111",
+    accentColor: "#891f18",
     cursor: "pointer",
   },
 
@@ -559,13 +578,16 @@ const styles = {
     width: "100%",
     padding: 16,
     marginTop: 4,
-    border: "none",
-    borderRadius: 10,
-    backgroundColor: "#000000",
+    border: "1px solid #5f120e",
+    borderRadius: 3,
+    background:
+      "linear-gradient(180deg, #a22b22, #5f120e)",
     color: "#ffffff",
     fontSize: 18,
     fontWeight: 700,
     cursor: "pointer",
+    boxShadow:
+      "0 4px 10px rgba(95,18,14,0.28)",
   },
 };
 

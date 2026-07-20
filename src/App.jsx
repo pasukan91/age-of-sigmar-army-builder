@@ -5,7 +5,7 @@ import MyLists from "./pages/MyLists";
 import SelectAlliance from "./pages/SelectAlliance";
 import SelectFaction from "./pages/SelectFaction";
 import NewListConfig from "./pages/NewListConfig";
-import ArmyBuilder from "./pages/ArmyBuilder";
+import ArmyBuilder from "./pages/Armybuilder";
 import OptionSelector from "./pages/OptionSelector";
 import UnitWarscroll from "./pages/UnitWarscroll";
 import UnitConfig from "./pages/UnitConfig";
@@ -14,6 +14,10 @@ import {
   calculateArmyPoints,
   hasExceededPointsLimit,
 } from "./utils/armyPoints";
+import {
+  canUnitJoinRegiment,
+  isUnitUniqueInArmy,
+} from "./utils/regimentRules";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -25,16 +29,19 @@ const EMPTY_SELECTOR = {
 const INITIAL_ARMY = {
   alliance: null,
   faction: null,
+  armyOfRenown: null,
   points: 2000,
   name: "",
 };
 
 function App() {
-  const [page, setPage] =
-    useState("home");
+  const [navigation, setNavigation] =
+    useState({
+      page: "home",
+      history: [],
+    });
 
-  const [history, setHistory] =
-    useState([]);
+  const { page, history } = navigation;
 
   const [lists, setLists] =
     useState([]);
@@ -71,37 +78,48 @@ function App() {
    */
 
   function navigate(nextPage) {
-    if (
-      !nextPage ||
-      nextPage === page
-    ) {
+    if (!nextPage) {
       return;
     }
 
-    setHistory((previous) => [
-      ...previous,
-      page,
-    ]);
-
-    setPage(nextPage);
-  }
-
-  function goBack() {
-    setHistory((previous) => {
-      if (previous.length === 0) {
+    setNavigation((previous) => {
+      if (
+        nextPage === previous.page
+      ) {
         return previous;
       }
 
-      const updatedHistory = [
-        ...previous,
-      ];
+      return {
+        page: nextPage,
+        history: [
+          ...previous.history,
+          previous.page,
+        ],
+      };
+    });
+  }
+
+  function goBack() {
+    setNavigation((previous) => {
+      if (
+        previous.history.length === 0
+      ) {
+        return previous;
+      }
 
       const previousPage =
-        updatedHistory.pop();
+        previous.history[
+          previous.history.length - 1
+        ];
 
-      setPage(previousPage);
-
-      return updatedHistory;
+      return {
+        page: previousPage,
+        history:
+          previous.history.slice(
+            0,
+            -1
+          ),
+      };
     });
   }
 
@@ -116,23 +134,28 @@ function App() {
     setUnitEditor(null);
     resetSelector();
 
-    setHistory((previous) => {
+    setNavigation((previous) => {
       const builderIndex =
-        previous.lastIndexOf(
+        previous.history.lastIndexOf(
           "builder"
         );
 
       if (builderIndex === -1) {
-        return previous;
+        return {
+          ...previous,
+          page: "builder",
+        };
       }
 
-      return previous.slice(
-        0,
-        builderIndex
-      );
+      return {
+        page: "builder",
+        history:
+          previous.history.slice(
+            0,
+            builderIndex
+          ),
+      };
     });
-
-    setPage("builder");
   }
 
   function handleSelectorBack() {
@@ -228,27 +251,6 @@ function App() {
     resetSelector();
   }
 
-  function isWarmaster(unit) {
-    if (
-      unit?.rules?.warmaster === true
-    ) {
-      return true;
-    }
-
-    const keywords =
-      Array.isArray(unit?.keywords)
-        ? unit.keywords
-        : [];
-
-    return keywords.some(
-      (keyword) =>
-        String(keyword)
-          .trim()
-          .toLowerCase() ===
-        "warmaster"
-    );
-  }
-
   function saveUpdatedList(
     updatedList
   ) {
@@ -332,13 +334,15 @@ function App() {
       alliance:
         selectedAlliance,
       faction: null,
+      armyOfRenown: null,
     }));
 
     navigate("faction");
   }
 
   function handleSelectFaction(
-    selectedFaction
+    selectedFaction,
+    armyOfRenown = null
   ) {
     if (!selectedFaction) {
       return;
@@ -348,6 +352,7 @@ function App() {
       ...previousArmy,
       faction:
         selectedFaction,
+      armyOfRenown,
     }));
 
     navigate("config");
@@ -789,6 +794,19 @@ function App() {
       return;
     }
 
+    if (
+      isUnitUniqueInArmy(
+        currentList,
+        configuredHero
+      )
+    ) {
+      window.alert(
+        "Esta unidad es Única y ya está incluida en el ejército."
+      );
+
+      return;
+    }
+
     const heroInstance = {
       ...configuredHero,
 
@@ -871,18 +889,6 @@ function App() {
       return;
     }
 
-    if (
-      isWarmaster(
-        configuredUnit
-      )
-    ) {
-      window.alert(
-        "Una unidad con la clave Warmaster solo puede ser líder de regimiento."
-      );
-
-      return;
-    }
-
     const selectedRegiment =
       regiments[
         regimentIndex
@@ -907,6 +913,20 @@ function App() {
     ) {
       window.alert(
         `Este regimiento ya contiene el máximo de ${regimentLimit} unidades.`
+      );
+
+      return;
+    }
+
+    if (
+      !canUnitJoinRegiment({
+        list: currentList,
+        regiment: selectedRegiment,
+        unit: configuredUnit,
+      })
+    ) {
+      window.alert(
+        "Esta unidad no puede formar parte de este regimiento según las opciones de su líder."
       );
 
       return;
@@ -1115,6 +1135,23 @@ function App() {
       return;
     }
 
+    const selectedRegiment = (currentList.regiments ?? []).find(
+      (regiment) => regiment.id === regimentId
+    );
+
+    if (
+      selectedRegiment?.requiredByArmyOfRenown ||
+      (currentList.armyOfRenown?.requiredUnits ?? []).includes(
+        selectedRegiment?.hero?.id
+      )
+    ) {
+      window.alert(
+        `${selectedRegiment.hero.name} es obligatorio en ${currentList.armyOfRenown.name} y su regimiento no se puede eliminar.`
+      );
+
+      return;
+    }
+
     const updatedList = {
       ...currentList,
 
@@ -1129,6 +1166,41 @@ function App() {
     };
 
     saveUpdatedList(updatedList);
+  }
+
+  function handleAddRegimentOfRenown(regiment) {
+    if (!currentList || !regiment) {
+      return;
+    }
+
+    const alreadyIncluded = (currentList.regimentsOfRenown ?? []).some(
+      (item) => item.id === regiment.id
+    );
+
+    if (alreadyIncluded) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      regimentsOfRenown: [
+        ...(currentList.regimentsOfRenown ?? []),
+        { ...regiment, instanceId: createInstanceId("renown") },
+      ],
+    });
+  }
+
+  function handleRemoveRegimentOfRenown(instanceId) {
+    if (!currentList || !instanceId) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      regimentsOfRenown: (currentList.regimentsOfRenown ?? []).filter(
+        (regiment) => regiment.instanceId !== instanceId
+      ),
+    });
   }
 
   /*
@@ -1184,6 +1256,7 @@ function App() {
           setCurrentList={
             setCurrentList
           }
+          onBack={goBack}
 
           /*
            * NewListConfig ya espera una
@@ -1236,6 +1309,8 @@ function App() {
           onRemoveRegiment={
             handleRemoveRegiment
           }
+          onAddRegimentOfRenown={handleAddRegimentOfRenown}
+          onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
         />
       );
 

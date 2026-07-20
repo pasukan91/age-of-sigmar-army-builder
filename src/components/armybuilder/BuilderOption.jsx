@@ -12,7 +12,7 @@ function BuilderOption({
   return (
     <div
       style={{
-        padding: "0 16px",
+        padding: "0 4px",
         marginBottom: 10,
       }}
     >
@@ -39,15 +39,15 @@ function BuilderOption({
             ? "5px solid #c6a15b"
             : "5px solid #77777d",
 
-          borderRadius: 5,
+          borderRadius: 3,
 
-          backgroundColor: "#f0eee8",
+          backgroundColor: "#faf8f3",
           color: "#17171a",
 
           textAlign: "left",
 
           boxShadow:
-            "0 2px 5px rgba(0,0,0,0.18)",
+            "0 3px 9px rgba(47,38,28,0.13)",
 
           opacity: disabled ? 0.55 : 1,
           cursor: disabled
@@ -85,8 +85,11 @@ function BuilderOption({
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
 
-              fontSize: 16,
+              fontFamily:
+                '"Oswald", "Arial Narrow", sans-serif',
+              fontSize: 17,
               fontWeight: 900,
+              textTransform: "uppercase",
             }}
           >
             {value}

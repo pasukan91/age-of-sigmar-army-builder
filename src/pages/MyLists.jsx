@@ -1,12 +1,77 @@
-function MyLists({ goBack }) {
+import BackButton from "../components/BackButton";
+
+function MyLists({
+  lists = [],
+  onOpenList,
+  goBack,
+}) {
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Mis listas</h1>
+    <main className="aos-shell">
+      <header className="aos-screen-header">
+        <BackButton
+          onClick={goBack}
+          light
+          compact
+        />
 
-      <p>Aún no tienes listas guardadas.</p>
+        <h1 className="aos-screen-header__title">
+          Mis listas
+        </h1>
 
-      <button onClick={goBack}>Volver</button>
-    </div>
+        <span aria-hidden="true" />
+      </header>
+
+      <div className="aos-screen-content">
+        <header className="aos-form-intro">
+          <p className="aos-kicker">
+            Storm Forge
+          </p>
+
+          <h2 className="aos-heading">
+            Tus ejércitos
+          </h2>
+        </header>
+
+        {lists.length === 0 ? (
+          <div className="aos-empty-message">
+            Aún no tienes listas creadas.
+          </div>
+        ) : (
+          <section className="aos-option-list">
+            {lists.map((list) => (
+              <button
+                key={list.id}
+                type="button"
+                onClick={() =>
+                  onOpenList(list)
+                }
+                className="aos-list-card"
+              >
+                <span>
+                  <small>
+                    {list.faction?.name ??
+                      "Age of Sigmar"}
+                  </small>
+
+                  <strong>{list.name}</strong>
+                </span>
+
+                <span className="aos-list-card__points">
+                  {list.pointsLimit} pts
+                </span>
+
+                <span
+                  className="aos-list-card__arrow"
+                  aria-hidden="true"
+                >
+                  ›
+                </span>
+              </button>
+            ))}
+          </section>
+        )}
+      </div>
+    </main>
   );
 }
 

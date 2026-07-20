@@ -1,4 +1,5 @@
 import Accordion from "../components/Accordion";
+import UnitArtwork from "../components/UnitArtwork";
 
 import "../styles/aos-app.css";
 
@@ -43,10 +44,6 @@ function UnitWarscroll({
   const displayedModels =
     getDisplayedModels(unit);
 
-  const unitImage =
-    unit.image ??
-    `/images/units/${unit.id}.webp`;
-
   return (
     <main className="aos-page aos-warscroll-page">
       <header className="aos-topbar">
@@ -66,16 +63,9 @@ function UnitWarscroll({
         <span aria-hidden="true" />
       </header>
 
-      <section
-        className="aos-warscroll-hero"
-        style={{
-          "--aos-unit-image":
-            `url("${unitImage}")`,
-        }}
-        aria-label={
-          `Imagen de ${unit.name}`
-        }
-      />
+      <section className="aos-warscroll-hero">
+        <UnitArtwork unit={unit} variant="warscroll" />
+      </section>
 
       <section className="aos-profile-strip">
         <Stat

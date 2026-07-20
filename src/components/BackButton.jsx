@@ -2,6 +2,7 @@ function BackButton({
   onClick,
   label = "Volver",
   light = false,
+  compact = false,
 }) {
   return (
     <button
@@ -12,14 +13,17 @@ function BackButton({
         alignItems: "center",
         gap: 8,
 
+        minWidth: compact ? 44 : undefined,
         minHeight: 42,
-        padding: "8px 12px",
+        padding: compact
+          ? "8px 10px"
+          : "8px 12px",
 
         border: light
           ? "1px solid rgba(255,255,255,0.35)"
           : "1px solid #aaa69e",
 
-        borderRadius: 4,
+        borderRadius: 3,
 
         backgroundColor: light
           ? "rgba(0,0,0,0.18)"
@@ -47,7 +51,7 @@ function BackButton({
         ‹
       </span>
 
-      {label}
+      {!compact && label}
     </button>
   );
 }

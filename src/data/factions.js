@@ -86,13 +86,6 @@ const factions = [
     name: "Skaven",
   },
   {
-    id: "hedonites",
-    name: "Hedonites of Slaanesh",
-    alliance: "chaos",
-    image:
-      "/images/factions/hedonites.webp",
-  },
-  {
     id: "tzeentch",
     alliance: "chaos",
     name: "Disciples of Tzeentch",

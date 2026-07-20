@@ -1,3 +1,9 @@
+import {
+  getAvailableRegimentLeaders,
+  getAvailableUnitsForRegiment,
+} from "../../utils/regimentRules";
+import UnitArtwork from "../UnitArtwork";
+
 function RegimentSection({
   list,
   setSelector,
@@ -13,118 +19,11 @@ function RegimentSection({
     ? list.regiments
     : [];
 
-  const factionUnits = Array.isArray(
-    list?.faction?.units
-  )
-    ? list.faction.units
-    : [];
-
   const availableHeroes =
-    factionUnits.filter(
-      (unit) =>
-        unit.rules?.hero === true
-    );
-
-  function isWarmaster(unit) {
-    if (
-      unit?.rules?.warmaster === true
-    ) {
-      return true;
-    }
-
-    return unit?.keywords?.some(
-      (keyword) =>
-        String(keyword)
-          .trim()
-          .toLowerCase() ===
-        "warmaster"
-    );
-  }
+    getAvailableRegimentLeaders(list);
 
   function getRegimentLimit(index) {
     return index === 0 ? 4 : 3;
-  }
-
-  function unitMatchesOption(
-    unit,
-    option
-  ) {
-    const normalizedOption =
-      String(option)
-        .trim()
-        .toLowerCase();
-
-    const keywords =
-      Array.isArray(unit?.keywords)
-        ? unit.keywords.map(
-            (keyword) =>
-              String(keyword)
-                .trim()
-                .toLowerCase()
-          )
-        : [];
-
-    if (
-      normalizedOption ===
-        "any faction unit" ||
-      normalizedOption ===
-        "any kruleboyz" ||
-      normalizedOption ===
-        "any hedonites of slaanesh"
-    ) {
-      return true;
-    }
-
-    return keywords.some(
-      (keyword) =>
-        normalizedOption.includes(
-          keyword
-        ) ||
-        keyword.includes(
-          normalizedOption
-        )
-    );
-  }
-
-  function getAvailableUnits(
-    regiment
-  ) {
-    const regimentOptions =
-      Array.isArray(
-        regiment?.hero?.details
-          ?.regimentOptions
-      )
-        ? regiment.hero.details
-            .regimentOptions
-        : [];
-
-    return factionUnits.filter(
-      (unit) => {
-        if (
-          unit.id === regiment.hero?.id
-        ) {
-          return false;
-        }
-
-        if (isWarmaster(unit)) {
-          return false;
-        }
-
-        if (
-          regimentOptions.length === 0
-        ) {
-          return true;
-        }
-
-        return regimentOptions.some(
-          (option) =>
-            unitMatchesOption(
-              unit,
-              option
-            )
-        );
-      }
-    );
   }
 
   function getUnitPoints(unit) {
@@ -223,10 +122,6 @@ function RegimentSection({
 
   return (
     <section style={styles.section}>
-      <h2 style={styles.title}>
-        Regimientos
-      </h2>
-
       {regiments.length === 0 && (
         <div style={styles.emptyCard}>
           No hay ningún regimiento.
@@ -260,7 +155,8 @@ function RegimentSection({
             units.length >= limit;
 
           const selectableUnits =
-            getAvailableUnits(
+            getAvailableUnitsForRegiment(
+              list,
               regiment
             );
 
@@ -294,6 +190,9 @@ function RegimentSection({
                     {regimentIndex === 0
                       ? "Regimiento del general"
                       : `Liderado por ${regiment.hero.name}`}
+                    {regiment.requiredByArmyOfRenown
+                      ? " · Obligatorio"
+                      : ""}
                   </p>
                 </div>
 
@@ -531,6 +430,8 @@ function UnitCard({
 }) {
   return (
     <article style={styles.unitCard}>
+      <UnitArtwork unit={unit} variant="thumbnail" />
+
       <div style={styles.unitInfo}>
         <strong style={styles.unitName}>
           {unit.name}
@@ -632,26 +533,28 @@ function UnitCard({
 
 const styles = {
   section: {
-    padding: 20,
-  },
-
-  title: {
-    marginTop: 0,
+    padding: "0 16px 24px",
   },
 
   emptyCard: {
     padding: 18,
     marginBottom: 20,
-    borderRadius: 10,
-    backgroundColor: "#ffffff",
+    border: "1px dashed #aaa092",
+    borderRadius: 3,
+    color: "#716a61",
+    backgroundColor: "rgba(255,255,255,0.55)",
+    textAlign: "center",
   },
 
   regimentCard: {
     padding: 16,
     marginBottom: 20,
-    border: "1px solid #bbbbbb",
-    borderRadius: 12,
-    backgroundColor: "#ffffff",
+    border: "1px solid #d4cec1",
+    borderTop: "4px solid #8f6c2e",
+    borderRadius: 3,
+    backgroundColor: "#faf8f3",
+    boxShadow:
+      "0 5px 16px rgba(47,38,28,0.13)",
   },
 
   regimentHeader: {
@@ -664,6 +567,10 @@ const styles = {
 
   regimentTitle: {
     margin: 0,
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 23,
+    textTransform: "uppercase",
   },
 
   regimentSubtitle: {
@@ -677,8 +584,12 @@ const styles = {
     gap: 10,
     padding: 10,
     marginBottom: 16,
-    borderRadius: 8,
-    backgroundColor: "#eeeeee",
+    borderRadius: 2,
+    color: "#5f574e",
+    backgroundColor: "#e9e3d7",
+    fontSize: 12,
+    fontWeight: 800,
+    textTransform: "uppercase",
   },
 
   sectionLabel: {
@@ -698,8 +609,9 @@ const styles = {
     padding: 14,
     marginBottom: 10,
     border: "1px solid #d0d0d0",
-    borderRadius: 9,
-    backgroundColor: "#fafafa",
+    borderLeft: "4px solid #891f18",
+    borderRadius: 3,
+    backgroundColor: "#fffefa",
   },
 
   unitInfo: {
@@ -707,7 +619,10 @@ const styles = {
   },
 
   unitName: {
-    fontSize: 17,
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 19,
+    textTransform: "uppercase",
   },
 
   badges: {
@@ -720,7 +635,8 @@ const styles = {
   badge: {
     padding: "3px 7px",
     borderRadius: 999,
-    backgroundColor: "#dddddd",
+    color: "#ffffff",
+    backgroundColor: "#62605c",
     fontSize: 11,
     fontWeight: 700,
   },
@@ -744,16 +660,17 @@ const styles = {
   secondaryButton: {
     padding: "9px 12px",
     border: "1px solid #111111",
-    borderRadius: 7,
-    backgroundColor: "#ffffff",
+    borderRadius: 3,
+    backgroundColor: "#faf8f3",
+    fontWeight: 700,
     cursor: "pointer",
   },
 
   primaryButton: {
     padding: "9px 12px",
-    border: "1px solid #111111",
-    borderRadius: 7,
-    backgroundColor: "#111111",
+    border: "1px solid #5f120e",
+    borderRadius: 3,
+    backgroundColor: "#891f18",
     color: "#ffffff",
     cursor: "pointer",
   },
@@ -761,7 +678,7 @@ const styles = {
   deleteUnitButton: {
     padding: "9px 12px",
     border: "1px solid #a40000",
-    borderRadius: 7,
+    borderRadius: 3,
     backgroundColor: "#ffffff",
     color: "#a40000",
     cursor: "pointer",
@@ -770,7 +687,7 @@ const styles = {
   deleteRegimentButton: {
     padding: "8px 10px",
     border: "1px solid #a40000",
-    borderRadius: 7,
+    borderRadius: 3,
     backgroundColor: "#ffffff",
     color: "#a40000",
     cursor: "pointer",
@@ -779,20 +696,27 @@ const styles = {
   addUnitButton: {
     width: "100%",
     padding: 13,
-    border: "1px solid #111111",
-    borderRadius: 8,
-    backgroundColor: "#ffffff",
+    border: "1px solid #8f6c2e",
+    borderRadius: 3,
+    color: "#5f120e",
+    backgroundColor: "#f5eee1",
     fontWeight: 700,
   },
 
   addRegimentButton: {
     width: "100%",
     padding: 15,
-    border: "none",
-    borderRadius: 9,
-    backgroundColor: "#111111",
+    border: "1px solid #5f120e",
+    borderRadius: 3,
+    background:
+      "linear-gradient(180deg, #a22b22, #5f120e)",
     color: "#ffffff",
     fontWeight: 700,
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 17,
+    letterSpacing: "0.04em",
+    textTransform: "uppercase",
     cursor: "pointer",
   },
 
@@ -800,7 +724,7 @@ const styles = {
     padding: 14,
     marginBottom: 10,
     border: "1px dashed #cccccc",
-    borderRadius: 8,
+    borderRadius: 3,
     color: "#666666",
   },
 };

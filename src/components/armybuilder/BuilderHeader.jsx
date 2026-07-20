@@ -24,6 +24,12 @@ function BuilderHeader({ list }) {
             "Age of Sigmar"}
         </p>
 
+        {list.armyOfRenown && (
+          <p style={styles.renownLabel}>
+            {list.armyOfRenown.name}
+          </p>
+        )}
+
         <h1 style={styles.title}>
           {list.name}
         </h1>
@@ -103,6 +109,15 @@ const styles = {
     fontSize: 12,
     fontWeight: 900,
     letterSpacing: "0.13em",
+    textTransform: "uppercase",
+  },
+
+  renownLabel: {
+    margin: "0 0 7px",
+    color: "#ffffff",
+    fontFamily: '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 16,
+    fontWeight: 700,
     textTransform: "uppercase",
   },
 

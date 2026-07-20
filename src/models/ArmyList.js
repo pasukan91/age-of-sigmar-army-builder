@@ -3,8 +3,21 @@ export function createArmyList({
   faction,
   alliance,
   pointsLimit,
+  armyOfRenown = null,
 }) {
   const now = Date.now();
+  const requiredRegiments = (armyOfRenown?.requiredUnits ?? [])
+    .map((unitId) => faction?.units?.find((unit) => unit.id === unitId))
+    .filter(Boolean)
+    .map((hero) => ({
+      id: crypto.randomUUID(),
+      hero: {
+        ...hero,
+        instanceId: crypto.randomUUID(),
+      },
+      units: [],
+      requiredByArmyOfRenown: true,
+    }));
 
   return {
     id: crypto.randomUUID(),
@@ -16,6 +29,8 @@ export function createArmyList({
     faction,
 
     pointsLimit,
+
+    armyOfRenown,
 
     battleFormation: null,
 
@@ -29,7 +44,7 @@ export function createArmyList({
 
     terrain: null,
 
-    regiments: [],
+    regiments: requiredRegiments,
 
     regimentsOfRenown: [],
 

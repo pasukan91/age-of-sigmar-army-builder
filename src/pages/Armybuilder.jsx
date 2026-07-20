@@ -1,11 +1,15 @@
-import BuilderHeader from "../components/ArmyBuilder/BuilderHeader";
-import BuilderOption from "../components/ArmyBuilder/BuilderOption";
-import RegimentSection from "../components/ArmyBuilder/RegimentSection";
-import EmptyState from "../components/ArmyBuilder/EmptyState";
+import BuilderHeader from "../components/armybuilder/BuilderHeader";
+import BuilderOption from "../components/armybuilder/BuilderOption";
+import RegimentSection from "../components/armybuilder/RegimentSection";
+import RenownSection from "../components/armybuilder/RenownSection";
+import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
 
 import {
   calculateArmyPoints,
 } from "../utils/armyPoints";
+import {
+  getAvailableRegimentLeaders,
+} from "../utils/regimentRules";
 
 import "../styles/aos-app.css";
 
@@ -18,6 +22,8 @@ function ArmyBuilder({
   onConfigureUnit,
   onRemoveUnit,
   onRemoveRegiment,
+  onAddRegimentOfRenown,
+  onRemoveRegimentOfRenown,
 }) {
   const faction =
     list?.faction ?? {};
@@ -44,9 +50,6 @@ function ArmyBuilder({
       faction.manifestationLores
     );
 
-  const regiments =
-    getArray(list?.regiments);
-
   const manifestationOptions =
     manifestationLores.length > 0
       ? manifestationLores
@@ -57,6 +60,10 @@ function ArmyBuilder({
 
   const currentPoints =
     calculateArmyPoints(list);
+
+  const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
+    ? []
+    : getEligibleRegimentsOfRenown(faction.id);
 
   const pointsLimit =
     Number(
@@ -81,10 +88,7 @@ function ArmyBuilder({
 
   function openNewRegimentSelector() {
     const heroes =
-      getArray(faction.units).filter(
-        (unit) =>
-          unit.rules?.hero === true
-      );
+      getAvailableRegimentLeaders(list);
 
     setSelector({
       title:
@@ -232,9 +236,12 @@ function ArmyBuilder({
         }
       />
 
-      {regiments.length === 0 && (
-        <EmptyState />
-      )}
+      <RenownSection
+        available={eligibleRegimentsOfRenown}
+        selected={getArray(list.regimentsOfRenown)}
+        onAdd={onAddRegimentOfRenown}
+        onRemove={onRemoveRegimentOfRenown}
+      />
 
       <footer className="aos-builder-footer">
         <div className="aos-points-summary">

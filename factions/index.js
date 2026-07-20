@@ -1,4 +1,4 @@
-import stormcast from "./orruks/orruks";
+import orruks from "./orruks/orruks";
 import skaven from "./skaven";
 import soulblight from "./soulblight";
 

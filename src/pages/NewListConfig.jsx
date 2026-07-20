@@ -10,6 +10,7 @@ function NewListConfig({
   setLists,
   setCurrentList,
   setPage,
+  onBack,
 }) {
   function handleCreateList() {
     if (!army.faction) {
@@ -28,6 +29,7 @@ function NewListConfig({
       faction: army.faction,
       alliance: army.alliance,
       pointsLimit: army.points,
+      armyOfRenown: army.armyOfRenown,
     });
 
     setLists((previousLists) => [
@@ -39,96 +41,139 @@ function NewListConfig({
     setPage("builder");
   }
 
-  function handleGoHome() {
-    setCurrentList(null);
-
-    setArmy({
-      alliance: null,
-      faction: null,
-      points: 2000,
-      name: "",
-    });
-
-    setPage("home");
-  }
-
   return (
-    <main style={styles.page}>
-      <div style={styles.container}>
-        <BackButton onClick={handleGoHome} />
+    <main className="aos-shell">
+      <header className="aos-screen-header">
+        <BackButton
+          onClick={onBack}
+          light
+          compact
+        />
 
-        <header style={styles.header}>
-          <p style={styles.eyebrow}>
-            Nueva lista
+        <h1 className="aos-screen-header__title">
+          Nueva lista
+        </h1>
+
+        <span aria-hidden="true" />
+      </header>
+
+      <div className="aos-screen-content">
+        <header className="aos-form-intro">
+          <p className="aos-kicker">
+            Storm Forge
           </p>
 
-          <h1 style={styles.title}>
+          <h2 className="aos-heading">
             {army.faction?.name ??
               "Selecciona una facción"}
-          </h1>
+          </h2>
         </header>
 
-        <section style={styles.card}>
-          <label style={styles.label}>
-            Nombre de la lista
+        <section className="aos-panel aos-form-panel">
+          {army.faction?.armiesOfRenown?.length > 0 && (
+            <label className="aos-field">
+              <span className="aos-field__label">
+                Tipo de ejército
+              </span>
+
+              <select
+                autoFocus
+                value={army.armyOfRenown?.id ?? "standard"}
+                onChange={(event) => {
+                  const selectedId = event.target.value;
+                  const selectedArmy = army.faction.armiesOfRenown.find(
+                    (option) => option.id === selectedId
+                  ) ?? null;
+
+                  setArmy((previousArmy) => ({
+                    ...previousArmy,
+                    armyOfRenown: selectedArmy,
+                  }));
+                }}
+                className="aos-field__control"
+              >
+                <option value="standard">
+                  Ejército estándar — Hedonites of Slaanesh
+                </option>
+
+                {army.faction.armiesOfRenown.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+
+              <small className="aos-field__hint">
+                La selección determina qué unidades estarán disponibles al crear los regimientos.
+              </small>
+            </label>
+          )}
+
+          <label className="aos-field">
+            <span className="aos-field__label">
+              Nombre de la lista
+            </span>
+
+            <input
+              type="text"
+              value={army.name}
+              placeholder="Nueva Lista"
+              onChange={(event) =>
+                setArmy((previousArmy) => ({
+                  ...previousArmy,
+                  name: event.target.value,
+                }))
+              }
+              className="aos-field__control"
+            />
           </label>
 
-          <input
-            type="text"
-            value={army.name}
-            placeholder="Nueva Lista"
-            onChange={(event) =>
-              setArmy((previousArmy) => ({
-                ...previousArmy,
-                name: event.target.value,
-              }))
-            }
-            style={styles.input}
-          />
+          <label className="aos-field">
+            <span className="aos-field__label">
+              Límite de puntos
+            </span>
 
-          <label style={styles.label}>
-            Límite de puntos
+            <select
+              value={army.points}
+              onChange={(event) =>
+                setArmy((previousArmy) => ({
+                  ...previousArmy,
+
+                  points: Number(
+                    event.target.value
+                  ),
+                }))
+              }
+              className="aos-field__control"
+            >
+              <option value={1000}>
+                1000 puntos
+              </option>
+
+              <option value={1500}>
+                1500 puntos
+              </option>
+
+              <option value={2000}>
+                2000 puntos
+              </option>
+
+              <option value={2500}>
+                2500 puntos
+              </option>
+
+              <option value={3000}>
+                3000 puntos
+              </option>
+            </select>
           </label>
-
-          <select
-            value={army.points}
-            onChange={(event) =>
-              setArmy((previousArmy) => ({
-                ...previousArmy,
-
-                points: Number(
-                  event.target.value
-                ),
-              }))
-            }
-            style={styles.select}
-          >
-            <option value={1000}>
-              1000 puntos
-            </option>
-
-            <option value={1500}>
-              1500 puntos
-            </option>
-
-            <option value={2000}>
-              2000 puntos
-            </option>
-
-            <option value={2500}>
-              2500 puntos
-            </option>
-
-            <option value={3000}>
-              3000 puntos
-            </option>
-          </select>
         </section>
 
         <button
           type="button"
           onClick={handleCreateList}
-          style={styles.createButton}
+          className="aos-primary-action"
+          style={{ marginTop: 16 }}
         >
           Crear lista
         </button>
@@ -136,83 +181,5 @@ function NewListConfig({
     </main>
   );
 }
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    padding: 20,
-    backgroundColor: "#eeeeee",
-    color: "#111111",
-  },
-
-  container: {
-    width: "100%",
-    maxWidth: 720,
-    margin: "0 auto",
-  },
-
-  header: {
-    marginBottom: 20,
-    textAlign: "center",
-  },
-
-  eyebrow: {
-    margin: "0 0 5px",
-    color: "#666666",
-    fontSize: 13,
-    fontWeight: 700,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-
-  title: {
-    margin: 0,
-  },
-
-  card: {
-    padding: 20,
-    borderRadius: 12,
-    backgroundColor: "#ffffff",
-  },
-
-  label: {
-    display: "block",
-    marginBottom: 7,
-    fontWeight: 700,
-  },
-
-  input: {
-    width: "100%",
-    boxSizing: "border-box",
-    padding: 13,
-    marginBottom: 20,
-    border: "1px solid #bbbbbb",
-    borderRadius: 8,
-    fontSize: 16,
-  },
-
-  select: {
-    width: "100%",
-    boxSizing: "border-box",
-    padding: 13,
-    border: "1px solid #bbbbbb",
-    borderRadius: 8,
-    backgroundColor: "#ffffff",
-    fontSize: 16,
-  },
-
-  createButton: {
-    width: "100%",
-    padding: 16,
-    marginTop: 18,
-    border: "none",
-    borderRadius: 10,
-    backgroundColor: "#000000",
-    color: "#ffffff",
-    fontSize: 18,
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-};
 
 export default NewListConfig;

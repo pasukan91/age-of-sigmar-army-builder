@@ -7,6 +7,23 @@ import spellLores from "./spellLores";
 import manifestations from "./manifestations";
 import terrain from "./terrain";
 import units from "./units";
+import missingUnits from "./missingUnits";
+import regimentProfiles from "./regimentProfiles";
+import armiesOfRenown from "./armiesOfRenown";
+import regimentsOfRenown from "./regimentsOfRenown";
+
+const completeUnits = [...units, ...missingUnits].map((unit) => {
+  const profile = regimentProfiles[unit.id] ?? {};
+
+  return {
+    ...unit,
+    details: {
+      ...unit.details,
+      regimentOptions: profile.options ?? [],
+      canJoinRegimentAs: profile.canJoinAs ?? [],
+    },
+  };
+});
 
 const hedonites = {
   id: "hedonites",
@@ -35,7 +52,11 @@ const hedonites = {
 
   terrain,
 
-  units,
+  units: completeUnits,
+
+  armiesOfRenown,
+
+  regimentsOfRenown,
 };
 
 export default hedonites;
