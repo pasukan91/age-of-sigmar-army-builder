@@ -8,7 +8,7 @@ const regimentsOfRenown = [
 
 export function getEligibleRegimentsOfRenown(factionId) {
   return regimentsOfRenown.filter((regiment) =>
-    regiment.eligibleFactionIds.includes(factionId)
+    regiment.sourceFaction === factionId
   );
 }
 

@@ -615,6 +615,114 @@ textarea {
   }
 }
 
+.aos-rules-reference {
+  margin: 32px 16px 8px;
+  padding: 18px;
+  border: 1px solid #cfc4b3;
+  border-radius: var(--aos-radius-lg);
+  background:
+    radial-gradient(circle at 100% 0, rgba(181, 139, 59, 0.14), transparent 28%),
+    rgba(246, 242, 234, 0.96);
+  box-shadow: var(--aos-shadow-md);
+}
+
+.aos-rules-reference__header {
+  margin-bottom: 18px;
+}
+
+.aos-rules-reference__header h2 {
+  margin: 4px 0 7px;
+  color: #302a25;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 27px;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.aos-rules-reference__header > p:last-child {
+  margin: 0;
+  color: #6d655d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.aos-rule-list {
+  display: grid;
+  gap: 10px;
+  padding-top: 12px;
+}
+
+.aos-rule-card {
+  padding: 14px;
+  border: 1px solid #ddd5c9;
+  border-left: 4px solid var(--aos-red);
+  border-radius: 5px;
+  background: #fbfaf7;
+}
+
+.aos-rule-card__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.aos-rule-card__heading h3 {
+  margin: 3px 0 0;
+  color: #262321;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 18px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.aos-rule-card__phase {
+  color: var(--aos-red-dark);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aos-rule-card__cp {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--aos-red-dark);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.aos-rule-card__type {
+  margin: 8px 0 0;
+  color: #887044;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.aos-rule-card__description,
+.aos-rule-card__empty {
+  margin: 9px 0 0;
+  color: #57514b;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.aos-rule-card__empty {
+  padding: 12px 2px 2px;
+}
+
+@media (max-width: 620px) {
+  .aos-rules-reference {
+    margin-inline: 12px;
+    padding: 13px;
+  }
+}
+
 /* Shared app shell */
 .aos-shell {
   width: 100%;

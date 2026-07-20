@@ -2,6 +2,7 @@ import BuilderHeader from "../components/armybuilder/BuilderHeader";
 import BuilderOption from "../components/armybuilder/BuilderOption";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
+import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
 
 import {
@@ -38,6 +39,9 @@ function ArmyBuilder({
     getArray(
       faction.battleFormations
     );
+
+  const battleTraits =
+    getArray(faction.battleTraits);
 
   const spellLores =
     getArray(faction.spellLores);
@@ -256,6 +260,11 @@ function ArmyBuilder({
         selected={getArray(list.regimentsOfRenown)}
         onAdd={onAddRegimentOfRenown}
         onRemove={onRemoveRegimentOfRenown}
+      />
+
+      <ArmyRulesReference
+        battleTraits={battleTraits}
+        battleFormation={list.battleFormation}
       />
 
       <footer className="aos-builder-footer">

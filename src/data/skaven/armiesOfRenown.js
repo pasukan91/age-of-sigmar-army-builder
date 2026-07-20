@@ -1,4 +1,10 @@
 const greatGnawhordeRules = {
+  battleTraits: [
+    { id: "disciples-of-vizzik", name: "Disciples of Vizzik", type: "Passive", description: "While a friendly Vizzik Skour is within the combat range of another friendly Gnawhorde unit, Vizzik has Ward (4+). Each successful ward passes 1 damage point to a friendly Gnawhorde unit in its combat range." },
+    { id: "unstoppable-warp-volley", name: "Unstoppable Warp-volley", type: "Once Per Turn (Army)", phase: "Any Shooting Phase", description: "If no Warpshatter Throes ability has been used this turn, pick up to 3 friendly Gnawhorde units. Add 3\" to their ranged weapons for the turn, but those units cannot use commands." },
+    { id: "frenzied-momentum", name: "Frenzied Momentum", type: "Once Per Turn (Army)", phase: "Your Movement Phase", description: "If no Warpshatter Throes ability has been used this turn, pick up to 3 friendly Gnawhorde units. Add 2 to their run and charge rolls and subtract 1 from their control scores for the turn." },
+    { id: "reckless-abandon", name: "Reckless Abandon", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "If no Warpshatter Throes ability has been used this turn, pick up to 3 friendly Gnawhorde units. Add 1 to their melee weapon Attacks, but add 1 to hit rolls for combat attacks that target them." },
+  ],
   battleFormations: [],
   heroicTraits: [{ id: "harbinger-of-the-great-ascendancy", name: "Harbinger of the Great Ascendancy", points: 0, source: "Army of Renown", description: "Once per battle, if this unit is not in combat, you can use 2 different Warpshatter Throes abilities this turn instead of 1." }],
   artefacts: [{ id: "icon-of-great-total-supremacy", name: "Icon of Great-total Supremacy", points: 0, source: "Army of Renown", description: "Once per battle, return up to D3 slain models to each friendly Gnawhorde Infantry unit with Health 3 or less." }],
@@ -9,6 +15,12 @@ const greatGnawhordeRules = {
 };
 
 const mutatedMenagerieRules = {
+  battleTraits: [
+    { id: "monstrous-entourage", name: "Monstrous Entourage", type: "Passive", description: "While a friendly Thanquol is within the combat range of another friendly Mutated Menagerie unit, Thanquol has Ward (4+). Each successful ward passes 1 damage point to a friendly Mutated Menagerie unit in his combat range." },
+    { id: "more-more-mutation", name: "More-more Mutation!", type: "Once Per Turn (Army)", phase: "Your Hero Phase", description: "Pick a friendly non-Hero Mutated Menagerie unit that has not been picked before. For the battle it gains +2 Health, +2\" Move, +1 Attack on melee weapons and Ward (5+), but suffers D3+2 damage at the end of each turn." },
+    { id: "spiteful-swarms", name: "Spiteful Swarms", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "Pick an eligible non-Hero Mutated Menagerie Monster. It gains Strike-first, is destroyed at the end of the turn, and can permanently reduce nearby enemies' melee Attacks when destroyed." },
+    { id: "rampaging-demise", name: "Rampaging Demise", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "Pick an eligible non-Hero Mutated Menagerie Monster. It gains Strike-first and is destroyed at the end of the turn, inflicting possible mortal damage on nearby enemy units before removal." },
+  ],
   battleFormations: [],
   heroicTraits: [{ id: "pack-tactics", name: "Pack Tactics", points: 0, source: "Army of Renown", description: "Once per battle, up to 2 friendly non-Hero Mutated Menagerie Monsters can use All-out Attack or All-out Defence even if already used this phase." }],
   artefacts: [{ id: "warpstone-innards", name: "Warpstone Innards", points: 0, source: "Army of Renown", description: "Once per battle, add 1 Attack permanently to a nearby non-Hero Mutated Menagerie Monster; it then suffers D3 damage at the end of each turn." }],
