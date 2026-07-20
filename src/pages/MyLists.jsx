@@ -1,8 +1,12 @@
 import BackButton from "../components/BackButton";
+import ChevronIcon from "../components/ChevronIcon";
+import { calculateArmyPoints } from "../utils/armyPoints";
 
 function MyLists({
   lists = [],
   onOpenList,
+  onDeleteList,
+  storageStatus = "saved",
   goBack,
 }) {
   return (
@@ -30,6 +34,12 @@ function MyLists({
           <h2 className="aos-heading">
             Tus ejércitos
           </h2>
+
+          <p className="aos-storage-note" role="status">
+            {storageStatus === "error"
+              ? "No se ha podido acceder al almacenamiento del dispositivo."
+              : "Las listas se guardan automáticamente en este dispositivo y funcionan sin conexión."}
+          </p>
         </header>
 
         {lists.length === 0 ? (
@@ -38,41 +48,81 @@ function MyLists({
           </div>
         ) : (
           <section className="aos-option-list">
-            {lists.map((list) => (
-              <button
+            {[...lists]
+              .sort(
+                (left, right) =>
+                  Number(right.updatedAt) - Number(left.updatedAt)
+              )
+              .map((list) => (
+              <article
                 key={list.id}
-                type="button"
-                onClick={() =>
-                  onOpenList(list)
-                }
                 className="aos-list-card"
               >
-                <span>
-                  <small>
-                    {list.faction?.name ??
-                      "Age of Sigmar"}
-                  </small>
-
-                  <strong>{list.name}</strong>
-                </span>
-
-                <span className="aos-list-card__points">
-                  {list.pointsLimit} pts
-                </span>
-
-                <span
-                  className="aos-list-card__arrow"
-                  aria-hidden="true"
+                <button
+                  type="button"
+                  onClick={() => onOpenList(list)}
+                  className="aos-list-card__open"
                 >
-                  ›
-                </span>
-              </button>
+                  <span>
+                    <small>
+                      {list.faction?.name ?? "Age of Sigmar"}
+                    </small>
+
+                    <strong>{list.name}</strong>
+                    <span className="aos-list-card__updated">
+                      Actualizada {formatSavedDate(list.updatedAt)}
+                    </span>
+                  </span>
+
+                  <span className="aos-list-card__points">
+                    {calculateArmyPoints(list)} / {list.pointsLimit} pts
+                  </span>
+
+                  <span
+                    className="aos-list-card__arrow"
+                    aria-hidden="true"
+                  >
+                    <ChevronIcon direction="right" size={8} />
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  className="aos-list-card__delete"
+                  onClick={() => {
+                    const confirmed = window.confirm(
+                      `¿Eliminar la lista “${list.name}”? Esta acción no se puede deshacer.`
+                    );
+
+                    if (confirmed) {
+                      onDeleteList(list.id);
+                    }
+                  }}
+                >
+                  Eliminar lista
+                </button>
+              </article>
             ))}
           </section>
         )}
       </div>
     </main>
   );
+}
+
+function formatSavedDate(value) {
+  const date = new Date(Number(value));
+
+  if (Number.isNaN(date.getTime())) {
+    return "recientemente";
+  }
+
+  return new Intl.DateTimeFormat("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
 }
 
 export default MyLists;

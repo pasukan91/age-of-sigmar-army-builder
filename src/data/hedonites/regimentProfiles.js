@@ -7,6 +7,7 @@ const regimentProfiles = {
   "syllesske-the-vengeful-alliance": { options: ["slaaneshi-beguiler", "dark-egotist", "any-hedonites"] },
   "thricefold-discord": { options: ["slaaneshi-beguiler", "any-hedonites"] },
   "infernal-enrapturess": { options: ["any-daemon"], canJoinAs: ["slaaneshi-beguiler"] },
+  "infernal-enrapturess-scourge-of-aqshy": { options: ["any-daemon"], canJoinAs: ["slaaneshi-beguiler"] },
   "contorted-epitome": { options: ["slaaneshi-beguiler", "any-daemon"] },
   "glutos-orscollion": { options: ["dark-egotist", "any-hedonites"] },
   "sigvald-prince-of-slaanesh": { options: ["dark-egotist", "any-hedonites"], canJoinAs: ["dark-egotist"] },

@@ -15,6 +15,7 @@ import "../styles/aos-app.css";
 
 function ArmyBuilder({
   list,
+  storageStatus,
   setSelector,
   navigate,
   onBack,
@@ -25,8 +26,13 @@ function ArmyBuilder({
   onAddRegimentOfRenown,
   onRemoveRegimentOfRenown,
 }) {
-  const faction =
+  const baseFaction =
     list?.faction ?? {};
+
+  const faction = {
+    ...baseFaction,
+    ...(list?.armyOfRenown?.rules ?? {}),
+  };
 
   const battleFormations =
     getArray(
@@ -63,7 +69,7 @@ function ArmyBuilder({
 
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
     ? []
-    : getEligibleRegimentsOfRenown(faction.id);
+    : getEligibleRegimentsOfRenown(baseFaction.id);
 
   const pointsLimit =
     Number(
@@ -120,11 +126,15 @@ function ArmyBuilder({
         <span aria-hidden="true" />
       </header>
 
-      <BuilderHeader list={list} />
+      <BuilderHeader
+        list={list}
+        storageStatus={storageStatus}
+      />
 
       <section className="aos-builder-options">
+        {battleFormations.length > 0 && (
         <BuilderOption
-          title="Battle Formation"
+          title="Formación de batalla"
           value={
             list.battleFormation?.name ??
             "No seleccionada"
@@ -132,7 +142,7 @@ function ArmyBuilder({
           onClick={() =>
             openSelector({
               title:
-                "Battle Formation",
+                "Formación de batalla",
               property:
                 "battleFormation",
               options:
@@ -140,25 +150,28 @@ function ArmyBuilder({
             })
           }
         />
+        )}
 
+        {spellLores.length > 0 && (
         <BuilderOption
-          title="Spell Lore"
+          title="Saber de hechizos"
           value={
             list.spellLore?.name ??
             "No seleccionada"
           }
           onClick={() =>
             openSelector({
-              title: "Spell Lore",
+              title: "Saber de hechizos",
               property: "spellLore",
               options: spellLores,
             })
           }
         />
+        )}
 
         {prayerLores.length > 0 && (
           <BuilderOption
-            title="Prayer Lore"
+            title="Saber de plegarias"
             value={
               list.prayerLore?.name ??
               "No seleccionada"
@@ -166,7 +179,7 @@ function ArmyBuilder({
             onClick={() =>
               openSelector({
                 title:
-                  "Prayer Lore",
+                  "Saber de plegarias",
                 property:
                   "prayerLore",
                 options:
@@ -176,8 +189,9 @@ function ArmyBuilder({
           />
         )}
 
+        {manifestationOptions.length > 0 && (
         <BuilderOption
-          title="Manifestation Lore"
+          title="Saber de manifestaciones"
           value={
             list.manifestationLore
               ?.name ??
@@ -186,7 +200,7 @@ function ArmyBuilder({
           onClick={() =>
             openSelector({
               title:
-                "Manifestation Lore",
+                "Saber de manifestaciones",
               property:
                 "manifestationLore",
               options:
@@ -194,10 +208,11 @@ function ArmyBuilder({
             })
           }
         />
+        )}
 
         {terrain.length > 0 && (
           <BuilderOption
-            title="Faction Terrain"
+            title="Terreno de facción"
             value={
               list.terrain?.name ??
               "No seleccionado"
@@ -205,7 +220,7 @@ function ArmyBuilder({
             onClick={() =>
               openSelector({
                 title:
-                  "Faction Terrain",
+                  "Terreno de facción",
                 property: "terrain",
                 options: terrain,
               })

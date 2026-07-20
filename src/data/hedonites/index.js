@@ -11,8 +11,13 @@ import missingUnits from "./missingUnits";
 import regimentProfiles from "./regimentProfiles";
 import armiesOfRenown from "./armiesOfRenown";
 import regimentsOfRenown from "./regimentsOfRenown";
+import {
+  allConsumingObsessions,
+  scourgeHeroicTraits,
+  scourgeUnits,
+} from "./scourgeOfAqshy";
 
-const completeUnits = [...units, ...missingUnits].map((unit) => {
+const completeUnits = [...units, ...missingUnits, ...scourgeUnits].map((unit) => {
   const profile = regimentProfiles[unit.id] ?? {};
 
   return {
@@ -36,7 +41,9 @@ const hedonites = {
 
   battleFormations,
 
-  heroicTraits,
+  heroicTraits: [...heroicTraits, ...scourgeHeroicTraits],
+
+  allConsumingObsessions,
 
   monsterTraits,
 

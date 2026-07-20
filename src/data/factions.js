@@ -1,9 +1,11 @@
 import kruleboyz from "./kruleboyz";
 import hedonites from "./hedonites";
+import skaven from "./skaven";
 
 const factions = [
   kruleboyz,
   hedonites,
+  skaven,
 
   // ORDEN
   {
@@ -79,11 +81,6 @@ const factions = [
     id: "hashut",
     alliance: "chaos",
     name: "Disciples of Hashut",
-  },
-  {
-    id: "skaven",
-    alliance: "chaos",
-    name: "Skaven",
   },
   {
     id: "tzeentch",

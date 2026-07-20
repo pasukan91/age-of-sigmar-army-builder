@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import factions from "../data/factions";
+import ChevronIcon from "../components/ChevronIcon";
 import "../styles/aos-app.css";
 
 function SelectFaction({ alliance, onSelect, onBack }) {
@@ -24,11 +25,11 @@ function SelectFaction({ alliance, onSelect, onBack }) {
           className="aos-icon-button"
           onClick={onBack}
           aria-label="Volver"
-        >
-          ‹
+          >
+            <ChevronIcon direction="left" size={10} thickness={3} />
         </button>
 
-        <h1 className="aos-topbar__title">Choose Faction</h1>
+        <h1 className="aos-topbar__title">Elige facción</h1>
         <span aria-hidden="true" />
       </header>
 
@@ -71,9 +72,13 @@ function SelectFaction({ alliance, onSelect, onBack }) {
                   </span>
                 </span>
 
-                <span className="aos-round-action" aria-hidden="true">
-                  {expanded ? "⌃" : "›"}
-                </span>
+              <span className="aos-round-action" aria-hidden="true">
+                  <ChevronIcon
+                    direction={expanded ? "up" : "right"}
+                    size={11}
+                    thickness={3}
+                  />
+              </span>
               </button>
 
               {expanded && (
@@ -82,7 +87,7 @@ function SelectFaction({ alliance, onSelect, onBack }) {
 
                   <button type="button" onClick={() => onSelect(faction, null)}>
                     <strong>Ejército estándar</strong>
-                    <span>Hedonites of Slaanesh</span>
+                    <span>{faction.name}</span>
                   </button>
 
                   {variants.map((variant) => (

@@ -25,6 +25,23 @@ function OptionSelector({
     );
   }
 
+  function canReceiveAqshyObsession(option) {
+    const keywords = (option?.keywords ?? []).map(
+      (keyword) => String(keyword).trim().toLowerCase()
+    );
+
+    const isHero =
+      option?.rules?.hero === true ||
+      keywords.includes("hero");
+
+    return (
+      !isHero &&
+      keywords.includes("hedonites of slaanesh") &&
+      (keywords.includes("infantry") ||
+        keywords.includes("cavalry"))
+    );
+  }
+
   return (
     <main className="aos-shell">
       <header className="aos-screen-header">
@@ -82,6 +99,12 @@ function OptionSelector({
                       "number" && (
                       <span className="aos-option-card__points">
                         {option.points} puntos
+                      </span>
+                    )}
+
+                    {canReceiveAqshyObsession(option) && (
+                      <span className="aos-aqshy-pill">
+                        AQSHY · Obsesión disponible
                       </span>
                     )}
 

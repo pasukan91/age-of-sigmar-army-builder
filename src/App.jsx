@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Home from "./pages/Home";
 import MyLists from "./pages/MyLists";
@@ -18,6 +18,10 @@ import {
   canUnitJoinRegiment,
   isUnitUniqueInArmy,
 } from "./utils/regimentRules";
+import {
+  loadArmyLists,
+  saveArmyLists,
+} from "./storage/armyListStorage";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -43,8 +47,29 @@ function App() {
 
   const { page, history } = navigation;
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [page]);
+
   const [lists, setLists] =
-    useState([]);
+    useState(() => loadArmyLists());
+
+  const [storageStatus, setStorageStatus] =
+    useState("saved");
+
+  useEffect(() => {
+    const saveTimer = window.setTimeout(() => {
+      const saved = saveArmyLists(lists);
+
+      setStorageStatus(saved ? "saved" : "error");
+    }, 0);
+
+    return () => window.clearTimeout(saveTimer);
+  }, [lists]);
 
   const [currentList, setCurrentList] =
     useState(null);
@@ -316,6 +341,20 @@ function App() {
     }
   }
 
+  function handleDeleteList(listId) {
+    if (!listId) {
+      return;
+    }
+
+    setLists((previousLists) =>
+      previousLists.filter((list) => list.id !== listId)
+    );
+
+    if (currentList?.id === listId) {
+      setCurrentList(null);
+    }
+  }
+
   /*
    * =====================================================
    * CREACIÓN DE LISTA
@@ -558,7 +597,8 @@ function App() {
   }
 
   function findEnhancementOwner(
-    property
+    property,
+    enhancementId = null
   ) {
     return getArmyUnits().find(
       ({
@@ -576,9 +616,10 @@ function App() {
           return false;
         }
 
-        return Boolean(
-          unit?.[property]
-        );
+        const enhancement = unit?.[property];
+
+        return Boolean(enhancement) &&
+          (!enhancementId || enhancement.id === enhancementId);
       }
     );
   }
@@ -669,6 +710,38 @@ function App() {
       }
     }
 
+    if (configuredUnit.allConsumingObsession) {
+      const owner = findEnhancementOwner(
+        "allConsumingObsession",
+        configuredUnit.allConsumingObsession.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Obsesión devoradora",
+          selected: configuredUnit.allConsumingObsession.name,
+          owner: owner.unit.name,
+          existing: owner.unit.allConsumingObsession?.name,
+        });
+      }
+    }
+
+    if (configuredUnit.moulderMutation) {
+      const owner = findEnhancementOwner(
+        "moulderMutation",
+        configuredUnit.moulderMutation.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Mutación Moulder",
+          selected: configuredUnit.moulderMutation.name,
+          owner: owner.unit.name,
+          existing: owner.unit.moulderMutation?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -696,7 +769,7 @@ function App() {
 
     window.alert(
       "No se puede guardar esta configuración.\n\n" +
-        "Solo puede haber un artefacto, un rasgo heroico y un rasgo monstruoso por ejército.\n\n" +
+        "Solo puede haber un artefacto, un rasgo heroico y un rasgo monstruoso por ejército; cada mejora de unidad única solo puede elegirse una vez.\n\n" +
         conflictText
     );
 
@@ -1214,6 +1287,7 @@ function App() {
       return (
         <MyLists
           lists={lists}
+          storageStatus={storageStatus}
           onOpenList={(list) => {
             setCurrentList(list);
             setSelectedUnit(null);
@@ -1222,6 +1296,7 @@ function App() {
 
             navigate("builder");
           }}
+          onDeleteList={handleDeleteList}
           goBack={goBack}
         />
       );
@@ -1294,6 +1369,7 @@ function App() {
       return (
         <ArmyBuilder
           list={currentList}
+          storageStatus={storageStatus}
           setSelector={setSelector}
           navigate={navigate}
           onBack={goBack}
@@ -1427,7 +1503,10 @@ function App() {
         <UnitConfig
           unit={selectedUnit}
           faction={
-            currentList?.faction
+            {
+              ...currentList?.faction,
+              ...(currentList?.armyOfRenown?.rules ?? {}),
+            }
           }
           mode={
             unitEditor

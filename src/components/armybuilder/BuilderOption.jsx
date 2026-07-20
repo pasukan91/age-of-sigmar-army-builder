@@ -1,3 +1,5 @@
+import ChevronIcon from "../ChevronIcon";
+
 function BuilderOption({
   title,
   value,
@@ -18,6 +20,7 @@ function BuilderOption({
     >
       <button
         type="button"
+        className="aos-builder-option-card"
         onClick={onClick}
         disabled={disabled}
         style={{
@@ -99,13 +102,19 @@ function BuilderOption({
         <span
           aria-hidden="true"
           style={{
+            width: 34,
+            height: 34,
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            border: "1px solid rgba(141,32,24,0.25)",
+            borderRadius: 999,
             color: "#8d2018",
-            fontSize: 27,
-            fontWeight: 700,
-            lineHeight: 1,
+            backgroundColor: "rgba(141,32,24,0.06)",
           }}
         >
-          ›
+          <ChevronIcon direction="right" size={8} />
         </span>
       </button>
     </div>

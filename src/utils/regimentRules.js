@@ -11,6 +11,13 @@ function normalizeOption(value) {
     "any sybarite": "any-sybarite",
     "any daemon": "any-daemon",
     "any war machine": "any-war-machine",
+    "any skaven": "any-skaven",
+    "any skryre": "any-skryre",
+    "any verminus": "any-verminus",
+    "any moulder": "any-moulder",
+    "any pestilens": "any-pestilens",
+    "any eshin": "any-eshin",
+    "skaven overclaw": "skaven-overclaw",
     "slaaneshi beguiler": "slaaneshi-beguiler",
     "dark egotist": "dark-egotist",
     "mob wrangler": "mob-wrangler",
@@ -70,6 +77,28 @@ function isAllowedByArmyOfRenown(list, unit) {
     return hasKeyword(unit, "Daemon") && unit.rules?.unique !== true;
   }
 
+  if (armyId === "the-great-grand-gnawhorde") {
+    if (unit.id === "vizzik-skour-prophet-of-the-horned-rat") {
+      return true;
+    }
+
+    return unit.rules?.unique !== true &&
+      ["Masterclan", "Verminus", "Skryre", "Moulder"].some(
+        (keyword) => hasKeyword(unit, keyword)
+      );
+  }
+
+  if (armyId === "thanquols-mutated-menagerie") {
+    return [
+      "thanquol-on-boneripper",
+      "master-moulder",
+      "rat-ogors",
+      "hell-pit-abomination",
+      "brood-terror",
+      "stormfiends",
+    ].includes(unit.id);
+  }
+
   return true;
 }
 
@@ -87,13 +116,25 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Kruleboyz");
     case "any-faction-unit":
       return true;
+    case "any-skaven":
+      return hasKeyword(unit, "Skaven");
+    case "any-skryre":
+      return hasKeyword(unit, "Skryre");
+    case "any-verminus":
+      return hasKeyword(unit, "Verminus");
+    case "any-moulder":
+      return hasKeyword(unit, "Moulder");
+    case "any-pestilens":
+      return hasKeyword(unit, "Pestilens");
+    case "any-eshin":
+      return hasKeyword(unit, "Eshin");
     default:
       return false;
   }
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw"].includes(option)
     ? 1
     : null;
 }
@@ -138,6 +179,19 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   const options = (regiment.hero?.details?.regimentOptions ?? []).map(normalizeOption);
   const isHero = unit.rules?.hero === true || hasKeyword(unit, "Hero");
 
+  if (!hasKeyword(regiment.hero, "Skryre")) {
+    const sameCategoryCount = (regiment.units ?? []).filter((armyUnit) =>
+      hasKeyword(armyUnit, hasKeyword(unit, "Weapon Team") ? "Weapon Team" : "War Machine")
+    ).length;
+
+    if (
+      (hasKeyword(unit, "Weapon Team") || hasKeyword(unit, "War Machine")) &&
+      sameCategoryCount >= 1
+    ) {
+      return false;
+    }
+  }
+
   if (isHero) {
     const joinRoles = unit.details?.canJoinRegimentAs ?? [];
 
@@ -155,7 +209,9 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
     });
   }
 
-  return options.some((option) => optionMatchesNonHero(unit, option));
+  return options.some(
+    (option) => option === unit.id || optionMatchesNonHero(unit, option)
+  );
 }
 
 export function getAvailableUnitsForRegiment(list, regiment) {

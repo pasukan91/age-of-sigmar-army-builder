@@ -1,3 +1,5 @@
+import ChevronIcon from "./ChevronIcon";
+
 function BackButton({
   onClick,
   label = "Volver",
@@ -48,7 +50,11 @@ function BackButton({
           lineHeight: 1,
         }}
       >
-        ‹
+        <ChevronIcon
+          direction="left"
+          size={8}
+          thickness={2}
+        />
       </span>
 
       {!compact && label}

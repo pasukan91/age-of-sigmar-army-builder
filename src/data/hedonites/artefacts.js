@@ -4,6 +4,8 @@ const artefacts = [
 
     name: "Bashful Visage",
 
+    source: "Battletome",
+
     points: 0,
 
     description:
@@ -21,6 +23,8 @@ const artefacts = [
 
     name: "Crown of the Ur-Slaanesh",
 
+    source: "Battletome",
+
     points: 0,
 
     description:
@@ -37,6 +41,8 @@ const artefacts = [
     id: "the-rod-of-misrule",
 
     name: "The Rod of Misrule",
+
+    source: "Battletome",
 
     points: 0,
 

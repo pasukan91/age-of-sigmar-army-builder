@@ -25,11 +25,20 @@ const HEDONITES_UNIT_IDS = new Set([
   "blissbarb-seekers",
 ]);
 
+const IMAGE_ALIASES = {
+  "infernal-enrapturess-scourge-of-aqshy": "infernal-enrapturess",
+  "blissbarb-seekers-scourge-of-aqshy": "blissbarb-seekers",
+};
+
 function UnitArtwork({ unit, className = "", variant = "card" }) {
-  const hasOfficialImage = HEDONITES_UNIT_IDS.has(unit?.id);
-  const source = hasOfficialImage
-    ? `/images/units/${unit.id}.webp`
-    : "/images/factions/kruleboyz.webp";
+  const artworkId = IMAGE_ALIASES[unit?.id] ?? unit?.imageAlias ?? unit?.id;
+  const explicitSource = String(unit?.image ?? "").startsWith("/")
+    ? unit.image
+    : null;
+  const hasOfficialImage = Boolean(explicitSource) || HEDONITES_UNIT_IDS.has(artworkId);
+  const source = explicitSource ?? (hasOfficialImage
+    ? `/images/units/${artworkId}.webp`
+    : "/images/factions/kruleboyz.webp");
   const classes = [
     "aos-unit-artwork",
     `aos-unit-artwork--${variant}`,

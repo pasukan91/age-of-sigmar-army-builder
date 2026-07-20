@@ -10,7 +10,7 @@ const armiesOfRenown = [
       "Up to 1 Daemonettes unit",
       "Up to 1 Contorted Epitome",
     ],
-    description: "An army led by Sigvald and formed around mortal Sybarites, with limited daemonic support.",
+    description: "Un ejército liderado por Sigvald y formado alrededor de Sybarites mortales, con apoyo demoníaco limitado.",
   },
   {
     id: "court-of-the-godlings",
@@ -19,7 +19,7 @@ const armiesOfRenown = [
     excludesRegimentsOfRenown: true,
     roster: ["Dexcessa", "Synessa", "Any non-Unique Hedonites of Slaanesh Daemon units"],
     restrictions: ["Dexcessa and Synessa cannot be in the same regiment"],
-    description: "The divine twins command a court composed exclusively of non-Unique daemons.",
+    description: "Los gemelos divinos dirigen una corte compuesta exclusivamente por demonios no Únicos.",
   },
 ];
 

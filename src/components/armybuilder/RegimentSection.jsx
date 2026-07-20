@@ -30,9 +30,22 @@ function RegimentSection({
     const basePoints =
       Number(unit?.points) || 0;
 
-    return unit?.reinforced
-      ? basePoints * 2
-      : basePoints;
+    const enhancementPoints = [
+      unit?.heroicTrait,
+      unit?.monstrousTrait,
+      unit?.artefact,
+      unit?.allConsumingObsession,
+      unit?.moulderMutation,
+    ].reduce(
+      (total, enhancement) =>
+        total + (Number(enhancement?.points) || 0),
+      0
+    );
+
+    return (
+      (unit?.reinforced ? basePoints * 2 : basePoints) +
+      enhancementPoints
+    );
   }
 
   function getUnitModels(unit) {
@@ -163,6 +176,7 @@ function RegimentSection({
           return (
             <article
               key={regiment.id}
+              className="aos-regiment-card"
               style={
                 styles.regimentCard
               }
@@ -428,8 +442,15 @@ function UnitCard({
   onConfigure,
   onRemove,
 }) {
+  const isHedonitesUnit =
+    (unit?.keywords ?? []).some(
+      (keyword) =>
+        String(keyword).trim().toLowerCase() ===
+        "hedonites of slaanesh"
+    );
+
   return (
-    <article style={styles.unitCard}>
+    <article className="aos-regiment-unit-card" style={styles.unitCard}>
       <UnitArtwork unit={unit} variant="thumbnail" />
 
       <div style={styles.unitInfo}>
@@ -471,6 +492,9 @@ function UnitCard({
               Artefacto:
             </strong>{" "}
             {unit.artefact.name}
+            {unit.artefact.source
+              ? ` · ${unit.artefact.source}`
+              : ""}
           </p>
         )}
 
@@ -483,7 +507,7 @@ function UnitCard({
           </p>
         )}
 
-        {unit.monstrousTrait && (
+        {unit.monstrousTrait && !isHedonitesUnit && (
           <p style={styles.upgrade}>
             <strong>
               Rasgo monstruoso:
@@ -492,6 +516,24 @@ function UnitCard({
               unit.monstrousTrait
                 .name
             }
+          </p>
+        )}
+
+        {unit.allConsumingObsession && (
+          <p style={styles.upgrade}>
+            <strong>
+              Obsesión:
+            </strong>{" "}
+            {unit.allConsumingObsession.name}
+          </p>
+        )}
+
+        {unit.moulderMutation && (
+          <p style={styles.upgrade}>
+            <strong>
+              Mutación Moulder:
+            </strong>{" "}
+            {unit.moulderMutation.name}
           </p>
         )}
       </div>
@@ -512,7 +554,7 @@ function UnitCard({
           onClick={onConfigure}
           style={styles.primaryButton}
         >
-          Configuración
+          Asignar mejoras
         </button>
 
         {!isLeader && (

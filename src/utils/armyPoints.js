@@ -12,7 +12,9 @@ function getEnhancementPoints(unit) {
   return (
     getNumericPoints(unit.heroicTrait) +
     getNumericPoints(unit.monstrousTrait) +
-    getNumericPoints(unit.artefact)
+    getNumericPoints(unit.artefact) +
+    getNumericPoints(unit.allConsumingObsession) +
+    getNumericPoints(unit.moulderMutation)
   );
 }
 

@@ -44,6 +44,13 @@ function UnitWarscroll({
   const displayedModels =
     getDisplayedModels(unit);
 
+  const isHedonitesUnit =
+    (unit.keywords ?? []).some(
+      (keyword) =>
+        String(keyword).trim().toLowerCase() ===
+        "hedonites of slaanesh"
+    );
+
   return (
     <main className="aos-page aos-warscroll-page">
       <header className="aos-topbar">
@@ -131,20 +138,22 @@ function UnitWarscroll({
           />
         </Accordion>
 
-        <Accordion
-          title="Ranged Weapons"
-          subtitle={
-            getWeaponCount(
-              unit,
-              "Ranged"
-            )
-          }
-        >
-          <WeaponList
-            weapons={unit.weapons}
-            type="Ranged"
-          />
-        </Accordion>
+        {hasWeaponProfile(unit, "Ranged") && (
+          <Accordion
+            title="Ranged Weapons"
+            subtitle={
+              getWeaponCount(
+                unit,
+                "Ranged"
+              )
+            }
+          >
+            <WeaponList
+              weapons={unit.weapons}
+              type="Ranged"
+            />
+          </Accordion>
+        )}
 
         <Accordion
           title="Abilities"
@@ -227,12 +236,26 @@ function UnitWarscroll({
           />
         )}
 
-        {unit.monstrousTrait && (
+        {unit.monstrousTrait && !isHedonitesUnit && (
           <EnhancementAccordion
             title="Rasgo monstruoso"
             enhancement={
               unit.monstrousTrait
             }
+          />
+        )}
+
+        {unit.allConsumingObsession && (
+          <EnhancementAccordion
+            title="Obsesión devoradora"
+            enhancement={unit.allConsumingObsession}
+          />
+        )}
+
+        {unit.moulderMutation && (
+          <EnhancementAccordion
+            title="Mutación Moulder"
+            enhancement={unit.moulderMutation}
           />
         )}
 
@@ -243,7 +266,7 @@ function UnitWarscroll({
             className="aos-configure-button"
             onClick={onConfigure}
           >
-            Configuración
+            Asignar mejoras
           </button>
         )}
       </div>
@@ -457,6 +480,12 @@ function EnhancementAccordion({
         {enhancement.name}
       </h3>
 
+      {enhancement.source && (
+        <span style={styles.enhancementSource}>
+          {enhancement.source}
+        </span>
+      )}
+
       <p style={styles.preservedText}>
         {enhancement.description}
       </p>
@@ -486,9 +515,29 @@ function getDisplayedPoints(unit) {
   const basePoints =
     Number(unit?.points) || 0;
 
-  return unit?.reinforced
-    ? basePoints * 2
-    : basePoints;
+  const enhancementPoints = [
+    unit?.heroicTrait,
+    unit?.monstrousTrait,
+    unit?.artefact,
+    unit?.allConsumingObsession,
+    unit?.moulderMutation,
+  ].reduce(
+    (total, enhancement) =>
+      total + (Number(enhancement?.points) || 0),
+    0
+  );
+
+  return (
+    (unit?.reinforced ? basePoints * 2 : basePoints) +
+    enhancementPoints
+  );
+}
+
+function hasWeaponProfile(unit, type) {
+  return (unit?.weapons ?? []).some(
+    (weapon) =>
+      (weapon.type ?? "Melee") === type
+  );
 }
 
 function getDisplayedModels(unit) {
@@ -622,6 +671,20 @@ const styles = {
     marginBottom: 8,
     fontFamily:
       '"Oswald", "Arial Narrow", sans-serif',
+    textTransform: "uppercase",
+  },
+
+  enhancementSource: {
+    display: "inline-block",
+    padding: "4px 9px",
+    marginBottom: 10,
+    border: "1px solid #9a6820",
+    borderRadius: 999,
+    backgroundColor: "#f2dfb3",
+    color: "#5f3b0d",
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.08em",
     textTransform: "uppercase",
   },
 

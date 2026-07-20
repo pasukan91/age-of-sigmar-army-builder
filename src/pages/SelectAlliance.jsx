@@ -1,4 +1,5 @@
 import alliances from "../data/alliances";
+import ChevronIcon from "../components/ChevronIcon";
 
 import "../styles/aos-app.css";
 
@@ -18,7 +19,7 @@ function SelectAlliance({
       }}
     >
       <SelectionHeader
-        title="Choose Alliance"
+        title="Elige alianza"
         onBack={onBack}
       />
 
@@ -55,7 +56,7 @@ function SelectAlliance({
                 className="aos-round-action"
                 aria-hidden="true"
               >
-                ⌄
+                <ChevronIcon direction="right" size={11} thickness={3} />
               </span>
             </button>
           );
@@ -77,7 +78,7 @@ function SelectionHeader({
         onClick={onBack}
         aria-label="Volver"
       >
-        ‹
+        <ChevronIcon direction="left" size={10} thickness={3} />
       </button>
 
       <h1 className="aos-topbar__title">

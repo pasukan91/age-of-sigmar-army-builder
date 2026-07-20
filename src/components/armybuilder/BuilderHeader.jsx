@@ -3,7 +3,7 @@ import {
   hasExceededPointsLimit,
 } from "../../utils/armyPoints";
 
-function BuilderHeader({ list }) {
+function BuilderHeader({ list, storageStatus = "saved" }) {
   const currentPoints =
     calculateArmyPoints(list);
 
@@ -17,7 +17,7 @@ function BuilderHeader({ list }) {
     hasExceededPointsLimit(list);
 
   return (
-    <header style={styles.header}>
+    <header className="aos-army-summary-card" style={styles.header}>
       <div style={styles.overlay}>
         <p style={styles.factionLabel}>
           {list.faction?.name ??
@@ -33,6 +33,26 @@ function BuilderHeader({ list }) {
         <h1 style={styles.title}>
           {list.name}
         </h1>
+
+        <div
+          role="status"
+          aria-live="polite"
+          style={{
+            ...styles.saveStatus,
+            ...(storageStatus === "error"
+              ? styles.saveStatusError
+              : {}),
+          }}
+        >
+          <span aria-hidden="true">
+            {storageStatus === "error" ? "!" : "✓"}
+          </span>
+          {storageStatus === "saving"
+            ? "Guardando…"
+            : storageStatus === "error"
+              ? "No se pudo guardar"
+              : "Guardada en este dispositivo"}
+        </div>
 
         <div style={styles.divider} />
 
@@ -138,6 +158,27 @@ const styles = {
     margin: "15px 0",
 
     backgroundColor: "#c6a15b",
+  },
+
+  saveStatus: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "5px 8px",
+    marginTop: 10,
+    border: "1px solid rgba(255,255,255,0.22)",
+    borderRadius: 999,
+    color: "#f4ead3",
+    backgroundColor: "rgba(0,0,0,0.18)",
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.04em",
+    textTransform: "uppercase",
+  },
+
+  saveStatusError: {
+    color: "#ffffff",
+    backgroundColor: "#9c2923",
   },
 
   pointsRow: {

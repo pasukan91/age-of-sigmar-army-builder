@@ -27,6 +27,12 @@ function UnitConfig({
   const [artefact, setArtefact] =
     useState(unit?.artefact ?? null);
 
+  const [allConsumingObsession, setAllConsumingObsession] =
+    useState(unit?.allConsumingObsession ?? null);
+
+  const [moulderMutation, setMoulderMutation] =
+    useState(unit?.moulderMutation ?? null);
+
   if (!unit) {
     return (
       <main className="aos-shell">
@@ -79,6 +85,14 @@ function UnitConfig({
     unit.rules?.monster === true ||
     keywords.includes("monster");
 
+  const isWarMachine =
+    keywords.includes("war machine");
+
+  const isHedonitesFaction =
+    faction?.id === "hedonites" ||
+    faction?.name === "Hedonites of Slaanesh" ||
+    keywords.includes("hedonites of slaanesh");
+
   const canBeReinforced =
     !isHero &&
     baseModels > 1 &&
@@ -90,10 +104,32 @@ function UnitConfig({
   const canSelectHeroicTrait =
     isHero && !isUnique;
 
+  const rawMonstrousTraitOptions =
+    faction?.monsterTraits ?? [];
+
+  const monstrousTraitOptions =
+    Array.isArray(rawMonstrousTraitOptions)
+      ? rawMonstrousTraitOptions
+      : Object.values(rawMonstrousTraitOptions).flat();
+
   const canSelectMonstrousTrait =
+    !isHedonitesFaction &&
     isHero &&
     isMonster &&
-    !isUnique;
+    !isUnique &&
+    monstrousTraitOptions.length > 0;
+
+  const canSelectAllConsumingObsession =
+    !isHero &&
+    (keywords.includes("infantry") ||
+      keywords.includes("cavalry")) &&
+    (faction?.allConsumingObsessions?.length ?? 0) > 0;
+
+  const canSelectMoulderMutation =
+    !isHero &&
+    !isWarMachine &&
+    keywords.includes("skaven") &&
+    (faction?.moulderMutations?.length ?? 0) > 0;
 
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
@@ -103,8 +139,21 @@ function UnitConfig({
   const heroicTraitOptions =
     faction?.heroicTraits ?? [];
 
-  const monstrousTraitOptions =
-    faction?.monsterTraits ?? [];
+  const aqshyHeroicTraitOptions =
+    heroicTraitOptions.filter(
+      (option) => option.source === "Aqshy"
+    );
+
+  const standardHeroicTraitOptions =
+    heroicTraitOptions.filter(
+      (option) => option.source !== "Aqshy"
+    );
+
+  const allConsumingObsessionOptions =
+    faction?.allConsumingObsessions ?? [];
+
+  const moulderMutationOptions =
+    faction?.moulderMutations ?? [];
 
   const totalModels =
     canBeReinforced && reinforced
@@ -112,9 +161,14 @@ function UnitConfig({
       : baseModels;
 
   const totalPoints =
-    canBeReinforced && reinforced
+    (canBeReinforced && reinforced
       ? basePoints * 2
-      : basePoints;
+      : basePoints) +
+    Number(artefact?.points ?? 0) +
+    Number(heroicTrait?.points ?? 0) +
+    Number(monstrousTrait?.points ?? 0) +
+    Number(allConsumingObsession?.points ?? 0) +
+    Number(moulderMutation?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -146,6 +200,16 @@ function UnitConfig({
       monstrousTrait:
         canSelectMonstrousTrait
           ? monstrousTrait
+          : null,
+
+      allConsumingObsession:
+        canSelectAllConsumingObsession
+          ? allConsumingObsession
+          : null,
+
+      moulderMutation:
+        canSelectMoulderMutation
+          ? moulderMutation
           : null,
     });
   }
@@ -191,7 +255,7 @@ function UnitConfig({
 
       <div className="aos-screen-content">
 
-      <header style={styles.header}>
+      <header className="aos-unit-config-header" style={styles.header}>
         <div>
           <p style={styles.eyebrow}>
             Configuración
@@ -247,26 +311,113 @@ function UnitConfig({
         </div>
       </section>
 
-      {canBeReinforced && (
+      {(canBeReinforced ||
+        canSelectAllConsumingObsession ||
+        canSelectMoulderMutation) && (
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>
-            Tamaño de unidad
+            Tamaño y mejoras de unidad
           </h2>
 
-          <CheckboxOption
-            title="Unidad reforzada"
-            description={
-              `Duplica el tamaño de ` +
-              `${baseModels} a ` +
-              `${baseModels * 2} modelos.`
-            }
-            checked={reinforced}
-            onChange={() =>
-              setReinforced(
-                (previous) => !previous
-              )
-            }
-          />
+          {canBeReinforced && (
+            <CheckboxOption
+              title="Unidad reforzada"
+              description={
+                `Duplica el tamaño de ` +
+                `${baseModels} a ` +
+                `${baseModels * 2} modelos.`
+              }
+              checked={reinforced}
+              onChange={() =>
+                setReinforced(
+                  (previous) => !previous
+                )
+              }
+            />
+          )}
+
+          {canSelectAllConsumingObsession && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Obsesiones devoradoras
+                </h3>
+
+                <span
+                  style={{
+                    ...styles.sourceBadge,
+                    ...styles.aqshySourceBadge,
+                    marginTop: 0,
+                  }}
+                >
+                  Aqshy
+                </span>
+              </div>
+
+              <p style={styles.sectionIntro}>
+                Asigna una Obsesión de Aqshy a esta unidad.
+                Cada una solo puede elegirse una vez por ejército.
+              </p>
+
+              {allConsumingObsessionOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={
+                    allConsumingObsession?.id === option.id
+                  }
+                  onChange={() =>
+                    toggleExclusiveOption(
+                      setAllConsumingObsession,
+                      option
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
+
+          {canSelectMoulderMutation && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Mutaciones Moulder
+                </h3>
+
+                <span
+                  style={{
+                    ...styles.sourceBadge,
+                    ...styles.aqshySourceBadge,
+                    marginTop: 0,
+                  }}
+                >
+                  Aqshy
+                </span>
+              </div>
+
+              <p style={styles.sectionIntro}>
+                Asigna una mutación a esta unidad Skaven no Hero y no Máquina de Guerra. Cada mutación solo puede elegirse una vez por ejército.
+              </p>
+
+              {moulderMutationOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={moulderMutation?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(
+                      setMoulderMutation,
+                      option
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
         </section>
       )}
 
@@ -284,10 +435,28 @@ function UnitConfig({
         />
       )}
 
-      {canSelectHeroicTrait && (
+      {canSelectHeroicTrait &&
+        standardHeroicTraitOptions.length > 0 && (
         <SelectionSection
           title="Rasgo heroico"
-          options={heroicTraitOptions}
+          options={standardHeroicTraitOptions}
+          selected={heroicTrait}
+          onToggle={(option) =>
+            toggleExclusiveOption(
+              setHeroicTrait,
+              option
+            )
+          }
+        />
+      )}
+
+      {canSelectHeroicTrait &&
+        aqshyHeroicTraitOptions.length > 0 && (
+        <SelectionSection
+          title="Rasgos heroicos de Aqshy"
+          source="Aqshy"
+          intro="Contenido adicional de Scourge of Aqshy. Elige uno de estos rasgos o uno del Battletome."
+          options={aqshyHeroicTraitOptions}
           selected={heroicTrait}
           onToggle={(option) =>
             toggleExclusiveOption(
@@ -358,15 +527,37 @@ function SummaryItem({
 
 function SelectionSection({
   title,
+  source,
+  intro,
   options = [],
   selected,
   onToggle,
 }) {
   return (
-    <section style={styles.section}>
-      <h2 style={styles.sectionTitle}>
-        {title}
-      </h2>
+    <section className="aos-unit-config-section" style={styles.section}>
+      <div className="aos-unit-config-heading-row" style={styles.sectionHeadingRow}>
+        <h2 style={styles.sectionTitle}>
+          {title}
+        </h2>
+
+        {source && (
+          <span
+            style={{
+              ...styles.sourceBadge,
+              ...styles.aqshySourceBadge,
+              marginTop: 0,
+            }}
+          >
+            {source}
+          </span>
+        )}
+      </div>
+
+      {intro && (
+        <p style={styles.sectionIntro}>
+          {intro}
+        </p>
+      )}
 
       {options.length === 0 && (
         <p style={styles.emptyText}>
@@ -377,10 +568,15 @@ function SelectionSection({
       {options.map((option) => (
         <CheckboxOption
           key={option.id}
-          title={option.name}
+          title={
+            Number(option.points) > 0
+              ? `${option.name} · ${option.points} pts`
+              : option.name
+          }
           description={
             option.description
           }
+          source={option.source}
           checked={
             selected?.id === option.id
           }
@@ -396,11 +592,13 @@ function SelectionSection({
 function CheckboxOption({
   title,
   description,
+  source,
   checked,
   onChange,
 }) {
   return (
     <label
+      className="aos-config-option-card"
       style={{
         ...styles.optionCard,
 
@@ -409,10 +607,23 @@ function CheckboxOption({
           : {}),
       }}
     >
-      <div style={styles.optionContent}>
+      <div className="aos-config-option-content" style={styles.optionContent}>
         <strong style={styles.optionTitle}>
           {title}
         </strong>
+
+        {source && (
+          <span
+            style={{
+              ...styles.sourceBadge,
+              ...(source === "Aqshy"
+                ? styles.aqshySourceBadge
+                : styles.standardSourceBadge),
+            }}
+          >
+            {source}
+          </span>
+        )}
 
         {description && (
           <p
@@ -426,6 +637,7 @@ function CheckboxOption({
       </div>
 
       <input
+        className="aos-config-option-checkbox"
         type="checkbox"
         checked={checked}
         onChange={onChange}
@@ -496,7 +708,7 @@ const styles = {
   summaryGrid: {
     display: "grid",
     gridTemplateColumns:
-      "repeat(auto-fit, minmax(120px, 1fr))",
+      "repeat(auto-fit, minmax(100px, 1fr))",
     gap: 10,
   },
 
@@ -588,6 +800,59 @@ const styles = {
     cursor: "pointer",
     boxShadow:
       "0 4px 10px rgba(95,18,14,0.28)",
+  },
+
+  sectionHeadingRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  sectionIntro: {
+    margin: "-3px 0 14px",
+    color: "#625b51",
+    fontSize: 14,
+    lineHeight: 1.45,
+    textAlign: "left",
+  },
+
+  embeddedEnhancement: {
+    paddingTop: 16,
+    marginTop: 16,
+    borderTop: "1px solid #d4c7ad",
+  },
+
+  embeddedTitle: {
+    margin: 0,
+    color: "#39322c",
+    fontFamily:
+      '"Oswald", "Arial Narrow", sans-serif',
+    fontSize: 20,
+    textTransform: "uppercase",
+  },
+
+  sourceBadge: {
+    display: "inline-block",
+    padding: "3px 8px",
+    marginTop: 8,
+    borderRadius: 999,
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  },
+
+  aqshySourceBadge: {
+    border: "1px solid #9a6820",
+    backgroundColor: "#f2dfb3",
+    color: "#5f3b0d",
+  },
+
+  standardSourceBadge: {
+    border: "1px solid #8b8983",
+    backgroundColor: "#e8e5de",
+    color: "#4f4b43",
   },
 };
 

@@ -93,7 +93,7 @@ function NewListConfig({
                 className="aos-field__control"
               >
                 <option value="standard">
-                  Ejército estándar — Hedonites of Slaanesh
+                  Ejército estándar — {army.faction.name}
                 </option>
 
                 {army.faction.armiesOfRenown.map((option) => (

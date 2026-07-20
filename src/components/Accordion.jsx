@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ChevronIcon from "./ChevronIcon";
 
 function Accordion({
   title,
@@ -123,18 +124,16 @@ function Accordion({
               ? "#ffffff"
               : "#17171a",
 
-            fontSize: 19,
-            fontWeight: 800,
-
-            transform: open
-              ? "rotate(180deg)"
-              : "rotate(0deg)",
-
-            transition:
-              "transform 160ms ease",
+            boxShadow: open
+              ? "0 3px 8px rgba(0,0,0,0.24)"
+              : "inset 0 0 0 1px rgba(0,0,0,0.08)",
           }}
         >
-         ⌄
+          <ChevronIcon
+            direction={open ? "up" : "down"}
+            size={8}
+            thickness={2}
+          />
         </span>
       </button>
 
