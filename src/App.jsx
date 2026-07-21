@@ -9,6 +9,7 @@ import ArmyBuilder from "./pages/Armybuilder";
 import OptionSelector from "./pages/OptionSelector";
 import UnitWarscroll from "./pages/UnitWarscroll";
 import UnitConfig from "./pages/UnitConfig";
+import RuleWarscroll from "./pages/RuleWarscroll";
 
 import {
   calculateArmyPoints,
@@ -75,6 +76,9 @@ function App() {
     useState(null);
 
   const [selectedUnit, setSelectedUnit] =
+    useState(null);
+
+  const [selectedRuleReference, setSelectedRuleReference] =
     useState(null);
 
   /*
@@ -420,6 +424,22 @@ function App() {
     returnToBuilder();
   }
 
+  function handleCommandPointsChange(nextValue) {
+    if (!currentList) {
+      return;
+    }
+
+    const commandPoints = Math.min(
+      99,
+      Math.max(0, Number(nextValue) || 0)
+    );
+
+    saveUpdatedList({
+      ...currentList,
+      commandPoints,
+    });
+  }
+
   /*
    * =====================================================
    * SELECTOR, WARSCROLL Y CONFIGURACIÓN
@@ -437,6 +457,15 @@ function App() {
     setUnitEditor(null);
 
     navigate("warscroll");
+  }
+
+  function openRuleWarscroll(reference) {
+    if (!reference?.item) {
+      return;
+    }
+
+    setSelectedRuleReference(reference);
+    navigate("ruleWarscroll");
   }
 
   function openNewUnitConfiguration(
@@ -1387,6 +1416,16 @@ function App() {
           }
           onAddRegimentOfRenown={handleAddRegimentOfRenown}
           onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
+          onCommandPointsChange={handleCommandPointsChange}
+          onViewRule={openRuleWarscroll}
+        />
+      );
+
+    case "ruleWarscroll":
+      return (
+        <RuleWarscroll
+          reference={selectedRuleReference}
+          onBack={goBack}
         />
       );
 
@@ -1467,6 +1506,7 @@ function App() {
       return (
         <UnitWarscroll
           unit={selectedUnit}
+          list={currentList}
           onBack={
             handleWarscrollBack
           }
@@ -1502,6 +1542,11 @@ function App() {
       return (
         <UnitConfig
           unit={selectedUnit}
+          enhancementOwners={{
+            artefact: findEnhancementOwner("artefact"),
+            heroicTrait: findEnhancementOwner("heroicTrait"),
+            monstrousTrait: findEnhancementOwner("monstrousTrait"),
+          }}
           faction={
             {
               ...currentList?.faction,

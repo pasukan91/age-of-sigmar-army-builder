@@ -114,6 +114,7 @@ function serializeList(list) {
     factionId: list.faction?.id ?? list.factionId ?? null,
     armyOfRenown: list.armyOfRenown ?? null,
     pointsLimit: list.pointsLimit,
+    commandPoints: Math.max(0, Number(list.commandPoints) || 0),
     battleFormation: list.battleFormation ?? null,
     spellLore: list.spellLore ?? null,
     prayerLore: list.prayerLore ?? null,
@@ -159,7 +160,7 @@ function restoreList(savedList) {
     name: savedList.allianceId ?? faction.alliance,
   };
 
-  const regiments = (savedList.regiments ?? [])
+  const restoredRegiments = (savedList.regiments ?? [])
     .map((regiment) => {
       const hero = restoreUnit(regiment.hero, faction);
 
@@ -179,6 +180,8 @@ function restoreList(savedList) {
     })
     .filter(Boolean);
 
+  const regiments = enforceSingleArmyTraits(restoredRegiments);
+
   return {
     id: savedList.id,
     name: savedList.name || "Lista sin nombre",
@@ -189,6 +192,9 @@ function restoreList(savedList) {
       faction.armiesOfRenown
     ),
     pointsLimit: Number(savedList.pointsLimit) || 2000,
+    commandPoints: Number.isFinite(Number(savedList.commandPoints))
+      ? Math.max(0, Number(savedList.commandPoints))
+      : 4,
     battleFormation: restoreOption(
       savedList.battleFormation,
       faction.battleFormations
@@ -232,6 +238,45 @@ function restoreList(savedList) {
     createdAt: savedList.createdAt ?? Date.now(),
     updatedAt: savedList.updatedAt ?? savedList.createdAt ?? Date.now(),
   };
+}
+
+function enforceSingleArmyTraits(regiments) {
+  const claimedTraits = {
+    heroicTrait: false,
+    monstrousTrait: false,
+  };
+
+  function normalizeUnitTraits(unit) {
+    if (!unit) {
+      return unit;
+    }
+
+    let normalizedUnit = unit;
+
+    Object.keys(claimedTraits).forEach((property) => {
+      if (!unit[property]) {
+        return;
+      }
+
+      if (claimedTraits[property]) {
+        normalizedUnit = {
+          ...normalizedUnit,
+          [property]: null,
+        };
+        return;
+      }
+
+      claimedTraits[property] = true;
+    });
+
+    return normalizedUnit;
+  }
+
+  return regiments.map((regiment) => ({
+    ...regiment,
+    hero: normalizeUnitTraits(regiment.hero),
+    units: (regiment.units ?? []).map(normalizeUnitTraits),
+  }));
 }
 
 export function loadArmyLists() {

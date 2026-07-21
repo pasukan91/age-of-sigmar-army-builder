@@ -1,16 +1,48 @@
-# React + Vite
+# Storm Forge — AoS Army Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Publicar en el Apache local
 
-Currently, two official plugins are available:
+La carpeta pública compartida de Apache está mapeada como `Z:\`. El virtual host sirve `Z:\html\dist` y está disponible en `http://10.100.100.101/`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Desde el terminal integrado de Visual Studio, ejecuta un único comando:
 
-## React Compiler
+```powershell
+npm run deploy:apache
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Este comando:
 
-## Expanding the ESLint configuration
+1. Compila la aplicación con Vite.
+2. Genera la versión de producción en `dist\`.
+3. Crea `Z:\html\dist` si todavía no existe.
+4. Limpia únicamente los archivos web generados anteriormente en `Z:\html\dist`.
+5. Copia `dist\` a `Z:\html\dist` y comprueba el `index.html` publicado.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+El script no intenta borrar `node_modules`, el código fuente ni otras carpetas del servidor. Si algún archivo antiguo está protegido, muestra un aviso y continúa intentando publicar la versión nueva.
+
+También puedes ejecutar `PUBLICAR-EN-APACHE.cmd` con doble clic. Realiza el mismo proceso y mantiene la ventana abierta para mostrar el resultado.
+
+Después de publicarla, abre desde un móvil conectado a la misma red:
+
+```text
+http://10.100.100.101/
+```
+
+Si `Z:\` no está disponible en el terminal, vuelve a conectar la unidad de red en esa misma sesión o ejecuta el script indicando la ruta compartida real:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy-apache.ps1 -TargetRoot "\\servidor\recurso\html\dist"
+```
+
+## Desarrollo
+
+```powershell
+npm run dev
+```
+
+## Comprobaciones
+
+```powershell
+npm run lint
+npm run build
+```

@@ -20,6 +20,7 @@ function ArmyRulesReference({ battleTraits, battleFormation }) {
       <Accordion
         title="Rasgos de batalla"
         subtitle={`${battleTraits.length} habilidades de ejército`}
+        defaultOpen
       >
         <RuleList rules={battleTraits} emptyText="Este ejército no tiene rasgos de batalla disponibles." />
       </Accordion>

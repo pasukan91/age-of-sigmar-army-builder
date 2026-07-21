@@ -4,7 +4,7 @@ const manifestations = [
 
     name: "Dreadful Visage",
 
-    image: "dreadful-visage.png",
+    image: "/images/manifestations/dreadful-visage.webp",
 
     castingValue: 6,
 
@@ -90,7 +90,7 @@ const manifestations = [
 
     name: "Wheels of Excruciation",
 
-    image: "wheels-of-excruciation.png",
+    image: "/images/manifestations/wheels-of-excruciation.webp",
 
     castingValue: 6,
 
@@ -176,7 +176,7 @@ const manifestations = [
 
     name: "Mesmerising Mirror",
 
-    image: "mesmerising-mirror.png",
+    image: "/images/manifestations/mesmerising-mirror.webp",
 
     castingValue: 6,
 

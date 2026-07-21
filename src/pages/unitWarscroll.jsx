@@ -1,10 +1,12 @@
 import Accordion from "../components/Accordion";
 import UnitArtwork from "../components/UnitArtwork";
+import { getPotentialSynergies } from "../utils/unitSynergies";
 
 import "../styles/aos-app.css";
 
 function UnitWarscroll({
   unit,
+  list,
   onBack,
   onConfigure,
 }) {
@@ -43,6 +45,9 @@ function UnitWarscroll({
 
   const displayedModels =
     getDisplayedModels(unit);
+
+  const potentialSynergies =
+    getPotentialSynergies(list, unit);
 
   const isHedonitesUnit =
     (unit.keywords ?? []).some(
@@ -164,6 +169,18 @@ function UnitWarscroll({
           <AbilityList
             abilities={unit.abilities}
           />
+        </Accordion>
+
+        <Accordion
+          title="Sinergias potenciales"
+          subtitle={`${potentialSynergies.length} ${
+            potentialSynergies.length === 1
+              ? "detectada"
+              : "detectadas"
+          }`}
+          defaultOpen={potentialSynergies.length > 0}
+        >
+          <SynergyList synergies={potentialSynergies} />
         </Accordion>
 
         <Accordion title="Unit Details">
@@ -530,6 +547,71 @@ function getDisplayedPoints(unit) {
   return (
     (unit?.reinforced ? basePoints * 2 : basePoints) +
     enhancementPoints
+  );
+}
+
+function SynergyList({ synergies }) {
+  if (synergies.length === 0) {
+    return (
+      <section className="aos-synergy-empty">
+        <span className="aos-synergy-empty__icon" aria-hidden="true">◇</span>
+        <h2>Sin sinergias detectadas</h2>
+        <p>
+          Añade unidades de apoyo, asigna mejoras o selecciona una formación de batalla para descubrir combinaciones aplicables.
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="aos-synergy-list" aria-label="Sinergias potenciales">
+      <p className="aos-synergy-note">
+        Estas reglas proceden de unidades y opciones presentes en tu ejército. La app no decide si las condiciones se cumplen durante la partida: solo te muestra todas las combinaciones posibles.
+      </p>
+
+      {synergies.map((synergy, index) => (
+        <article
+          className="aos-synergy-card"
+          key={`${synergy.sourceType}-${synergy.sourceName}-${synergy.ability?.name}-${index}`}
+        >
+          <div className="aos-synergy-card__topline">
+            <span className="aos-synergy-card__source-type">
+              {synergy.sourceType}
+            </span>
+            <span className="aos-synergy-card__phase">
+              {synergy.ability?.phase ?? synergy.ability?.type ?? "Pasiva"}
+            </span>
+          </div>
+
+          <p className="aos-synergy-card__source">
+            Aportada por <strong>{synergy.sourceName}</strong>
+          </p>
+
+          <h3>{synergy.ability?.name}</h3>
+
+          <div className="aos-synergy-card__matches">
+            {synergy.matchedOn.map((match) => (
+              <span key={match}>{match}</span>
+            ))}
+          </div>
+
+          {synergy.conditions?.length > 0 && (
+            <div className="aos-synergy-card__conditions">
+              <strong>Condiciones que debes comprobar</strong>
+              <ul>
+                {synergy.conditions.map((condition) => (
+                  <li key={condition}>{condition}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <p className="aos-synergy-card__description">
+            {synergy.ability?.description}
+          </p>
+        </article>
+      ))}
+    </section>
   );
 }
 

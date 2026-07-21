@@ -1,6 +1,8 @@
+import createId from "../utils/createId";
+
 export function createRegiment(hero) {
     return {
-        id: crypto.randomUUID(),
+        id: createId("regiment"),
 
         hero,
 

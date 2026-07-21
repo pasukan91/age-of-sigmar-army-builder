@@ -449,6 +449,16 @@ function UnitCard({
         "hedonites of slaanesh"
     );
 
+  const assignedEnhancements = [
+    ["Artefacto", unit.artefact],
+    ["Rasgo heroico", unit.heroicTrait],
+    ...(!isHedonitesUnit
+      ? [["Rasgo monstruoso", unit.monstrousTrait]]
+      : []),
+    ["Obsesión", unit.allConsumingObsession],
+    ["Mutación Moulder", unit.moulderMutation],
+  ].filter(([, enhancement]) => Boolean(enhancement));
+
   return (
     <article className="aos-regiment-unit-card" style={styles.unitCard}>
       <UnitArtwork unit={unit} variant="thumbnail" />
@@ -486,55 +496,25 @@ function UnitCard({
           · {points} puntos
         </p>
 
-        {unit.artefact && (
-          <p style={styles.upgrade}>
-            <strong>
-              Artefacto:
-            </strong>{" "}
-            {unit.artefact.name}
-            {unit.artefact.source
-              ? ` · ${unit.artefact.source}`
-              : ""}
-          </p>
-        )}
-
-        {unit.heroicTrait && (
-          <p style={styles.upgrade}>
-            <strong>
-              Rasgo heroico:
-            </strong>{" "}
-            {unit.heroicTrait.name}
-          </p>
-        )}
-
-        {unit.monstrousTrait && !isHedonitesUnit && (
-          <p style={styles.upgrade}>
-            <strong>
-              Rasgo monstruoso:
-            </strong>{" "}
-            {
-              unit.monstrousTrait
-                .name
-            }
-          </p>
-        )}
-
-        {unit.allConsumingObsession && (
-          <p style={styles.upgrade}>
-            <strong>
-              Obsesión:
-            </strong>{" "}
-            {unit.allConsumingObsession.name}
-          </p>
-        )}
-
-        {unit.moulderMutation && (
-          <p style={styles.upgrade}>
-            <strong>
-              Mutación Moulder:
-            </strong>{" "}
-            {unit.moulderMutation.name}
-          </p>
+        {assignedEnhancements.length > 0 && (
+          <div className="aos-unit-enhancements" aria-label="Mejoras asignadas">
+            {assignedEnhancements.map(([label, enhancement]) => (
+              <div className="aos-unit-enhancement" key={`${label}-${enhancement.id}`}>
+                <span className="aos-unit-enhancement__type">{label}</span>
+                <strong>{enhancement.name}</strong>
+                <div className="aos-unit-enhancement__meta">
+                  {enhancement.source && (
+                    <span className={enhancement.source === "Aqshy" ? "is-aqshy" : ""}>
+                      {enhancement.source}
+                    </span>
+                  )}
+                  {Number(enhancement.points) > 0 && (
+                    <span>{enhancement.points} pts</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         )}
       </div>
 
@@ -686,11 +666,6 @@ const styles = {
   summary: {
     margin: "8px 0 0",
     color: "#555555",
-  },
-
-  upgrade: {
-    margin: "6px 0 0",
-    fontSize: 14,
   },
 
   actions: {

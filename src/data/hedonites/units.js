@@ -1303,6 +1303,14 @@ const units = [
                 ],
                 lore: null,
                 name: "Master of the Revels",
+                synergy: {
+                    includeKeywords: ["Sybarite"],
+                    conditions: [
+                        "La unidad debe estar visible y completamente a 12\" del Lord of Hysteria",
+                        "Si es Paragon, el efecto se aplica automáticamente",
+                        "Si no es Paragon, el efecto se aplica con una tirada de 3+",
+                    ],
+                },
                 description:
                     "Declare: If this unit has not used a Temptation ability this turn, pick a visible friendly Sybarite unit wholly within 12\" of this unit to be the target.\n\nEffect: If the target is a Paragon, apply the following effect to the target. Otherwise, roll a dice. On a 3+, apply the following effect to the target: for the rest of the turn, while the target is wholly within 12\" of this unit, add 1 to the Attacks characteristic of the target's melee weapons.",
             },
@@ -1315,6 +1323,15 @@ const units = [
                 keywords: [],
                 lore: null,
                 name: "Slaughterous Celebrants",
+                synergy: {
+                    includeKeywords: [
+                        "Hedonites of Slaanesh",
+                        "Infantry",
+                    ],
+                    conditions: [
+                        "La unidad debe estar visible y completamente a 12\" del Lord of Hysteria",
+                    ],
+                },
                 description:
                     "Effect: While they are wholly within 12\" of and visible to this unit, melee weapons used by friendly Hedonites of Slaanesh Infantry units have Anti-charge (+1 Rend).",
             },

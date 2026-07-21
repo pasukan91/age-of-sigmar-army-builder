@@ -5,6 +5,7 @@ import BackButton from "../components/BackButton";
 function UnitConfig({
   unit,
   faction,
+  enhancementOwners = {},
   mode,
   goBack,
   onConfirm,
@@ -154,6 +155,10 @@ function UnitConfig({
 
   const moulderMutationOptions =
     faction?.moulderMutations ?? [];
+
+  const artefactOwner = enhancementOwners.artefact?.unit ?? null;
+  const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
+  const monstrousTraitOwner = enhancementOwners.monstrousTrait?.unit ?? null;
 
   const totalModels =
     canBeReinforced && reinforced
@@ -426,6 +431,12 @@ function UnitConfig({
           title="Artefacto de poder"
           options={artefactOptions}
           selected={artefact}
+          disabled={Boolean(artefactOwner)}
+          lockedMessage={
+            artefactOwner
+              ? `El ejército ya tiene ${artefactOwner.artefact?.name}, asignado a ${artefactOwner.name}.`
+              : null
+          }
           onToggle={(option) =>
             toggleExclusiveOption(
               setArtefact,
@@ -441,6 +452,12 @@ function UnitConfig({
           title="Rasgo heroico"
           options={standardHeroicTraitOptions}
           selected={heroicTrait}
+          disabled={Boolean(heroicTraitOwner)}
+          lockedMessage={
+            heroicTraitOwner
+              ? `Solo puede haber 1 rasgo heroico por ejército. ${heroicTraitOwner.name} ya tiene ${heroicTraitOwner.heroicTrait?.name}.`
+              : null
+          }
           onToggle={(option) =>
             toggleExclusiveOption(
               setHeroicTrait,
@@ -458,6 +475,12 @@ function UnitConfig({
           intro="Contenido adicional de Scourge of Aqshy. Elige uno de estos rasgos o uno del Battletome."
           options={aqshyHeroicTraitOptions}
           selected={heroicTrait}
+          disabled={Boolean(heroicTraitOwner)}
+          lockedMessage={
+            heroicTraitOwner
+              ? `El único rasgo heroico del ejército ya está asignado a ${heroicTraitOwner.name}: ${heroicTraitOwner.heroicTrait?.name}.`
+              : null
+          }
           onToggle={(option) =>
             toggleExclusiveOption(
               setHeroicTrait,
@@ -474,6 +497,12 @@ function UnitConfig({
             monstrousTraitOptions
           }
           selected={monstrousTrait}
+          disabled={Boolean(monstrousTraitOwner)}
+          lockedMessage={
+            monstrousTraitOwner
+              ? `El ejército ya tiene ${monstrousTraitOwner.monstrousTrait?.name}, asignado a ${monstrousTraitOwner.name}.`
+              : null
+          }
           onToggle={(option) =>
             toggleExclusiveOption(
               setMonstrousTrait,
@@ -531,6 +560,8 @@ function SelectionSection({
   intro,
   options = [],
   selected,
+  disabled = false,
+  lockedMessage,
   onToggle,
 }) {
   return (
@@ -559,6 +590,12 @@ function SelectionSection({
         </p>
       )}
 
+      {lockedMessage && (
+        <p className="aos-enhancement-lock" role="status">
+          {lockedMessage}
+        </p>
+      )}
+
       {options.length === 0 && (
         <p style={styles.emptyText}>
           No hay opciones disponibles.
@@ -577,6 +614,7 @@ function SelectionSection({
             option.description
           }
           source={option.source}
+          disabled={disabled}
           checked={
             selected?.id === option.id
           }
@@ -593,6 +631,7 @@ function CheckboxOption({
   title,
   description,
   source,
+  disabled = false,
   checked,
   onChange,
 }) {
@@ -604,6 +643,10 @@ function CheckboxOption({
 
         ...(checked
           ? styles.selectedOptionCard
+          : {}),
+
+        ...(disabled
+          ? styles.disabledOptionCard
           : {}),
       }}
     >
@@ -640,6 +683,7 @@ function CheckboxOption({
         className="aos-config-option-checkbox"
         type="checkbox"
         checked={checked}
+        disabled={disabled}
         onChange={onChange}
         style={styles.checkbox}
       />
@@ -800,6 +844,11 @@ const styles = {
     cursor: "pointer",
     boxShadow:
       "0 4px 10px rgba(95,18,14,0.28)",
+  },
+
+  disabledOptionCard: {
+    opacity: 0.58,
+    cursor: "not-allowed",
   },
 
   sectionHeadingRow: {

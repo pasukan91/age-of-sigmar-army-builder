@@ -1,3 +1,5 @@
+import createId from "../utils/createId";
+
 export function createArmyList({
   name,
   faction,
@@ -10,17 +12,17 @@ export function createArmyList({
     .map((unitId) => faction?.units?.find((unit) => unit.id === unitId))
     .filter(Boolean)
     .map((hero) => ({
-      id: crypto.randomUUID(),
+      id: createId("regiment"),
       hero: {
         ...hero,
-        instanceId: crypto.randomUUID(),
+        instanceId: createId("hero"),
       },
       units: [],
       requiredByArmyOfRenown: true,
     }));
 
   return {
-    id: crypto.randomUUID(),
+    id: createId("list"),
 
     name,
 
@@ -29,6 +31,8 @@ export function createArmyList({
     faction,
 
     pointsLimit,
+
+    commandPoints: 4,
 
     armyOfRenown,
 
@@ -67,7 +71,7 @@ export function addRegiment(list, hero) {
             ...list.regiments,
 
             {
-                id: crypto.randomUUID(),
+                id: createId("regiment"),
 
                 hero,
 

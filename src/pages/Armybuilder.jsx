@@ -3,6 +3,7 @@ import BuilderOption from "../components/armybuilder/BuilderOption";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
 import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
+import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
 
 import {
@@ -26,6 +27,8 @@ function ArmyBuilder({
   onRemoveRegiment,
   onAddRegimentOfRenown,
   onRemoveRegimentOfRenown,
+  onCommandPointsChange,
+  onViewRule,
 }) {
   const baseFaction =
     list?.faction ?? {};
@@ -80,6 +83,11 @@ function ArmyBuilder({
       list?.pointsLimit ??
         list?.points
     ) || 0;
+
+  const commandPoints = Math.max(
+    0,
+    Number(list?.commandPoints ?? 4) || 0
+  );
 
   function openSelector({
     title,
@@ -233,6 +241,14 @@ function ArmyBuilder({
         )}
       </section>
 
+      <a className="aos-rules-jump" href="#army-rules-title">
+        <span>
+          <strong>Referencia de reglas</strong>
+          <small>Rasgos, formación, habilidades y comandos universales</small>
+        </span>
+        <span aria-hidden="true">↓</span>
+      </a>
+
       <h2 className="aos-builder-section-title">
         Regimientos
       </h2>
@@ -267,24 +283,55 @@ function ArmyBuilder({
         battleFormation={list.battleFormation}
       />
 
+      <SelectedRulesLibrary
+        list={list}
+        onViewRule={onViewRule}
+      />
+
       <footer className="aos-builder-footer">
-        <div className="aos-points-summary">
-          <div className="aos-points-summary__icon">
-            ✓
-          </div>
-
-          <div>
-            <div className="aos-points-summary__value">
-              {currentPoints}
-
-              <span className="aos-points-summary__limit">
-                /{pointsLimit}
-              </span>
+        <div className="aos-builder-footer__meters">
+          <div className="aos-points-summary">
+            <div className="aos-points-summary__icon">
+              ✓
             </div>
 
-            <span className="aos-points-summary__label">
-              Puntos totales
-            </span>
+            <div>
+              <div className="aos-points-summary__value">
+                {currentPoints}
+
+                <span className="aos-points-summary__limit">
+                  /{pointsLimit}
+                </span>
+              </div>
+
+              <span className="aos-points-summary__label">
+                Puntos
+              </span>
+            </div>
+          </div>
+
+          <div className="aos-command-counter" aria-label="Puntos de mando">
+            <button
+              type="button"
+              onClick={() => onCommandPointsChange(commandPoints - 1)}
+              disabled={commandPoints === 0}
+              aria-label="Gastar un punto de mando"
+            >
+              −
+            </button>
+
+            <div aria-live="polite">
+              <strong>{commandPoints}</strong>
+              <span>PC</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => onCommandPointsChange(commandPoints + 1)}
+              aria-label="Añadir un punto de mando"
+            >
+              +
+            </button>
           </div>
         </div>
 
