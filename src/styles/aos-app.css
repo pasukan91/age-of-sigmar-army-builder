@@ -663,6 +663,43 @@ textarea {
   font-weight: 700;
 }
 
+.aos-warscroll-meta__identity {
+  min-width: 0;
+}
+
+.aos-warscroll-meta__composition {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.aos-warscroll-meta__composition > span {
+  padding: 4px 7px;
+  border: 1px solid #d7cdbb;
+  border-radius: 999px;
+  color: #5f5950;
+  background: #f5f1e8;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.aos-warscroll-meta__composition > .aos-warscroll-meta__reinforced {
+  border-color: #9a7625;
+  color: #624a12;
+  background: #f4e3b2;
+}
+
+.aos-warscroll-meta__notes {
+  margin: 8px 0 0;
+  color: #6a645b;
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
 .aos-synergy-list {
   display: grid;
   gap: 12px;
@@ -747,6 +784,63 @@ textarea {
 @media (max-width: 620px) {
   .aos-selected-rules { margin-inline: 12px; padding: 14px; }
   .aos-casting-card { grid-template-columns: 78px 1fr; }
+}
+
+.aos-home__private-note {
+  max-width: 520px;
+  margin: 24px auto 0;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 11px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.aos-pwa-controls {
+  position: fixed;
+  z-index: 1000;
+  top: calc(env(safe-area-inset-top, 0px) + 72px);
+  right: 12px;
+  max-width: min(310px, calc(100vw - 24px));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+  padding: 8px;
+  border: 1px solid rgba(198, 161, 91, 0.55);
+  border-radius: 7px;
+  color: #fff;
+  background: rgba(24, 24, 25, 0.94);
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(9px);
+}
+
+.aos-pwa-controls button {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #c6a15b;
+  border-radius: 4px;
+  color: #fff;
+  background: #7e1d16;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-pwa-controls__offline {
+  align-self: center;
+  padding: 6px 9px;
+  color: #e4cc87;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-pwa-controls p {
+  width: 100%;
+  margin: 2px 4px 4px;
+  color: #ddd7cc;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .aos-synergy-intro,

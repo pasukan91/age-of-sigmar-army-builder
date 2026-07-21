@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Storm Forge · AoS Army Builder",
+  "short_name": "Storm Forge",
+  "description": "Constructor privado de ejércitos y referencia de batalla para Age of Sigmar.",
+  "lang": "es",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#111416",
+  "theme_color": "#17191b",
+  "categories": ["games", "utilities"],
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

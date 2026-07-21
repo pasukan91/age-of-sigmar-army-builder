@@ -104,29 +104,45 @@ function UnitWarscroll({
 
       <div className="aos-warscroll-content">
         <section className="aos-warscroll-meta">
-          <div>
+          <div className="aos-warscroll-meta__identity">
             <h2 className="aos-warscroll-meta__name">
               {unit.name}
             </h2>
 
-            <span>
-              {displayedModels}{" "}
-              {displayedModels === 1
-                ? "miniatura"
-                : "miniaturas"}
-            </span>
+            <div className="aos-warscroll-meta__composition">
+              <span>
+                {displayedModels}{" "}
+                {displayedModels === 1
+                  ? "miniatura"
+                  : "miniaturas"}
+              </span>
+
+              <span>
+                Peana {unit.details?.baseSize ?? "—"}
+              </span>
+
+              {unit.profile?.ward && (
+                <span>Ward {unit.profile.ward}</span>
+              )}
+
+              {unit.reinforced && (
+                <span className="aos-warscroll-meta__reinforced">
+                  Reforzada
+                </span>
+              )}
+            </div>
+
+            {unit.details?.notes && (
+              <p className="aos-warscroll-meta__notes">
+                {unit.details.notes}
+              </p>
+            )}
           </div>
 
           <strong className="aos-warscroll-meta__points">
             {displayedPoints} pts
           </strong>
         </section>
-
-        {unit.reinforced && (
-          <div style={styles.reinforced}>
-            Unidad reforzada
-          </div>
-        )}
 
         <Accordion
           title="Melee Weapons"
@@ -181,36 +197,6 @@ function UnitWarscroll({
           defaultOpen={potentialSynergies.length > 0}
         >
           <SynergyList synergies={potentialSynergies} />
-        </Accordion>
-
-        <Accordion title="Unit Details">
-          <DetailRow
-            label="Modelos"
-            value={displayedModels}
-          />
-
-          <DetailRow
-            label="Peana"
-            value={
-              unit.details?.baseSize ??
-              "-"
-            }
-          />
-
-          {unit.profile?.ward && (
-            <DetailRow
-              label="Ward"
-              value={
-                unit.profile.ward
-              }
-            />
-          )}
-
-          {unit.details?.notes && (
-            <p style={styles.preservedText}>
-              {unit.details.notes}
-            </p>
-          )}
         </Accordion>
 
         <Accordion title="Keywords">
@@ -474,19 +460,6 @@ function AbilityList({
   );
 }
 
-function DetailRow({
-  label,
-  value,
-}) {
-  return (
-    <div style={styles.detailRow}>
-      <span>{label}</span>
-
-      <strong>{value}</strong>
-    </div>
-  );
-}
-
 function EnhancementAccordion({
   title,
   enhancement,
@@ -633,18 +606,6 @@ function getDisplayedModels(unit) {
 }
 
 const styles = {
-  reinforced: {
-    padding: 10,
-    marginBottom: 10,
-    borderLeft:
-      "5px solid #d8b354",
-    backgroundColor: "#272d2e",
-    color: "#ffffff",
-    fontWeight: 700,
-    textAlign: "center",
-    textTransform: "uppercase",
-  },
-
   weapon: {
     padding: 13,
     marginBottom: 10,
@@ -722,15 +683,6 @@ const styles = {
     fontSize: 10,
     fontWeight: 700,
     textTransform: "uppercase",
-  },
-
-  detailRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 20,
-    padding: "10px 0",
-    borderBottom:
-      "1px solid #dddddd",
   },
 
   keywordList: {

@@ -51,6 +51,10 @@ function Home({
             Mis listas
           </button>
         </div>
+
+        <p className="aos-home__private-note">
+          Herramienta privada y no oficial. Sin afiliación ni aprobación de Games Workshop.
+        </p>
       </section>
     </main>
   );

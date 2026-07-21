@@ -7,8 +7,8 @@ import SelectFaction from "./pages/SelectFaction";
 import NewListConfig from "./pages/NewListConfig";
 import ArmyBuilder from "./pages/Armybuilder";
 import OptionSelector from "./pages/OptionSelector";
-import UnitWarscroll from "./pages/UnitWarscroll";
-import UnitConfig from "./pages/UnitConfig";
+import UnitWarscroll from "./pages/unitWarscroll";
+import UnitConfig from "./pages/unitConfig";
 import RuleWarscroll from "./pages/RuleWarscroll";
 
 import {
