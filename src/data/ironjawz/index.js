@@ -3,13 +3,13 @@ import scourgeUnits from "./scourgeOfAqshy";
 import terrain from "./terrain";
 import armiesOfRenown from "./armiesOfRenown";
 import { kragnos, manifestations, manifestationLores } from "../orrukWarclans/shared";
-import { battleTraits, battleFormations, heroicTraits, monsterTraits, artefacts, aqshyArtefacts, spellLores } from "./rules";
+import { battleTraits, battleFormations, heroicTraits, monsterTraits, artefacts, aqshyArtefacts, spellLores, prayerLores } from "./rules";
 
-const kruleboyz = {
-  id: "kruleboyz",
+const ironjawz = {
+  id: "ironjawz",
   alliance: "destruction",
-  name: "Kruleboyz",
-  image: "/images/factions/kruleboyz.webp",
+  name: "Ironjawz",
+  image: "/images/factions/ironjawz.webp",
   battleTraits,
   battleFormations,
   heroicTraits,
@@ -17,7 +17,7 @@ const kruleboyz = {
   artefacts,
   aqshyArtefacts,
   spellLores,
-  prayerLores: [],
+  prayerLores,
   manifestations,
   manifestationLores,
   terrain,
@@ -25,4 +25,4 @@ const kruleboyz = {
   armiesOfRenown,
 };
 
-export default kruleboyz;
+export default ironjawz;

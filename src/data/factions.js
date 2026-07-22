@@ -1,9 +1,9 @@
-import kruleboyz from "./kruleboyz";
+import orrukWarclans from "./orrukWarclans";
 import hedonites from "./hedonites";
 import skaven from "./skaven";
 
 const factions = [
-  kruleboyz,
+  orrukWarclans,
   hedonites,
   skaven,
 
@@ -119,15 +119,6 @@ const factions = [
     alliance: "destruction",
     name: "Sons of Behemat",
   },
-  {
-    id: "kruleboyz",
-    alliance: "destruction",
-    name: "kruleboyz",
-    image:
-      "/images/factions/kruleboyz.webp",
-
-  },
-  
 ];
 
 export default factions;

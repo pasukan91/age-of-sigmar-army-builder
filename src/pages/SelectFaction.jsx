@@ -15,6 +15,7 @@ function SelectFaction({ alliance, onSelect, onBack }) {
     `/images/backgrounds/${alliance?.id ?? "factions"}.webp`;
 
   if (selectedFaction) {
+    const armyTypes = selectedFaction.armyTypes ?? [];
     const variants = selectedFaction.armiesOfRenown ?? [];
 
     return (
@@ -42,17 +43,32 @@ function SelectFaction({ alliance, onSelect, onBack }) {
             Elige las reglas y unidades disponibles para esta lista.
           </p>
 
-          <button
-            type="button"
-            className="aos-army-type-card"
-            onClick={() => onSelect(selectedFaction, null)}
-          >
-            <strong>Ejército estándar</strong>
-            <span>{selectedFaction.name}</span>
-            <ChevronIcon direction="right" size={9} thickness={3} />
-          </button>
+          {armyTypes.length > 0 ? (
+            armyTypes.map((armyType) => (
+              <button
+                key={armyType.id}
+                type="button"
+                className="aos-army-type-card"
+                onClick={() => onSelect(armyType, null)}
+              >
+                <strong>{armyType.name}</strong>
+                <span>Ejército de Orruk Warclans</span>
+                <ChevronIcon direction="right" size={9} thickness={3} />
+              </button>
+            ))
+          ) : (
+            <button
+              type="button"
+              className="aos-army-type-card"
+              onClick={() => onSelect(selectedFaction, null)}
+            >
+              <strong>Ejército estándar</strong>
+              <span>{selectedFaction.name}</span>
+              <ChevronIcon direction="right" size={9} thickness={3} />
+            </button>
+          )}
 
-          {variants.map((variant) => (
+          {armyTypes.length === 0 && variants.map((variant) => (
             <button
               key={variant.id}
               type="button"

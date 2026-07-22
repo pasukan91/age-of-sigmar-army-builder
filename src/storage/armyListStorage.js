@@ -27,6 +27,12 @@ function findById(collection, id) {
   ) ?? null;
 }
 
+function getSelectableFactions() {
+  return factions.flatMap((faction) =>
+    faction.armyTypes?.length > 0 ? faction.armyTypes : [faction]
+  );
+}
+
 function restoreOption(savedOption, canonicalOptions) {
   if (!savedOption) {
     return null;
@@ -146,13 +152,24 @@ function serializeList(list) {
 }
 
 function restoreList(savedList) {
-  const faction = factions.find(
-    (item) => item.id === savedList?.factionId
+  const savedFactionId = savedList?.factionId === "orruks"
+    ? "kruleboyz"
+    : savedList?.factionId;
+  const faction = getSelectableFactions().find(
+    (item) => item.id === savedFactionId
   );
 
   if (!savedList?.id || !faction) {
     return null;
   }
+
+  const armyOfRenown = restoreOption(
+    savedList.armyOfRenown,
+    faction.armiesOfRenown
+  );
+  const effectiveFaction = armyOfRenown?.rules?.units
+    ? { ...faction, units: armyOfRenown.rules.units }
+    : faction;
 
   const alliance = alliances.find(
     (item) => item.id === savedList.allianceId
@@ -163,7 +180,7 @@ function restoreList(savedList) {
 
   const restoredRegiments = (savedList.regiments ?? [])
     .map((regiment) => {
-      const hero = restoreUnit(regiment.hero, faction);
+      const hero = restoreUnit(regiment.hero, effectiveFaction);
 
       if (!hero) {
         return null;
@@ -173,7 +190,7 @@ function restoreList(savedList) {
         id: regiment.id,
         hero,
         units: (regiment.units ?? [])
-          .map((unit) => restoreUnit(unit, faction))
+          .map((unit) => restoreUnit(unit, effectiveFaction))
           .filter(Boolean),
         requiredByArmyOfRenown:
           Boolean(regiment.requiredByArmyOfRenown),
@@ -188,10 +205,7 @@ function restoreList(savedList) {
     name: savedList.name || "Lista sin nombre",
     alliance,
     faction,
-    armyOfRenown: restoreOption(
-      savedList.armyOfRenown,
-      faction.armiesOfRenown
-    ),
+    armyOfRenown,
     pointsLimit: Number(savedList.pointsLimit) || 2000,
     commandPoints: Number.isFinite(Number(savedList.commandPoints))
       ? Math.max(0, Number(savedList.commandPoints))
@@ -237,7 +251,7 @@ function restoreList(savedList) {
       })
       .filter(Boolean),
     auxiliaries: (savedList.auxiliaries ?? [])
-      .map((unit) => restoreUnit(unit, faction))
+      .map((unit) => restoreUnit(unit, effectiveFaction))
       .filter(Boolean),
     createdAt: savedList.createdAt ?? Date.now(),
     updatedAt: savedList.updatedAt ?? savedList.createdAt ?? Date.now(),

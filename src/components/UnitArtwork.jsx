@@ -39,6 +39,7 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
   const source = explicitSource ?? (hasOfficialImage
     ? `/images/units/${artworkId}.webp`
     : "/images/factions/kruleboyz.webp");
+  const fallbackSource = "/images/factions/kruleboyz.webp";
   const classes = [
     "aos-unit-artwork",
     `aos-unit-artwork--${variant}`,
@@ -55,6 +56,12 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
         : `Imagen genérica de ${unit?.name ?? "unidad"}`}
       loading={variant === "warscroll" ? "eager" : "lazy"}
       decoding="async"
+      onError={(event) => {
+        if (!event.currentTarget.src.endsWith(fallbackSource)) {
+          event.currentTarget.src = fallbackSource;
+          event.currentTarget.classList.add("aos-unit-artwork--fallback");
+        }
+      }}
     />
   );
 }

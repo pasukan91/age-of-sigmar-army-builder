@@ -7,10 +7,17 @@ function normalizeOption(value) {
   const aliases = {
     "any faction unit": "any-faction-unit",
     "any kruleboyz": "any-kruleboyz",
+    "any ironjawz": "any-ironjawz",
+    "any infantry": "any-infantry",
+    "any monster": "any-monster",
+    "any war machine": "any-war-machine",
+    "monster": "any-monster",
+    "war machine": "any-war-machine",
+    "headstompa": "headstompa",
+    "tusk wrangler": "tusk-wrangler",
     "any hedonites of slaanesh": "any-hedonites",
     "any sybarite": "any-sybarite",
     "any daemon": "any-daemon",
-    "any war machine": "any-war-machine",
     "any skaven": "any-skaven",
     "any skryre": "any-skryre",
     "any verminus": "any-verminus",
@@ -99,6 +106,53 @@ function isAllowedByArmyOfRenown(list, unit) {
     ].includes(unit.id);
   }
 
+  if (armyId === "big-waaagh") {
+    return hasKeyword(unit, "Ironjawz") || hasKeyword(unit, "Kruleboyz");
+  }
+
+  if (armyId === "zoggroks-ironmongerz") {
+    return unit.id === "zoggrok-anvilsmasha" ||
+      (hasKeyword(unit, "Ironjawz") && hasKeyword(unit, "Infantry"));
+  }
+
+  if (armyId === "murkvast-menagerie") {
+    const armyUnits = getAllArmyUnits(list);
+    const monsterCount = armyUnits.filter((armyUnit) =>
+      hasKeyword(armyUnit, "Kruleboyz") &&
+      hasKeyword(armyUnit, "Hero") &&
+      hasKeyword(armyUnit, "Monster")
+    ).length;
+
+    if ([
+      "swampboss-skumdrekk",
+      "snatchaboss-on-sludgeraker-beast",
+      "killaboss-on-corpse-rippa-vulcha",
+      "breaka-boss-on-mirebrute-troggoth",
+      "marshcrawla-sloggoth",
+    ].includes(unit.id)) {
+      return true;
+    }
+
+    if (unit.id === "swampcalla-shaman-with-pot-grot") {
+      return countUnitInArmy(list, unit.id) < monsterCount;
+    }
+
+    const isEligibleInfantry = hasKeyword(unit, "Kruleboyz") &&
+      hasKeyword(unit, "Infantry") && unit.rules?.hero !== true;
+
+    if (!isEligibleInfantry) {
+      return false;
+    }
+
+    const infantryCount = armyUnits.filter((armyUnit) =>
+      hasKeyword(armyUnit, "Kruleboyz") &&
+      hasKeyword(armyUnit, "Infantry") &&
+      armyUnit.rules?.hero !== true
+    ).length;
+
+    return infantryCount < monsterCount;
+  }
+
   return true;
 }
 
@@ -114,6 +168,12 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "War Machine");
     case "any-kruleboyz":
       return hasKeyword(unit, "Kruleboyz");
+    case "any-ironjawz":
+      return hasKeyword(unit, "Ironjawz");
+    case "any-infantry":
+      return hasKeyword(unit, "Infantry");
+    case "any-monster":
+      return hasKeyword(unit, "Monster");
     case "any-faction-unit":
       return true;
     case "any-skaven":
@@ -134,7 +194,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler"].includes(option)
     ? 1
     : null;
 }
@@ -215,13 +275,15 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
 }
 
 export function getAvailableUnitsForRegiment(list, regiment) {
-  return (list?.faction?.units ?? []).filter((unit) =>
+  const units = list?.armyOfRenown?.rules?.units ?? list?.faction?.units ?? [];
+  return units.filter((unit) =>
     canUnitJoinRegiment({ list, regiment, unit })
   );
 }
 
 export function getAvailableRegimentLeaders(list) {
-  return (list?.faction?.units ?? []).filter(
+  const units = list?.armyOfRenown?.rules?.units ?? list?.faction?.units ?? [];
+  return units.filter(
     (unit) =>
       unit.rules?.hero === true &&
       !isUnitUniqueInArmy(list, unit) &&
