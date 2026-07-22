@@ -34,6 +34,8 @@ export function createArmyList({
 
     commandPoints: 4,
 
+    furyPoints: 0,
+
     armyOfRenown,
 
     battleFormation: null,

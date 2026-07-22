@@ -38,7 +38,7 @@ function NewListConfig({
     ]);
 
     setCurrentList(newList);
-    setPage("builder");
+    setPage("builder", { listId: newList.id, resetToLists: true });
   }
 
   return (
@@ -59,6 +59,7 @@ function NewListConfig({
 
       <div className="aos-screen-content">
         <header className="aos-form-intro">
+          <p className="aos-selection-step aos-selection-step--light">Paso 4 de 4</p>
           <p className="aos-kicker">
             Storm Forge
           </p>

@@ -1,6 +1,9 @@
+import MainNav from "../components/MainNav";
+
 function Home({
   onNewList,
   onMyLists,
+  onSettings,
 }) {
   return (
     <main className="aos-home">
@@ -56,6 +59,13 @@ function Home({
           Herramienta privada y no oficial. Sin afiliación ni aprobación de Games Workshop.
         </p>
       </section>
+
+      <MainNav
+        active={null}
+        onLists={onMyLists}
+        onCreate={onNewList}
+        onSettings={onSettings}
+      />
     </main>
   );
 }

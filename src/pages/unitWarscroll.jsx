@@ -551,9 +551,17 @@ function SynergyList({ synergies }) {
             <span className="aos-synergy-card__source-type">
               {synergy.sourceType}
             </span>
-            <span className="aos-synergy-card__phase">
-              {synergy.ability?.phase ?? synergy.ability?.type ?? "Pasiva"}
-            </span>
+            <div className="aos-synergy-card__meta">
+              {isSpellAbility(synergy.ability) &&
+                synergy.ability?.castingValue != null && (
+                  <span className="aos-synergy-card__casting">
+                    Dificultad {synergy.ability.castingValue}+
+                  </span>
+                )}
+              <span className="aos-synergy-card__phase">
+                {synergy.ability?.phase ?? synergy.ability?.type ?? "Pasiva"}
+              </span>
+            </div>
           </div>
 
           <p className="aos-synergy-card__source">
@@ -586,6 +594,15 @@ function SynergyList({ synergies }) {
       ))}
     </section>
   );
+}
+
+function isSpellAbility(ability) {
+  const type = String(ability?.type ?? "").trim().toLowerCase();
+  const keywords = (ability?.keywords ?? []).map((keyword) =>
+    String(keyword).trim().toLowerCase()
+  );
+
+  return type === "spell" || keywords.includes("spell");
 }
 
 function hasWeaponProfile(unit, type) {

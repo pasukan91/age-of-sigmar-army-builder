@@ -1,5 +1,6 @@
 import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
+import MainNav from "../components/MainNav";
 import { calculateArmyPoints } from "../utils/armyPoints";
 
 function MyLists({
@@ -8,6 +9,11 @@ function MyLists({
   onDeleteList,
   storageStatus = "saved",
   goBack,
+  onLists,
+  onCreate,
+  onSettings,
+  deletedList,
+  onUndoDelete,
 }) {
   return (
     <main className="aos-shell">
@@ -89,15 +95,7 @@ function MyLists({
                 <button
                   type="button"
                   className="aos-list-card__delete"
-                  onClick={() => {
-                    const confirmed = window.confirm(
-                      `¿Eliminar la lista “${list.name}”? Esta acción no se puede deshacer.`
-                    );
-
-                    if (confirmed) {
-                      onDeleteList(list.id);
-                    }
-                  }}
+                  onClick={() => onDeleteList(list.id)}
                 >
                   Eliminar lista
                 </button>
@@ -106,6 +104,20 @@ function MyLists({
           </section>
         )}
       </div>
+
+      {deletedList && (
+        <div className="aos-undo-toast" role="status">
+          <span>Lista “{deletedList.name}” eliminada</span>
+          <button type="button" onClick={onUndoDelete}>Deshacer</button>
+        </div>
+      )}
+
+      <MainNav
+        active="lists"
+        onLists={onLists}
+        onCreate={onCreate}
+        onSettings={onSettings}
+      />
     </main>
   );
 }

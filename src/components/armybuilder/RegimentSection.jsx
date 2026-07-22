@@ -11,6 +11,7 @@ function RegimentSection({
   onViewWarscroll,
   onConfigureUnit,
   onRemoveUnit,
+  onDuplicateUnit,
   onRemoveRegiment,
 }) {
   const regiments = Array.isArray(
@@ -347,6 +348,21 @@ function RegimentSection({
                       unit
                     )
                   }
+                  onDuplicate={() => {
+                    if (typeof onDuplicateUnit === "function") {
+                      onDuplicateUnit({
+                        regimentId: regiment.id,
+                        unitInstanceId: unit.instanceId,
+                      });
+                    }
+                  }}
+                  canDuplicate={
+                    unit.rules?.unique !== true &&
+                    !(unit.keywords ?? []).some(
+                      (keyword) =>
+                        String(keyword).trim().toLowerCase() === "unique"
+                    )
+                  }
                 />
               ))}
 
@@ -441,7 +457,14 @@ function UnitCard({
   onView,
   onConfigure,
   onRemove,
+  onDuplicate,
+  canDuplicate = false,
 }) {
+  const baseSize =
+    unit?.details?.baseSize ??
+    unit?.profile?.baseSize ??
+    unit?.baseSize;
+
   const isHedonitesUnit =
     (unit?.keywords ?? []).some(
       (keyword) =>
@@ -461,7 +484,14 @@ function UnitCard({
 
   return (
     <article className="aos-regiment-unit-card" style={styles.unitCard}>
-      <UnitArtwork unit={unit} variant="thumbnail" />
+      <button
+        type="button"
+        onClick={onView}
+        className="aos-unit-artwork-link"
+        aria-label={`Ver warscroll de ${unit.name}`}
+      >
+        <UnitArtwork unit={unit} variant="thumbnail" />
+      </button>
 
       <div style={styles.unitInfo}>
         <strong style={styles.unitName}>
@@ -494,6 +524,7 @@ function UnitCard({
             ? "miniatura"
             : "miniaturas"}{" "}
           · {points} puntos
+          {baseSize ? ` · Peana ${baseSize}` : ""}
         </p>
 
         {assignedEnhancements.length > 0 && (
@@ -521,16 +552,6 @@ function UnitCard({
       <div style={styles.actions}>
         <button
           type="button"
-          onClick={onView}
-          style={
-            styles.secondaryButton
-          }
-        >
-          Warscroll
-        </button>
-
-        <button
-          type="button"
           onClick={onConfigure}
           style={styles.primaryButton}
         >
@@ -538,15 +559,27 @@ function UnitCard({
         </button>
 
         {!isLeader && (
-          <button
-            type="button"
-            onClick={onRemove}
-            style={
-              styles.deleteUnitButton
-            }
-          >
-            Eliminar
-          </button>
+          <>
+            {canDuplicate && (
+              <button
+                type="button"
+                onClick={onDuplicate}
+                style={styles.secondaryButton}
+              >
+                Duplicar
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={onRemove}
+              style={
+                styles.deleteUnitButton
+              }
+            >
+              Eliminar
+            </button>
+          </>
         )}
       </div>
     </article>

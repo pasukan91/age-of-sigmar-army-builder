@@ -313,6 +313,16 @@ function UnitConfig({
               unit.profile?.save ?? "-"
             }
           />
+
+          <SummaryItem
+            label="Peana"
+            value={
+              unit.details?.baseSize ??
+              unit.profile?.baseSize ??
+              unit.baseSize ??
+              "-"
+            }
+          />
         </div>
       </section>
 

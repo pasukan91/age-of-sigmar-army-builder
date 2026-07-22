@@ -118,7 +118,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "100mm",
             regimentOptions: [],
             notes: null,
         },
@@ -261,7 +261,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "100mm",
             regimentOptions: [],
             notes: null,
         },
@@ -379,7 +379,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "105 × 70mm",
             regimentOptions: [],
             notes: null,
         },
@@ -499,7 +499,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "105 × 70mm",
             regimentOptions: [],
             notes: null,
         },
@@ -591,7 +591,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "32mm",
             regimentOptions: [],
             notes: null,
         },
@@ -705,7 +705,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "50mm",
             regimentOptions: [],
             notes: null,
         },
@@ -800,7 +800,7 @@ const units = [
 
         details: {
             models: 3,
-            baseSize: null,
+            baseSize: "40mm [1], 28.5mm [2]",
             regimentOptions: [],
             notes: null,
         },
@@ -890,7 +890,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "60 × 35mm",
             regimentOptions: [],
             notes: null,
         },
@@ -981,7 +981,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "75 × 42mm",
             regimentOptions: [],
             notes: null,
         },
@@ -1123,7 +1123,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "170 × 105mm",
             regimentOptions: [],
             notes: null,
         },
@@ -1232,7 +1232,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "60mm",
             regimentOptions: [],
             notes: null,
         },
@@ -1343,7 +1343,7 @@ const units = [
 
         details: {
             models: 1,
-            baseSize: null,
+            baseSize: "40mm",
             regimentOptions: [],
             notes: null,
         },

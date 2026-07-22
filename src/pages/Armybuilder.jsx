@@ -9,10 +9,6 @@ import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
 import {
   calculateArmyPoints,
 } from "../utils/armyPoints";
-import {
-  getAvailableRegimentLeaders,
-} from "../utils/regimentRules";
-
 import "../styles/aos-app.css";
 
 function ArmyBuilder({
@@ -24,11 +20,15 @@ function ArmyBuilder({
   onViewWarscroll,
   onConfigureUnit,
   onRemoveUnit,
+  onDuplicateUnit,
   onRemoveRegiment,
   onAddRegimentOfRenown,
   onRemoveRegimentOfRenown,
   onCommandPointsChange,
+  onFuryPointsChange,
   onViewRule,
+  section = "regiments",
+  onSectionChange,
 }) {
   const baseFaction =
     list?.faction ?? {};
@@ -89,6 +89,11 @@ function ArmyBuilder({
     Number(list?.commandPoints ?? 4) || 0
   );
 
+  const furyPoints = Math.min(
+    7,
+    Math.max(0, Number(list?.furyPoints ?? 0) || 0)
+  );
+
   function openSelector({
     title,
     property,
@@ -99,21 +104,6 @@ function ArmyBuilder({
       property,
       regimentId: null,
       options,
-    });
-
-    navigate("selector");
-  }
-
-  function openNewRegimentSelector() {
-    const heroes =
-      getAvailableRegimentLeaders(list);
-
-    setSelector({
-      title:
-        "Selecciona el líder del regimiento",
-      property: "newRegiment",
-      regimentId: null,
-      options: heroes,
     });
 
     navigate("selector");
@@ -137,6 +127,27 @@ function ArmyBuilder({
 
         <span aria-hidden="true" />
       </header>
+
+      <nav className="aos-builder-tabs" aria-label="Secciones de la lista">
+        {[
+          ["list", "Lista"],
+          ["regiments", "Regimientos"],
+          ["rules", "Reglas"],
+        ].map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            className={section === id ? "is-active" : ""}
+            onClick={() => onSectionChange?.(id)}
+            aria-current={section === id ? "page" : undefined}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      {section === "list" && (
+        <>
 
       <BuilderHeader
         list={list}
@@ -241,13 +252,23 @@ function ArmyBuilder({
         )}
       </section>
 
-      <a className="aos-rules-jump" href="#army-rules-title">
+      <button
+        type="button"
+        className="aos-rules-jump aos-rules-jump--button"
+        onClick={() => onSectionChange?.("rules")}
+      >
         <span>
           <strong>Referencia de reglas</strong>
           <small>Rasgos, formación, habilidades y comandos universales</small>
         </span>
         <span aria-hidden="true">↓</span>
-      </a>
+      </button>
+
+        </>
+      )}
+
+      {section === "regiments" && (
+        <>
 
       <h2 className="aos-builder-section-title">
         Regimientos
@@ -266,6 +287,9 @@ function ArmyBuilder({
         onRemoveUnit={
           onRemoveUnit
         }
+        onDuplicateUnit={
+          onDuplicateUnit
+        }
         onRemoveRegiment={
           onRemoveRegiment
         }
@@ -278,6 +302,12 @@ function ArmyBuilder({
         onRemove={onRemoveRegimentOfRenown}
       />
 
+        </>
+      )}
+
+      {section === "rules" && (
+        <>
+
       <ArmyRulesReference
         battleTraits={battleTraits}
         battleFormation={list.battleFormation}
@@ -287,6 +317,9 @@ function ArmyBuilder({
         list={list}
         onViewRule={onViewRule}
       />
+
+        </>
+      )}
 
       <footer className="aos-builder-footer">
         <div className="aos-builder-footer__meters">
@@ -335,16 +368,30 @@ function ArmyBuilder({
           </div>
         </div>
 
-        <button
-          type="button"
-          className="aos-floating-add"
-          onClick={
-            openNewRegimentSelector
-          }
-          aria-label="Añadir regimiento"
-        >
-          +
-        </button>
+        <div className="aos-fury-counter" aria-label="Puntos de furia">
+          <button
+            type="button"
+            onClick={() => onFuryPointsChange(furyPoints - 1)}
+            disabled={furyPoints === 0}
+            aria-label="Gastar un punto de furia"
+          >
+            −
+          </button>
+
+          <div aria-live="polite">
+            <strong>{furyPoints}</strong>
+            <span>Furia</span>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onFuryPointsChange(furyPoints + 1)}
+            disabled={furyPoints === 7}
+            aria-label="Añadir un punto de furia"
+          >
+            +
+          </button>
+        </div>
       </footer>
     </main>
   );

@@ -115,6 +115,7 @@ function serializeList(list) {
     armyOfRenown: list.armyOfRenown ?? null,
     pointsLimit: list.pointsLimit,
     commandPoints: Math.max(0, Number(list.commandPoints) || 0),
+    furyPoints: Math.min(7, Math.max(0, Number(list.furyPoints) || 0)),
     battleFormation: list.battleFormation ?? null,
     spellLore: list.spellLore ?? null,
     prayerLore: list.prayerLore ?? null,
@@ -195,6 +196,9 @@ function restoreList(savedList) {
     commandPoints: Number.isFinite(Number(savedList.commandPoints))
       ? Math.max(0, Number(savedList.commandPoints))
       : 4,
+    furyPoints: Number.isFinite(Number(savedList.furyPoints))
+      ? Math.min(7, Math.max(0, Number(savedList.furyPoints)))
+      : 0,
     battleFormation: restoreOption(
       savedList.battleFormation,
       faction.battleFormations

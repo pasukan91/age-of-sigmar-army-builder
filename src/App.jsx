@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Home from "./pages/Home";
 import MyLists from "./pages/MyLists";
@@ -10,6 +10,7 @@ import OptionSelector from "./pages/OptionSelector";
 import UnitWarscroll from "./pages/unitWarscroll";
 import UnitConfig from "./pages/unitConfig";
 import RuleWarscroll from "./pages/RuleWarscroll";
+import Settings from "./pages/Settings";
 
 import {
   calculateArmyPoints,
@@ -29,6 +30,7 @@ const EMPTY_SELECTOR = {
   options: [],
   property: "",
   regimentId: null,
+  ui: {},
 };
 
 const INITIAL_ARMY = {
@@ -40,24 +42,21 @@ const INITIAL_ARMY = {
 };
 
 function App() {
+  const [initialRoute] = useState(() =>
+    getInitialRoute(window.location.pathname)
+  );
+
+  const [lists, setLists] =
+    useState(() => loadArmyLists());
+
   const [navigation, setNavigation] =
     useState({
-      page: "home",
+      page: initialRoute.page,
       history: [],
     });
 
   const { page, history } = navigation;
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto",
-    });
-  }, [page]);
-
-  const [lists, setLists] =
-    useState(() => loadArmyLists());
+  const scrollPositions = useRef(new Map());
 
   const [storageStatus, setStorageStatus] =
     useState("saved");
@@ -73,7 +72,58 @@ function App() {
   }, [lists]);
 
   const [currentList, setCurrentList] =
+    useState(() =>
+      initialRoute.listId
+        ? lists.find((list) => list.id === initialRoute.listId) ?? null
+        : null
+    );
+
+  const [builderSection, setBuilderSection] =
+    useState("regiments");
+
+  const [deletedList, setDeletedList] =
     useState(null);
+
+  useEffect(() => {
+    window.history.replaceState(
+      { page: initialRoute.page, depth: 0, listId: initialRoute.listId ?? null },
+      "",
+      getPagePath(initialRoute.page, initialRoute.listId)
+    );
+  }, [initialRoute]);
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      const nextPage = event.state?.page ?? getInitialRoute(window.location.pathname).page;
+      const nextDepth = Math.max(0, Number(event.state?.depth) || 0);
+      const listId = event.state?.listId ?? getListIdFromPath(window.location.pathname);
+
+      if (listId) {
+        const routedList = lists.find((list) => list.id === listId);
+        if (routedList) setCurrentList(routedList);
+      }
+
+      setNavigation((previous) => ({
+        page: nextPage,
+        history: previous.history.slice(0, nextDepth),
+      }));
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [lists]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: scrollPositions.current.get(page) ?? 0,
+        left: 0,
+        behavior: "auto",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [page]);
 
   const [selectedUnit, setSelectedUnit] =
     useState(null);
@@ -106,50 +156,68 @@ function App() {
    * =====================================================
    */
 
-  function navigate(nextPage) {
+  function navigate(nextPage, options = {}) {
     if (!nextPage) {
       return;
     }
 
-    setNavigation((previous) => {
-      if (
-        nextPage === previous.page
-      ) {
-        return previous;
-      }
+    const replace = options.replace === true;
+    const listId = Object.prototype.hasOwnProperty.call(options, "listId")
+      ? options.listId
+      : currentList?.id ?? null;
 
-      return {
-        page: nextPage,
-        history: [
-          ...previous.history,
-          previous.page,
-        ],
-      };
+    if (options.resetToLists === true) {
+      window.history.replaceState(
+        { page: "lists", depth: 0, listId: null },
+        "",
+        "/listas"
+      );
+      window.history.pushState(
+        { page: nextPage, depth: 1, listId },
+        "",
+        getPagePath(nextPage, listId)
+      );
+      setNavigation({ page: nextPage, history: ["lists"] });
+      return;
+    }
+
+    if (nextPage === page && !replace) {
+      return;
+    }
+
+    scrollPositions.current.set(page, window.scrollY);
+
+    const nextHistory = replace
+      ? history
+      : [...history, page];
+    const browserState = {
+      page: nextPage,
+      depth: nextHistory.length,
+      listId,
+    };
+    const path = getPagePath(nextPage, listId);
+
+    if (replace) {
+      window.history.replaceState(browserState, "", path);
+    } else {
+      window.history.pushState(browserState, "", path);
+    }
+
+    setNavigation({
+      page: nextPage,
+      history: nextHistory,
     });
   }
 
   function goBack() {
-    setNavigation((previous) => {
-      if (
-        previous.history.length === 0
-      ) {
-        return previous;
-      }
+    scrollPositions.current.set(page, window.scrollY);
 
-      const previousPage =
-        previous.history[
-          previous.history.length - 1
-        ];
+    if (history.length === 0) {
+      navigate("home", { replace: true });
+      return;
+    }
 
-      return {
-        page: previousPage,
-        history:
-          previous.history.slice(
-            0,
-            -1
-          ),
-      };
-    });
+    window.history.back();
   }
 
   /*
@@ -163,28 +231,15 @@ function App() {
     setUnitEditor(null);
     resetSelector();
 
-    setNavigation((previous) => {
-      const builderIndex =
-        previous.history.lastIndexOf(
-          "builder"
-        );
+    const builderIndex = history.lastIndexOf("builder");
 
-      if (builderIndex === -1) {
-        return {
-          ...previous,
-          page: "builder",
-        };
-      }
+    if (builderIndex === -1) {
+      navigate("builder", { replace: true });
+      return;
+    }
 
-      return {
-        page: "builder",
-        history:
-          previous.history.slice(
-            0,
-            builderIndex
-          ),
-      };
-    });
+    const stepsBack = history.length - builderIndex;
+    window.history.go(-stepsBack);
   }
 
   function handleSelectorBack() {
@@ -350,6 +405,9 @@ function App() {
       return;
     }
 
+    const removedList = lists.find((list) => list.id === listId);
+    if (removedList) setDeletedList(removedList);
+
     setLists((previousLists) =>
       previousLists.filter((list) => list.id !== listId)
     );
@@ -357,6 +415,13 @@ function App() {
     if (currentList?.id === listId) {
       setCurrentList(null);
     }
+  }
+
+  function restoreDeletedList() {
+    if (!deletedList) return;
+
+    setLists((previousLists) => [deletedList, ...previousLists]);
+    setDeletedList(null);
   }
 
   /*
@@ -437,6 +502,22 @@ function App() {
     saveUpdatedList({
       ...currentList,
       commandPoints,
+    });
+  }
+
+  function handleFuryPointsChange(nextValue) {
+    if (!currentList) {
+      return;
+    }
+
+    const furyPoints = Math.min(
+      7,
+      Math.max(0, Number(nextValue) || 0)
+    );
+
+    saveUpdatedList({
+      ...currentList,
+      furyPoints,
     });
   }
 
@@ -1227,6 +1308,96 @@ function App() {
     saveUpdatedList(updatedList);
   }
 
+  function handleDuplicateUnit({
+    regimentId,
+    unitInstanceId,
+  }) {
+    if (
+      !currentList ||
+      !regimentId ||
+      !unitInstanceId
+    ) {
+      return;
+    }
+
+    const regiments = currentList.regiments ?? [];
+    const regimentIndex = regiments.findIndex(
+      (regiment) => regiment.id === regimentId
+    );
+
+    if (regimentIndex === -1) {
+      return;
+    }
+
+    const regiment = regiments[regimentIndex];
+    const sourceUnit = (regiment.units ?? []).find(
+      (unit) => unit.instanceId === unitInstanceId
+    );
+
+    const isUnique = sourceUnit?.rules?.unique === true ||
+      (sourceUnit?.keywords ?? []).some(
+        (keyword) => String(keyword).trim().toLowerCase() === "unique"
+      );
+
+    if (!sourceUnit || isUnique) {
+      return;
+    }
+
+    const regimentLimit = regimentIndex === 0 ? 4 : 3;
+
+    if ((regiment.units ?? []).length >= regimentLimit) {
+      window.alert(
+        `Este regimiento ya contiene el máximo de ${regimentLimit} unidades.`
+      );
+      return;
+    }
+
+    if (
+      !canUnitJoinRegiment({
+        list: currentList,
+        regiment,
+        unit: sourceUnit,
+      })
+    ) {
+      window.alert(
+        "Esta unidad no se puede duplicar en este regimiento por sus restricciones actuales."
+      );
+      return;
+    }
+
+    const clonedUnit = typeof structuredClone === "function"
+      ? structuredClone(sourceUnit)
+      : JSON.parse(JSON.stringify(sourceUnit));
+
+    const duplicatedUnit = {
+      ...clonedUnit,
+      instanceId: createInstanceId("unit"),
+
+      // Las mejoras limitadas al ejército no se copian para evitar
+      // crear artefactos, rasgos u objetos únicos duplicados.
+      artefact: null,
+      heroicTrait: null,
+      monstrousTrait: null,
+      allConsumingObsession: null,
+      moulderMutation: null,
+    };
+
+    saveUpdatedList({
+      ...currentList,
+      regiments: regiments.map((item) =>
+        item.id === regimentId
+          ? {
+              ...item,
+              units: [
+                ...(item.units ?? []),
+                duplicatedUnit,
+              ],
+            }
+          : item
+      ),
+    });
+  }
+
   function handleRemoveRegiment(
     regimentId
   ) {
@@ -1305,6 +1476,19 @@ function App() {
     });
   }
 
+  function startNewList() {
+    resetNewArmy();
+    navigate("alliance", { listId: null });
+  }
+
+  function openLists() {
+    navigate("lists", { listId: null });
+  }
+
+  function openSettings() {
+    navigate("settings", { listId: null });
+  }
+
   /*
    * =====================================================
    * PÁGINAS
@@ -1323,10 +1507,25 @@ function App() {
             setUnitEditor(null);
             resetSelector();
 
-            navigate("builder");
+            navigate("builder", { listId: list.id });
           }}
           onDeleteList={handleDeleteList}
+          deletedList={deletedList}
+          onUndoDelete={restoreDeletedList}
           goBack={goBack}
+          onLists={openLists}
+          onCreate={startNewList}
+          onSettings={openSettings}
+        />
+      );
+
+    case "settings":
+      return (
+        <Settings
+          onBack={goBack}
+          onLists={openLists}
+          onCreate={startNewList}
+          onSettings={openSettings}
         />
       );
 
@@ -1411,13 +1610,19 @@ function App() {
           onRemoveUnit={
             handleRemoveUnit
           }
+          onDuplicateUnit={
+            handleDuplicateUnit
+          }
           onRemoveRegiment={
             handleRemoveRegiment
           }
           onAddRegimentOfRenown={handleAddRegimentOfRenown}
           onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
           onCommandPointsChange={handleCommandPointsChange}
+          onFuryPointsChange={handleFuryPointsChange}
           onViewRule={openRuleWarscroll}
+          section={builderSection}
+          onSectionChange={setBuilderSection}
         />
       );
 
@@ -1439,6 +1644,10 @@ function App() {
           options={
             selector?.options ??
             []
+          }
+          state={selector?.ui ?? {}}
+          onStateChange={(ui) =>
+            setSelector((previous) => ({ ...previous, ui }))
           }
           goBack={
             handleSelectorBack
@@ -1571,16 +1780,49 @@ function App() {
     default:
       return (
         <Home
-          onNewList={() => {
-            resetNewArmy();
-            navigate("alliance");
-          }}
-          onMyLists={() =>
-            navigate("lists")
-          }
+          onNewList={startNewList}
+          onMyLists={openLists}
+          onSettings={openSettings}
         />
       );
   }
+}
+
+function getListIdFromPath(pathname) {
+  const match = String(pathname ?? "").match(/^\/listas\/([^/]+)/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function getInitialRoute(pathname) {
+  const listId = getListIdFromPath(pathname);
+
+  if (listId) return { page: "builder", listId };
+  if (pathname === "/listas") return { page: "lists", listId: null };
+  if (pathname === "/ajustes") return { page: "settings", listId: null };
+  if (pathname === "/nueva/alianza") return { page: "alliance", listId: null };
+  if (pathname === "/nueva/faccion") return { page: "faction", listId: null };
+  if (pathname === "/nueva/configuracion") return { page: "config", listId: null };
+
+  return { page: "home", listId: null };
+}
+
+function getPagePath(page, listId = null) {
+  const encodedListId = listId ? encodeURIComponent(listId) : null;
+  const listBase = encodedListId ? `/listas/${encodedListId}` : "/listas";
+
+  return {
+    home: "/",
+    lists: "/listas",
+    settings: "/ajustes",
+    alliance: "/nueva/alianza",
+    faction: "/nueva/faccion",
+    config: "/nueva/configuracion",
+    builder: listBase,
+    selector: `${listBase}/selector`,
+    warscroll: `${listBase}/unidad`,
+    unitConfig: `${listBase}/unidad/configurar`,
+    ruleWarscroll: `${listBase}/regla`,
+  }[page] ?? "/";
 }
 
 const styles = {

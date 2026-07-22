@@ -126,7 +126,7 @@ const scourgeUnits = [
     allConsumingObsession: null,
     details: {
       models: 1,
-      baseSize: "32mm",
+      baseSize: "60 × 35mm",
       regimentOptions: [],
       notes: "Warscroll de temporada de Scourge of Aqshy. Legal en juego equilibrado con el battlepack General's Handbook 2026-27.",
     },

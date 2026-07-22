@@ -24,6 +24,7 @@ function SelectAlliance({
       />
 
       <section className="aos-selection-content">
+        <p className="aos-selection-step">Paso 1 de 4</p>
         <h2 className="aos-selection-heading">
           Selecciona una Gran Alianza
         </h2>

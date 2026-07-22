@@ -4,7 +4,7 @@ const terrain = [
 
     name: "Fane of Slaanesh",
 
-    image: "fane-of-slaanesh.png",
+    image: "/images/terrain/fane-of-slaanesh.jpg",
 
     profile: {
       move: "-",

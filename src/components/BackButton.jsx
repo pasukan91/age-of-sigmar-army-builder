@@ -10,6 +10,7 @@ function BackButton({
     <button
       type="button"
       onClick={onClick}
+      aria-label={compact ? label : undefined}
       style={{
         display: "inline-flex",
         alignItems: "center",
