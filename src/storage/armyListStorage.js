@@ -28,9 +28,7 @@ function findById(collection, id) {
 }
 
 function getSelectableFactions() {
-  return factions.flatMap((faction) =>
-    faction.armyTypes?.length > 0 ? faction.armyTypes : [faction]
-  );
+  return factions;
 }
 
 function restoreOption(savedOption, canonicalOptions) {

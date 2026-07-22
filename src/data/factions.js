@@ -2,8 +2,11 @@ import orrukWarclans from "./orrukWarclans";
 import hedonites from "./hedonites";
 import skaven from "./skaven";
 
+const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
+
 const factions = [
-  orrukWarclans,
+  kruleboyz,
+  ironjawz,
   hedonites,
   skaven,
 
