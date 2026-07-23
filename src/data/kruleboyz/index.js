@@ -14,6 +14,7 @@ const unitImages = {
   "snatchaboss-on-sludgeraker-beast": "snatchaboss.jpg",
   "swampboss-skumdrekk": "skumdrekk.jpg",
   "hobgrot-slittaboss": "slittaboss.jpg",
+  "murknob-with-belcha-banna": "murknob-with-belcha-banna.jpg",
   "swampcalla-shaman-with-pot-grot": "shaman.jpg",
   gutrippaz: "gutrippaz.jpg",
   "hobgrot-slittaz": "hobgrot.jpg",
