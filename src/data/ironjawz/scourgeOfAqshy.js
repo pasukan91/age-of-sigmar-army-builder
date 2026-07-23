@@ -19,7 +19,7 @@ const scourgeUnits = [
     name: "Scourge of Aqshy Megaboss",
     points: 150,
     abilities: [
-      ability("Get In There and Wallop 'Em!", "Your Hero Phase", "Pick a friendly Ironjawz unit wholly within 12\" that was not set up this turn. The next use of Mighty Destroyers this turn can pick it as a second target.", "Once Per Battle Round (Army)"),
+      ability("Get In There and Wallop 'Em!", "Any Hero Phase", "Pick a friendly Ironjawz unit wholly within 12\" that was not set up this turn. The next use of Mighty Destroyers this turn can pick it as a second target.", "Once Per Battle Round (Army)"),
       ability("You Ain't Gonna Show Me Up", "End of Any Turn", "If this unit fought this turn, spend 1 rage dice and add 1 permanently to the Damage of its Boss-choppa. If your opponent has lower fury, they gain 1 fury.", "Once Per Turn (Army)"),
     ],
     weapons: [weapon("Boss-choppa", "Melee", 8, "4+", "2+", "1", "2")],

@@ -5,31 +5,39 @@ import armiesOfRenown from "./armiesOfRenown";
 import { kragnos, manifestations, manifestationLores } from "../orrukWarclans/shared";
 import { battleTraits, battleFormations, heroicTraits, monsterTraits, artefacts, aqshyArtefacts, spellLores, prayerLores } from "./rules";
 
-
 const unitImages = {
-  "gobsprakk-the-mouth-of-mork": "gobbsprakk.jpg",
-  "killaboss-on-corpse-rippa-vulcha": "killaboss-in-corpse-rippa.jpg",
-  "killaboss-on-great-gnashtoof": "killaboss-on-great-gnashroof.jpg",
-  "killaboss-with-stab-grot": "killaboss.jpg",
-  "breaka-boss-on-mirebrute-troggoth": "breakka-boss.jpg",
-  "snatchaboss-on-sludgeraker-beast": "snatchaboss.jpg",
-  "swampboss-skumdrekk": "skumdrekk.jpg",
-  "hobgrot-slittaboss": "slittaboss.jpg",
-  "swampcalla-shaman-with-pot-grot": "shaman.jpg",
-  gutrippaz: "gutrippaz.jpg",
-  "hobgrot-slittaz": "hobgrot.jpg",
-  "man-skewer-boltboyz": "boltboyz.jpg",
-  "beast-skewer-killbow": "beast-skewer.jpg",
-  "marshcrawla-sloggoth": "sloggoth.jpg",
-  "kragnos-the-end-of-empires": "kragnos.jpg",
-  "killaboss-on-great-gnashtoof-scourge-of-aqshy": "killaboss-on-great-gnashroof-aqshy.jpg",
-  "killaboss-with-stab-grot-scourge-of-aqshy": "killaboss-aqshy.jpg",
+  "gordrakk-the-fist-of-gork": "gordrakk-the-fist-of-gork.jpg",
+  "megaboss-on-maw-krusha": "megaboss-on-maw-krusha.jpg",
+  megaboss: "megaboss.jpg",
+  "tuskboss-on-maw-grunta": "tuskboss-on-maw-grunta.jpg",
+  "zoggrok-anvilsmasha": "zoggrok-anvilsmasha.jpg",
+  "ardboy-big-boss": "ardboy-big-boss.jpg",
+  warchanter: "warchanter.jpg",
+  "weirdnob-shaman": "weirdnob-shaman.jpg",
+  ardboyz: "ardboyz.jpg",
+  brutes: "brutes.jpg",
+  "weirdbrute-wrekkaz": "weirdbrute-wrekkaz.jpg",
+  "gore-gruntas": "gore-gruntas.jpg",
+  "maw-grunta-with-hakkin-krew": "maw-grunta-with-hakkin-krew.jpg",
+  "megaboss-scourge-of-aqshy": "megaboss-aqshy.jpg",
+  "brutes-scourge-of-aqshy": "brutes-aqshy.jpg",
 };
+
+const withAvailableImage = (unit) => {
+  if (unit.id === "kragnos-the-end-of-empires") {
+    return { ...unit, image: "/images/units/kruleboyz/kragnos.jpg" };
+  }
+
+  return unitImages[unit.id]
+    ? { ...unit, image: `/images/units/ironjawz/${unitImages[unit.id]}` }
+    : unit;
+};
+
 const ironjawz = {
   id: "ironjawz",
   alliance: "destruction",
   name: "Ironjawz",
-  image: "/images/factions/ironjawz.webp",
+  image: "/images/units/ironjawz/gordrakk-the-fist-of-gork.jpg",
   battleTraits,
   battleFormations,
   heroicTraits,
@@ -41,7 +49,7 @@ const ironjawz = {
   manifestations,
   manifestationLores,
   terrain,
-  units: [...units, kragnos, ...scourgeUnits],
+  units: [...units, kragnos, ...scourgeUnits].map(withAvailableImage),
   armiesOfRenown,
 };
 

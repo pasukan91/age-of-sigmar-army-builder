@@ -32,14 +32,23 @@ const IMAGE_ALIASES = {
 
 function UnitArtwork({ unit, className = "", variant = "card" }) {
   const artworkId = IMAGE_ALIASES[unit?.id] ?? unit?.imageAlias ?? unit?.id;
+  const keywords = (unit?.keywords ?? []).map((keyword) =>
+    String(keyword).trim().toLowerCase()
+  );
   const explicitSource = String(unit?.image ?? "").startsWith("/")
     ? unit.image
     : null;
   const hasOfficialImage = Boolean(explicitSource) || HEDONITES_UNIT_IDS.has(artworkId);
+  const fallbackSource = keywords.includes("ironjawz")
+    ? "/images/units/ironjawz/gordrakk-the-fist-of-gork.jpg"
+    : keywords.includes("hedonites of slaanesh")
+      ? "/images/factions/hedonites.webp"
+      : keywords.includes("skaven")
+        ? "/images/factions/skaven.webp"
+        : "/images/factions/kruleboyz.webp";
   const source = explicitSource ?? (hasOfficialImage
-    ? `/images/units/${artworkId}.webp`
-    : "/images/factions/kruleboyz.webp");
-  const fallbackSource = "/images/factions/kruleboyz.webp";
+    ? `/images/units/hedonitas/${artworkId}.webp`
+    : fallbackSource);
   const classes = [
     "aos-unit-artwork",
     `aos-unit-artwork--${variant}`,
