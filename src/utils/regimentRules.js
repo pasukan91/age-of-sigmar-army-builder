@@ -24,11 +24,21 @@ function normalizeOption(value) {
     "any moulder": "any-moulder",
     "any pestilens": "any-pestilens",
     "any eshin": "any-eshin",
+    "any ogor mawtribes": "any-ogors",
+    "any gutbusters": "any-gutbusters",
+    "any beastclaw": "any-beastclaw",
+    "any beastclaw raiders": "any-beastclaw",
+    "any mawseekers": "any-mawseekers",
+    "any gnoblars": "any-gnoblars",
+    "any gorger mawpack": "any-gorger-mawpack",
     "skaven overclaw": "skaven-overclaw",
     "slaaneshi beguiler": "slaaneshi-beguiler",
     "dark egotist": "dark-egotist",
     "mob wrangler": "mob-wrangler",
     "swamp beast": "swamp-beast",
+    "bloodpelt hunter": "bloodpelt-hunter",
+    "gnoblar scraplauncher": "gnoblar-scraplauncher",
+    "voice of the everwinter": "voice-of-the-everwinter",
   };
 
   return aliases[option] ?? option;
@@ -188,13 +198,25 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Pestilens");
     case "any-eshin":
       return hasKeyword(unit, "Eshin");
+    case "any-ogors":
+      return hasKeyword(unit, "Ogor Mawtribes");
+    case "any-gutbusters":
+      return hasKeyword(unit, "Gutbusters");
+    case "any-beastclaw":
+      return hasKeyword(unit, "Beastclaw");
+    case "any-mawseekers":
+      return hasKeyword(unit, "Mawseekers");
+    case "any-gnoblars":
+      return hasKeyword(unit, "Gnoblars");
+    case "any-gorger-mawpack":
+      return unit.id === "gorger-mawpack";
     default:
       return false;
   }
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter"].includes(option)
     ? 1
     : null;
 }
