@@ -331,7 +331,14 @@ function WeaponList({
           {weapon.name}
         </h3>
 
-        <div style={styles.weaponGrid}>
+        <div
+          style={{
+            ...styles.weaponGrid,
+            gridTemplateColumns: `repeat(${
+              type === "Ranged" ? 6 : 5
+            }, minmax(0, 1fr))`,
+          }}
+        >
           {type === "Ranged" && (
             <WeaponStat
               label="Alcance"
@@ -388,7 +395,7 @@ function WeaponStat({
         {label}
       </span>
 
-      <strong>
+      <strong style={styles.weaponStatValue}>
         {value ?? "-"}
       </strong>
     </div>
@@ -543,54 +550,59 @@ function SynergyList({ synergies }) {
       </p>
 
       {synergies.map((synergy, index) => (
-        <article
+        <details
           className="aos-synergy-card"
           key={`${synergy.sourceType}-${synergy.sourceName}-${synergy.ability?.name}-${index}`}
         >
-          <div className="aos-synergy-card__topline">
-            <span className="aos-synergy-card__source-type">
-              {synergy.sourceType}
+          <summary className="aos-synergy-card__summary">
+            <h3>{synergy.ability?.name}</h3>
+            <span className="aos-synergy-card__phase">
+              {getAbilityTimingLabel(synergy.ability)}
             </span>
-            <div className="aos-synergy-card__meta">
+            <span className="aos-synergy-card__chevron" aria-hidden="true">
+              ›
+            </span>
+          </summary>
+
+          <div className="aos-synergy-card__content">
+            <div className="aos-synergy-card__topline">
+              <span className="aos-synergy-card__source-type">
+                {synergy.sourceType}
+              </span>
               {isSpellAbility(synergy.ability) &&
                 synergy.ability?.castingValue != null && (
                   <span className="aos-synergy-card__casting">
                     Dificultad {synergy.ability.castingValue}+
                   </span>
                 )}
-              <span className="aos-synergy-card__phase">
-                {synergy.ability?.phase ?? synergy.ability?.type ?? "Pasiva"}
-              </span>
             </div>
-          </div>
 
-          <p className="aos-synergy-card__source">
-            Aportada por <strong>{synergy.sourceName}</strong>
-          </p>
+            <p className="aos-synergy-card__source">
+              Aportada por <strong>{synergy.sourceName}</strong>
+            </p>
 
-          <h3>{synergy.ability?.name}</h3>
-
-          <div className="aos-synergy-card__matches">
-            {synergy.matchedOn.map((match) => (
-              <span key={match}>{match}</span>
-            ))}
-          </div>
-
-          {synergy.conditions?.length > 0 && (
-            <div className="aos-synergy-card__conditions">
-              <strong>Condiciones que debes comprobar</strong>
-              <ul>
-                {synergy.conditions.map((condition) => (
-                  <li key={condition}>{condition}</li>
-                ))}
-              </ul>
+            <div className="aos-synergy-card__matches">
+              {synergy.matchedOn.map((match) => (
+                <span key={match}>{match}</span>
+              ))}
             </div>
-          )}
 
-          <p className="aos-synergy-card__description">
-            {synergy.ability?.description}
-          </p>
-        </article>
+            {synergy.conditions?.length > 0 && (
+              <div className="aos-synergy-card__conditions">
+                <strong>Condiciones que debes comprobar</strong>
+                <ul>
+                  {synergy.conditions.map((condition) => (
+                    <li key={condition}>{condition}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <p className="aos-synergy-card__description">
+              {synergy.ability?.description}
+            </p>
+          </div>
+        </details>
       ))}
     </section>
   );
@@ -603,6 +615,16 @@ function isSpellAbility(ability) {
   );
 
   return type === "spell" || keywords.includes("spell");
+}
+
+function getAbilityTimingLabel(ability) {
+  const timing = String(
+    ability?.phase ?? ability?.type ?? ""
+  ).trim();
+
+  return !timing || timing.toLowerCase() === "passive"
+    ? "Pasiva"
+    : timing;
 }
 
 function hasWeaponProfile(unit, type) {
@@ -640,13 +662,12 @@ const styles = {
 
   weaponGrid: {
     display: "grid",
-    gridTemplateColumns:
-      "repeat(auto-fit, minmax(72px, 1fr))",
-    gap: 7,
+    gap: 4,
   },
 
   weaponStat: {
-    padding: 8,
+    minWidth: 0,
+    padding: "7px 2px",
     border:
       "1px solid rgba(0,0,0,0.13)",
     backgroundColor: "#ffffff",
@@ -657,7 +678,7 @@ const styles = {
     display: "block",
     marginBottom: 3,
     color: "#666666",
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 700,
     textTransform: "uppercase",
   },
@@ -737,6 +758,11 @@ const styles = {
     fontWeight: 800,
     letterSpacing: "0.08em",
     textTransform: "uppercase",
+  },
+
+  weaponStatValue: {
+    fontSize: 13,
+    whiteSpace: "nowrap",
   },
 
   preservedText: {
