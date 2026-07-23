@@ -25,6 +25,8 @@ function normalizeOption(value) {
     "any pestilens": "any-pestilens",
     "any eshin": "any-eshin",
     "any ogor mawtribes": "any-ogors",
+    "any sylvaneth": "any-sylvaneth",
+    "any non-monster sylvaneth": "any-non-monster-sylvaneth",
     "any gutbusters": "any-gutbusters",
     "any beastclaw": "any-beastclaw",
     "any beastclaw raiders": "any-beastclaw",
@@ -39,6 +41,7 @@ function normalizeOption(value) {
     "bloodpelt hunter": "bloodpelt-hunter",
     "gnoblar scraplauncher": "gnoblar-scraplauncher",
     "voice of the everwinter": "voice-of-the-everwinter",
+    "forest sentinel": "forest-sentinel",
   };
 
   return aliases[option] ?? option;
@@ -200,6 +203,10 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Eshin");
     case "any-ogors":
       return hasKeyword(unit, "Ogor Mawtribes");
+    case "any-sylvaneth":
+      return hasKeyword(unit, "Sylvaneth");
+    case "any-non-monster-sylvaneth":
+      return hasKeyword(unit, "Sylvaneth") && !hasKeyword(unit, "Monster");
     case "any-gutbusters":
       return hasKeyword(unit, "Gutbusters");
     case "any-beastclaw":
@@ -216,7 +223,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel"].includes(option)
     ? 1
     : null;
 }

@@ -2,6 +2,7 @@ import orrukWarclans from "./orrukWarclans";
 import hedonites from "./hedonites";
 import skaven from "./skaven";
 import ogors from "./ogors";
+import sylvaneth from "./sylvaneth";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
 
@@ -11,6 +12,7 @@ const factions = [
   hedonites,
   skaven,
   ogors,
+  sylvaneth,
 
   // ORDEN
   {
@@ -37,11 +39,6 @@ const factions = [
     id: "daughters",
     alliance: "order",
     name: "Daughters of Khaine",
-  },
-  {
-    id: "sylvaneth",
-    alliance: "order",
-    name: "Sylvaneth",
   },
   {
     id: "seraphon",
