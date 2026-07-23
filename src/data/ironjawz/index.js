@@ -37,7 +37,7 @@ const ironjawz = {
   id: "ironjawz",
   alliance: "destruction",
   name: "Ironjawz",
-  image: "/images/units/ironjawz/gordrakk-the-fist-of-gork.jpg",
+  image: "/images/factions/ironjawz.webp",
   battleTraits,
   battleFormations,
   heroicTraits,
