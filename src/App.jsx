@@ -1645,10 +1645,6 @@ function App() {
             selector?.options ??
             []
           }
-          state={selector?.ui ?? {}}
-          onStateChange={(ui) =>
-            setSelector((previous) => ({ ...previous, ui }))
-          }
           goBack={
             handleSelectorBack
           }

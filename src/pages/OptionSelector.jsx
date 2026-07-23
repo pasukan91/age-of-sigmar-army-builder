@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import Accordion from "../components/Accordion";
 import BackButton from "../components/BackButton";
 import UnitArtwork from "../components/UnitArtwork";
@@ -9,60 +8,7 @@ function OptionSelector({
   onView,
   onConfigure,
   goBack,
-  state = {},
-  onStateChange,
 }) {
-  const query = state.query ?? "";
-  const role = state.role ?? "all";
-  const keyword = state.keyword ?? "all";
-  const maxPoints = state.maxPoints ?? "all";
-  const sort = state.sort ?? "name";
-  const isUnitSelector = options.some(
-    (option) => option?.rules || (option?.keywords ?? []).length > 0
-  );
-
-  const keywordOptions = useMemo(() => {
-    const values = new Set(
-      options.flatMap((option) => option?.keywords ?? []).filter(Boolean)
-    );
-
-    return [...values].sort((left, right) =>
-      left.localeCompare(right, "es")
-    );
-  }, [options]);
-
-  const visibleOptions = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    const filtered = options.filter((option) => {
-      const keywords = (option?.keywords ?? []).map((item) =>
-        String(item).trim().toLowerCase()
-      );
-      const isHero = option?.rules?.hero === true || keywords.includes("hero");
-      const haystack = [option?.name, option?.id, ...keywords]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      if (normalizedQuery && !haystack.includes(normalizedQuery)) return false;
-      if (role === "heroes" && !isHero) return false;
-      if (role === "units" && isHero) return false;
-      if (keyword !== "all" && !keywords.includes(keyword.toLowerCase())) return false;
-      if (maxPoints !== "all" && Number(option?.points) > Number(maxPoints)) return false;
-
-      return true;
-    });
-
-    return [...filtered].sort((left, right) => {
-      if (sort === "points-asc") return (Number(left.points) || 0) - (Number(right.points) || 0);
-      if (sort === "points-desc") return (Number(right.points) || 0) - (Number(left.points) || 0);
-      return String(left.name ?? "").localeCompare(String(right.name ?? ""), "es");
-    });
-  }, [keyword, maxPoints, options, query, role, sort]);
-
-  function updateState(patch) {
-    onStateChange?.({ ...state, ...patch });
-  }
-
   function hasWarscroll(option) {
     return Boolean(
       option.rules ||
@@ -123,83 +69,14 @@ function OptionSelector({
           </h2>
         </div>
 
-        {options.length > 6 && (
-          <section className="aos-selector-tools" aria-label="Buscar y filtrar opciones">
-            <label className="aos-selector-search">
-              <span>Buscar</span>
-              <input
-                type="search"
-                value={query}
-                placeholder="Nombre o palabra clave"
-                onChange={(event) => updateState({ query: event.target.value })}
-              />
-            </label>
-
-            <div className="aos-selector-filters">
-              {isUnitSelector && (
-                <>
-                  <label>
-                    <span>Tipo</span>
-                    <select value={role} onChange={(event) => updateState({ role: event.target.value })}>
-                      <option value="all">Todos</option>
-                      <option value="heroes">Héroes</option>
-                      <option value="units">Unidades</option>
-                    </select>
-                  </label>
-
-                  <label>
-                    <span>Keyword</span>
-                    <select value={keyword} onChange={(event) => updateState({ keyword: event.target.value })}>
-                      <option value="all">Todas</option>
-                      {keywordOptions.map((item) => (
-                        <option key={item} value={item}>{item}</option>
-                      ))}
-                    </select>
-                  </label>
-
-                  <label>
-                    <span>Puntos</span>
-                    <select value={maxPoints} onChange={(event) => updateState({ maxPoints: event.target.value })}>
-                      <option value="all">Sin límite</option>
-                      <option value="100">Hasta 100</option>
-                      <option value="200">Hasta 200</option>
-                      <option value="300">Hasta 300</option>
-                      <option value="400">Hasta 400</option>
-                    </select>
-                  </label>
-                </>
-              )}
-
-              <label>
-                <span>Orden</span>
-                <select value={sort} onChange={(event) => updateState({ sort: event.target.value })}>
-                  <option value="name">Nombre</option>
-                  <option value="points-asc">Puntos: menor primero</option>
-                  <option value="points-desc">Puntos: mayor primero</option>
-                </select>
-              </label>
-            </div>
-
-            <p className="aos-selector-results" role="status">
-              {visibleOptions.length} de {options.length} opciones
-            </p>
-          </section>
-        )}
-
         {options.length === 0 && (
           <div className="aos-empty-message">
             No hay opciones disponibles.
           </div>
         )}
 
-        {options.length > 0 && visibleOptions.length === 0 && (
-          <div className="aos-empty-message">
-            No hay opciones que coincidan con los filtros.
-          </div>
-        )}
-
         <section className="aos-option-list">
-          {visibleOptions.map((option) => {
+          {options.map((option) => {
             const description =
               getDescription(option);
 
@@ -210,7 +87,18 @@ function OptionSelector({
               >
                 <div className="aos-option-card__head">
                   {hasWarscroll(option) && (
-                    <UnitArtwork unit={option} variant="thumbnail" />
+                    onView ? (
+                      <button
+                        type="button"
+                        onClick={() => onView(option)}
+                        className="aos-unit-artwork-link"
+                        aria-label={`Ver warscroll de ${option.name}`}
+                      >
+                        <UnitArtwork unit={option} variant="thumbnail" />
+                      </button>
+                    ) : (
+                      <UnitArtwork unit={option} variant="thumbnail" />
+                    )
                   )}
 
                   <div>
@@ -255,20 +143,6 @@ function OptionSelector({
                   </div>
 
                   <div className="aos-option-card__actions">
-                    {hasWarscroll(option) &&
-                      onView && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            onView(option)
-                          }
-                          className="aos-option-card__button aos-option-card__button--view"
-                          aria-label={`Ver warscroll de ${option.name}`}
-                        >
-                          Warscroll
-                        </button>
-                      )}
-
                     {onConfigure && (
                       <button
                         type="button"
