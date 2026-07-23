@@ -20,7 +20,10 @@ function SelectFaction({ alliance, onSelect, onBack }) {
     return (
       <main
         className="aos-page aos-selection-page"
-        style={{ "--aos-page-background": `url("${selectedFaction.image ?? background}")` }}
+        style={{
+          "--aos-page-background": `url("${selectedFaction.image ?? background}")`,
+          "--aos-page-background-position": selectedFaction.imagePosition ?? "center",
+        }}
       >
         <header className="aos-topbar">
           <button
@@ -111,7 +114,10 @@ function SelectFaction({ alliance, onSelect, onBack }) {
                 onClick={() => {
                   setSelectedFaction(faction);
                 }}
-                style={{ "--aos-card-image": `url("${image}")` }}
+                style={{
+                  "--aos-card-image": `url("${image}")`,
+                  "--aos-card-position": faction.imagePosition ?? "center right",
+                }}
               >
                 <span className="aos-selection-card__content">
                   <span className="aos-selection-card__title">

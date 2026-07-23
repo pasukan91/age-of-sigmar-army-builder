@@ -40,7 +40,7 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
     : null;
   const hasOfficialImage = Boolean(explicitSource) || HEDONITES_UNIT_IDS.has(artworkId);
   const fallbackSource = keywords.includes("ironjawz")
-    ? "/images/factions/ironjawz.webp"
+    ? "/images/factions/ironjawz-army.webp"
     : keywords.includes("hedonites of slaanesh")
       ? "/images/factions/hedonites.webp"
       : keywords.includes("skaven")

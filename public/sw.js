@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const CORE_FILES = ["/", "/index.html", "/offline.html", "/manifest.webmanifest", "/pwa-icon.svg"];
