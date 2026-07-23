@@ -2128,6 +2128,82 @@ body {
   background: linear-gradient(180deg, #5d4a25, #2c2415);
 }
 
+.aos-config-option-header {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 50px;
+  align-items: stretch;
+}
+
+.aos-config-option-trigger {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 10px 13px 15px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.aos-config-option-trigger:focus-visible,
+.aos-config-option-selector:focus-within {
+  outline: 3px solid rgba(137, 31, 24, 0.36);
+  outline-offset: -3px;
+}
+
+.aos-config-option-chevron {
+  display: grid;
+  place-items: center;
+  color: #7a4f18;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 160ms ease;
+}
+
+.aos-config-option-trigger[aria-expanded="true"] .aos-config-option-chevron {
+  transform: rotate(90deg);
+}
+
+.aos-config-option-selector {
+  display: grid;
+  place-items: center;
+  border-left: 1px solid #ded6c7;
+  cursor: pointer;
+}
+
+.aos-config-option-selector:has(input:disabled) {
+  cursor: not-allowed;
+}
+
+.aos-config-option-description {
+  padding: 12px 15px 14px;
+  border-top: 1px solid #ded6c7;
+  color: #49443d;
+  background: rgba(244, 239, 226, 0.58);
+}
+
+.aos-config-option-description p {
+  margin: 0 !important;
+}
+
+.aos-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 @media (max-width: 520px) {
   .aos-unit-config-header {
     align-items: center !important;
@@ -2143,20 +2219,20 @@ body {
   }
 
   .aos-config-option-card {
-    position: relative;
-    align-items: stretch !important;
-    padding: 14px 48px 14px 14px !important;
-    gap: 8px !important;
+    padding: 0 !important;
   }
 
   .aos-config-option-content {
     width: 100%;
   }
 
+  .aos-config-option-trigger {
+    gap: 6px;
+    padding: 12px 8px 12px 12px;
+  }
+
   .aos-config-option-checkbox {
-    position: absolute;
-    top: 14px;
-    right: 14px;
+    position: static;
   }
 }
 

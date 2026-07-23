@@ -645,8 +645,10 @@ function CheckboxOption({
   checked,
   onChange,
 }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <label
+    <article
       className="aos-config-option-card"
       style={{
         ...styles.optionCard,
@@ -660,25 +662,57 @@ function CheckboxOption({
           : {}),
       }}
     >
-      <div className="aos-config-option-content" style={styles.optionContent}>
-        <strong style={styles.optionTitle}>
-          {title}
-        </strong>
+      <div className="aos-config-option-header">
+        <button
+          className="aos-config-option-trigger"
+          type="button"
+          aria-expanded={open}
+          onClick={() => setOpen((previous) => !previous)}
+        >
+          <span className="aos-config-option-content" style={styles.optionContent}>
+            <strong style={styles.optionTitle}>
+              {title}
+            </strong>
 
-        {source && (
-          <span
-            style={{
-              ...styles.sourceBadge,
-              ...(source === "Aqshy"
-                ? styles.aqshySourceBadge
-                : styles.standardSourceBadge),
-            }}
-          >
-            {source}
+            {source && (
+              <span
+                style={{
+                  ...styles.sourceBadge,
+                  ...(source === "Aqshy"
+                    ? styles.aqshySourceBadge
+                    : styles.standardSourceBadge),
+                }}
+              >
+                {source}
+              </span>
+            )}
           </span>
-        )}
 
-        {description && (
+          <span
+            className="aos-config-option-chevron"
+            aria-hidden="true"
+          >
+            ›
+          </span>
+        </button>
+
+        <label className="aos-config-option-selector">
+          <span className="aos-visually-hidden">
+            Seleccionar {title}
+          </span>
+          <input
+            className="aos-config-option-checkbox"
+            type="checkbox"
+            checked={checked}
+            disabled={disabled}
+            onChange={onChange}
+            style={styles.checkbox}
+          />
+        </label>
+      </div>
+
+      {open && description && (
+        <div className="aos-config-option-description">
           <p
             style={
               styles.optionDescription
@@ -686,18 +720,9 @@ function CheckboxOption({
           >
             {description}
           </p>
-        )}
-      </div>
-
-      <input
-        className="aos-config-option-checkbox"
-        type="checkbox"
-        checked={checked}
-        disabled={disabled}
-        onChange={onChange}
-        style={styles.checkbox}
-      />
-    </label>
+        </div>
+      )}
+    </article>
   );
 }
 
@@ -790,17 +815,14 @@ const styles = {
   optionCard: {
     width: "100%",
     boxSizing: "border-box",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 18,
-    padding: 16,
+    display: "block",
+    overflow: "hidden",
+    padding: 0,
     marginBottom: 10,
     border: "1px solid #cccccc",
     borderRadius: 3,
     backgroundColor: "#fffefa",
     color: "#111111",
-    cursor: "pointer",
   },
 
   selectedOptionCard: {
