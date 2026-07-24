@@ -46,6 +46,12 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
       : keywords.includes("skaven")
         ? "/images/factions/skaven.webp"
         : "/images/factions/kruleboyz.webp";
+        keywords.includes("sylvaneth")
+        ? "/images/factions/sylvaneth.webp"
+        : "/images/factions/kruleboyz.webp";
+        
+        
+        
   const source = explicitSource ?? (hasOfficialImage
     ? `/images/units/hedonitas/${artworkId}.webp`
     : fallbackSource);
