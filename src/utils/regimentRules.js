@@ -26,6 +26,12 @@ function normalizeOption(value) {
     "any eshin": "any-eshin",
     "any ogor mawtribes": "any-ogors",
     "any sylvaneth": "any-sylvaneth",
+    "any gloomspite gitz": "any-gloomspite",
+    "any moonclan": "any-moonclan",
+    "any moonclan infantry": "any-moonclan-infantry",
+    "any troggoth": "any-troggoth",
+    "any gitmob": "any-gitmob",
+    "any spiderfang": "any-spiderfang",
     "any non-monster sylvaneth": "any-non-monster-sylvaneth",
     "any gutbusters": "any-gutbusters",
     "any beastclaw": "any-beastclaw",
@@ -42,6 +48,9 @@ function normalizeOption(value) {
     "gnoblar scraplauncher": "gnoblar-scraplauncher",
     "voice of the everwinter": "voice-of-the-everwinter",
     "forest sentinel": "forest-sentinel",
+    "moonclan agitator": "moonclan-agitator",
+    "top dog": "top-dog",
+    "dankhold troggboss": "dankhold-troggboss",
   };
 
   return aliases[option] ?? option;
@@ -207,6 +216,18 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Sylvaneth");
     case "any-non-monster-sylvaneth":
       return hasKeyword(unit, "Sylvaneth") && !hasKeyword(unit, "Monster");
+    case "any-gloomspite":
+      return hasKeyword(unit, "Gloomspite Gitz");
+    case "any-moonclan":
+      return hasKeyword(unit, "Moonclan");
+    case "any-moonclan-infantry":
+      return hasKeyword(unit, "Moonclan") && hasKeyword(unit, "Infantry");
+    case "any-troggoth":
+      return hasKeyword(unit, "Troggoth");
+    case "any-gitmob":
+      return hasKeyword(unit, "Gitmob");
+    case "any-spiderfang":
+      return hasKeyword(unit, "Spiderfang");
     case "any-gutbusters":
       return hasKeyword(unit, "Gutbusters");
     case "any-beastclaw":
@@ -223,7 +244,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss"].includes(option)
     ? 1
     : null;
 }

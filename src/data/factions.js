@@ -3,6 +3,7 @@ import hedonites from "./hedonites";
 import skaven from "./skaven";
 import ogors from "./ogors";
 import sylvaneth from "./sylvaneth";
+import gloomspite from "./gloomspite";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -14,6 +15,7 @@ const factions = [
   skaven,
   ogors,
   sylvaneth,
+  gloomspite,
 
   // ORDEN
   {
@@ -107,11 +109,6 @@ const factions = [
   },
 
   // DESTRUCCIÓN
-  {
-    id: "gloomspite",
-    alliance: "destruction",
-    name: "Gloomspite Gitz",
-  },
   {
     id: "behemat",
     alliance: "destruction",

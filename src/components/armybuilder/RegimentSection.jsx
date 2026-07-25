@@ -37,6 +37,7 @@ function RegimentSection({
       unit?.artefact,
       unit?.allConsumingObsession,
       unit?.moulderMutation,
+      unit?.specialKnickKnack,
     ].reduce(
       (total, enhancement) =>
         total + (Number(enhancement?.points) || 0),
@@ -480,6 +481,7 @@ function UnitCard({
       : []),
     ["Obsesión", unit.allConsumingObsession],
     ["Mutación Moulder", unit.moulderMutation],
+    ["Special Knick-Knack", unit.specialKnickKnack],
   ].filter(([, enhancement]) => Boolean(enhancement));
 
   return (

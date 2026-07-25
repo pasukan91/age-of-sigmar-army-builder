@@ -29,6 +29,7 @@ const UNIT_ENHANCEMENTS = [
   ["monstrousTrait", "Rasgo monstruoso"],
   ["allConsumingObsession", "Obsesión devoradora"],
   ["moulderMutation", "Mutación Moulder"],
+  ["specialKnickKnack", "Special Knick-Knack"],
 ];
 
 function normalize(value) {

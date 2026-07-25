@@ -4,6 +4,7 @@ import MainNav from "../components/MainNav";
 import { calculateArmyPoints } from "../utils/armyPoints";
 
 const factionArtwork = {
+  gloomspite: "/images/factions/gloomspite.webp",
   hedonites: "/images/factions/hedonites.webp",
   ironjawz: "/images/factions/ironjawz-army.webp",
   kruleboyz: "/images/factions/kruleboyz.webp",

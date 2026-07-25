@@ -15,6 +15,7 @@ const ARRAY_FIELDS = [
   "regimentsOfRenown",
   "allConsumingObsessions",
   "moulderMutations",
+  "specialKnickKnacks",
 ];
 
 export function normalizeFaction(faction) {

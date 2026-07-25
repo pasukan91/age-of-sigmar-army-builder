@@ -262,6 +262,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.specialKnickKnack && (
+          <EnhancementAccordion
+            title="Special Knick-Knack"
+            enhancement={unit.specialKnickKnack}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" && (
           <button
@@ -518,6 +525,7 @@ function getDisplayedPoints(unit) {
     unit?.artefact,
     unit?.allConsumingObsession,
     unit?.moulderMutation,
+    unit?.specialKnickKnack,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

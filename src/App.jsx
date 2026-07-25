@@ -852,6 +852,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.specialKnickKnack) {
+      const owner = findEnhancementOwner(
+        "specialKnickKnack",
+        configuredUnit.specialKnickKnack.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Special Knick-Knack",
+          selected: configuredUnit.specialKnickKnack.name,
+          owner: owner.unit.name,
+          existing: owner.unit.specialKnickKnack?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1380,6 +1396,7 @@ function App() {
       monstrousTrait: null,
       allConsumingObsession: null,
       moulderMutation: null,
+      specialKnickKnack: null,
     };
 
     saveUpdatedList({

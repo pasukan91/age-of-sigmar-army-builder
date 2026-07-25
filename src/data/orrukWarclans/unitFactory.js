@@ -87,6 +87,7 @@ export function createOrrukUnit({
     heroicTrait: null,
     monstrousTrait: null,
     artefact: null,
+    specialKnickKnack: null,
     details: {
       models,
       baseSize,

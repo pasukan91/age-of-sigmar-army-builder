@@ -1,7 +1,6 @@
 import battleTraits from "./battleTraits";
 import battleFormations from "./battleFormations";
 import heroicTraits from "./heroicTraits";
-import monsterTraits from "./monsterTraits";
 import artefacts from "./artefacts";
 import spellLores from "./spellLores";
 import manifestations from "./manifestations";
@@ -47,7 +46,7 @@ const hedonites = {
 
   allConsumingObsessions,
 
-  monsterTraits,
+  monsterTraits: [],
 
   artefacts,
 

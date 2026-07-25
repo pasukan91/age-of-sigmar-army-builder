@@ -45,13 +45,12 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
       ? "/images/factions/hedonites.webp"
       : keywords.includes("skaven")
         ? "/images/factions/skaven.webp"
-        : "/images/factions/kruleboyz.webp";
-        keywords.includes("sylvaneth")
-        ? "/images/factions/sylvaneth.webp"
-        : "/images/factions/kruleboyz.webp";
-        
-        
-        
+        : keywords.includes("sylvaneth")
+          ? "/images/factions/sylvaneth.webp"
+          : keywords.includes("gloomspite gitz")
+            ? "/images/factions/gloomspite.webp"
+            : "/images/factions/kruleboyz.webp";
+
   const source = explicitSource ?? (hasOfficialImage
     ? `/images/units/hedonitas/${artworkId}.webp`
     : fallbackSource);

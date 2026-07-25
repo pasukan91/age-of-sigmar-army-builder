@@ -34,6 +34,9 @@ function UnitConfig({
   const [moulderMutation, setMoulderMutation] =
     useState(unit?.moulderMutation ?? null);
 
+  const [specialKnickKnack, setSpecialKnickKnack] =
+    useState(unit?.specialKnickKnack ?? null);
+
   if (!unit) {
     return (
       <main className="aos-shell">
@@ -132,6 +135,10 @@ function UnitConfig({
     keywords.includes("skaven") &&
     (faction?.moulderMutations?.length ?? 0) > 0;
 
+  const canSelectSpecialKnickKnack =
+    !isHero &&
+    (faction?.specialKnickKnacks?.length ?? 0) > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -156,6 +163,9 @@ function UnitConfig({
   const moulderMutationOptions =
     faction?.moulderMutations ?? [];
 
+  const specialKnickKnackOptions =
+    faction?.specialKnickKnacks ?? [];
+
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
   const monstrousTraitOwner = enhancementOwners.monstrousTrait?.unit ?? null;
@@ -173,7 +183,8 @@ function UnitConfig({
     Number(heroicTrait?.points ?? 0) +
     Number(monstrousTrait?.points ?? 0) +
     Number(allConsumingObsession?.points ?? 0) +
-    Number(moulderMutation?.points ?? 0);
+    Number(moulderMutation?.points ?? 0) +
+    Number(specialKnickKnack?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -215,6 +226,11 @@ function UnitConfig({
       moulderMutation:
         canSelectMoulderMutation
           ? moulderMutation
+          : null,
+
+      specialKnickKnack:
+        canSelectSpecialKnickKnack
+          ? specialKnickKnack
           : null,
     });
   }
@@ -328,7 +344,8 @@ function UnitConfig({
 
       {(canBeReinforced ||
         canSelectAllConsumingObsession ||
-        canSelectMoulderMutation) && (
+        canSelectMoulderMutation ||
+        canSelectSpecialKnickKnack) && (
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>
             Tamaño y mejoras de unidad
@@ -426,6 +443,46 @@ function UnitConfig({
                   onChange={() =>
                     toggleExclusiveOption(
                       setMoulderMutation,
+                      option
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
+
+          {canSelectSpecialKnickKnack && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Special Knick-Knacks
+                </h3>
+
+                <span
+                  style={{
+                    ...styles.sourceBadge,
+                    ...styles.aqshySourceBadge,
+                    marginTop: 0,
+                  }}
+                >
+                  Aqshy
+                </span>
+              </div>
+
+              <p style={styles.sectionIntro}>
+                Asigna una mejora de Aqshy a esta unidad Gloomspite Gitz no Hero. Cada una solo puede elegirse una vez por ejército.
+              </p>
+
+              {specialKnickKnackOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={specialKnickKnack?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(
+                      setSpecialKnickKnack,
                       option
                     )
                   }

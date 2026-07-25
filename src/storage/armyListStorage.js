@@ -59,6 +59,8 @@ function serializeUnit(unit) {
       unit.allConsumingObsession ?? null,
     moulderMutation:
       unit.moulderMutation ?? null,
+    specialKnickKnack:
+      unit.specialKnickKnack ?? null,
   };
 }
 
@@ -106,6 +108,10 @@ function restoreUnit(savedUnit, faction) {
     moulderMutation: restoreOption(
       savedUnit.moulderMutation,
       faction?.moulderMutations
+    ),
+    specialKnickKnack: restoreOption(
+      savedUnit.specialKnickKnack,
+      faction?.specialKnickKnacks
     ),
   };
 }
