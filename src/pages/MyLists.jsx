@@ -2,16 +2,7 @@ import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
 import { calculateArmyPoints } from "../utils/armyPoints";
-
-const factionArtwork = {
-  gloomspite: "/images/factions/gloomspite.webp",
-  hedonites: "/images/factions/hedonites.webp",
-  ironjawz: "/images/factions/ironjawz-army.webp",
-  kruleboyz: "/images/factions/kruleboyz.webp",
-  ogors: "/images/factions/ogormawtribes.webp",
-  skaven: "/images/factions/skaven.webp",
-  sylvaneth: "/images/factions/sylvaneth.webp",
-};
+import { getFactionArtwork } from "../utils/factionArtwork";
 
 function MyLists({
   lists = [],
@@ -137,14 +128,6 @@ function MyLists({
       />
     </main>
   );
-}
-
-function getFactionArtwork(faction) {
-  if (typeof faction?.image === "string" && faction.image) {
-    return faction.image;
-  }
-
-  return factionArtwork[faction?.id] ?? null;
 }
 
 function formatSavedDate(value) {

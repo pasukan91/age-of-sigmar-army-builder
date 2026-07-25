@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import factions from "../data/factions";
 import ChevronIcon from "../components/ChevronIcon";
+import { getFactionArtwork } from "../utils/factionArtwork";
 import "../styles/aos-app.css";
 
 function SelectFaction({ alliance, onSelect, onBack }) {
@@ -21,7 +22,7 @@ function SelectFaction({ alliance, onSelect, onBack }) {
       <main
         className="aos-page aos-selection-page"
         style={{
-          "--aos-page-background": `url("${selectedFaction.image ?? background}")`,
+          "--aos-page-background": `url("${getFactionArtwork(selectedFaction) ?? background}")`,
           "--aos-page-background-position": selectedFaction.imagePosition ?? "center",
         }}
       >
@@ -104,8 +105,8 @@ function SelectFaction({ alliance, onSelect, onBack }) {
         )}
 
         {factionList.map((faction) => {
-          const image =
-            faction.image ?? `/images/factions/${faction.id}.webp`;
+          const image = getFactionArtwork(faction) ??
+            `/images/factions/${faction.id}.webp`;
           return (
             <div key={faction.id} className="aos-faction-choice">
               <button
