@@ -83,7 +83,7 @@ const factions = [
   {
     id: "hashut",
     alliance: "chaos",
-    name: "Disciples of Hashut",
+    name: "Helsmiths of Hashut",
   },
   {
     id: "tzeentch",

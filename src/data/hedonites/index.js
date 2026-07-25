@@ -37,6 +37,8 @@ const hedonites = {
 
   name: "Hedonites of Slaanesh",
 
+  image: "/images/factions/hedonites.webp",
+
   battleTraits,
 
   battleFormations,

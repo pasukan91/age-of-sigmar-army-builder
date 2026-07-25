@@ -3,6 +3,15 @@ import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
 import { calculateArmyPoints } from "../utils/armyPoints";
 
+const factionArtwork = {
+  hedonites: "/images/factions/hedonites.webp",
+  ironjawz: "/images/factions/ironjawz-army.webp",
+  kruleboyz: "/images/factions/kruleboyz.webp",
+  ogors: "/images/factions/ogormawtribes.webp",
+  skaven: "/images/factions/skaven.webp",
+  sylvaneth: "/images/factions/sylvaneth.webp",
+};
+
 function MyLists({
   lists = [],
   onOpenList,
@@ -59,48 +68,55 @@ function MyLists({
                 (left, right) =>
                   Number(right.updatedAt) - Number(left.updatedAt)
               )
-              .map((list) => (
-              <article
-                key={list.id}
-                className="aos-list-card"
-              >
-                <button
-                  type="button"
-                  onClick={() => onOpenList(list)}
-                  className="aos-list-card__open"
-                >
-                  <span>
-                    <small>
-                      {list.faction?.name ?? "Age of Sigmar"}
-                    </small>
+              .map((list) => {
+                const artwork = getFactionArtwork(list.faction);
 
-                    <strong>{list.name}</strong>
-                    <span className="aos-list-card__updated">
-                      Actualizada {formatSavedDate(list.updatedAt)}
-                    </span>
-                  </span>
-
-                  <span className="aos-list-card__points">
-                    {calculateArmyPoints(list)} / {list.pointsLimit} pts
-                  </span>
-
-                  <span
-                    className="aos-list-card__arrow"
-                    aria-hidden="true"
+                return (
+                  <article
+                    key={list.id}
+                    className={`aos-list-card${artwork ? " aos-list-card--with-artwork" : ""}`}
+                    style={artwork
+                      ? { "--aos-list-card-image": `url("${artwork}")` }
+                      : undefined}
                   >
-                    <ChevronIcon direction="right" size={8} />
-                  </span>
-                </button>
+                    <button
+                      type="button"
+                      onClick={() => onOpenList(list)}
+                      className="aos-list-card__open"
+                    >
+                      <span>
+                        <small>
+                          {list.faction?.name ?? "Age of Sigmar"}
+                        </small>
 
-                <button
-                  type="button"
-                  className="aos-list-card__delete"
-                  onClick={() => onDeleteList(list.id)}
-                >
-                  Eliminar lista
-                </button>
-              </article>
-            ))}
+                        <strong>{list.name}</strong>
+                        <span className="aos-list-card__updated">
+                          Actualizada {formatSavedDate(list.updatedAt)}
+                        </span>
+                      </span>
+
+                      <span className="aos-list-card__points">
+                        {calculateArmyPoints(list)} / {list.pointsLimit} pts
+                      </span>
+
+                      <span
+                        className="aos-list-card__arrow"
+                        aria-hidden="true"
+                      >
+                        <ChevronIcon direction="right" size={8} />
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className="aos-list-card__delete"
+                      onClick={() => onDeleteList(list.id)}
+                    >
+                      Eliminar lista
+                    </button>
+                  </article>
+                );
+              })}
           </section>
         )}
       </div>
@@ -120,6 +136,14 @@ function MyLists({
       />
     </main>
   );
+}
+
+function getFactionArtwork(faction) {
+  if (typeof faction?.image === "string" && faction.image) {
+    return faction.image;
+  }
+
+  return factionArtwork[faction?.id] ?? null;
 }
 
 function formatSavedDate(value) {
