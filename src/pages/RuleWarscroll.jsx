@@ -1,4 +1,5 @@
 import Accordion from "../components/Accordion";
+import { getRuleArtwork } from "../utils/ruleReferences";
 import "../styles/aos-app.css";
 
 function RuleWarscroll({ reference, onBack }) {
@@ -11,7 +12,7 @@ function RuleWarscroll({ reference, onBack }) {
   const isManifestation = kind === "manifestation";
   const isTerrain = kind === "terrain";
   const profile = item.profile ?? {};
-  const artwork = getReferenceArtwork(item, kind);
+  const artwork = getRuleArtwork(item, kind);
   const primaryRule = isManifestation ? item.summonSpell : item;
   const ruleParts = splitRuleText(primaryRule?.description);
   const value = kind === "prayer"
@@ -165,7 +166,7 @@ function AbilityList({ abilities }) {
 
 function WeaponList({ weapons }) {
   return <div className="aos-rule-list">{weapons.map((weapon) => (
-    <article className="aos-reference-weapon" key={weapon.name}>
+    <article className="aos-reference-weapon" key={`${weapon.type}-${weapon.name}`}>
       <h3>{weapon.name}</h3>
       <div>{[["Attacks", weapon.attacks], ["Hit", weapon.hit], ["Wound", weapon.wound], ["Rend", weapon.rend], ["Damage", weapon.damage]].map(([label, value]) => <span key={label}><small>{label}</small><strong>{value ?? "-"}</strong></span>)}</div>
       {weapon.abilities?.length > 0 && <p>{weapon.abilities.join(" · ")}</p>}
@@ -186,21 +187,6 @@ function splitRuleText(description = "") {
 
 function getKindLabel(kind) {
   return { spell: "Hechizo", prayer: "Plegaria", manifestation: "Manifestación", terrain: "Escenografía de facción" }[kind] ?? "Regla";
-}
-
-function getReferenceArtwork(item, kind) {
-  if (kind !== "manifestation") {
-    return item.image;
-  }
-
-  return {
-    "dreadful-visage": "/images/manifestations/dreadful-visage.webp",
-    "mesmerising-mirror": "/images/manifestations/mesmerising-mirror.webp",
-    "wheels-of-excruciation": "/images/manifestations/wheels-of-excruciation.webp",
-    vermintide: "/images/manifestations/skaven-manifestations.webp",
-    "warp-lightning-vortex": "/images/manifestations/warp-lightning-vortex.webp",
-    "bell-of-doom": "/images/manifestations/skaven-manifestations.webp",
-  }[item.id] ?? item.image;
 }
 
 export default RuleWarscroll;

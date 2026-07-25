@@ -17,6 +17,11 @@ export function initializePwa() {
     return;
   }
 
+  if (import.meta.env.DEV) {
+    clearDevelopmentServiceWorkers();
+    return;
+  }
+
   window.addEventListener("load", async () => {
     try {
       const registration = await navigator.serviceWorker.register("/sw.js", {
@@ -50,7 +55,7 @@ export async function requestPwaInstall() {
   return result.outcome === "accepted";
 }
 
-export function activatePwaUpdate(registration) {
+function activatePwaUpdate(registration) {
   registration?.waiting?.postMessage({ type: "SKIP_WAITING" });
 }
 
@@ -65,7 +70,7 @@ export function isIosDevice() {
 
 function watchRegistration(registration) {
   if (registration.waiting && navigator.serviceWorker.controller) {
-    dispatchPwaEvent("storm-forge:update", registration);
+    activatePwaUpdate(registration);
   }
 
   registration.addEventListener("updatefound", () => {
@@ -73,10 +78,28 @@ function watchRegistration(registration) {
 
     worker?.addEventListener("statechange", () => {
       if (worker.state === "installed" && navigator.serviceWorker.controller) {
-        dispatchPwaEvent("storm-forge:update", registration);
+        activatePwaUpdate(registration);
       }
     });
   });
+}
+
+async function clearDevelopmentServiceWorkers() {
+  try {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(registrations.map((registration) => registration.unregister()));
+
+    if ("caches" in window) {
+      const cacheNames = await window.caches.keys();
+      await Promise.all(
+        cacheNames
+          .filter((name) => name.startsWith("storm-forge-"))
+          .map((name) => window.caches.delete(name))
+      );
+    }
+  } catch (error) {
+    console.warn("No se ha podido limpiar la caché PWA de desarrollo.", error);
+  }
 }
 
 function dispatchPwaEvent(name, detail) {

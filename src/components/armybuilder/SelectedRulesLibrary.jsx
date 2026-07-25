@@ -1,4 +1,5 @@
 import ChevronIcon from "../ChevronIcon";
+import { normalizeRuleItem } from "../../utils/ruleReferences";
 
 function SelectedRulesLibrary({ list, onViewRule }) {
   const groups = [
@@ -49,7 +50,7 @@ function SelectedRulesLibrary({ list, onViewRule }) {
 
           <div className="aos-selected-rules__grid">
             {group.items.map((rawItem) => {
-              const item = normalizeItem(rawItem);
+              const item = normalizeRuleItem(rawItem);
 
               return (
                 <button
@@ -84,38 +85,6 @@ function SelectedRulesLibrary({ list, onViewRule }) {
       ))}
     </section>
   );
-}
-
-function normalizeItem(item) {
-  if (typeof item !== "string") {
-    return {
-      ...item,
-      image: resolveManifestationImage(item.id, item.image),
-    };
-  }
-
-  return {
-    id: item,
-    name: item
-      .split("-")
-      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(" "),
-    image: resolveManifestationImage(item),
-    dataPending: true,
-  };
-}
-
-function resolveManifestationImage(id, image) {
-  const manifestationImages = {
-    "dreadful-visage": "/images/manifestations/dreadful-visage.webp",
-    "mesmerising-mirror": "/images/manifestations/mesmerising-mirror.webp",
-    "wheels-of-excruciation": "/images/manifestations/wheels-of-excruciation.webp",
-    vermintide: "/images/manifestations/skaven-manifestations.webp",
-    "warp-lightning-vortex": "/images/manifestations/warp-lightning-vortex.webp",
-    "bell-of-doom": "/images/manifestations/skaven-manifestations.webp",
-  };
-
-  return manifestationImages[id] ?? image;
 }
 
 function getKindLabel(kind) {

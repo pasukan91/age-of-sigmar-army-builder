@@ -1,12 +1,14 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v2";
+const CACHE_VERSION = "v3";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const CORE_FILES = ["/", "/index.html", "/offline.html", "/manifest.webmanifest", "/pwa-icon.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => cache.addAll(CORE_FILES))
+    caches.open(STATIC_CACHE)
+      .then((cache) => cache.addAll(CORE_FILES))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -43,6 +45,11 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirstPage(request));
+    return;
+  }
+
+  if (["script", "style", "worker"].includes(request.destination)) {
+    event.respondWith(networkFirstAsset(request));
     return;
   }
 
@@ -83,5 +90,20 @@ async function cacheFirstAsset(request) {
     return response;
   } catch {
     return Response.error();
+  }
+}
+
+async function networkFirstAsset(request) {
+  try {
+    const response = await fetch(request);
+
+    if (response.ok) {
+      const cache = await caches.open(RUNTIME_CACHE);
+      cache.put(request, response.clone());
+    }
+
+    return response;
+  } catch {
+    return (await caches.match(request)) || Response.error();
   }
 }

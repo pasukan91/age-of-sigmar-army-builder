@@ -56,6 +56,7 @@ const hedonites = {
   prayerLores: [],
 
   manifestations,
+  manifestationLoreName: "Manifestations of Depravity",
 
   terrain,
 

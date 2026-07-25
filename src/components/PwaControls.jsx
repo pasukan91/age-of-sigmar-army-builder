@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  activatePwaUpdate,
   isIosDevice,
   isStandalonePwa,
   requestPwaInstall,
@@ -8,7 +7,6 @@ import {
 
 function PwaControls() {
   const [installable, setInstallable] = useState(false);
-  const [updateRegistration, setUpdateRegistration] = useState(null);
   const [online, setOnline] = useState(() => navigator.onLine);
   const [showIosHelp, setShowIosHelp] = useState(false);
   const standalone = isStandalonePwa();
@@ -16,36 +14,27 @@ function PwaControls() {
 
   useEffect(() => {
     const handleInstallable = (event) => setInstallable(Boolean(event.detail));
-    const handleUpdate = (event) => setUpdateRegistration(event.detail);
     const handleOnline = () => setOnline(true);
     const handleOffline = () => setOnline(false);
 
     window.addEventListener("storm-forge:installable", handleInstallable);
-    window.addEventListener("storm-forge:update", handleUpdate);
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
     return () => {
       window.removeEventListener("storm-forge:installable", handleInstallable);
-      window.removeEventListener("storm-forge:update", handleUpdate);
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };
   }, []);
 
-  if (!installable && !updateRegistration && online && !showIosInstall) {
+  if (!installable && online && !showIosInstall) {
     return null;
   }
 
   return (
     <aside className="aos-pwa-controls" aria-live="polite">
       {!online && <span className="aos-pwa-controls__offline">Modo sin conexión</span>}
-
-      {updateRegistration && (
-        <button type="button" onClick={() => activatePwaUpdate(updateRegistration)}>
-          Actualizar app
-        </button>
-      )}
 
       {installable && (
         <button type="button" onClick={requestPwaInstall}>

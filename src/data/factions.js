@@ -3,6 +3,7 @@ import hedonites from "./hedonites";
 import skaven from "./skaven";
 import ogors from "./ogors";
 import sylvaneth from "./sylvaneth";
+import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
 
@@ -116,6 +117,6 @@ const factions = [
     alliance: "destruction",
     name: "Sons of Behemat",
   },
-];
+].map(normalizeFaction);
 
 export default factions;

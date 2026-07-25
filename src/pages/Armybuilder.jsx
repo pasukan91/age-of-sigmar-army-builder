@@ -55,21 +55,10 @@ function ArmyBuilder({
   const terrain =
     getArray(faction.terrain);
 
-  const manifestations =
-    getArray(faction.manifestations);
-
   const manifestationLores =
     getArray(
       faction.manifestationLores
     );
-
-  const manifestationOptions =
-    manifestationLores.length > 0
-      ? manifestationLores
-      : createManifestationOptions({
-          faction,
-          manifestations,
-        });
 
   const currentPoints =
     calculateArmyPoints(list);
@@ -212,7 +201,7 @@ function ArmyBuilder({
           />
         )}
 
-        {manifestationOptions.length > 0 && (
+        {manifestationLores.length > 0 && (
         <BuilderOption
           title="Saber de manifestaciones"
           value={
@@ -227,7 +216,7 @@ function ArmyBuilder({
               property:
                 "manifestationLore",
               options:
-                manifestationOptions,
+                manifestationLores,
             })
           }
         />
@@ -401,41 +390,6 @@ function getArray(value) {
   return Array.isArray(value)
     ? value
     : [];
-}
-
-function createManifestationOptions({
-  faction,
-  manifestations,
-}) {
-  if (manifestations.length === 0) {
-    return [];
-  }
-
-  return [
-    {
-      id:
-        `${faction.id}-` +
-        "manifestation-lore",
-
-      name:
-        faction.id === "hedonites"
-          ? "Manifestations of Depravity"
-          : "Manifestation Lore",
-
-      points: 0,
-
-      description:
-        "Esta manifestación incluye:\n\n" +
-        manifestations
-          .map(
-            (item) =>
-              `• ${item.name}`
-          )
-          .join("\n"),
-
-      manifestations,
-    },
-  ];
 }
 
 export default ArmyBuilder;

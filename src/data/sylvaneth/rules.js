@@ -48,10 +48,11 @@ export const monsterTraits = [
 export const spellLores = [{
   id: "lore-of-the-deepwood",
   name: "Lore of the Deepwood",
+  description: "Hechizos de los Sylvaneth para fortalecer a sus aliados y controlar el movimiento enemigo.",
   spells: [
-    { id: "jade-thorns", name: "Jade Thorns", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Pick a visible friendly unit wholly within 12\". Add 1 to wound rolls for its combat attacks, including Companion attacks, for the rest of the turn." },
-    { id: "zephyrspite-rush", name: "Zephyrspite Rush", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Pick a visible friendly unit wholly within 12\". It can use Charge abilities this turn even if it used a Run ability." },
-    { id: "grasping-roots", name: "Grasping Roots", castingValue: 5, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Pick a visible enemy within 18\". It cannot use Run abilities and subtract 1 from its charge rolls until your next turn." },
+    { id: "jade-thorns", name: "Jade Thorns", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Declare: Pick a friendly SYLVANETH WIZARD to cast this spell, pick a visible friendly unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.\n\nEffect: Add 1 to wound rolls for the target's combat attacks, including Companion attacks, for the rest of the turn." },
+    { id: "zephyrspite-rush", name: "Zephyrspite Rush", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Declare: Pick a friendly SYLVANETH WIZARD to cast this spell, pick a visible friendly unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.\n\nEffect: The target can use Charge abilities this turn even if it used a Run ability." },
+    { id: "grasping-roots", name: "Grasping Roots", castingValue: 5, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Declare: Pick a friendly SYLVANETH WIZARD to cast this spell, pick a visible enemy unit within 18\" of them to be the target, then make a casting roll of 2D6.\n\nEffect: The target cannot use Run abilities and subtract 1 from its charge rolls until your next turn." },
   ],
 }];
 
