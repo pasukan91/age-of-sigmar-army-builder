@@ -25,7 +25,14 @@ const unitImages = {
 
 const withAvailableImage = (unit) => {
   if (unit.id === "kragnos-the-end-of-empires") {
-    return { ...unit, image: "/images/units/kruleboyz/kragnos.jpg" };
+    return {
+      ...unit,
+      image: "/images/units/kruleboyz/kragnos.jpg",
+      details: {
+        ...unit.details,
+        regimentOptions: ["0-1 Headstompa", "0-1 Tusk Wrangler", "Any Ironjawz"],
+      },
+    };
   }
 
   return unitImages[unit.id]

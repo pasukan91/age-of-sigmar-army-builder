@@ -26,9 +26,21 @@ const unitImages = {
   "killaboss-with-stab-grot-scourge-of-aqshy": "killaboss-aqshy.jpg",
 };
 
-const withAvailableImage = (unit) => unitImages[unit.id]
-  ? { ...unit, image: `/images/units/kruleboyz/${unitImages[unit.id]}` }
-  : unit;
+const withAvailableImage = (unit) => {
+  const factionUnit = unit.id === "kragnos-the-end-of-empires"
+    ? {
+      ...unit,
+      details: {
+        ...unit.details,
+        regimentOptions: ["0-1 Mob Wrangler", "0-1 Swamp Beast", "Any Kruleboyz"],
+      },
+    }
+    : unit;
+
+  return unitImages[unit.id]
+    ? { ...factionUnit, image: `/images/units/kruleboyz/${unitImages[unit.id]}` }
+    : factionUnit;
+};
 
 const manifestationImages = {
   "foot-of-gork": "foot-of-gork.jpg",
