@@ -61,6 +61,10 @@ function serializeUnit(unit) {
       unit.moulderMutation ?? null,
     specialKnickKnack:
       unit.specialKnickKnack ?? null,
+    decorationForValour:
+      unit.decorationForValour ?? null,
+    ironweldInnovation:
+      unit.ironweldInnovation ?? null,
   };
 }
 
@@ -112,6 +116,14 @@ function restoreUnit(savedUnit, faction) {
     specialKnickKnack: restoreOption(
       savedUnit.specialKnickKnack,
       faction?.specialKnickKnacks
+    ),
+    decorationForValour: restoreOption(
+      savedUnit.decorationForValour,
+      faction?.decorationsForValour
+    ),
+    ironweldInnovation: restoreOption(
+      savedUnit.ironweldInnovation,
+      faction?.ironweldInnovations
     ),
   };
 }

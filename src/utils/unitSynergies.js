@@ -30,6 +30,8 @@ const UNIT_ENHANCEMENTS = [
   ["allConsumingObsession", "Obsesión devoradora"],
   ["moulderMutation", "Mutación Moulder"],
   ["specialKnickKnack", "Special Knick-Knack"],
+  ["decorationForValour", "Decoration for Valour"],
+  ["ironweldInnovation", "Ironweld Innovation"],
 ];
 
 function normalize(value) {

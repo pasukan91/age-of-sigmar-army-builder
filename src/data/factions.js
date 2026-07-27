@@ -4,6 +4,7 @@ import skaven from "./skaven";
 import ogors from "./ogors";
 import sylvaneth from "./sylvaneth";
 import gloomspite from "./gloomspite";
+import cities from "./cities";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -16,6 +17,7 @@ const factions = [
   ogors,
   sylvaneth,
   gloomspite,
+  cities,
 
   // ORDEN
   {
@@ -27,11 +29,6 @@ const factions = [
     id: "idoneth",
     alliance: "order",
     name: "Idoneth Deepkin",
-  },
-  {
-    id: "cities",
-    alliance: "order",
-    name: "Cities of Sigmar",
   },
   {
     id: "lumineth",

@@ -61,6 +61,7 @@ export function createOrrukUnit({
   notes = null,
   rules = {},
   imageAlias = null,
+  image = null,
 }) {
   const unitRules = {
     hero: false,
@@ -78,7 +79,7 @@ export function createOrrukUnit({
   return {
     id,
     name,
-    image: `/images/units/${faction}/${imageAlias ?? id}.webp`,
+    image: image ?? `/images/units/${faction}/${imageAlias ?? id}.webp`,
     ...(imageAlias ? { imageAlias } : {}),
     points,
     profile: { move, health, control, save, ward },
@@ -87,6 +88,8 @@ export function createOrrukUnit({
     heroicTrait: null,
     monstrousTrait: null,
     artefact: null,
+    decorationForValour: null,
+    ironweldInnovation: null,
     specialKnickKnack: null,
     details: {
       models,

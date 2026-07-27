@@ -39,6 +39,13 @@ function normalizeOption(value) {
     "any mawseekers": "any-mawseekers",
     "any gnoblars": "any-gnoblars",
     "any gorger mawpack": "any-gorger-mawpack",
+    "any sigmarite": "any-sigmarite",
+    "any sigmarite infantry": "any-sigmarite-infantry",
+    "any allies of the free cities": "any-allies-of-the-free-cities",
+    "sigmarite war machine": "sigmarite-war-machine",
+    "freeguild veteran": "freeguild-veteran",
+    "ironweld great cannon": "ironweld-great-cannon",
+    "toll's companions": "tolls-companions",
     "skaven overclaw": "skaven-overclaw",
     "slaaneshi beguiler": "slaaneshi-beguiler",
     "dark egotist": "dark-egotist",
@@ -238,13 +245,21 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Gnoblars");
     case "any-gorger-mawpack":
       return unit.id === "gorger-mawpack";
+    case "any-sigmarite":
+      return hasKeyword(unit, "Sigmarite");
+    case "any-sigmarite-infantry":
+      return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "Infantry");
+    case "any-allies-of-the-free-cities":
+      return hasKeyword(unit, "Allies of the Free Cities");
+    case "sigmarite-war-machine":
+      return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "War Machine");
     default:
       return false;
   }
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran"].includes(option)
     ? 1
     : null;
 }
@@ -253,6 +268,15 @@ function countRole(regiment, role) {
   return (regiment?.units ?? []).filter((unit) =>
     (unit?.details?.canJoinRegimentAs ?? []).includes(role)
   ).length;
+}
+
+const FREE_COMMAND_CORPS_UNITS = new Set([
+  "freeguild-command-auxiliaries",
+  "freeguild-command-corps-whisperblade",
+]);
+
+export function countsTowardRegimentLimit(unit) {
+  return !FREE_COMMAND_CORPS_UNITS.has(unit?.id);
 }
 
 export function isUnitUniqueInArmy(list, unit, ignoredInstanceId = null) {
@@ -275,6 +299,15 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   }
 
   if (!isAllowedByArmyOfRenown(list, unit)) {
+    return false;
+  }
+
+  if (
+    FREE_COMMAND_CORPS_UNITS.has(unit.id) &&
+    !(regiment.units ?? []).some(
+      (regimentUnit) => regimentUnit.id === "freeguild-command-adjutants"
+    )
+  ) {
     return false;
   }
 

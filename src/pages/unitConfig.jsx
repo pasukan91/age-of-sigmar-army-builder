@@ -37,6 +37,12 @@ function UnitConfig({
   const [specialKnickKnack, setSpecialKnickKnack] =
     useState(unit?.specialKnickKnack ?? null);
 
+  const [decorationForValour, setDecorationForValour] =
+    useState(unit?.decorationForValour ?? null);
+
+  const [ironweldInnovation, setIronweldInnovation] =
+    useState(unit?.ironweldInnovation ?? null);
+
   if (!unit) {
     return (
       <main className="aos-shell">
@@ -92,6 +98,13 @@ function UnitConfig({
   const isWarMachine =
     keywords.includes("war machine");
 
+  const isChampion =
+    keywords.includes("champion") ||
+    keywords.some((keyword) => keyword.startsWith("champion ("));
+
+  const isCogfort =
+    ["cannonade-cogfort", "conqueror-cogfort"].includes(unit.id);
+
   const isHedonitesFaction =
     faction?.id === "hedonites" ||
     faction?.name === "Hedonites of Slaanesh" ||
@@ -103,10 +116,10 @@ function UnitConfig({
     unit.rules?.canBeReinforced !== false;
 
   const canSelectArtefact =
-    isHero && !isUnique;
+    isHero && !isUnique && !isCogfort;
 
   const canSelectHeroicTrait =
-    isHero && !isUnique;
+    isHero && !isUnique && !isCogfort;
 
   const rawMonstrousTraitOptions =
     faction?.monsterTraits ?? [];
@@ -139,6 +152,15 @@ function UnitConfig({
     !isHero &&
     (faction?.specialKnickKnacks?.length ?? 0) > 0;
 
+  const canSelectDecorationForValour =
+    !isHero &&
+    isChampion &&
+    (faction?.decorationsForValour?.length ?? 0) > 0;
+
+  const canSelectIronweldInnovation =
+    isCogfort &&
+    (faction?.ironweldInnovations?.length ?? 0) > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -166,6 +188,12 @@ function UnitConfig({
   const specialKnickKnackOptions =
     faction?.specialKnickKnacks ?? [];
 
+  const decorationForValourOptions =
+    faction?.decorationsForValour ?? [];
+
+  const ironweldInnovationOptions =
+    faction?.ironweldInnovations ?? [];
+
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
   const monstrousTraitOwner = enhancementOwners.monstrousTrait?.unit ?? null;
@@ -184,7 +212,9 @@ function UnitConfig({
     Number(monstrousTrait?.points ?? 0) +
     Number(allConsumingObsession?.points ?? 0) +
     Number(moulderMutation?.points ?? 0) +
-    Number(specialKnickKnack?.points ?? 0);
+    Number(specialKnickKnack?.points ?? 0) +
+    Number(decorationForValour?.points ?? 0) +
+    Number(ironweldInnovation?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -231,6 +261,16 @@ function UnitConfig({
       specialKnickKnack:
         canSelectSpecialKnickKnack
           ? specialKnickKnack
+          : null,
+
+      decorationForValour:
+        canSelectDecorationForValour
+          ? decorationForValour
+          : null,
+
+      ironweldInnovation:
+        canSelectIronweldInnovation
+          ? ironweldInnovation
           : null,
     });
   }
@@ -345,7 +385,8 @@ function UnitConfig({
       {(canBeReinforced ||
         canSelectAllConsumingObsession ||
         canSelectMoulderMutation ||
-        canSelectSpecialKnickKnack) && (
+        canSelectSpecialKnickKnack ||
+        canSelectDecorationForValour) && (
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>
             Tamaño y mejoras de unidad
@@ -490,7 +531,46 @@ function UnitConfig({
               ))}
             </div>
           )}
+
+          {canSelectDecorationForValour && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Decorations for Valour
+                </h3>
+                <span style={{ ...styles.sourceBadge, ...styles.aqshySourceBadge, marginTop: 0 }}>
+                  Aqshy
+                </span>
+              </div>
+              <p style={styles.sectionIntro}>
+                Asigna una condecoración al campeón de esta unidad. Cada condecoración solo puede elegirse una vez por ejército.
+              </p>
+              {decorationForValourOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={decorationForValour?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(setDecorationForValour, option)
+                  }
+                />
+              ))}
+            </div>
+          )}
         </section>
+      )}
+
+      {canSelectIronweldInnovation && (
+        <SelectionSection
+          title="Ironweld Innovation"
+          options={ironweldInnovationOptions}
+          selected={ironweldInnovation}
+          onToggle={(option) =>
+            toggleExclusiveOption(setIronweldInnovation, option)
+          }
+        />
       )}
 
       {canSelectArtefact && (

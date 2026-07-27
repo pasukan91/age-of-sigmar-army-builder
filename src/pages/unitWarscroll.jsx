@@ -269,6 +269,20 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.decorationForValour && (
+          <EnhancementAccordion
+            title="Decoration for Valour"
+            enhancement={unit.decorationForValour}
+          />
+        )}
+
+        {unit.ironweldInnovation && (
+          <EnhancementAccordion
+            title="Ironweld Innovation"
+            enhancement={unit.ironweldInnovation}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" && (
           <button
@@ -526,6 +540,8 @@ function getDisplayedPoints(unit) {
     unit?.allConsumingObsession,
     unit?.moulderMutation,
     unit?.specialKnickKnack,
+    unit?.decorationForValour,
+    unit?.ironweldInnovation,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

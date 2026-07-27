@@ -1,4 +1,5 @@
 import {
+  countsTowardRegimentLimit,
   getAvailableRegimentLeaders,
   getAvailableUnitsForRegiment,
 } from "../../utils/regimentRules";
@@ -38,6 +39,8 @@ function RegimentSection({
       unit?.allConsumingObsession,
       unit?.moulderMutation,
       unit?.specialKnickKnack,
+      unit?.decorationForValour,
+      unit?.ironweldInnovation,
     ].reduce(
       (total, enhancement) =>
         total + (Number(enhancement?.points) || 0),
@@ -162,18 +165,33 @@ function RegimentSection({
 
           const availableSlots =
             Math.max(
-              limit - units.length,
+              limit - units.filter(countsTowardRegimentLimit).length,
               0
             );
 
           const full =
-            units.length >= limit;
+            units.filter(countsTowardRegimentLimit).length >= limit;
 
           const selectableUnits =
             getAvailableUnitsForRegiment(
               list,
               regiment
             );
+
+          const canAddFreeCommandCorpsUnit =
+            selectableUnits.some(
+              (unit) => !countsTowardRegimentLimit(unit)
+            );
+
+          const offeredUnits = full
+            ? selectableUnits.filter(
+                (unit) => !countsTowardRegimentLimit(unit)
+              )
+            : selectableUnits;
+
+          const addUnitsDisabled =
+            (full && !canAddFreeCommandCorpsUnit) ||
+            offeredUnits.length === 0;
 
           return (
             <article
@@ -231,7 +249,7 @@ function RegimentSection({
               <div style={styles.slotsRow}>
                 <span>
                   Unidades:{" "}
-                  {units.length}/{limit}
+                  {units.filter(countsTowardRegimentLimit).length}/{limit}
                 </span>
 
                 <span>
@@ -370,9 +388,7 @@ function RegimentSection({
               <button
                 type="button"
                 disabled={
-                  full ||
-                  selectableUnits.length ===
-                    0
+                  addUnitsDisabled
                 }
                 onClick={() => {
                   setSelector({
@@ -387,7 +403,7 @@ function RegimentSection({
                       regiment.id,
 
                     options:
-                      selectableUnits,
+                      offeredUnits,
                   });
 
                   setPage("selector");
@@ -396,21 +412,17 @@ function RegimentSection({
                   ...styles.addUnitButton,
 
                   opacity:
-                    full ||
-                    selectableUnits.length ===
-                      0
+                    addUnitsDisabled
                       ? 0.5
                       : 1,
 
                   cursor:
-                    full ||
-                    selectableUnits.length ===
-                      0
+                    addUnitsDisabled
                       ? "not-allowed"
                       : "pointer",
                 }}
               >
-                {full
+                {full && !canAddFreeCommandCorpsUnit
                   ? "Regimiento completo"
                   : "+ Añadir unidad"}
               </button>
@@ -482,6 +494,8 @@ function UnitCard({
     ["Obsesión", unit.allConsumingObsession],
     ["Mutación Moulder", unit.moulderMutation],
     ["Special Knick-Knack", unit.specialKnickKnack],
+    ["Decoration for Valour", unit.decorationForValour],
+    ["Ironweld Innovation", unit.ironweldInnovation],
   ].filter(([, enhancement]) => Boolean(enhancement));
 
   return (

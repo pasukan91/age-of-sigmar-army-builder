@@ -15,7 +15,9 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.artefact) +
     getNumericPoints(unit.allConsumingObsession) +
     getNumericPoints(unit.moulderMutation) +
-    getNumericPoints(unit.specialKnickKnack)
+    getNumericPoints(unit.specialKnickKnack) +
+    getNumericPoints(unit.decorationForValour) +
+    getNumericPoints(unit.ironweldInnovation)
   );
 }
 

@@ -18,6 +18,7 @@ import {
 } from "./utils/armyPoints";
 import {
   canUnitJoinRegiment,
+  countsTowardRegimentLimit,
   isUnitUniqueInArmy,
 } from "./utils/regimentRules";
 import {
@@ -868,6 +869,38 @@ function App() {
       }
     }
 
+    if (configuredUnit.decorationForValour) {
+      const owner = findEnhancementOwner(
+        "decorationForValour",
+        configuredUnit.decorationForValour.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Decoration for Valour",
+          selected: configuredUnit.decorationForValour.name,
+          owner: owner.unit.name,
+          existing: owner.unit.decorationForValour?.name,
+        });
+      }
+    }
+
+    if (configuredUnit.ironweldInnovation) {
+      const owner = findEnhancementOwner(
+        "ironweldInnovation",
+        configuredUnit.ironweldInnovation.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Ironweld Innovation",
+          selected: configuredUnit.ironweldInnovation.name,
+          owner: owner.unit.name,
+          existing: owner.unit.ironweldInnovation?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1107,8 +1140,9 @@ function App() {
         : 3;
 
     if (
-      unitsInRegiment.length >=
-      regimentLimit
+      unitsInRegiment.filter(countsTowardRegimentLimit).length >=
+      regimentLimit &&
+      countsTowardRegimentLimit(configuredUnit)
     ) {
       window.alert(
         `Este regimiento ya contiene el máximo de ${regimentLimit} unidades.`
@@ -1361,7 +1395,11 @@ function App() {
 
     const regimentLimit = regimentIndex === 0 ? 4 : 3;
 
-    if ((regiment.units ?? []).length >= regimentLimit) {
+    if (
+      (regiment.units ?? []).filter(countsTowardRegimentLimit).length >=
+      regimentLimit &&
+      countsTowardRegimentLimit(sourceUnit)
+    ) {
       window.alert(
         `Este regimiento ya contiene el máximo de ${regimentLimit} unidades.`
       );
@@ -1397,6 +1435,8 @@ function App() {
       allConsumingObsession: null,
       moulderMutation: null,
       specialKnickKnack: null,
+      decorationForValour: null,
+      ironweldInnovation: null,
     };
 
     saveUpdatedList({
