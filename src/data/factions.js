@@ -5,6 +5,7 @@ import ogors from "./ogors";
 import sylvaneth from "./sylvaneth";
 import gloomspite from "./gloomspite";
 import cities from "./cities";
+import tzeentch from "./tzeentch";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -18,6 +19,7 @@ const factions = [
   sylvaneth,
   gloomspite,
   cities,
+  tzeentch,
 
   // ORDEN
   {
@@ -83,11 +85,6 @@ const factions = [
     id: "hashut",
     alliance: "chaos",
     name: "Helsmiths of Hashut",
-  },
-  {
-    id: "tzeentch",
-    alliance: "chaos",
-    name: "Disciples of Tzeentch",
   },
   {
     id: "nurgle",

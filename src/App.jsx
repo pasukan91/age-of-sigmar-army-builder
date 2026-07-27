@@ -853,6 +853,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.visionOfFate) {
+      const owner = findEnhancementOwner(
+        "visionOfFate",
+        configuredUnit.visionOfFate.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Visión de destino",
+          selected: configuredUnit.visionOfFate.name,
+          owner: owner.unit.name,
+          existing: owner.unit.visionOfFate?.name,
+        });
+      }
+    }
+
     if (configuredUnit.specialKnickKnack) {
       const owner = findEnhancementOwner(
         "specialKnickKnack",
@@ -1434,6 +1450,7 @@ function App() {
       monstrousTrait: null,
       allConsumingObsession: null,
       moulderMutation: null,
+      visionOfFate: null,
       specialKnickKnack: null,
       decorationForValour: null,
       ironweldInnovation: null,

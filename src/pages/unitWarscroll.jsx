@@ -262,6 +262,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.visionOfFate && (
+          <EnhancementAccordion
+            title="Visión de destino"
+            enhancement={unit.visionOfFate}
+          />
+        )}
+
         {unit.specialKnickKnack && (
           <EnhancementAccordion
             title="Special Knick-Knack"
@@ -539,6 +546,7 @@ function getDisplayedPoints(unit) {
     unit?.artefact,
     unit?.allConsumingObsession,
     unit?.moulderMutation,
+    unit?.visionOfFate,
     unit?.specialKnickKnack,
     unit?.decorationForValour,
     unit?.ironweldInnovation,

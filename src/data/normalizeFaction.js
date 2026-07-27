@@ -18,6 +18,7 @@ const ARRAY_FIELDS = [
   "specialKnickKnacks",
   "decorationsForValour",
   "ironweldInnovations",
+  "visionsOfFate",
 ];
 
 export function normalizeFaction(faction) {

@@ -34,6 +34,9 @@ function UnitConfig({
   const [moulderMutation, setMoulderMutation] =
     useState(unit?.moulderMutation ?? null);
 
+  const [visionOfFate, setVisionOfFate] =
+    useState(unit?.visionOfFate ?? null);
+
   const [specialKnickKnack, setSpecialKnickKnack] =
     useState(unit?.specialKnickKnack ?? null);
 
@@ -148,6 +151,11 @@ function UnitConfig({
     keywords.includes("skaven") &&
     (faction?.moulderMutations?.length ?? 0) > 0;
 
+  const canSelectVisionOfFate =
+    !isHero &&
+    !keywords.includes("beast") &&
+    (faction?.visionsOfFate?.length ?? 0) > 0;
+
   const canSelectSpecialKnickKnack =
     !isHero &&
     (faction?.specialKnickKnacks?.length ?? 0) > 0;
@@ -185,6 +193,9 @@ function UnitConfig({
   const moulderMutationOptions =
     faction?.moulderMutations ?? [];
 
+  const visionOfFateOptions =
+    faction?.visionsOfFate ?? [];
+
   const specialKnickKnackOptions =
     faction?.specialKnickKnacks ?? [];
 
@@ -212,6 +223,7 @@ function UnitConfig({
     Number(monstrousTrait?.points ?? 0) +
     Number(allConsumingObsession?.points ?? 0) +
     Number(moulderMutation?.points ?? 0) +
+    Number(visionOfFate?.points ?? 0) +
     Number(specialKnickKnack?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
     Number(ironweldInnovation?.points ?? 0);
@@ -256,6 +268,11 @@ function UnitConfig({
       moulderMutation:
         canSelectMoulderMutation
           ? moulderMutation
+          : null,
+
+      visionOfFate:
+        canSelectVisionOfFate
+          ? visionOfFate
           : null,
 
       specialKnickKnack:
@@ -385,6 +402,7 @@ function UnitConfig({
       {(canBeReinforced ||
         canSelectAllConsumingObsession ||
         canSelectMoulderMutation ||
+        canSelectVisionOfFate ||
         canSelectSpecialKnickKnack ||
         canSelectDecorationForValour) && (
         <section style={styles.section}>
@@ -484,6 +502,46 @@ function UnitConfig({
                   onChange={() =>
                     toggleExclusiveOption(
                       setMoulderMutation,
+                      option
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
+
+          {canSelectVisionOfFate && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Visiones de destino
+                </h3>
+                <span
+                  style={{
+                    ...styles.sourceBadge,
+                    ...styles.aqshySourceBadge,
+                    marginTop: 0,
+                  }}
+                >
+                  Aqshy
+                </span>
+              </div>
+
+              <p style={styles.sectionIntro}>
+                Asigna una visión a esta unidad no Hero y no Beast.
+                Cada visión solo puede elegirse una vez por ejército.
+              </p>
+
+              {visionOfFateOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={visionOfFate?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(
+                      setVisionOfFate,
                       option
                     )
                   }

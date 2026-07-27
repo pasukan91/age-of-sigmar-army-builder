@@ -3,6 +3,7 @@ import skavenRegiments from "./skaven/regimentsOfRenown";
 import orrukRegiments from "./orrukWarclans/regimentsOfRenown";
 import gloomspiteRegiments from "./gloomspite/regimentsOfRenown";
 import citiesRegiments from "./cities/regimentsOfRenown";
+import tzeentchRegiments from "./tzeentch/regimentsOfRenown";
 
 const regimentsOfRenown = [
   ...hedonitesRegiments,
@@ -10,6 +11,7 @@ const regimentsOfRenown = [
   ...orrukRegiments,
   ...gloomspiteRegiments,
   ...citiesRegiments,
+  ...tzeentchRegiments,
 ];
 
 export function getEligibleRegimentsOfRenown(factionId) {
