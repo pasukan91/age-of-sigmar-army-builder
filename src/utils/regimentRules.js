@@ -145,6 +145,55 @@ function isAllowedByArmyOfRenown(list, unit) {
     return unit.id === "kairos-fateweaver" || hasKeyword(unit, "Daemon");
   }
 
+  if (armyId === "the-iron-march") {
+    if ([
+      "cannonade-cogfort",
+      "immolator-cogfort",
+      "conqueror-cogfort",
+      "linebreaker-cogfort",
+    ].includes(unit.id)) {
+      return true;
+    }
+
+    const escortSlots = getAllArmyUnits(list).filter((armyUnit) =>
+      ["conqueror-cogfort", "linebreaker-cogfort"].includes(armyUnit.id)
+    ).length;
+
+    if (unit.id === "mallus-forgepriest") {
+      return countUnitInArmy(list, unit.id) < escortSlots;
+    }
+
+    if (unit.id === "freeguild-gallants") {
+      return countUnitInArmy(list, unit.id) < escortSlots;
+    }
+
+    return false;
+  }
+
+  if (armyId === "allies-of-the-free-cities") {
+    if (hasKeyword(unit, "Sigmarite")) {
+      return unit.rules?.unique !== true;
+    }
+
+    if (
+      hasKeyword(unit, "Allies of the Free Cities") &&
+      (hasKeyword(unit, "Aelf") || hasKeyword(unit, "Duardin"))
+    ) {
+      const armyUnits = getAllArmyUnits(list);
+      const sigmariteCount = armyUnits.filter((armyUnit) =>
+        hasKeyword(armyUnit, "Sigmarite")
+      ).length;
+      const alliedCount = armyUnits.filter((armyUnit) =>
+        hasKeyword(armyUnit, "Allies of the Free Cities") &&
+        (hasKeyword(armyUnit, "Aelf") || hasKeyword(armyUnit, "Duardin"))
+      ).length;
+
+      return alliedCount < sigmariteCount;
+    }
+
+    return false;
+  }
+
   if (armyId === "big-waaagh") {
     return hasKeyword(unit, "Ironjawz") || hasKeyword(unit, "Kruleboyz");
   }

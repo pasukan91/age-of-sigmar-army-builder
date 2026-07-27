@@ -2,6 +2,7 @@ import units from "./units";
 import scourgeUnits from "./scourgeOfAqshy";
 import manifestations from "./manifestations";
 import terrain from "./terrain";
+import armiesOfRenown from "./armiesOfRenown";
 import {
   aqshyArtefacts,
   artefacts,
@@ -76,7 +77,7 @@ const sylvaneth = {
   manifestationLores: completeManifestationLores,
   terrain,
   units: [...units, ...scourgeUnits].map(withImage),
-  armiesOfRenown: [],
+  armiesOfRenown,
   regimentsOfRenown: [],
 };
 

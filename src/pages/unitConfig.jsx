@@ -106,7 +106,12 @@ function UnitConfig({
     keywords.some((keyword) => keyword.startsWith("champion ("));
 
   const isCogfort =
-    ["cannonade-cogfort", "conqueror-cogfort"].includes(unit.id);
+    [
+      "cannonade-cogfort",
+      "conqueror-cogfort",
+      "immolator-cogfort",
+      "linebreaker-cogfort",
+    ].includes(unit.id);
 
   const isHedonitesFaction =
     faction?.id === "hedonites" ||
@@ -119,10 +124,14 @@ function UnitConfig({
     unit.rules?.canBeReinforced !== false;
 
   const canSelectArtefact =
-    isHero && !isUnique && !isCogfort;
+    isHero &&
+    !isUnique &&
+    (!isCogfort || faction?.allowCogfortHeroEnhancements === true);
 
   const canSelectHeroicTrait =
-    isHero && !isUnique && !isCogfort;
+    isHero &&
+    !isUnique &&
+    (!isCogfort || faction?.allowCogfortHeroEnhancements === true);
 
   const rawMonstrousTraitOptions =
     faction?.monsterTraits ?? [];
@@ -628,7 +637,7 @@ function UnitConfig({
 
       {canSelectIronweldInnovation && (
         <SelectionSection
-          title="Ironweld Innovation"
+          title={faction?.ironweldInnovationLabel ?? "Ironweld Innovation"}
           options={ironweldInnovationOptions}
           selected={ironweldInnovation}
           onToggle={(option) =>
@@ -639,7 +648,7 @@ function UnitConfig({
 
       {canSelectArtefact && (
         <SelectionSection
-          title="Artefacto de poder"
+          title={faction?.artefactLabel ?? "Artefacto de poder"}
           options={artefactOptions}
           selected={artefact}
           disabled={Boolean(artefactOwner)}
@@ -660,7 +669,7 @@ function UnitConfig({
       {canSelectHeroicTrait &&
         standardHeroicTraitOptions.length > 0 && (
         <SelectionSection
-          title="Rasgo heroico"
+          title={faction?.heroicTraitLabel ?? "Rasgo heroico"}
           options={standardHeroicTraitOptions}
           selected={heroicTrait}
           disabled={Boolean(heroicTraitOwner)}

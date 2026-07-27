@@ -1,5 +1,6 @@
 import units from "./units";
 import scourgeUnits from "./scourgeOfAqshy";
+import armiesOfRenown from "./armiesOfRenown";
 import regimentsOfRenown from "./regimentsOfRenown";
 import {
   artefacts,
@@ -32,7 +33,7 @@ const cities = {
   manifestationLores: [],
   terrain,
   units: [...units, ...scourgeUnits],
-  armiesOfRenown: [],
+  armiesOfRenown,
   regimentsOfRenown,
 };
 
