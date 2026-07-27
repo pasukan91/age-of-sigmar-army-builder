@@ -3,7 +3,7 @@ function normalize(value) {
 }
 
 function normalizeOption(value) {
-  const option = normalize(value).replace(/^0-1\s+/, "");
+  const option = normalize(value).replace(/^0-1(?:\s+|-)/, "");
   const aliases = {
     "any faction unit": "any-faction-unit",
     "any kruleboyz": "any-kruleboyz",
@@ -18,6 +18,8 @@ function normalizeOption(value) {
     "any hedonites of slaanesh": "any-hedonites",
     "any sybarite": "any-sybarite",
     "any daemon": "any-daemon",
+    "any arcanite": "any-arcanite",
+    "any disciples of tzeentch": "any-disciples-of-tzeentch",
     "any skaven": "any-skaven",
     "any skryre": "any-skryre",
     "any verminus": "any-verminus",
@@ -135,6 +137,14 @@ function isAllowedByArmyOfRenown(list, unit) {
     ].includes(unit.id);
   }
 
+  if (armyId === "change-cult-uprising") {
+    return hasKeyword(unit, "Arcanite") && !hasKeyword(unit, "Warflock");
+  }
+
+  if (armyId === "the-oracles-of-fate") {
+    return unit.id === "kairos-fateweaver" || hasKeyword(unit, "Daemon");
+  }
+
   if (armyId === "big-waaagh") {
     return hasKeyword(unit, "Ironjawz") || hasKeyword(unit, "Kruleboyz");
   }
@@ -193,6 +203,10 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Sybarite");
     case "any-daemon":
       return hasKeyword(unit, "Daemon");
+    case "any-arcanite":
+      return hasKeyword(unit, "Arcanite");
+    case "any-disciples-of-tzeentch":
+      return hasKeyword(unit, "Disciples of Tzeentch");
     case "any-war-machine":
       return hasKeyword(unit, "War Machine");
     case "any-kruleboyz":
@@ -259,7 +273,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist"].includes(option)
     ? 1
     : null;
 }
@@ -358,14 +372,22 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
 }
 
 export function getAvailableUnitsForRegiment(list, regiment) {
-  const units = list?.armyOfRenown?.rules?.units ?? list?.faction?.units ?? [];
+  const armyUnits = list?.armyOfRenown?.rules?.units;
+  const units = Array.isArray(armyUnits) && armyUnits.length > 0
+    ? armyUnits
+    : list?.faction?.units ?? [];
+
   return units.filter((unit) =>
     canUnitJoinRegiment({ list, regiment, unit })
   );
 }
 
 export function getAvailableRegimentLeaders(list) {
-  const units = list?.armyOfRenown?.rules?.units ?? list?.faction?.units ?? [];
+  const armyUnits = list?.armyOfRenown?.rules?.units;
+  const units = Array.isArray(armyUnits) && armyUnits.length > 0
+    ? armyUnits
+    : list?.faction?.units ?? [];
+
   return units.filter(
     (unit) =>
       unit.rules?.hero === true &&

@@ -140,32 +140,38 @@ function UnitConfig({
     monstrousTraitOptions.length > 0;
 
   const canSelectAllConsumingObsession =
+    !isUnique &&
     !isHero &&
     (keywords.includes("infantry") ||
       keywords.includes("cavalry")) &&
     (faction?.allConsumingObsessions?.length ?? 0) > 0;
 
   const canSelectMoulderMutation =
+    !isUnique &&
     !isHero &&
     !isWarMachine &&
     keywords.includes("skaven") &&
     (faction?.moulderMutations?.length ?? 0) > 0;
 
   const canSelectVisionOfFate =
+    !isUnique &&
     !isHero &&
     !keywords.includes("beast") &&
     (faction?.visionsOfFate?.length ?? 0) > 0;
 
   const canSelectSpecialKnickKnack =
+    !isUnique &&
     !isHero &&
     (faction?.specialKnickKnacks?.length ?? 0) > 0;
 
   const canSelectDecorationForValour =
+    !isUnique &&
     !isHero &&
     isChampion &&
     (faction?.decorationsForValour?.length ?? 0) > 0;
 
   const canSelectIronweldInnovation =
+    !isUnique &&
     isCogfort &&
     (faction?.ironweldInnovations?.length ?? 0) > 0;
 
@@ -715,19 +721,6 @@ function UnitConfig({
             )
           }
         />
-      )}
-
-      {isUnique && (
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>
-            Mejoras
-          </h2>
-
-          <p style={styles.emptyText}>
-            Esta unidad es única y no puede
-            recibir artefactos ni rasgos.
-          </p>
-        </section>
       )}
 
       <button
