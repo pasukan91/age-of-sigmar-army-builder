@@ -45,10 +45,14 @@ function PwaControls() {
       {showIosInstall && (
         <>
           <button type="button" onClick={() => setShowIosHelp((value) => !value)}>
-            Instalar en iPhone
+            Instalar en iPhone/iPad
           </button>
           {showIosHelp && (
-            <p>Pulsa Compartir en Safari y después «Añadir a pantalla de inicio».</p>
+            <p>
+              En Safari, pulsa Compartir, elige «Añadir a pantalla de inicio»
+              y confirma con «Añadir». Después abre Storm Forge desde su nuevo
+              icono, no desde la pestaña del navegador.
+            </p>
           )}
         </>
       )}

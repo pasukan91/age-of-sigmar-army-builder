@@ -67,6 +67,14 @@ try {
       ".htaccess",
       "favicon.svg",
       "icons.svg",
+      "manifest.webmanifest",
+      "offline.html",
+      "sw.js",
+      "pwa-icon.svg",
+      "pwa-icon-192.png",
+      "pwa-icon-512.png",
+      "apple-touch-icon.png",
+      "_headers",
       "assets",
       "images"
     )

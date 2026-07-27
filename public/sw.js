@@ -1,8 +1,16 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v4";
+const CACHE_VERSION = "v5";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
-const CORE_FILES = ["/", "/index.html", "/offline.html", "/manifest.webmanifest", "/pwa-icon.svg"];
+const CORE_FILES = [
+  "/",
+  "/index.html",
+  "/offline.html",
+  "/manifest.webmanifest",
+  "/apple-touch-icon.png",
+  "/pwa-icon-192.png",
+  "/pwa-icon-512.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -65,7 +65,11 @@ export function isStandalonePwa() {
 }
 
 export function isIosDevice() {
-  return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+  return /iphone|ipad|ipod/i.test(window.navigator.userAgent) ||
+    (
+      window.navigator.platform === "MacIntel" &&
+      window.navigator.maxTouchPoints > 1
+    );
 }
 
 function watchRegistration(registration) {
