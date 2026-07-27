@@ -50,7 +50,7 @@ const regimentsOfRenown = [
         name: "Mercenary Attitudes",
         phase: "Your Hero Phase",
         description:
-          "Pick a friendly non-Unique unit wholly within 12\". Until the start of your next turn, while it remains wholly within 12\", choose one: re-roll its run rolls; add 1 to its charge rolls; it cannot be targeted by shooting attacks; add 1 to wound rolls for its combat attacks; or add 10 to its control score.",
+          "Pick another friendly non-Unique unit wholly within 12\". Until the start of your next turn, while it remains wholly within 12\", choose one: re-roll its run rolls; add 1 to its charge rolls; it cannot be targeted by shooting attacks; add 1 to wound rolls for its combat attacks; or add 10 to its control score.",
       },
     ],
   },

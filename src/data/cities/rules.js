@@ -164,7 +164,7 @@ export const artefacts = [
   enhancement(
     "the-sphere-celestial",
     "The Sphere Celestial",
-    "If this unit is not in combat, pick a point more than 3\" from all units and terrain, then another visible friendly Cities of Sigmar Infantry or Cavalry Hero wholly within 18\" and not in combat. Swap their positions, setting each up within 1\" of the other's former position and not in combat. Both can use Move abilities in the following movement phase.",
+    "If this unit is not in combat, pick a point on the battlefield within 1\" of this unit and more than 3\" from all other units (friendly and enemy) and terrain features, then another visible friendly Cities of Sigmar Infantry or Cavalry Hero wholly within 18\" and not in combat. Swap their positions, setting each up within 1\" of the other's former position and not in combat. Both can use Move abilities in the following movement phase.",
     { phase: "Your Hero Phase" }
   ),
 ];

@@ -75,7 +75,7 @@ const units = [
     abilities: [
       ability("The Loonking's Entreaty", "Reaction: The Faces of the Bad Moon", "Once per battle, keep the Bad Moon on its current face instead of advancing.", "Once Per Battle (Army)"),
       ability("Fangz of da Bad Moon", "Your Hero Phase", "Spell: pick an enemy within 18\". Roll dice equal to the unmodified casting roll; each 3+ inflicts 1 mortal damage.", "Spell", ["Spell"], 7),
-      ability("Babbling Wand", null, "Once per turn, when a friendly Moonclan unit wholly within 12\" uses Redeploy, no command points are spent.", "Passive"),
+      ability("Babbling Wand", null, "Each time a friendly Moonclan unit wholly within 12\" of this unit uses the Redeploy command, no command points are spent.", "Passive"),
     ],
   }),
   make({
@@ -238,7 +238,7 @@ const units = [
     ],
     abilities: [
       ability("Da Frazzlefangz", null, "Enemies within 6\" suffer -1 to hit and cannot use All-out Attack.", "Passive"),
-      ability("Time Ta Scarper", "Reaction: You declared a Fight ability", "Once per turn, after a friendly unit wholly within 9\" fights, on a 4+ it can move 2D6\" through enemy combat ranges but cannot end in combat.", "Reaction"),
+      ability("Time Ta Scarper", "Reaction: You declared a Fight ability for a unit wholly within 9\" of this unit", "Roll a dice. On a 4+, the unit using that Fight ability can move 2D6\" after it has been resolved. It can move through the combat ranges of enemy units but cannot end that move in combat.", "Once Per Turn (Army)"),
       ability("Rip 'Em Ta Bits", "Reaction: You declared a Fight ability", "A friendly Gitmob unit in combat range can fight immediately after this unit.", "Once Per Turn (Army)"),
     ],
   }),
@@ -581,7 +581,7 @@ const units = [
       weapon("Wheela Slicers and Stabbin' Stikka", "Melee", 4, "4+", "4+", "0", "1"),
       weapon("Snarlfangs' Frothing Jaws", "Melee", 6, "4+", "3+", "0", "2", ["Companion"]),
     ],
-    abilities: [ability("Careening Destruction", "Your Movement Phase", "Move up to this unit's Move through models and combat ranges, then inflict D3 mortal damage plus 1 per model in this unit on one Infantry unit passed across.", "Once Per Turn (Army)", ["Core", "Move"])],
+    abilities: [ability("Careening Destruction", "Any Movement Phase", "If this unit is in combat, it can move a distance up to its Move characteristic through models and combat ranges. Pick up to 1 enemy Infantry or Cavalry unit passed across and inflict D3 mortal damage plus 1 per model in this unit.", "Once Per Turn (Army)", ["Core", "Move"])],
   }),
   make({
     id: "doom-diver-catapult",

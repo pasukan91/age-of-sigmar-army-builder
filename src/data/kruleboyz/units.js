@@ -20,7 +20,7 @@ const units = [
       ability("Strangle Hex", "Your Hero Phase", "Pick a visible enemy within 18\" and cast on 6. Roll dice equal to its Health, to a maximum of 10; each 4+ inflicts 1 mortal damage.", "Spell", ["Spell"], 6),
       ability("Crush to Death", "Any Combat Phase", "Pick an enemy in combat and roll. If the roll exceeds its Health, slay 1 model in that unit.", "Once Per Turn (Army)", ["Rampage"]),
       ability("Mork Sez No!", null, "Each time this unit unbinds a spell, inflict D3 mortal damage on the caster, or D6 if the unbinding roll was 10+.", "Passive"),
-      ability("Screamin' Mandrakk", "Opponent declared a Spell ability", "Once per battle, this unit uses Unbind with 3D6 instead of 2D6.", "Reaction"),
+      ability("Screamin' Mandrakk", "Opponent declared a Spell ability", "This unit uses Unbind with 3D6 instead of 2D6.", "Reaction"),
     ],
   }),
   make({
@@ -73,7 +73,7 @@ const units = [
   }),
   make({
     id: "breaka-boss-on-mirebrute-troggoth", name: "Breaka-boss on Mirebrute Troggoth", points: 180,
-    move: '5"', health: 12, control: 2, save: "4+", baseSize: "80mm",
+    move: '5"', health: 12, control: 5, save: "4+", baseSize: "80mm",
     regimentOptions: ["0-1 Mob Wrangler", "Any Kruleboyz"], canJoinRegimentAs: ["swamp-beast"],
     keywords: ["Hero", "Monster", "Destruction", "Kruleboyz"],
     rules: { hero: true, monster: true, companion: true, canBeReinforced: false },
@@ -82,7 +82,7 @@ const units = [
       weapon("Mirebrute's Clubs", "Melee", 4, "4+", "2+", "2", "3", ["Companion"]),
     ],
     abilities: [
-      ability("Breaka-harness", "Any Combat Phase", "Inflict D3 mortal damage on this unit. Add 2 Attacks to Mirebrute's Clubs for each damage point allocated this way for the turn.", "Ability"),
+      ability("Breaka-harness", "Any Combat Phase", "Make a breaka-roll of D3. Inflict mortal damage on this unit equal to the breaka-roll. Double the breaka-roll and add that value to the Attacks characteristic of this unit's Mirebrute's Clubs for the rest of the turn.", "Ability"),
       ability("Tear Limb from Limb", "End of Any Turn", "Pick an enemy Infantry unit within 1\" and roll. If the roll exceeds its Health, slay 1 model.", "Once Per Turn (Army)", ["Rampage"]),
       ability("Regeneration", "Start of Any Turn", "Heal (D3) this unit.", "Ability"),
     ],
@@ -101,7 +101,7 @@ const units = [
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, Sludgeraker's Talons has 4 Attacks.", "Passive"),
       ability("Sludgeraker Venom", "Your Hero Phase", "Pick a friendly Kruleboyz unit wholly within 12\". It gains the Sludgeraker Venom keyword for the rest of the turn.", "Ability"),
-      ability("Festering Wounds", "End of Any Turn", "Pick up to 3 enemies damaged by this unit or a Sludgeraker Venom unit. On a 2+, inflict D3 mortal damage and subtract 1 from their wound rolls until the end of the next turn.", "Once Per Turn (Army)", ["Rampage"]),
+      ability("Festering Wounds", "End of Any Turn", "Declare: Pick up to 3 enemy units that had any damage points allocated to them this turn by attacks made by this unit or a friendly unit with the Sludgeraker Venom keyword. On a 2+, inflict D3 mortal damage and subtract 1 from their wound rolls until the end of the next turn.", "Once Per Turn (Army)", ["Rampage"]),
     ],
   }),
   make({
@@ -212,7 +212,7 @@ const units = [
       weapon("Jaggedy Blades", "Melee", 3, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
     ],
     abilities: [
-      ability("Skewering Bolts", "Your Shooting Phase", "Once per turn, Beast-skewer Bolts have Damage 6 against a Monster.", "Once Per Turn (Army)"),
+      ability("Skewering Bolts", "Your Shooting Phase", "For the rest of the turn, the Damage characteristic of this unit's Beast-skewer Bolts is 6 if the target is a Monster.", "Once Per Turn (Army)"),
       ability("Pick 'Em Off", "Your Shooting Phase", "If this unit has not moved or been set up this turn, add 1 to hit rolls for its shooting attacks.", "Ability"),
     ],
   }),

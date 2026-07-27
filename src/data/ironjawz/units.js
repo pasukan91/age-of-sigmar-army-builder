@@ -65,7 +65,7 @@ const units = [
     ],
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, Maw-grunta's Tusks has 3 Attacks.", "Passive"),
-      ability("Unstoppable Momentum", null, "Gain 1 momentum point after a Charge and 2 after a Run, to a maximum of 3. Add momentum to the Damage of Maw-grunta's Tusks; lose 1 at each battle round's end.", "Passive"),
+      ability("Unstoppable Momentum", null, "Each time this unit has charged as a result of using a Charge ability, gain 1 momentum point. Each time it has run as a result of using a Run ability, gain 2 instead, to a maximum of 3. Add momentum to the Damage of Maw-grunta's Tusks; lose 1 at each battle round's end.", "Passive"),
       ability("Head of the Stampede", "Any Charge Phase", "After this unit charges, up to 3 friendly Maw-grunta units wholly within 12\" that charged this turn gain 1 momentum point.", "Once Per Turn (Army)", ["Rampage"]),
     ],
   }),
@@ -83,7 +83,7 @@ const units = [
     abilities: [
       ability("Power of Da Great Green God", "Your Hero Phase", "Pick an Ironjawz Infantry unit wholly within 12\" and make a forging roll. On a 4+, its melee weapons gain Crit (Mortal) until your next turn; Grunta-tongs add 1 to the roll.", "Ability"),
       ability("Klonk", null, "Klonk is a token. Re-roll forging rolls while it remains; remove it after an unmodified save roll of 1.", "Passive"),
-      ability("Ward-smashing Choppa", null, "A unit hit by this weapon gains Ward-smashed for the battle and cannot make ward rolls.", "Passive"),
+      ability("Ward-smashing Choppa", null, "A unit hit by this weapon gains Ward-smashed for the battle. Ward rolls cannot be made for a Ward-smashed unit even if this unit has been destroyed.", "Passive"),
     ],
   }),
   make({
@@ -152,7 +152,7 @@ const units = [
     keywords: ["Cavalry", "Champion", "Destruction", "Ironjawz"],
     weapons: [
       weapon("Choppa or Hacka", "Melee", 4, "4+", "3+", "1", "1", ["Anti-Cavalry (+1 Rend)"]),
-      weapon("Grunta's Tusks", "Melee", 4, "5+", "2+", "1", "1", ["Charge (+1 Damage)", "Companion"]),
+      weapon("Grunta's Tusks", "Melee", 4, "4+", "2+", "1", "1", ["Charge (+1 Damage)", "Companion"]),
     ],
     abilities: [ability("Gore-grunta Charge", "Any Charge Phase", "After charging, pick an enemy within 1\". On a 2+, inflict D3 mortal damage, adding 1 against Cavalry.", "Ability")],
   }),
@@ -169,7 +169,7 @@ const units = [
       weapon("Maw-grunta's Tusks", "Melee", 5, "4+", "2+", "2", "2", ["Companion"]),
       weapon("Maw-grunta's Trotters", "Melee", 4, "5+", "2+", "1", "D3", ["Companion"]),
     ],
-    abilities: [ability("Unstoppable Momentum", null, "Gain momentum after Run and Charge abilities, to a maximum of 3. Momentum adds to the Damage of the Maw-grunta's Tusks and drops by 1 each battle round.", "Passive"), entry.ability],
+    abilities: [ability("Unstoppable Momentum", null, "Gain momentum each time this unit has run or charged as a result of using the corresponding Run or Charge ability, to a maximum of 3. Momentum adds to the Damage of the Maw-grunta's Tusks and drops by 1 each battle round.", "Passive"), entry.ability],
   })),
 ];
 

@@ -23,7 +23,7 @@ const bigWaaaghRules = {
     { id: "get-krumpin", name: "Get Krumpin'!", source: "Army of Renown", points: 0, description: "Una vez por batalla, si tiene Power of the Waaagh! y no se ha usado otra Brutal Kunnin' este turno, +1 a herir con ataques de combate Big Waaagh! totalmente a 12\" durante la ronda." },
   ],
   artefacts: [{ id: "da-sneaky-stab-slab", name: "Da Sneaky Stab-slab", source: "Army of Renown", points: 0, description: "Cada salvación sin modificar de 6 contra un ataque de combate inflige 1 daño mortal a la unidad atacante después de resolver su Fight." }],
-  spellLores: [{ id: "two-headz-as-one-lore", name: "Two Headz as One", spells: [{ id: "two-headz-as-one", name: "Two Headz as One", type: "Spell", castingValue: 7, phase: "Your Hero Phase", keywords: ["Spell"], description: "Elige una unidad Infantry amiga a 12\". Si es Ironjawz, obtiene +3 Control mientras esté a 12\" de Kruleboyz amigos; si es Kruleboyz, obtiene +2\" Move mientras esté a 12\" de Ironjawz amigos, hasta tu siguiente turno." }] }],
+  spellLores: [{ id: "two-headz-as-one-lore", name: "Two Headz as One", spells: [{ id: "two-headz-as-one", name: "Two Headz as One", type: "Spell", castingValue: 7, phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Elige una unidad Infantry amiga a 12\". Si es Ironjawz, obtiene +3 Control mientras esté a 12\" de Kruleboyz amigos; si es Kruleboyz, obtiene +2\" Move mientras esté a 12\" de Ironjawz amigos, hasta tu siguiente turno." }] }],
   prayerLores: [{ id: "unstoppable-waaagh-beats-lore", name: "Unstoppable Waaagh!-beats", prayers: [{ id: "unstoppable-waaagh-beats", name: "Unstoppable Waaagh!-beats", chantingValue: 4, phase: "Your Hero Phase", keywords: ["Prayer"], description: "Una unidad Infantry no Hero en combate puede usar 2 Fight este turno; tras la primera obtiene Strike-last. Con 10+, elige un segundo objetivo elegible." }] }],
   manifestations: footOfGork,
   manifestationLores: [{ id: "big-waaagh-manifestations", name: "Foot of Gork", description: "La Big Waaagh! puede invocar el Foot of Gork.", manifestations: footOfGork }],
@@ -36,7 +36,7 @@ const bigWaaagh = {
   excludesRegimentsOfRenown: true,
   excludesFactionTerrain: true,
   rules: bigWaaaghRules,
-  roster: ["Ironjawz units", "Kruleboyz units", "El mismo número de regimientos liderados por cada warclan"],
+  roster: ["Los Heroes Kruleboyz solo pueden incluir unidades Kruleboyz en su regimiento", "Los Heroes Ironjawz solo pueden incluir unidades Ironjawz en su regimiento", "El mismo número de regimientos liderados por cada warclan", "Kragnos puede incluir unidades de un warclan o del otro, pero no de ambos, y cuenta como Hero de ese warclan"],
   description: "Una fuerza combinada de Ironjawz y Kruleboyz con sus propias reglas de Waaagh!.",
 };
 

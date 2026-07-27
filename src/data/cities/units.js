@@ -276,7 +276,7 @@ const units = [
       ability(
         "Realmsphere Mastery",
         "Any Hero Phase",
-        "Pick a visible enemy manifestation within 12\" that was not set up this turn. Make a 2D6 arcane manipulation roll. If it meets its banishment value, set up an Endless Spell this unit can summon within 1\" of the target and more than 3\" from enemies and enemy manifestations, then banish the target.",
+        "Pick a visible enemy manifestation within 12\" that was not set up this turn. Make a 2D6 arcane manipulation roll. If it equals or exceeds the target's banishment value, set up an Endless Spell that can be summoned using a Summon spell this unit can cast within 1\" of the target and more than 3\" from all enemy units and enemy manifestations. If that Endless Spell has multiple parts, both parts must be set up within 1\" of the target. This unit has summoned that Endless Spell. If a friendly Endless Spell of the same type is already on the battlefield, banish and remove it before setting up the new one. Then banish and remove the target.",
         "Ability"
       ),
       ability(
@@ -641,7 +641,7 @@ const units = [
     control: 1,
     save: "4+",
     baseSize: "28.5mm",
-    keywords: ["Infantry", "Champion", ...sigmarite],
+    keywords: ["Infantry", "Champion (1/10)", ...sigmarite],
     rules: { canBeReinforced: false },
     weapons: [
       weapon("Ruin-sweeper Arsenal", "Ranged", 1, "4+", "2+", "2", "1", [], '10"'),

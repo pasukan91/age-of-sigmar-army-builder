@@ -16,10 +16,10 @@ const greatGnawhordeRules = {
 
 const mutatedMenagerieRules = {
   battleTraits: [
-    { id: "monstrous-entourage", name: "Monstrous Entourage", type: "Passive", description: "While a friendly Thanquol is within the combat range of another friendly Mutated Menagerie unit, Thanquol has Ward (4+). Each successful ward passes 1 damage point to a friendly Mutated Menagerie unit in his combat range." },
+    { id: "monstrous-entourage", name: "Monstrous Entourage", type: "Passive", description: "The Companion weapon ability has no effect on Mutated Menagerie units. While a friendly Thanquol is within the combat range of another friendly Mutated Menagerie unit, Thanquol has Ward (4+). Each successful ward passes 1 damage point to a friendly Mutated Menagerie unit in his combat range." },
     { id: "more-more-mutation", name: "More-more Mutation!", type: "Once Per Turn (Army)", phase: "Your Hero Phase", description: "Pick a friendly non-Hero Mutated Menagerie unit that has not been picked before. For the battle it gains +2 Health, +2\" Move, +1 Attack on melee weapons and Ward (5+), but suffers D3+2 damage at the end of each turn." },
-    { id: "spiteful-swarms", name: "Spiteful Swarms", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "Pick an eligible non-Hero Mutated Menagerie Monster. It gains Strike-first, is destroyed at the end of the turn, and can permanently reduce nearby enemies' melee Attacks when destroyed." },
-    { id: "rampaging-demise", name: "Rampaging Demise", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "Pick an eligible non-Hero Mutated Menagerie Monster. It gains Strike-first and is destroyed at the end of the turn, inflicting possible mortal damage on nearby enemy units before removal." },
+    { id: "spiteful-swarms", name: "Spiteful Swarms", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "Pick an eligible non-Hero Mutated Menagerie Monster. It gains Strike-first and, when it would be destroyed at the end of the turn, can permanently reduce nearby enemies' melee Attacks before removal." },
+    { id: "rampaging-demise", name: "Rampaging Demise", type: "Once Per Turn (Army)", phase: "Any Combat Phase", description: "Pick an eligible non-Hero Mutated Menagerie Monster. It gains Strike-first and, when it would be destroyed at the end of the turn, inflicts possible mortal damage on nearby enemy units before removal." },
   ],
   battleFormations: [],
   heroicTraits: [{ id: "pack-tactics", name: "Pack Tactics", points: 0, source: "Army of Renown", description: "Once per battle, up to 2 friendly non-Hero Mutated Menagerie Monsters can use All-out Attack or All-out Defence even if already used this phase." }],

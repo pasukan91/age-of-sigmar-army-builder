@@ -50,7 +50,7 @@ const units = [
       weapon("Kurnotheal's Wrath and Lashing Vines", "Melee", 6, "3+", "3+", "2", "2", ["Crit (Mortal)"]),
     ],
     abilities: [
-      ability("Hand of the Everqueen", "Any Hero Phase", "Pick a terrain feature within 18\" with a friendly overgrown token. Measure range and visibility for this unit's next spell from that terrain feature; opponents also measure unbinding range and visibility to it.", "Once Per Turn (Army)"),
+      ability("Hand of the Everqueen", "Any Hero Phase", "The next time this unit uses a non-Summon Spell ability this phase, when picking targets for that spell, you can measure range and visibility from the target terrain feature instead of from this unit, and your opponent can measure range and visibility to that terrain feature instead of to this unit for the purposes of the Unbind ability.", "Once Per Turn (Army)"),
       ability("Protection of the Everqueen", "Your Hero Phase", "Make a casting roll, adding 1 if this unit is wholly within the creeping overgrowth. Until your next turn, friendly Sylvaneth units wholly within 12\" have Ward (5+).", "Spell", ["Spell"], 7),
       ability("Verdian Crown", "Any Hero Phase", "Once per battle, pick a terrain feature within 18\" without a friendly overgrown token and give it one.", "Once Per Battle"),
     ],
@@ -123,8 +123,8 @@ const units = [
       weapon("Guardian Spites", "Melee", 6, "4+", "4+", "1", "D3", ["Crit (Mortal)", "Companion"]),
     ],
     abilities: [
-      ability("Soulshriek", null, "Each time a model in a friendly non-Hero Revenant unit wholly within 12\" and visible is slain by a combat attack, roll dice equal to its Health. Each 5+ inflicts 1 mortal damage on the attacker after it fights.", "Passive"),
-      ability("Regenesis", "Your Hero Phase", "Pick a friendly unit wholly within the creeping overgrowth or visible and wholly within 12\". On a 6+, pick a second. Return D3 slain models to Revenant Infantry or Dryads targets; otherwise Heal (3).", "Prayer", ["Prayer"], 4),
+      ability("Soulshriek", "Any Combat Phase", "Declare: Pick each friendly non-Hero Revenant unit wholly within 12\" of and visible to this unit. For the rest of the phase, each time a model in a target unit is slain by a combat attack, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit.", "Once Per Turn (Army)"),
+      ability("Regenesis", "Your Hero Phase", "Pick a friendly unit wholly within the creeping overgrowth or visible and wholly within 12\". If the chanting roll was 6+, pick another eligible unit as a second target. If a target is a non-Hero Revenant Infantry or Dryads unit, return up to D3 slain models to it; otherwise, Heal (3) that target.", "Prayer", ["Prayer"], 4),
     ],
   }),
   make({

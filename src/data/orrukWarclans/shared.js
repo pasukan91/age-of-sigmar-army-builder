@@ -52,7 +52,7 @@ export const manifestations = [
     profile: { move: '6"', health: 6, save: "5+", banishment: "7+", ward: "6+" },
     weapons: [weapon("Toxic Gas", "Melee", 5, "2+", "4+", "1", "D3")],
     abilities: [
-      ability("Bellowing Waaagh!-Cries", "Your Hero Phase", "Pick an Ironjawz or Kruleboyz Wizard or Priest within 3\". Add either 1 or 2 to its casting or chanting rolls until your next turn, then roll that many dice: each 1-2 damages it and each 5+ grants nearby Orruks +1 to charge rolls.", "Ability"),
+      ability("Bellowing Waaagh!-Cries", "Your Hero Phase", "Pick an Ironjawz or Kruleboyz Wizard or Priest within 3\". Add either 1 or 2 to its casting or chanting rolls until your next turn, then roll that many dice: each 1-2 damages it and each 5+ grants nearby Orruks +1 to charge rolls. Friendly units can be affected by this ability multiple times and the effects are cumulative.", "Ability"),
     ],
     details: { models: 1, baseSize: null },
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)", "Destruction", "Ironjawz", "Kruleboyz"],

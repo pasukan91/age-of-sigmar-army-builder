@@ -29,7 +29,7 @@ export const battleTraits = [
     type: "Once Per Battle Round (Army)",
     phase: "Start of Battle Round",
     keywords: [],
-    description: "Declare: Use this ability if there are fewer than 3 friendly Gnawholes on the battlefield.\n\nEffect: Set up a Gnawhole more than 9\" from enemies, more than 1\" from friendly units and more than 3\" from objectives and other terrain.",
+    description: "Declare: Use this ability if there are fewer than 3 friendly Gnawholes on the battlefield.\n\nEffect: Set up a Gnawhole on the battlefield more than 9\" from all enemy units, more than 3\" from all objectives and more than 1\" from all other terrain features.",
   },
   {
     id: "gnawhole-ambush",

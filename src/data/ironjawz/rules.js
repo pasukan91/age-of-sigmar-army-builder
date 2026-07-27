@@ -10,10 +10,10 @@ export const battleTraits = [
   {
     id: "ironjawz-waaagh",
     name: "Ironjawz Waaagh!",
-    type: "Once Per Battle",
+    type: "Once Per Turn (Army)",
     phase: "Your Charge Phase",
     keywords: ["Waaagh!"],
-    description: "Declare: Pick a friendly IRONJAWZ HERO.\n\nEffect: For the rest of the turn, add 1 to charge rolls and add 1 to the Attacks characteristic of melee weapons used by friendly IRONJAWZ units wholly within 18\" of the target.",
+    description: "Declare: Pick a friendly IRONJAWZ HERO to be the target. You cannot pick the same HERO to be the target of this ability more than once per battle.\n\nEffect: For the rest of the turn, add 1 to charge rolls and add 1 to the Attacks characteristic of melee weapons used by friendly IRONJAWZ units wholly within 18\" of the target.",
   },
 ];
 
@@ -60,7 +60,7 @@ export const spellLores = [
     id: "lore-of-the-weird",
     name: "Lore of the Weird",
     spells: [
-      { id: "bash-em-ladz", name: "Bash 'Em, Ladz!", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Pick a visible friendly Ironjawz unit wholly within 12\". Its melee weapons have Crit (2 Hits) for the rest of the turn." },
+      { id: "bash-em-ladz", name: "Bash 'Em, Ladz!", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Pick a visible friendly Ironjawz unit wholly within 12\". The target's melee weapons have Crit (2 Hits) until the start of your next turn." },
       { id: "mighty-eadbutt", name: "Mighty 'Eadbutt", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Pick a visible enemy within 18\". Inflict D3 mortal damage, or 3 mortal damage if the target is a Wizard." },
       { id: "da-great-big-green-hand-of-gork", name: "Da Great Big Green Hand of Gork", castingValue: 7, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Move a visible friendly unit wholly within 12\" and not in combat to a position wholly within 24\" of the caster and more than 9\" from enemies." },
     ],
@@ -74,7 +74,7 @@ export const prayerLores = [
     prayers: [
       { id: "get-em-beat", name: "Get 'Em Beat", chantingValue: 4, phase: "Your Hero Phase", keywords: ["Prayer", "Unlimited"], description: "Add 1 to charge rolls for a visible friendly Ironjawz unit wholly within 12\". On an 8+, add one charge die, to a maximum of 3." },
       { id: "fixin-beat", name: "Fixin' Beat", chantingValue: 4, phase: "Your Hero Phase", keywords: ["Prayer"], description: "Heal (D6) a visible friendly Ironjawz unit wholly within 12\". On an 8+, Heal (D3+3) instead." },
-      { id: "killa-beat", name: "Killa Beat", chantingValue: 5, phase: "Your Hero Phase", keywords: ["Prayer"], description: "Add 1 to the Damage of a visible friendly Ironjawz unit's melee weapons. On a 10+, pick a second eligible unit." },
+      { id: "killa-beat", name: "Killa Beat", chantingValue: 5, phase: "Your Hero Phase", keywords: ["Prayer"], description: "Add 1 to the Damage characteristic of a visible friendly Ironjawz unit's melee weapons until the start of your next turn. On a 10+, pick a second eligible unit." },
     ],
   },
 ];

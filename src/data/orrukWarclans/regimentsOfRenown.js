@@ -23,6 +23,7 @@ const regimentsOfRenown = [
     abilities: [
       { name: "Kountin' the Tally", phase: "End of Any Turn", description: "La Krew lleva la cuenta de sus bajas y obtiene bonificaciones a medida que aumenta la tally." },
       { name: "Skumdrekk's Best Bet", phase: "Any Combat Phase", description: "Skumdrekk apuesta por una unidad enemiga y recompensa a la Krew cuando consigue acabar con ella." },
+      { name: "Snatch 'Em Up", type: "Once Per Turn (Army)", phase: "Enemy Hero Phase", description: "Elige una unidad enemiga en combate con el Swampboss Skumdrekk de este Regimiento de Renombre. Tira un dado; si el resultado es al menos el doble de la característica Health del objetivo, muere 1 miniatura de esa unidad." },
     ],
   },
 ];
