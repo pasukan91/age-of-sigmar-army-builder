@@ -268,6 +268,57 @@ function getArmyRuleSources(list) {
   ];
 }
 
+function getSynergyPhaseRank(ability) {
+  const timing = normalize(
+    [
+      ability?.type,
+      ability?.phase,
+      ...(ability?.keywords ?? []),
+    ].join(" ")
+  );
+
+  if (timing.includes("passive")) {
+    return 0;
+  }
+
+  if (
+    timing.includes("hero phase") ||
+    timing.includes("start of your turn") ||
+    timing.includes("start of enemy turn") ||
+    timing.includes("start of any turn") ||
+    timing.includes("spell") ||
+    timing.includes("prayer")
+  ) {
+    return 10;
+  }
+
+  if (timing.includes("movement phase")) {
+    return 20;
+  }
+
+  if (timing.includes("charge phase") || timing.includes("charge ability")) {
+    return 30;
+  }
+
+  if (timing.includes("shooting phase")) {
+    return 40;
+  }
+
+  if (timing.includes("combat phase") || timing.includes("fight ability")) {
+    return 50;
+  }
+
+  if (
+    timing.includes("end of your turn") ||
+    timing.includes("end of enemy turn") ||
+    timing.includes("end of any turn")
+  ) {
+    return 60;
+  }
+
+  return 70;
+}
+
 export function getPotentialSynergies(list, targetUnit) {
   if (!list || !targetUnit) {
     return [];
@@ -337,10 +388,18 @@ export function getPotentialSynergies(list, targetUnit) {
     }
   });
 
-  return [...uniqueSynergies.values()].sort((left, right) =>
-    `${left.sourceType} ${left.sourceName} ${left.ability?.name}`.localeCompare(
+  return [...uniqueSynergies.values()].sort((left, right) => {
+    const phaseDifference =
+      getSynergyPhaseRank(left.ability) -
+      getSynergyPhaseRank(right.ability);
+
+    if (phaseDifference !== 0) {
+      return phaseDifference;
+    }
+
+    return `${left.sourceType} ${left.sourceName} ${left.ability?.name}`.localeCompare(
       `${right.sourceType} ${right.sourceName} ${right.ability?.name}`,
       "es"
-    )
-  );
+    );
+  });
 }
