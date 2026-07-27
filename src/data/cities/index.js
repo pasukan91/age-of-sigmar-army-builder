@@ -1,5 +1,6 @@
 import units from "./units";
 import scourgeUnits from "./scourgeOfAqshy";
+import regimentsOfRenown from "./regimentsOfRenown";
 import {
   artefacts,
   battleFormations,
@@ -32,7 +33,7 @@ const cities = {
   terrain,
   units: [...units, ...scourgeUnits],
   armiesOfRenown: [],
-  regimentsOfRenown: [],
+  regimentsOfRenown,
 };
 
 export default cities;
