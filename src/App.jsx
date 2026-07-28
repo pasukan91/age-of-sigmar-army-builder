@@ -853,6 +853,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.mortisanRefinement) {
+      const owner = findEnhancementOwner(
+        "mortisanRefinement",
+        configuredUnit.mortisanRefinement.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Refinamiento Mortisan",
+          selected: configuredUnit.mortisanRefinement.name,
+          owner: owner.unit.name,
+          existing: owner.unit.mortisanRefinement?.name,
+        });
+      }
+    }
+
     if (configuredUnit.visionOfFate) {
       const owner = findEnhancementOwner(
         "visionOfFate",
@@ -1450,6 +1466,7 @@ function App() {
       monstrousTrait: null,
       allConsumingObsession: null,
       moulderMutation: null,
+      mortisanRefinement: null,
       visionOfFate: null,
       specialKnickKnack: null,
       decorationForValour: null,

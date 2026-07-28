@@ -4,6 +4,7 @@ import orrukRegiments from "./orrukWarclans/regimentsOfRenown";
 import gloomspiteRegiments from "./gloomspite/regimentsOfRenown";
 import citiesRegiments from "./cities/regimentsOfRenown";
 import tzeentchRegiments from "./tzeentch/regimentsOfRenown";
+import ossiarchRegiments from "./ossiarch/regimentsOfRenown";
 
 const regimentsOfRenown = [
   ...hedonitesRegiments,
@@ -12,6 +13,7 @@ const regimentsOfRenown = [
   ...gloomspiteRegiments,
   ...citiesRegiments,
   ...tzeentchRegiments,
+  ...ossiarchRegiments,
 ];
 
 export function getEligibleRegimentsOfRenown(factionId) {

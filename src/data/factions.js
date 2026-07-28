@@ -6,6 +6,7 @@ import sylvaneth from "./sylvaneth";
 import gloomspite from "./gloomspite";
 import cities from "./cities";
 import tzeentch from "./tzeentch";
+import ossiarch from "./ossiarch";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -20,6 +21,7 @@ const factions = [
   gloomspite,
   cities,
   tzeentch,
+  ossiarch,
 
   // ORDEN
   {
@@ -63,11 +65,6 @@ const factions = [
     id: "soulblight",
     alliance: "death",
     name: "Soulblight Gravelords",
-  },
-  {
-    id: "ossiarch",
-    alliance: "death",
-    name: "Ossiarch Bonereapers",
   },
   {
     id: "nighthaunt",

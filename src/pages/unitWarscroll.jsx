@@ -262,6 +262,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.mortisanRefinement && (
+          <EnhancementAccordion
+            title="Refinamiento Mortisan"
+            enhancement={unit.mortisanRefinement}
+          />
+        )}
+
         {unit.visionOfFate && (
           <EnhancementAccordion
             title="Visión de destino"
@@ -546,6 +553,7 @@ function getDisplayedPoints(unit) {
     unit?.artefact,
     unit?.allConsumingObsession,
     unit?.moulderMutation,
+    unit?.mortisanRefinement,
     unit?.visionOfFate,
     unit?.specialKnickKnack,
     unit?.decorationForValour,

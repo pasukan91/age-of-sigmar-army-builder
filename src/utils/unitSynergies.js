@@ -29,6 +29,7 @@ const UNIT_ENHANCEMENTS = [
   ["monstrousTrait", "Rasgo monstruoso"],
   ["allConsumingObsession", "Obsesión devoradora"],
   ["moulderMutation", "Mutación Moulder"],
+  ["mortisanRefinement", "Refinamiento Mortisan"],
   ["visionOfFate", "Visión de destino"],
   ["specialKnickKnack", "Special Knick-Knack"],
   ["decorationForValour", "Decoration for Valour"],

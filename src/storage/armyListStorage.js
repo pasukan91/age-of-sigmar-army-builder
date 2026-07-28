@@ -59,6 +59,8 @@ function serializeUnit(unit) {
       unit.allConsumingObsession ?? null,
     moulderMutation:
       unit.moulderMutation ?? null,
+    mortisanRefinement:
+      unit.mortisanRefinement ?? null,
     visionOfFate:
       unit.visionOfFate ?? null,
     specialKnickKnack:
@@ -114,6 +116,10 @@ function restoreUnit(savedUnit, faction) {
     moulderMutation: restoreOption(
       savedUnit.moulderMutation,
       faction?.moulderMutations
+    ),
+    mortisanRefinement: restoreOption(
+      savedUnit.mortisanRefinement,
+      faction?.mortisanRefinements
     ),
     visionOfFate: restoreOption(
       savedUnit.visionOfFate,

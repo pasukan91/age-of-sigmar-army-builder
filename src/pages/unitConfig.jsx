@@ -34,6 +34,9 @@ function UnitConfig({
   const [moulderMutation, setMoulderMutation] =
     useState(unit?.moulderMutation ?? null);
 
+  const [mortisanRefinement, setMortisanRefinement] =
+    useState(unit?.mortisanRefinement ?? null);
+
   const [visionOfFate, setVisionOfFate] =
     useState(unit?.visionOfFate ?? null);
 
@@ -162,6 +165,11 @@ function UnitConfig({
     keywords.includes("skaven") &&
     (faction?.moulderMutations?.length ?? 0) > 0;
 
+  const canSelectMortisanRefinement =
+    !isUnique &&
+    !isHero &&
+    (faction?.mortisanRefinements?.length ?? 0) > 0;
+
   const canSelectVisionOfFate =
     !isUnique &&
     !isHero &&
@@ -208,6 +216,9 @@ function UnitConfig({
   const moulderMutationOptions =
     faction?.moulderMutations ?? [];
 
+  const mortisanRefinementOptions =
+    faction?.mortisanRefinements ?? [];
+
   const visionOfFateOptions =
     faction?.visionsOfFate ?? [];
 
@@ -238,6 +249,7 @@ function UnitConfig({
     Number(monstrousTrait?.points ?? 0) +
     Number(allConsumingObsession?.points ?? 0) +
     Number(moulderMutation?.points ?? 0) +
+    Number(mortisanRefinement?.points ?? 0) +
     Number(visionOfFate?.points ?? 0) +
     Number(specialKnickKnack?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
@@ -283,6 +295,11 @@ function UnitConfig({
       moulderMutation:
         canSelectMoulderMutation
           ? moulderMutation
+          : null,
+
+      mortisanRefinement:
+        canSelectMortisanRefinement
+          ? mortisanRefinement
           : null,
 
       visionOfFate:
@@ -417,6 +434,7 @@ function UnitConfig({
       {(canBeReinforced ||
         canSelectAllConsumingObsession ||
         canSelectMoulderMutation ||
+        canSelectMortisanRefinement ||
         canSelectVisionOfFate ||
         canSelectSpecialKnickKnack ||
         canSelectDecorationForValour) && (
@@ -517,6 +535,47 @@ function UnitConfig({
                   onChange={() =>
                     toggleExclusiveOption(
                       setMoulderMutation,
+                      option
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
+
+          {canSelectMortisanRefinement && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Refinamientos Mortisan
+                </h3>
+
+                <span
+                  style={{
+                    ...styles.sourceBadge,
+                    ...styles.aqshySourceBadge,
+                    marginTop: 0,
+                  }}
+                >
+                  Aqshy
+                </span>
+              </div>
+
+              <p style={styles.sectionIntro}>
+                Asigna un refinamiento Mortisan a esta unidad no Hero.
+                Cada refinamiento solo puede elegirse una vez por ejército.
+              </p>
+
+              {mortisanRefinementOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={mortisanRefinement?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(
+                      setMortisanRefinement,
                       option
                     )
                   }

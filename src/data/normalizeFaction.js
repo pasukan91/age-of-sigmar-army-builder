@@ -15,6 +15,7 @@ const ARRAY_FIELDS = [
   "regimentsOfRenown",
   "allConsumingObsessions",
   "moulderMutations",
+  "mortisanRefinements",
   "specialKnickKnacks",
   "decorationsForValour",
   "ironweldInnovations",

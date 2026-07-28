@@ -44,6 +44,7 @@ function normalizeOption(value) {
     "any sigmarite": "any-sigmarite",
     "any sigmarite infantry": "any-sigmarite-infantry",
     "any allies of the free cities": "any-allies-of-the-free-cities",
+    "any ossiarch bonereapers": "any-ossiarch",
     "sigmarite war machine": "sigmarite-war-machine",
     "freeguild veteran": "freeguild-veteran",
     "ironweld great cannon": "ironweld-great-cannon",
@@ -60,6 +61,7 @@ function normalizeOption(value) {
     "moonclan agitator": "moonclan-agitator",
     "top dog": "top-dog",
     "dankhold troggboss": "dankhold-troggboss",
+    "legion subcommander": "legion-subcommander",
   };
 
   return aliases[option] ?? option;
@@ -143,6 +145,34 @@ function isAllowedByArmyOfRenown(list, unit) {
 
   if (armyId === "the-oracles-of-fate") {
     return unit.id === "kairos-fateweaver" || hasKeyword(unit, "Daemon");
+  }
+
+  if (armyId === "the-lance-of-ossia") {
+    return [
+      "arch-kavalos-zandtos",
+      "liege-kavalos-on-war-chariot",
+      "kavalos-war-chariot",
+    ].includes(unit.id) || (
+      hasKeyword(unit, "Ossiarch Bonereapers") &&
+      hasKeyword(unit, "Cavalry")
+    );
+  }
+
+  if (armyId === "the-null-myriad") {
+    if (unit.id === "arkhan") {
+      return true;
+    }
+
+    if (
+      unit.rules?.hero === true &&
+      unit.rules?.unique !== true &&
+      Number(unit.rules?.wizard ?? 0) > 0
+    ) {
+      return true;
+    }
+
+    return hasKeyword(unit, "Ossiarch Bonereapers") &&
+      hasKeyword(unit, "Infantry");
   }
 
   if (armyId === "the-iron-march") {
@@ -314,6 +344,8 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "Infantry");
     case "any-allies-of-the-free-cities":
       return hasKeyword(unit, "Allies of the Free Cities");
+    case "any-ossiarch":
+      return hasKeyword(unit, "Ossiarch Bonereapers");
     case "sigmarite-war-machine":
       return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "War Machine");
     default:
@@ -322,7 +354,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander"].includes(option)
     ? 1
     : null;
 }
