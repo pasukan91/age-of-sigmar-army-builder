@@ -6,8 +6,8 @@ function alternateUnit(baseId, overrides) {
   return {
     ...base,
     ...overrides,
-    image: `/images/units/skaven/${baseId}.jpg`,
-    imageAlias: baseId,
+    image: base.image,
+    imageAlias: base.imageAlias ?? base.id,
     profile: {
       ...base.profile,
       ...overrides.profile,
