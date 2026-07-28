@@ -824,6 +824,7 @@ const units = [
             ward: "5+",
             warmaster: false,
             companion: false,
+            canBeReinforced: false,
         },
     },
 
@@ -1822,7 +1823,7 @@ const units = [
         artefact: null,
 
         details: {
-            models: 11,
+            models: 10,
             baseSize: "10 × 28.5mm; 1 × 25mm",
             regimentOptions: [],
             notes:

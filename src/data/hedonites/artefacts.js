@@ -25,7 +25,7 @@ const artefacts = [
 
     source: "Battletome",
 
-    points: 0,
+    points: 20,
 
     description:
       "Declare: Pick a friendly non-HERO HEDONITES OF SLAANESH INFANTRY unit that has been destroyed to be the target.\n\nEffect: Set up a replacement unit with half the number of models from the target unit, rounding up, wholly within 12\" of this unit and more than 9\" from all enemy units.",
@@ -44,7 +44,7 @@ const artefacts = [
 
     source: "Battletome",
 
-    points: 0,
+    points: 10,
 
     description:
       "Declare: Pick another visible friendly HEDONITES OF SLAANESH unit wholly within 12\" of this unit to be the target.\n\nEffect: For the rest of the turn, when the target uses the 'Power Through' command, you can pick an enemy target for that command that does not have a lower Health characteristic than the unit using that command.",

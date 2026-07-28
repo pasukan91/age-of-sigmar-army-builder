@@ -615,7 +615,7 @@ const units = [
     ],
     abilities: [
       ability("Markin' Territory", null, "After charging, add 5 to this unit's control score for the turn.", "Passive"),
-      ability("Frazzleburned Scrap", "Any Combat Phase", "After charging, this unit has Strike-first for the turn.", "Once Per Turn (Army)"),
+      ability("Frazzleburned Scrap", null, "This unit has Strike-first if it charged in the same turn.", "Passive"),
     ],
   }),
   make({

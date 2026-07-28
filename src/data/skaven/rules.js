@@ -90,6 +90,19 @@ export const battleFormations = [
       description: "Pick up to 3 friendly Verminus units that charged this turn. Add 1 to the Rend characteristic of their melee weapons for the rest of the turn.",
     },
   },
+  {
+    id: "kill-pack",
+    name: "Kill-pack",
+    source: "Battletome Supplement: Skaven Eshin",
+    description: "Kill-kill! Scurry-flee! marks an enemy Hero for assassination and rewards the Eshin kill-pack once the target falls.",
+    ability: {
+      name: "Kill-kill! Scurry-flee!",
+      type: "Once Per Turn (Army)",
+      phase: "Deployment Phase",
+      keywords: [],
+      description: "Pick an enemy Hero. For the rest of the battle, once that target has been destroyed, add 2\" to the Move characteristic of friendly Eshin units.",
+    },
+  },
 ];
 
 export const heroicTraits = [
