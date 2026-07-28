@@ -16,6 +16,7 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.allConsumingObsession) +
     getNumericPoints(unit.moulderMutation) +
     getNumericPoints(unit.mortisanRefinement) +
+    getNumericPoints(unit.originOfTerrifyingFolkTale) +
     getNumericPoints(unit.visionOfFate) +
     getNumericPoints(unit.specialKnickKnack) +
     getNumericPoints(unit.decorationForValour) +

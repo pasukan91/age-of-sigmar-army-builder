@@ -869,6 +869,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.originOfTerrifyingFolkTale) {
+      const owner = findEnhancementOwner(
+        "originOfTerrifyingFolkTale",
+        configuredUnit.originOfTerrifyingFolkTale.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Origen de relato terrorífico",
+          selected: configuredUnit.originOfTerrifyingFolkTale.name,
+          owner: owner.unit.name,
+          existing: owner.unit.originOfTerrifyingFolkTale?.name,
+        });
+      }
+    }
+
     if (configuredUnit.visionOfFate) {
       const owner = findEnhancementOwner(
         "visionOfFate",
@@ -1467,6 +1483,7 @@ function App() {
       allConsumingObsession: null,
       moulderMutation: null,
       mortisanRefinement: null,
+      originOfTerrifyingFolkTale: null,
       visionOfFate: null,
       specialKnickKnack: null,
       decorationForValour: null,

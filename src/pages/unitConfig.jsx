@@ -37,6 +37,9 @@ function UnitConfig({
   const [mortisanRefinement, setMortisanRefinement] =
     useState(unit?.mortisanRefinement ?? null);
 
+  const [originOfTerrifyingFolkTale, setOriginOfTerrifyingFolkTale] =
+    useState(unit?.originOfTerrifyingFolkTale ?? null);
+
   const [visionOfFate, setVisionOfFate] =
     useState(unit?.visionOfFate ?? null);
 
@@ -170,6 +173,13 @@ function UnitConfig({
     !isHero &&
     (faction?.mortisanRefinements?.length ?? 0) > 0;
 
+  const canSelectOriginOfTerrifyingFolkTale =
+    !isUnique &&
+    !isHero &&
+    keywords.includes("infantry") &&
+    keywords.includes("soulblight gravelords") &&
+    (faction?.originsOfTerrifyingFolkTales?.length ?? 0) > 0;
+
   const canSelectVisionOfFate =
     !isUnique &&
     !isHero &&
@@ -219,6 +229,9 @@ function UnitConfig({
   const mortisanRefinementOptions =
     faction?.mortisanRefinements ?? [];
 
+  const originOfTerrifyingFolkTaleOptions =
+    faction?.originsOfTerrifyingFolkTales ?? [];
+
   const visionOfFateOptions =
     faction?.visionsOfFate ?? [];
 
@@ -250,6 +263,7 @@ function UnitConfig({
     Number(allConsumingObsession?.points ?? 0) +
     Number(moulderMutation?.points ?? 0) +
     Number(mortisanRefinement?.points ?? 0) +
+    Number(originOfTerrifyingFolkTale?.points ?? 0) +
     Number(visionOfFate?.points ?? 0) +
     Number(specialKnickKnack?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
@@ -300,6 +314,11 @@ function UnitConfig({
       mortisanRefinement:
         canSelectMortisanRefinement
           ? mortisanRefinement
+          : null,
+
+      originOfTerrifyingFolkTale:
+        canSelectOriginOfTerrifyingFolkTale
+          ? originOfTerrifyingFolkTale
           : null,
 
       visionOfFate:
@@ -578,6 +597,35 @@ function UnitConfig({
                       setMortisanRefinement,
                       option
                     )
+                  }
+                />
+              ))}
+            </div>
+          )}
+
+          {canSelectOriginOfTerrifyingFolkTale && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  Orígenes de relatos populares terroríficos
+                </h3>
+                <span style={{ ...styles.sourceBadge, ...styles.aqshySourceBadge, marginTop: 0 }}>
+                  Aqshy
+                </span>
+              </div>
+              <p style={styles.sectionIntro}>
+                Asigna un origen a esta unidad Soulblight Infantry no Hero.
+                Cada origen solo puede elegirse una vez por ejército.
+              </p>
+              {originOfTerrifyingFolkTaleOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={originOfTerrifyingFolkTale?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(setOriginOfTerrifyingFolkTale, option)
                   }
                 />
               ))}

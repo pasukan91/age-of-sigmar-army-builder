@@ -269,6 +269,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.originOfTerrifyingFolkTale && (
+          <EnhancementAccordion
+            title="Origen de relato terrorífico"
+            enhancement={unit.originOfTerrifyingFolkTale}
+          />
+        )}
+
         {unit.visionOfFate && (
           <EnhancementAccordion
             title="Visión de destino"
@@ -554,6 +561,7 @@ function getDisplayedPoints(unit) {
     unit?.allConsumingObsession,
     unit?.moulderMutation,
     unit?.mortisanRefinement,
+    unit?.originOfTerrifyingFolkTale,
     unit?.visionOfFate,
     unit?.specialKnickKnack,
     unit?.decorationForValour,

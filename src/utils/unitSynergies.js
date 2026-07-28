@@ -30,6 +30,7 @@ const UNIT_ENHANCEMENTS = [
   ["allConsumingObsession", "Obsesión devoradora"],
   ["moulderMutation", "Mutación Moulder"],
   ["mortisanRefinement", "Refinamiento Mortisan"],
+  ["originOfTerrifyingFolkTale", "Origen de relato terrorífico"],
   ["visionOfFate", "Visión de destino"],
   ["specialKnickKnack", "Special Knick-Knack"],
   ["decorationForValour", "Decoration for Valour"],

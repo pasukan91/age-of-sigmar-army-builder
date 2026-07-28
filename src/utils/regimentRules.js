@@ -45,6 +45,10 @@ function normalizeOption(value) {
     "any sigmarite infantry": "any-sigmarite-infantry",
     "any allies of the free cities": "any-allies-of-the-free-cities",
     "any ossiarch bonereapers": "any-ossiarch",
+    "any soulblight gravelords": "any-soulblight",
+    "any soulblight": "any-soulblight",
+    "any deathrattle": "any-deathrattle",
+    "any vyrkos retainer": "any-vyrkos-retainer",
     "sigmarite war machine": "sigmarite-war-machine",
     "freeguild veteran": "freeguild-veteran",
     "ironweld great cannon": "ironweld-great-cannon",
@@ -62,6 +66,8 @@ function normalizeOption(value) {
     "top dog": "top-dog",
     "dankhold troggboss": "dankhold-troggboss",
     "legion subcommander": "legion-subcommander",
+    "deathrattle overseer": "deathrattle-overseer",
+    "vyrkos retainer": "vyrkos-retainer",
   };
 
   return aliases[option] ?? option;
@@ -173,6 +179,19 @@ function isAllowedByArmyOfRenown(list, unit) {
 
     return hasKeyword(unit, "Ossiarch Bonereapers") &&
       hasKeyword(unit, "Infantry");
+  }
+
+  if (armyId === "knights-of-the-crimson-keep") {
+    return [
+      "prince-vhordrai",
+      "vampire-lord-on-nightmare-steed",
+      "blood-knights",
+      "revenant-draconith",
+    ].includes(unit.id);
+  }
+
+  if (armyId === "barrow-legion") {
+    return hasKeyword(unit, "Deathrattle");
   }
 
   if (armyId === "the-iron-march") {
@@ -346,6 +365,10 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Allies of the Free Cities");
     case "any-ossiarch":
       return hasKeyword(unit, "Ossiarch Bonereapers");
+    case "any-soulblight":
+      return hasKeyword(unit, "Soulblight Gravelords");
+    case "any-deathrattle":
+      return hasKeyword(unit, "Deathrattle");
     case "sigmarite-war-machine":
       return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "War Machine");
     default:
@@ -354,7 +377,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander"].includes(option)
+  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer"].includes(option)
     ? 1
     : null;
 }

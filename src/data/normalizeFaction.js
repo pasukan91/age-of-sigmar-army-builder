@@ -16,6 +16,8 @@ const ARRAY_FIELDS = [
   "allConsumingObsessions",
   "moulderMutations",
   "mortisanRefinements",
+  "originsOfTerrifyingFolkTales",
+  "aqshyHeroicTraits",
   "specialKnickKnacks",
   "decorationsForValour",
   "ironweldInnovations",

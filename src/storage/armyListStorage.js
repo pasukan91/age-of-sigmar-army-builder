@@ -61,6 +61,8 @@ function serializeUnit(unit) {
       unit.moulderMutation ?? null,
     mortisanRefinement:
       unit.mortisanRefinement ?? null,
+    originOfTerrifyingFolkTale:
+      unit.originOfTerrifyingFolkTale ?? null,
     visionOfFate:
       unit.visionOfFate ?? null,
     specialKnickKnack:
@@ -120,6 +122,10 @@ function restoreUnit(savedUnit, faction) {
     mortisanRefinement: restoreOption(
       savedUnit.mortisanRefinement,
       faction?.mortisanRefinements
+    ),
+    originOfTerrifyingFolkTale: restoreOption(
+      savedUnit.originOfTerrifyingFolkTale,
+      faction?.originsOfTerrifyingFolkTales
     ),
     visionOfFate: restoreOption(
       savedUnit.visionOfFate,
