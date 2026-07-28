@@ -51,6 +51,8 @@ function UnitConfig({
 
   const [ironweldInnovation, setIronweldInnovation] =
     useState(unit?.ironweldInnovation ?? null);
+  const [accursedDevice, setAccursedDevice] =
+    useState(unit?.accursedDevice ?? null);
 
   if (!unit) {
     return (
@@ -202,6 +204,12 @@ function UnitConfig({
     isCogfort &&
     (faction?.ironweldInnovations?.length ?? 0) > 0;
 
+  const canSelectAccursedDevice =
+    !isUnique &&
+    !isHero &&
+    isWarMachine &&
+    (faction?.accursedDevices?.length ?? 0) > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -244,9 +252,13 @@ function UnitConfig({
   const ironweldInnovationOptions =
     faction?.ironweldInnovations ?? [];
 
+  const accursedDeviceOptions =
+    faction?.accursedDevices ?? [];
+
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
   const monstrousTraitOwner = enhancementOwners.monstrousTrait?.unit ?? null;
+  const accursedDeviceOwner = enhancementOwners.accursedDevice?.unit ?? null;
 
   const totalModels =
     canBeReinforced && reinforced
@@ -267,7 +279,8 @@ function UnitConfig({
     Number(visionOfFate?.points ?? 0) +
     Number(specialKnickKnack?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
-    Number(ironweldInnovation?.points ?? 0);
+    Number(ironweldInnovation?.points ?? 0) +
+    Number(accursedDevice?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -339,6 +352,11 @@ function UnitConfig({
       ironweldInnovation:
         canSelectIronweldInnovation
           ? ironweldInnovation
+          : null,
+
+      accursedDevice:
+        canSelectAccursedDevice
+          ? accursedDevice
           : null,
     });
   }
@@ -749,6 +767,23 @@ function UnitConfig({
           selected={ironweldInnovation}
           onToggle={(option) =>
             toggleExclusiveOption(setIronweldInnovation, option)
+          }
+        />
+      )}
+
+      {canSelectAccursedDevice && (
+        <SelectionSection
+          title="Dispositivo maldito"
+          options={accursedDeviceOptions}
+          selected={accursedDevice}
+          disabled={Boolean(accursedDeviceOwner)}
+          lockedMessage={
+            accursedDeviceOwner
+              ? `${accursedDeviceOwner.name} ya tiene ${accursedDeviceOwner.accursedDevice?.name}. Cada dispositivo solo puede elegirse una vez.`
+              : null
+          }
+          onToggle={(option) =>
+            toggleExclusiveOption(setAccursedDevice, option)
           }
         />
       )}

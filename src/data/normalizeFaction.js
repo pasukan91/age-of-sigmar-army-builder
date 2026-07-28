@@ -4,6 +4,7 @@ const ARRAY_FIELDS = [
   "heroicTraits",
   "monsterTraits",
   "artefacts",
+  "accursedDevices",
   "aqshyArtefacts",
   "spellLores",
   "prayerLores",

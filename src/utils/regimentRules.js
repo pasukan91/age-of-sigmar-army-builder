@@ -47,6 +47,8 @@ function normalizeOption(value) {
     "any ossiarch bonereapers": "any-ossiarch",
     "any soulblight gravelords": "any-soulblight",
     "any soulblight": "any-soulblight",
+    "any helsmiths of hashut": "any-hashut",
+    "any hashutite commander": "hashutite-commander",
     "any deathrattle": "any-deathrattle",
     "any vyrkos retainer": "any-vyrkos-retainer",
     "sigmarite war machine": "sigmarite-war-machine",
@@ -97,6 +99,27 @@ function isAllowedByArmyOfRenown(list, unit) {
 
   if (!armyId) {
     return true;
+  }
+
+  if (armyId === "taars-grand-forgehost") {
+    return unit.id === "urak-taar" ||
+      unit.id === "daemonsmith" ||
+      unit.id === "ashen-elder" ||
+      (
+        hasKeyword(unit, "Helsmiths of Hashut") &&
+        (
+          (hasKeyword(unit, "Infantry") && !hasKeyword(unit, "Hobgrot")) ||
+          hasKeyword(unit, "War Machine")
+        )
+      );
+  }
+
+  if (armyId === "ziggurat-stampede") {
+    return unit.id === "daemonsmith-infernal-taurus" ||
+      (
+        hasKeyword(unit, "Helsmiths of Hashut") &&
+        (hasKeyword(unit, "Cavalry") || hasKeyword(unit, "Automaton"))
+      );
   }
 
   if (armyId === "the-decadent-host") {
@@ -367,6 +390,8 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Ossiarch Bonereapers");
     case "any-soulblight":
       return hasKeyword(unit, "Soulblight Gravelords");
+    case "any-hashut":
+      return hasKeyword(unit, "Helsmiths of Hashut");
     case "any-deathrattle":
       return hasKeyword(unit, "Deathrattle");
     case "sigmarite-war-machine":
@@ -377,7 +402,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer"].includes(option)
+  return ["hashutite-commander", "slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer"].includes(option)
     ? 1
     : null;
 }

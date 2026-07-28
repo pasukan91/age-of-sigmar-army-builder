@@ -20,7 +20,8 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.visionOfFate) +
     getNumericPoints(unit.specialKnickKnack) +
     getNumericPoints(unit.decorationForValour) +
-    getNumericPoints(unit.ironweldInnovation)
+    getNumericPoints(unit.ironweldInnovation) +
+    getNumericPoints(unit.accursedDevice)
   );
 }
 

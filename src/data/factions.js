@@ -8,6 +8,7 @@ import cities from "./cities";
 import tzeentch from "./tzeentch";
 import ossiarch from "./ossiarch";
 import soulblight from "./soulblight";
+import hashut from "./hashut";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -24,6 +25,7 @@ const factions = [
   tzeentch,
   ossiarch,
   soulblight,
+  hashut,
 
   // ORDEN
   {
@@ -75,11 +77,6 @@ const factions = [
   },
 
   // CAOS
-  {
-    id: "hashut",
-    alliance: "chaos",
-    name: "Helsmiths of Hashut",
-  },
   {
     id: "nurgle",
     alliance: "chaos",

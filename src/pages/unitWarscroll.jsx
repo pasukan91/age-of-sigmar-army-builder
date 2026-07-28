@@ -304,6 +304,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.accursedDevice && (
+          <EnhancementAccordion
+            title="Dispositivo maldito"
+            enhancement={unit.accursedDevice}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" && (
           <button
@@ -566,6 +573,7 @@ function getDisplayedPoints(unit) {
     unit?.specialKnickKnack,
     unit?.decorationForValour,
     unit?.ironweldInnovation,
+    unit?.accursedDevice,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

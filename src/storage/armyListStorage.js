@@ -71,6 +71,8 @@ function serializeUnit(unit) {
       unit.decorationForValour ?? null,
     ironweldInnovation:
       unit.ironweldInnovation ?? null,
+    accursedDevice:
+      unit.accursedDevice ?? null,
   };
 }
 
@@ -142,6 +144,10 @@ function restoreUnit(savedUnit, faction) {
     ironweldInnovation: restoreOption(
       savedUnit.ironweldInnovation,
       faction?.ironweldInnovations
+    ),
+    accursedDevice: restoreOption(
+      savedUnit.accursedDevice,
+      faction?.accursedDevices
     ),
   };
 }

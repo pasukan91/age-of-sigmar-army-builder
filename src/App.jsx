@@ -949,6 +949,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.accursedDevice) {
+      const owner = findEnhancementOwner(
+        "accursedDevice",
+        configuredUnit.accursedDevice.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Dispositivo maldito",
+          selected: configuredUnit.accursedDevice.name,
+          owner: owner.unit.name,
+          existing: owner.unit.accursedDevice?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1488,6 +1504,7 @@ function App() {
       specialKnickKnack: null,
       decorationForValour: null,
       ironweldInnovation: null,
+      accursedDevice: null,
     };
 
     saveUpdatedList({
@@ -1859,6 +1876,7 @@ function App() {
             artefact: findEnhancementOwner("artefact"),
             heroicTrait: findEnhancementOwner("heroicTrait"),
             monstrousTrait: findEnhancementOwner("monstrousTrait"),
+            accursedDevice: findEnhancementOwner("accursedDevice"),
           }}
           faction={
             {
