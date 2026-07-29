@@ -981,6 +981,38 @@ function App() {
       }
     }
 
+    if (configuredUnit.brandOfDarkGod) {
+      const owner = findEnhancementOwner(
+        "brandOfDarkGod",
+        configuredUnit.brandOfDarkGod.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Brand of the Dark Gods",
+          selected: configuredUnit.brandOfDarkGod.name,
+          owner: owner.unit.name,
+          existing: owner.unit.brandOfDarkGod?.name,
+        });
+      }
+    }
+
+    if (configuredUnit.ensorcelledBanner) {
+      const owner = findEnhancementOwner(
+        "ensorcelledBanner",
+        configuredUnit.ensorcelledBanner.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Ensorcelled Banner",
+          selected: configuredUnit.ensorcelledBanner.name,
+          owner: owner.unit.name,
+          existing: owner.unit.ensorcelledBanner?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1522,6 +1554,8 @@ function App() {
       ironweldInnovation: null,
       accursedDevice: null,
       brazenMutation: null,
+      brandOfDarkGod: null,
+      ensorcelledBanner: null,
     };
 
     saveUpdatedList({
@@ -1895,6 +1929,8 @@ function App() {
             monstrousTrait: findEnhancementOwner("monstrousTrait"),
             accursedDevice: findEnhancementOwner("accursedDevice"),
             brazenMutation: findEnhancementOwner("brazenMutation"),
+            brandOfDarkGod: findEnhancementOwner("brandOfDarkGod"),
+            ensorcelledBanner: findEnhancementOwner("ensorcelledBanner"),
           }}
           faction={
             {

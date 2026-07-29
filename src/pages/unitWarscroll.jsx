@@ -318,6 +318,20 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.brandOfDarkGod && (
+          <EnhancementAccordion
+            title="Brand of the Dark Gods"
+            enhancement={unit.brandOfDarkGod}
+          />
+        )}
+
+        {unit.ensorcelledBanner && (
+          <EnhancementAccordion
+            title="Ensorcelled Banner"
+            enhancement={unit.ensorcelledBanner}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" && (
           <button
@@ -582,6 +596,8 @@ function getDisplayedPoints(unit) {
     unit?.ironweldInnovation,
     unit?.accursedDevice,
     unit?.brazenMutation,
+    unit?.brandOfDarkGod,
+    unit?.ensorcelledBanner,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

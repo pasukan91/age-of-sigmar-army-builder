@@ -55,6 +55,10 @@ function UnitConfig({
     useState(unit?.accursedDevice ?? null);
   const [brazenMutation, setBrazenMutation] =
     useState(unit?.brazenMutation ?? null);
+  const [brandOfDarkGod, setBrandOfDarkGod] =
+    useState(unit?.brandOfDarkGod ?? null);
+  const [ensorcelledBanner, setEnsorcelledBanner] =
+    useState(unit?.ensorcelledBanner ?? null);
 
   if (!unit) {
     return (
@@ -218,6 +222,19 @@ function UnitConfig({
     (keywords.includes("infantry") || keywords.includes("cavalry")) &&
     (faction?.brazenMutations?.length ?? 0) > 0;
 
+  const canSelectBrandOfDarkGod =
+    !isUnique &&
+    !isHero &&
+    keywords.includes("infantry") &&
+    keywords.includes("slaves to darkness") &&
+    (faction?.brandsOfTheDarkGods?.length ?? 0) > 0;
+
+  const canSelectEnsorcelledBanner =
+    !isUnique &&
+    (keywords.includes("infantry") || keywords.includes("cavalry")) &&
+    keywords.some((keyword) => keyword.startsWith("standard bearer")) &&
+    (faction?.ensorcelledBanners?.length ?? 0) > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -264,6 +281,10 @@ function UnitConfig({
     faction?.accursedDevices ?? [];
   const brazenMutationOptions =
     faction?.brazenMutations ?? [];
+  const brandOfDarkGodOptions =
+    faction?.brandsOfTheDarkGods ?? [];
+  const ensorcelledBannerOptions =
+    faction?.ensorcelledBanners ?? [];
 
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
@@ -291,7 +312,9 @@ function UnitConfig({
     Number(decorationForValour?.points ?? 0) +
     Number(ironweldInnovation?.points ?? 0) +
     Number(accursedDevice?.points ?? 0) +
-    Number(brazenMutation?.points ?? 0);
+    Number(brazenMutation?.points ?? 0) +
+    Number(brandOfDarkGod?.points ?? 0) +
+    Number(ensorcelledBanner?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -373,6 +396,16 @@ function UnitConfig({
       brazenMutation:
         canSelectBrazenMutation
           ? brazenMutation
+          : null,
+
+      brandOfDarkGod:
+        canSelectBrandOfDarkGod
+          ? brandOfDarkGod
+          : null,
+
+      ensorcelledBanner:
+        canSelectEnsorcelledBanner
+          ? ensorcelledBanner
           : null,
     });
   }
@@ -811,6 +844,28 @@ function UnitConfig({
           selected={brazenMutation}
           onToggle={(option) =>
             toggleExclusiveOption(setBrazenMutation, option)
+          }
+        />
+      )}
+
+      {canSelectBrandOfDarkGod && (
+        <SelectionSection
+          title="Brand of the Dark Gods"
+          options={brandOfDarkGodOptions}
+          selected={brandOfDarkGod}
+          onToggle={(option) =>
+            toggleExclusiveOption(setBrandOfDarkGod, option)
+          }
+        />
+      )}
+
+      {canSelectEnsorcelledBanner && (
+        <SelectionSection
+          title="Ensorcelled Banner"
+          options={ensorcelledBannerOptions}
+          selected={ensorcelledBanner}
+          onToggle={(option) =>
+            toggleExclusiveOption(setEnsorcelledBanner, option)
           }
         />
       )}

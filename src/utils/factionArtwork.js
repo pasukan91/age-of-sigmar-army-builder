@@ -9,6 +9,7 @@ const factionArtwork = {
   ogors: "/images/factions/ogormawtribes.webp",
   skaven: "/images/factions/skaven.webp",
   sylvaneth: "/images/factions/sylvaneth.webp",
+  std: "/images/factions/slaves.webp",
 };
 
 export function getFactionArtwork(faction) {

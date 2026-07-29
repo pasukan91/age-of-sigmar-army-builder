@@ -52,6 +52,16 @@ function normalizeOption(value) {
     "any blades of khorne daemon": "any-khorne-daemon",
     "any blades of khorne daemon cavalry": "any-khorne-daemon-cavalry",
     "any bloodbound": "any-bloodbound",
+    "any slaves to darkness": "any-slaves-to-darkness",
+    "any warriors of chaos": "any-warriors-of-chaos",
+    "any darkoath": "any-darkoath",
+    "any chaos legionnaires": "chaos-legionnaires",
+    "any ogroid theridons": "ogroid-theridons",
+    "ruinous champion": "ruinous-champion",
+    "oathsworn": "oathsworn",
+    "eternus": "eternus",
+    "singri brand": "singri-brand",
+    "the oathsworn kin": "oathsworn-kin",
     "any hashutite commander": "hashutite-commander",
     "any deathrattle": "any-deathrattle",
     "any vyrkos retainer": "any-vyrkos-retainer",
@@ -425,6 +435,12 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Blades of Khorne") && hasKeyword(unit, "Daemon") && hasKeyword(unit, "Cavalry");
     case "any-bloodbound":
       return hasKeyword(unit, "Bloodbound");
+    case "any-slaves-to-darkness":
+      return hasKeyword(unit, "Slaves to Darkness");
+    case "any-warriors-of-chaos":
+      return hasKeyword(unit, "Warriors of Chaos");
+    case "any-darkoath":
+      return hasKeyword(unit, "Darkoath");
     case "any-deathrattle":
       return hasKeyword(unit, "Deathrattle");
     case "sigmarite-war-machine":
@@ -435,7 +451,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["hashutite-commander", "slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer", "slaughter-seeker", "bloodbound-warmonger", "baleful-lord"].includes(option)
+  return ["hashutite-commander", "slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer", "slaughter-seeker", "bloodbound-warmonger", "baleful-lord", "ruinous-champion", "oathsworn"].includes(option)
     ? 1
     : null;
 }

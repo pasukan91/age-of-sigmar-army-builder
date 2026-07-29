@@ -10,6 +10,7 @@ import ossiarch from "./ossiarch";
 import soulblight from "./soulblight";
 import hashut from "./hashut";
 import khorne from "./khorne";
+import slaves from "./slaves";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -28,6 +29,7 @@ const factions = [
   soulblight,
   hashut,
   khorne,
+  slaves,
 
   // ORDEN
   {
@@ -84,12 +86,6 @@ const factions = [
     alliance: "chaos",
     name: "Maggotkin of Nurgle",
   },
-  {
-    id: "std",
-    alliance: "chaos",
-    name: "Slaves to Darkness",
-  },
-
   // DESTRUCCIÓN
   {
     id: "behemat",

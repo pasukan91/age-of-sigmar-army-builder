@@ -22,7 +22,9 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.decorationForValour) +
     getNumericPoints(unit.ironweldInnovation) +
     getNumericPoints(unit.accursedDevice) +
-    getNumericPoints(unit.brazenMutation)
+    getNumericPoints(unit.brazenMutation) +
+    getNumericPoints(unit.brandOfDarkGod) +
+    getNumericPoints(unit.ensorcelledBanner)
   );
 }
 

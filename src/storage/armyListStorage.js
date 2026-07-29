@@ -75,6 +75,10 @@ function serializeUnit(unit) {
       unit.accursedDevice ?? null,
     brazenMutation:
       unit.brazenMutation ?? null,
+    brandOfDarkGod:
+      unit.brandOfDarkGod ?? null,
+    ensorcelledBanner:
+      unit.ensorcelledBanner ?? null,
   };
 }
 
@@ -154,6 +158,14 @@ function restoreUnit(savedUnit, faction) {
     brazenMutation: restoreOption(
       savedUnit.brazenMutation,
       faction?.brazenMutations
+    ),
+    brandOfDarkGod: restoreOption(
+      savedUnit.brandOfDarkGod,
+      faction?.brandsOfTheDarkGods
+    ),
+    ensorcelledBanner: restoreOption(
+      savedUnit.ensorcelledBanner,
+      faction?.ensorcelledBanners
     ),
   };
 }

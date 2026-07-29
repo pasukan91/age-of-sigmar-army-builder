@@ -6,6 +6,8 @@ const ARRAY_FIELDS = [
   "artefacts",
   "accursedDevices",
   "brazenMutations",
+  "brandsOfTheDarkGods",
+  "ensorcelledBanners",
   "aqshyArtefacts",
   "aqshyPrayerLores",
   "spellLores",

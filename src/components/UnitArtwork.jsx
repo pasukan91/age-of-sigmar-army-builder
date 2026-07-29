@@ -43,6 +43,8 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
     ? "/images/factions/ironjawz-army.webp"
     : keywords.includes("hedonites of slaanesh")
       ? "/images/factions/hedonites.webp"
+      : keywords.includes("slaves to darkness")
+        ? "/images/factions/slaves.webp"
       : keywords.includes("skaven")
         ? "/images/factions/skaven.webp"
         : keywords.includes("sylvaneth")

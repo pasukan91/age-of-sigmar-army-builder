@@ -46,6 +46,8 @@ function RegimentSection({
       unit?.specialKnickKnack,
       unit?.decorationForValour,
       unit?.ironweldInnovation,
+      unit?.brandOfDarkGod,
+      unit?.ensorcelledBanner,
     ].reduce(
       (total, enhancement) =>
         total + (Number(enhancement?.points) || 0),
@@ -506,6 +508,8 @@ function UnitCard({
     ["Special Knick-Knack", unit.specialKnickKnack],
     ["Decoration for Valour", unit.decorationForValour],
     ["Ironweld Innovation", unit.ironweldInnovation],
+    ["Brand of the Dark Gods", unit.brandOfDarkGod],
+    ["Ensorcelled Banner", unit.ensorcelledBanner],
   ].filter(([, enhancement]) => Boolean(enhancement));
 
   return (
