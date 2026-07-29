@@ -1,3 +1,17 @@
+function formatOrganisation(regiment) {
+  const organisation = Array.isArray(regiment.organisation)
+    ? regiment.organisation
+    : Array.isArray(regiment.units)
+      ? regiment.units
+      : Array.isArray(regiment.unitIds)
+        ? regiment.unitIds
+        : [];
+
+  return organisation.length > 0
+    ? organisation.join(" · ")
+    : "Composición no especificada";
+}
+
 function RenownSection({ available, selected, onAdd, onRemove }) {
   if (available.length === 0 && selected.length === 0) {
     return null;
@@ -14,7 +28,7 @@ function RenownSection({ available, selected, onAdd, onRemove }) {
           <div>
             <span className="aos-kicker">Incluido</span>
             <h3>{regiment.name}</h3>
-            <p>{regiment.organisation.join(" · ")}</p>
+            <p>{formatOrganisation(regiment)}</p>
           </div>
           <div className="aos-renown-card__actions">
             <strong>{regiment.points} pts</strong>
@@ -27,7 +41,7 @@ function RenownSection({ available, selected, onAdd, onRemove }) {
         <article className="aos-renown-card" key={regiment.id}>
           <div>
             <h3>{regiment.name}</h3>
-            <p>{regiment.organisation.join(" · ")}</p>
+            <p>{formatOrganisation(regiment)}</p>
           </div>
           <div className="aos-renown-card__actions">
             <strong>{regiment.points} pts</strong>
