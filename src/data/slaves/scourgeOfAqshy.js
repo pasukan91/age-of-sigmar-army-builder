@@ -20,8 +20,8 @@ export default [
       weapon("Karkadrak's Claws and Horn", "Melee", 4, "4+", "3+", 1, 2, ["Companion"]),
     ],
     abilities: [
-      ability("Ferocious Influence", "Any Combat Phase", "Si cargó, elige un enemigo en combate. +1 Damage a las armas Companion de esta unidad contra él y +1 a impactar con armas Companion de Cavalry y War Machines Slaves to Darkness amigas totalmente a 12\".", "Once Per Turn (Army)"),
-      ability("Wrathful Abandon", "End of Any Turn", "Si cargó, esta unidad y una Warriors of Chaos amiga no Hero que cargó y está totalmente a 12\" pueden mover tantas pulgadas como tu nivel de furia, manteniendo sus combates previos y sin entrar en otros.", "Once Per Turn (Army)"),
+      ability("Ferocious Influence", "Any Combat Phase", "If this unit charged this turn, pick an enemy unit in combat with it. Add 1 to the Damage characteristic of this unit's Companion weapons against that enemy, and add 1 to hit rolls for Companion weapons used by friendly Slaves to Darkness Cavalry and War Machines wholly within 12\".", "Once Per Turn (Army)"),
+      ability("Wrathful Abandon", "End of Any Turn", "If this unit charged this turn, this unit and 1 friendly non-Hero Warriors of Chaos unit that charged and is wholly within 12\" can each move a number of inches equal to your rage level. They must remain in any combats they were already in and cannot enter new combats.", "Once Per Turn (Army)"),
     ],
     rules: { hero: true, canBeReinforced: false },
   }),
@@ -40,7 +40,7 @@ export default [
     keywords: ["Infantry", "Champion", "Musician (1/10)", "Standard Bearer (1/10)", "Warriors of Chaos"],
     weapons: [weapon("Rune-etched Weapons", "Melee", 2, "3+", "3+", 1, 1, ["Crit (Auto-wound)"])],
     abilities: [
-      ability("For the Glory of the Dark Gods", "Your Hero Phase", "Hasta tu siguiente turno, aplica efectos acumulativos según tu furia: 1+, Ward (6+); 4+, Anti-charge (+1 Rend) en combate; 7, Strike-first mientras no haya cargado.", "Once Per Turn (Army)"),
+      ability("For the Glory of the Dark Gods", "Your Hero Phase", "Until the start of your next turn, apply the following cumulative effects based on your rage level: 1+, Ward (6+); 4+, this unit's combat weapons have Anti-charge (+1 Rend); 7, this unit has Strike-first while it has not charged.", "Once Per Turn (Army)"),
     ],
   }),
 ];

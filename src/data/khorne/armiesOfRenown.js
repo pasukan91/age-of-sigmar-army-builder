@@ -2,41 +2,41 @@ const r = (id,name,phase,description,type="Ability") => ({id,name,phase,descript
 
 const gorechosenRules = {
   battleTraits:[
-    r("murder-won-trophies","Murder-won Trophies","Deployment Phase","Elige un Hero Gorechosen Champions amigo y dale un artefacto de este ejército de renombre.","Once Per Battle (Army)"),
-    r("brutal-lashmaster","Brutal Lashmaster","Passive","Cuando Bloodstoker use Whipped to Fury, puede elegir otro Hero Gorechosen Champions dentro de su alcance en vez de una unidad Bloodbound no Hero."),
-    r("legendary-slayers","Legendary Slayers","Passive","Las armas Blood-hungry de unidades Gorechosen Champions amigas tienen Crit (Mortal)."),
-    r("red-gods-eye","The Red God's Eye","Passive","Las unidades Gorechosen Champions amigas tienen Ward (6+)."),
-    r("hate-fuelled-killers","Hate-fuelled Killers","Passive","Cuando una unidad fuera a ser destruida, con 5+ no lo es, ignora el daño restante y Heal (1)."),
+    r("murder-won-trophies","Murder-won Trophies","Deployment Phase","Pick a friendly Gorechosen Champions Hero and give it an artefact of power from this Army of Renown.","Once Per Battle (Army)"),
+    r("brutal-lashmaster","Brutal Lashmaster","Passive","When a Bloodstoker uses Whipped to Fury, it can pick another Gorechosen Champions Hero within its combat range instead of a non-Hero Bloodbound unit."),
+    r("legendary-slayers","Legendary Slayers","Passive","Blood-hungry weapons used by friendly Gorechosen Champions units have Crit (Mortal)."),
+    r("red-gods-eye","The Red God's Eye","Passive","Friendly Gorechosen Champions units have Ward (6+)."),
+    r("hate-fuelled-killers","Hate-fuelled Killers","Passive","When a friendly unit would be destroyed, on a 5+, it is not destroyed, any remaining damage points have no effect and it can Heal (1)."),
   ],
-  heroicTraits:[r("crowned-in-butchery","Crowned in Butchery","Passive","+20 al Control del portador mientras está en combate.")],
+  heroicTraits:[r("crowned-in-butchery","Crowned in Butchery","Passive","Add 20 to the bearer's control score while it is in combat.")],
   artefacts:[
-    r("warmongers-icon","Warmonger's Icon","Any Combat Phase","Una vez por batalla, el portador y hasta D3 unidades Gorechosen Champions amigas en su alcance obtienen Strike-first este turno.","Once Per Battle"),
-    r("scarring-blade","The Scarring Blade","Any Combat Phase","Asigna D3 puntos de daño al portador sin permitir wards. Este turno suma esa cantidad a Ataques de las armas de combate Gorechosen Champions amigas. El portador no puede usar Hate-fuelled Killers ni curarse durante el resto de la batalla."),
-    r("bloodmist-skull","Bloodmist Skull","Passive","Ward (3+) contra daño de ataques de disparo."),
+    r("warmongers-icon","Warmonger's Icon","Any Combat Phase","Once per battle, the bearer and up to D3 friendly Gorechosen Champions units within its combat range have Strike-first this turn.","Once Per Battle"),
+    r("scarring-blade","The Scarring Blade","Any Combat Phase","Allocate D3 damage points to the bearer; ward rolls cannot be made for those damage points. This turn, add that amount to the Attacks characteristic of combat weapons used by friendly Gorechosen Champions units. The bearer cannot use Hate-fuelled Killers and cannot be healed for the rest of the battle."),
+    r("bloodmist-skull","Bloodmist Skull","Passive","The bearer has Ward (3+) against damage points inflicted by shooting attacks."),
   ],
   prayerLores:[{id:"gorechosen-prayers",name:"Prayers of the Gorechosen",prayers:[
-    {...r("skin-of-brass","Skin of Brass","Your Hero Phase","CV 4, Unlimited. Hasta tu siguiente turno resta 1 al Rend de ataques contra una unidad amiga totalmente a 12\"; con 8+, elige un segundo objetivo."),chantingValue:4},
-    {...r("cowed-and-broken","Cowed and Broken","Your Hero Phase","CV 4. Tira 8 dados contra un enemigo a 12\" que esté en combate; cada 4+ causa 1 mortal, sumando 1 a cada dado con 8+."),chantingValue:4},
-    {...r("eruption-apoplexy","Eruption of Apoplexy","Your Hero Phase","CV 4. Un enemigo a 12\" en combate sufre D6 mortales. Si es destruido, antes de retirar la última miniatura, cada unidad a 6\" sufre D3 mortales, o D6 con 8+."),chantingValue:4},
+    {...r("skin-of-brass","Skin of Brass","Your Hero Phase","Chanting value 4, Unlimited. Until the start of your next turn, subtract 1 from the Rend characteristic of attacks that target a friendly unit wholly within 12\". If the chanting roll was 8+, pick a second target."),chantingValue:4},
+    {...r("cowed-and-broken","Cowed and Broken","Your Hero Phase","Chanting value 4. Roll 8 dice for an enemy unit within 12\" that is in combat. For each 4+, inflict 1 mortal damage, adding 1 to each roll if the chanting roll was 8+."),chantingValue:4},
+    {...r("eruption-apoplexy","Eruption of Apoplexy","Your Hero Phase","Chanting value 4. An enemy unit within 12\" that is in combat suffers D6 mortal damage. If it is destroyed, before removing its last model, each unit within 6\" suffers D3 mortal damage, or D6 if the chanting roll was 8+."),chantingValue:4},
   ]}],
   manifestationLores:[{id:"gorechosen-manifestations",name:"Manifestations of the Gorechosen",manifestations:["wrath-axe"]}],
 };
 
 const balefulRules = {
   battleTraits:[
-    r("born-of-butchery","Born of Butchery","Your Movement Phase","Elige una unidad Baleful Lords amiga no Unique destruida. Tira tantos dados como la ronda actual más el número de unidades amigas y enemigas destruidas; con 8 o más resultados de 3+, despliega una unidad de reemplazo idéntica totalmente a 7\" del borde y a más de 9\" del enemigo.","Once Per Turn"),
-    r("bellow-of-hatred","Bellow of Hatred","Any Combat Phase","Un Baleful Lord que no usó Rampage impide que enemigos en combate usen commands; él tampoco puede usar más Rampage este turno.","Once Per Turn (Army), Rampage"),
-    r("mage-eaters","Mage-eaters","Reaction: Opponent declared a Spell ability","Reacción a un spell que tenga como objetivo esta unidad: con 3+ se disipa; si la tirada fue 5+, el lanzador sufre D3 mortales.","Once Per Turn (Army), Reaction"),
-    r("first-in-his-sight","First in His Sight","End of Enemy Turn","Heal (D3) cada Hero Baleful Lords amigo en combate.","Once Per Turn (Army)"),
-    r("drawn-by-blood","Drawn by Blood","End of Your Turn","Una unidad que no usó Rampage mueve D6\" y solo puede acabar en combate con enemigos con los que empezó la fase; si destruyó una unidad, mueve 2D6\" y puede acabar con cualquier enemigo dañado este turno.","Rampage"),
-    r("price-of-mercy","The Price of Mercy","End of Your Turn","Debes elegir cada Baleful Lord que no cargó ni luchó. Por cada uno, con 2+ sufre 1 mortal.","Once Per Turn (Army)"),
-    r("sunder-sorcerous","Sunder the Sorcerous","End of Any Turn","Cada manifestación enemiga a 3\" es objetivo de una tirada de destierro 2D6; si se destierra, su invocador sufre D3 mortales.","Once Per Turn (Army)"),
+    r("born-of-butchery","Born of Butchery","Your Movement Phase","Pick a friendly non-Unique Baleful Lords unit that has been destroyed. Roll a number of dice equal to the current battle round plus the number of friendly and enemy units that have been destroyed. If 8 or more rolls are 3+, set up an identical replacement unit wholly within 7\" of a battlefield edge and more than 9\" from all enemy units.","Once Per Turn"),
+    r("bellow-of-hatred","Bellow of Hatred","Any Combat Phase","Pick a Baleful Lord that has not used a Rampage ability this turn. Enemy units in combat with it cannot use commands this turn, and it cannot use any other Rampage abilities this turn.","Once Per Turn (Army), Rampage"),
+    r("mage-eaters","Mage-eaters","Reaction: Opponent declared a Spell ability","Reaction to a spell ability that targets this unit: on a 3+, the spell is unbound. If the roll was 5+, the caster also suffers D3 mortal damage.","Once Per Turn (Army), Reaction"),
+    r("first-in-his-sight","First in His Sight","End of Enemy Turn","Each friendly Baleful Lords Hero that is in combat can Heal (D3).","Once Per Turn (Army)"),
+    r("drawn-by-blood","Drawn by Blood","End of Your Turn","Pick a unit that has not used a Rampage ability this turn. It can move D6\" and can only end that move in combat with enemy units it was in combat with at the start of the phase. If it destroyed a unit this turn, it can move 2D6\" instead and can end that move in combat with any enemy unit damaged this turn.","Rampage"),
+    r("price-of-mercy","The Price of Mercy","End of Your Turn","You must pick each Baleful Lord that did not charge or fight this turn. For each one, on a 2+, inflict 1 mortal damage on it.","Once Per Turn (Army)"),
+    r("sunder-sorcerous","Sunder the Sorcerous","End of Any Turn","Make a 2D6 banishment roll for each enemy manifestation within 3\". If a manifestation is banished, its summoner suffers D3 mortal damage.","Once Per Turn (Army)"),
   ],
-  heroicTraits:[r("unrivalled-battlelust","Unrivalled Battlelust","Any Combat Phase","+1 Ataques para unidades Baleful Lords amigas totalmente a 12\" este turno.","Once Per Battle (Army)")],
-  artefacts:[r("crown-slaughterborn","Crown of the Slaughterborn","Passive","Los enemigos a 12\" no pueden curarse ni devolver miniaturas eliminadas.")],
+  heroicTraits:[r("unrivalled-battlelust","Unrivalled Battlelust","Any Combat Phase","Add 1 to the Attacks characteristic of combat weapons used by friendly Baleful Lords units wholly within 12\" this turn.","Once Per Battle (Army)")],
+  artefacts:[r("crown-slaughterborn","Crown of the Slaughterborn","Passive","Enemy units within 12\" cannot be healed and slain models cannot be returned to them.")],
 };
 
 export default [
-  {id:"gorechosen-champions",name:"Gorechosen Champions",excludesRegimentsOfRenown:true,roster:["0-1 Mighty Lord of Khorne (debe ser general)","Slaughterpriests","Bloodsecrators","Bloodstokers","Realmgore Ritualists","Skullgrinders","Deathbringers"],rules:gorechosenRules},
+  {id:"gorechosen-champions",name:"Gorechosen Champions",excludesRegimentsOfRenown:true,roster:["0-1 Mighty Lord of Khorne (must be the general)","Slaughterpriests","Bloodsecrators","Bloodstokers","Realmgore Ritualists","Skullgrinders","Deathbringers"],rules:gorechosenRules},
   {id:"the-baleful-lords",name:"The Baleful Lords",excludesRegimentsOfRenown:true,roster:["Any Monster Hero Daemon units"],rules:balefulRules},
 ];

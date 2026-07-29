@@ -36,12 +36,12 @@ const armiesOfRenown = [
   {
     id: "change-cult-uprising", name: "Change-cult Uprising", requiredUnits: [], excludesRegimentsOfRenown: true,
     rules: changeCultRules, roster: ["Any non-Warflock Arcanite units"],
-    description: "Una insurrección de cultistas Arcanite no Warflock que sustituye las reglas normales de facción.",
+    description: "An insurrection of non-Warflock Arcanite cultists that replaces the normal faction rules.",
   },
   {
     id: "the-oracles-of-fate", name: "The Oracles of Fate", requiredUnits: ["kairos-fateweaver"], excludesRegimentsOfRenown: true, excludesFactionTerrain: true,
     rules: oraclesRules, roster: ["Kairos Fateweaver", "Any Disciples of Tzeentch Daemon units"],
-    description: "Kairos conduce un ejército exclusivamente daemónico basado en nueve dados de destino.",
+    description: "Kairos leads an exclusively daemonic army built around nine destiny dice.",
   },
 ];
 

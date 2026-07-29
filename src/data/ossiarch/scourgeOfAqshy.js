@@ -2,7 +2,7 @@ import units from "./units";
 import { ability } from "./unitFactory";
 
 const legalNote =
-  "Warscroll de temporada de Scourge of Aqshy. Legal con el battlepack General's Handbook 2026-27.";
+  "Seasonal Scourge of Aqshy warscroll. Legal with the General's Handbook 2026-27 battlepack.";
 
 function alternateUnit(baseId, overrides) {
   const base = units.find((unit) => unit.id === baseId);

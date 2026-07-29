@@ -371,7 +371,7 @@ const units = [
       ability("Diversionary Assault", "Your Charge Phase", "Pick a visible friendly Gutter Runners unit wholly within 13\". Add 2 to its charge rolls for the rest of the turn."),
       ability("Shadowblood Cloak", "Any Combat Phase", "Pick a visible friendly Eshin unit with 2 or more models wholly within 18\". On a 3+, set this unit up wholly within 6\" of that unit; it can be set up in combat."),
     ],
-    notes: "Perfil del suplemento Battletome: Skaven Eshin.",
+    notes: "Profile from the Battletome Supplement: Skaven Eshin.",
   }),
   ...[
     { id: "stormfiends", name: "Stormfiends", points: 230, models: 3, move: '6"', health: 6, control: 2, save: "4+", base: "60mm", clans: ["Skryre", "Moulder", "Infantry"], weapons: [weapon("Ratling Cannons", "Ranged", "3D6", "4+", "3+", "1", "1", [], '15"'), weapon("Windlaunchers", "Ranged", 3, "4+", "3+", "2", "D3", [], '15"'), weapon("Warpfire Projectors", "Ranged", "2D6", "2+", "4+", "2", "1", ["Shoot in Combat"], '10"'), weapon("Doomflayer Gauntlets", "Melee", 5, "4+", "2+", "2", "D3", ["Charge (+1 Damage)"]), weapon("Grinderfists", "Melee", 4, "4+", "2+", "2", "2"), weapon("Shock Gauntlets", "Melee", 4, "4+", "2+", "1", "2"), weapon("Clubbing Blows", "Melee", 3, "4+", "2+", "1", "2")], abilityName: "Grinderfist Tunnellers", abilityPhase: "Any Movement Phase", abilityType: "Once Per Turn (Army)", abilityText: "If armed with Grinderfists and in the tunnels below, set this unit up more than 9\" from enemies.", extraAbilities: [ability("Shock Gauntlets", null, "Critical hits made with Shock Gauntlets score D6 hits instead of 1.", "Passive")] },

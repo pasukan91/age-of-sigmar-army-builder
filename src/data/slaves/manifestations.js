@@ -21,9 +21,9 @@ export default [
     abilities: [{
       name: "Fuelled by Sorcery",
       phase: "Passive",
-      description: "Cada spell lanzado por una unidad a 12\" le da 1 punto de energía ruinosa, hasta 6. Suma 1 a Ataques de Darkfire Torrent por cada punto; los pierde al ser retirado.",
+      description: "Each spell successfully cast by a unit within 12\" gives this manifestation 1 ruinous energy point, to a maximum of 6. Add 1 to the Attacks characteristic of Darkfire Torrent for each point. All points are lost when this manifestation is removed from play.",
     }],
-    summonSpell: summon("Darkfire Daemonrift", "Despliega un Darkfire Daemonrift totalmente a 12\" del lanzador, visible y a más de 9\" del enemigo."),
+    summonSpell: summon("Darkfire Daemonrift", "Set up a Darkfire Daemonrift wholly within 12\" of and visible to the caster, and more than 9\" from all enemy units."),
     keywords: ["Manifestation", "Endless Spell", "Fly", "Ward (6+)", "Chaos", "Slaves to Darkness"],
   },
   {
@@ -36,9 +36,9 @@ export default [
     abilities: [{
       name: "Debilitating Shockwave",
       phase: "Any Charge Phase",
-      description: "Si cargó, elige un enemigo a 1\" y tira por cada miniatura; cada 6 causa 1 mortal. Si mata alguna, el objetivo tiene -1 a impactar este turno.",
+      description: "If this manifestation charged this phase, pick an enemy unit within 1\" and roll a dice for each model in that unit. For each 6, inflict 1 mortal damage. If any models are slain, subtract 1 from hit rolls for that unit's attacks this turn.",
     }],
-    summonSpell: summon("Realmscourge Rupture", "Despliega una Realmscourge Rupture totalmente a 12\" del lanzador, visible y a más de 9\" del enemigo."),
+    summonSpell: summon("Realmscourge Rupture", "Set up a Realmscourge Rupture wholly within 12\" of and visible to the caster, and more than 9\" from all enemy units."),
     keywords: ["Manifestation", "Endless Spell", "Fly", "Ward (6+)", "Chaos", "Slaves to Darkness"],
   },
   {
@@ -51,9 +51,9 @@ export default [
     abilities: [{
       name: "Empowered by Atrocity",
       phase: "Passive",
-      description: "Si 2 o más unidades amigas o enemigas fueron destruidas este turno, +1 Ataques en combate para unidades Slaves to Darkness amigas totalmente a 12\" durante el resto del turno.",
+      description: "If 2 or more friendly or enemy units were destroyed this turn, add 1 to the Attacks characteristic of combat weapons used by friendly Slaves to Darkness units wholly within 12\" for the rest of the turn.",
     }],
-    summonSpell: summon("Eightfold Doom-Sigil", "Despliega un Eightfold Doom-Sigil totalmente a 12\" del lanzador y visible."),
+    summonSpell: summon("Eightfold Doom-Sigil", "Set up an Eightfold Doom-Sigil wholly within 12\" of and visible to the caster."),
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)", "Chaos", "Slaves to Darkness"],
   },
 ];

@@ -23,14 +23,14 @@ const scourgeUnits = [
       ability("You Ain't Gonna Show Me Up", "End of Any Turn", "If this unit fought this turn, spend 1 rage dice and add 1 permanently to the Damage of its Boss-choppa. If your opponent has lower fury, they gain 1 fury.", "Once Per Turn (Army)"),
     ],
     weapons: [weapon("Boss-choppa", "Melee", 8, "4+", "2+", "1", "2")],
-    details: { notes: "Legal para juego equilibrado con el battlepack General's Handbook 2026-27." },
+    details: { notes: "Legal for matched play with the General's Handbook 2026-27 battlepack." },
   }),
   alternate("brutes", {
     id: "brutes-scourge-of-aqshy",
     name: "Scourge of Aqshy Brutes",
     points: 160,
     abilities: [ability("You Call Dat a Punch?", "Reaction: Opponent declared an Attack ability", "Add 1 to hit and wound rolls for this unit's combat attacks that target the attacking enemy for the rest of the turn.", "Once Per Turn (Army)")],
-    details: { notes: "Legal para juego equilibrado con el battlepack General's Handbook 2026-27." },
+    details: { notes: "Legal for matched play with the General's Handbook 2026-27 battlepack." },
   }),
 ];
 

@@ -69,7 +69,7 @@ export default [
     requiredUnits: ["sigvald-prince-of-slaanesh"],
     excludesRegimentsOfRenown: true,
     roster: ["Sigvald, Prince of Slaanesh", "Any non-War Machine Sybarite units", "Up to 1 Daemonettes unit", "Up to 1 Contorted Epitome"],
-    description: "Un ejército liderado por Sigvald y formado alrededor de Sybarites mortales, con apoyo demoníaco limitado.",
+    description: "An army led by Sigvald and built around mortal Sybarites, with limited daemonic support.",
     rules: decadentHostRules,
   },
   {
@@ -79,7 +79,7 @@ export default [
     excludesRegimentsOfRenown: true,
     roster: ["Dexcessa, the Talon of Slaanesh", "Synessa, the Voice of Slaanesh", "Any non-Unique Hedonites of Slaanesh Daemon units"],
     restrictions: ["Dexcessa and Synessa cannot be in the same regiment"],
-    description: "Los gemelos divinos dirigen una corte compuesta exclusivamente por demonios no únicos.",
+    description: "The divine twins lead a court composed exclusively of non-Unique daemons.",
     rules: courtRules,
   },
 ];

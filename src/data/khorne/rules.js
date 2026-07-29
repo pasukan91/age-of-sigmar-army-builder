@@ -1,56 +1,56 @@
 const rule = (id, name, phase, description, type = "Ability") => ({ id, name, phase, description, type, points: 0 });
 
 export const battleTraits = [
-  rule("blood-drenched", "Blood-drenched", "Reaction: You declared Skulls for the Skull Throne", "Después de resolver Skulls for the Skull Throne, si has desbloqueado una habilidad de Tributo de Sangre este turno, elige una unidad Blades of Khorne amiga. Durante el resto de la batalla: ignora modificadores positivos a su salvación; si es Bloodbound, sus armas Blood-hungry obtienen Crit (Mortal); si es Daemon no Monster, sus armas Blood-hungry, incluidas las Companion, obtienen +1 Rend; si es Monster, sus armas Blood-hungry obtienen +1 Damage.", "Once Per Turn, Reaction"),
-  rule("blood-for-the-blood-god", "Blood for the Blood God", "Passive", "Gana 1 punto de tributo de sangre cada vez que una unidad amiga o enemiga es destruida. Los puntos se gastan para desbloquear permanentemente habilidades de tributo."),
-  rule("skulls-for-the-skull-throne", "Skulls for the Skull Throne", "Start of Any Turn", "Gasta los puntos indicados para desbloquear una habilidad de tributo de sangre disponible.", "Once Per Turn (Army)"),
-  rule("murderlust", "Murderlust — 0", "Any Charge Phase", "Reacción a una carga amiga: sustituye uno de los dados de carga por una tirada nueva. Si lo haces, tras cargar la unidad sufre D3 daños mortales.", "Once Per Turn (Army), Blood Tithe"),
-  rule("divine-scorn", "Divine Scorn — 1", "Start of Any Turn", "Elige hasta 3 Wizards o Priests enemigos a 6\" de unidades Khorne amigas. Con 3+, resta 1 a su nivel de poder hasta tu siguiente turno (mínimo 0).", "Blood Tithe"),
-  rule("punish-the-pacifist", "Punish the Pacifist — 1", "Your Combat Phase", "Tira un dado por cada unidad y manifestación enemiga que no esté en combate y por cada unidad amiga que no esté en combate. Con 1-2, las amigas sufren 1 mortal; con 3+, las enemigas sufren 1 mortal.", "Once Per Turn (Army), Blood Tithe"),
-  rule("murder-the-mystic", "Murder the Mystic — 2", "Your Hero Phase", "Requiere Divine Scorn. Intenta desterrar hasta 4 manifestaciones enemigas. Cada una desterrada inflige D3 mortales a cada enemigo a 3\".", "Once Per Turn (Army), Blood Tithe"),
-  rule("glorious-combat-or-naught", "Glorious Combat or Naught — 2", "Passive", "Requiere Divine Scorn o Punish the Pacifist. Resta 1 a impactar con ataques de disparo que tengan como objetivo unidades Khorne amigas.", "Blood Tithe"),
-  rule("revel-in-battle", "Revel in Battle — 3", "Passive", "Requiere Punish the Pacifist. Las habilidades de armas que no sean Companion no afectan a ataques de combate de unidades enemigas que cargaron contra Khorne.", "Blood Tithe"),
-  rule("slaughter-triumphant", "Slaughter Triumphant — 4", "Passive", "Requiere Glorious Combat or Naught o Murder the Mystic. +1 Ataques a las armas de unidades Khorne amigas que cargaron este turno.", "Blood Tithe"),
-  rule("cleave-wide-the-grin", "Cleave Wide the Grin — 4", "Passive", "Requiere Revel in Battle o Glorious Combat or Naught. +1 a impactar con ataques de combate Khorne amigos.", "Blood Tithe"),
+  rule("blood-drenched", "Blood-drenched", "Reaction: You declared Skulls for the Skull Throne", "After resolving Skulls for the Skull Throne, if you unlocked a Blood Tithe ability this turn, pick a friendly Blades of Khorne unit. For the rest of the battle: ignore positive modifiers to its save rolls; if it is Bloodbound, its Blood-hungry weapons gain Crit (Mortal); if it is a non-Monster Daemon, its Blood-hungry weapons, including Companion weapons, gain +1 Rend; if it is a Monster, its Blood-hungry weapons gain +1 Damage.", "Once Per Turn, Reaction"),
+  rule("blood-for-the-blood-god", "Blood for the Blood God", "Passive", "Gain 1 blood tithe point each time a friendly or enemy unit is destroyed. Blood tithe points are spent to permanently unlock Blood Tithe abilities."),
+  rule("skulls-for-the-skull-throne", "Skulls for the Skull Throne", "Start of Any Turn", "Spend the indicated number of blood tithe points to unlock an available Blood Tithe ability.", "Once Per Turn (Army)"),
+  rule("murderlust", "Murderlust — 0", "Any Charge Phase", "Reaction to a friendly charge: replace one of the charge dice with a new roll. If you do so, after that unit charges, it suffers D3 mortal damage.", "Once Per Turn (Army), Blood Tithe"),
+  rule("divine-scorn", "Divine Scorn — 1", "Start of Any Turn", "Pick up to 3 enemy Wizards or Priests within 6\" of friendly Khorne units. On a 3+, subtract 1 from the target's power level until the start of your next turn (to a minimum of 0).", "Blood Tithe"),
+  rule("punish-the-pacifist", "Punish the Pacifist — 1", "Your Combat Phase", "Roll a dice for each enemy unit and manifestation that is not in combat and for each friendly unit that is not in combat. On a 1-2, the friendly unit suffers 1 mortal damage; on a 3+, the enemy unit or manifestation suffers 1 mortal damage.", "Once Per Turn (Army), Blood Tithe"),
+  rule("murder-the-mystic", "Murder the Mystic — 2", "Your Hero Phase", "Requires Divine Scorn. Make a banishment roll for up to 4 enemy manifestations. Each manifestation banished by this ability inflicts D3 mortal damage on each enemy unit within 3\" of it.", "Once Per Turn (Army), Blood Tithe"),
+  rule("glorious-combat-or-naught", "Glorious Combat or Naught — 2", "Passive", "Requires Divine Scorn or Punish the Pacifist. Subtract 1 from hit rolls for shooting attacks that target friendly Khorne units.", "Blood Tithe"),
+  rule("revel-in-battle", "Revel in Battle — 3", "Passive", "Requires Punish the Pacifist. Weapon abilities other than Companion have no effect on combat attacks made by enemy units that charged a Khorne unit this turn.", "Blood Tithe"),
+  rule("slaughter-triumphant", "Slaughter Triumphant — 4", "Passive", "Requires Glorious Combat or Naught or Murder the Mystic. Add 1 to the Attacks characteristic of weapons used by friendly Khorne units that charged this turn.", "Blood Tithe"),
+  rule("cleave-wide-the-grin", "Cleave Wide the Grin — 4", "Passive", "Requires Revel in Battle or Glorious Combat or Naught. Add 1 to hit rolls for combat attacks made by friendly Khorne units.", "Blood Tithe"),
 ];
 
 export const battleFormations = [
-  rule("khornate-legion", "Khornate Legion — Butchers of Nations", "Any Combat Phase", "Después de que luche un Daemon amigo, una unidad Bloodbound amiga totalmente a 12\" que no haya luchado puede hacerlo inmediatamente.", "Once Per Turn (Army), Reaction"),
-  rule("brass-stampede", "Brass Stampede — Drawn to Carnage", "Passive", "Suma X a las cargas Khorne, donde X es el número de Cavalry o Monsters Khorne amigos totalmente a 12\" que ya cargaron esta fase."),
-  rule("bloodbound-warhorde", "Bloodbound Warhorde — Tireless Conquerors", "Passive", "+1 a impactar en combate para Bloodbound contra enemigos que disputan un objetivo que no controlas."),
-  rule("murderhost", "Murderhost — Eager Killers", "End of Your Turn", "Cada Daemon amigo que haya luchado y ya no esté en combate puede mover D6\", sin terminar en combate."),
+  rule("khornate-legion", "Khornate Legion — Butchers of Nations", "Any Combat Phase", "After a friendly Daemon unit uses a Fight ability, pick a friendly Bloodbound unit wholly within 12\" of it that has not used a Fight ability this phase to use a Fight ability immediately after the first has been resolved.", "Once Per Turn (Army), Reaction"),
+  rule("brass-stampede", "Brass Stampede — Drawn to Carnage", "Passive", "Add X to charge rolls for friendly Khorne units, where X is the number of friendly Khorne Cavalry or Monster units wholly within 12\" that have charged in the same phase."),
+  rule("bloodbound-warhorde", "Bloodbound Warhorde — Tireless Conquerors", "Passive", "Add 1 to hit rolls for combat attacks made by friendly Bloodbound units that target enemy units contesting an objective you do not control."),
+  rule("murderhost", "Murderhost — Eager Killers", "End of Your Turn", "Each friendly Daemon unit that used a Fight ability this turn and is no longer in combat can move D6\". It cannot end that move in combat."),
 ];
 
 export const heroicTraits = [
-  rule("magical-scorn", "Magical Scorn", "Passive", "Wizards y Priests enemigos a 12\" tienen -1 a lanzar y cantar."),
-  rule("frenzied-taskmaster", "Frenzied Taskmaster", "Your Movement Phase", "Una Infantry o Cavalry Khorne amiga dentro del alcance de combate que no esté en combate mueve D6\" sin acabar en combate; si termina dentro del alcance del portador, sufre tantos mortales como la tirada."),
-  rule("skull-collector", "Skull Collector", "End of Any Turn", "Si el portador mató a un Hero enemigo con ataques de combate este turno, +1 Ataques a sus armas de combate durante el resto de la batalla. Acumulativo."),
+  rule("magical-scorn", "Magical Scorn", "Passive", "Subtract 1 from casting and chanting rolls for enemy Wizards and Priests within 12\" of the bearer."),
+  rule("frenzied-taskmaster", "Frenzied Taskmaster", "Your Movement Phase", "Pick a friendly Khorne Infantry or Cavalry unit within the bearer's combat range that is not in combat. That unit can move D6\" but cannot end that move in combat. If it ends the move within the bearer's combat range, inflict mortal damage on it equal to the roll."),
+  rule("skull-collector", "Skull Collector", "End of Any Turn", "If the bearer destroyed an enemy Hero with combat attacks this turn, add 1 to the Attacks characteristic of the bearer's combat weapons for the rest of the battle. This effect is cumulative."),
 ];
 
 export const artefacts = [
-  rule("collar-of-contempt", "Collar of Contempt", "Passive", "El portador puede disipar como Wizard (1). Tras una disipación exitosa, el lanzador sufre D3 mortales."),
-  rule("butchers-blade", "Butcher's Blade", "End of Your Turn", "Por cada enemigo dañado por los ataques de combate del portador este turno, con 2+ inflige D3 mortales."),
-  rule("argath", "Ar'gath, the King of Blades", "Passive", "Los Heroes enemigos en combate con el portador no pueden hacer tiradas de ward."),
+  rule("collar-of-contempt", "Collar of Contempt", "Passive", "The bearer can use Unbind abilities as if it had Wizard (1). Each time the bearer successfully unbinds a spell, the caster suffers D3 mortal damage."),
+  rule("butchers-blade", "Butcher's Blade", "End of Your Turn", "For each enemy unit damaged by the bearer's combat attacks this turn, on a 2+, inflict D3 mortal damage on that unit."),
+  rule("argath", "Ar'gath, the King of Blades", "Passive", "Enemy Heroes in combat with the bearer cannot make ward rolls."),
 ];
 
 export const prayerLores = [{
   id: "blood-blessings-of-khorne", name: "Blood Blessings of Khorne", prayers: [
-    { ...rule("uncontrollable-rage", "Uncontrollable Rage", "Your Hero Phase", "CV 4, Unlimited. Una unidad amiga totalmente a 12\" obtiene los efectos de Blood-drenched hasta tu siguiente turno; con 8+, ignora Wild-eyed Brutality."), chantingValue: 4 },
-    { ...rule("blood-boil", "Blood Boil", "Your Hero Phase", "CV 4. Tira un dado por miniatura de un enemigo visible a 18\"; cada 5+ causa 1 mortal. Con 8+, además -1 a herir con sus ataques hasta tu siguiente turno."), chantingValue: 4 },
-    { ...rule("final-act-of-violence", "Final Act of Violence", "Your Hero Phase", "CV 4. Hasta tu siguiente turno, cuando una miniatura de la unidad Khorne objetivo muera por un ataque de combate, tira un dado (2 con 8+); cada 5+ causa 1 mortal al atacante tras luchar."), chantingValue: 4 },
+    { ...rule("uncontrollable-rage", "Uncontrollable Rage", "Your Hero Phase", "Chanting value 4, Unlimited. Pick a friendly unit wholly within 12\" to gain the effects of Blood-drenched until the start of your next turn. If the chanting roll was 8+, it also ignores Wild-eyed Brutality."), chantingValue: 4 },
+    { ...rule("blood-boil", "Blood Boil", "Your Hero Phase", "Chanting value 4. Roll a dice for each model in an enemy unit visible to the chanter and within 18\". For each 5+, inflict 1 mortal damage on that unit. If the chanting roll was 8+, also subtract 1 from wound rolls for that unit's attacks until the start of your next turn."), chantingValue: 4 },
+    { ...rule("final-act-of-violence", "Final Act of Violence", "Your Hero Phase", "Chanting value 4. Until the start of your next turn, each time a model in the target Khorne unit is slain by a combat attack, roll a dice, or 2 dice if the chanting roll was 8+. For each 5+, after the attacking unit's Fight ability is resolved, inflict 1 mortal damage on it."), chantingValue: 4 },
   ],
 }];
 
 export const aqshyPrayerLores = [{
   id: "proclamations-of-slaughter", name: "Proclamations of Slaughter", prayers: [
-    { ...rule("fetters-of-blood", "Fetters of Blood", "Your Hero Phase", "CV 4. Un enemigo a 18\" no puede Run, Retreat ni ser retirado y redesplegado hasta tu siguiente turno; con 8+, elige un segundo objetivo."), chantingValue: 4 },
-    { ...rule("stoke-the-flames", "Stoke the Flames", "Your Hero Phase", "CV 3, Unlimited. Hasta tu siguiente turno el rival no puede gastar rage dice para Fight Through the Pain contra la unidad objetivo. Si esta es destruida, gana 1 rage die, o 2 con 6+."), chantingValue: 3 },
-    { ...rule("gift-of-apoplexy", "Gift of Apoplexy", "Your Hero Phase", "CV 3. Hasta tu siguiente turno, después de que el enemigo objetivo use una habilidad que no sea Move o Fight, sufre D3 mortales, o 3 con un cántico de 8+."), chantingValue: 3 },
+    { ...rule("fetters-of-blood", "Fetters of Blood", "Your Hero Phase", "Chanting value 4. Pick an enemy unit within 18\". Until the start of your next turn, it cannot use Run or Retreat abilities or be removed from the battlefield and set up again. If the chanting roll was 8+, pick a second target."), chantingValue: 4 },
+    { ...rule("stoke-the-flames", "Stoke the Flames", "Your Hero Phase", "Chanting value 3, Unlimited. Until the start of your next turn, your opponent cannot spend rage dice to use Fight Through the Pain for the target unit. If that unit is destroyed, gain 1 rage die, or 2 if the chanting roll was 6+."), chantingValue: 3 },
+    { ...rule("gift-of-apoplexy", "Gift of Apoplexy", "Your Hero Phase", "Chanting value 3. Until the start of your next turn, after the target enemy unit uses an ability other than Move or Fight, it suffers D3 mortal damage, or 3 mortal damage if the chanting roll was 8+."), chantingValue: 3 },
   ],
 }];
 
 export const brazenMutations = [
-  { id: "brass-flesh", name: "Brass Flesh", points: 20, phase: "Passive", description: "Las tiradas de salvación sin modificar de 5+ para esta unidad no pueden fallar." },
-  { id: "blade-limbs", name: "Blade-limbs", points: 20, phase: "Passive", description: "Al usar Eruption of Fury, por cada 6 sin modificar para impactar inflige 3 mortales adicionales a cada enemigo en combate, en vez de D3." },
-  { id: "scorpion-tails", name: "Scorpion Tails", points: 10, phase: "Any Combat Phase", description: "Un enemigo en combate sufre D3 mortales; si su tamaño inicial era 1, además -1 a herir en combate este turno." },
+  { id: "brass-flesh", name: "Brass Flesh", points: 20, phase: "Passive", description: "Unmodified save rolls of 5+ for this unit cannot fail." },
+  { id: "blade-limbs", name: "Blade-limbs", points: 20, phase: "Passive", description: "When this unit uses Eruption of Fury, for each unmodified hit roll of 6, inflict 3 additional mortal damage on each enemy unit in combat with it instead of D3." },
+  { id: "scorpion-tails", name: "Scorpion Tails", points: 10, phase: "Any Combat Phase", description: "Pick an enemy unit in combat with this unit to suffer D3 mortal damage. If that enemy unit had a starting size of 1, also subtract 1 from wound rolls for its combat attacks this turn." },
 ];

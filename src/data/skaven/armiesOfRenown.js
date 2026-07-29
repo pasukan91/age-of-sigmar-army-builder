@@ -10,7 +10,7 @@ const greatGnawhordeRules = {
   artefacts: [{ id: "icon-of-great-total-supremacy", name: "Icon of Great-total Supremacy", points: 0, source: "Army of Renown", description: "Once per battle, return up to D3 slain models to each friendly Gnawhorde Infantry unit with Health 3 or less." }],
   spellLores: [{ id: "deafening-frenzy-lore", name: "Deafening Frenzy", spells: [{ id: "deafening-frenzy", name: "Deafening Frenzy", castingValue: 7, description: "A friendly Gnawhorde Infantry unit gains Strike-first but cannot use commands until your next turn." }] }],
   prayerLores: [{ id: "reverberating-ritual-lore", name: "Reverberating Ritual", prayers: [{ id: "reverberating-ritual", name: "Reverberating Ritual", chantingValue: 4, description: "A friendly Gnawhorde Infantry unit can pile in an extra 3\"; on an 8+, also add 1 to its control score." }] }],
-  manifestationLores: [{ id: "gnawhorde-manifestations", name: "Vermintide", description: "Esta formación puede invocar Vermintide." }],
+  manifestationLores: [{ id: "gnawhorde-manifestations", name: "Vermintide", description: "This formation can summon Vermintide." }],
   terrain: [],
 };
 
@@ -26,7 +26,7 @@ const mutatedMenagerieRules = {
   artefacts: [{ id: "warpstone-innards", name: "Warpstone Innards", points: 0, source: "Army of Renown", description: "Once per battle, add 1 Attack permanently to a nearby non-Hero Mutated Menagerie Monster; it then suffers D3 damage at the end of each turn." }],
   spellLores: [{ id: "untapped-mutation-lore", name: "Untapped Mutation", spells: [{ id: "untapped-mutation", name: "Untapped Mutation", castingValue: 7, description: "Convert the end-of-turn damage from More-more Mutation! into extra control until your next turn." }] }],
   prayerLores: [],
-  manifestationLores: [{ id: "menagerie-manifestations", name: "Warp Lightning Vortex", description: "Esta formación puede invocar Warp Lightning Vortex." }],
+  manifestationLores: [{ id: "menagerie-manifestations", name: "Warp Lightning Vortex", description: "This formation can summon Warp Lightning Vortex." }],
   terrain: [],
 };
 
@@ -45,7 +45,7 @@ const armiesOfRenown = [
       "Non-Unique Skryre units",
       "Non-Unique Moulder units",
     ],
-    description: "La comitiva de Vizzik reúne unidades no únicas de Masterclan, Verminus, Skryre y Moulder bajo las Warpshatter Throes.",
+    description: "Vizzik's entourage brings together non-Unique Masterclan, Verminus, Skryre and Moulder units under the Warpshatter Throes.",
   },
   {
     id: "thanquols-mutated-menagerie",
@@ -62,7 +62,7 @@ const armiesOfRenown = [
       "Brood Terror",
       "Stormfiends",
     ],
-    description: "Thanquol dirige una colección restringida de mutantes Moulder y Stormfiends, potenciados con More-more Mutation!.",
+    description: "Thanquol leads a restricted collection of Moulder mutants and Stormfiends enhanced by More-more Mutation!.",
   },
 ];
 

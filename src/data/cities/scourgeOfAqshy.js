@@ -14,7 +14,7 @@ function alternate(baseId, overrides) {
 }
 
 const legalNote =
-  "Warscroll de temporada de Scourge of Aqshy. Legal en juego equilibrado con el battlepack General's Handbook 2026-27.";
+  "Seasonal Scourge of Aqshy warscroll. Legal for matched play with the General's Handbook 2026-27 battlepack.";
 
 const scourgeUnits = [
   alternate("alchemite-warforger", {

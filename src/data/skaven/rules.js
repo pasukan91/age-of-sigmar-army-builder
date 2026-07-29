@@ -229,7 +229,7 @@ export const spellLores = [
   {
     id: "lore-of-ruin",
     name: "Lore of Ruin",
-    description: "Magia ruinosa del Gran Rata Cornuda.",
+    description: "Ruinous magic of the Great Horned Rat.",
     spells: [
       { id: "skitterleap", name: "Skitterleap", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Move a visible friendly Skaven Hero wholly within 13\" to a new position more than 9\" from enemies." },
       { id: "wither", name: "Wither", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Pick a visible enemy unit within 13\" and inflict D3 mortal damage." },
@@ -242,7 +242,7 @@ export const prayerLores = [
   {
     id: "noxious-prayers",
     name: "Noxious Prayers",
-    description: "Plegarias pestilentes de los Skaven.",
+    description: "Pestilent prayers of the Skaven.",
     prayers: [
       { id: "filth-crust", name: "Filth-crust", chantingValue: 4, phase: "Your Hero Phase", description: "Add 1 to wound rolls for a friendly Skaven Infantry unit's combat attacks. On an 8+, its melee weapons also gain Crit (Mortal)." },
       { id: "bile-torrent", name: "Bile-torrent", chantingValue: 4, phase: "Your Hero Phase", description: "Roll one dice per model in an enemy unit within 13\"; each 5+ inflicts 1 mortal damage, or each 4+ on an 8+ chant." },

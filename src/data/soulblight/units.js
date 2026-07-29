@@ -52,7 +52,7 @@ const units = [
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, Shordemaire's Claws has 5 Attacks.", "Passive"),
       ability("The Saint of Slaughter", "End of Any Turn", "Pick a friendly non-Monster Vampire wholly within 12\" that destroyed a unit using Fight. Permanently add 2\" Move, 1 melee Attack, or 1 melee Damage. Each option can affect a unit once and the effects are cumulative."),
-      ability("Trail of Crimson", "Any Combat Phase", "Esta unidad puede hacer un movimiento de pile-in aunque no esté en combate. Después, si está en combate, elige un enemigo en combate con ella y, con 4+, inflige daño mortal igual a la tirada.", "Once Per Turn (Army)", ["Rampage"]),
+      ability("Trail of Crimson", "Any Combat Phase", "This unit can make a pile-in move even if it is not in combat. Then, if it is in combat, pick an enemy unit in combat with it and roll a dice. On a 4+, inflict mortal damage equal to the roll.", "Once Per Turn (Army)", ["Rampage"]),
       ability("Quickblood", "Your Hero Phase", "Spell (7): this unit has Strike-first until the start of your next turn.", "Spell", ["Spell"]),
     ],
   }),
@@ -386,7 +386,7 @@ const units = [
       weapon("Skeletal Steed's Hooves and Teeth", "Melee", 2, "5+", "3+", "0", "1", ["Companion"]),
     ],
     abilities: [
-      ability("The Ancient Barrow Curse", null, "Resta 1 a las tiradas de salvación de las unidades enemigas que hayan recibido un impacto crítico de Baleful Tomb Weapon durante el resto de la batalla, incluso si esta unidad ha sido destruida.", "Passive"),
+      ability("The Ancient Barrow Curse", null, "Subtract 1 from save rolls for enemy units that have been hit by a critical hit from a Baleful Tomb Weapon for the rest of the battle, even if this unit has been destroyed.", "Passive"),
       ability("Immortal Conqueror", "Your Hero Phase", "Pick an objective or terrain feature in enemy territory. Friendly Deathrattle units wholly within 6\" of it add 1 to hit rolls for the rest of the turn."),
     ],
   }),

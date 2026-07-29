@@ -269,9 +269,9 @@ const ironMarchRules = {
     enhancement("broadmoore-and-louse", "Broadmoore and Louse", "Add 2 to the Attacks of this unit's Crew's Leadshotters. If this unit is destroyed, on a 3+ set up a Freeguild Marshal and Relic Envoy within 6\" and not in combat; it gains the Iron March keyword.", "Passive"),
     enhancement("master-sapper-gavelock-fiske", "Master Sapper Gavelock Fiske", "This unit's ranged weapons have Anti-Faction Terrain (+1 Rend) and Anti-War Machine (+1 Rend).", "Passive"),
   ],
-  heroicTraitLabel: "Comandante de la Marcha de Hierro",
-  artefactLabel: "Ingeniero de la Marcha de Hierro",
-  ironweldInnovationLabel: "Auxiliar de la Marcha de Hierro",
+  heroicTraitLabel: "Ironweld March Commander",
+  artefactLabel: "Ironweld March Engineer",
+  ironweldInnovationLabel: "Ironweld March Auxiliary",
   allowCogfortHeroEnhancements: true,
   spellLores: [],
   prayerLores: [{
@@ -355,7 +355,7 @@ const armiesOfRenown = [
     requiredUnits: [],
     excludesRegimentsOfRenown: true,
     excludesFactionTerrain: true,
-    description: "Una columna mecanizada de Cogforts con comandantes, ingenieros y auxiliares exclusivos.",
+    description: "A mechanised column of Cogforts with exclusive commanders, engineers and auxiliaries.",
     rules: ironMarchRules,
   },
   {
@@ -369,7 +369,7 @@ const armiesOfRenown = [
     ],
     requiredUnits: [],
     excludesRegimentsOfRenown: true,
-    description: "Una alianza de Sigmaritas, aelfos y duardin que combate bajo órdenes compartidas.",
+    description: "An alliance of Sigmarites, aelves and duardin fighting under shared orders.",
     rules: alliesRules,
   },
 ];

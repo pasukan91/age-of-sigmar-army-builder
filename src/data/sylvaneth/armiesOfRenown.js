@@ -62,7 +62,7 @@ const armiesOfRenown = [
     ],
     requiredUnits: [],
     excludesRegimentsOfRenown: true,
-    description: "Los ancianos del bosque y la élite Kurnothi despiertan para reclamar las tierras perdidas.",
+    description: "The forest elders and Kurnothi elite awaken to reclaim the lost lands.",
     rules: {
       units: lordsOfTheClanUnits,
       battleTraits: [
@@ -110,7 +110,7 @@ const armiesOfRenown = [
     roster: ["Grove Guardian", "Branchwych", "Any Revenant units"],
     requiredUnits: [],
     excludesRegimentsOfRenown: true,
-    description: "Guardianes Revenant que forman y defienden un Soulpod Grove de tres Awakened Wyldwoods.",
+    description: "Revenant guardians who form and defend a Soulpod Grove of three Awakened Wyldwoods.",
     rules: {
       units: soulpodGuardiansUnits,
       battleTraits: [
@@ -164,7 +164,7 @@ const armiesOfRenown = [
     ],
     requiredUnits: ["belthanos-first-thorn-of-kurnoth"],
     excludesRegimentsOfRenown: true,
-    description: "La cacería de Belthanos acumula acordes mientras acorrala y derriba a su presa.",
+    description: "Belthanos's hunt builds chords as it corners and brings down its prey.",
     rules: {
       units: evergreenUnits,
       battleTraits: [

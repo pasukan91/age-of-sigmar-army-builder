@@ -5,7 +5,7 @@ const spellLores = [
     name: "Lore of Extravagance",
 
     description:
-      "Hechizos de los Hedonites of Slaanesh centrados en potenciar a sus aliados y debilitar a enemigos concretos.",
+      "Hedonites of Slaanesh spells focused on empowering allies and weakening specific enemies.",
 
     spells: [
       {

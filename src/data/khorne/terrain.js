@@ -3,10 +3,10 @@ export default [{
   profile:{move:"-",health:10,control:"-",save:"4+",ward:null},
   terrainAbilities:["Cover","Impassable"],
   abilities:[
-    {name:"Words of Hate",phase:"Passive",description:"Mientras tenga Invoker, suma 1 a sus cánticos; no puede usar Move; mide alcance y visibilidad desde el altar, que recibe sus ataques. Si el altar es destruido, el Invoker sufre D3 mortales y se despliega a 3\"."},
-    {name:"Ascend the Altar",phase:"Your Hero Phase",description:"Si no tiene Invoker, coloca sobre él un Priest Infantry Blades of Khorne amigo a 3\" y fuera de combate."},
-    {name:"Hatred of Sorcery",phase:"Your Hero Phase",description:"Con Invoker, intenta desterrar hasta D3 Endless Spells enemigos a 18\". Si alguno es desterrado, gana 1 punto de tributo de sangre.","type":"Once Per Turn"},
-    {name:"Descend the Altar",phase:"Your Movement Phase",description:"Si el Invoker no fue colocado este turno, desplíegalo totalmente a 6\" y fuera de combate."},
+    {name:"Words of Hate",phase:"Passive",description:"While this terrain feature has an Invoker, add 1 to that Invoker's chanting rolls. The Invoker cannot use Move abilities. Measure range and visibility from the altar, which is allocated attacks that target the Invoker. If the altar is destroyed, the Invoker suffers D3 mortal damage and is set up within 3\" of it."},
+    {name:"Ascend the Altar",phase:"Your Hero Phase",description:"If this terrain feature does not have an Invoker, place a friendly Blades of Khorne Priest Infantry Hero within 3\" of it and not in combat on it."},
+    {name:"Hatred of Sorcery",phase:"Your Hero Phase",description:"If this terrain feature has an Invoker, make banishment rolls for up to D3 enemy Endless Spells within 18\". If any are banished, gain 1 blood tithe point.",type:"Once Per Turn"},
+    {name:"Descend the Altar",phase:"Your Movement Phase",description:"If the Invoker was not placed on the altar this turn, set it up wholly within 6\" of the altar and not in combat."},
   ],
   keywords:["Faction Terrain","Chaos","Blades of Khorne"],
 }];

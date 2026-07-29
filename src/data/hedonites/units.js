@@ -1307,9 +1307,9 @@ const units = [
                 synergy: {
                     includeKeywords: ["Sybarite"],
                     conditions: [
-                        "La unidad debe estar visible y completamente a 12\" del Lord of Hysteria",
-                        "Si es Paragon, el efecto se aplica automáticamente",
-                        "Si no es Paragon, el efecto se aplica con una tirada de 3+",
+                        "The unit must be visible to and wholly within 12\" of the Lord of Hysteria",
+                        "If it is a Paragon, the effect applies automatically",
+                        "If it is not a Paragon, the effect applies on a roll of 3+",
                     ],
                 },
                 description:
@@ -1330,7 +1330,7 @@ const units = [
                         "Infantry",
                     ],
                     conditions: [
-                        "La unidad debe estar visible y completamente a 12\" del Lord of Hysteria",
+                        "The unit must be visible to and wholly within 12\" of the Lord of Hysteria",
                     ],
                 },
                 description:
@@ -1827,7 +1827,7 @@ const units = [
             baseSize: "10 × 28.5mm; 1 × 25mm",
             regimentOptions: [],
             notes:
-                "La unidad está formada por 10 Blissbarb Archers y 1 Blissbrew Homonculus. El Homonculus se trata como un token a efectos de reglas.",
+                "The unit consists of 10 Blissbarb Archers and 1 Blissbrew Homonculus. The Homonculus is treated as a token for rules purposes.",
         },
 
         keywords: [

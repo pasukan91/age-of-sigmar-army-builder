@@ -88,7 +88,7 @@ const scourgeUnits = [
       },
     ],
     details: {
-      notes: "Legal para juego equilibrado con el battlepack General's Handbook 2026-27.",
+      notes: "Legal for matched play with the General's Handbook 2026-27 battlepack.",
     },
   }),
   alternateUnit("verminlord-corruptor", {
@@ -135,7 +135,7 @@ const scourgeUnits = [
       },
     ],
     details: {
-      notes: "Legal para juego equilibrado con el battlepack General's Handbook 2026-27.",
+      notes: "Legal for matched play with the General's Handbook 2026-27 battlepack.",
     },
   }),
 ];

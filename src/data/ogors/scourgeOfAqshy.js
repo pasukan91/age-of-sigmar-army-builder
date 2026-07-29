@@ -12,7 +12,7 @@ function alternate(baseId, overrides) {
   };
 }
 
-const legalNote = "Legal para juego equilibrado con el battlepack General's Handbook 2026-27.";
+const legalNote = "Legal for matched play with the General's Handbook 2026-27 battlepack.";
 
 const scourgeUnits = [
   alternate("huskard-on-thundertusk", {

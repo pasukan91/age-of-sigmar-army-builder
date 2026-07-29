@@ -128,7 +128,7 @@ const scourgeUnits = [
       models: 1,
       baseSize: "60 × 35mm",
       regimentOptions: [],
-      notes: "Warscroll de temporada de Scourge of Aqshy. Legal en juego equilibrado con el battlepack General's Handbook 2026-27.",
+      notes: "Seasonal Scourge of Aqshy warscroll. Legal for matched play with the General's Handbook 2026-27 battlepack.",
     },
     keywords: [
       "Hero",
@@ -173,7 +173,7 @@ const scourgeUnits = [
       models: 5,
       baseSize: "75 × 42mm",
       regimentOptions: [],
-      notes: "Warscroll de temporada de Scourge of Aqshy. Legal en juego equilibrado con el battlepack General's Handbook 2026-27.",
+      notes: "Seasonal Scourge of Aqshy warscroll. Legal for matched play with the General's Handbook 2026-27 battlepack.",
     },
     keywords: [
       "Cavalry",

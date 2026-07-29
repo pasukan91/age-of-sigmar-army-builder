@@ -13,7 +13,7 @@ const alliances = [
   },
   {
     id: "destruction",
-    name: "Destrucción",
+    name: "Destruction",
   },
 ];
 

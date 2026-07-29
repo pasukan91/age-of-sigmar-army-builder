@@ -8,7 +8,7 @@ const armiesOfRenown = [
     roster: ["Any Gutbusters units"],
     requiredUnits: [],
     excludesRegimentsOfRenown: false,
-    description: "La mawtribe de Morga aplasta a sus enemigos mediante cargas masivas y una arrogancia brutal.",
+    description: "Morga's mawtribe crushes its enemies through massed charges and brutal arrogance.",
     rules: {
       battleTraits: [
         rule("bloodthirsty-arrogance", "Bloodthirsty Arrogance", "Passive", null, "After a friendly Meatfist Infantry unit that did not charge is targeted by combat attacks, each unmodified save roll of 1 inflicts 1 mortal damage on the attacker after Fight is resolved."),
@@ -37,7 +37,7 @@ const armiesOfRenown = [
     roster: ["Any Beastclaw units"],
     requiredUnits: [],
     excludesRegimentsOfRenown: true,
-    description: "Una cacería Beastclaw envuelta por la furia de la Everwinter.",
+    description: "A Beastclaw hunt wrapped in the fury of the Everwinter.",
     rules: {
       battleTraits: [
         rule("masked-by-the-endless-white", "Masked by the Endless White", "Passive", null, "Friendly Alfrostun units are not visible to enemies more than 12\" away."),
@@ -65,7 +65,7 @@ const armiesOfRenown = [
     roster: ["Any Mawseekers units"],
     requiredUnits: [],
     excludesRegimentsOfRenown: true,
-    description: "Los Mawseekers cosechan ingredientes crudos y los convierten en festines de poder arcano.",
+    description: "The Mawseekers harvest raw ingredients and turn them into feasts of arcane power.",
     rules: {
       battleTraits: [
         rule("prepare-the-feast", "Prepare the Feast", "Once Per Turn (Army)", "Start of Any Turn", "If there is no Feastmaster, pick a friendly Gollop Hero to be Feastmaster for the battle."),

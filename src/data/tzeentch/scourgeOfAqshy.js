@@ -1,6 +1,6 @@
 import { ability, createUnit, weapon } from "./unitFactory";
 
-const legalNote = "Warscroll de temporada de Scourge of Aqshy. Legal con el battlepack General's Handbook 2026-27.";
+const legalNote = "Seasonal Scourge of Aqshy warscroll. Legal with the General's Handbook 2026-27 battlepack.";
 
 const scourgeUnits = [
   createUnit({

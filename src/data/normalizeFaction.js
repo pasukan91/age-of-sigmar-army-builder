@@ -221,19 +221,19 @@ export function getFactionValidationErrors(faction) {
 
   ARRAY_FIELDS.forEach((field) => {
     if (!Array.isArray(faction?.[field])) {
-      errors.push(`${field} no es un array`);
+      errors.push(`${field} is not an array`);
     }
   });
 
   faction?.spellLores?.forEach((lore) => {
     if (!lore.id || !lore.name || !Array.isArray(lore.spells)) {
-      errors.push(`saber de hechizos inválido: ${lore?.id ?? "sin id"}`);
+      errors.push(`invalid spell lore: ${lore?.id ?? "missing id"}`);
     }
   });
 
   faction?.manifestationLores?.forEach((lore) => {
     if (!lore.id || !lore.name || !Array.isArray(lore.manifestations)) {
-      errors.push(`saber de manifestaciones inválido: ${lore?.id ?? "sin id"}`);
+      errors.push(`invalid manifestation lore: ${lore?.id ?? "missing id"}`);
     }
   });
 

@@ -8,17 +8,17 @@ export default [{
     {
       name: "Draw Power",
       phase: "Your Hero Phase",
-      description: "Tira un dado y gana esa cantidad de puntos de poder, hasta un máximo de 12.",
+      description: "Roll a dice and give this terrain feature a number of power points equal to the roll, to a maximum of 12.",
     },
     {
       name: "Infernal Sorcery",
       phase: "Your Hero Phase",
-      description: "Con 3+ puntos, elige un Wizard Slaves to Darkness amigo a 3\", retira 3 puntos y suma 1 a sus tiradas de lanzamiento este turno.",
+      description: "If this terrain feature has 3 or more power points, pick a friendly Slaves to Darkness Wizard within 3\", remove 3 power points and add 1 to that Wizard's casting rolls this turn.",
     },
     {
       name: "Corrupt the Realms",
       phase: "Your Hero Phase",
-      description: "Con 9+ puntos, elige un objetivo o terreno a 24\" y los enemigos a 3\" de él. Retira 9 puntos; por cada objetivo tira D3 y con 2+ inflige esa cantidad de mortales.",
+      description: "If this terrain feature has 9 or more power points, pick an objective or terrain feature within 24\" and each enemy unit within 3\" of it. Remove 9 power points, then roll a D3 for each target. On a 2+, inflict mortal damage equal to the roll.",
     },
   ],
   keywords: ["Faction Terrain", "Chaos", "Slaves to Darkness"],

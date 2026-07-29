@@ -32,7 +32,7 @@ const armiesOfRenown = [
     roster: ["Droggz Da Sunchompa", "Any Gitmob units"],
     requiredUnits: ["droggz-da-sunchompa"],
     excludesRegimentsOfRenown: true,
-    description: "Droggz dirige una fuerza Gitmob rápida que rodea, deslumbra y abandona los combates desfavorables.",
+    description: "Droggz leads a fast Gitmob force that circles, dazzles and abandons unfavourable combats.",
     rules: {
       units: gitmobUnits,
       battleTraits: [
@@ -70,7 +70,7 @@ const armiesOfRenown = [
     roster: ["Skragrott, the Loonking", "Any Moonclan units", "0-1 Bad Moon Loonshrine", "0-2 non-Hero Troggoth units"],
     requiredUnits: ["skragrott-the-loonking"],
     excludesRegimentsOfRenown: true,
-    description: "La corte de Skragrott combina hordas Moonclan con una guardia limitada de troggoths.",
+    description: "Skragrott's court combines Moonclan hordes with a limited troggoth guard.",
     rules: {
       units: kingsGitzUnits,
       battleTraits: [

@@ -77,7 +77,7 @@ export const manifestationLores = [
   {
     id: "manifestations-of-gorkamorka",
     name: "Manifestations of Gorkamorka",
-    description: "Manifestaciones compartidas por Ironjawz y Kruleboyz.",
+    description: "Manifestations shared by Ironjawz and Kruleboyz.",
     manifestations,
   },
 ];

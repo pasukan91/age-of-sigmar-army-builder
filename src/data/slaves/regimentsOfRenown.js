@@ -12,7 +12,7 @@ export default [
     abilities: [{
       name: "Ironclad Despoilers",
       phase: "Passive",
-      description: "+1 a save para unidades del regimiento mientras disputen un objetivo que controlas; +1 a herir mientras disputen uno que no controlas.",
+      description: "Add 1 to save rolls for units in this regiment while they are contesting an objective you control; add 1 to wound rolls while they are contesting an objective you do not control.",
     }],
   },
   {
@@ -27,12 +27,12 @@ export default [
       {
         name: "Godmarked Legion",
         phase: "Passive",
-        description: "El Daemon Prince obtiene la keyword de la facción del ejército y Gifts of Chaos.",
+        description: "The Daemon Prince gains the army faction keyword and Gifts of Chaos.",
       },
       {
         name: "Gifts of Chaos",
         phase: "Passive",
-        description: "Khorne: +1 Ataques y Blood-hungry para Hellforged Weapons. Tzeentch: Wizard (1). Nurgle: Ward (5+). Slaanesh: +1 a correr y cargar.",
+        description: "Khorne: +1 Attacks and Blood-hungry for Hellforged Weapons. Tzeentch: Wizard (1). Nurgle: Ward (5+). Slaanesh: +1 to run and charge rolls.",
       },
     ],
   },

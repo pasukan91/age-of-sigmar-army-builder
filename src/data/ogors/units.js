@@ -2,8 +2,8 @@ import { ability, createOrrukUnit, weapon } from "../orrukWarclans/unitFactory";
 
 const make = (config) => createOrrukUnit({ faction: "ogors", ...config });
 const pendingBase = {
-  baseSize: "Pendiente de publicación",
-  notes: "El tamaño de peana todavía no figura en la información facilitada.",
+  baseSize: "Pending publication",
+  notes: "The base size is not yet listed in the supplied information.",
 };
 
 const units = [
