@@ -32,7 +32,7 @@ export const manifestations = [
   {
     id: "foot-of-gork",
     name: "Foot of Gork",
-    image: "/images/manifestations/orruk-warclans/foot-of-gork.webp",
+    image: "/images/units/kruleboyz/foot-of-gork.jpg",
     castingValue: 7,
     phase: "Your Hero Phase",
     profile: { move: "-", health: 8, save: "4+", banishment: "7+", ward: "6+" },
@@ -46,7 +46,7 @@ export const manifestations = [
   {
     id: "gork-roara",
     name: "Gork-Roara",
-    image: "/images/manifestations/orruk-warclans/gork-roara.webp",
+    image: "/images/units/kruleboyz/gork-roara.jpg",
     castingValue: 5,
     phase: "Your Hero Phase",
     profile: { move: '6"', health: 6, save: "5+", banishment: "7+", ward: "6+" },
@@ -60,7 +60,7 @@ export const manifestations = [
   {
     id: "morkspit-marsh",
     name: "Morkspit Marsh",
-    image: "/images/manifestations/orruk-warclans/morkspit-marsh.webp",
+    image: "/images/units/kruleboyz/morkspit-marsh.jpg",
     castingValue: 5,
     phase: "Your Hero Phase",
     profile: { move: "-", health: 8, save: "5+", banishment: "7+", ward: "6+" },

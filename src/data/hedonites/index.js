@@ -16,11 +16,23 @@ import {
   scourgeUnits,
 } from "./scourgeOfAqshy";
 
+const imageAliases = {
+  dexcessa: "dexcessa-the-talon-of-slaanesh",
+  synessa: "synessa-the-voice-of-slaanesh",
+  sigvald: "sigvald-prince-of-slaanesh",
+  syllesske: "syllesske-the-vengeful-alliance",
+};
+
 const completeUnits = [...units, ...missingUnits, ...scourgeUnits].map((unit) => {
   const profile = regimentProfiles[unit.id] ?? {};
+  const sourceAlias = unit.imageAlias
+    ?? unit.image?.replace(/\.[^.]+$/, "")
+    ?? unit.id.replace("-scourge-of-aqshy", "");
+  const imageAlias = imageAliases[sourceAlias] ?? sourceAlias;
 
   return {
     ...unit,
+    image: `/images/units/hedonitas/${imageAlias}.webp`,
     details: {
       ...unit.details,
       regimentOptions: profile.options ?? [],
