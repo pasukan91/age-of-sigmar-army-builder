@@ -58,7 +58,7 @@ const units = [
     ],
   }),
   make({
-    id: "tyrant", name: "Tyrant", points: 150,
+    id: "tyrant", name: "Tyrant", points: 130,
     move: '6"', health: 10, control: 3, save: "3+", baseSize: "50mm",
     regimentOptions: ["0-1 Bloodpelt Hunter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
@@ -86,14 +86,14 @@ const units = [
     ],
   }),
   make({
-    id: "gluttons", name: "Gluttons", points: 200, models: 5,
+    id: "gluttons", name: "Ogor Gluttons", points: 220, models: 6,
     move: '6"', health: 4, control: 2, save: "5+", baseSize: "40mm",
-    keywords: ["Infantry", "Champion", "Musician (1/5)", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
+    keywords: ["Infantry", "Champion", "Musician (1/6)", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     weapons: [weapon("Glutton Weapons", "Melee", 4, "4+", "2+", "1", "2")],
     abilities: [ability("Wall of Meat", null, "Add 1 to save rolls for this unit if it has not charged this turn.", "Passive")],
   }),
   make({
-    id: "ironguts", name: "Ironguts", points: 200, models: 3,
+    id: "ironguts", name: "Ironguts", points: 210, models: 4,
     move: '4"', health: 4, control: 2, save: "4+", baseSize: "40mm",
     keywords: ["Infantry", "Champion", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     weapons: [weapon("Irongut Weapon", "Melee", 3, "4+", "2+", "2", "3")],
@@ -103,7 +103,7 @@ const units = [
     ],
   }),
   make({
-    id: "ironblaster", name: "Ironblaster", points: 180,
+    id: "ironblaster", name: "Ironblaster", points: 160,
     move: '6"', health: 16, control: 2, save: "4+", baseSize: "120 × 92mm",
     keywords: ["War Machine", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { companion: true, canBeReinforced: false },
@@ -115,7 +115,7 @@ const units = [
     abilities: [ability("Explosive Shells", "Any Shooting Phase", "After this unit shoots, pick the target and each other unit within 3\" of it. On a 3+, inflict mortal damage equal to the roll on the target and D3 mortal damage on each collateral target.", "Once Per Turn (Army)", ["Core", "Attack", "Shoot"])],
   }),
   make({
-    id: "gnoblar-scraplauncher", name: "Gnoblar Scraplauncher", points: 160,
+    id: "gnoblar-scraplauncher", name: "Gnoblar Scraplauncher", points: 120,
     move: '6"', health: 9, control: 2, save: "4+", baseSize: "120 × 92mm",
     keywords: ["War Machine", "Destruction", "Ogor Mawtribes"],
     rules: { companion: true, canBeReinforced: false },
@@ -126,7 +126,7 @@ const units = [
     abilities: [ability("Rain of Crap", "Any Shooting Phase", "Pick an enemy damaged by this unit's shooting. Until your next turn, subtract the damage allocated by those attacks from its Move (minimum 1\"). On a 3+, it also cannot Run, Retreat or be removed and set up elsewhere.", "Once Per Turn (Army)")],
   }),
   make({
-    id: "frostlord-on-stonehorn", name: "Frostlord on Stonehorn", points: 340,
+    id: "frostlord-on-stonehorn", name: "Frostlord on Stonehorn", points: 320,
     move: '10"', health: 15, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["0-1 Voice of the Everwinter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -143,7 +143,7 @@ const units = [
     ],
   }),
   make({
-    id: "frostlord-on-thundertusk", name: "Frostlord on Thundertusk", points: 280,
+    id: "frostlord-on-thundertusk", name: "Frostlord on Thundertusk", points: 230,
     move: '10"', health: 15, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["0-1 Voice of the Everwinter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -160,7 +160,7 @@ const units = [
     ],
   }),
   make({
-    id: "huskard-on-stonehorn", name: "Huskard on Stonehorn", points: 300,
+    id: "huskard-on-stonehorn", name: "Huskard on Stonehorn", points: 290,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["voice-of-the-everwinter"],
     keywords: ["Hero", "Monster", "Priest (1)", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -177,7 +177,7 @@ const units = [
     ],
   }),
   make({
-    id: "huskard-on-thundertusk", name: "Huskard on Thundertusk", points: 280,
+    id: "huskard-on-thundertusk", name: "Huskard on Thundertusk", points: 220,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["voice-of-the-everwinter"],
     keywords: ["Hero", "Monster", "Priest (1)", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -195,7 +195,7 @@ const units = [
     ],
   }),
   make({
-    id: "bloodpelt-hunter", name: "Bloodpelt Hunter", points: 130,
+    id: "bloodpelt-hunter", name: "Bloodpelt Hunter", points: 110,
     move: '6"', health: 8, control: 3, save: "5+", baseSize: "40mm",
     regimentOptions: ["Any Gutbusters"], canJoinRegimentAs: ["tyrant-companion"],
     keywords: ["Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -254,7 +254,7 @@ const units = [
     abilities: [ability("Relentless Predators", "Enemy Movement Phase", "If this unit is more than 9\" from all enemy units, it can move up to D6\". It cannot enter combat during that move.", "Once Per Turn (Army)")],
   }),
   make({
-    id: "stonehorn-beastriders", name: "Stonehorn Beastriders", points: 280,
+    id: "stonehorn-beastriders", name: "Stonehorn Beastriders", points: 260,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     keywords: ["Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { monster: true, companion: true, canBeReinforced: false },
@@ -269,7 +269,7 @@ const units = [
     ],
   }),
   make({
-    id: "thundertusk-beastriders", name: "Thundertusk Beastriders", points: 240,
+    id: "thundertusk-beastriders", name: "Thundertusk Beastriders", points: 180,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     keywords: ["Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { monster: true, companion: true, canBeReinforced: false },
@@ -303,7 +303,7 @@ const units = [
     ],
   }),
   make({
-    id: "butcher", name: "Butcher", points: 170,
+    id: "butcher", name: "Butcher", points: 150,
     move: '6"', health: 8, control: 3, save: "6+", ward: "6+", baseSize: "50mm",
     regimentOptions: ["0-1 Gnoblar Scraplauncher", "Any Gutbusters", "Any Gnoblars", "Any Gorger Mawpack"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],

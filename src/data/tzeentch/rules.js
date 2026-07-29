@@ -1,7 +1,7 @@
 export const battleTraits = [
   {
     id: "all-part-of-the-plan", name: "All Part of the Plan", type: "Passive", phase: null,
-    description: "Start with 0 fate points. Gain 1 each time you lose priority, a friendly spell is unbound, a friendly unit miscasts, your opponent takes an objective you controlled at the start of the turn, or a friendly Argent Shard is destroyed.",
+    description: "Start with 0 fate points. Gain 1 each time you lose priority, a friendly spell is unbound, a friendly unit miscasts, your opponent takes an objective you controlled at the start of the turn, or a friendly Argent Shard is demolished.",
   },
   {
     id: "eldritch-illusions", name: "Eldritch Illusions", type: "Once Per Battle (Army)", phase: "Deployment Phase",
@@ -13,7 +13,7 @@ export const battleTraits = [
   },
   {
     id: "smoke-and-mirrors", name: "Smoke and Mirrors", type: "Once Per Turn (Army)", phase: "Any Hero Phase",
-    description: "Swap a friendly non-Monster unit with a friendly unit masked by illusion: set up the substitute wholly within 6\" and out of combat, then place the target in reserve masked by illusion.",
+    description: "Pick a friendly non-Monster unit that was not set up this turn and was not set up with this ability in the previous turn, then pick a friendly unit masked by illusion as its substitute. Set up the substitute wholly within 6\" and out of combat, then place the target in reserve masked by illusion.",
   },
   {
     id: "destined-to-serve", name: "Destined to Serve", type: "Passive", phase: null,

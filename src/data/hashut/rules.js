@@ -2,7 +2,7 @@ const rule = (id, name, phase, description, type = "Ability") => ({ id, name, ph
 
 export const battleTraits = [
   rule("harness-daemonic-power", "Harness Daemonic Power", "Start of Your Turn", "Retira todos tus puntos de poder demoníaco (DPP). Gana 1 DPP por cada ficha de desolación amiga y repártelos entre unidades Helsmiths of Hashut amigas que no sean Hobgrot, con un máximo de 3 por unidad. Los no asignados se pierden.", "Once Per Turn (Army)"),
-  rule("reserves-daemonic-power", "Reserves of Daemonic Power", "Any Hero Phase", "Gasta 1 PC y elige una unidad Helsmiths of Hashut amiga que no sea Hobgrot y tenga 0 DPP. Si el total de DPP de tu ejército es 3 o menos, dale 2 DPP; de lo contrario, 1.", "Once Per Turn (Army), Command"),
+  rule("reserves-daemonic-power", "Reserves of Daemonic Power", "Any Hero Phase", "Gasta 1 PC y elige una unidad Helsmiths of Hashut amiga que no sea Hobgrot y tenga 0 DPP. Dale 2 puntos de poder daemónico.", "Once Per Turn (Army), Command"),
   rule("leave-land-in-ruin", "Leave the Land in Ruin", "Start of Any Turn", "Elige un elemento de terreno u objetivo sin una ficha de desolación amiga, disputado por una unidad Helsmiths of Hashut amiga que no esté en combate, y coloca una ficha de desolación amiga.", "Once Per Turn (Army)"),
 ];
 

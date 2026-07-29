@@ -304,7 +304,7 @@ const units = [
       weapon("Chariot Steeds' Fangs and Claws", "Melee", 6, "5+", "3+", "0", "1", ["Companion"]),
     ],
     abilities: [
-      ability("Pinning Attacks", "Your Shooting Phase", "Pick an enemy within 18\". On a 3+, inflict 1 mortal damage and it cannot make pile-in moves for the rest of the turn.", "Once Per Turn (Army)"),
+      ability("Pinning Attacks", "Your Shooting Phase", "Pick an enemy within 18\". If this unit is wholly within 12\" of a friendly Liege-Kavalos on War Chariot, apply the effect automatically; otherwise, on a 3+, inflict 1 mortal damage and the target cannot make pile-in moves for the rest of the turn.", "Once Per Turn (Army)"),
       ability("Scything Assault", "Any Combat Phase", "After charging, inflict D3 mortal damage on an enemy in combat, then set this unit up again within 1\" of that target.", "Ability", ["Core", "Attack", "Fight"]),
     ],
   }),

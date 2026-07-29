@@ -28,7 +28,7 @@ const manifestations = [
     id: "tome-of-eyes", name: "Tome of Eyes", imageAlias: "Tome_of_Eyes_M02",
     castingValue: 5, move: '4"', health: 5, save: "6+", ward: "6+",
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)"], rules: { ward: "6+", canBeReinforced: false },
-    summonDescription: "Set up a Tome of Eyes wholly within 18\" of the caster and visible to them.",
+    summonDescription: "Set up a Tome of Eyes wholly within 18\" of the caster, visible to them and more than 9\" from all enemy units.",
     weapons: [weapon("Incinerating Gaze", "Melee", "2D6", "4+", "4+", "0", "1")],
     abilities: [ability("Compendium of Dark Knowledge", "Your Hero Phase", "A visible friendly Wizard within 3\" can immediately use a spell from the Lore of Change or Lore of Fate without it counting toward its spell limit.")],
   }),

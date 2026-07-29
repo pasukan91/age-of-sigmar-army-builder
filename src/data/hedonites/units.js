@@ -369,7 +369,7 @@ const units = [
                 lore: null,
                 name: "Redolence of Violence",
                 description:
-                    "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll 2D6. If this unit charged this turn, add 2 to the roll. If the roll exceeds the target's Health characteristic, 1 model in the target is automatically slain. If the target is a Manifestation and the roll exceeds its banishment value, it is banished.",
+                    "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll 2D6. If this unit charged this turn, add 2 to the roll. If the roll exceeds the target's Health characteristic, 1 model in the target is automatically slain. If the target is a Manifestation and the roll exceeds its banishment value, it is banished and removed from play.",
             },
         ],
 
@@ -621,7 +621,7 @@ const units = [
     {
         id: "syllesske-the-vengeful-alliance",
 
-        name: "Syll'Esske, the Vengeful Alliance",
+        name: "Syll'Esske, the Vengeful Allegiance",
 
         image: "syllesske.png",
 

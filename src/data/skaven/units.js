@@ -319,7 +319,7 @@ const units = [
     },
     {
       id: "deathmaster", name: "Deathmaster", points: 120, clan: "Eshin", options: ["clanrats", "any-eshin"],
-      move: '7"', health: 5, save: "5+", base: "32mm",
+      move: '7"', health: 5, save: "5+", ward: "6+", base: "32mm",
       weapons: [
         weapon("Eshin Throwing Stars", "Ranged", 3, "3+", "4+", "0", "D3", ["Crit (Auto-wound)", "Shoot in Combat"], '10"'),
         weapon("Weeping Blade", "Melee", 5, "3+", "4+", "1", "D3", ["Anti-Hero (+1 Rend)", "Crit (Mortal)"]),

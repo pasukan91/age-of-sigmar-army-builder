@@ -43,7 +43,7 @@ const scourgeUnits = [
     id: "mortis-reapers-scourge-of-aqshy",
     name: "Scourge of Aqshy Mortis Reapers",
     source: "Aqshy",
-    points: 110,
+    points: 90,
     abilities: [
       ability("Terminate Their Command", "Any Charge Phase", "If this unit is in combat, pick a visible enemy Hero within 12\". If it is more than 3\" from all other enemies, or on a 3+ otherwise, reposition this unit within 1\" of the target.", "Once Per Turn (Army)"),
       ability("The Coldness of Death", "End of Any Turn", "If an enemy Hero was destroyed by this unit's combat attacks this turn, your opponent reduces their fury level to 0.", "Once Per Turn (Army)"),

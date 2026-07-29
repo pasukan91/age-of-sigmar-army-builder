@@ -17,7 +17,7 @@ const scourgeUnits = [
   alternate("killaboss-on-great-gnashtoof", {
     id: "killaboss-on-great-gnashtoof-scourge-of-aqshy",
     name: "Scourge of Aqshy Killaboss on Great Gnashtoof",
-    points: 230,
+    points: 150,
     weapons: [
       weapon("Boss-skewa", "Melee", 5, "4+", "3+", "1", "2", ["Anti-Hero (+1 Rend)", "Crit (Mortal)"]),
       weapon("Great Gnashtoof's Jaws", "Melee", 5, "4+", "3+", "1", "2", ["Companion"]),

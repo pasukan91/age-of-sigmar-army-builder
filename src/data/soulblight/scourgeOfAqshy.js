@@ -3,7 +3,7 @@ import { ability, createUnit, weapon } from "./unitFactory";
 const scourgeUnits = [
   createUnit({
     id: "scourge-revenant-draconith",
-    name: "Scourge Revenant Draconith",
+    name: "Scourge of Aqshy Revenant Draconith",
     imageAlias: "revenant_draconith",
     source: "Scourge of Aqshy",
     points: 290,
@@ -24,7 +24,7 @@ const scourgeUnits = [
   }),
   createUnit({
     id: "scourge-vengorian-lord",
-    name: "Scourge Vengorian Lord",
+    name: "Scourge of Aqshy Vengorian Lord",
     imageAlias: "vengorian-lord",
     source: "Scourge of Aqshy",
     points: 310,

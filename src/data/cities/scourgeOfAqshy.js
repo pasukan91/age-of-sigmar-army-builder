@@ -34,7 +34,7 @@ const scourgeUnits = [
   }),
   alternate("pontifex-zenestra-matriarch-of-the-great-wheel", {
     id: "pontifex-zenestra-scourge-of-aqshy",
-    name: "Scourge of Aqshy Pontifex Zenestra",
+    name: "Scourge of Aqshy Pontifex Zenestra, Matriarch of the Great Wheel",
     image: "/images/units/cos/zenestra-aqshy.jpg",
     points: 160,
     abilities: [

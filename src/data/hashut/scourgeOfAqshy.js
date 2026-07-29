@@ -4,7 +4,7 @@ const resilience = ability("Daemonic Resilience", "Passive", "Con 1 DPP: Ward (6
 
 export default [
   createUnit({
-    id:"scourge-daemonsmith-infernal-taurus", name:"Scourge Daemonsmith on Infernal Taurus", points:350,
+    id:"scourge-daemonsmith-infernal-taurus", name:"Scourge of Aqshy Daemonsmith on Infernal Taurus", points:350,
     source:"Scourge of Aqshy", move:'10"', health:15, control:5, save:"3+", baseSize:"130mm",
     imageAlias:"daemonsmith_infernal_taurus", keywords:["Hero","Monster","War Machine","Wizard (1)","Fly","Duardin"],
     regimentOptions:["0-1 Hashutite Commander","Any Helsmiths of Hashut"],
@@ -21,7 +21,7 @@ export default [
     ], rules:{hero:true,monster:true,wizard:1,canBeReinforced:false},
   }),
   createUnit({
-    id:"scourge-anointed-sentinels", name:"Scourge Anointed Sentinels", points:170, models:3,
+    id:"scourge-anointed-sentinels", name:"Scourge of Aqshy Anointed Sentinels", points:170, models:3,
     source:"Scourge of Aqshy", move:'10"', health:4, save:"4+", baseSize:"75×42mm",
     imageAlias:"annointed_sentinels", keywords:["Cavalry","Champion","Duardin"],
     weapons:[weapon("Glaive","Melee",3,"3+","3+",1,2,["Anti-Cavalry (+1 Rend)","Charge (+1 Damage)"])],

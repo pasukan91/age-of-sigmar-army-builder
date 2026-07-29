@@ -5,13 +5,13 @@ const gorechosenRules = {
     r("murder-won-trophies","Murder-won Trophies","Deployment Phase","Elige un Hero Gorechosen Champions amigo y dale un artefacto de este ejército de renombre.","Once Per Battle (Army)"),
     r("brutal-lashmaster","Brutal Lashmaster","Passive","Cuando Bloodstoker use Whipped to Fury, puede elegir otro Hero Gorechosen Champions dentro de su alcance en vez de una unidad Bloodbound no Hero."),
     r("legendary-slayers","Legendary Slayers","Passive","Las armas Blood-hungry de unidades Gorechosen Champions amigas tienen Crit (Mortal)."),
-    r("red-gods-eye","The Red God's Eye","Passive","Las unidades Gorechosen Champions amigas tienen Ward (4+)."),
+    r("red-gods-eye","The Red God's Eye","Passive","Las unidades Gorechosen Champions amigas tienen Ward (6+)."),
     r("hate-fuelled-killers","Hate-fuelled Killers","Passive","Cuando una unidad fuera a ser destruida, con 5+ no lo es, ignora el daño restante y Heal (1)."),
   ],
   heroicTraits:[r("crowned-in-butchery","Crowned in Butchery","Passive","+20 al Control del portador mientras está en combate.")],
   artefacts:[
     r("warmongers-icon","Warmonger's Icon","Any Combat Phase","Una vez por batalla, el portador y hasta D3 unidades Gorechosen Champions amigas en su alcance obtienen Strike-first este turno.","Once Per Battle"),
-    r("scarring-blade","The Scarring Blade","Any Combat Phase","Inflige D3 mortales al portador. Este turno suma esa cantidad a Ataques de las armas de combate Gorechosen Champions amigas. El portador no puede usar Hate-fuelled Killers ni curarse durante el resto de la batalla."),
+    r("scarring-blade","The Scarring Blade","Any Combat Phase","Asigna D3 puntos de daño al portador sin permitir wards. Este turno suma esa cantidad a Ataques de las armas de combate Gorechosen Champions amigas. El portador no puede usar Hate-fuelled Killers ni curarse durante el resto de la batalla."),
     r("bloodmist-skull","Bloodmist Skull","Passive","Ward (3+) contra daño de ataques de disparo."),
   ],
   prayerLores:[{id:"gorechosen-prayers",name:"Prayers of the Gorechosen",prayers:[
@@ -24,9 +24,9 @@ const gorechosenRules = {
 
 const balefulRules = {
   battleTraits:[
-    r("born-of-butchery","Born of Butchery","Your Movement Phase","Elige una unidad Baleful Lords amiga destruida. Tira un dado por cada unidad destruida en la batalla; con 8 o más resultados de 4+, despliega una unidad de reemplazo idéntica a más de 9\" del enemigo.","Once Per Turn"),
+    r("born-of-butchery","Born of Butchery","Your Movement Phase","Elige una unidad Baleful Lords amiga no Unique destruida. Tira tantos dados como la ronda actual más el número de unidades amigas y enemigas destruidas; con 8 o más resultados de 3+, despliega una unidad de reemplazo idéntica totalmente a 7\" del borde y a más de 9\" del enemigo.","Once Per Turn"),
     r("bellow-of-hatred","Bellow of Hatred","Any Combat Phase","Un Baleful Lord que no usó Rampage impide que enemigos en combate usen commands; él tampoco puede usar más Rampage este turno.","Once Per Turn (Army), Rampage"),
-    r("mage-eaters","Mage-eaters","Any Hero Phase","Reacción a un spell que tenga como objetivo esta unidad: con 3+ se disipa; si la tirada fue 5+, el lanzador sufre D3 mortales.","Reaction"),
+    r("mage-eaters","Mage-eaters","Reaction: Opponent declared a Spell ability","Reacción a un spell que tenga como objetivo esta unidad: con 3+ se disipa; si la tirada fue 5+, el lanzador sufre D3 mortales.","Once Per Turn (Army), Reaction"),
     r("first-in-his-sight","First in His Sight","End of Enemy Turn","Heal (D3) cada Hero Baleful Lords amigo en combate.","Once Per Turn (Army)"),
     r("drawn-by-blood","Drawn by Blood","End of Your Turn","Una unidad que no usó Rampage mueve D6\" y solo puede acabar en combate con enemigos con los que empezó la fase; si destruyó una unidad, mueve 2D6\" y puede acabar con cualquier enemigo dañado este turno.","Rampage"),
     r("price-of-mercy","The Price of Mercy","End of Your Turn","Debes elegir cada Baleful Lord que no cargó ni luchó. Por cada uno, con 2+ sufre 1 mortal.","Once Per Turn (Army)"),

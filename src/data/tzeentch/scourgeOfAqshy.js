@@ -14,7 +14,7 @@ const scourgeUnits = [
     ],
   }),
   createUnit({
-    id: "ogroid-thaumaturge-scourge-of-aqshy", name: "Scourge of Aqshy Ogroid Thaumaturge", points: 210,
+    id: "ogroid-thaumaturge-scourge-of-aqshy", name: "Scourge of Aqshy Ogroid Thaumaturge", points: 140,
     imageAlias: "ogroid_thaumaturge", move: '6"', health: 8, control: 2, save: "5+", ward: "6+", baseSize: "50mm",
     regimentOptions: ["any-arcanite"], canJoinRegimentAs: ["arcanite-cabalist"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Arcanite"],

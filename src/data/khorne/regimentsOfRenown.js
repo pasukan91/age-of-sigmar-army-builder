@@ -2,7 +2,7 @@ const eligible = ["tzeentch","nurgle","hedonites","skaven","std"];
 
 export default [
   {
-    id:"the-exiled-one",name:"The Exiled One",points:430,sourceFaction:"khorne",
+    id:"the-exiled-one",name:"The Exiled One",points:390,sourceFaction:"khorne",
     eligibleFactionIds:eligible,organisation:["1 Skarbrand"],unitIds:["skarbrand"],
     abilities:[{name:"Hatred for All",phase:"Any Combat Phase",description:"Si Skarbrand no está en combate y hay otra unidad amiga visible en su alcance, debes elegir una y resolver contra ella los ataques de combate de Skarbrand."}],
   },

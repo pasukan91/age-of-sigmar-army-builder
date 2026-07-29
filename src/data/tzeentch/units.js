@@ -56,7 +56,7 @@ const units = [
     ],
   }),
   createUnit({
-    id: "fateskimmer", name: "Fateskimmer", points: 140,
+    id: "fateskimmer", name: "Fateskimmer, Herald of Tzeentch on Burning Chariot", points: 140,
     move: '14"', health: 8, control: 2, save: "5+", ward: "6+", baseSize: "120 x 92mm",
     regimentOptions: ["0-1-tzeentchian-deceiver", ...anyDaemon],
     keywords: ["Hero", "Wizard (1)", "War Machine", "Fly", "Ward (6+)", "Daemon"],
@@ -71,7 +71,7 @@ const units = [
     ],
   }),
   createUnit({
-    id: "changecaster", name: "Changecaster", points: 140,
+    id: "changecaster", name: "Changecaster, Herald of Tzeentch", points: 140,
     move: '5"', health: 5, control: 2, save: "5+", ward: "6+", baseSize: "32mm",
     regimentOptions: anyDaemon, canJoinRegimentAs: ["tzeentchian-deceiver"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Daemon"],
@@ -135,7 +135,7 @@ const units = [
       ...(onDisc ? [weapon("Disc's Teeth and Horns", "Melee", 2, "4+", "3+", "1", "D3", ["Companion"])] : []),
     ],
     abilities: [
-      ability("Spellmaster", "Reaction: You declared a Spell ability", "Once per turn, try to unbind your own spell with 2D6; if successful, the spell is unresolved and this unit adds 1 to casting rolls for the rest of the phase.", "Once Per Turn (Army)", ["Unbind"]),
+      ability("Spellmaster", "Reaction: You declared a Spell ability for a Wizard within 30\" and the successful spell was not unbound", "Try to unbind your own spell with 2D6; if successful, the spell is unresolved and this unit adds 1 to casting rolls for the rest of the phase.", "Once Per Turn (Army)", ["Unbind"]),
       onDisc
         ? ability("Fates Converge", null, "While you have 6 or more fate points, friendly Arcanite units wholly within 12\" add 1 to the Attacks of their melee weapons.", "Passive")
         : ability("Imbued with Arcane Fire", "Any Combat Phase", "Spend 1 fate point: a visible friendly Arcanite unit wholly within 12\" gains Crit (Mortal) on melee weapons until your next turn.", "Once Per Turn (Army)"),
@@ -226,7 +226,10 @@ const units = [
     move: '5"', health: 1, control: 1, save: "6+", ward: "6+", baseSize: "25mm",
     keywords: ["Infantry", "Ward (6+)", "Daemon"], rules: { ward: "6+" },
     weapons: [weapon("Magical Flames", "Ranged", 2, "4+", "4+", "0", "1", [], '12"'), weapon("Taloned Hands", "Melee", 2, "4+", "4+", "0", "1")],
-    abilities: [ability("Split Again", "End of Any Turn", "For each slain Blue Horror, on a 3+ add 1 Brimstone Horrors model, respecting the unit's model limits.")],
+    abilities: [
+      ability("Split Again", "End of Any Turn", "Roll a dice for each Blue Horror model currently slain. For each 3+, if there are fewer Brimstone Horrors than the unit's starting size, add 1 Brimstone Horrors model."),
+      ability("Immolation", null, "Slain Brimstone Horrors cannot return. When setting up a replacement unit, ignore Brimstone Horrors when determining its model count and do not set them up.", "Passive"),
+    ],
   }),
   createUnit({
     id: "tzaangors", name: "Tzaangors", points: 170, models: 10,

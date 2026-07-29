@@ -32,7 +32,7 @@ export default [
       {
         name: "Gifts of Chaos",
         phase: "Passive",
-        description: "Khorne: +1 Ataques de Hellforged Weapons. Tzeentch: Wizard (1). Nurgle: Ward (5+). Slaanesh: +1 a correr y cargar.",
+        description: "Khorne: +1 Ataques y Blood-hungry para Hellforged Weapons. Tzeentch: Wizard (1). Nurgle: Ward (5+). Slaanesh: +1 a correr y cargar.",
       },
     ],
   },

@@ -27,7 +27,7 @@ export const battleTraits = [
     "dark-apotheosis",
     "Dark Apotheosis",
     "Any Hero Phase",
-    "Una vez por batalla, elige una unidad amiga con 8+ puntos de Apoteosis: puede curarse por completo y obtener Ward (5+) durante el resto de la batalla, o ser sustituida por un Daemon Prince que hereda general, mejoras y Pledge to Chaos.",
+    "Una vez por batalla, elige una unidad amiga con 8+ puntos de Apoteosis: puede curarse por completo y obtener Ward (5+) durante el resto de la batalla, o ser sustituida por un Daemon Prince que hereda general, mejoras y Pledge to Chaos. Retira las manifestaciones invocadas por el objetivo; si era tu general, el Daemon Prince pasa a serlo y se añade a su regimiento.",
     "Once Per Battle (Army)"
   ),
   rule(
@@ -60,7 +60,7 @@ export const battleTraits = [
     "pledged-to-slaanesh",
     "Pledged to Slaanesh",
     "Your Charge Phase",
-    "Las unidades amigas Pledged to Slaanesh tiran 1 dado adicional al cargar, hasta un máximo de 3."
+    "Al cargar con una unidad amiga Pledged to Slaanesh, puedes tirar 1 dado adicional, hasta un máximo de 3; si lo haces, debes descartar 1 dado de tu elección."
   ),
 ];
 
@@ -81,16 +81,16 @@ export const battleFormations = [
   rule(
     "despoilers",
     "Despoilers - Feral Ruin",
-    "Any Combat Phase",
-    "Reacción al declarar Fight con un Daemon Prince: una unidad Monster o Beast Slaves to Darkness amiga no Hero totalmente a 12\" puede luchar inmediatamente después.",
-    "Once Per Turn (Army), Reaction"
+    "End of Your Turn",
+    "Elige un Daemon Prince amigo y una unidad Slaves to Darkness amiga visible, no Daemon ni Unique, totalmente a 12\". Retira sus keywords Pledge to Chaos y dale las que tenga el Daemon Prince.",
+    "Once Per Turn (Army)"
   ),
   rule(
     "darkoath-horde",
     "Darkoath Horde - Rally the Tribes",
     "Your Movement Phase",
-    "Si hay un Hero Darkoath amigo, elige una unidad Darkoath amiga no Hero ni Unique destruida. Con 3+, despliega una unidad de reemplazo con la mitad de miniaturas junto a un borde y a más de 3\" del enemigo.",
-    "Once Per Turn (Army)"
+    "Gasta 1 PC. Si hay un Hero Darkoath amigo, elige una unidad Darkoath amiga no Hero ni Unique destruida. Con 3+, despliega una unidad de reemplazo con la mitad de miniaturas totalmente a 6\" del borde y a más de 3\" del enemigo.",
+    "Once Per Turn (Army), Command"
   ),
 ];
 
@@ -98,7 +98,7 @@ export const heroicTraits = [
   rule(
     "favoured-of-the-pantheon",
     "Favoured of the Pantheon",
-    "Deployment Phase",
+    "Passive",
     "Si esta unidad es el objetivo de Eye of the Gods, gana 3 puntos de Apoteosis."
   ),
   rule(
@@ -206,7 +206,7 @@ export const ensorcelledBanners = [
   rule("banner-rage", "The Banner of Rage", "Passive", "La unidad obtiene Pledged to Khorne y, mientras conserve un portaestandarte, suma 1 a herir con ataques de combate."),
   rule("blasted-standard", "The Blasted Standard", "Passive", "La unidad obtiene Pledged to Tzeentch y, mientras conserve un portaestandarte, tiene Ward (4+) contra daño de disparos."),
   rule("eroding-icon", "The Eroding Icon", "Passive", "La unidad obtiene Pledged to Nurgle y, mientras conserve un portaestandarte, los ataques contra ella no pueden conseguir críticos."),
-  rule("banner-screaming-flesh", "The Banner of Screaming Flesh", "Passive", "La unidad obtiene Pledged to Slaanesh y, si cargó, suma 1 a Ataques de sus armas de combate este turno."),
+  rule("banner-screaming-flesh", "The Banner of Screaming Flesh", "Passive", "La unidad obtiene Pledged to Slaanesh. Además, mientras incluya un portaestandarte, si cargó este turno, suma 1 a Ataques de sus armas de combate durante el resto del turno."),
 ];
 
 export const spellLores = [{

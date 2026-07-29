@@ -9,11 +9,11 @@ export default [
     description:"Ashen Elder y Dominator Engine with Bane Maces.",
     abilities:[
       { id:"dirge-desolation", name:"Dirge of Desolation", phase:"Your Hero Phase", description:"CV 6. Elige un terreno o lugar de poder visible: con 3+, coloca una ficha de desolación; con 2-5, además D3 daños mortales a cada enemigo a 1\", y con 6+ elige un segundo objetivo." },
-      { id:"all-consuming-search", name:"All-consuming Search", phase:"End of Any Turn", description:"El Ashen Elder elige un objetivo, lugar de poder o terreno que dispute y no tenga ficha de desolación amiga. Tira un dado por cada objetivo elegido; cada 5+ le da 1 punto ritual." },
+      { id:"all-consuming-search", name:"All-consuming Search", phase:"End of Any Turn", description:"El Ashen Elder elige un objetivo o Place of Power que dispute y que no haya sido elegido antes en esta batalla. Tira un dado; con 5+, gana 1 punto ritual." },
     ],
   },
   {
-    id:"curse-steel-battery", name:"Curse-Steel Battery", sourceFaction:"hashut",
+    id:"curse-steel-battery", name:"The Curse-Steel Battery", sourceFaction:"hashut",
     points:380, eligibleFactionIds:eligible, units:["daemonsmith","tormentor-bombard","deathshrieker-rocket-battery"],
     organisation:["1 Daemonsmith","1 Tormentor Bombard","1 Deathshrieker Rocket Battery"],
     unitIds:["daemonsmith","tormentor-bombard","deathshrieker-rocket-battery"],

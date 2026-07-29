@@ -11,7 +11,7 @@ const manifestations = [
       { name: "Inescapable Reach", phase: "Your Movement Phase", description: "If not set up this turn, remove and set it up more than 9\" from enemies, then roll D3; on a 2+ it can move that many inches." },
     ],
     keywords: ["Manifestation", "Endless Spell", "Fly", "Ward (6+)", "Death", "Soulblight Gravelords"],
-    summonSpell: { name: "Summon Hand of Nagash", castingValue: 7, phase: "Your Hero Phase", description: "Set it up wholly within 18\" of the caster and more than 9\" from enemies.", keywords: ["Spell", "Summon"] },
+    summonSpell: { name: "Summon Hand of Nagash", castingValue: 7, phase: "Your Hero Phase", description: "Set it up wholly within 12\" of and visible to the caster and more than 9\" from enemies.", keywords: ["Spell", "Summon"] },
   },
   {
     id: "unholy-reliquary",
@@ -19,9 +19,9 @@ const manifestations = [
     image: "/images/units/soulblight/unholly-relicary.jpg",
     castingValue: 6,
     profile: { move: "-", health: 8, control: "-", save: "5+", banishment: "7+", ward: "6+" },
-    abilities: [{ name: "Draw on Power", phase: "Any Combat Phase", description: "Pick a friendly Soulblight Gravelords Hero wholly within 12\". Heal (D3) it, or add 1 to its melee Attacks for the turn and banish this manifestation." }],
+    abilities: [{ name: "Draw on Power", phase: "Any Combat Phase", description: "Pick a friendly Soulblight Gravelords Hero wholly within 12\". Heal (D3) it, or add 1 to its melee Attacks for the turn; then this manifestation is banished and removed from play." }],
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)", "Death", "Soulblight Gravelords"],
-    summonSpell: { name: "Summon Unholy Reliquary", castingValue: 6, phase: "Your Hero Phase", description: "Set it up wholly within 18\" of the caster.", keywords: ["Spell", "Summon"] },
+    summonSpell: { name: "Summon Unholy Reliquary", castingValue: 6, phase: "Your Hero Phase", description: "Set it up wholly within 18\" of and visible to the caster and more than 3\" from enemies.", keywords: ["Spell", "Summon"] },
   },
   {
     id: "sanguine-swarm",
@@ -35,7 +35,7 @@ const manifestations = [
       { name: "Leeching Bites", type: "Passive", phase: null, description: "Each time this manifestation scores a critical hit, Heal (1) it." },
     ],
     keywords: ["Manifestation", "Endless Spell", "Fly", "Ward (6+)", "Death", "Soulblight Gravelords"],
-    summonSpell: { name: "Summon Sanguine Swarm", castingValue: 6, phase: "Your Hero Phase", description: "Set it up wholly within 18\" of the caster and more than 9\" from enemies.", keywords: ["Spell", "Summon"] },
+    summonSpell: { name: "Summon Sanguine Swarm", castingValue: 6, phase: "Your Hero Phase", description: "Set it up wholly within 12\" of and visible to the caster and more than 9\" from enemies. Its 2 parts must be set up within 9\" of each other.", keywords: ["Spell", "Summon"] },
   },
 ];
 

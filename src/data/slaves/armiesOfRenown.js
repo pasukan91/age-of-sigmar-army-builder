@@ -53,7 +53,7 @@ const firstPrinceDaemons = [
     abilities: [a("Cloud of Flies", "Passive", "-1 a impactar con disparos contra esta unidad.")],
   }, "/images/factions/slaves.webp"),
   daemon({
-    id: "first-prince-beast-of-nurgle", name: "Legion of the First Prince Beast of Nurgle", points: 120,
+    id: "first-prince-beast-of-nurgle", name: "Legion of the First Prince Beasts of Nurgle", points: 120,
     move: '5"', health: 8, save: "5+", ward: "5+", baseSize: "60mm",
     keywords: ["Beast", "Ward (5+)", "Legion of the First Prince", "Daemon"],
     weapons: [w("Filthy Claws and Slobbering Maw", "Melee", 5, "4+", "3+", 1, "D3", ["Companion"])],
@@ -94,12 +94,13 @@ const units = [
 export default [{
   id: "legion-of-the-first-prince",
   name: "Legion of the First Prince",
-  excludesRegimentsOfRenown: true,
+  excludesRegimentsOfRenown: false,
+  description: "Todas las unidades del ejército obtienen la keyword Legion of the First Prince, salvo las incluidas en un Regiment of Renown.",
   roster: ["Be'lakor", "Daemon Prince", "Eternus", "Varanguard", "Chaos Sorcerer Lord", "Chaos Legionnaires", "Chaos Furies", "Centaurion Marshal", "Legion of the First Prince Daemons"],
   rules: {
     units,
     battleTraits: [
-      r("first-damned-prince", "First-damned Prince", "Passive", "Mientras Be'lakor esté en combate junto a un Daemon Legion of the First Prince amigo no Hero, tiene Ward (4+); las wards exitosas trasladan 1 daño a uno de esos daemons."),
+      r("first-damned-prince", "First-damned Prince", "Passive", "Mientras Be'lakor esté en combate junto a un Daemon Legion of the First Prince amigo no Hero, tiene Ward (4+). Después de resolver su secuencia de daño, cada ward exitosa asigna 1 daño a uno de esos daemons dentro de su alcance de combate; no se permiten wards contra ese daño."),
       r("daemonic-reinforcements", "Daemonic Reinforcements", "Any Movement Phase", "Elige una Infantry o Cavalry Daemon amiga no Hero destruida y despliega una unidad de reemplazo con la mitad de miniaturas totalmente a 12\" de Be'lakor y a más de 9\" del enemigo.", "Once Per Turn (Army)"),
       r("storm-blackened-blades", "Storm of Blackened Blades", "Your Combat Phase", "Una vez por batalla, Eternus y hasta 2 unidades amigas no Hero ni Daemon totalmente a 12\" suman 1 a Ataques de combate este turno.", "Once Per Battle (Army)"),
       r("bestow-favour", "Bestow Favour", "Your Hero Phase", "Si Be'lakor está en el campo, una unidad amiga no Hero obtiene +5 Control hasta tu siguiente turno y además +1 save si es Daemon o Ward (6+) si no lo es.", "Once Per Turn (Army)"),

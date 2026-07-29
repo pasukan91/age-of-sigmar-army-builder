@@ -76,7 +76,7 @@ const units = [
       ability(
         "Lead from the Front",
         "Any Combat Phase",
-        "Once per battle, if this unit is in combat, pick each visible friendly Sigmarite unit wholly within 12\". Add 1 to hit and wound rolls for those units' combat attacks for the rest of the turn.",
+        "Once per battle, if this unit is in combat, pick each visible friendly Sigmarite unit wholly within 12\". Add 1 to wound rolls for those units' combat attacks and give them Ward (5+) for the rest of the turn.",
         "Once Per Battle"
       ),
       ability(
