@@ -31,6 +31,7 @@ const UNIT_ENHANCEMENTS = [
   ["moulderMutation", "Mutación Moulder"],
   ["mortisanRefinement", "Refinamiento Mortisan"],
   ["accursedDevice", "Dispositivo maldito"],
+  ["brazenMutation", "Mutación de bronce"],
   ["originOfTerrifyingFolkTale", "Origen de relato terrorífico"],
   ["visionOfFate", "Visión de destino"],
   ["specialKnickKnack", "Special Knick-Knack"],

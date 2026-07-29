@@ -965,6 +965,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.brazenMutation) {
+      const owner = findEnhancementOwner(
+        "brazenMutation",
+        configuredUnit.brazenMutation.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Mutación de bronce",
+          selected: configuredUnit.brazenMutation.name,
+          owner: owner.unit.name,
+          existing: owner.unit.brazenMutation?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1505,6 +1521,7 @@ function App() {
       decorationForValour: null,
       ironweldInnovation: null,
       accursedDevice: null,
+      brazenMutation: null,
     };
 
     saveUpdatedList({
@@ -1877,6 +1894,7 @@ function App() {
             heroicTrait: findEnhancementOwner("heroicTrait"),
             monstrousTrait: findEnhancementOwner("monstrousTrait"),
             accursedDevice: findEnhancementOwner("accursedDevice"),
+            brazenMutation: findEnhancementOwner("brazenMutation"),
           }}
           faction={
             {

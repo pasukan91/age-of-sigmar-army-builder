@@ -48,6 +48,10 @@ function normalizeOption(value) {
     "any soulblight gravelords": "any-soulblight",
     "any soulblight": "any-soulblight",
     "any helsmiths of hashut": "any-hashut",
+    "any blades of khorne": "any-khorne",
+    "any blades of khorne daemon": "any-khorne-daemon",
+    "any blades of khorne daemon cavalry": "any-khorne-daemon-cavalry",
+    "any bloodbound": "any-bloodbound",
     "any hashutite commander": "hashutite-commander",
     "any deathrattle": "any-deathrattle",
     "any vyrkos retainer": "any-vyrkos-retainer",
@@ -70,6 +74,9 @@ function normalizeOption(value) {
     "legion subcommander": "legion-subcommander",
     "deathrattle overseer": "deathrattle-overseer",
     "vyrkos retainer": "vyrkos-retainer",
+    "slaughter seeker": "slaughter-seeker",
+    "bloodbound warmonger": "bloodbound-warmonger",
+    "baleful lord": "baleful-lord",
   };
 
   return aliases[option] ?? option;
@@ -120,6 +127,24 @@ function isAllowedByArmyOfRenown(list, unit) {
         hasKeyword(unit, "Helsmiths of Hashut") &&
         (hasKeyword(unit, "Cavalry") || hasKeyword(unit, "Automaton"))
       );
+  }
+
+  if (armyId === "gorechosen-champions") {
+    return [
+      "mighty-lord-of-khorne",
+      "slaughterpriest",
+      "bloodsecrator",
+      "bloodstoker",
+      "realmgore-ritualist",
+      "skullgrinder",
+      "deathbringer",
+    ].includes(unit.id);
+  }
+
+  if (armyId === "the-baleful-lords") {
+    return hasKeyword(unit, "Monster") &&
+      hasKeyword(unit, "Hero") &&
+      hasKeyword(unit, "Daemon");
   }
 
   if (armyId === "the-decadent-host") {
@@ -392,6 +417,14 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Soulblight Gravelords");
     case "any-hashut":
       return hasKeyword(unit, "Helsmiths of Hashut");
+    case "any-khorne":
+      return hasKeyword(unit, "Blades of Khorne");
+    case "any-khorne-daemon":
+      return hasKeyword(unit, "Blades of Khorne") && hasKeyword(unit, "Daemon");
+    case "any-khorne-daemon-cavalry":
+      return hasKeyword(unit, "Blades of Khorne") && hasKeyword(unit, "Daemon") && hasKeyword(unit, "Cavalry");
+    case "any-bloodbound":
+      return hasKeyword(unit, "Bloodbound");
     case "any-deathrattle":
       return hasKeyword(unit, "Deathrattle");
     case "sigmarite-war-machine":
@@ -402,7 +435,7 @@ function optionMatchesNonHero(unit, option) {
 }
 
 function roleLimit(option) {
-  return ["hashutite-commander", "slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer"].includes(option)
+  return ["hashutite-commander", "slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer", "slaughter-seeker", "bloodbound-warmonger", "baleful-lord"].includes(option)
     ? 1
     : null;
 }

@@ -311,6 +311,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.brazenMutation && (
+          <EnhancementAccordion
+            title="Mutación de bronce"
+            enhancement={unit.brazenMutation}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" && (
           <button
@@ -574,6 +581,7 @@ function getDisplayedPoints(unit) {
     unit?.decorationForValour,
     unit?.ironweldInnovation,
     unit?.accursedDevice,
+    unit?.brazenMutation,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

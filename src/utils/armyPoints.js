@@ -21,7 +21,8 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.specialKnickKnack) +
     getNumericPoints(unit.decorationForValour) +
     getNumericPoints(unit.ironweldInnovation) +
-    getNumericPoints(unit.accursedDevice)
+    getNumericPoints(unit.accursedDevice) +
+    getNumericPoints(unit.brazenMutation)
   );
 }
 

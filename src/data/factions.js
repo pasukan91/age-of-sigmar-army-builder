@@ -9,6 +9,7 @@ import tzeentch from "./tzeentch";
 import ossiarch from "./ossiarch";
 import soulblight from "./soulblight";
 import hashut from "./hashut";
+import khorne from "./khorne";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -26,6 +27,7 @@ const factions = [
   ossiarch,
   soulblight,
   hashut,
+  khorne,
 
   // ORDEN
   {
@@ -81,11 +83,6 @@ const factions = [
     id: "nurgle",
     alliance: "chaos",
     name: "Maggotkin of Nurgle",
-  },
-  {
-    id: "khorne",
-    alliance: "chaos",
-    name: "Blades of Khorne",
   },
   {
     id: "std",

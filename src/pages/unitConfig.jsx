@@ -53,6 +53,8 @@ function UnitConfig({
     useState(unit?.ironweldInnovation ?? null);
   const [accursedDevice, setAccursedDevice] =
     useState(unit?.accursedDevice ?? null);
+  const [brazenMutation, setBrazenMutation] =
+    useState(unit?.brazenMutation ?? null);
 
   if (!unit) {
     return (
@@ -210,6 +212,12 @@ function UnitConfig({
     isWarMachine &&
     (faction?.accursedDevices?.length ?? 0) > 0;
 
+  const canSelectBrazenMutation =
+    !isUnique &&
+    !isHero &&
+    (keywords.includes("infantry") || keywords.includes("cavalry")) &&
+    (faction?.brazenMutations?.length ?? 0) > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -254,6 +262,8 @@ function UnitConfig({
 
   const accursedDeviceOptions =
     faction?.accursedDevices ?? [];
+  const brazenMutationOptions =
+    faction?.brazenMutations ?? [];
 
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
@@ -280,7 +290,8 @@ function UnitConfig({
     Number(specialKnickKnack?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
     Number(ironweldInnovation?.points ?? 0) +
-    Number(accursedDevice?.points ?? 0);
+    Number(accursedDevice?.points ?? 0) +
+    Number(brazenMutation?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -357,6 +368,11 @@ function UnitConfig({
       accursedDevice:
         canSelectAccursedDevice
           ? accursedDevice
+          : null,
+
+      brazenMutation:
+        canSelectBrazenMutation
+          ? brazenMutation
           : null,
     });
   }
@@ -784,6 +800,17 @@ function UnitConfig({
           }
           onToggle={(option) =>
             toggleExclusiveOption(setAccursedDevice, option)
+          }
+        />
+      )}
+
+      {canSelectBrazenMutation && (
+        <SelectionSection
+          title="Mutación de bronce"
+          options={brazenMutationOptions}
+          selected={brazenMutation}
+          onToggle={(option) =>
+            toggleExclusiveOption(setBrazenMutation, option)
           }
         />
       )}
