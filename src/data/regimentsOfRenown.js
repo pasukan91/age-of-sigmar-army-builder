@@ -9,6 +9,7 @@ import soulblightRegiments from "./soulblight/regimentsOfRenown";
 import hashutRegiments from "./hashut/regimentsOfRenown";
 import khorneRegiments from "./khorne/regimentsOfRenown";
 import slavesRegiments from "./slaves/regimentsOfRenown";
+import nurgleRegiments from "./nurgle/regimentsOfRenown";
 
 const regimentsOfRenown = [
   ...hedonitesRegiments,
@@ -22,6 +23,7 @@ const regimentsOfRenown = [
   ...hashutRegiments,
   ...khorneRegiments,
   ...slavesRegiments,
+  ...nurgleRegiments,
 ];
 
 export function getEligibleRegimentsOfRenown(factionId) {

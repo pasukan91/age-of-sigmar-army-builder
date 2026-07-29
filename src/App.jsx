@@ -1550,6 +1550,7 @@ function App() {
       originOfTerrifyingFolkTale: null,
       visionOfFate: null,
       specialKnickKnack: null,
+      plaguefathersPox: null,
       decorationForValour: null,
       ironweldInnovation: null,
       accursedDevice: null,

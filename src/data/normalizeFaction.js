@@ -27,6 +27,7 @@ const ARRAY_FIELDS = [
   "decorationsForValour",
   "ironweldInnovations",
   "visionsOfFate",
+  "plaguefathersPoxes",
 ];
 
 export function normalizeFaction(faction) {

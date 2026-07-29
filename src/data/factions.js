@@ -11,6 +11,8 @@ import soulblight from "./soulblight";
 import hashut from "./hashut";
 import khorne from "./khorne";
 import slaves from "./slaves";
+import nurgle from "./nurgle";
+import armiesOfRenownByFaction from "./rulesOfRenownArmies";
 import { normalizeFaction } from "./normalizeFaction";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -30,6 +32,7 @@ const factions = [
   hashut,
   khorne,
   slaves,
+  nurgle,
 
   // ORDEN
   {
@@ -81,17 +84,32 @@ const factions = [
   },
 
   // CAOS
-  {
-    id: "nurgle",
-    alliance: "chaos",
-    name: "Maggotkin of Nurgle",
-  },
   // DESTRUCCIÓN
   {
     id: "behemat",
     alliance: "destruction",
     name: "Sons of Behemat",
   },
-].map(normalizeFaction);
+].map((faction) => {
+  const addedArmies = (armiesOfRenownByFaction[faction.id] ?? []).map(
+    ({ unitFilter, ...renownArmy }) => ({
+      ...renownArmy,
+      rules: {
+        ...renownArmy.rules,
+        units: unitFilter
+          ? (faction.units ?? []).filter(unitFilter)
+          : (faction.units ?? []),
+      },
+    })
+  );
+
+  return normalizeFaction({
+    ...faction,
+    armiesOfRenown: [
+      ...(faction.armiesOfRenown ?? []),
+      ...addedArmies,
+    ],
+  });
+});
 
 export default factions;

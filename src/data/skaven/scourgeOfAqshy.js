@@ -43,7 +43,7 @@ const scourgeUnits = [
         wound: "3+",
         rend: "1",
         damage: "2",
-        abilities: ["Companion"],
+        abilities: [],
       },
       {
         name: "Crushing Bulk",

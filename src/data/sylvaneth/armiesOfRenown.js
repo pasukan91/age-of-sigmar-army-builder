@@ -171,9 +171,11 @@ const armiesOfRenown = [
         rule("rhythm-of-the-chase-evergreen", "Rhythm of the Chase", "Once Per Battle Round (Army)", "Start of Battle Round", "If there is no quarry, pick an enemy unit to be the quarry for the rest of the battle."),
         rule("opening-horn-blast", "Opening Horn Blast", "Once Per Battle Round (Army)", "Start of Battle Round", "Reset your chords to 0, then gain 1 for Belthanos being on the battlefield, for each friendly Evergreen Hunt unit wholly within the same large battlefield quarter as the quarry, and for each quarry destroyed so far."),
         rule("song-of-the-hunt", "Song of the Hunt", "Passive", null, "Cumulative effects by chords: 1, +1 run and charge in the quarry's quarter; 2, +1 hit and wound for combat attacks against enemies in that quarter; 3-5, +1 Attack to melee weapons while fighting the quarry; 6+, the quarry has Strike-last while fighting a friendly unit."),
+        rule("nature-aetheric", "Nature Aetheric", "Once Per Battle (Army)", "Deployment Phase", "Pick a terrain feature within friendly territory. For the rest of the battle, friendly units wholly within 6\" of it are wholly within the creeping overgrowth."),
         rule("a-prize-quarry-is-sighted", "A Prize Quarry Is Sighted", "Once Per Battle (Army)", "Your Hero Phase", "Pick an enemy within 9\" of a friendly Evergreen Hunt unit. It becomes the quarry and the previous quarry ceases to be one."),
         rule("abundant-growth", "Abundant Growth", "Once Per Turn (Army)", "Your Hero Phase", "Heal (1) each friendly Evergreen Hunt unit wholly within 3\" of a terrain feature."),
         rule("merciful-strike", "Merciful Strike", "Once Per Turn (Army)", "Any Combat Phase", "Pick a friendly Evergreen Hunt Monster that has not used a Rampage and an enemy in combat. Roll a die and add the target's allocated damage; if the result exceeds its Health, slay 1 model.", ["Rampage"]),
+        rule("questing-tendrils", "Questing Tendrils", "Once Per Turn (Army)", "Start of Any Turn", "Pick the terrain feature closest to the quarry. For the rest of the turn, friendly units wholly within 6\" of it are wholly within the creeping overgrowth."),
       ],
       heroicTraits: [
         enhancement("sapwood-leader", "Sapwood Leader", "If this unit is targeted by Abundant Growth, Heal (3) instead of Heal (1).", "Passive"),

@@ -46,6 +46,9 @@ function UnitConfig({
   const [specialKnickKnack, setSpecialKnickKnack] =
     useState(unit?.specialKnickKnack ?? null);
 
+  const [plaguefathersPox, setPlaguefathersPox] =
+    useState(unit?.plaguefathersPox ?? null);
+
   const [decorationForValour, setDecorationForValour] =
     useState(unit?.decorationForValour ?? null);
 
@@ -199,6 +202,10 @@ function UnitConfig({
     !isHero &&
     (faction?.specialKnickKnacks?.length ?? 0) > 0;
 
+  const canSelectPlaguefathersPox =
+    !isHero &&
+    (faction?.plaguefathersPoxes?.length ?? 0) > 0;
+
   const canSelectDecorationForValour =
     !isUnique &&
     !isHero &&
@@ -271,6 +278,9 @@ function UnitConfig({
   const specialKnickKnackOptions =
     faction?.specialKnickKnacks ?? [];
 
+  const plaguefathersPoxOptions =
+    faction?.plaguefathersPoxes ?? [];
+
   const decorationForValourOptions =
     faction?.decorationsForValour ?? [];
 
@@ -309,6 +319,7 @@ function UnitConfig({
     Number(originOfTerrifyingFolkTale?.points ?? 0) +
     Number(visionOfFate?.points ?? 0) +
     Number(specialKnickKnack?.points ?? 0) +
+    Number(plaguefathersPox?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
     Number(ironweldInnovation?.points ?? 0) +
     Number(accursedDevice?.points ?? 0) +
@@ -376,6 +387,11 @@ function UnitConfig({
       specialKnickKnack:
         canSelectSpecialKnickKnack
           ? specialKnickKnack
+          : null,
+
+      plaguefathersPox:
+        canSelectPlaguefathersPox
+          ? plaguefathersPox
           : null,
 
       decorationForValour:
@@ -816,6 +832,17 @@ function UnitConfig({
           selected={ironweldInnovation}
           onToggle={(option) =>
             toggleExclusiveOption(setIronweldInnovation, option)
+          }
+        />
+      )}
+
+      {canSelectPlaguefathersPox && (
+        <SelectionSection
+          title="Plaguefather’s Pox"
+          options={plaguefathersPoxOptions}
+          selected={plaguefathersPox}
+          onToggle={(option) =>
+            toggleExclusiveOption(setPlaguefathersPox, option)
           }
         />
       )}

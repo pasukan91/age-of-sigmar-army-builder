@@ -290,6 +290,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.plaguefathersPox && (
+          <EnhancementAccordion
+            title="Plaguefather’s Pox"
+            enhancement={unit.plaguefathersPox}
+          />
+        )}
+
         {unit.decorationForValour && (
           <EnhancementAccordion
             title="Decoration for Valour"
@@ -592,6 +599,7 @@ function getDisplayedPoints(unit) {
     unit?.originOfTerrifyingFolkTale,
     unit?.visionOfFate,
     unit?.specialKnickKnack,
+    unit?.plaguefathersPox,
     unit?.decorationForValour,
     unit?.ironweldInnovation,
     unit?.accursedDevice,

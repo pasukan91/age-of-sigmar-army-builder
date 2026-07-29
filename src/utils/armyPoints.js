@@ -19,6 +19,7 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.originOfTerrifyingFolkTale) +
     getNumericPoints(unit.visionOfFate) +
     getNumericPoints(unit.specialKnickKnack) +
+    getNumericPoints(unit.plaguefathersPox) +
     getNumericPoints(unit.decorationForValour) +
     getNumericPoints(unit.ironweldInnovation) +
     getNumericPoints(unit.accursedDevice) +

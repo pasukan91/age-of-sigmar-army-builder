@@ -67,6 +67,8 @@ function serializeUnit(unit) {
       unit.visionOfFate ?? null,
     specialKnickKnack:
       unit.specialKnickKnack ?? null,
+    plaguefathersPox:
+      unit.plaguefathersPox ?? null,
     decorationForValour:
       unit.decorationForValour ?? null,
     ironweldInnovation:
@@ -142,6 +144,10 @@ function restoreUnit(savedUnit, faction) {
     specialKnickKnack: restoreOption(
       savedUnit.specialKnickKnack,
       faction?.specialKnickKnacks
+    ),
+    plaguefathersPox: restoreOption(
+      savedUnit.plaguefathersPox,
+      faction?.plaguefathersPoxes
     ),
     decorationForValour: restoreOption(
       savedUnit.decorationForValour,
