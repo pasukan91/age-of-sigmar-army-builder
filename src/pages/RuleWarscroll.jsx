@@ -15,9 +15,18 @@ function RuleWarscroll({ reference, onBack }) {
   const artwork = getRuleArtwork(item, kind);
   const primaryRule = isManifestation ? item.summonSpell : item;
   const ruleParts = splitRuleText(primaryRule?.description);
-  const value = kind === "prayer"
-    ? item.chantingValue ?? item.castingValue
-    : item.castingValue;
+  const isInvocation = isManifestation && isPrayer(primaryRule);
+  const value = isManifestation
+    ? isInvocation
+      ? primaryRule?.chantingValue ?? item.chantingValue ?? primaryRule?.castingValue ?? item.castingValue
+      : primaryRule?.castingValue ?? item.castingValue
+    : kind === "prayer"
+      ? item.chantingValue ?? item.castingValue
+      : item.castingValue;
+  const declareText = ruleParts.declare ||
+    (isManifestation ? getManifestationDeclare(item, primaryRule, isInvocation) : "");
+  const effectText = ruleParts.effect ||
+    (!ruleParts.declare ? primaryRule?.description : "");
 
   return (
     <main className="aos-page aos-warscroll-page aos-reference-warscroll">
@@ -60,7 +69,7 @@ function RuleWarscroll({ reference, onBack }) {
             {(kind === "spell" || kind === "prayer" || isManifestation) && (
               <section className="aos-casting-card">
                 <div className="aos-casting-card__value">
-                  <span>{kind === "prayer" ? "Canto" : isManifestation ? "Manifestar" : "Lanzamiento"}</span>
+                  <span>{kind === "prayer" || isInvocation ? "Canto" : isManifestation ? "Manifestar" : "Lanzamiento"}</span>
                   <strong>{value ?? "-"}+</strong>
                 </div>
                 <div className="aos-casting-card__content">
@@ -71,10 +80,10 @@ function RuleWarscroll({ reference, onBack }) {
               </section>
             )}
 
-            {(ruleParts.declare || ruleParts.effect || primaryRule?.description) && (
+            {(declareText || effectText) && (
               <section className="aos-rule-procedure">
-                <RuleStep title={isManifestation ? "Condiciones para manifestarla" : kind === "prayer" ? "Condiciones para entonarla" : "Condiciones para lanzarlo"} text={ruleParts.declare} />
-                <RuleStep title="Efecto" text={ruleParts.effect || (!ruleParts.declare ? primaryRule?.description : "")} variant="effect" />
+                <RuleStep title={isManifestation ? "Condiciones para manifestarla" : kind === "prayer" ? "Condiciones para entonarla" : "Condiciones para lanzarlo"} text={declareText} />
+                <RuleStep title="Efecto" text={effectText} variant="effect" />
               </section>
             )}
 
@@ -183,6 +192,21 @@ function splitRuleText(description = "") {
   const declareMatch = text.match(/Declare:\s*([\s\S]*?)(?=\n\s*\nEffect:|Effect:|$)/i);
   const effectMatch = text.match(/Effect:\s*([\s\S]*)$/i);
   return { declare: declareMatch?.[1]?.trim() ?? "", effect: effectMatch?.[1]?.trim() ?? "" };
+}
+
+function isPrayer(rule) {
+  return String(rule?.type ?? "").toLowerCase() === "prayer" ||
+    rule?.keywords?.some((keyword) => String(keyword).toLowerCase() === "prayer");
+}
+
+function getManifestationDeclare(item, rule, invocation) {
+  if (!rule) return "";
+
+  const summoner = invocation ? "PRIEST" : "WIZARD";
+  const action = invocation ? "chant this prayer" : "cast this spell";
+  const roll = invocation ? "chanting" : "casting";
+
+  return `If there is not a friendly ${item.name} on the battlefield, pick an eligible friendly ${summoner} to ${action}, then make a ${roll} roll of 2D6.`;
 }
 
 function getKindLabel(kind) {
