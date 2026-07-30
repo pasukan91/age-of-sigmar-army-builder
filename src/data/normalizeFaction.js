@@ -1,3 +1,5 @@
+import { withEnhancementTiming } from "../utils/enhancementTiming";
+
 const ARRAY_FIELDS = [
   "battleTraits",
   "battleFormations",
@@ -30,10 +32,35 @@ const ARRAY_FIELDS = [
   "plaguefathersPoxes",
 ];
 
+const ENHANCEMENT_FIELDS = [
+  "heroicTraits",
+  "monsterTraits",
+  "artefacts",
+  "aqshyArtefacts",
+  "aqshyHeroicTraits",
+  "allConsumingObsessions",
+  "moulderMutations",
+  "mortisanRefinements",
+  "originsOfTerrifyingFolkTales",
+  "visionsOfFate",
+  "specialKnickKnacks",
+  "plaguefathersPoxes",
+  "decorationsForValour",
+  "ironweldInnovations",
+  "accursedDevices",
+  "brazenMutations",
+  "brandsOfTheDarkGods",
+  "ensorcelledBanners",
+];
+
 export function normalizeFaction(faction) {
   const normalized = Object.fromEntries(
     ARRAY_FIELDS.map((field) => [field, asArray(faction?.[field])])
   );
+
+  ENHANCEMENT_FIELDS.forEach((field) => {
+    normalized[field] = normalized[field].map(withEnhancementTiming);
+  });
 
   normalized.spellLores = normalized.spellLores.map(normalizeSpellLore);
   normalized.prayerLores = normalized.prayerLores.map(normalizePrayerLore);

@@ -2217,6 +2217,21 @@ body {
   transform: rotate(90deg);
 }
 
+.aos-config-option-phase {
+  display: block;
+  width: fit-content;
+  margin-top: 6px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: #fff8e8;
+  background: #6d4512;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
 .aos-config-option-selector {
   display: grid;
   place-items: center;

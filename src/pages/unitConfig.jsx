@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import BackButton from "../components/BackButton";
+import { getEnhancementTiming } from "../utils/enhancementTiming";
 
 function UnitConfig({
   unit,
@@ -1071,6 +1072,7 @@ function SelectionSection({
           description={
             option.description
           }
+          phase={getEnhancementTiming(option)}
           source={option.source}
           disabled={disabled}
           checked={
@@ -1088,6 +1090,7 @@ function SelectionSection({
 function CheckboxOption({
   title,
   description,
+  phase,
   source,
   disabled = false,
   checked,
@@ -1121,6 +1124,12 @@ function CheckboxOption({
             <strong style={styles.optionTitle}>
               {title}
             </strong>
+
+            {phase && (
+              <span className="aos-config-option-phase">
+                {phase}
+              </span>
+            )}
 
             {source && (
               <span

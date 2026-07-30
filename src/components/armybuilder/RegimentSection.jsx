@@ -4,6 +4,7 @@ import {
   getAvailableUnitsForRegiment,
 } from "../../utils/regimentRules";
 import UnitArtwork from "../UnitArtwork";
+import { getEnhancementTiming } from "../../utils/enhancementTiming";
 
 function RegimentSection({
   list,
@@ -566,6 +567,7 @@ function UnitCard({
                 <span className="aos-unit-enhancement__type">{label}</span>
                 <strong>{enhancement.name}</strong>
                 <div className="aos-unit-enhancement__meta">
+                  <span>{getEnhancementTiming(enhancement)}</span>
                   {enhancement.source && (
                     <span className={enhancement.source === "Aqshy" ? "is-aqshy" : ""}>
                       {enhancement.source}

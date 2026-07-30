@@ -1,5 +1,6 @@
 import Accordion from "../components/Accordion";
 import UnitArtwork from "../components/UnitArtwork";
+import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { getPotentialSynergies } from "../utils/unitSynergies";
 
 import "../styles/aos-app.css";
@@ -553,6 +554,10 @@ function EnhancementAccordion({
       <h3 style={styles.enhancementName}>
         {enhancement.name}
       </h3>
+
+      <span className="aos-rule-card__phase">
+        {getEnhancementTiming(enhancement)}
+      </span>
 
       {enhancement.source && (
         <span style={styles.enhancementSource}>
