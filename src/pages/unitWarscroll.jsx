@@ -1,6 +1,7 @@
 import Accordion from "../components/Accordion";
 import UnitArtwork from "../components/UnitArtwork";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
+import { isUniqueUnit } from "../utils/unitIdentity";
 import { getPotentialSynergies } from "../utils/unitSynergies";
 
 import "../styles/aos-app.css";
@@ -341,7 +342,8 @@ function UnitWarscroll({
         )}
 
         {typeof onConfigure ===
-          "function" && (
+          "function" &&
+          !isUniqueUnit(unit) && (
           <button
             type="button"
             className="aos-configure-button"

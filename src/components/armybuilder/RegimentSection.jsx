@@ -5,6 +5,7 @@ import {
 } from "../../utils/regimentRules";
 import UnitArtwork from "../UnitArtwork";
 import { getEnhancementTiming } from "../../utils/enhancementTiming";
+import { isUniqueUnit } from "../../utils/unitIdentity";
 
 function RegimentSection({
   list,
@@ -493,6 +494,7 @@ function UnitCard({
         String(keyword).trim().toLowerCase() ===
         "hedonites of slaanesh"
     );
+  const isUnique = isUniqueUnit(unit);
 
   const assignedEnhancements = [
     ["Artefacto", unit.artefact],
@@ -584,13 +586,15 @@ function UnitCard({
       </div>
 
       <div style={styles.actions}>
-        <button
-          type="button"
-          onClick={onConfigure}
-          style={styles.primaryButton}
-        >
-          Asignar mejoras
-        </button>
+        {!isUnique && (
+          <button
+            type="button"
+            onClick={onConfigure}
+            style={styles.primaryButton}
+          >
+            Asignar mejoras
+          </button>
+        )}
 
         {!isLeader && (
           <>

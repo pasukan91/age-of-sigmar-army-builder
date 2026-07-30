@@ -25,6 +25,7 @@ import {
   loadArmyLists,
   saveArmyLists,
 } from "./storage/armyListStorage";
+import { isUniqueUnit } from "./utils/unitIdentity";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -591,7 +592,7 @@ function App() {
     regimentId,
     isLeader = false,
   }) {
-    if (!unit || !regimentId) {
+    if (!unit || !regimentId || isUniqueUnit(unit)) {
       return;
     }
 
@@ -630,7 +631,7 @@ function App() {
   }
 
   function handleConfigureSelectedUnit() {
-    if (!selectedUnit) {
+    if (!selectedUnit || isUniqueUnit(selectedUnit)) {
       return;
     }
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import BackButton from "../components/BackButton";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
+import { isUniqueUnit } from "../utils/unitIdentity";
 
 function UnitConfig({
   unit,
@@ -108,9 +109,7 @@ function UnitConfig({
     unit.rules?.hero === true ||
     keywords.includes("hero");
 
-  const isUnique =
-    unit.rules?.unique === true ||
-    keywords.includes("unique");
+  const isUnique = isUniqueUnit(unit);
 
   const isMonster =
     unit.rules?.monster === true ||
@@ -204,6 +203,7 @@ function UnitConfig({
     (faction?.specialKnickKnacks?.length ?? 0) > 0;
 
   const canSelectPlaguefathersPox =
+    !isUnique &&
     !isHero &&
     (faction?.plaguefathersPoxes?.length ?? 0) > 0;
 
