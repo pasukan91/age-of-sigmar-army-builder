@@ -2,6 +2,7 @@ import units from "./units";
 import scourgeUnits from "./scourgeOfAqshy";
 import armiesOfRenown from "./armiesOfRenown";
 import regimentsOfRenown from "./regimentsOfRenown";
+import manifestationWarscrolls from "./manifestations";
 import {
   artefacts,
   battleFormations,
@@ -28,7 +29,7 @@ const skaven = {
   aqshyArtefacts: [],
   spellLores,
   prayerLores,
-  manifestations: [],
+  manifestations: manifestationWarscrolls,
   manifestationLores: manifestations,
   terrain,
   units: [...units, ...scourgeUnits],

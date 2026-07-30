@@ -127,7 +127,19 @@ function normalizeManifestation(manifestation) {
   const castingValue =
     manifestation.castingValue ??
     manifestation.summonSpell?.castingValue ??
+    manifestation.summonSpell?.chantingValue ??
     null;
+  const fallbackSummonSpell = {
+    name: `Summon ${manifestation.name}`,
+    type: "Spell",
+    phase: manifestation.phase ?? "Your Hero Phase",
+    keywords: ["Spell", "Summon"],
+    description: manifestation.description ?? "",
+  };
+  const summonSpell = normalizeSummonSpell(
+    manifestation,
+    manifestation.summonSpell ?? fallbackSummonSpell
+  );
 
   return {
     weapons: [],
@@ -141,14 +153,34 @@ function normalizeManifestation(manifestation) {
       save: null,
       ...manifestation.profile,
     },
-    summonSpell: manifestation.summonSpell ?? {
-      name: `Summon ${manifestation.name}`,
-      type: "Spell",
-      phase: manifestation.phase ?? "Your Hero Phase",
-      keywords: ["Spell", "Summon"],
-      description: manifestation.description ?? "",
-    },
+    summonSpell,
     keywords: unique(["Manifestation", ...asArray(manifestation.keywords)]),
+  };
+}
+
+function normalizeSummonSpell(manifestation, summonSpell) {
+  const description = String(summonSpell?.description ?? "").trim();
+  if (/Declare:/i.test(description) && /Effect:/i.test(description)) {
+    return summonSpell;
+  }
+
+  const invocation = String(summonSpell?.type ?? "").toLowerCase() === "prayer" ||
+    asArray(summonSpell?.keywords).some(
+      (keyword) => String(keyword).toLowerCase() === "prayer"
+    );
+  const summoner = invocation ? "PRIEST" : "WIZARD";
+  const action = invocation ? "chant this prayer" : "cast this spell";
+  const roll = invocation ? "chanting" : "casting";
+  const declare =
+    `Declare: If there is not a friendly ${manifestation.name} on the battlefield, ` +
+    `pick an eligible friendly ${summoner} to ${action}, then make a ${roll} roll of 2D6.`;
+  const effect = description
+    ? `\n\nEffect: ${description.replace(/^Effect:\s*/i, "")}`
+    : "";
+
+  return {
+    ...summonSpell,
+    description: declare + effect,
   };
 }
 
@@ -262,6 +294,41 @@ export function getFactionValidationErrors(faction) {
   faction?.manifestationLores?.forEach((lore) => {
     if (!lore.id || !lore.name || !Array.isArray(lore.manifestations)) {
       errors.push(`invalid manifestation lore: ${lore?.id ?? "missing id"}`);
+      return;
+    }
+
+    lore.manifestations.forEach((manifestation) => {
+      if (manifestation?.dataPending) {
+        errors.push(
+          `unresolved manifestation in ${lore.id}: ${manifestation.id}`
+        );
+      }
+    });
+  });
+
+  faction?.manifestations?.forEach((manifestation) => {
+    const summonSpell = manifestation?.summonSpell;
+    const summonValue =
+      summonSpell?.chantingValue ??
+      summonSpell?.castingValue ??
+      manifestation?.chantingValue ??
+      manifestation?.castingValue;
+    const summonText = String(summonSpell?.description ?? "");
+
+    if (!manifestation?.id || !manifestation?.name) {
+      errors.push("manifestation missing id or name");
+    }
+    if (!summonSpell || !summonValue) {
+      errors.push(`manifestation missing summon rule: ${manifestation?.id}`);
+    }
+    if (!manifestation?.profile?.health) {
+      errors.push(`manifestation missing profile: ${manifestation?.id}`);
+    }
+    if (!/Declare:/i.test(summonText) || !/Effect:/i.test(summonText)) {
+      errors.push(`manifestation missing Declare or Effect: ${manifestation?.id}`);
+    }
+    if (!/within\s+[^.]*\b(caster|chanter)\b/i.test(summonText)) {
+      errors.push(`manifestation missing summoning distance: ${manifestation?.id}`);
     }
   });
 

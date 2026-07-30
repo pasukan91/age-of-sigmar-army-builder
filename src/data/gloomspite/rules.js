@@ -112,6 +112,14 @@ export const manifestations = [
     profile: { move: "-", health: 6, control: "-", save: "6+", ward: "6+", banishment: "7+" },
     weapons: [],
     abilities: [ability("Mutating Spores", "Any Shooting Phase", "Pick up to 3 enemies within 6\". Roll one dice for each model in each target within 6\"; every 5+ inflicts 1 mortal damage.")],
+    summonSpell: {
+      name: "Summon Mork's Mighty Mushroom",
+      type: "Spell",
+      phase: "Your Hero Phase",
+      castingValue: 6,
+      keywords: ["Spell", "Summon"],
+      description: "Declare: If there is not a friendly Mork's Mighty Mushroom on the battlefield, pick a friendly GLOOMSPITE GITZ WIZARD to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a Mork's Mighty Mushroom wholly within 12\" of the caster and visible to them.",
+    },
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)", "Destruction", "Gloomspite Gitz"],
   },
   {
@@ -125,6 +133,14 @@ export const manifestations = [
       ability("Wall Crawler", null, "This manifestation can pass across terrain as if it had Fly.", "Passive"),
       ability("Endless Terrors", null, "This manifestation has Ward (4+) while wholly within 12\" of a friendly Arachnarok.", "Passive"),
     ],
+    summonSpell: {
+      name: "Summon Scuttletide",
+      type: "Spell",
+      phase: "Your Hero Phase",
+      castingValue: 6,
+      keywords: ["Spell", "Summon"],
+      description: "Declare: If there is not a friendly Scuttletide on the battlefield, pick a friendly GLOOMSPITE GITZ WIZARD to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a Scuttletide wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.",
+    },
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)", "Destruction", "Gloomspite Gitz"],
   },
   {
@@ -135,6 +151,14 @@ export const manifestations = [
     profile: { move: '6"', health: 6, control: "-", save: "5+", ward: "6+", banishment: "7+" },
     weapons: [weapon("Spider Legs", "Melee", 2, "4+", "3+", "0", "2")],
     abilities: [ability("Blessings of the Cauldron", "Your Hero Phase", "Pick a friendly Gloomspite Gitz Wizard within 1\". Add 1 to its power level until your next turn.")],
+    summonSpell: {
+      name: "Summon Scrapskuttle's Arachnacauldron",
+      type: "Spell",
+      phase: "Your Hero Phase",
+      castingValue: 7,
+      keywords: ["Spell", "Summon"],
+      description: "Declare: If there is not a friendly Scrapskuttle's Arachnacauldron on the battlefield, pick a friendly GLOOMSPITE GITZ WIZARD to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a Scrapskuttle's Arachnacauldron wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.",
+    },
     keywords: ["Manifestation", "Endless Spell", "Ward (6+)", "Destruction", "Gloomspite Gitz"],
   },
   {
@@ -145,6 +169,14 @@ export const manifestations = [
     profile: { move: '12"', health: 6, control: "-", save: "6+", ward: "6+", banishment: "7+" },
     weapons: [weapon("Lunarock Slam", "Melee", 1, "4+", "3+", "0", "D3")],
     abilities: [ability("Lurid Light", null, "Friendly Gloomspite Gitz units wholly within 12\" are affected by all four faces of the Bad Moon.", "Passive")],
+    summonSpell: {
+      name: "Summon Malevolent Moon",
+      type: "Spell",
+      phase: "Your Hero Phase",
+      castingValue: 7,
+      keywords: ["Spell", "Summon"],
+      description: "Declare: If there is not a friendly Malevolent Moon on the battlefield, pick a friendly GLOOMSPITE GITZ WIZARD to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a Malevolent Moon wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.",
+    },
     keywords: ["Manifestation", "Endless Spell", "Fly", "Ward (6+)", "Destruction", "Gloomspite Gitz"],
   },
 ];
