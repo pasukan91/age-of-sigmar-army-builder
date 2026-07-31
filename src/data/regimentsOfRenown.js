@@ -10,6 +10,7 @@ import hashutRegiments from "./hashut/regimentsOfRenown";
 import khorneRegiments from "./khorne/regimentsOfRenown";
 import slavesRegiments from "./slaves/regimentsOfRenown";
 import nurgleRegiments from "./nurgle/regimentsOfRenown";
+import luminethRegiments from "./lumineth/regimentsOfRenown";
 
 const regimentsOfRenown = [
   ...hedonitesRegiments,
@@ -24,6 +25,7 @@ const regimentsOfRenown = [
   ...khorneRegiments,
   ...slavesRegiments,
   ...nurgleRegiments,
+  ...luminethRegiments,
 ];
 
 export function getEligibleRegimentsOfRenown(factionId) {

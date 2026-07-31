@@ -2,6 +2,7 @@ import {
   countsTowardRegimentLimit,
   getAvailableRegimentLeaders,
   getAvailableUnitsForRegiment,
+  getRegimentCompositionErrors,
 } from "../../utils/regimentRules";
 import UnitArtwork from "../UnitArtwork";
 import { getEnhancementTiming } from "../../utils/enhancementTiming";
@@ -25,6 +26,8 @@ function RegimentSection({
 
   const availableHeroes =
     getAvailableRegimentLeaders(list);
+  const compositionErrors =
+    getRegimentCompositionErrors(list);
 
   function getRegimentLimit(index) {
     return index === 0 ? 4 : 3;
@@ -46,6 +49,7 @@ function RegimentSection({
       unit?.originOfTerrifyingFolkTale,
       unit?.visionOfFate,
       unit?.specialKnickKnack,
+      unit?.flawlessManoeuvre,
       unit?.plaguefathersPox,
       unit?.decorationForValour,
       unit?.ironweldInnovation,
@@ -202,6 +206,11 @@ function RegimentSection({
           const addUnitsDisabled =
             (full && !canAddFreeCommandCorpsUnit) ||
             offeredUnits.length === 0;
+          const regimentErrors =
+            compositionErrors.filter(
+              (error) =>
+                error.regimentId === regiment.id
+            );
 
           return (
             <article
@@ -269,6 +278,16 @@ function RegimentSection({
                     : "plazas disponibles"}
                 </span>
               </div>
+
+              {regimentErrors.map((error) => (
+                <p
+                  key={`${error.role}-${error.max}`}
+                  role="alert"
+                  style={styles.compositionError}
+                >
+                  Composición ilegal: {error.message}
+                </p>
+              ))}
 
               <p
                 style={
@@ -510,6 +529,7 @@ function UnitCard({
     ["Origen de relato terrorífico", unit.originOfTerrifyingFolkTale],
     ["Visión de destino", unit.visionOfFate],
     ["Special Knick-Knack", unit.specialKnickKnack],
+    ["Flawless Manoeuvre", unit.flawlessManoeuvre],
     ["Plaguefather’s Pox", unit.plaguefathersPox],
     ["Decoration for Valour", unit.decorationForValour],
     ["Ironweld Innovation", unit.ironweldInnovation],
@@ -691,6 +711,17 @@ const styles = {
     fontSize: 13,
     fontWeight: 700,
     textTransform: "uppercase",
+  },
+
+  compositionError: {
+    padding: 10,
+    margin: "0 0 14px",
+    border: "1px solid #a40000",
+    borderRadius: 3,
+    color: "#7b110c",
+    backgroundColor: "#fff0ee",
+    fontSize: 13,
+    fontWeight: 700,
   },
 
   unitCard: {

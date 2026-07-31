@@ -6,6 +6,7 @@ const factionArtwork = {
   hedonites: "/images/factions/hedonites.webp",
   ironjawz: "/images/factions/ironjawz-army.webp",
   kruleboyz: "/images/factions/kruleboyz.webp",
+  lumineth: "/images/factions/lumineth.webp",
   ogors: "/images/factions/ogormawtribes.webp",
   skaven: "/images/factions/skaven.webp",
   sylvaneth: "/images/factions/sylvaneth.webp",

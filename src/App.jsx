@@ -918,6 +918,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.flawlessManoeuvre) {
+      const owner = findEnhancementOwner(
+        "flawlessManoeuvre",
+        configuredUnit.flawlessManoeuvre.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Flawless Manoeuvre",
+          selected: configuredUnit.flawlessManoeuvre.name,
+          owner: owner.unit.name,
+          existing: owner.unit.flawlessManoeuvre?.name,
+        });
+      }
+    }
+
     if (configuredUnit.decorationForValour) {
       const owner = findEnhancementOwner(
         "decorationForValour",
@@ -1551,6 +1567,7 @@ function App() {
       originOfTerrifyingFolkTale: null,
       visionOfFate: null,
       specialKnickKnack: null,
+      flawlessManoeuvre: null,
       plaguefathersPox: null,
       decorationForValour: null,
       ironweldInnovation: null,

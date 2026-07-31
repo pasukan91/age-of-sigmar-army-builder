@@ -2,6 +2,7 @@ import {
   calculateArmyPoints,
   hasExceededPointsLimit,
 } from "../../utils/armyPoints";
+import { hasIllegalRegimentComposition } from "../../utils/regimentRules";
 
 function BuilderHeader({ list, storageStatus = "saved" }) {
   const currentPoints =
@@ -15,6 +16,10 @@ function BuilderHeader({ list, storageStatus = "saved" }) {
 
   const exceeded =
     hasExceededPointsLimit(list);
+  const illegalComposition =
+    hasIllegalRegimentComposition(list);
+  const invalid =
+    exceeded || illegalComposition;
 
   return (
     <header className="aos-army-summary-card" style={styles.header}>
@@ -66,7 +71,7 @@ function BuilderHeader({ list, storageStatus = "saved" }) {
               style={{
                 ...styles.pointsValue,
 
-                color: exceeded
+                color: invalid
                   ? "#ffd0cb"
                   : "#ffffff",
               }}
@@ -83,14 +88,16 @@ function BuilderHeader({ list, storageStatus = "saved" }) {
             style={{
               ...styles.statusBadge,
 
-              backgroundColor: exceeded
+              backgroundColor: invalid
                 ? "#9c2923"
                 : "#426547",
             }}
           >
             {exceeded
               ? "Límite superado"
-              : "Lista válida"}
+              : illegalComposition
+                ? "Composición ilegal"
+                : "Lista válida"}
           </div>
         </div>
       </div>

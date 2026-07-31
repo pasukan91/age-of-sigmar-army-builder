@@ -91,6 +91,7 @@ export function createOrrukUnit({
     decorationForValour: null,
     ironweldInnovation: null,
     specialKnickKnack: null,
+    flawlessManoeuvre: null,
     details: {
       models,
       baseSize,

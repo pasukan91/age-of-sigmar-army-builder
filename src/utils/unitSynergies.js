@@ -35,6 +35,7 @@ const UNIT_ENHANCEMENTS = [
   ["originOfTerrifyingFolkTale", "Origen de relato terrorífico"],
   ["visionOfFate", "Visión de destino"],
   ["specialKnickKnack", "Special Knick-Knack"],
+  ["flawlessManoeuvre", "Flawless Manoeuvre"],
   ["plaguefathersPox", "Plaguefather’s Pox"],
   ["brandOfDarkGod", "Brand of the Dark Gods"],
   ["ensorcelledBanner", "Ensorcelled Banner"],

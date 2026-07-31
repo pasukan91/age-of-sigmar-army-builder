@@ -48,6 +48,9 @@ function UnitConfig({
   const [specialKnickKnack, setSpecialKnickKnack] =
     useState(unit?.specialKnickKnack ?? null);
 
+  const [flawlessManoeuvre, setFlawlessManoeuvre] =
+    useState(unit?.flawlessManoeuvre ?? null);
+
   const [plaguefathersPox, setPlaguefathersPox] =
     useState(unit?.plaguefathersPox ?? null);
 
@@ -202,6 +205,11 @@ function UnitConfig({
     !isHero &&
     (faction?.specialKnickKnacks?.length ?? 0) > 0;
 
+  const canSelectFlawlessManoeuvre =
+    !isHero &&
+    !isMonster &&
+    (faction?.flawlessManoeuvres?.length ?? 0) > 0;
+
   const canSelectPlaguefathersPox =
     !isUnique &&
     !isHero &&
@@ -279,6 +287,9 @@ function UnitConfig({
   const specialKnickKnackOptions =
     faction?.specialKnickKnacks ?? [];
 
+  const flawlessManoeuvreOptions =
+    faction?.flawlessManoeuvres ?? [];
+
   const plaguefathersPoxOptions =
     faction?.plaguefathersPoxes ?? [];
 
@@ -320,6 +331,7 @@ function UnitConfig({
     Number(originOfTerrifyingFolkTale?.points ?? 0) +
     Number(visionOfFate?.points ?? 0) +
     Number(specialKnickKnack?.points ?? 0) +
+    Number(flawlessManoeuvre?.points ?? 0) +
     Number(plaguefathersPox?.points ?? 0) +
     Number(decorationForValour?.points ?? 0) +
     Number(ironweldInnovation?.points ?? 0) +
@@ -388,6 +400,11 @@ function UnitConfig({
       specialKnickKnack:
         canSelectSpecialKnickKnack
           ? specialKnickKnack
+          : null,
+
+      flawlessManoeuvre:
+        canSelectFlawlessManoeuvre
+          ? flawlessManoeuvre
           : null,
 
       plaguefathersPox:
@@ -788,6 +805,46 @@ function UnitConfig({
                   onChange={() =>
                     toggleExclusiveOption(
                       setSpecialKnickKnack,
+                      option
+                    )
+                  }
+                />
+              ))}
+            </div>
+          )}
+
+          {canSelectFlawlessManoeuvre && (
+            <div style={styles.embeddedEnhancement}>
+              <div style={styles.sectionHeadingRow}>
+                <h3 style={styles.embeddedTitle}>
+                  {faction?.flawlessManoeuvreLabel ?? "Flawless Manoeuvres"}
+                </h3>
+
+                <span
+                  style={{
+                    ...styles.sourceBadge,
+                    ...styles.aqshySourceBadge,
+                    marginTop: 0,
+                  }}
+                >
+                  Aqshy
+                </span>
+              </div>
+
+              <p style={styles.sectionIntro}>
+                Asigna una maniobra a esta unidad Lumineth no Hero y no Monster. Cada una solo puede elegirse una vez por ejército.
+              </p>
+
+              {flawlessManoeuvreOptions.map((option) => (
+                <CheckboxOption
+                  key={option.id}
+                  title={`${option.name} · ${option.points} pts`}
+                  description={option.description}
+                  source={option.source}
+                  checked={flawlessManoeuvre?.id === option.id}
+                  onChange={() =>
+                    toggleExclusiveOption(
+                      setFlawlessManoeuvre,
                       option
                     )
                   }

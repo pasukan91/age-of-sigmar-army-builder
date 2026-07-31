@@ -3,7 +3,10 @@ function normalize(value) {
 }
 
 function normalizeOption(value) {
-  const option = normalize(value).replace(/^0-1(?:\s+|-)/, "");
+  const option = normalize(value).replace(
+    /^\d+\s*[-–—]\s*\d+(?:\s+|-)/,
+    ""
+  );
   const aliases = {
     "any faction unit": "any-faction-unit",
     "any kruleboyz": "any-kruleboyz",
@@ -55,6 +58,13 @@ function normalizeOption(value) {
     "any slaves to darkness": "any-slaves-to-darkness",
     "any warriors of chaos": "any-warriors-of-chaos",
     "any darkoath": "any-darkoath",
+    "any lumineth realm-lords": "any-lumineth",
+    "any vanari": "any-vanari",
+    "any alarith": "any-alarith",
+    "any hurakan": "any-hurakan",
+    "any vanari auralan wardens": "vanari-auralan-wardens",
+    "any vanari bladelords": "vanari-bladelords",
+    "lumineth paragon": "lumineth-paragon",
     "any chaos legionnaires": "chaos-legionnaires",
     "any ogroid theridons": "ogroid-theridons",
     "ruinous champion": "ruinous-champion",
@@ -89,7 +99,21 @@ function normalizeOption(value) {
     "baleful lord": "baleful-lord",
   };
 
-  return aliases[option] ?? option;
+  return aliases[option] ?? option.replace(/\s+/g, "-");
+}
+
+function parseRegimentOption(value) {
+  const rawOption = normalize(value);
+  const limitMatch = rawOption.match(
+    /^(\d+)\s*[-–—]\s*(\d+)(?:\s+|-)(.+)$/
+  );
+
+  return {
+    key: normalizeOption(value),
+    label: limitMatch?.[3]?.trim() || String(value ?? "").trim(),
+    min: limitMatch ? Number(limitMatch[1]) : null,
+    max: limitMatch ? Number(limitMatch[2]) : null,
+  };
 }
 
 function getKeywords(unit) {
@@ -441,6 +465,14 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Warriors of Chaos");
     case "any-darkoath":
       return hasKeyword(unit, "Darkoath");
+    case "any-lumineth":
+      return hasKeyword(unit, "Lumineth Realm-lords");
+    case "any-vanari":
+      return hasKeyword(unit, "Vanari");
+    case "any-alarith":
+      return hasKeyword(unit, "Alarith");
+    case "any-hurakan":
+      return hasKeyword(unit, "Hurakan");
     case "any-deathrattle":
       return hasKeyword(unit, "Deathrattle");
     case "sigmarite-war-machine":
@@ -450,16 +482,33 @@ function optionMatchesNonHero(unit, option) {
   }
 }
 
-function roleLimit(option) {
-  return ["hashutite-commander", "slaaneshi-beguiler", "dark-egotist", "mob-wrangler", "swamp-beast", "skaven-overclaw", "headstompa", "tusk-wrangler", "voice-of-the-everwinter", "forest-sentinel", "moonclan-agitator", "top-dog", "dankhold-troggboss", "freeguild-veteran", "tzeentchian-deceiver", "arcanite-cabalist", "legion-subcommander", "deathrattle-overseer", "vyrkos-retainer", "slaughter-seeker", "bloodbound-warmonger", "baleful-lord", "ruinous-champion", "oathsworn"].includes(option)
-    ? 1
-    : null;
+function isHeroUnit(unit) {
+  return unit?.rules?.hero === true || hasKeyword(unit, "Hero");
 }
 
-function countRole(regiment, role) {
+function unitMatchesRegimentOption(unit, option) {
+  if (isHeroUnit(unit)) {
+    const joinRoles = (unit?.details?.canJoinRegimentAs ?? []).map(
+      normalizeOption
+    );
+
+    return option.key === normalizeOption(unit?.id) ||
+      joinRoles.includes(option.key);
+  }
+
+  return option.key === normalizeOption(unit?.id) ||
+    optionMatchesNonHero(unit, option.key);
+}
+
+function countUnitsForOption(regiment, option) {
   return (regiment?.units ?? []).filter((unit) =>
-    (unit?.details?.canJoinRegimentAs ?? []).includes(role)
+    unitMatchesRegimentOption(unit, option)
   ).length;
+}
+
+function optionHasCapacity(regiment, option) {
+  return option.max === null ||
+    countUnitsForOption(regiment, option) < option.max;
 }
 
 const FREE_COMMAND_CORPS_UNITS = new Set([
@@ -511,8 +560,10 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
     return false;
   }
 
-  const options = (regiment.hero?.details?.regimentOptions ?? []).map(normalizeOption);
-  const isHero = unit.rules?.hero === true || hasKeyword(unit, "Hero");
+  const options = (regiment.hero?.details?.regimentOptions ?? []).map(
+    parseRegimentOption
+  );
+  const isHero = isHeroUnit(unit);
 
   if (!hasKeyword(regiment.hero, "Skryre")) {
     const sameCategoryCount = (regiment.units ?? []).filter((armyUnit) =>
@@ -528,25 +579,50 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   }
 
   if (isHero) {
-    const joinRoles = unit.details?.canJoinRegimentAs ?? [];
-
-    return options.some((option) => {
-      if (option === unit.id) {
-        return true;
-      }
-
-      if (!joinRoles.includes(option)) {
-        return false;
-      }
-
-      const limit = roleLimit(option);
-      return limit === null || countRole(regiment, option) < limit;
-    });
+    return options.some(
+      (option) =>
+        unitMatchesRegimentOption(unit, option) &&
+        optionHasCapacity(regiment, option)
+    );
   }
 
   return options.some(
-    (option) => option === unit.id || optionMatchesNonHero(unit, option)
+    (option) =>
+      unitMatchesRegimentOption(unit, option) &&
+      optionHasCapacity(regiment, option)
   );
+}
+
+export function getRegimentCompositionErrors(list) {
+  return (list?.regiments ?? []).flatMap((regiment, regimentIndex) => {
+    const options = (regiment?.hero?.details?.regimentOptions ?? [])
+      .map(parseRegimentOption)
+      .filter((option) => option.max !== null);
+
+    return options.flatMap((option) => {
+      const count = countUnitsForOption(regiment, option);
+
+      if (count <= option.max) {
+        return [];
+      }
+
+      return [{
+        regimentId: regiment.id,
+        regimentIndex,
+        role: option.key,
+        label: option.label,
+        count,
+        max: option.max,
+        message:
+          `El regimiento de ${regiment.hero?.name ?? "este líder"} ` +
+          `incluye ${count} unidades de ${option.label}; el máximo es ${option.max}.`,
+      }];
+    });
+  });
+}
+
+export function hasIllegalRegimentComposition(list) {
+  return getRegimentCompositionErrors(list).length > 0;
 }
 
 export function getAvailableUnitsForRegiment(list, regiment) {
