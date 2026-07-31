@@ -1,10 +1,7 @@
-import {
-  calculateArmyPoints,
-  hasExceededPointsLimit,
-} from "../../utils/armyPoints";
-import { hasIllegalRegimentComposition } from "../../utils/regimentRules";
+import { calculateArmyPoints } from "../../utils/armyPoints";
+import { validateArmyList } from "../../utils/armyValidation";
 
-function BuilderHeader({ list, storageStatus = "saved" }) {
+function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
   const currentPoints =
     calculateArmyPoints(list);
 
@@ -14,15 +11,11 @@ function BuilderHeader({ list, storageStatus = "saved" }) {
         list?.points
     ) || 0;
 
-  const exceeded =
-    hasExceededPointsLimit(list);
-  const illegalComposition =
-    hasIllegalRegimentComposition(list);
-  const invalid =
-    exceeded || illegalComposition;
+  const validation = validateArmyList(list);
+  const invalid = !validation.isValid;
 
   return (
-    <header className="aos-army-summary-card" style={styles.header}>
+    <header id="army-summary" className="aos-army-summary-card" style={styles.header}>
       <div style={styles.overlay}>
         <p style={styles.factionLabel}>
           {list.faction?.name ??
@@ -84,7 +77,9 @@ function BuilderHeader({ list, storageStatus = "saved" }) {
             </div>
           </div>
 
-          <div
+          <button
+            type="button"
+            onClick={onShowValidation}
             style={{
               ...styles.statusBadge,
 
@@ -93,12 +88,12 @@ function BuilderHeader({ list, storageStatus = "saved" }) {
                 : "#426547",
             }}
           >
-            {exceeded
-              ? "Límite superado"
-              : illegalComposition
-                ? "Composición ilegal"
+            {invalid
+              ? `${validation.errors.length} ${validation.errors.length === 1 ? "error" : "errores"}`
+              : validation.warnings.length > 0
+                ? `${validation.warnings.length} pendientes`
                 : "Lista válida"}
-          </div>
+          </button>
         </div>
       </div>
     </header>
@@ -233,6 +228,7 @@ const styles = {
     fontWeight: 900,
     letterSpacing: "0.05em",
     textTransform: "uppercase",
+    cursor: "pointer",
   },
 };
 

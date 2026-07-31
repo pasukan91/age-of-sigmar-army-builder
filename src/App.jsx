@@ -1816,6 +1816,7 @@ function App() {
           onCommandPointsChange={handleCommandPointsChange}
           onFuryPointsChange={handleFuryPointsChange}
           onViewRule={openRuleWarscroll}
+          onBrowseUnit={openNewUnitWarscroll}
           section={builderSection}
           onSectionChange={setBuilderSection}
         />
@@ -1911,7 +1912,11 @@ function App() {
             handleWarscrollBack
           }
           onConfigure={
-            handleConfigureSelectedUnit
+            unitEditor ||
+            selector?.property === "newRegiment" ||
+            selector?.property === "newUnit"
+              ? handleConfigureSelectedUnit
+              : undefined
           }
         />
       );

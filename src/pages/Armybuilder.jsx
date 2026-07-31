@@ -4,7 +4,12 @@ import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
 import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
 import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
+import ArmySharePanel from "../components/armybuilder/ArmySharePanel";
+import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
+import GlobalRulesSearch from "../components/armybuilder/GlobalRulesSearch";
+import GameMode from "../components/armybuilder/GameMode";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
+import { validateArmyList } from "../utils/armyValidation";
 
 import {
   calculateArmyPoints,
@@ -27,6 +32,7 @@ function ArmyBuilder({
   onCommandPointsChange,
   onFuryPointsChange,
   onViewRule,
+  onBrowseUnit,
   section = "regiments",
   onSectionChange,
 }) {
@@ -62,6 +68,7 @@ function ArmyBuilder({
 
   const currentPoints =
     calculateArmyPoints(list);
+  const validation = validateArmyList(list);
 
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
     ? []
@@ -98,6 +105,27 @@ function ArmyBuilder({
     navigate("selector");
   }
 
+  function navigateToIssue(issue) {
+    onSectionChange?.(issue.section ?? "list");
+    window.requestAnimationFrame(() => {
+      const target = issue.targetId
+        ? document.getElementById(issue.targetId)
+        : document.getElementById("army-validation-panel");
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+      target?.focus?.({ preventScroll: true });
+    });
+  }
+
+  function showValidation() {
+    onSectionChange?.("list");
+    window.requestAnimationFrame(() => {
+      document.getElementById("army-validation-panel")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }
+
   return (
     <main className="aos-page aos-builder-page">
       <header className="aos-topbar">
@@ -122,6 +150,8 @@ function ArmyBuilder({
           ["list", "Lista"],
           ["regiments", "Regimientos"],
           ["rules", "Reglas"],
+          ["search", "Buscar"],
+          ["game", "Partida"],
         ].map(([id, label]) => (
           <button
             key={id}
@@ -141,11 +171,18 @@ function ArmyBuilder({
       <BuilderHeader
         list={list}
         storageStatus={storageStatus}
+        onShowValidation={showValidation}
+      />
+
+      <ArmyValidationPanel
+        validation={validation}
+        onNavigateIssue={navigateToIssue}
       />
 
       <section className="aos-builder-options">
         {battleFormations.length > 0 && (
         <BuilderOption
+          id="battle-formation-option"
           title="Formación de batalla"
           value={
             list.battleFormation?.name ??
@@ -166,6 +203,7 @@ function ArmyBuilder({
 
         {spellLores.length > 0 && (
         <BuilderOption
+          id="spellLore-option"
           title="Saber de hechizos"
           value={
             list.spellLore?.name ??
@@ -183,6 +221,7 @@ function ArmyBuilder({
 
         {prayerLores.length > 0 && (
           <BuilderOption
+            id="prayerLore-option"
             title="Saber de plegarias"
             value={
               list.prayerLore?.name ??
@@ -203,6 +242,7 @@ function ArmyBuilder({
 
         {manifestationLores.length > 0 && (
         <BuilderOption
+          id="manifestationLore-option"
           title="Saber de manifestaciones"
           value={
             list.manifestationLore
@@ -241,6 +281,8 @@ function ArmyBuilder({
         )}
       </section>
 
+      <ArmySharePanel list={list} />
+
       <button
         type="button"
         className="aos-rules-jump aos-rules-jump--button"
@@ -259,7 +301,7 @@ function ArmyBuilder({
       {section === "regiments" && (
         <>
 
-      <h2 className="aos-builder-section-title">
+      <h2 id="regiments-section" className="aos-builder-section-title">
         Regimientos
       </h2>
 
@@ -308,6 +350,22 @@ function ArmyBuilder({
       />
 
         </>
+      )}
+
+      {section === "search" && (
+        <GlobalRulesSearch
+          list={list}
+          onViewUnit={onBrowseUnit}
+          onViewRule={onViewRule}
+        />
+      )}
+
+      {section === "game" && (
+        <GameMode
+          list={list}
+          onViewUnit={onBrowseUnit}
+          onViewRule={onViewRule}
+        />
       )}
 
       <footer className="aos-builder-footer">

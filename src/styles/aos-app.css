@@ -2762,12 +2762,423 @@ select.aos-field__control:hover {
   z-index: 19;
   top: var(--aos-header-height);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, minmax(72px, 1fr));
+  overflow-x: auto;
   padding: 7px;
   border-bottom: 1px solid #c9baa0;
   background: rgba(242, 236, 224, 0.97);
   box-shadow: 0 5px 13px rgba(34, 27, 20, 0.1);
   backdrop-filter: blur(12px);
+}
+
+.aos-validation-panel,
+.aos-share-panel,
+.aos-global-search,
+.aos-game-mode {
+  margin: 16px;
+  border: 1px solid #cfc4b2;
+  border-radius: 10px;
+  background: #fffdf8;
+  box-shadow: 0 7px 20px rgba(47, 38, 28, 0.12);
+}
+
+.aos-validation-panel {
+  overflow: hidden;
+  border-color: #a63a31;
+}
+
+.aos-validation-panel.is-valid {
+  border-color: #527258;
+}
+
+.aos-validation-panel > header {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 18px;
+  background: linear-gradient(135deg, #fff4f1, #fffdf8);
+}
+
+.aos-validation-panel.is-valid > header {
+  background: linear-gradient(135deg, #edf6ee, #fffdf8);
+}
+
+.aos-validation-panel h2,
+.aos-share-panel h2,
+.aos-global-search h2,
+.aos-game-mode h2,
+.aos-game-mode h3 {
+  margin: 2px 0 5px;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+}
+
+.aos-validation-panel header p,
+.aos-share-panel > p,
+.aos-global-search > header p,
+.aos-game-mode__hero p {
+  margin: 0;
+  color: #655d53;
+  line-height: 1.45;
+}
+
+.aos-validation-panel__icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: #9c2923;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.aos-validation-panel.is-valid .aos-validation-panel__icon {
+  background: #426547;
+}
+
+.aos-validation-panel__issues {
+  border-top: 1px solid #e1d8ca;
+}
+
+.aos-validation-panel__issues article {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #ece4d7;
+}
+
+.aos-validation-panel__issues article:last-child {
+  border-bottom: 0;
+}
+
+.aos-validation-panel__issues article.is-warning {
+  background: #fffaf0;
+}
+
+.aos-validation-panel__issues small,
+.aos-validation-panel__issues strong {
+  display: block;
+}
+
+.aos-validation-panel__issues small {
+  margin-bottom: 2px;
+  color: #9c2923;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aos-validation-panel__issues .is-warning small {
+  color: #8a641d;
+}
+
+.aos-validation-panel__issues p {
+  margin: 3px 0 0;
+  color: #655d53;
+  font-size: 13px;
+}
+
+.aos-validation-panel__issues button,
+.aos-share-panel__actions button,
+.aos-global-search__filters button,
+.aos-game-mode__phases button {
+  min-height: 40px;
+  border: 1px solid #b9aa93;
+  border-radius: 6px;
+  color: #5d1813;
+  background: #fff;
+  font-weight: 800;
+}
+
+.aos-validation-panel__issues button {
+  flex-shrink: 0;
+  padding: 8px 11px;
+}
+
+.aos-share-panel {
+  padding: 18px;
+}
+
+.aos-share-panel > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.aos-share-panel__drops {
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: #2f3335;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-share-panel__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.aos-share-panel__actions button {
+  padding: 10px;
+}
+
+.aos-share-panel__actions button.is-primary {
+  border-color: #741b15;
+  color: #fff;
+  background: linear-gradient(180deg, var(--aos-red-light), var(--aos-red-dark));
+}
+
+.aos-share-panel__status {
+  margin: 12px 0 0;
+  color: #426547;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.aos-global-search,
+.aos-game-mode {
+  padding: 18px;
+}
+
+.aos-global-search__input {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 17px;
+  padding: 0 12px;
+  border: 2px solid #bbaa90;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.aos-global-search__input:focus-within {
+  border-color: #8d2018;
+  box-shadow: 0 0 0 3px rgba(141, 32, 24, 0.12);
+}
+
+.aos-global-search__input input {
+  min-width: 0;
+  min-height: 48px;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+}
+
+.aos-global-search__input button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: #eee7dc;
+  font-size: 22px;
+}
+
+.aos-global-search__filters,
+.aos-game-mode__phases {
+  display: flex;
+  gap: 7px;
+  margin: 13px -2px 0;
+  padding: 2px;
+  overflow-x: auto;
+}
+
+.aos-global-search__filters button,
+.aos-game-mode__phases button {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+}
+
+.aos-global-search__filters button.is-active,
+.aos-game-mode__phases button.is-active {
+  border-color: #741b15;
+  color: #fff;
+  background: #741b15;
+}
+
+.aos-global-search__count {
+  margin: 14px 0 8px;
+  color: #746c62;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.aos-global-search__results,
+.aos-game-mode__rules {
+  display: grid;
+  gap: 8px;
+}
+
+.aos-global-search__results > button,
+.aos-game-mode__rules > button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: center;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d8cebf;
+  border-radius: 7px;
+  color: #1d1a17;
+  background: #fff;
+  text-align: left;
+}
+
+.aos-global-search__results strong,
+.aos-global-search__results small {
+  display: block;
+}
+
+.aos-global-search__results small {
+  margin-top: 2px;
+  color: #746c62;
+}
+
+.aos-global-search__results p,
+.aos-game-mode__rules p {
+  margin: 5px 0 0;
+  color: #655d53;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.aos-global-search__kind {
+  width: 68px;
+  padding: 5px;
+  border-radius: 4px;
+  color: #fff;
+  background: #5c6265;
+  font-size: 9px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.aos-global-search__kind.is-unit { background: #7b211b; }
+.aos-global-search__kind.is-spell { background: #385b83; }
+.aos-global-search__kind.is-prayer { background: #76602b; }
+.aos-global-search__kind.is-enhancement { background: #66507a; }
+
+.aos-game-mode__hero {
+  padding-bottom: 15px;
+  border-bottom: 3px solid #c6a15b;
+}
+
+.aos-game-roster {
+  margin-top: 20px;
+}
+
+.aos-game-mode__section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 19px 0 9px;
+}
+
+.aos-game-mode__section-title h3 {
+  margin: 0;
+}
+
+.aos-game-mode__section-title span {
+  color: #746c62;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-game-roster__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.aos-game-roster__grid button {
+  min-height: 88px;
+  padding: 11px;
+  border: 1px solid #c9baa0;
+  border-left: 4px solid #8d2018;
+  border-radius: 6px;
+  color: #1d1a17;
+  background: #fff;
+  text-align: left;
+}
+
+.aos-game-roster__grid strong,
+.aos-game-roster__grid span,
+.aos-game-roster__grid small {
+  display: block;
+}
+
+.aos-game-roster__grid span {
+  margin-top: 3px;
+  color: #8d2018;
+  font-weight: 900;
+}
+
+.aos-game-roster__grid small {
+  margin-top: 4px;
+  color: #746c62;
+}
+
+.aos-game-mode__rules > button {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.aos-game-mode__rules small,
+.aos-game-mode__rules strong {
+  display: block;
+}
+
+.aos-game-mode__rules small {
+  margin-bottom: 3px;
+  color: #8d2018;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@media (max-width: 520px) {
+  .aos-builder-tabs {
+    grid-template-columns: repeat(5, minmax(64px, 1fr));
+    scrollbar-width: none;
+  }
+
+  .aos-builder-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .aos-builder-tabs button {
+    padding-inline: 2px;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .aos-validation-panel__issues article {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .aos-validation-panel__issues button {
+    align-self: flex-start;
+  }
+
+  .aos-game-roster__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .aos-builder-tabs button {

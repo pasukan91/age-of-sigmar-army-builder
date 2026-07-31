@@ -1,6 +1,7 @@
 import ChevronIcon from "../ChevronIcon";
 
 function BuilderOption({
+  id,
   title,
   value,
   onClick,
@@ -19,6 +20,7 @@ function BuilderOption({
       }}
     >
       <button
+        id={id}
         type="button"
         className="aos-builder-option-card"
         onClick={onClick}

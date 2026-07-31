@@ -214,6 +214,7 @@ function RegimentSection({
 
           return (
             <article
+              id={`regiment-${regiment.id}`}
               key={regiment.id}
               className="aos-regiment-card"
               style={
