@@ -2,8 +2,6 @@ import BuilderHeader from "../components/armybuilder/BuilderHeader";
 import BuilderOption from "../components/armybuilder/BuilderOption";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
-import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
-import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import ArmySharePanel from "../components/armybuilder/ArmySharePanel";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import GameMode from "../components/armybuilder/GameMode";
@@ -152,7 +150,6 @@ function ArmyBuilder({
         {[
           ["list", "Lista"],
           ["regiments", "Regimientos"],
-          ["rules", "Reglas"],
           ["game", "Partida"],
         ].map(([id, label]) => (
           <button
@@ -312,18 +309,6 @@ function ArmyBuilder({
 
       <ArmySharePanel list={list} />
 
-      <button
-        type="button"
-        className="aos-rules-jump aos-rules-jump--button"
-        onClick={() => onSectionChange?.("rules")}
-      >
-        <span>
-          <strong>Referencia de reglas</strong>
-          <small>Rasgos, formación, habilidades y comandos universales</small>
-        </span>
-        <span aria-hidden="true">↓</span>
-      </button>
-
         </>
       )}
 
@@ -365,25 +350,11 @@ function ArmyBuilder({
         </>
       )}
 
-      {section === "rules" && (
-        <>
-
-      <ArmyRulesReference
-        battleTraits={battleTraits}
-        battleFormation={list.battleFormation}
-      />
-
-      <SelectedRulesLibrary
-        list={list}
-        onViewRule={onViewRule}
-      />
-
-        </>
-      )}
-
       {section === "game" && (
         <GameMode
           list={list}
+          battleTraits={battleTraits}
+          battleFormation={list.battleFormation}
           onViewUnit={onBrowseUnit}
           onViewRule={onViewRule}
         />

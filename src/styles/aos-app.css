@@ -427,33 +427,6 @@ textarea {
   letter-spacing: 0.08em;
 }
 
-.aos-rules-jump {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin: 14px 16px 0;
-  padding: 13px 15px;
-  border: 1px solid rgba(143, 108, 46, 0.55);
-  border-radius: var(--aos-radius-md);
-  color: #fff;
-  background: linear-gradient(135deg, #272c2e, #111517);
-  box-shadow: var(--aos-shadow-sm);
-  text-decoration: none;
-}
-
-.aos-rules-jump strong,
-.aos-rules-jump small {
-  display: block;
-}
-
-.aos-rules-jump strong {
-  font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
 .aos-fury-counter {
   border-color: #b68a43;
   background: #f2e2bb;
@@ -476,18 +449,6 @@ textarea {
 .aos-unit-artwork-link:focus-visible {
   outline: 3px solid var(--aos-gold-dark);
   outline-offset: 3px;
-}
-
-.aos-rules-jump small {
-  margin-top: 3px;
-  color: #c8c2b8;
-  font-size: 11px;
-  line-height: 1.35;
-}
-
-.aos-rules-jump > span:last-child {
-  color: var(--aos-gold);
-  font-size: 22px;
 }
 
 .aos-points-summary {
@@ -2774,7 +2735,7 @@ select.aos-field__control:hover {
   z-index: 19;
   top: var(--aos-header-height);
   display: grid;
-  grid-template-columns: repeat(4, minmax(72px, 1fr));
+  grid-template-columns: repeat(3, minmax(72px, 1fr));
   overflow-x: auto;
   padding: 7px;
   border-bottom: 1px solid #c9baa0;
@@ -2962,8 +2923,136 @@ select.aos-field__control:hover {
   border-bottom: 3px solid #c6a15b;
 }
 
+.aos-game-mode__anchors {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.aos-game-mode__anchors a {
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  padding: 8px;
+  border: 1px solid #b9aa93;
+  border-radius: 6px;
+  color: #5d1813;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.aos-game-mode__anchors a:hover,
+.aos-game-mode__anchors a:focus-visible {
+  border-color: #741b15;
+  color: #fff;
+  background: #741b15;
+}
+
+.aos-game-section {
+  scroll-margin-top: calc(var(--aos-header-height) + 76px);
+}
+
+.aos-game-section + .aos-game-section {
+  padding-top: 23px;
+  margin-top: 28px;
+  border-top: 3px solid #c6a15b;
+}
+
 .aos-game-roster {
   margin-top: 20px;
+}
+
+.aos-game-mode .aos-rules-reference,
+.aos-game-mode .aos-selected-rules {
+  margin-inline: 0;
+}
+
+.aos-game-mode .aos-rules-reference {
+  margin-top: 12px;
+}
+
+.aos-game-mode .aos-selected-rules {
+  margin-top: 16px;
+}
+
+.aos-game-battle-setup__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.aos-game-battle-card {
+  padding: 15px;
+  border: 1px solid #c9baa0;
+  border-left: 4px solid #8d2018;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(47, 38, 28, 0.1);
+}
+
+.aos-game-battle-card--map {
+  padding: 0;
+  overflow: hidden;
+}
+
+.aos-game-battle-card--map > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.2;
+  border-bottom: 1px solid #c9baa0;
+  background: #eee7dc;
+  object-fit: cover;
+}
+
+.aos-game-battle-card--map > div {
+  padding: 15px;
+}
+
+.aos-game-battle-card > small,
+.aos-game-battle-card__tactic > span {
+  color: #8d2018;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.aos-game-battle-card h4 {
+  margin: 4px 0 9px;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.aos-game-battle-card p {
+  margin: 5px 0 0;
+  color: #655d53;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.aos-game-battle-card__tactic {
+  padding-top: 11px;
+  margin-top: 11px;
+  border-top: 1px solid #ddd2c1;
+}
+
+.aos-game-battle-card__tactic strong,
+.aos-game-battle-card__tactic span {
+  display: block;
+}
+
+.aos-game-battle-card.is-empty {
+  display: grid;
+  min-height: 130px;
+  align-content: center;
+  border-left-color: #77777d;
 }
 
 .aos-game-mode__section-title {
@@ -3058,7 +3147,7 @@ select.aos-field__control:hover {
 
 @media (max-width: 520px) {
   .aos-builder-tabs {
-    grid-template-columns: repeat(4, minmax(64px, 1fr));
+    grid-template-columns: repeat(3, minmax(64px, 1fr));
     scrollbar-width: none;
   }
 
@@ -3084,6 +3173,14 @@ select.aos-field__control:hover {
   .aos-game-roster__grid {
     grid-template-columns: 1fr;
   }
+
+  .aos-game-mode__anchors {
+    grid-template-columns: 1fr;
+  }
+
+  .aos-game-battle-setup__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .aos-builder-tabs button {
@@ -3103,11 +3200,6 @@ select.aos-field__control:hover {
   color: #fff;
   background: linear-gradient(180deg, var(--aos-red-light), var(--aos-red-dark));
   box-shadow: 0 3px 8px rgba(95, 18, 14, 0.24);
-}
-
-.aos-rules-jump--button {
-  width: calc(100% - 32px);
-  text-align: left;
 }
 
 .aos-option-card__button,

@@ -1,8 +1,11 @@
 import { normalizeRuleItem } from "../../utils/ruleReferences";
+import { getUniqueListUnits } from "../../utils/listWarscrolls";
 import UnitArtwork from "../UnitArtwork";
+import ArmyRulesReference from "./ArmyRulesReference";
+import SelectedRulesLibrary from "./SelectedRulesLibrary";
 
-function GameMode({ list, onViewUnit, onViewRule }) {
-  const units = getListUnits(list);
+function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule }) {
+  const units = getUniqueListUnits(list);
   const manifestations = getManifestations(list);
   const warscrollCount = units.length + manifestations.length;
 
@@ -14,7 +17,13 @@ function GameMode({ list, onViewUnit, onViewRule }) {
         <p>Consulta rápidamente los warscrolls y manifestaciones que forman parte de esta lista.</p>
       </header>
 
-      <section className="aos-game-roster" aria-labelledby="game-roster-title">
+      <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
+        <a href="#game-warscrolls">Warscrolls</a>
+        <a href="#game-rules">Reglas</a>
+        <a href="#game-battle-setup">Battleplan y tácticas</a>
+      </nav>
+
+      <section id="game-warscrolls" className="aos-game-section aos-game-roster" aria-labelledby="game-roster-title">
         <div className="aos-game-mode__section-title">
           <h3 id="game-roster-title">Warscrolls del ejército</h3>
           <span>{warscrollCount} {warscrollCount === 1 ? "ficha" : "fichas"}</span>
@@ -55,7 +64,83 @@ function GameMode({ list, onViewUnit, onViewRule }) {
           )}
         </div>
       </section>
+
+      <section id="game-rules" className="aos-game-section aos-game-rules" aria-labelledby="game-rules-title">
+        <div className="aos-game-mode__section-title">
+          <h3 id="game-rules-title">Reglas</h3>
+          <span>Referencia de batalla</span>
+        </div>
+
+        <ArmyRulesReference
+          battleTraits={battleTraits}
+          battleFormation={battleFormation}
+        />
+
+        <SelectedRulesLibrary
+          list={list}
+          onViewRule={onViewRule}
+        />
+      </section>
+
+      <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
+        <div className="aos-game-mode__section-title">
+          <h3 id="game-battle-setup-title">Battleplan y battle tactics</h3>
+          <span>Partida seleccionada</span>
+        </div>
+
+        <div className="aos-game-battle-setup__grid">
+          <BattleplanCard battleplan={list?.battleplan} />
+          <BattleTacticsCard card={list?.battleTactics} />
+        </div>
+      </section>
     </section>
+  );
+}
+
+function BattleplanCard({ battleplan }) {
+  if (!battleplan) {
+    return <EmptyBattleCard title="Battleplan" message="Selecciona un battleplan en la pestaña Lista." />;
+  }
+
+  return (
+    <article className="aos-game-battle-card aos-game-battle-card--map">
+      {battleplan.image && <img src={battleplan.image} alt={`${battleplan.name} battleplan map`} />}
+      <div>
+        <small>Battleplan</small>
+        <h4>{battleplan.name}</h4>
+        <p>{battleplan.description}</p>
+      </div>
+    </article>
+  );
+}
+
+function BattleTacticsCard({ card }) {
+  if (!card) {
+    return <EmptyBattleCard title="Battle tactics" message="Selecciona una carta de battle tactics en la pestaña Lista." />;
+  }
+
+  return (
+    <article className="aos-game-battle-card">
+      <small>Battle tactics</small>
+      <h4>{card.name}</h4>
+      {(card.tactics ?? []).map((tactic) => (
+        <div className="aos-game-battle-card__tactic" key={`${tactic.type}-${tactic.name}`}>
+          <span>{tactic.type}</span>
+          <strong>{tactic.name}</strong>
+          <p>{tactic.condition}</p>
+        </div>
+      ))}
+      {!card.tactics?.length && <p>{card.description}</p>}
+    </article>
+  );
+}
+
+function EmptyBattleCard({ title, message }) {
+  return (
+    <article className="aos-game-battle-card is-empty">
+      <small>{title}</small>
+      <p>{message}</p>
+    </article>
   );
 }
 
@@ -73,13 +158,6 @@ function WarscrollCard({ artwork, image, type, name, summary, details, fallback 
       </span>
     </button>
   );
-}
-
-function getListUnits(list) {
-  return (list?.regiments ?? []).flatMap((regiment) => [
-    regiment.hero,
-    ...(regiment.units ?? []),
-  ]).filter(Boolean);
 }
 
 function getManifestations(list) {
