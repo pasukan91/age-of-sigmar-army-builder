@@ -16,19 +16,27 @@ function createBattleplan(number, table, name, sections, scoring) {
     number,
     table,
     season: "GHB 2026-27",
-    image: `/images/battleplans/ghb-2026/battleplan-${number}.webp`,
+    image: `/images/battleplans/ghb-2026/battleplan-${number}.${number === 6 ? "jpeg" : "webp"}`,
     sections,
     scoring,
     description: [
-      `Battle Plan ${number} (Table ${table})`,
+      `Plan de batalla ${number} (Tabla ${table})`,
       ...sectionText,
-      "Each player scores victory points at the end of each of their turns as follows:",
+      "Cada jugador obtiene puntos de victoria al final de cada uno de sus turnos del siguiente modo:",
       ...scoring,
     ].join("\n\n"),
   };
 }
 
 function createBattleTacticsCard(number, name, introduction, setup, tactics) {
+  const identifiedTactics = tactics.map((tactic, index) => ({
+    ...tactic,
+    id: `ghb-2026-battle-tactics-card-${number}-tactic-${index + 1}`,
+    cardNumber: number,
+    cardName: name,
+    season: "GHB 2026-27",
+  }));
+
   return {
     id: `ghb-2026-battle-tactics-card-${number}`,
     name,
@@ -36,186 +44,210 @@ function createBattleTacticsCard(number, name, introduction, setup, tactics) {
     season: "GHB 2026-27",
     introduction,
     setup,
-    tactics,
+    tactics: identifiedTactics,
     description: [
-      `Battle Tactics Card ${number}`,
+      `Carta de táctica ${number}`,
       introduction,
       setup,
-      ...tactics.map((tactic) => [
+      ...identifiedTactics.map((tactic) => [
         `${tactic.type}: ${tactic.name}`,
         tactic.flavour,
         tactic.condition,
-        `${tactic.points} Victory Points`,
+        `${tactic.points} puntos de victoria`,
       ].filter(Boolean).join("\n")),
     ].filter(Boolean).join("\n\n"),
   };
 }
 
 export const ghb2026Battleplans = [
-  createBattleplan(1, 1, "In the Flames", [
-    section("TWIST", "Both players' armies have the \"Secure the Gate\" ability. While you are the underdog, your army has the \"Determined Defenders\" ability."),
-    section("ABILITY", "Effect: While you control the Power Site that is entirely within your territory, friendly units' melee weapons have Anti-Charge (+1 Perf.) while contesting an objective you control.", "SECURE THE GATE", "Passive"),
-    section("ABILITY", "Effect: Add 3 to the control scores of friendly units while they are entirely outside enemy territory.", "DETERMINED DEFENDERS", "Passive"),
+  createBattleplan(1, 1, "Al fuego", [
+    section("GIRO", "Los ejércitos de ambos jugadores tienen la habilidad «Asegurar el paso». Mientras seas el jugador en desventaja, tu ejército tiene la habilidad «Defensores aguerridos»."),
+    section("HABILIDAD", "Efecto: Mientras controles el Lugar de poder completamente en territorio amigo, las armas de combate de las unidades amigas tienen Anti-Carga (+1 Perforar) mientras disputen un objetivo que controles.", "ASEGURAR EL PASO", "Pasiva"),
+    section("HABILIDAD", "Efecto: Suma 3 a las puntuaciones de control de las unidades amigas que estén completamente fuera de territorio enemigo.", "DEFENSORES AGUERRIDOS", "Pasiva"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control at least 2 objectives.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 
-  createBattleplan(2, 1, "Bloody Ribs", [
-    section("TWIST", "Starting in the 2nd round, both players may use the following abilities:"),
-    section("ABILITY", "Announcement: Choose as your target a friendly unit that charged this turn and has one or more emberston shards.\n\nEffect: Choose 1 of the following effects to apply for the rest of the turn:\n\nAdd 1 to the target's hit rolls for melee attacks.\n\nAdd 1 to the target's wound rolls for melee attacks.\n\nThen, if you are the underdog, remove all emberston shards from the target. Otherwise, remove all emberston shards from all friendly units.", "EMBERSTONES", "Any Melee Phase"),
-    section("ABILITY", "Announcement: Choose as your target a friendly unit contesting an objective you control.\n\nEffect: Give the target one Emberstone Shard.", "EMBERSTONES CACHE", "Once Per Turn (Army), Your Hero Phase"),
+  createBattleplan(2, 1, "Costas salpicadas de sangre", [
+    section("GIRO", "Desde la segunda ronda de batalla en adelante, ambos jugadores pueden usar estas habilidades:"),
+    section("HABILIDAD", "Declara: Toma como blanco una unidad amiga que haya cargado en este turno y tenga alguna esquirla de piedrascua.\n\nEfecto: Designa 1 de los efectos siguientes y aplícalo durante el resto del turno:\n\n• Suma 1 a las tiradas para impactar de los ataques de combate del blanco.\n• Suma 1 a las tiradas para herir de los ataques de combate del blanco.\n\nA continuación, si eres el jugador en desventaja, retira todas las esquirlas de piedrascua del blanco. Si no lo eres, retira todas las esquirlas de piedrascua de cada unidad amiga.", "ARMAS MEJORADAS CON PIEDRASCUA", "Cualquier fase de combate"),
+    section("HABILIDAD", "Declara: Toma como blanco una unidad amiga que dispute un objetivo que controles.\n\nEfecto: Dale al blanco una esquirla de piedrascua.", "RESERVA DE PIEDRASCUA", "Una vez por turno (Ejército), Tu fase de héroe"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control at least 2 objectives.",
-    "In the first battle round, score 4 victory points if you control more objectives than your opponent.",
-    "From the second battle round onward, score 4 victory points if you control an objective your opponent controlled at the start of the turn.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "En la primera ronda de batalla, obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
+    "Desde la segunda ronda de batalla en adelante, obtienes 4 puntos de victoria si controlas algún objetivo que controlaba el oponente al inicio del turno.",
   ]),
 
-  createBattleplan(3, 1, "Ash Avalanche", [
-    section("TWIST", "If you are the underdog, you must use the following ability:"),
-    section("ABILITY", "Announcement: Choose all objectives as targets. Then choose 1 of the targets to be the focus point.\n\nEffect: Roll one die for each target. Add 1 to the result for each unit (friend and foe) contesting it. If the target is the focus point, you may add 3 or subtract 3 from the roll. On 8 or higher, remove the target from the battlefield.", "UNSTABLE PASSAGE", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(3, 1, "Avalancha de cenizas", [
+    section("GIRO", "Si eres el jugador en desventaja, debes usar esta habilidad:"),
+    section("HABILIDAD", "Declara: Toma como blancos cada objetivo. A continuación, designa 1 de ellos como el foco.\n\nEfecto: Tira 1D6 por cada blanco. Suma 1 al resultado por cada unidad (amiga y enemiga) que esté disputándolo. Si el blanco es el foco, puedes sumar o restar 3 al resultado. Con 8+, retira el blanco del campo de batalla.", "EL PASO COLAPSA", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control at least 2 objectives.",
-    "Score 4 victory points if you control more objectives than your opponent.",
-    "Score 3 victory points if there is only one objective on the battlefield and you control a terrain feature other than a FACTION TERRAIN in enemy territory.",
-    "Score 7 victory points if there are no objectives on the battlefield and you control more terrain features other than FACTION TERRAINS than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
+    "Obtienes 3 puntos de victoria si solo hay 1 objetivo en el campo de batalla y controlas en territorio enemigo un elemento de terreno que no es TERRENO DE FACCIÓN.",
+    "Obtienes 7 puntos de victoria si no hay objetivos en el campo de batalla y controlas más elementos de terreno que no son TERRENO DE FACCIÓN que tu oponente.",
   ]),
 
-  createBattleplan(4, 1, "The Caverns of Massacre", [
-    section("TWIST", "If you are the underdog, you may use the \"Moving Passages\" ability. Both players may use the \"Negotiate Tunnels\" ability."),
-    section("ABILITY", "Announcement: Target 2 terrain features other than FACTION TERRAINS.\n\nEffect: Remove all hidden passage tokens from the battlefield (if any). Then give each target a hidden passage token.", "MOVING PASSAGES", "Once per Battle Round, Start of Battle Round"),
-    section("ABILITY", "Announcement: Target a friendly unit entirely within 6\" of a terrain feature that has a hidden passage token.\n\nEffect: Remove the target from the battlefield and replace it entirely 6\" away from any other terrain feature that has a hidden passage token, and more than 9\" away from enemy units.", "NEGOTIATE TUNNELS", "Once per Turn (Army), Your Movement Phase"),
+  createBattleplan(4, 1, "Cavernas de la matanza", [
+    section("GIRO", "Si eres el jugador en desventaja, puedes usar la habilidad «Pasadizos cambiantes». Ambos jugadores pueden usar la habilidad «Ir por los túneles»."),
+    section("HABILIDAD", "Declara: Toma como blancos 2 elementos de terreno que no sean TERRENO DE FACCIÓN.\n\nEfecto: Retira todas las fichas de pasadizo secreto del campo de batalla (si las hay). A continuación, asigna una ficha de pasadizo secreto a cada blanco.", "PASADIZOS CAMBIANTES", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
+    section("HABILIDAD", "Declara: Toma como blanco una unidad amiga completamente a 6\" o menos de un elemento de terreno que tenga una ficha de pasadizo secreto.\n\nEfecto: Retira el blanco del campo de batalla y sitúalo de nuevo completamente a 6\" o menos de otro elemento de terreno que tenga una ficha de pasadizo secreto y a más de 9\" de toda unidad enemiga.", "IR POR LOS TÚNELES", "Una vez por turno (Ejército), Tu fase de movimiento"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control at least 2 objectives.",
-    "Score 4 victory points if you control one or more pairs of objectives.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "Obtienes 4 puntos de victoria si controlas alguna pareja de objetivos.",
   ]),
 
-  createBattleplan(5, 1, "What's Yours Is Us", [
-    section("TWIST", "If the current round number is odd, the Golden Lions' objective pair is the coveted objective pair.\n\nIf the current round number is even, the Soliphiles' objective pair is the coveted objective pair.\n\nIf you are the underdog, you may use the following ability:"),
-    section("ABILITY", "Announcement: Choose one objective pair as your target.\n\nEffect: For the remainder of the battle round, the target is the coveted objective pair (instead of the other objective pair).", "UNLEASH YOUR FURY", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(5, 1, "Lo vuestro es nuestro", [
+    section("GIRO", "Mientras el número de la ronda de batalla sea impar, la pareja de objetivos de los Leones Dorados es la pareja de objetivos codiciada.\n\nMientras el número de la ronda de batalla sea par, la pareja de objetivos de los Buscasoles es la pareja de objetivos codiciada.\n\nSi eres el jugador en desventaja, puedes usar esta habilidad:"),
+    section("HABILIDAD", "Declara: Toma como blanco una pareja de objetivos.\n\nEfecto: Durante el resto de la ronda de batalla, el blanco es la pareja de objetivos codiciada en lugar de la otra pareja de objetivos.", "TODA LA RABIA", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control the desired pair of objectives.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas la pareja de objetivos codiciada.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 
-  createBattleplan(7, 2, "Deformed Ruins", [
-    section("SETUP", "Each terrain item other than a FACTION TERRAIN must be placed within 12\" of at least 1 other terrain item other than a FACTION TERRAIN."),
-    section("TWIST", "If you are the underdog, you must use the ability opposite:"),
-    section("ABILITY", "Announcement: If there are no burning terrain features on the battlefield, target any terrain feature other than a FACTION TERRAIN. Otherwise, target any terrain feature other than a FACTION TERRAIN that is not burning and is within 12\" of a burning terrain feature.\n\nEffect: The target is set on fire for the rest of the battle. Then deal D3 lethal damage to each unit (friend and foe) within 6\" of one or more burning terrain features.", "THE CURSE FLAME SPREADS", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(6, 1, "Ocultos bajo nubes de cenizas", [
+    section("GIRO", "Al inicio de cada ronda de batalla, el jugador en desventaja debe decidir si las nubes de ceniza están bajas o no. Si no hay jugador en desventaja, las nubes de ceniza están bajas.\n\nLa siguiente habilidad pasiva se aplica en esta batalla:"),
+    section("HABILIDAD", "Efecto: Mientras las nubes de ceniza estén bajas:\n\n• No se pueden situar, en territorio neutral, ni unidades ni MANIFESTACIONES.\n• Ni unidades ni MANIFESTACIONES pueden terminar un movimiento en territorio neutral salvo si empezaron ese movimiento completamente dentro de terreno neutral.\n• Las MINIATURAS y MANIFESTACIONES solo son visibles para otras miniaturas a más de 3\" si se puede trazar una línea recta entre algún punto de sus peanas sin cruzar territorio neutral.", "NUBES DE CENIZA POR DOQUIER", "Pasiva"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control one or more pairs of objectives.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 
-  createBattleplan(8, 2, "Curse of the Bitch", [
-    section("TWIST", "At the start of the battle, the instability level is 1. Each time either player uses the \"Power Site Activation\" ability, add 1 to the instability level, up to a maximum of 6.\n\nAfter deciding who will take the first turn, the underdog may use the following ability:"),
-    section("ABILITY", "Announcement: Choose an objective as your target.\n\nEffect: Deal lethal damage to each unit (friend and foe) contesting the target equal to the instability level. Then reset the instability level to 1.", "TOWN ECHOES", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(7, 2, "Ruinas brujas", [
+    section("DESPLIEGUE", "Cada elemento de terreno que no sea TERRENO DE FACCIÓN debe situarse a 12\" o menos de al menos otro elemento de terreno que no sea TERRENO DE FACCIÓN."),
+    section("GIRO", "Si eres el jugador en desventaja, debes usar esta habilidad:"),
+    section("HABILIDAD", "Declara: Si no hay elementos de terreno ardiendo en el campo de batalla, toma como blanco un elemento de terreno que no sea TERRENO DE FACCIÓN. Si los hay, toma como blanco un elemento de terreno que no sea TERRENO DE FACCIÓN que no esté ardiendo y que esté a 12\" o menos de un elemento de terreno ardiendo.\n\nEfecto: El blanco está ardiendo durante el resto de la batalla. A continuación, inflige 1D3 daños mortales a cada unidad (amiga o enemiga) a 6\" o menos de algún elemento de terreno ardiendo.", "SE EXTIENDE EL FUEGO DISFORME", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
   ], [
-    "Score 3 victory points if you control the Golden Lions' objective.",
-    "Score 3 victory points if you control the Soliphiles' objective.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas alguna pareja de objetivos.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 
-  createBattleplan(9, 2, "Seize the Embers", [
-    section("EVENT", "Both players may use the following abilities:"),
-    section("ABILITY", "Announcement: Target a friendly unit that does not have an Emberstone Nugget and is contesting a Soliphiles objective.\n\nEffect: Give the target an Emberstone Nugget. If you are the underdog, the target may move immediately 6\", but cannot end that move in melee. The target cannot use the \"Return to Base Camp\" or \"Break In\" abilities for the rest of the turn.", "SEARCH THE RUBBLE", "End of Your Turn"),
-    section("ABILITY", "Announcement: Target a friendly unit that has an Emberstone Nugget, has not been placed this turn, and is contesting a Golden Lions objective.\n\nEffect: Remove the Emberstone Nugget from the target.", "RETURN TO BASE CAMP", "Once Per Turn (Army), End of Your Turn"),
+  createBattleplan(8, 2, "Maldición del Roer", [
+    section("GIRO", "Al inicio de la batalla, el nivel de inestabilidad es 1. Suma 1 al nivel de inestabilidad, hasta un máximo de 6, siempre que algún jugador use la habilidad «Activar Lugar de poder».\n\nTras decidir quién tendrá el primer turno, el jugador en desventaja puede usar esta habilidad:"),
+    section("HABILIDAD", "Declara: Toma como blanco un objetivo.\n\nEfecto: Inflige una cantidad de daños mortales a cada unidad (amiga o enemiga) que dispute el blanco igual al nivel de inestabilidad. A continuación, el nivel de inestabilidad vuelve a ser 1.", "ECOS DE PLAGÓPOLIS", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "In the first battle round, score 3 victory points if you control at least 2 objectives.",
-    "From the second battle round onward, score 3 victory points if you used the \"Return to Base Camp\" ability that turn.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas el objetivo Leones Dorados.",
+    "Obtienes 3 puntos de victoria si controlas el objetivo Buscasoles.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 
-  createBattleplan(10, 2, "Treacherous Terrain", [
-    section("TWIST", "At the start of the battle, all objectives are stable.\n\nBoth players must use the \"Advance Cautiously\" ability. Then, starting in the 2nd round, if you are the underdog, you may use the \"Violent Shake\" ability."),
-    section("ABILITY", "Announcement: Choose an objective in friendly territory as your target.\n\nEffect: The target is no longer stable.", "ADVANCE CAUTIOUSLY", "Once per Battle (Army), Start of First Battle Round"),
-    section("ABILITY", "Announcement: Choose a pair of objectives as your targets.\n\nEffect: The stable target objective is no longer stable. Instead, the other target objective is stable.", "VIOLENT SHAKE", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(9, 2, "Conseguir las ascuas", [
+    section("GIRO", "Ambos jugadores pueden usar estas habilidades:"),
+    section("HABILIDAD", "Declara: Toma como blanco una unidad amiga que no tenga pedazos de piedrascua y que dispute un objetivo de Buscasoles.\n\nEfecto: Asigna al blanco 1 pedazo de piedrascua. Si eres el jugador en desventaja, el blanco puede, inmediatamente, mover 6\" pero no puede terminar dicho movimiento trabado. El blanco no puede usar las habilidades «De vuelta al campo base» o «Arrollar» durante el resto del turno.", "INSPECCIONAR LAS RUINAS", "Final de tu turno"),
+    section("HABILIDAD", "Declara: Toma como blanco una unidad amiga que tenga algún pedazo de piedrascua, que no fuera situada este turno y que dispute un objetivo de Leones Dorados.\n\nEfecto: Retira al blanco su pedazo de piedrascua.", "DE VUELTA AL CAMPO BASE", "Una vez por turno (Ejército), Final de tu turno"),
   ], [
-    "Score 3 victory points if you control at least 1 stable objective.",
-    "Score 3 victory points if you control at least 2 stable objectives.",
-    "Score 4 victory points if you control more stable objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "En la primera ronda de batalla, obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "Desde la segunda ronda de batalla en adelante, obtienes 3 puntos de victoria si usaste la habilidad «De vuelta al campo base» en este turno.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 
-  createBattleplan(11, 2, "Flee the Coast", [
-    section("TWIST", "If you are the underdog, you may use the following ability:"),
-    section("ABILITY", "Announcement: Choose as your target the Heldenhain objective or the Soliphiles objective.\n\nEffect: Remove the target from the battlefield.", "TO THE SHIPS!", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(10, 2, "Suelo traicionero", [
+    section("GIRO", "Al inicio de la batalla, todos los objetivos están estables.\n\nAmbos jugadores deben usar la habilidad «Pasito a pasito». A continuación, desde la segunda ronda de batalla en adelante, si eres el jugador en desventaja, puedes usar la habilidad «Temblor violento»."),
+    section("HABILIDAD", "Declara: Toma como blanco un objetivo en territorio amigo.\n\nEfecto: El blanco deja de estar estable.", "PASITO A PASITO", "Una vez por batalla (Ejército), Inicio de la primera ronda de batalla"),
+    section("HABILIDAD", "Declara: Toma como blancos una pareja de objetivos.\n\nEfecto: El objetivo estable blanco deja de estar estable. El otro objetivo blanco pasa a estar estable en su lugar.", "TEMBLOR VIOLENTO", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
   ], [
-    "Score 3 victory points if you control at least 1 objective.",
-    "Score 3 victory points if you control at least 2 objectives.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo estable.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos estables.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos estables que tu oponente.",
   ]),
 
-  createBattleplan(12, 2, "The Might of Kingdoms", [
-    section("EVENT", "At the start of the battle, the Soliphiles' objective is the primary objective, and the other objectives are secondary objectives.\n\nIf you are the underdog, you may use the following ability:"),
-    section("ABILITY", "Announcement: Choose a Power Site you control as your target.\n\nEffect: Draw a straight line from the center of the primary objective to the target. If this line passes through any secondary objectives, the first secondary objective it passes through is now the primary objective, and all other objectives are now secondary objectives.", "MYSTIC CHARGE", "Once per Battle Round, Start of Battle Round"),
+  createBattleplan(11, 2, "Escapar de la costa", [
+    section("GIRO", "Si eres el jugador en desventaja, puedes usar esta habilidad:"),
+    section("HABILIDAD", "Declara: Toma como blanco un objetivo Protectores de Helden o Buscasoles.\n\nEfecto: retira el blanco del campo de batalla.", "¡A LAS NAVES!", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
   ], [
-    "Score 3 victory points if you control the primary objective.",
-    "Score 3 victory points if you control at least 2 secondary objectives.",
-    "Score 4 victory points if you control more objectives than your opponent.",
+    "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
+  ]),
+
+  createBattleplan(12, 2, "Poder de los reinos", [
+    section("GIRO", "Al inicio de la batalla, el objetivo Buscasoles es el objetivo primario y el resto son objetivos secundarios.\n\nSi eres el jugador en desventaja, puedes usar esta habilidad:"),
+    section("HABILIDAD", "Declara: Toma como blanco un Lugar de poder que controles.\n\nEfecto: Traza una línea recta desde el centro del objetivo primario al blanco. Si esa línea toca cualquier objetivo secundario, el primer objetivo secundario tocado por la línea pasa a ser el objetivo primario y el resto de objetivos son ahora secundarios.", "CARGA ARCANA", "Una vez por ronda de batalla, Inicio de la ronda de batalla"),
+  ], [
+    "Obtienes 3 puntos de victoria si controlas el objetivo primario.",
+    "Obtienes 3 puntos de victoria si controlas 2 o más objetivos secundarios.",
+    "Obtienes 4 puntos de victoria si controlas más objetivos que tu oponente.",
   ]),
 ];
 
 export const ghb2026BattleTacticsCards = [
   createBattleTacticsCard(
     1,
-    "Flaming Assault",
-    "Inaugurated by a hurricane of fire and smoke, the battle for control of a vital stronghold erupts in earnest.",
-    "At the start of the battle, after using all Deployment Phase abilities but before determining who goes first, your opponent must choose 1 piece of terrain other than a FACTION TERRAIN in their territory to be their Lair. The Lair cannot be removed from the battlefield during this battle.",
+    "Ataque ardiente",
+    "Entre humo y fuego, comienza la batalla por el control de un bastión vital.",
+    "Al inicio de la batalla, después de usar todas las habilidades Fase de despliegue pero antes de determinar qué jugador tendrá el primer turno, tu oponente debe elegir 1 elemento de terreno que no sea TERRENO DE FACCIÓN y esté en su territorio para que sea su escondite. El escondite no se puede retirar del campo de batalla en ningún momento durante la batalla.",
     [
-      { type: "Brawl", name: "Master of Weapons", flavour: "Successfully invading requires skill in all aspects of warfare.", condition: "You execute this battle tactic at the end of your turn if the same enemy unit has taken at least 1 damage in 3 different phases this turn.", points: 5 },
-      { type: "Strike", name: "Break Their Defenses", flavour: "The enemy won't be able to hide for long...", condition: "You execute this battle tactic at the end of your turn if you control the enemy lair.", points: 5 },
-      { type: "Domination", name: "No Survivors", flavour: "Make sure the only stories of this battle are those of your victory.", condition: "You execute this battle tactic at the end of your turn if at least 2 enemy units were destroyed this turn and you control the enemy lair.", points: 5 },
+      { type: "Altercado", name: "Maestro de armas", flavour: "Una invasión exitosa requiere habilidad en todos los aspectos de la guerra.", condition: "Completas esta táctica de batalla al final de tu turno si, durante este turno, se le ha asignado a la misma unidad enemiga al menos 1 daño en 3 fases diferentes.", points: 5 },
+      { type: "Golpe", name: "Rompe sus defensas", flavour: "El enemigo no se podrá esconder más...", condition: "Completas esta táctica de batalla al final de tu turno si controlas el escondite enemigo.", points: 5 },
+      { type: "Dominio", name: "Sin supervivientes", flavour: "Asegúrate de que lo único que se cuente de esta batalla sea cómo la ganaste.", condition: "Completas esta táctica de batalla al final de tu turno si se han eliminado 2 o más unidades enemigas en este turno y controlas el escondite enemigo.", points: 5 },
     ],
   ),
   createBattleTacticsCard(
     2,
-    "Siege of Ashes",
-    "You hold a fort that blocks the enemy's path, and will defend it to the death.",
+    "Asedio y cenizas",
+    "Has ocupado una fortaleza que bloquea el paso del enemigo y la defenderás hasta la muerte.",
     null,
     [
-      { type: "Rift", name: "Form a Bulldoz", flavour: "A good defense begins with solid foundations.", condition: "You execute this battle tactic at the end of your turn if at least 2 friendly units are entirely outside friendly territory, entirely within 6\" of friendly territory, and within 3\" of each other.", points: 5 },
-      { type: "Strike", name: "Supply", flavour: "A good general must choose precisely where and when to send reinforcements.", condition: "You execute this battle tactic at the end of your turn if you control an objective in enemy territory and that objective is contested by:\n\nAt least 1 friendly unit that has not used any MOVEMENT ability this turn.\n\nAt least 1 other friendly unit that has charged this turn.", points: 5 },
-      { type: "Domination", name: "Repel the Attackers", flavour: "Unleash your inner fury and clear the battlefield of all enemy presence.", condition: "You execute this battle tactic at the end of your turn if there are at least 3 friendly units within 3\" of the center of the battlefield that are not in melee.", points: 5 },
+      { type: "Altercado", name: "Forma un muro", flavour: "Una buena defensa necesita unos cimientos sólidos.", condition: "Completas esta táctica de batalla al final de tu turno si 2 o más unidades amigas están completamente fuera de territorio amigo, completamente a 6\" o menos de territorio amigo, y a 3\" o menos entre sí.", points: 5 },
+      { type: "Golpe", name: "Resuministra el campamento", flavour: "Un general debe ser preciso en cuanto a dónde y cuándo asignar refuerzos.", condition: "Completas esta táctica de batalla al final de tu turno si controlas algún objetivo en territorio enemigo y dicho objetivo está disputado por:\n\n• Al menos 1 unidad amiga que no usó habilidades MOVIMIENTO en este turno.\n• Al menos 1 unidad amiga diferente que cargó en este turno.", points: 5 },
+      { type: "Dominio", name: "Rechazar a los atacantes", flavour: "Desata tu furia y expulsa a tus enemigos.", condition: "Completas esta táctica de batalla al final de tu turno si hay 3 o más unidades amigas que no estén trabadas a 3\" o menos del centro del campo de batalla.", points: 5 },
     ],
   ),
   createBattleTacticsCard(
     3,
-    "Surrounded by Fire",
-    "The plan is simple: flank and surround your enemies, and make sure none of them escape.",
+    "Atormenta los flancos",
+    "El plan es simple: flanquear y rodear al enemigo, y asegurarse de que ninguno escape con vida.",
     null,
     [
-      { type: "Brawl", name: "Ambush", flavour: "Send scouts to ambush the enemy.", condition: "You execute this battle tactic at the end of your turn if you control a combination of at least 2 objectives or terrain features, and each of them is contested by a different friendly unit within 6\" of friendly territory that was not placed this turn.", points: 5 },
-      { type: "Strike", name: "Surround the Enemy", flavour: "Surround your enemies like flames surround the condemned.", condition: "You execute this battle tactic at the end of your turn if at least 2 friendly units that were not placed this turn are each within 9\" of a different corner of the battlefield and entirely outside friendly territory.", points: 5 },
-      { type: "Domination", name: "Take What Is Due", flavour: "These lands are yours; the enemy must be driven from them.", condition: "You execute this battle tactic at the end of your turn if there are more friendly units than enemy units in enemy territory, and if there is at least 1 friendly HERO wholly in enemy territory.", points: 5 },
+      { type: "Altercado", name: "Emboscada", flavour: "Envía hostigadores para acechar al enemigo.", condition: "Completas esta táctica de batalla al final de tu turno si 2 o más objetivos o elementos de terreno que controles en cualquier combinación, los disputan, cada uno, unidades amigas diferentes que estén a más de 6\" del territorio amigo y que no se situaron en este turno.", points: 5 },
+      { type: "Golpe", name: "Rodea al enemigo", flavour: "Rodea al enemigo como las llamas de una conflagración rodean a los condenados.", condition: "Completas esta táctica de batalla al final de tu turno si 2 o más unidades amigas que no se situaron en este turno están, cada una, a 9\" o menos de una esquina distinta del campo de batalla y completamente fuera de territorio amigo.", points: 5 },
+      { type: "Dominio", name: "Reclama lo que es tuyo", flavour: "Estas tierras son tuyas, expulsa de ellas a tu oponente.", condition: "Completas esta táctica de batalla al final de tu turno si hay más unidades amigas en territorio enemigo que unidades enemigas y hay 1 o más HÉROES amigos completamente en territorio enemigo.", points: 5 },
     ],
   ),
   createBattleTacticsCard(
     4,
-    "Smokescreen",
-    "Lure the enemy by feigning weakness and concealing your true strength in the smoke of battle until the opportune moment.",
+    "Pantalla de humo",
+    "Atrae al enemigo fingiendo debilidad, y oculta tu verdadera fuerza entre el humo de la batalla hasta el momento oportuno.",
     null,
     [
-      { type: "Chasing", name: "Keep the Enemy Close", flavour: "Mask your intentions, and the enemy will be unaware of their role in your plans.", condition: "You execute this battle tactic at the end of your turn if you control an objective contested by at least 1 enemy unit.", points: 5 },
-      { type: "Strike", name: "Feign Weakness", flavour: "Allowing a few small victories distracts them from their task.", condition: "You execute this battle tactic at the end of your turn if more friendly units than enemy units were destroyed this turn.", points: 5 },
-      { type: "Domination", name: "Execute the Plan", flavour: "Carry out your plan and watch the enemy army burn in flames.", condition: "You execute this battle tactic at the end of your turn if you control all objectives located in enemy territory.", points: 5 },
+      { type: "Altercado", name: "Mantén a tus enemigos cerca", flavour: "Mantén tus motivos ocultos y al enemigo inconsciente de su papel en tus planes.", condition: "Completas esta táctica de batalla al final de tu turno si controlas algún objetivo disputado por alguna unidad enemiga.", points: 5 },
+      { type: "Golpe", name: "Finge debilidad", flavour: "Permitir que el enemigo obtenga pequeñas victorias lo distrae de la tarea en cuestión.", condition: "Completas esta táctica de batalla al final de tu turno si se han eliminado más unidades amigas que enemigas en este turno.", points: 5 },
+      { type: "Dominio", name: "Ejecuta el plan", flavour: "Lleva a cabo tu plan y observa cómo el ejército enemigo arde en llamas.", condition: "Completas esta táctica de batalla al final de tu turno si controlas cada objetivo en territorio enemigo.", points: 5 },
+    ],
+  ),
+  createBattleTacticsCard(
+    5,
+    "Ardiendo en deseos de venganza",
+    "Las atrocidades del enemigo merecen un castigo brutal. Rastréalo y derrótalo.",
+    "Al inicio de la batalla, después de usar todas las habilidades Fase de despliegue, pero antes de determinar qué jugador jugará el primer turno, elige un HÉROE enemigo en el campo de batalla o en reserva. Ese es el fugitivo durante el resto de la batalla.",
+    [
+      { type: "Altercado", name: "Inspecciona cada rincón", flavour: "Campo de lava, llanura de ceniza, o jungla húmeda, da igual, no dejes rincones sin explorar.", condition: "Completas esta táctica de batalla al final de tu turno si hay una unidad amiga diferente completamente dentro de cada cuadrante grande del campo de batalla, si esas unidades amigas están a más de 9\" del centro del campo de batalla, y si no se ha situado más de 1 de esas unidades amigas en este turno.", points: 5 },
+      { type: "Golpe", name: "Persecución rápida", flavour: "Tras ser detectado, el tiempo se agota para el fugitivo.", condition: "Completas esta táctica de batalla al final de tu turno si se cumple alguna de estas condiciones:\n\n• Hay 3 o más unidades amigas, ninguna de ellas trabada, a 12\" o menos del fugitivo enemigo.\n• No hay fugitivo enemigo en el campo de batalla.", points: 5 },
+      { type: "Dominio", name: "Captúradlo", flavour: "Vivo o muerto, el fugitivo pagará por sus actos.", condition: "Completas esta táctica de batalla al final de tu turno si se cumple alguna de estas condiciones:\n\n• Hay 3 o más unidades amigas trabadas con el fugitivo enemigo.\n• No hay fugitivo enemigo en el campo de batalla y 3 o más unidades amigas disputan un mismo objetivo, el cual está completamente fuera de territorio amigo.", points: 5 },
     ],
   ),
   createBattleTacticsCard(
     6,
-    "Legend of the Arid",
-    "As a raging fire threatens to consume all, a hero rises and a legend will be born.",
+    "Leyenda del erial",
+    "Cuando el fuego y la muerte amenazan con consumirlo todo, surgirá un héroe y nacerá una leyenda.",
     null,
     [
-      { type: "Brawl", name: "Daring Rescue", flavour: "The most respected warriors are those who willingly come to the aid of their allies.", condition: "You execute this battle tactic at the end of your turn if an enemy unit that was in melee at the start of the turn was destroyed by a melee attack made by a friendly unit that charged this turn.", points: 5 },
-      { type: "Strike", name: "Commanding on the Front", flavour: "Commanders must work together to fuel the war machine.", condition: "You execute this battle tactic at the end of your turn if there are at least 2 friendly HEROES on the battlefield, if they are all within 9\" of a visible enemy unit, and if none of them were killed this turn.", points: 5 },
-      { type: "Domination", name: "Legendary Hero", flavour: "Whoever completes a glorious quest has their name etched in history.", condition: "You execute this battle tactic at the end of your turn if you control an objective that is entirely outside your territory, that you did not control at the start of the turn, and that a friendly HERO is contesting.", points: 5 },
+      { type: "Altercado", name: "Rescate temerario", flavour: "Los guerreros más respetados son los que ayudan voluntariamente a sus aliados.", condition: "Completas esta táctica de batalla al final de tu turno si se eliminó alguna unidad enemiga que estuviese trabada al inicio del turno con ataques de combate de una unidad amiga que cargó en este turno.", points: 5 },
+      { type: "Golpe", name: "Lidera desde el frente", flavour: "Los comandantes deben trabajar en equipo para impulsar la maquinaria de guerra.", condition: "Completas esta táctica de batalla al final de tu turno si hay 2 o más HÉROES amigos en el campo de batalla, si todos los HÉROES amigos están a 9\" o menos de alguna unidad enemiga visible para alguno de ellos, y si ningún HÉROE amigo murió en este turno.", points: 5 },
+      { type: "Dominio", name: "Héroe de leyenda", flavour: "Completar una gran misión es ver tu nombre pasar a la historia.", condition: "Completas esta táctica de batalla al final de tu turno si controlas un objetivo completamente fuera de tu territorio que no controlabas al inicio del turno y algún HÉROE amigo está disputando ese objetivo.", points: 5 },
     ],
   ),
 ];
+
+export const ghb2026BattleTactics = ghb2026BattleTacticsCards.flatMap(
+  (card) => card.tactics
+);

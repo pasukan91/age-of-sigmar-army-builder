@@ -1622,6 +1622,20 @@ textarea {
   background: transparent;
 }
 
+.aos-battle-tactics-selector .aos-game-battle-card__tactic.is-selected {
+  outline: 2px solid var(--aos-red);
+  outline-offset: -2px;
+}
+
+.aos-battle-tactics-selector__introduction {
+  font-style: italic;
+}
+
+.aos-battle-tactics-selector .aos-option-card__button {
+  width: 100%;
+  margin-top: 12px;
+}
+
 .aos-option-card__button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
@@ -2953,10 +2967,17 @@ select.aos-field__control:hover {
 }
 
 .aos-game-mode__anchors {
+  position: sticky;
+  top: calc(var(--aos-header-height) + 4px);
+  z-index: 5;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin-top: 16px;
+  padding: 6px;
+  border-radius: 8px;
+  background: rgba(244, 238, 226, 0.96);
+  box-shadow: 0 4px 14px rgba(47, 38, 28, 0.12);
 }
 
 .aos-game-mode__anchors a {
@@ -3013,6 +3034,190 @@ select.aos-field__control:hover {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+.aos-game-tactics-reference {
+  margin-bottom: 14px;
+}
+
+.aos-game-reference-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #8d2018, #5d1813);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aos-game-reference-heading strong {
+  color: #f5dda0;
+}
+
+.aos-game-tactics-reference__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.aos-game-tactic-reference {
+  border-left-width: 6px;
+}
+
+.aos-game-tactic-reference .aos-game-battle-card__header {
+  padding-bottom: 10px;
+}
+
+.aos-game-tactic-reference .aos-game-battle-card__tactic-heading small {
+  color: #8d2018;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aos-game-tactic-reference__condition {
+  margin-top: 12px;
+}
+
+.aos-game-tactic-reference__condition > strong {
+  display: block;
+  color: #5d1813;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aos-game-tactic-reference__condition > p,
+.aos-game-tactic-reference .aos-game-battle-card__header > p {
+  color: #3f3932;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.aos-game-battleplan-reference {
+  padding: 0;
+  overflow: hidden;
+}
+
+.aos-game-battleplan-reference > .aos-game-battle-card__header {
+  padding: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #303437, #16191b);
+}
+
+.aos-game-battleplan-reference > .aos-game-battle-card__header small {
+  color: #e7d6ac;
+}
+
+.aos-game-scoring-reference {
+  padding: 14px;
+  background: #f7edcf;
+}
+
+.aos-game-scoring-reference .aos-game-reference-heading {
+  margin: -14px -14px 12px;
+  background: linear-gradient(135deg, #8d6a30, #5f451e);
+}
+
+.aos-game-scoring-reference ul {
+  display: grid;
+  gap: 9px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.aos-game-scoring-reference li {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  align-items: start;
+  gap: 10px;
+  padding: 9px;
+  border: 1px solid #d5bb7c;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  color: #37312a;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.aos-game-scoring-reference li > b {
+  display: grid;
+  min-height: 34px;
+  place-items: center;
+  border-radius: 5px;
+  color: #fff;
+  background: #7b5a25;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+}
+
+.aos-game-battleplan-reference__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+  gap: 14px;
+  padding: 14px;
+}
+
+.aos-game-battleplan-reference__body .aos-game-battle-card__content {
+  min-width: 0;
+}
+
+.aos-game-battleplan-reference__body .aos-game-rule-panel:first-child {
+  margin-top: 0;
+}
+
+.aos-game-battleplan-reference__body .aos-game-rule-panel p {
+  color: #3f3932;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.aos-game-battleplan-map {
+  align-self: start;
+  overflow: hidden;
+  border: 1px solid #c9baa0;
+  border-radius: 6px;
+  background: #eee7dc;
+}
+
+.aos-game-battleplan-map summary {
+  padding: 12px;
+  color: #5d1813;
+  background: #f4eee2;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.aos-game-battleplan-map img {
+  display: block;
+  width: 100%;
+  max-height: 620px;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.aos-game-battleplan-map.is-photo img {
+  aspect-ratio: 1.15;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+@media (max-width: 760px) {
+  .aos-game-tactics-reference__grid,
+  .aos-game-battleplan-reference__body {
+    grid-template-columns: 1fr;
+  }
+
+  .aos-game-battleplan-map {
+    order: -1;
+  }
 }
 
 .aos-game-battle-card {

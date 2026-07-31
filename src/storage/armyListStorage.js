@@ -3,7 +3,7 @@ import factions from "../data/factions";
 import regimentsOfRenown from "../data/regimentsOfRenown";
 import {
   ghb2026Battleplans,
-  ghb2026BattleTacticsCards,
+  ghb2026BattleTactics,
 } from "../data/ghb2026";
 
 const STORAGE_KEY = "storm-forge.army-lists.v1";
@@ -311,8 +311,8 @@ function restoreList(savedList) {
       : savedList.battleTactics
         ? [savedList.battleTactics]
         : [])
-      .map((card) => restoreOption(card, ghb2026BattleTacticsCards))
-      .filter(Boolean)
+      .map((tactic) => restoreOption(tactic, ghb2026BattleTactics))
+      .filter((tactic) => tactic && !Array.isArray(tactic.tactics))
       .slice(0, 2),
     terrain: restoreOption(
       savedList.terrain,

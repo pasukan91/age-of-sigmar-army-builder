@@ -1876,6 +1876,7 @@ function App() {
               : []
           }
           maxSelections={selector?.ui?.maxSelections ?? 1}
+          variant={selector?.ui?.variant}
           onToggle={toggleArmyOption}
           goBack={
             handleSelectorBack

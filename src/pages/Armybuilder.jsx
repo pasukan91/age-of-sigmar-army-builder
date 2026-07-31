@@ -197,14 +197,14 @@ function ArmyBuilder({
 
         <BuilderOption
           id="battle-tactics-option"
-          title="Battle tactics"
+          title="Tácticas de batalla"
           value={formatBattleTactics(list.battleTactics)}
           onClick={() =>
             openSelector({
-              title: "Battle tactics",
+              title: "Tácticas de batalla",
               property: "battleTactics",
               options: ghb2026BattleTacticsCards,
-              ui: { maxSelections: 2 },
+              ui: { maxSelections: 2, variant: "battleTactics" },
             })
           }
         />

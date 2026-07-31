@@ -10,6 +10,7 @@ function OptionSelector({
   goBack,
   selectedOptions = [],
   maxSelections = 1,
+  variant,
   onToggle,
 }) {
   const isMultiSelect = maxSelections > 1;
@@ -83,6 +84,15 @@ function OptionSelector({
           </div>
         )}
 
+        {variant === "battleTactics" ? (
+          <BattleTacticsOptions
+            cards={options}
+            selectedIds={selectedIds}
+            selectedCount={selectedOptions.length}
+            maxSelections={maxSelections}
+            onToggle={onToggle}
+          />
+        ) : (
         <section className="aos-option-list">
           {options.map((option) => {
             const description =
@@ -201,6 +211,7 @@ function OptionSelector({
             );
           })}
         </section>
+        )}
 
         {isMultiSelect && (
           <div className="aos-option-selector__footer">
@@ -212,6 +223,70 @@ function OptionSelector({
         )}
       </div>
     </main>
+  );
+}
+
+function BattleTacticsOptions({
+  cards,
+  selectedIds,
+  selectedCount,
+  maxSelections,
+  onToggle,
+}) {
+  return (
+    <section className="aos-battle-tactics-selector">
+      {cards.map((card) => (
+        <Accordion
+          key={card.id}
+          title={`Carta de táctica ${card.number} · ${card.name}`}
+          subtitle={`${card.tactics?.length ?? 0} tácticas de batalla`}
+        >
+          {card.introduction && (
+            <p className="aos-battle-tactics-selector__introduction">
+              {card.introduction}
+            </p>
+          )}
+
+          {card.setup && (
+            <section className="aos-game-rule-panel">
+              <div className="aos-game-rule-panel__label">
+                <span>Preparación de batalla</span>
+              </div>
+              <p>{card.setup}</p>
+            </section>
+          )}
+
+          {(card.tactics ?? []).map((tactic) => {
+            const isSelected = selectedIds.has(tactic.id);
+            const limitReached = selectedCount >= maxSelections && !isSelected;
+
+            return (
+              <div
+                className={`aos-game-battle-card__tactic${isSelected ? " is-selected" : ""}`}
+                key={tactic.id}
+              >
+                <div className="aos-game-battle-card__tactic-heading">
+                  <span>{tactic.type}</span>
+                  <b>{tactic.points} PV</b>
+                </div>
+                <strong>{tactic.name}</strong>
+                {tactic.flavour && <em>{tactic.flavour}</em>}
+                <p>{tactic.condition}</p>
+                <button
+                  type="button"
+                  className="aos-option-card__button aos-option-card__button--select"
+                  disabled={limitReached}
+                  aria-pressed={isSelected}
+                  onClick={() => onToggle?.(tactic)}
+                >
+                  {isSelected ? "Seleccionada" : "Seleccionar"}
+                </button>
+              </div>
+            );
+          })}
+        </Accordion>
+      ))}
+    </section>
   );
 }
 
