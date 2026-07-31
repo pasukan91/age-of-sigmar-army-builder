@@ -1573,6 +1573,18 @@ textarea {
   gap: 16px;
 }
 
+.aos-option-card__map {
+  width: min(38vw, 164px);
+  min-width: 118px;
+  aspect-ratio: 1.2;
+  flex: 0 0 auto;
+  border: 1px solid #b9aa93;
+  border-radius: 6px;
+  background: #eee7dc;
+  box-shadow: 0 4px 12px rgba(47, 38, 28, 0.18);
+  object-fit: cover;
+}
+
 .aos-option-card__title {
   margin: 0 0 6px;
   font-family: "Oswald", "Arial Narrow", sans-serif;

@@ -86,6 +86,15 @@ function OptionSelector({
                 className="aos-option-card"
               >
                 <div className="aos-option-card__head">
+                  {option.image && !hasWarscroll(option) && (
+                    <img
+                      className="aos-option-card__map"
+                      src={option.image}
+                      alt={`${option.name} battleplan map`}
+                      loading="lazy"
+                    />
+                  )}
+
                   {hasWarscroll(option) && (
                     onView ? (
                       <button

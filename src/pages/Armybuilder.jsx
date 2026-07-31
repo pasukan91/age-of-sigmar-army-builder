@@ -186,6 +186,7 @@ function ArmyBuilder({
           id="battleplan-option"
           title="Battleplan"
           value={list.battleplan?.name ?? "No seleccionado"}
+          image={list.battleplan?.image}
           onClick={() =>
             openSelector({
               title: "Battleplan",

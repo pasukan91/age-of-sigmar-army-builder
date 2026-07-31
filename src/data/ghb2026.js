@@ -5,7 +5,8 @@ function createBattleplan(number, table, name, description) {
     number,
     table,
     season: "GHB 2026-27",
-    description: `Battleplan ${number} - Tabla ${table}\n${description}`,
+    image: `/images/battleplans/ghb-2026/battleplan-${number}.webp`,
+    description: `Battleplan ${number} - Table ${table}\n${description}`,
   };
 }
 
@@ -17,7 +18,7 @@ function createBattleTacticsCard(number, name, introduction, tactics) {
     season: "GHB 2026-27",
     tactics,
     description: [
-      `Carta de battle tactics ${number}`,
+      `Battle Tactics Card ${number}`,
       introduction,
       ...tactics.map((tactic) => `\n${tactic.type}: ${tactic.name}\n${tactic.condition}`),
     ].join("\n"),
@@ -29,154 +30,154 @@ export const ghb2026Battleplans = [
     1,
     1,
     "In the Flames",
-    "Los ejércitos obtienen Secure the Gate y el ejército del underdog recibe Determined Defenders. Puntúa por controlar uno, dos o más objetivos que el rival.",
+    "Both armies gain Secure the Gate, while the underdog army gains Determined Defenders. Score by controlling one objective, two objectives, or more objectives than your opponent.",
   ),
   createBattleplan(
     2,
     1,
     "Bloody Ribs",
-    "Desde la segunda ronda entran en juego Embershines y una mejora temporal de héroe. La puntuación cambia tras la primera ronda.",
+    "From the second battle round, Embershines and a temporary Hero enhancement come into play. The scoring conditions change after the first battle round.",
   ),
   createBattleplan(
     3,
     1,
     "Ash Avalanche",
-    "El underdog puede desestabilizar los puentes y retirar elementos de terreno. Incluye condiciones adicionales de puntuación ligadas al terreno de facción.",
+    "The underdog can destabilise bridges and remove terrain features. Additional scoring conditions are tied to faction terrain.",
   ),
   createBattleplan(
     4,
     1,
     "The Caverns of Massacre",
-    "Los pasadizos ocultos permiten retirar y recolocar elementos de terreno. Puntúa por controlar uno, dos o más pares de objetivos que el rival.",
+    "Hidden passages allow terrain features to be removed and repositioned. Score by controlling one objective, two objectives, or more pairs of objectives than your opponent.",
   ),
   createBattleplan(
     5,
     1,
     "What's Yours Is Us",
-    "Cada ronda activa un par de objetivos deseados distinto. El underdog puede cambiar el par activo una vez por batalla.",
+    "A different desired objective pair is active each battle round. Once per battle, the underdog can change the active pair.",
   ),
   createBattleplan(
     7,
     2,
     "Deformed Ruins",
-    "El terreno neutral puede arder y dañar unidades cercanas. La habilidad disponible cambia según seas o no el underdog.",
+    "Neutral terrain features can be set ablaze and damage nearby units. The available ability changes depending on whether you are the underdog.",
   ),
   createBattleplan(
     8,
     2,
     "Curse of the Bitch",
-    "Los Power Sites aumentan la inestabilidad de las unidades. El underdog puede elegir un objetivo y elevar la inestabilidad de quienes lo disputan.",
+    "Power Sites increase the instability of nearby units. The underdog can choose an objective and raise the instability of units contesting it.",
   ),
   createBattleplan(
     9,
     2,
     "Seize the Embers",
-    "Las unidades buscan Emberstone Nuggets en los objetivos y deben devolverlos a su campamento base para obtener puntos adicionales.",
+    "Units search objectives for Emberstone Nuggets and return them to their base camp to earn additional victory points.",
   ),
   createBattleplan(
     10,
     2,
     "Treacherous Terrain",
-    "Los objetivos comienzan estables y pueden cambiar entre estables e inestables. La puntuación depende del control de objetivos estables.",
+    "Objectives begin stable and can change between stable and unstable. Scoring depends on controlling stable objectives.",
   ),
   createBattleplan(
     11,
     2,
     "Flee the Coast",
-    "El underdog puede retirar del campo un objetivo Golden Lions o Soliphiles una vez por batalla.",
+    "Once per battle, the underdog can remove either the Golden Lions or the Soliphiles objective from the battlefield.",
   ),
   createBattleplan(
     12,
     2,
     "The Might of Kingdoms",
-    "El objetivo de Soliphiles es el principal y el resto son secundarios. El underdog puede destruir objetivos secundarios alineados con el principal.",
+    "The Soliphiles objective is the primary objective and all others are secondary objectives. The underdog can destroy secondary objectives aligned with the primary objective.",
   ),
 ];
 
 export const ghb2026BattleTacticsCards = [
-  createBattleTacticsCard(1, "Flaming Assault", "La batalla por una guarida vital comienza entre fuego y humo.", [
+  createBattleTacticsCard(1, "Flaming Assault", "The battle for control of a vital stronghold begins amid fire and smoke.", [
     {
       type: "Brawl",
       name: "Master of Weapons",
-      condition: "Una misma unidad enemiga ha sufrido al menos 1 punto de daño en 3 fases distintas durante este turno.",
+      condition: "The same enemy unit has taken at least 1 damage in 3 different phases this turn.",
     },
     {
       type: "Strike",
       name: "Break Their Defenses",
-      condition: "Controlas la guarida enemiga al final de tu turno.",
+      condition: "You control the enemy lair at the end of your turn.",
     },
     {
       type: "Domination",
       name: "No Survivors",
-      condition: "Al menos 2 unidades enemigas fueron destruidas este turno y controlas la guarida enemiga.",
+      condition: "At least 2 enemy units were destroyed this turn and you control the enemy lair.",
     },
   ]),
-  createBattleTacticsCard(2, "Siege of Ashes", "Mantén el fuerte que bloquea el avance enemigo.", [
+  createBattleTacticsCard(2, "Siege of Ashes", "You hold a fort that blocks the enemy's path and must defend it to the death.", [
     {
       type: "Rift",
       name: "Form a Bulwark",
-      condition: "Al menos 2 unidades amigas están totalmente fuera del territorio amigo, a 6 pulgadas o menos de él y a 3 pulgadas o menos entre sí.",
+      condition: "At least 2 friendly units are entirely outside friendly territory, wholly within 6\" of it and within 3\" of each other.",
     },
     {
       type: "Strike",
       name: "Supply",
-      condition: "Controlas un objetivo en territorio enemigo disputado por una unidad amiga que no usó una habilidad Move y otra que cargó este turno.",
+      condition: "You control an objective in enemy territory contested by a friendly unit that did not use a Move ability and another friendly unit that charged this turn.",
     },
     {
       type: "Domination",
       name: "Repel the Attackers",
-      condition: "Al menos 3 unidades amigas están a 3 pulgadas o menos del centro del campo y no están en combate.",
+      condition: "At least 3 friendly units are within 3\" of the centre of the battlefield and are not in combat.",
     },
   ]),
-  createBattleTacticsCard(3, "Surrounded by Fire", "Flanquea y rodea al enemigo hasta dejarlo sin escapatoria.", [
+  createBattleTacticsCard(3, "Surrounded by Fire", "Flank and surround your enemies, leaving them no route of escape.", [
     {
       type: "Brawl",
       name: "Ambush",
-      condition: "Controlas una combinación de 2 objetivos o elementos de terreno, disputados por unidades amigas distintas situadas totalmente a 6 pulgadas o menos del territorio amigo y no desplegadas este turno.",
+      condition: "You control a combination of 2 objectives or terrain features, each contested by a different friendly unit wholly within 6\" of friendly territory that was not set up this turn.",
     },
     {
       type: "Strike",
       name: "Surround the Enemy",
-      condition: "Al menos 2 unidades amigas desplegadas este turno están cada una a 9 pulgadas o menos de una esquina distinta y totalmente fuera del territorio amigo.",
+      condition: "At least 2 friendly units set up this turn are each within 9\" of a different battlefield corner and entirely outside friendly territory.",
     },
     {
       type: "Domination",
       name: "Take What's Ours",
-      condition: "Hay 3 o más unidades amigas en territorio enemigo y al menos un héroe amigo totalmente dentro de él.",
+      condition: "There are 3 or more friendly units in enemy territory and at least 1 friendly Hero wholly within enemy territory.",
     },
   ]),
-  createBattleTacticsCard(4, "Smokescreen", "Engaña al enemigo y oculta tus verdaderas fuerzas entre el humo.", [
+  createBattleTacticsCard(4, "Smokescreen", "Feign weakness and conceal your true strength in the smoke of battle.", [
     {
       type: "Chasing",
       name: "Keep the Enemy Close",
-      condition: "Controlas un objetivo disputado por al menos 1 unidad enemiga.",
+      condition: "You control an objective contested by at least 1 enemy unit.",
     },
     {
       type: "Strike",
       name: "Feign Weakness",
-      condition: "Este turno se destruyeron más unidades amigas que unidades enemigas.",
+      condition: "More friendly units than enemy units were destroyed this turn.",
     },
     {
       type: "Domination",
       name: "Execute the Plan",
-      condition: "Controlas todos los objetivos situados en territorio enemigo.",
+      condition: "You control all objectives located in enemy territory.",
     },
   ]),
-  createBattleTacticsCard(6, "Legend of the Arid", "Un héroe se alza para convertirse en leyenda mientras el fuego lo consume todo.", [
+  createBattleTacticsCard(6, "Legend of the Arid", "As a raging fire threatens to consume all, a hero rises and a legend is born.", [
     {
       type: "Brawl",
       name: "Daring Rescue",
-      condition: "Una unidad enemiga que estaba en combate al inicio del turno fue destruida por un ataque de combate de una unidad amiga que cargó este turno.",
+      condition: "An enemy unit that was in melee at the start of the turn was destroyed by a combat attack made by a friendly unit that charged this turn.",
     },
     {
       type: "Strike",
       name: "Commanding on the Front",
-      condition: "Al menos 2 héroes amigos están en el campo, todos a 9 pulgadas o menos de una unidad enemiga visible, y ninguno murió este turno.",
+      condition: "At least 2 friendly Heroes are on the battlefield, all within 9\" of a visible enemy unit, and none were killed this turn.",
     },
     {
       type: "Domination",
       name: "Legendary Hero",
-      condition: "Controlas un objetivo totalmente fuera de tu territorio que no controlabas al inicio del turno y un héroe amigo lo disputa.",
+      condition: "You control an objective wholly outside your territory that you did not control at the start of the turn, and a friendly Hero is contesting it.",
     },
   ]),
 ];

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import test from "node:test";
 import {
   ghb2026Battleplans,
@@ -12,6 +13,10 @@ test("contains the unique battleplans supplied in the GHB 2026-27 PDF", () => {
     ghb2026Battleplans.map((item) => item.number),
     [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12],
   );
+  ghb2026Battleplans.forEach((battleplan) => {
+    assert.ok(battleplan.description.includes("Table"));
+    assert.ok(existsSync(`public${battleplan.image}`), `Missing map for ${battleplan.name}`);
+  });
 });
 
 test("contains three tactics for each unique battle tactics card", () => {

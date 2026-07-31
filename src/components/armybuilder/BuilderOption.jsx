@@ -4,6 +4,7 @@ function BuilderOption({
   id,
   title,
   value,
+  image,
   onClick,
   disabled = false,
 }) {
@@ -60,6 +61,23 @@ function BuilderOption({
             : "pointer",
         }}
       >
+        {image && (
+          <img
+            src={image}
+            alt=""
+            loading="lazy"
+            style={{
+              width: 82,
+              aspectRatio: "1.2",
+              flexShrink: 0,
+              border: "1px solid #b9aa93",
+              borderRadius: 4,
+              backgroundColor: "#eee7dc",
+              objectFit: "cover",
+            }}
+          />
+        )}
+
         <div
           style={{
             flex: 1,
