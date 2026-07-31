@@ -3000,6 +3000,15 @@ select.aos-field__control:hover {
   overflow: hidden;
 }
 
+.aos-game-battle-card__header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d8cebf;
+}
+
+.aos-game-battle-card--map > .aos-game-battle-card__header {
+  padding: 15px;
+}
+
 .aos-game-battle-card--map > img {
   display: block;
   width: 100%;
@@ -3009,12 +3018,12 @@ select.aos-field__control:hover {
   object-fit: cover;
 }
 
-.aos-game-battle-card--map > div {
+.aos-game-battle-card--map > .aos-game-battle-card__content {
   padding: 15px;
 }
 
-.aos-game-battle-card > small,
-.aos-game-battle-card__tactic > span {
+.aos-game-battle-card__header > small,
+.aos-game-battle-card__tactic-heading > span {
   color: #8d2018;
   font-size: 10px;
   font-weight: 900;
@@ -3023,9 +3032,10 @@ select.aos-field__control:hover {
 }
 
 .aos-game-battle-card h4 {
-  margin: 4px 0 9px;
+  margin: 4px 0 0;
   font-family: "Oswald", "Arial Narrow", sans-serif;
-  font-size: 20px;
+  font-size: 22px;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
@@ -3037,15 +3047,117 @@ select.aos-field__control:hover {
   white-space: pre-line;
 }
 
-.aos-game-battle-card__tactic {
-  padding-top: 11px;
+.aos-game-battle-card__header > p {
+  margin-top: 9px;
+  font-style: italic;
+}
+
+.aos-game-rule-panel {
+  padding: 12px;
   margin-top: 11px;
-  border-top: 1px solid #ddd2c1;
+  border: 1px solid #d8cebf;
+  border-radius: 5px;
+  background: #faf7f0;
+}
+
+.aos-game-rule-panel__label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin: -12px -12px 10px;
+  padding: 7px 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #2f3335, #171a1b);
+}
+
+.aos-game-rule-panel__label span,
+.aos-game-rule-panel__label em {
+  font-size: 9px;
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.aos-game-rule-panel__label em {
+  max-width: 68%;
+  color: #e7d6ac;
+  text-align: right;
+}
+
+.aos-game-rule-panel h5 {
+  margin: 0 0 6px;
+  color: #5d1813;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.aos-game-rule-panel--scoring {
+  border-color: #b99a57;
+  background: #f7edcf;
+}
+
+.aos-game-rule-panel--scoring .aos-game-rule-panel__label {
+  background: linear-gradient(135deg, #8d6a30, #5f451e);
+}
+
+.aos-game-rule-panel ul {
+  display: grid;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: #49423a;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.aos-game-battle-card__tactic {
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #d8cebf;
+  border-radius: 5px;
+  background: #faf7f0;
 }
 
 .aos-game-battle-card__tactic strong,
-.aos-game-battle-card__tactic span {
+.aos-game-battle-card__tactic em {
   display: block;
+}
+
+.aos-game-battle-card__tactic strong {
+  margin-top: 6px;
+  color: #301d19;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.aos-game-battle-card__tactic em {
+  margin-top: 5px;
+  color: #746c62;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.aos-game-battle-card__tactic-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.aos-game-battle-card__tactic-heading b {
+  display: inline-grid;
+  min-width: 42px;
+  min-height: 28px;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: #8d6a30;
+  font-size: 11px;
 }
 
 .aos-game-battle-card.is-empty {
@@ -3175,11 +3287,33 @@ select.aos-field__control:hover {
   }
 
   .aos-game-mode__anchors {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(92px, 1fr));
+    overflow-x: auto;
   }
 
   .aos-game-battle-setup__grid {
     grid-template-columns: 1fr;
+  }
+
+  .aos-game-mode {
+    padding: 13px;
+    margin: 12px;
+  }
+
+  .aos-game-mode__section-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .aos-game-battle-card,
+  .aos-game-battle-card--map > .aos-game-battle-card__header,
+  .aos-game-battle-card--map > .aos-game-battle-card__content {
+    padding: 12px;
+  }
+
+  .aos-game-battle-card--map {
+    padding: 0;
   }
 }
 

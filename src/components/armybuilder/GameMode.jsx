@@ -104,11 +104,32 @@ function BattleplanCard({ battleplan }) {
 
   return (
     <article className="aos-game-battle-card aos-game-battle-card--map">
-      {battleplan.image && <img src={battleplan.image} alt={`${battleplan.name} battleplan map`} />}
-      <div>
-        <small>Battleplan</small>
+      <header className="aos-game-battle-card__header">
+        <small>Battle Plan {battleplan.number} · Table {battleplan.table}</small>
         <h4>{battleplan.name}</h4>
-        <p>{battleplan.description}</p>
+      </header>
+      {battleplan.image && <img src={battleplan.image} alt={`${battleplan.name} battleplan map`} />}
+      <div className="aos-game-battle-card__content">
+        {(battleplan.sections ?? []).map((item, index) => (
+          <section className="aos-game-rule-panel" key={`${item.label}-${item.title ?? index}`}>
+            <div className="aos-game-rule-panel__label">
+              <span>{item.label}</span>
+              {item.timing && <em>{item.timing}</em>}
+            </div>
+            {item.title && <h5>{item.title}</h5>}
+            <p>{item.text}</p>
+          </section>
+        ))}
+
+        <section className="aos-game-rule-panel aos-game-rule-panel--scoring">
+          <div className="aos-game-rule-panel__label">
+            <span>Victory points</span>
+          </div>
+          <p>Each player scores victory points at the end of each of their turns as follows:</p>
+          <ul>
+            {(battleplan.scoring ?? []).map((condition) => <li key={condition}>{condition}</li>)}
+          </ul>
+        </section>
       </div>
     </article>
   );
@@ -121,12 +142,25 @@ function BattleTacticsCard({ card }) {
 
   return (
     <article className="aos-game-battle-card">
-      <small>Battle tactics</small>
-      <h4>{card.name}</h4>
+      <header className="aos-game-battle-card__header">
+        <small>Battle Tactics Card {card.number}</small>
+        <h4>{card.name}</h4>
+        {card.introduction && <p>{card.introduction}</p>}
+      </header>
+      {card.setup && (
+        <section className="aos-game-rule-panel">
+          <div className="aos-game-rule-panel__label"><span>Battle setup</span></div>
+          <p>{card.setup}</p>
+        </section>
+      )}
       {(card.tactics ?? []).map((tactic) => (
         <div className="aos-game-battle-card__tactic" key={`${tactic.type}-${tactic.name}`}>
-          <span>{tactic.type}</span>
+          <div className="aos-game-battle-card__tactic-heading">
+            <span>{tactic.type}</span>
+            <b>{tactic.points} VP</b>
+          </div>
           <strong>{tactic.name}</strong>
+          {tactic.flavour && <em>{tactic.flavour}</em>}
           <p>{tactic.condition}</p>
         </div>
       ))}

@@ -15,6 +15,9 @@ test("contains the unique battleplans supplied in the GHB 2026-27 PDF", () => {
   );
   ghb2026Battleplans.forEach((battleplan) => {
     assert.ok(battleplan.description.includes("Table"));
+    assert.ok(battleplan.sections.length > 0);
+    assert.ok(battleplan.scoring.length > 0);
+    assert.match(battleplan.description, /Each player scores victory points/);
     assert.ok(existsSync(`public${battleplan.image}`), `Missing map for ${battleplan.name}`);
   });
 });
@@ -22,5 +25,17 @@ test("contains the unique battleplans supplied in the GHB 2026-27 PDF", () => {
 test("contains three tactics for each unique battle tactics card", () => {
   assert.equal(ghb2026BattleTacticsCards.length, 5);
   assert.equal(new Set(ghb2026BattleTacticsCards.map((item) => item.id)).size, 5);
-  ghb2026BattleTacticsCards.forEach((card) => assert.equal(card.tactics.length, 3));
+  ghb2026BattleTacticsCards.forEach((card) => {
+    assert.equal(card.tactics.length, 3);
+    card.tactics.forEach((tactic) => {
+      assert.equal(tactic.points, 5);
+      assert.ok(tactic.flavour);
+      assert.match(tactic.condition, /You execute this battle tactic/);
+    });
+  });
+  assert.equal(
+    ghb2026BattleTacticsCards.find((card) => card.number === 3)
+      .tactics.find((tactic) => tactic.type === "Domination").name,
+    "Take What Is Due",
+  );
 });
