@@ -195,7 +195,11 @@ function serializeList(list) {
     spellLore: list.spellLore ?? null,
     prayerLore: list.prayerLore ?? null,
     manifestationLore: list.manifestationLore ?? null,
-    battleTactics: list.battleTactics ?? null,
+    battleTactics: (Array.isArray(list.battleTactics)
+      ? list.battleTactics
+      : list.battleTactics
+        ? [list.battleTactics]
+        : []).slice(0, 2),
     terrain: list.terrain ?? null,
     regiments: (list.regiments ?? []).map((regiment) => ({
       id: regiment.id,
@@ -302,10 +306,14 @@ function restoreList(savedList) {
       savedList.manifestationLore,
       faction.manifestationLores
     ),
-    battleTactics: restoreOption(
-      savedList.battleTactics,
-      ghb2026BattleTacticsCards
-    ),
+    battleTactics: (Array.isArray(savedList.battleTactics)
+      ? savedList.battleTactics
+      : savedList.battleTactics
+        ? [savedList.battleTactics]
+        : [])
+      .map((card) => restoreOption(card, ghb2026BattleTacticsCards))
+      .filter(Boolean)
+      .slice(0, 2),
     terrain: restoreOption(
       savedList.terrain,
       faction.terrain

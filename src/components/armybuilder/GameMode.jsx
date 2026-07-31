@@ -7,6 +7,7 @@ import SelectedRulesLibrary from "./SelectedRulesLibrary";
 function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule }) {
   const units = getUniqueListUnits(list);
   const manifestations = getManifestations(list);
+  const battleTactics = getBattleTactics(list);
   const warscrollCount = units.length + manifestations.length;
 
   return (
@@ -90,7 +91,12 @@ function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule 
 
         <div className="aos-game-battle-setup__grid">
           <BattleplanCard battleplan={list?.battleplan} />
-          <BattleTacticsCard card={list?.battleTactics} />
+          {battleTactics.map((card) => (
+            <BattleTacticsCard key={card.id} card={card} />
+          ))}
+          {battleTactics.length === 0 && (
+            <BattleTacticsCard card={null} />
+          )}
         </div>
       </section>
     </section>
@@ -198,6 +204,14 @@ function getManifestations(list) {
   return (list?.manifestationLore?.manifestations ?? [])
     .map(normalizeRuleItem)
     .filter((manifestation) => manifestation?.name);
+}
+
+function getBattleTactics(list) {
+  return Array.isArray(list?.battleTactics)
+    ? list.battleTactics
+    : list?.battleTactics
+      ? [list.battleTactics]
+      : [];
 }
 
 export default GameMode;

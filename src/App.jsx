@@ -491,6 +491,31 @@ function App() {
     returnToBuilder();
   }
 
+  function toggleArmyOption(option) {
+    if (!currentList || !selector?.property || !option) {
+      return;
+    }
+
+    const maxSelections = Math.max(1, Number(selector.ui?.maxSelections) || 1);
+    const currentValue = currentList[selector.property];
+    const selected = Array.isArray(currentValue)
+      ? currentValue
+      : currentValue
+        ? [currentValue]
+        : [];
+    const alreadySelected = selected.some((item) => item.id === option.id);
+    const nextSelection = alreadySelected
+      ? selected.filter((item) => item.id !== option.id)
+      : selected.length < maxSelections
+        ? [...selected, option]
+        : selected;
+
+    saveUpdatedList({
+      ...currentList,
+      [selector.property]: nextSelection,
+    });
+  }
+
   function handleCommandPointsChange(nextValue) {
     if (!currentList) {
       return;
@@ -1841,6 +1866,17 @@ function App() {
             selector?.options ??
             []
           }
+          selectedOptions={
+            selector?.ui?.maxSelections > 1
+              ? (Array.isArray(currentList?.[selector.property])
+                  ? currentList[selector.property]
+                  : currentList?.[selector.property]
+                    ? [currentList[selector.property]]
+                    : [])
+              : []
+          }
+          maxSelections={selector?.ui?.maxSelections ?? 1}
+          onToggle={toggleArmyOption}
           goBack={
             handleSelectorBack
           }

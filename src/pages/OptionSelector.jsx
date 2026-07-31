@@ -8,7 +8,13 @@ function OptionSelector({
   onView,
   onConfigure,
   goBack,
+  selectedOptions = [],
+  maxSelections = 1,
+  onToggle,
 }) {
+  const isMultiSelect = maxSelections > 1;
+  const selectedIds = new Set(selectedOptions.map((option) => option.id));
+
   function hasWarscroll(option) {
     return Boolean(
       option.rules ||
@@ -65,7 +71,9 @@ function OptionSelector({
           </p>
 
           <h2 className="aos-heading">
-            Selecciona una opción
+            {isMultiSelect
+              ? `Selecciona hasta ${maxSelections} opciones`
+              : "Selecciona una opción"}
           </h2>
         </div>
 
@@ -79,11 +87,16 @@ function OptionSelector({
           {options.map((option) => {
             const description =
               getDescription(option);
+            const isSelected = selectedIds.has(option.id);
+            const selectionLimitReached =
+              isMultiSelect &&
+              selectedOptions.length >= maxSelections &&
+              !isSelected;
 
             return (
               <article
                 key={option.id}
-                className="aos-option-card"
+                className={`aos-option-card${isSelected ? " is-selected" : ""}`}
               >
                 <div className="aos-option-card__head">
                   {option.image && !hasWarscroll(option) && (
@@ -155,13 +168,16 @@ function OptionSelector({
                     {onConfigure && (
                       <button
                         type="button"
-                        onClick={() =>
-                          onConfigure(option)
+                        onClick={() => isMultiSelect
+                          ? onToggle?.(option)
+                          : onConfigure(option)
                         }
                         className="aos-option-card__button aos-option-card__button--select"
-                        aria-label={`Seleccionar ${option.name}`}
+                        disabled={selectionLimitReached}
+                        aria-pressed={isMultiSelect ? isSelected : undefined}
+                        aria-label={`${isSelected ? "Quitar" : "Seleccionar"} ${option.name}`}
                       >
-                        Seleccionar
+                        {isSelected ? "Seleccionada" : "Seleccionar"}
                       </button>
                     )}
                   </div>
@@ -185,6 +201,15 @@ function OptionSelector({
             );
           })}
         </section>
+
+        {isMultiSelect && (
+          <div className="aos-option-selector__footer">
+            <span>{selectedOptions.length}/{maxSelections} seleccionadas</span>
+            <button type="button" className="aos-primary-action" onClick={goBack}>
+              Confirmar
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );

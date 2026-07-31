@@ -52,7 +52,14 @@ export function formatArmyListText(list) {
   ];
 
   if (list?.battleplan?.name) lines.push(`Battleplan: ${list.battleplan.name}`);
-  if (list?.battleTactics?.name) lines.push(`Battle tactics: ${list.battleTactics.name}`);
+  const battleTactics = Array.isArray(list?.battleTactics)
+    ? list.battleTactics
+    : list?.battleTactics
+      ? [list.battleTactics]
+      : [];
+  if (battleTactics.length > 0) {
+    lines.push(`Battle tactics: ${battleTactics.map((card) => card.name).join(", ")}`);
+  }
   if (list?.battleFormation?.name) lines.push(`Formación: ${list.battleFormation.name}`);
   if (list?.spellLore?.name) lines.push(`Hechizos: ${list.spellLore.name}`);
   if (list?.prayerLore?.name) lines.push(`Plegarias: ${list.prayerLore.name}`);

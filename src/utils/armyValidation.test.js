@@ -90,6 +90,20 @@ test("exports points, drops and regiment structure", () => {
   assert.match(text, /100\/2000 pts · 1 drops/);
 });
 
+test("exports both selected battle tactics cards", () => {
+  const text = formatArmyListText(list({
+    battleTactics: [
+      { id: "tactics-one", name: "Battle Tactics Card 1" },
+      { id: "tactics-two", name: "Battle Tactics Card 2" },
+    ],
+  }));
+
+  assert.match(
+    text,
+    /Battle tactics: Battle Tactics Card 1, Battle Tactics Card 2/
+  );
+});
+
 test("escapes list names in printable HTML", () => {
   const html = createArmyPrintHtml(list({ name: "<Ataque & defensa>" }));
   assert.match(html, /&lt;Ataque &amp; defensa&gt;/);

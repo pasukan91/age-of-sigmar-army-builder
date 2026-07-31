@@ -95,12 +95,14 @@ function ArmyBuilder({
     title,
     property,
     options,
+    ui,
   }) {
     setSelector({
       title,
       property,
       regimentId: null,
       options,
+      ui,
     });
 
     navigate("selector");
@@ -196,12 +198,13 @@ function ArmyBuilder({
         <BuilderOption
           id="battle-tactics-option"
           title="Battle tactics"
-          value={list.battleTactics?.name ?? "No seleccionada"}
+          value={formatBattleTactics(list.battleTactics)}
           onClick={() =>
             openSelector({
               title: "Battle tactics",
               property: "battleTactics",
               options: ghb2026BattleTacticsCards,
+              ui: { maxSelections: 2 },
             })
           }
         />
@@ -440,6 +443,18 @@ function getArray(value) {
   return Array.isArray(value)
     ? value
     : [];
+}
+
+function formatBattleTactics(value) {
+  const selected = Array.isArray(value)
+    ? value
+    : value
+      ? [value]
+      : [];
+
+  return selected.length > 0
+    ? selected.map((card) => card.name).join(" + ")
+    : "Ninguna seleccionada";
 }
 
 export default ArmyBuilder;

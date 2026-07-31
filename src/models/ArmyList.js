@@ -48,7 +48,7 @@ export function createArmyList({
 
     manifestationLore: null,
 
-    battleTactics: null,
+    battleTactics: [],
 
     terrain: null,
 
