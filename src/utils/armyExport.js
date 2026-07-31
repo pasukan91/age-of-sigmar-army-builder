@@ -51,6 +51,8 @@ export function formatArmyListText(list) {
     "",
   ];
 
+  if (list?.battleplan?.name) lines.push(`Battleplan: ${list.battleplan.name}`);
+  if (list?.battleTactics?.name) lines.push(`Battle tactics: ${list.battleTactics.name}`);
   if (list?.battleFormation?.name) lines.push(`Formación: ${list.battleFormation.name}`);
   if (list?.spellLore?.name) lines.push(`Hechizos: ${list.spellLore.name}`);
   if (list?.prayerLore?.name) lines.push(`Plegarias: ${list.prayerLore.name}`);

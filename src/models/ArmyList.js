@@ -40,6 +40,8 @@ export function createArmyList({
 
     battleFormation: null,
 
+    battleplan: null,
+
     spellLore: null,
 
     prayerLore: null,

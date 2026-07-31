@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 
 import { validateArmyList } from "./armyValidation.js";
 import { createArmyPrintHtml, formatArmyListText, getArmyDrops } from "./armyExport.js";
-import { searchRules } from "./ruleSearch.js";
 
 function unit(overrides = {}) {
   return {
@@ -95,20 +94,4 @@ test("escapes list names in printable HTML", () => {
   const html = createArmyPrintHtml(list({ name: "<Ataque & defensa>" }));
   assert.match(html, /&lt;Ataque &amp; defensa&gt;/);
   assert.doesNotMatch(html, /<Ataque & defensa>/);
-});
-
-test("search matches accents, keywords and source text", () => {
-  const index = [{
-    id: "spell:one",
-    kind: "spell",
-    name: "Protección Mística",
-    summary: "Otorga una salvación especial",
-    phase: "Your Hero Phase",
-    sourceName: "Saber Arcano",
-    item: { keywords: ["Unlimited"] },
-  }];
-
-  assert.equal(searchRules(index, "proteccion", "all").length, 1);
-  assert.equal(searchRules(index, "hero phase", "spell").length, 1);
-  assert.equal(searchRules(index, "unlimited", "spell").length, 1);
 });

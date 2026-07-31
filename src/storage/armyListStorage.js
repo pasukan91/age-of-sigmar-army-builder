@@ -1,6 +1,10 @@
 import alliances from "../data/alliances";
 import factions from "../data/factions";
 import regimentsOfRenown from "../data/regimentsOfRenown";
+import {
+  ghb2026Battleplans,
+  ghb2026BattleTacticsCards,
+} from "../data/ghb2026";
 
 const STORAGE_KEY = "storm-forge.army-lists.v1";
 const STORAGE_VERSION = 1;
@@ -187,6 +191,7 @@ function serializeList(list) {
     commandPoints: Math.max(0, Number(list.commandPoints) || 0),
     furyPoints: Math.min(7, Math.max(0, Number(list.furyPoints) || 0)),
     battleFormation: list.battleFormation ?? null,
+    battleplan: list.battleplan ?? null,
     spellLore: list.spellLore ?? null,
     prayerLore: list.prayerLore ?? null,
     manifestationLore: list.manifestationLore ?? null,
@@ -281,6 +286,10 @@ function restoreList(savedList) {
       savedList.battleFormation,
       faction.battleFormations
     ),
+    battleplan: restoreOption(
+      savedList.battleplan,
+      ghb2026Battleplans
+    ),
     spellLore: restoreOption(
       savedList.spellLore,
       faction.spellLores
@@ -293,7 +302,10 @@ function restoreList(savedList) {
       savedList.manifestationLore,
       faction.manifestationLores
     ),
-    battleTactics: savedList.battleTactics ?? null,
+    battleTactics: restoreOption(
+      savedList.battleTactics,
+      ghb2026BattleTacticsCards
+    ),
     terrain: restoreOption(
       savedList.terrain,
       faction.terrain

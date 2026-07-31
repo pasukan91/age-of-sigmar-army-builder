@@ -6,9 +6,12 @@ import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
 import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import ArmySharePanel from "../components/armybuilder/ArmySharePanel";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
-import GlobalRulesSearch from "../components/armybuilder/GlobalRulesSearch";
 import GameMode from "../components/armybuilder/GameMode";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
+import {
+  ghb2026Battleplans,
+  ghb2026BattleTacticsCards,
+} from "../data/ghb2026";
 import { validateArmyList } from "../utils/armyValidation";
 
 import {
@@ -150,7 +153,6 @@ function ArmyBuilder({
           ["list", "Lista"],
           ["regiments", "Regimientos"],
           ["rules", "Reglas"],
-          ["search", "Buscar"],
           ["game", "Partida"],
         ].map(([id, label]) => (
           <button
@@ -180,6 +182,32 @@ function ArmyBuilder({
       />
 
       <section className="aos-builder-options">
+        <BuilderOption
+          id="battleplan-option"
+          title="Battleplan"
+          value={list.battleplan?.name ?? "No seleccionado"}
+          onClick={() =>
+            openSelector({
+              title: "Battleplan",
+              property: "battleplan",
+              options: ghb2026Battleplans,
+            })
+          }
+        />
+
+        <BuilderOption
+          id="battle-tactics-option"
+          title="Battle tactics"
+          value={list.battleTactics?.name ?? "No seleccionada"}
+          onClick={() =>
+            openSelector({
+              title: "Battle tactics",
+              property: "battleTactics",
+              options: ghb2026BattleTacticsCards,
+            })
+          }
+        />
+
         {battleFormations.length > 0 && (
         <BuilderOption
           id="battle-formation-option"
@@ -350,14 +378,6 @@ function ArmyBuilder({
       />
 
         </>
-      )}
-
-      {section === "search" && (
-        <GlobalRulesSearch
-          list={list}
-          onViewUnit={onBrowseUnit}
-          onViewRule={onViewRule}
-        />
       )}
 
       {section === "game" && (

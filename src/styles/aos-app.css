@@ -2762,7 +2762,7 @@ select.aos-field__control:hover {
   z-index: 19;
   top: var(--aos-header-height);
   display: grid;
-  grid-template-columns: repeat(5, minmax(72px, 1fr));
+  grid-template-columns: repeat(4, minmax(72px, 1fr));
   overflow-x: auto;
   padding: 7px;
   border-bottom: 1px solid #c9baa0;
@@ -2773,7 +2773,6 @@ select.aos-field__control:hover {
 
 .aos-validation-panel,
 .aos-share-panel,
-.aos-global-search,
 .aos-game-mode {
   margin: 16px;
   border: 1px solid #cfc4b2;
@@ -2805,7 +2804,6 @@ select.aos-field__control:hover {
 
 .aos-validation-panel h2,
 .aos-share-panel h2,
-.aos-global-search h2,
 .aos-game-mode h2,
 .aos-game-mode h3 {
   margin: 2px 0 5px;
@@ -2815,7 +2813,6 @@ select.aos-field__control:hover {
 
 .aos-validation-panel header p,
 .aos-share-panel > p,
-.aos-global-search > header p,
 .aos-game-mode__hero p {
   margin: 0;
   color: #655d53;
@@ -2885,9 +2882,7 @@ select.aos-field__control:hover {
 }
 
 .aos-validation-panel__issues button,
-.aos-share-panel__actions button,
-.aos-global-search__filters button,
-.aos-game-mode__phases button {
+.aos-share-panel__actions button {
   min-height: 40px;
   border: 1px solid #b9aa93;
   border-radius: 6px;
@@ -2946,131 +2941,9 @@ select.aos-field__control:hover {
   font-weight: 700;
 }
 
-.aos-global-search,
 .aos-game-mode {
   padding: 18px;
 }
-
-.aos-global-search__input {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 17px;
-  padding: 0 12px;
-  border: 2px solid #bbaa90;
-  border-radius: 8px;
-  background: #fff;
-}
-
-.aos-global-search__input:focus-within {
-  border-color: #8d2018;
-  box-shadow: 0 0 0 3px rgba(141, 32, 24, 0.12);
-}
-
-.aos-global-search__input input {
-  min-width: 0;
-  min-height: 48px;
-  flex: 1;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  font: inherit;
-}
-
-.aos-global-search__input button {
-  width: 34px;
-  height: 34px;
-  border: 0;
-  border-radius: 999px;
-  background: #eee7dc;
-  font-size: 22px;
-}
-
-.aos-global-search__filters,
-.aos-game-mode__phases {
-  display: flex;
-  gap: 7px;
-  margin: 13px -2px 0;
-  padding: 2px;
-  overflow-x: auto;
-}
-
-.aos-global-search__filters button,
-.aos-game-mode__phases button {
-  flex: 0 0 auto;
-  padding: 7px 12px;
-}
-
-.aos-global-search__filters button.is-active,
-.aos-game-mode__phases button.is-active {
-  border-color: #741b15;
-  color: #fff;
-  background: #741b15;
-}
-
-.aos-global-search__count {
-  margin: 14px 0 8px;
-  color: #746c62;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.aos-global-search__results,
-.aos-game-mode__rules {
-  display: grid;
-  gap: 8px;
-}
-
-.aos-global-search__results > button,
-.aos-game-mode__rules > button {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 11px;
-  align-items: center;
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #d8cebf;
-  border-radius: 7px;
-  color: #1d1a17;
-  background: #fff;
-  text-align: left;
-}
-
-.aos-global-search__results strong,
-.aos-global-search__results small {
-  display: block;
-}
-
-.aos-global-search__results small {
-  margin-top: 2px;
-  color: #746c62;
-}
-
-.aos-global-search__results p,
-.aos-game-mode__rules p {
-  margin: 5px 0 0;
-  color: #655d53;
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.aos-global-search__kind {
-  width: 68px;
-  padding: 5px;
-  border-radius: 4px;
-  color: #fff;
-  background: #5c6265;
-  font-size: 9px;
-  font-weight: 900;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.aos-global-search__kind.is-unit { background: #7b211b; }
-.aos-global-search__kind.is-spell { background: #385b83; }
-.aos-global-search__kind.is-prayer { background: #76602b; }
-.aos-global-search__kind.is-enhancement { background: #66507a; }
 
 .aos-game-mode__hero {
   padding-bottom: 15px;
@@ -3107,8 +2980,11 @@ select.aos-field__control:hover {
 }
 
 .aos-game-roster__grid button {
-  min-height: 88px;
-  padding: 11px;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  min-height: 116px;
+  padding: 0;
+  overflow: hidden;
   border: 1px solid #c9baa0;
   border-left: 4px solid #8d2018;
   border-radius: 6px;
@@ -3117,34 +2993,51 @@ select.aos-field__control:hover {
   text-align: left;
 }
 
-.aos-game-roster__grid strong,
-.aos-game-roster__grid span,
-.aos-game-roster__grid small {
+.aos-game-roster__artwork {
+  display: grid;
+  min-height: 116px;
+  place-items: center;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(145deg, #8d2018, #32110e);
+  font-size: 28px;
+}
+
+.aos-game-roster__artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aos-game-roster__artwork i {
+  font-style: normal;
+}
+
+.aos-game-roster__body {
+  align-self: center;
+  min-width: 0;
+  padding: 11px 13px;
+}
+
+.aos-game-roster__body strong,
+.aos-game-roster__body small,
+.aos-game-roster__summary {
   display: block;
 }
 
-.aos-game-roster__grid span {
+.aos-game-roster__summary {
   margin-top: 3px;
   color: #8d2018;
   font-weight: 900;
 }
 
-.aos-game-roster__grid small {
+.aos-game-roster__body small {
   margin-top: 4px;
   color: #746c62;
 }
 
-.aos-game-mode__rules > button {
-  grid-template-columns: minmax(0, 1fr) auto;
-}
-
-.aos-game-mode__rules small,
-.aos-game-mode__rules strong {
-  display: block;
-}
-
-.aos-game-mode__rules small {
-  margin-bottom: 3px;
+.aos-game-roster__body .aos-game-roster__type {
+  margin: 0 0 3px;
   color: #8d2018;
   font-size: 10px;
   font-weight: 900;
@@ -3153,7 +3046,7 @@ select.aos-field__control:hover {
 
 @media (max-width: 520px) {
   .aos-builder-tabs {
-    grid-template-columns: repeat(5, minmax(64px, 1fr));
+    grid-template-columns: repeat(4, minmax(64px, 1fr));
     scrollbar-width: none;
   }
 
