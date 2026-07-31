@@ -1622,11 +1622,6 @@ textarea {
   background: transparent;
 }
 
-.aos-battle-tactics-selector .aos-game-battle-card__tactic.is-selected {
-  outline: 2px solid var(--aos-red);
-  outline-offset: -2px;
-}
-
 .aos-battle-tactics-selector__introduction {
   font-style: italic;
 }
@@ -1634,6 +1629,10 @@ textarea {
 .aos-battle-tactics-selector .aos-option-card__button {
   width: 100%;
   margin-top: 12px;
+}
+
+.aos-battle-tactics-selector .aos-battle-tactics-selector__card-button {
+  margin: 12px 0 16px;
 }
 
 .aos-option-card__button:disabled {
@@ -3072,19 +3071,11 @@ select.aos-field__control:hover {
   padding-bottom: 10px;
 }
 
-.aos-game-tactic-reference .aos-game-battle-card__tactic-heading small {
-  color: #8d2018;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.aos-game-tactic-reference__condition {
+.aos-game-tactic-reference__missions {
   margin-top: 12px;
 }
 
-.aos-game-tactic-reference__condition > strong {
+.aos-game-tactic-reference__missions > strong {
   display: block;
   color: #5d1813;
   font-size: 11px;
@@ -3092,7 +3083,7 @@ select.aos-field__control:hover {
   text-transform: uppercase;
 }
 
-.aos-game-tactic-reference__condition > p,
+.aos-game-tactic-reference__missions .aos-game-battle-card__tactic > p,
 .aos-game-tactic-reference .aos-game-battle-card__header > p {
   color: #3f3932;
   font-size: 14px;

@@ -4,6 +4,7 @@ import regimentsOfRenown from "../data/regimentsOfRenown";
 import {
   ghb2026Battleplans,
   ghb2026BattleTactics,
+  ghb2026BattleTacticsCards,
 } from "../data/ghb2026";
 
 const STORAGE_KEY = "storm-forge.army-lists.v1";
@@ -44,6 +45,31 @@ function restoreOption(savedOption, canonicalOptions) {
     findById(canonicalOptions, savedOption.id) ??
     savedOption
   );
+}
+
+function restoreBattleTacticsCards(savedValue) {
+  const savedItems = Array.isArray(savedValue)
+    ? savedValue
+    : savedValue
+      ? [savedValue]
+      : [];
+
+  const cards = savedItems
+    .map((item) => {
+      if (Array.isArray(item?.tactics)) {
+        return restoreOption(item, ghb2026BattleTacticsCards);
+      }
+
+      const tactic = restoreOption(item, ghb2026BattleTactics);
+      return ghb2026BattleTacticsCards.find(
+        (card) => card.number === tactic?.cardNumber
+      ) ?? null;
+    })
+    .filter(Boolean);
+
+  return cards
+    .filter((card, index) => cards.findIndex((item) => item.id === card.id) === index)
+    .slice(0, 2);
 }
 
 function serializeUnit(unit) {
@@ -306,14 +332,7 @@ function restoreList(savedList) {
       savedList.manifestationLore,
       faction.manifestationLores
     ),
-    battleTactics: (Array.isArray(savedList.battleTactics)
-      ? savedList.battleTactics
-      : savedList.battleTactics
-        ? [savedList.battleTactics]
-        : [])
-      .map((tactic) => restoreOption(tactic, ghb2026BattleTactics))
-      .filter((tactic) => tactic && !Array.isArray(tactic.tactics))
-      .slice(0, 2),
+    battleTactics: restoreBattleTacticsCards(savedList.battleTactics),
     terrain: restoreOption(
       savedList.terrain,
       faction.terrain

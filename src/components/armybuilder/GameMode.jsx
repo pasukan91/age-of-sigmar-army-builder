@@ -19,34 +19,10 @@ function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule 
       </header>
 
       <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
-        <a href="#game-battle-setup">Misión</a>
         <a href="#game-warscrolls">Warscrolls</a>
         <a href="#game-rules">Reglas</a>
+        <a href="#game-battle-setup">Battleplan y tácticas</a>
       </nav>
-
-      <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
-        <div className="aos-game-mode__section-title">
-          <h3 id="game-battle-setup-title">Referencia de misión</h3>
-          <span>Consulta rápida</span>
-        </div>
-
-        <div className="aos-game-tactics-reference">
-          <div className="aos-game-reference-heading">
-            <span>Mis tácticas de batalla</span>
-            <strong>{battleTactics.length}/2</strong>
-          </div>
-          <div className="aos-game-tactics-reference__grid">
-            {battleTactics.map((tactic) => (
-              <BattleTacticCard key={tactic.id} tactic={tactic} />
-            ))}
-            {battleTactics.length === 0 && (
-              <BattleTacticCard tactic={null} />
-            )}
-          </div>
-        </div>
-
-        <BattleplanCard battleplan={list?.battleplan} />
-      </section>
 
       <section id="game-warscrolls" className="aos-game-section aos-game-roster" aria-labelledby="game-roster-title">
         <div className="aos-game-mode__section-title">
@@ -107,6 +83,30 @@ function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule 
         />
       </section>
 
+      <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
+        <div className="aos-game-mode__section-title">
+          <h3 id="game-battle-setup-title">Battleplan y battle tactics</h3>
+          <span>Consulta rápida</span>
+        </div>
+
+        <div className="aos-game-tactics-reference">
+          <div className="aos-game-reference-heading">
+            <span>Mis tácticas de batalla</span>
+            <strong>{battleTactics.length}/2</strong>
+          </div>
+          <div className="aos-game-tactics-reference__grid">
+            {battleTactics.map((card) => (
+              <BattleTacticsCard key={card.id} card={card} />
+            ))}
+            {battleTactics.length === 0 && (
+              <BattleTacticsCard card={null} />
+            )}
+          </div>
+        </div>
+
+        <BattleplanCard battleplan={list?.battleplan} />
+      </section>
+
     </section>
   );
 }
@@ -163,24 +163,41 @@ function BattleplanCard({ battleplan }) {
   );
 }
 
-function BattleTacticCard({ tactic }) {
-  if (!tactic) {
-    return <EmptyBattleCard title="Battle tactics" message="Selecciona hasta 2 battle tactics en la pestaña Lista." />;
+function BattleTacticsCard({ card }) {
+  if (!card) {
+    return <EmptyBattleCard title="Tácticas de batalla" message="Selecciona hasta 2 cartas de táctica en la pestaña Lista." />;
   }
 
   return (
     <article className="aos-game-battle-card aos-game-tactic-reference">
       <header className="aos-game-battle-card__header">
-        <div className="aos-game-battle-card__tactic-heading">
-          <small>Carta {tactic.cardNumber} · {tactic.type}</small>
-          <b>{tactic.points} PV</b>
-        </div>
-        <h4>{tactic.name}</h4>
-        {tactic.flavour && <p>{tactic.flavour}</p>}
+        <small>Carta de táctica {card.number}</small>
+        <h4>{card.name}</h4>
+        {card.introduction && <p>{card.introduction}</p>}
       </header>
-      <div className="aos-game-tactic-reference__condition">
-        <strong>Cómo completarla</strong>
-        <p>{tactic.condition}</p>
+
+      {card.setup && (
+        <section className="aos-game-rule-panel">
+          <div className="aos-game-rule-panel__label">
+            <span>Preparación de batalla</span>
+          </div>
+          <p>{card.setup}</p>
+        </section>
+      )}
+
+      <div className="aos-game-tactic-reference__missions">
+        <strong>Misiones de la carta</strong>
+        {(card.tactics ?? []).map((tactic) => (
+          <div className="aos-game-battle-card__tactic" key={tactic.id}>
+            <div className="aos-game-battle-card__tactic-heading">
+              <span>{tactic.type}</span>
+              <b>{tactic.points} PV</b>
+            </div>
+            <strong>{tactic.name}</strong>
+            {tactic.flavour && <em>{tactic.flavour}</em>}
+            <p>{tactic.condition}</p>
+          </div>
+        ))}
       </div>
     </article>
   );
