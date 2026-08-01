@@ -1,4 +1,6 @@
 import Accordion from "../Accordion";
+import AbilityCard from "../AbilityCard";
+import { groupAbilitiesByPhase } from "../../utils/abilityFormatting";
 import {
   universalAbilities,
   universalCommands,
@@ -58,23 +60,15 @@ function RuleList({ rules, emptyText = "No hay reglas disponibles." }) {
   }
 
   return (
-    <div className="aos-rule-list">
-      {rules.map((rule) => (
-        <article className="aos-rule-card" key={rule.id ?? rule.name}>
-          <div className="aos-rule-card__heading">
-            <div>
-              {rule.phase && <span className="aos-rule-card__phase">{rule.phase}</span>}
-              <h3>{rule.name}</h3>
-            </div>
-
-            {Number(rule.commandPoints) > 0 && (
-              <span className="aos-rule-card__cp">{rule.commandPoints} PC</span>
-            )}
+    <div className="aos-ability-groups">
+      {groupAbilitiesByPhase(rules).map((group) => (
+        <section className="aos-ability-group" key={group.id}>
+          <div className="aos-ability-group__cards">
+            {group.items.map((rule) => (
+              <AbilityCard ability={rule} key={rule.id ?? rule.name} />
+            ))}
           </div>
-
-          {rule.type && <p className="aos-rule-card__type">{rule.type}</p>}
-          <p className="aos-rule-card__description">{rule.description}</p>
-        </article>
+        </section>
       ))}
     </div>
   );

@@ -1,5 +1,7 @@
 import Accordion from "../components/Accordion";
+import AbilityCard from "../components/AbilityCard";
 import { getRuleArtwork } from "../utils/ruleReferences";
+import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
 import "../styles/aos-app.css";
 
 function RuleWarscroll({ reference, onBack }) {
@@ -161,16 +163,19 @@ function RuleStep({ title, text, variant = "" }) {
 }
 
 function AbilityList({ abilities }) {
-  return <div className="aos-rule-list">{abilities.map((ability, index) => {
-    const parts = splitRuleText(ability.description);
-    return (
-      <article className="aos-rule-card" key={`${ability.name}-${index}`}>
-        <div className="aos-rule-card__heading"><div><span className="aos-rule-card__phase">{ability.phase ?? ability.type}</span><h3>{ability.name}</h3></div></div>
-        {parts.declare && <RuleStep title="Declarar" text={parts.declare} />}
-        {parts.effect ? <RuleStep title="Efecto" text={parts.effect} variant="effect" /> : <p className="aos-rule-card__description">{ability.description}</p>}
-      </article>
-    );
-  })}</div>;
+  return (
+    <div className="aos-ability-groups">
+      {groupAbilitiesByPhase(abilities).map((group) => (
+        <section className="aos-ability-group" key={group.id}>
+          <div className="aos-ability-group__cards">
+            {group.items.map((ability, index) => (
+              <AbilityCard ability={ability} key={`${ability.name}-${index}`} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
 }
 
 function WeaponList({ weapons }) {

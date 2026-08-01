@@ -15,119 +15,31 @@ function Accordion({
 
   return (
     <section
-      style={{
-        marginBottom: 12,
-
-        border: isDark
-          ? "1px solid #414249"
-          : "1px solid #d2cec5",
-
-        borderRadius: 6,
-
-        backgroundColor: isDark
-          ? "#292a30"
-          : "#ffffff",
-
-        color: isDark
-          ? "#f6f3ea"
-          : "#17171a",
-
-        overflow: "hidden",
-
-        boxShadow:
-          "0 1px 2px rgba(0,0,0,0.14)",
-      }}
+      className={`aos-accordion ${isDark ? "aos-accordion--dark" : "aos-accordion--light"} ${open ? "is-open" : ""}`}
     >
       <button
+        className="aos-accordion__trigger"
         type="button"
         onClick={() =>
           setOpen((previous) => !previous)
         }
         aria-expanded={open}
-        style={{
-          width: "100%",
-
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 14,
-
-          padding: "14px 16px",
-
-          border: "none",
-
-          backgroundColor: isDark
-            ? "#292a30"
-            : "#ffffff",
-
-          color: "inherit",
-
-          textAlign: "left",
-          cursor: "pointer",
-        }}
       >
-        <div
-          style={{
-            flex: 1,
-            minWidth: 0,
-          }}
-        >
-          <strong
-            style={{
-              display: "block",
-
-              fontSize: 16,
-              fontWeight: 900,
-              letterSpacing: "0.025em",
-              textTransform: "uppercase",
-            }}
-          >
+        <div className="aos-accordion__label">
+          <strong>
             {title}
           </strong>
 
           {subtitle && (
-            <span
-              style={{
-                display: "block",
-                marginTop: 3,
-
-                color: isDark
-                  ? "#b8b6bc"
-                  : "#68666a",
-
-                fontSize: 13,
-                fontWeight: 600,
-              }}
-            >
+            <span>
               {subtitle}
             </span>
           )}
         </div>
 
         <span
+          className="aos-accordion__chevron"
           aria-hidden="true"
-          style={{
-            width: 28,
-            height: 28,
-
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-
-            borderRadius: 999,
-
-            backgroundColor: open
-              ? "#17171a"
-              : "#dedbd3",
-
-            color: open
-              ? "#ffffff"
-              : "#17171a",
-
-            boxShadow: open
-              ? "0 3px 8px rgba(0,0,0,0.24)"
-              : "inset 0 0 0 1px rgba(0,0,0,0.08)",
-          }}
         >
           <ChevronIcon
             direction={open ? "up" : "down"}
@@ -138,17 +50,7 @@ function Accordion({
       </button>
 
       {open && (
-        <div
-          style={{
-            padding: "4px 16px 16px",
-
-            borderTop: isDark
-              ? "1px solid #414249"
-              : "1px solid #e0ddd6",
-
-            lineHeight: 1.55,
-          }}
-        >
+        <div className="aos-accordion__content">
           {children}
         </div>
       )}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import BackButton from "../components/BackButton";
+import ChevronIcon from "../components/ChevronIcon";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { isUniqueUnit } from "../utils/unitIdentity";
 
@@ -1234,7 +1235,7 @@ function CheckboxOption({
             className="aos-config-option-chevron"
             aria-hidden="true"
           >
-            ›
+            <ChevronIcon direction="right" size={9} thickness={2} />
           </span>
         </button>
 

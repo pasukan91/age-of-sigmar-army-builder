@@ -1,6 +1,8 @@
 import Accordion from "../components/Accordion";
+import AbilityCard from "../components/AbilityCard";
 import UnitArtwork from "../components/UnitArtwork";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
+import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
 import { isUniqueUnit } from "../utils/unitIdentity";
 import { getPotentialSynergies } from "../utils/unitSynergies";
 
@@ -507,56 +509,21 @@ function AbilityList({
     );
   }
 
-  return abilities.map(
-    (ability, index) => (
-      <article
-        key={`${ability.name}-${index}`}
-        style={styles.ability}
-      >
-        <div style={styles.abilityHeader}>
-          <h3 style={styles.abilityName}>
-            {ability.name}
-          </h3>
-
-          {(ability.phase ||
-            ability.type) && (
-            <span style={styles.abilityType}>
-              {ability.phase ??
-                ability.type}
-            </span>
-          )}
-        </div>
-
-        {ability.castingValue != null && (
-          <p>
-            <strong>
-              Valor de lanzamiento:
-            </strong>{" "}
-            {ability.castingValue}
-          </p>
-        )}
-
-        <p style={styles.preservedText}>
-          {ability.description}
-        </p>
-
-        {ability.keywords?.length >
-          0 && (
-          <div style={styles.keywordList}>
-            {ability.keywords.map(
-              (keyword) => (
-                <span
-                  key={keyword}
-                  style={styles.keyword}
-                >
-                  {keyword}
-                </span>
-              )
-            )}
+  return (
+    <div className="aos-ability-groups">
+      {groupAbilitiesByPhase(abilities).map((group) => (
+        <section className="aos-ability-group" key={group.id}>
+          <div className="aos-ability-group__cards">
+            {group.items.map((ability, index) => (
+              <AbilityCard
+                key={`${ability.name}-${index}`}
+                ability={ability}
+              />
+            ))}
           </div>
-        )}
-      </article>
-    )
+        </section>
+      ))}
+    </div>
   );
 }
 
@@ -652,67 +619,64 @@ function SynergyList({ synergies }) {
     );
   }
 
+  const groups = groupAbilitiesByPhase(
+    synergies,
+    (synergy) => synergy.ability
+  );
+
   return (
     <section className="aos-synergy-list" aria-label="Sinergias potenciales">
       <p className="aos-synergy-note">
         Estas reglas proceden de unidades y opciones presentes en tu ejército. La app no decide si las condiciones se cumplen durante la partida: solo te muestra todas las combinaciones posibles.
       </p>
 
-      {synergies.map((synergy, index) => (
-        <details
-          className="aos-synergy-card"
-          key={`${synergy.sourceType}-${synergy.sourceName}-${synergy.ability?.name}-${index}`}
-        >
-          <summary className="aos-synergy-card__summary">
-            <h3>{synergy.ability?.name}</h3>
-            <span className="aos-synergy-card__phase">
-              {getAbilityTimingLabel(synergy.ability)}
-            </span>
-            <span className="aos-synergy-card__chevron" aria-hidden="true">
-              ›
-            </span>
-          </summary>
-
-          <div className="aos-synergy-card__content">
-            <div className="aos-synergy-card__topline">
-              <span className="aos-synergy-card__source-type">
-                {synergy.sourceType}
-              </span>
-              {isSpellAbility(synergy.ability) &&
-                synergy.ability?.castingValue != null && (
-                  <span className="aos-synergy-card__casting">
-                    Dificultad {synergy.ability.castingValue}+
-                  </span>
-                )}
-            </div>
-
-            <p className="aos-synergy-card__source">
-              Aportada por <strong>{synergy.sourceName}</strong>
-            </p>
-
-            <div className="aos-synergy-card__matches">
-              {synergy.matchedOn.map((match) => (
-                <span key={match}>{match}</span>
+      <div className="aos-ability-groups">
+        {groups.map((group) => (
+          <section className="aos-ability-group" key={group.id}>
+            <div className="aos-ability-group__cards">
+              {group.items.map((synergy, index) => (
+                <AbilityCard
+                  key={`${synergy.sourceType}-${synergy.sourceName}-${synergy.ability?.name}-${index}`}
+                  ability={synergy.ability}
+                  context={(
+                    <div className="aos-ability-card__context">
+                      <div className="aos-synergy-card__topline">
+                        <span className="aos-synergy-card__source-type">
+                          {synergy.sourceType}
+                        </span>
+                        {isSpellAbility(synergy.ability) &&
+                          synergy.ability?.castingValue != null && (
+                            <span className="aos-synergy-card__casting">
+                              Dificultad {synergy.ability.castingValue}+
+                            </span>
+                          )}
+                      </div>
+                      <p className="aos-synergy-card__source">
+                        Aportada por <strong>{synergy.sourceName}</strong>
+                      </p>
+                      <div className="aos-synergy-card__matches">
+                        {synergy.matchedOn.map((match) => (
+                          <span key={match}>{match}</span>
+                        ))}
+                      </div>
+                      {synergy.conditions?.length > 0 && (
+                        <div className="aos-synergy-card__conditions">
+                          <strong>Condiciones que debes comprobar</strong>
+                          <ul>
+                            {synergy.conditions.map((condition) => (
+                              <li key={condition}>{condition}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                />
               ))}
             </div>
-
-            {synergy.conditions?.length > 0 && (
-              <div className="aos-synergy-card__conditions">
-                <strong>Condiciones que debes comprobar</strong>
-                <ul>
-                  {synergy.conditions.map((condition) => (
-                    <li key={condition}>{condition}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <p className="aos-synergy-card__description">
-              {synergy.ability?.description}
-            </p>
-          </div>
-        </details>
-      ))}
+          </section>
+        ))}
+      </div>
     </section>
   );
 }
@@ -724,16 +688,6 @@ function isSpellAbility(ability) {
   );
 
   return type === "spell" || keywords.includes("spell");
-}
-
-function getAbilityTimingLabel(ability) {
-  const timing = String(
-    ability?.phase ?? ability?.type ?? ""
-  ).trim();
-
-  return !timing || timing.toLowerCase() === "passive"
-    ? "Pasiva"
-    : timing;
 }
 
 function hasWeaponProfile(unit, type) {
@@ -797,39 +751,6 @@ const styles = {
     color: "#6e120c",
     fontSize: 13,
     fontWeight: 700,
-  },
-
-  ability: {
-    padding: 13,
-    marginBottom: 10,
-    borderLeft:
-      "4px solid #8e1b13",
-    backgroundColor: "#f4f1e8",
-  },
-
-  abilityHeader: {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    gap: 12,
-  },
-
-  abilityName: {
-    margin: 0,
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    fontSize: 19,
-    textTransform: "uppercase",
-  },
-
-  abilityType: {
-    flexShrink: 0,
-    padding: "4px 7px",
-    backgroundColor: "#8e1b13",
-    color: "#ffffff",
-    fontSize: 10,
-    fontWeight: 700,
-    textTransform: "uppercase",
   },
 
   keywordList: {
