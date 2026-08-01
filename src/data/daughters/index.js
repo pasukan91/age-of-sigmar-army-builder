@@ -18,10 +18,13 @@ const imageNames = {
   "morathi-khaine": "morathi.jpg",
   "the-shadow-queen": "shadow-queen.jpg",
   "krethusa": "krethusa.jpg",
+  "slaughter-queen": "slaughter-queen.jpg",
+  "hag-queen": "hag-queen.jpg",
   "slaughter-queen-cauldron": "slaughter-queen-cauldron-blood.jpg",
   "hag-queen-cauldron-blood": "hag-queen-cauldron-blood.jpg",
   "bloodwrack-shrine": "bloodwrack-shrine.jpg",
   "melusai-ironscale": "melusai-ironscale.jpg",
+  "bloodwrack-medusa": "bloodwrack-medusa.jpg",
   "high-gladiatrix": "high-gladiatrix.jpg",
   "blood-hags": "blood-hags.jpg",
   "khainite-shadowstalkers": "khainite-shadowstalkers.jpg",
@@ -31,6 +34,7 @@ const imageNames = {
   "khirenai-lifetakers": "khirenai-lifetakers.jpg",
   "blood-sisters": "blood-sisters.jpg",
   "blood-stalkers": "blood-stalkers.jpg",
+  "doomfire-warlocks": "doomfire-warlocks.jpg",
 };
 
 const withImage = (unit) => {

@@ -47,7 +47,7 @@ const units = [
     ],
   }),
   make({
-    id: "slaughter-queen", name: "Slaughter Queen", image: "/images/factions/dok.webp", points: 130, move: '6"', health: 5, control: 2, save: "5+", ward: "6+", baseSize: "25mm",
+    id: "slaughter-queen", name: "Slaughter Queen", points: 130, move: '6"', health: 5, control: 2, save: "5+", ward: "6+", baseSize: "25mm",
     regimentOptions: ["0-1 Coven Matriarch", "Any Aelf"],
     keywords: ["Hero", "Priest (1)", "Infantry", "Ward (6+)", ...aelf],
     rules: { ...heroRules, priest: 1, ...wardRules },
@@ -55,7 +55,7 @@ const units = [
     abilities: [ability("Fanatical Blademaster", "Your Hero Phase", "Pick a visible friendly Daughters of Khaine unit wholly within 12\" and roll a die. On a 3+, apply 1 inactive blessing to it until your next turn. If Blessings of Khaine has been used 3+ times, apply 2 instead.", "Once Per Turn (Army)", ["Exalted"])],
   }),
   make({
-    id: "hag-queen", name: "Hag Queen", image: "/images/factions/dok.webp", points: 110, move: '6"', health: 5, control: 2, save: "5+", ward: "6+", baseSize: "25mm",
+    id: "hag-queen", name: "Hag Queen", points: 110, move: '6"', health: 5, control: 2, save: "5+", ward: "6+", baseSize: "25mm",
     regimentOptions: ["0-1 Coven Matriarch", "Any Aelf"],
     keywords: ["Hero", "Priest (1)", "Infantry", "Ward (6+)", ...aelf],
     rules: { ...heroRules, priest: 1, ...wardRules },
@@ -105,7 +105,7 @@ const units = [
     abilities: [ability("Ironscale's Fury", null, "When a model in a friendly non-Hero Daughters of Khaine unit is slain by a combat attack while within this unit's combat range and in combat with the attacker, roll a die, or 2 dice for Blood Sisters or Blood Stalkers. Each 5+ inflicts 1 mortal damage on the attacker.", "Passive", ["Exalted"])],
   }),
   make({
-    id: "bloodwrack-medusa", name: "Bloodwrack Medusa", image: "/images/factions/dok.webp", points: 140, move: '8"', health: 6, control: 2, save: "5+", ward: "6+", baseSize: "40mm",
+    id: "bloodwrack-medusa", name: "Bloodwrack Medusa", points: 140, move: '8"', health: 6, control: 2, save: "5+", ward: "6+", baseSize: "40mm",
     regimentOptions: ["Any non-Aelf"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", ...dok],
     rules: { ...heroRules, wizard: 1, ...wardRules },
@@ -175,7 +175,7 @@ const units = [
     abilities: [ability("Barbed Arrows", "Reaction: You declared a Shoot ability", "If all attacks targeted the same enemy, roll a die and add 1 if another friendly Blood Stalkers unit also targeted it this turn. On a 3+, subtract 1 from its charge rolls until your next turn.", "Once Per Turn (Army)")],
   }),
   make({
-    id: "doomfire-warlocks", name: "Doomfire Warlocks", image: "/images/factions/dok.webp", points: 150, models: 5, move: '14"', health: 3, control: 1, save: "5+", ward: "6+", baseSize: "60 x 35mm",
+    id: "doomfire-warlocks", name: "Doomfire Warlocks", points: 150, models: 5, move: '14"', health: 3, control: 1, save: "5+", ward: "6+", baseSize: "60 x 35mm",
     notes: "Moves to Warhammer Legends on 1 June 2027.", keywords: ["Wizard (1)", "Cavalry", "Champion", "Ward (6+)", ...aelf], rules: { wizard: 1, ...wardRules, canBeReinforced: false, companion: true },
     weapons: [weapon("Doomfire Crossbow", "Ranged", 2, "3+", "4+", "0", "1", [], '10"'), weapon("Cursed Scimitar", "Melee", 2, "3+", "4+", "1", "1"), weapon("Dark Steed's Vicious Bite", "Melee", 2, "5+", "3+", "0", "1", ["Companion"])],
     abilities: [ability("Outmanoeuvre", null, "When this unit uses Redeploy, a distance roll of 1-3 can be treated as 4.", "Passive")],
