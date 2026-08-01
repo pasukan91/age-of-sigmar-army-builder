@@ -13,6 +13,7 @@ import khorne from "./khorne";
 import slaves from "./slaves";
 import nurgle from "./nurgle";
 import lumineth from "./lumineth";
+import daughters from "./daughters";
 import armiesOfRenownByFaction from "./rulesOfRenownArmies";
 import { normalizeFaction } from "./normalizeFaction";
 
@@ -35,6 +36,7 @@ const factions = [
   slaves,
   nurgle,
   lumineth,
+  daughters,
 
   // ORDEN
   {
@@ -46,11 +48,6 @@ const factions = [
     id: "idoneth",
     alliance: "order",
     name: "Idoneth Deepkin",
-  },
-  {
-    id: "daughters",
-    alliance: "order",
-    name: "Daughters of Khaine",
   },
   {
     id: "seraphon",

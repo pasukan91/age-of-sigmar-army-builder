@@ -31,6 +31,7 @@ const ARRAY_FIELDS = [
   "ironweldInnovations",
   "visionsOfFate",
   "plaguefathersPoxes",
+  "boonsOfShadow",
 ];
 
 const ENHANCEMENT_FIELDS = [
@@ -53,6 +54,7 @@ const ENHANCEMENT_FIELDS = [
   "brazenMutations",
   "brandsOfTheDarkGods",
   "ensorcelledBanners",
+  "boonsOfShadow",
 ];
 
 export function normalizeFaction(faction) {

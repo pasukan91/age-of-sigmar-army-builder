@@ -1,7 +1,8 @@
-const FACTION_ARTWORK_VERSION = "20260725";
+const FACTION_ARTWORK_VERSION = "20260801";
 
 const factionArtwork = {
   cities: "/images/factions/citiesofsigmar.webp",
+  daughters: "/images/factions/dok.webp",
   gloomspite: "/images/factions/gloomspite.webp",
   hedonites: "/images/factions/hedonites.webp",
   ironjawz: "/images/factions/ironjawz-army.webp",

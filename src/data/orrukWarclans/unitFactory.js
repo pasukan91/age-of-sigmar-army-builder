@@ -92,6 +92,7 @@ export function createOrrukUnit({
     ironweldInnovation: null,
     specialKnickKnack: null,
     flawlessManoeuvre: null,
+    boonOfShadow: null,
     details: {
       models,
       baseSize,

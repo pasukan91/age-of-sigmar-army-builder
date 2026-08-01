@@ -26,7 +26,8 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.accursedDevice) +
     getNumericPoints(unit.brazenMutation) +
     getNumericPoints(unit.brandOfDarkGod) +
-    getNumericPoints(unit.ensorcelledBanner)
+    getNumericPoints(unit.ensorcelledBanner) +
+    getNumericPoints(unit.boonOfShadow)
   );
 }
 

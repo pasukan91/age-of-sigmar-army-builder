@@ -53,7 +53,9 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
           ? "/images/factions/sylvaneth.webp"
           : keywords.includes("gloomspite gitz")
             ? "/images/factions/gloomspite.webp"
-            : "/images/factions/kruleboyz.webp";
+            : keywords.includes("daughters of khaine")
+              ? "/images/factions/dok.webp"
+              : "/images/factions/kruleboyz.webp";
 
   const source = explicitSource ?? (hasOfficialImage
     ? `/images/units/hedonitas/${artworkId}.webp`

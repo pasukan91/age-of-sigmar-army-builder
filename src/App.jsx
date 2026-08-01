@@ -1055,6 +1055,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.boonOfShadow) {
+      const owner = findEnhancementOwner(
+        "boonOfShadow",
+        configuredUnit.boonOfShadow.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: "Boon of Shadow",
+          selected: configuredUnit.boonOfShadow.name,
+          owner: owner.unit.name,
+          existing: owner.unit.boonOfShadow?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1600,6 +1616,7 @@ function App() {
       brazenMutation: null,
       brandOfDarkGod: null,
       ensorcelledBanner: null,
+      boonOfShadow: null,
     };
 
     saveUpdatedList({
@@ -1992,6 +2009,7 @@ function App() {
             brazenMutation: findEnhancementOwner("brazenMutation"),
             brandOfDarkGod: findEnhancementOwner("brandOfDarkGod"),
             ensorcelledBanner: findEnhancementOwner("ensorcelledBanner"),
+            boonOfShadow: findEnhancementOwner("boonOfShadow"),
           }}
           faction={
             {

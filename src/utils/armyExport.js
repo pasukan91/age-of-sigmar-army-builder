@@ -19,6 +19,7 @@ const ENHANCEMENTS = [
   ["brazenMutation", "Mutación"],
   ["brandOfDarkGod", "Marca"],
   ["ensorcelledBanner", "Estandarte"],
+  ["boonOfShadow", "Boon of Shadow"],
 ];
 
 function unitPoints(unit) {

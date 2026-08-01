@@ -22,6 +22,7 @@ const ENHANCEMENT_FIELDS = [
   "brazenMutation",
   "brandOfDarkGod",
   "ensorcelledBanner",
+  "boonOfShadow",
 ];
 
 function issue(id, severity, title, message, section, targetId = null) {
@@ -225,4 +226,3 @@ export function validateArmyList(list) {
     isValid: errors.length === 0,
   };
 }
-

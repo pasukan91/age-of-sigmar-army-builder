@@ -341,6 +341,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.boonOfShadow && (
+          <EnhancementAccordion
+            title="Boon of Shadow"
+            enhancement={unit.boonOfShadow}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" &&
           !isUniqueUnit(unit) && (
@@ -613,6 +620,7 @@ function getDisplayedPoints(unit) {
     unit?.brazenMutation,
     unit?.brandOfDarkGod,
     unit?.ensorcelledBanner,
+    unit?.boonOfShadow,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

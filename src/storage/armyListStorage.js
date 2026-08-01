@@ -111,6 +111,8 @@ function serializeUnit(unit) {
       unit.brandOfDarkGod ?? null,
     ensorcelledBanner:
       unit.ensorcelledBanner ?? null,
+    boonOfShadow:
+      unit.boonOfShadow ?? null,
   };
 }
 
@@ -202,6 +204,10 @@ function restoreUnit(savedUnit, faction) {
     ensorcelledBanner: restoreOption(
       savedUnit.ensorcelledBanner,
       faction?.ensorcelledBanners
+    ),
+    boonOfShadow: restoreOption(
+      savedUnit.boonOfShadow,
+      faction?.boonsOfShadow
     ),
   };
 }

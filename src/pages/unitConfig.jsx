@@ -67,6 +67,8 @@ function UnitConfig({
     useState(unit?.brandOfDarkGod ?? null);
   const [ensorcelledBanner, setEnsorcelledBanner] =
     useState(unit?.ensorcelledBanner ?? null);
+  const [boonOfShadow, setBoonOfShadow] =
+    useState(unit?.boonOfShadow ?? null);
 
   if (!unit) {
     return (
@@ -251,6 +253,11 @@ function UnitConfig({
     keywords.some((keyword) => keyword.startsWith("standard bearer")) &&
     (faction?.ensorcelledBanners?.length ?? 0) > 0;
 
+  const canSelectBoonOfShadow =
+    !isUnique &&
+    !isHero &&
+    (faction?.boonsOfShadow?.length ?? 0) > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -307,6 +314,8 @@ function UnitConfig({
     faction?.brandsOfTheDarkGods ?? [];
   const ensorcelledBannerOptions =
     faction?.ensorcelledBanners ?? [];
+  const boonOfShadowOptions =
+    faction?.boonsOfShadow ?? [];
 
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
@@ -338,7 +347,8 @@ function UnitConfig({
     Number(accursedDevice?.points ?? 0) +
     Number(brazenMutation?.points ?? 0) +
     Number(brandOfDarkGod?.points ?? 0) +
-    Number(ensorcelledBanner?.points ?? 0);
+    Number(ensorcelledBanner?.points ?? 0) +
+    Number(boonOfShadow?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -440,6 +450,11 @@ function UnitConfig({
       ensorcelledBanner:
         canSelectEnsorcelledBanner
           ? ensorcelledBanner
+          : null,
+
+      boonOfShadow:
+        canSelectBoonOfShadow
+          ? boonOfShadow
           : null,
     });
   }
@@ -890,6 +905,19 @@ function UnitConfig({
           selected={ironweldInnovation}
           onToggle={(option) =>
             toggleExclusiveOption(setIronweldInnovation, option)
+          }
+        />
+      )}
+
+      {canSelectBoonOfShadow && (
+        <SelectionSection
+          title="Boons of Shadow"
+          intro="Asigna un Boon of Shadow a esta unidad Daughters of Khaine no Hero. Cada unidad solo puede tener uno y cada opción solo puede elegirse una vez por ejército."
+          source="Aqshy"
+          options={boonOfShadowOptions}
+          selected={boonOfShadow}
+          onToggle={(option) =>
+            toggleExclusiveOption(setBoonOfShadow, option)
           }
         />
       )}

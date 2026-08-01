@@ -59,6 +59,9 @@ function normalizeOption(value) {
     "any warriors of chaos": "any-warriors-of-chaos",
     "any darkoath": "any-darkoath",
     "any lumineth realm-lords": "any-lumineth",
+    "any daughters of khaine": "any-daughters-of-khaine",
+    "any aelf": "any-aelf",
+    "any non-aelf": "any-non-aelf",
     "any vanari": "any-vanari",
     "any alarith": "any-alarith",
     "any hurakan": "any-hurakan",
@@ -467,6 +470,12 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Darkoath");
     case "any-lumineth":
       return hasKeyword(unit, "Lumineth Realm-lords");
+    case "any-daughters-of-khaine":
+      return hasKeyword(unit, "Daughters of Khaine");
+    case "any-aelf":
+      return hasKeyword(unit, "Aelf");
+    case "any-non-aelf":
+      return !hasKeyword(unit, "Aelf");
     case "any-vanari":
       return hasKeyword(unit, "Vanari");
     case "any-alarith":
@@ -602,8 +611,23 @@ export function getRegimentCompositionErrors(list) {
     return options.flatMap((option) => {
       const count = countUnitsForOption(regiment, option);
 
-      if (count <= option.max) {
+      if (count >= option.min && count <= option.max) {
         return [];
+      }
+
+      if (count < option.min) {
+        return [{
+          regimentId: regiment.id,
+          regimentIndex,
+          role: option.key,
+          label: option.label,
+          count,
+          min: option.min,
+          max: option.max,
+          message:
+            `El regimiento de ${regiment.hero?.name ?? "este líder"} ` +
+            `debe incluir al menos ${option.min} unidad de ${option.label}.`,
+        }];
       }
 
       return [{
@@ -645,6 +669,7 @@ export function getAvailableRegimentLeaders(list) {
   return units.filter(
     (unit) =>
       unit.rules?.hero === true &&
+      unit.rules?.canLeadRegiment !== false &&
       !isUnitUniqueInArmy(list, unit) &&
       isAllowedByArmyOfRenown(list, unit)
   );
