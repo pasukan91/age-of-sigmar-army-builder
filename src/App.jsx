@@ -557,6 +557,21 @@ function App() {
     });
   }
 
+  function handleBattleMissionToggle(missionId, completed) {
+    if (!currentList || !missionId) {
+      return;
+    }
+
+    const completedMissions = new Set(currentList.completedBattleMissions ?? []);
+    if (completed) completedMissions.add(missionId);
+    else completedMissions.delete(missionId);
+
+    saveUpdatedList({
+      ...currentList,
+      completedBattleMissions: [...completedMissions],
+    });
+  }
+
   /*
    * =====================================================
    * SELECTOR, WARSCROLL Y CONFIGURACIÓN
@@ -1887,6 +1902,7 @@ function App() {
           onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
           onCommandPointsChange={handleCommandPointsChange}
           onFuryPointsChange={handleFuryPointsChange}
+          onBattleMissionToggle={handleBattleMissionToggle}
           onViewRule={openBuilderRuleReference}
           onBrowseUnit={openBuilderUnitReference}
           section={builderSection}

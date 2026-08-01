@@ -232,6 +232,9 @@ function serializeList(list) {
       : list.battleTactics
         ? [list.battleTactics]
         : []).slice(0, 2),
+    completedBattleMissions: (Array.isArray(list.completedBattleMissions)
+      ? list.completedBattleMissions
+      : []).filter((missionId) => typeof missionId === "string"),
     terrain: list.terrain ?? null,
     regiments: (list.regiments ?? []).map((regiment) => ({
       id: regiment.id,
@@ -339,6 +342,9 @@ function restoreList(savedList) {
       faction.manifestationLores
     ),
     battleTactics: restoreBattleTacticsCards(savedList.battleTactics),
+    completedBattleMissions: (Array.isArray(savedList.completedBattleMissions)
+      ? savedList.completedBattleMissions
+      : []).filter((missionId) => typeof missionId === "string"),
     terrain: restoreOption(
       savedList.terrain,
       faction.terrain

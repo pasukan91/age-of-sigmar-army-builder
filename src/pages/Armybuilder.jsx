@@ -41,6 +41,7 @@ function ArmyBuilder({
   onRemoveRegimentOfRenown,
   onCommandPointsChange,
   onFuryPointsChange,
+  onBattleMissionToggle,
   onViewRule,
   onBrowseUnit,
   section = "units",
@@ -80,6 +81,7 @@ function ArmyBuilder({
     calculateArmyPoints(list);
   const validation = validateArmyList(list);
   const swipeStart = useRef(null);
+  const activeTabIndex = BUILDER_TABS.findIndex(([id]) => id === section);
 
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
     ? []
@@ -185,6 +187,18 @@ function ArmyBuilder({
       </header>
 
       <nav className="aos-builder-tabs" aria-label="Secciones de la lista">
+        <span
+          className={`aos-builder-tabs__direction is-left${activeTabIndex > 0 ? " can-move" : ""}`}
+          aria-hidden="true"
+        >
+          ‹
+        </span>
+        <span
+          className={`aos-builder-tabs__direction is-right${activeTabIndex < BUILDER_TABS.length - 1 ? " can-move" : ""}`}
+          aria-hidden="true"
+        >
+          ›
+        </span>
         {BUILDER_TABS.map(([id, label, icon]) => (
           <button
             key={id}
@@ -384,7 +398,7 @@ function ArmyBuilder({
       )}
 
       {section === "mission" && (
-        <BattleMission list={list} />
+        <BattleMission list={list} onToggleMission={onBattleMissionToggle} />
       )}
 
       <footer className="aos-builder-footer">

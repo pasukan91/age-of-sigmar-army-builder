@@ -94,8 +94,9 @@ function GameMode({ list, onViewUnit, onViewRule }) {
   );
 }
 
-function BattleMission({ list }) {
+function BattleMission({ list, onToggleMission }) {
   const battleTactics = getBattleTactics(list);
+  const completedMissions = new Set(list?.completedBattleMissions ?? []);
 
   return (
     <section className="aos-game-mode aos-mission-mode" aria-labelledby="mission-mode-title">
@@ -118,7 +119,12 @@ function BattleMission({ list }) {
           </div>
           <div className="aos-game-tactics-reference__grid">
             {battleTactics.map((card) => (
-              <BattleTacticsCard key={card.id} card={card} />
+              <BattleTacticsCard
+                key={card.id}
+                card={card}
+                completedMissions={completedMissions}
+                onToggleMission={onToggleMission}
+              />
             ))}
             {battleTactics.length === 0 && (
               <BattleTacticsCard card={null} />
@@ -184,7 +190,7 @@ function BattleplanCard({ battleplan }) {
   );
 }
 
-function BattleTacticsCard({ card }) {
+function BattleTacticsCard({ card, completedMissions = new Set(), onToggleMission }) {
   if (!card) {
     return <EmptyBattleCard title="Tácticas de batalla" message="Esta lista no tiene cartas de táctica asociadas." />;
   }
@@ -208,17 +214,31 @@ function BattleTacticsCard({ card }) {
 
       <div className="aos-game-tactic-reference__missions">
         <strong>Misiones de la carta</strong>
-        {(card.tactics ?? []).map((tactic) => (
-          <div className="aos-game-battle-card__tactic" key={tactic.id}>
-            <div className="aos-game-battle-card__tactic-heading">
-              <span>{tactic.type}</span>
-              <b>{tactic.points} PV</b>
+        {(card.tactics ?? []).map((tactic) => {
+          const missionId = `${card.id}:${tactic.id}`;
+          const completed = completedMissions.has(missionId);
+
+          return (
+          <label className={`aos-game-battle-card__tactic${completed ? " is-completed" : ""}`} key={tactic.id}>
+            <input
+              type="checkbox"
+              checked={completed}
+              onChange={(event) => onToggleMission?.(missionId, event.target.checked)}
+              aria-label={`Marcar ${tactic.name} como completada`}
+            />
+            <span className="aos-game-mission-check" aria-hidden="true">✓</span>
+            <div className="aos-game-battle-card__tactic-content">
+              <div className="aos-game-battle-card__tactic-heading">
+                <span>{tactic.type}</span>
+                <b>{tactic.points} PV</b>
+              </div>
+              <strong>{tactic.name}</strong>
+              {tactic.flavour && <em>{tactic.flavour}</em>}
+              <p>{tactic.condition}</p>
             </div>
-            <strong>{tactic.name}</strong>
-            {tactic.flavour && <em>{tactic.flavour}</em>}
-            <p>{tactic.condition}</p>
-          </div>
-        ))}
+          </label>
+          );
+        })}
       </div>
     </article>
   );

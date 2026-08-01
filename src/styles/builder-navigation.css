@@ -23,6 +23,7 @@ body .aos-builder-tabs {
 }
 
 body .aos-builder-tabs button {
+  position: relative;
   display: grid;
   place-items: center;
   align-content: center;
@@ -31,6 +32,21 @@ body .aos-builder-tabs button {
   min-height: 54px;
   padding: 4px 2px;
   color: #bdb6a9;
+}
+
+body .aos-builder-tabs button::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  transform: translateX(-50%) scale(0.65);
+  border-radius: 50%;
+  background: #e7cf87;
+  box-shadow: 0 0 0 transparent;
+  opacity: 0;
+  transition: opacity 150ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
 
 body .aos-builder-tabs button > span {
@@ -53,6 +69,104 @@ body .aos-builder-tabs button.is-active {
   box-shadow: inset 0 -2px #b69b59;
 }
 
+body .aos-builder-tabs button.is-active::before {
+  transform: translateX(-50%) scale(1);
+  box-shadow: 0 0 5px #efd98f, 0 0 13px rgba(222, 199, 132, 0.9);
+  opacity: 1;
+}
+
+body .aos-builder-tabs button.is-active > span {
+  text-shadow: 0 0 6px rgba(239, 217, 143, 0.82);
+}
+
+.aos-builder-tabs__direction {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: 18px;
+  height: 34px;
+  transform: translateY(-50%) scale(0.8);
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: transparent;
+  background: transparent;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  line-height: 1;
+  pointer-events: none;
+  transition: 150ms ease;
+}
+
+.aos-builder-tabs__direction.is-left {
+  left: 2px;
+}
+
+.aos-builder-tabs__direction.is-right {
+  right: 2px;
+}
+
+.aos-builder-tabs__direction.can-move {
+  transform: translateY(-50%) scale(1);
+  border-color: rgba(203, 177, 108, 0.22);
+  color: #d7bd76;
+  background: rgba(18, 21, 19, 0.72);
+  box-shadow: 0 0 8px rgba(215, 189, 118, 0.24);
+  text-shadow: 0 0 5px rgba(239, 217, 143, 0.66);
+}
+
 body .aos-builder-footer {
   z-index: 25;
+}
+
+.aos-game-battle-card__tactic {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  cursor: pointer;
+}
+
+.aos-game-battle-card__tactic > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.aos-game-mission-check {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 2px solid #a99e8b;
+  border-radius: 5px;
+  color: transparent;
+  background: #fffdf8;
+  font-size: 18px;
+  font-weight: 900;
+  transition: 140ms ease;
+}
+
+.aos-game-battle-card__tactic > input:focus-visible + .aos-game-mission-check {
+  outline: 3px solid rgba(169, 143, 84, 0.35);
+  outline-offset: 2px;
+}
+
+.aos-game-battle-card__tactic.is-completed {
+  border-color: #a78d4f;
+  background: #f1ecdf;
+}
+
+.aos-game-battle-card__tactic.is-completed .aos-game-mission-check {
+  border-color: #92783c;
+  color: #fffdf4;
+  background: linear-gradient(180deg, #b49a59, #75602e);
+  box-shadow: 0 2px 5px rgba(62, 47, 22, 0.22);
+}
+
+.aos-game-battle-card__tactic-content {
+  min-width: 0;
 }
