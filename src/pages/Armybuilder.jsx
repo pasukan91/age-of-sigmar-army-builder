@@ -5,6 +5,9 @@ import RenownSection from "../components/armybuilder/RenownSection";
 import ArmySharePanel from "../components/armybuilder/ArmySharePanel";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import GameMode from "../components/armybuilder/GameMode";
+import ArmyQuickSearch from "../components/armybuilder/ArmyQuickSearch";
+import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
+import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
 import {
   ghb2026Battleplans,
@@ -16,6 +19,7 @@ import {
   calculateArmyPoints,
 } from "../utils/armyPoints";
 import "../styles/aos-app.css";
+import "../styles/builder-navigation.css";
 
 function ArmyBuilder({
   list,
@@ -34,7 +38,7 @@ function ArmyBuilder({
   onFuryPointsChange,
   onViewRule,
   onBrowseUnit,
-  section = "regiments",
+  section = "units",
   onSectionChange,
 }) {
   const baseFaction =
@@ -109,7 +113,7 @@ function ArmyBuilder({
   }
 
   function navigateToIssue(issue) {
-    onSectionChange?.(issue.section ?? "list");
+    onSectionChange?.(normalizeBuilderSection(issue.section));
     window.requestAnimationFrame(() => {
       const target = issue.targetId
         ? document.getElementById(issue.targetId)
@@ -120,7 +124,7 @@ function ArmyBuilder({
   }
 
   function showValidation() {
-    onSectionChange?.("list");
+    onSectionChange?.("army");
     window.requestAnimationFrame(() => {
       document.getElementById("army-validation-panel")?.scrollIntoView({
         behavior: "smooth",
@@ -150,10 +154,12 @@ function ArmyBuilder({
 
       <nav className="aos-builder-tabs" aria-label="Secciones de la lista">
         {[
-          ["list", "Lista"],
-          ["regiments", "Regimientos"],
-          ["game", "Partida"],
-        ].map(([id, label]) => (
+          ["army", "Ejército", "♜"],
+          ["units", "Unidades", "⚔"],
+          ["rules", "Reglas", "▤"],
+          ["game", "Partida", "◉"],
+          ["search", "Buscar", "⌕"],
+        ].map(([id, label, icon]) => (
           <button
             key={id}
             type="button"
@@ -161,12 +167,13 @@ function ArmyBuilder({
             onClick={() => onSectionChange?.(id)}
             aria-current={section === id ? "page" : undefined}
           >
-            {label}
+            <span aria-hidden="true">{icon}</span>
+            <small>{label}</small>
           </button>
         ))}
       </nav>
 
-      {section === "list" && (
+      {section === "army" && (
         <>
 
       <BuilderHeader
@@ -315,7 +322,7 @@ function ArmyBuilder({
         </>
       )}
 
-      {section === "regiments" && (
+      {section === "units" && (
         <>
 
       <h2 id="regiments-section" className="aos-builder-section-title">
@@ -355,6 +362,24 @@ function ArmyBuilder({
 
       {section === "game" && (
         <GameMode
+          list={list}
+          onViewUnit={onBrowseUnit}
+          onViewRule={onViewRule}
+        />
+      )}
+
+      {section === "rules" && (
+        <section className="aos-builder-reference-section">
+          <ArmyRulesReference
+            battleTraits={battleTraits}
+            battleFormation={list.battleFormation}
+          />
+          <SelectedRulesLibrary list={list} onViewRule={onViewRule} />
+        </section>
+      )}
+
+      {section === "search" && (
+        <ArmyQuickSearch
           list={list}
           battleTraits={battleTraits}
           battleFormation={list.battleFormation}
@@ -443,6 +468,13 @@ function getArray(value) {
   return Array.isArray(value)
     ? value
     : [];
+}
+
+function normalizeBuilderSection(section) {
+  return {
+    list: "army",
+    regiments: "units",
+  }[section] ?? section ?? "army";
 }
 
 function formatBattleTactics(value) {

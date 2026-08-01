@@ -11,6 +11,7 @@ import UnitWarscroll from "./pages/unitWarscroll";
 import UnitConfig from "./pages/unitConfig";
 import RuleWarscroll from "./pages/RuleWarscroll";
 import Settings from "./pages/Settings";
+import ReferenceOverlay from "./components/ReferenceOverlay";
 
 import {
   calculateArmyPoints,
@@ -81,7 +82,7 @@ function App() {
     );
 
   const [builderSection, setBuilderSection] =
-    useState("regiments");
+    useState("units");
 
   const [deletedList, setDeletedList] =
     useState(null);
@@ -130,7 +131,7 @@ function App() {
   const [selectedUnit, setSelectedUnit] =
     useState(null);
 
-  const [selectedRuleReference, setSelectedRuleReference] =
+  const [builderReference, setBuilderReference] =
     useState(null);
 
   /*
@@ -567,13 +568,32 @@ function App() {
     navigate("warscroll");
   }
 
-  function openRuleWarscroll(reference) {
+  function openBuilderUnitReference(payload) {
+    const unit = payload?.unit ?? payload;
+
+    if (!unit) {
+      return;
+    }
+
+    setBuilderReference({
+      type: "unit",
+      unit,
+      editor: payload?.unit
+        ? {
+            regimentId: payload.regimentId,
+            unitInstanceId: unit.instanceId ?? null,
+            isLeader: payload.isLeader ?? false,
+          }
+        : null,
+    });
+  }
+
+  function openBuilderRuleReference(reference) {
     if (!reference?.item) {
       return;
     }
 
-    setSelectedRuleReference(reference);
-    navigate("ruleWarscroll");
+    setBuilderReference({ type: "rule", reference });
   }
 
   function openNewUnitConfiguration(
@@ -587,29 +607,6 @@ function App() {
     setUnitEditor(null);
 
     navigate("unitConfig");
-  }
-
-  function handleViewAddedUnit({
-    unit,
-    regimentId,
-    isLeader = false,
-  }) {
-    if (!unit || !regimentId) {
-      return;
-    }
-
-    setSelectedUnit(unit);
-
-    setUnitEditor({
-      regimentId,
-
-      unitInstanceId:
-        unit.instanceId ?? null,
-
-      isLeader,
-    });
-
-    navigate("warscroll");
   }
 
   function handleConfigureAddedUnit({
@@ -639,14 +636,6 @@ function App() {
    * Estos nombres son los callbacks que
    * recibe ArmyBuilder.
    */
-  function handleViewWarscroll(
-    editorData
-  ) {
-    handleViewAddedUnit(
-      editorData
-    );
-  }
-
   function handleConfigureUnit(
     editorData
   ) {
@@ -1833,6 +1822,7 @@ function App() {
       }
 
       return (
+        <>
         <ArmyBuilder
           list={currentList}
           storageStatus={storageStatus}
@@ -1840,7 +1830,7 @@ function App() {
           navigate={navigate}
           onBack={goBack}
           onViewWarscroll={
-            handleViewWarscroll
+            openBuilderUnitReference
           }
           onConfigureUnit={
             handleConfigureUnit
@@ -1858,19 +1848,39 @@ function App() {
           onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
           onCommandPointsChange={handleCommandPointsChange}
           onFuryPointsChange={handleFuryPointsChange}
-          onViewRule={openRuleWarscroll}
-          onBrowseUnit={openNewUnitWarscroll}
+          onViewRule={openBuilderRuleReference}
+          onBrowseUnit={openBuilderUnitReference}
           section={builderSection}
           onSectionChange={setBuilderSection}
         />
-      );
-
-    case "ruleWarscroll":
-      return (
-        <RuleWarscroll
-          reference={selectedRuleReference}
-          onBack={goBack}
-        />
+        {builderReference && (
+          <ReferenceOverlay
+            title={builderReference.type === "unit" ? "Ficha de unidad" : "Referencia de regla"}
+            onClose={() => setBuilderReference(null)}
+          >
+            {builderReference.type === "unit" ? (
+              <UnitWarscroll
+                unit={builderReference.unit}
+                list={currentList}
+                onBack={() => setBuilderReference(null)}
+                onConfigure={builderReference.editor && !isUniqueUnit(builderReference.unit)
+                  ? () => {
+                      const editor = builderReference.editor;
+                      const unit = builderReference.unit;
+                      setBuilderReference(null);
+                      handleConfigureAddedUnit({ unit, ...editor });
+                    }
+                  : undefined}
+              />
+            ) : (
+              <RuleWarscroll
+                reference={builderReference.reference}
+                onBack={() => setBuilderReference(null)}
+              />
+            )}
+          </ReferenceOverlay>
+        )}
+        </>
       );
 
     case "selector":
@@ -2077,7 +2087,6 @@ function getPagePath(page, listId = null) {
     selector: `${listBase}/selector`,
     warscroll: `${listBase}/unidad`,
     unitConfig: `${listBase}/unidad/configurar`,
-    ruleWarscroll: `${listBase}/regla`,
   }[page] ?? "/";
 }
 

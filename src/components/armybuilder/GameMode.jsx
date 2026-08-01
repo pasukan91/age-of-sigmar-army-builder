@@ -1,13 +1,12 @@
 import { normalizeRuleItem } from "../../utils/ruleReferences";
 import { getUniqueListUnits } from "../../utils/listWarscrolls";
 import UnitArtwork from "../UnitArtwork";
-import ArmyRulesReference from "./ArmyRulesReference";
-import SelectedRulesLibrary from "./SelectedRulesLibrary";
 
-function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule }) {
+function GameMode({ list, onViewUnit, onViewRule }) {
   const units = getUniqueListUnits(list);
   const manifestations = getManifestations(list);
   const battleTactics = getBattleTactics(list);
+  const terrain = list?.terrain ? normalizeRuleItem(list.terrain) : null;
   const warscrollCount = units.length + manifestations.length;
 
   return (
@@ -20,7 +19,7 @@ function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule 
 
       <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
         <a href="#game-warscrolls">Warscrolls</a>
-        <a href="#game-rules">Reglas</a>
+        <a href="#game-terrain">Terreno</a>
         <a href="#game-battle-setup">Battleplan y tácticas</a>
       </nav>
 
@@ -66,21 +65,31 @@ function GameMode({ list, battleTraits, battleFormation, onViewUnit, onViewRule 
         </div>
       </section>
 
-      <section id="game-rules" className="aos-game-section aos-game-rules" aria-labelledby="game-rules-title">
+      <section id="game-terrain" className="aos-game-section aos-game-terrain" aria-labelledby="game-terrain-title">
         <div className="aos-game-mode__section-title">
-          <h3 id="game-rules-title">Reglas</h3>
-          <span>Referencia de batalla</span>
+          <h3 id="game-terrain-title">Terreno de facción</h3>
+          <span>{terrain ? "Seleccionado" : "Sin seleccionar"}</span>
         </div>
 
-        <ArmyRulesReference
-          battleTraits={battleTraits}
-          battleFormation={battleFormation}
-        />
-
-        <SelectedRulesLibrary
-          list={list}
-          onViewRule={onViewRule}
-        />
+        <div className="aos-game-roster__grid">
+          {terrain ? (
+            <WarscrollCard
+              image={terrain.image}
+              type="Terreno de facción"
+              name={terrain.name}
+              summary={`${terrain.profile?.health ?? "-"} salud`}
+              details={`${terrain.profile?.save ?? "-"} salvación · ${terrain.profile?.control ?? "-"} control`}
+              fallback="◆"
+              onClick={() => onViewRule?.({
+                kind: "terrain",
+                item: terrain,
+                sourceName: list?.faction?.name,
+              })}
+            />
+          ) : (
+            <p className="aos-empty-message">Selecciona el terreno de tu facción para tener su ficha disponible durante la partida.</p>
+          )}
+        </div>
       </section>
 
       <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
