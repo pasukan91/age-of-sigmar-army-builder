@@ -1,5 +1,7 @@
 body .aos-builder-page {
   padding-bottom: calc(150px + env(safe-area-inset-bottom));
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior-x: contain;
 }
 
 body .aos-builder-tabs {

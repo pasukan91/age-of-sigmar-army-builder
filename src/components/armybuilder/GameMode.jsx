@@ -5,7 +5,6 @@ import UnitArtwork from "../UnitArtwork";
 function GameMode({ list, onViewUnit, onViewRule }) {
   const units = getUniqueListUnits(list);
   const manifestations = getManifestations(list);
-  const battleTactics = getBattleTactics(list);
   const terrain = list?.terrain ? normalizeRuleItem(list.terrain) : null;
   const warscrollCount = units.length + manifestations.length;
 
@@ -14,13 +13,12 @@ function GameMode({ list, onViewUnit, onViewRule }) {
       <header className="aos-game-mode__hero">
         <span className="aos-eyebrow">Mesa de juego</span>
         <h2 id="game-mode-title">Modo partida</h2>
-        <p>Ten a mano la misión, tus tácticas, los warscrolls y las reglas que consultarás durante la partida.</p>
+        <p>Ten a mano los warscrolls, manifestaciones y terreno que consultarás durante la partida.</p>
       </header>
 
       <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
         <a href="#game-warscrolls">Warscrolls</a>
         <a href="#game-terrain">Terreno</a>
-        <a href="#game-battle-setup">Battleplan y tácticas</a>
       </nav>
 
       <section id="game-warscrolls" className="aos-game-section aos-game-roster" aria-labelledby="game-roster-title">
@@ -92,6 +90,21 @@ function GameMode({ list, onViewUnit, onViewRule }) {
         </div>
       </section>
 
+    </section>
+  );
+}
+
+function BattleMission({ list }) {
+  const battleTactics = getBattleTactics(list);
+
+  return (
+    <section className="aos-game-mode aos-mission-mode" aria-labelledby="mission-mode-title">
+      <header className="aos-game-mode__hero">
+        <span className="aos-eyebrow">Objetivos de batalla</span>
+        <h2 id="mission-mode-title">Misión</h2>
+        <p>Consulta el battleplan, la puntuación y las tácticas elegidas sin mezclarlas con las fichas del ejército.</p>
+      </header>
+
       <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
         <div className="aos-game-mode__section-title">
           <h3 id="game-battle-setup-title">Battleplan y battle tactics</h3>
@@ -115,14 +128,13 @@ function GameMode({ list, onViewUnit, onViewRule }) {
 
         <BattleplanCard battleplan={list?.battleplan} />
       </section>
-
     </section>
   );
 }
 
 function BattleplanCard({ battleplan }) {
   if (!battleplan) {
-    return <EmptyBattleCard title="Battleplan" message="Selecciona un battleplan en la pestaña Lista." />;
+    return <EmptyBattleCard title="Battleplan" message="Esta lista no tiene un battleplan asociado." />;
   }
 
   return (
@@ -174,7 +186,7 @@ function BattleplanCard({ battleplan }) {
 
 function BattleTacticsCard({ card }) {
   if (!card) {
-    return <EmptyBattleCard title="Tácticas de batalla" message="Selecciona hasta 2 cartas de táctica en la pestaña Lista." />;
+    return <EmptyBattleCard title="Tácticas de batalla" message="Esta lista no tiene cartas de táctica asociadas." />;
   }
 
   return (
@@ -255,4 +267,5 @@ function getVictoryPoints(condition) {
   return condition.match(/obtienes (\d+) puntos? de victoria/i)?.[1] ?? "–";
 }
 
+export { BattleMission };
 export default GameMode;

@@ -134,6 +134,14 @@ function App() {
   const [builderReference, setBuilderReference] =
     useState(null);
 
+  useEffect(() => {
+    if (!builderReference) return undefined;
+
+    const closeOverlayOnBack = () => setBuilderReference(null);
+    window.addEventListener("popstate", closeOverlayOnBack);
+    return () => window.removeEventListener("popstate", closeOverlayOnBack);
+  }, [builderReference]);
+
   /*
    * Información sobre una unidad que ya
    * pertenece a un regimiento.
@@ -575,7 +583,7 @@ function App() {
       return;
     }
 
-    setBuilderReference({
+    openBuilderReference({
       type: "unit",
       unit,
       editor: payload?.unit
@@ -593,7 +601,38 @@ function App() {
       return;
     }
 
-    setBuilderReference({ type: "rule", reference });
+    openBuilderReference({ type: "rule", reference });
+  }
+
+  function openBuilderReference(reference) {
+    if (!window.history.state?.builderOverlay) {
+      window.history.pushState(
+        { ...(window.history.state ?? {}), builderOverlay: true },
+        "",
+        window.location.href
+      );
+    }
+
+    setBuilderReference(reference);
+  }
+
+  function closeBuilderReference() {
+    if (window.history.state?.builderOverlay) {
+      window.history.back();
+      return;
+    }
+
+    setBuilderReference(null);
+  }
+
+  function clearBuilderReferenceHistory() {
+    if (window.history.state?.builderOverlay) {
+      const nextState = { ...(window.history.state ?? {}) };
+      delete nextState.builderOverlay;
+      window.history.replaceState(nextState, "", window.location.href);
+    }
+
+    setBuilderReference(null);
   }
 
   function openNewUnitConfiguration(
@@ -1856,18 +1895,18 @@ function App() {
         {builderReference && (
           <ReferenceOverlay
             title={builderReference.type === "unit" ? "Ficha de unidad" : "Referencia de regla"}
-            onClose={() => setBuilderReference(null)}
+            onClose={closeBuilderReference}
           >
             {builderReference.type === "unit" ? (
               <UnitWarscroll
                 unit={builderReference.unit}
                 list={currentList}
-                onBack={() => setBuilderReference(null)}
+                onBack={closeBuilderReference}
                 onConfigure={builderReference.editor && !isUniqueUnit(builderReference.unit)
                   ? () => {
                       const editor = builderReference.editor;
                       const unit = builderReference.unit;
-                      setBuilderReference(null);
+                      clearBuilderReferenceHistory();
                       handleConfigureAddedUnit({ unit, ...editor });
                     }
                   : undefined}
@@ -1875,7 +1914,7 @@ function App() {
             ) : (
               <RuleWarscroll
                 reference={builderReference.reference}
-                onBack={() => setBuilderReference(null)}
+                onBack={closeBuilderReference}
               />
             )}
           </ReferenceOverlay>

@@ -1,18 +1,15 @@
+import { useRef } from "react";
+
 import BuilderHeader from "../components/armybuilder/BuilderHeader";
 import BuilderOption from "../components/armybuilder/BuilderOption";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
 import ArmySharePanel from "../components/armybuilder/ArmySharePanel";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
-import GameMode from "../components/armybuilder/GameMode";
-import ArmyQuickSearch from "../components/armybuilder/ArmyQuickSearch";
+import GameMode, { BattleMission } from "../components/armybuilder/GameMode";
 import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
 import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
-import {
-  ghb2026Battleplans,
-  ghb2026BattleTacticsCards,
-} from "../data/ghb2026";
 import { validateArmyList } from "../utils/armyValidation";
 
 import {
@@ -20,6 +17,14 @@ import {
 } from "../utils/armyPoints";
 import "../styles/aos-app.css";
 import "../styles/builder-navigation.css";
+
+const BUILDER_TABS = [
+  ["army", "Ejército", "♜"],
+  ["units", "Unidades", "⚔"],
+  ["rules", "Reglas", "▤"],
+  ["game", "Partida", "◉"],
+  ["mission", "Misión", "⌖"],
+];
 
 function ArmyBuilder({
   list,
@@ -74,6 +79,7 @@ function ArmyBuilder({
   const currentPoints =
     calculateArmyPoints(list);
   const validation = validateArmyList(list);
+  const swipeStart = useRef(null);
 
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
     ? []
@@ -133,8 +139,34 @@ function ArmyBuilder({
     });
   }
 
+  function handleSwipeStart(event) {
+    const touch = event.touches?.[0];
+    if (!touch) return;
+    swipeStart.current = { x: touch.clientX, y: touch.clientY };
+  }
+
+  function handleSwipeEnd(event) {
+    const start = swipeStart.current;
+    const touch = event.changedTouches?.[0];
+    swipeStart.current = null;
+    if (!start || !touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+    if (Math.abs(deltaX) < 55 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+
+    const currentIndex = BUILDER_TABS.findIndex(([id]) => id === section);
+    const nextIndex = deltaX < 0 ? currentIndex + 1 : currentIndex - 1;
+    const nextSection = BUILDER_TABS[nextIndex]?.[0];
+    if (nextSection) onSectionChange?.(nextSection);
+  }
+
   return (
-    <main className="aos-page aos-builder-page">
+    <main
+      className="aos-page aos-builder-page"
+      onTouchStart={handleSwipeStart}
+      onTouchEnd={handleSwipeEnd}
+    >
       <header className="aos-topbar">
         <button
           type="button"
@@ -153,13 +185,7 @@ function ArmyBuilder({
       </header>
 
       <nav className="aos-builder-tabs" aria-label="Secciones de la lista">
-        {[
-          ["army", "Ejército", "♜"],
-          ["units", "Unidades", "⚔"],
-          ["rules", "Reglas", "▤"],
-          ["game", "Partida", "◉"],
-          ["search", "Buscar", "⌕"],
-        ].map(([id, label, icon]) => (
+        {BUILDER_TABS.map(([id, label, icon]) => (
           <button
             key={id}
             type="button"
@@ -188,34 +214,6 @@ function ArmyBuilder({
       />
 
       <section className="aos-builder-options">
-        <BuilderOption
-          id="battleplan-option"
-          title="Battleplan"
-          value={list.battleplan?.name ?? "No seleccionado"}
-          image={list.battleplan?.image}
-          onClick={() =>
-            openSelector({
-              title: "Battleplan",
-              property: "battleplan",
-              options: ghb2026Battleplans,
-            })
-          }
-        />
-
-        <BuilderOption
-          id="battle-tactics-option"
-          title="Tácticas de batalla"
-          value={formatBattleTactics(list.battleTactics)}
-          onClick={() =>
-            openSelector({
-              title: "Tácticas de batalla",
-              property: "battleTactics",
-              options: ghb2026BattleTacticsCards,
-              ui: { maxSelections: 2, variant: "battleTactics" },
-            })
-          }
-        />
-
         {battleFormations.length > 0 && (
         <BuilderOption
           id="battle-formation-option"
@@ -317,6 +315,13 @@ function ArmyBuilder({
         )}
       </section>
 
+      <ArmyRulesReference
+        battleTraits={battleTraits}
+        battleFormation={list.battleFormation}
+      />
+
+      <SelectedRulesLibrary list={list} onViewRule={onViewRule} />
+
       <ArmySharePanel list={list} />
 
         </>
@@ -378,14 +383,8 @@ function ArmyBuilder({
         </section>
       )}
 
-      {section === "search" && (
-        <ArmyQuickSearch
-          list={list}
-          battleTraits={battleTraits}
-          battleFormation={list.battleFormation}
-          onViewUnit={onBrowseUnit}
-          onViewRule={onViewRule}
-        />
+      {section === "mission" && (
+        <BattleMission list={list} />
       )}
 
       <footer className="aos-builder-footer">
@@ -475,18 +474,6 @@ function normalizeBuilderSection(section) {
     list: "army",
     regiments: "units",
   }[section] ?? section ?? "army";
-}
-
-function formatBattleTactics(value) {
-  const selected = Array.isArray(value)
-    ? value
-    : value
-      ? [value]
-      : [];
-
-  return selected.length > 0
-    ? selected.map((card) => card.name).join(" + ")
-    : "Ninguna seleccionada";
 }
 
 export default ArmyBuilder;
