@@ -80,6 +80,54 @@ test("reports duplicate unique units", () => {
   assert.ok(result.errors.some((item) => item.id === "duplicate-unique-unique-unit"));
 });
 
+test("rejects armies with more than five regiments", () => {
+  const regiments = Array.from({ length: 6 }, (_, index) => ({
+    id: `regiment-${index + 1}`,
+    hero: unit({
+      id: `hero-${index + 1}`,
+      name: `Héroe ${index + 1}`,
+      keywords: ["Hero"],
+      rules: { hero: true, canBeReinforced: false },
+    }),
+    units: [],
+  }));
+  const result = validateArmyList(list({ regiments }));
+
+  assert.ok(result.errors.some((item) => item.id === "regiment-limit"));
+});
+
+test("rejects armies with more than one Regiment of Renown", () => {
+  const result = validateArmyList(list({
+    regimentsOfRenown: [
+      { id: "renown-one", name: "Primero" },
+      { id: "renown-two", name: "Segundo" },
+    ],
+  }));
+
+  assert.ok(result.errors.some((item) => item.id === "regiment-of-renown-limit"));
+});
+
+test("uses four unit slots for the general and three for other regiments", () => {
+  const regimentUnit = (id) => unit({ id, instanceId: id });
+  const result = validateArmyList(list({
+    regiments: [
+      {
+        id: "general-regiment",
+        hero: unit({ id: "general", keywords: ["Hero"], rules: { hero: true } }),
+        units: [1, 2, 3, 4].map((id) => regimentUnit(`general-unit-${id}`)),
+      },
+      {
+        id: "other-regiment",
+        hero: unit({ id: "other-hero", keywords: ["Hero"], rules: { hero: true } }),
+        units: [1, 2, 3, 4].map((id) => regimentUnit(`other-unit-${id}`)),
+      },
+    ],
+  }));
+
+  assert.ok(!result.errors.some((item) => item.id === "slots-general-regiment"));
+  assert.ok(result.errors.some((item) => item.id === "slots-other-regiment"));
+});
+
 test("exports points, drops and regiment structure", () => {
   const army = list();
   const text = formatArmyListText(army);

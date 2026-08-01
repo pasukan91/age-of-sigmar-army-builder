@@ -4,6 +4,11 @@ import {
   getAvailableUnitsForRegiment,
   getRegimentCompositionErrors,
 } from "../../utils/regimentRules";
+import {
+  canAddRegiment,
+  getRegimentUnitLimit,
+  MAX_REGIMENTS_PER_ARMY,
+} from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
 import { getEnhancementTiming } from "../../utils/enhancementTiming";
 import { isUniqueUnit } from "../../utils/unitIdentity";
@@ -28,10 +33,6 @@ function RegimentSection({
     getAvailableRegimentLeaders(list);
   const compositionErrors =
     getRegimentCompositionErrors(list);
-
-  function getRegimentLimit(index) {
-    return index === 0 ? 4 : 3;
-  }
 
   function getUnitPoints(unit) {
     const basePoints =
@@ -174,7 +175,7 @@ function RegimentSection({
               : [];
 
           const limit =
-            getRegimentLimit(
+            getRegimentUnitLimit(
               regimentIndex
             );
 
@@ -465,7 +466,12 @@ function RegimentSection({
       <button
         type="button"
         disabled={
-          availableHeroes.length === 0
+          availableHeroes.length === 0 || !canAddRegiment(list)
+        }
+        title={
+          !canAddRegiment(list)
+            ? `El máximo es de ${MAX_REGIMENTS_PER_ARMY} regimientos por ejército.`
+            : undefined
         }
         onClick={() => {
           setSelector({
@@ -487,7 +493,9 @@ function RegimentSection({
           styles.addRegimentButton
         }
       >
-        + Añadir regimiento
+        {canAddRegiment(list)
+          ? "+ Añadir regimiento"
+          : `Máximo de ${MAX_REGIMENTS_PER_ARMY} regimientos alcanzado`}
       </button>
     </section>
   );

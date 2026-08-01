@@ -3,6 +3,11 @@ import {
   countsTowardRegimentLimit,
   getRegimentCompositionErrors,
 } from "./regimentRules.js";
+import {
+  getRegimentUnitLimit,
+  MAX_REGIMENTS_OF_RENOWN,
+  MAX_REGIMENTS_PER_ARMY,
+} from "./armyComposition.js";
 
 const ENHANCEMENT_FIELDS = [
   "artefact",
@@ -78,6 +83,27 @@ export function validateArmyList(list) {
     ));
   }
 
+  if (regiments.length > MAX_REGIMENTS_PER_ARMY) {
+    issues.push(issue(
+      "regiment-limit",
+      "error",
+      "Demasiados regimientos",
+      `El ejército incluye ${regiments.length} regimientos y el máximo es ${MAX_REGIMENTS_PER_ARMY}.`,
+      "regiments",
+      "regiments-section"
+    ));
+  }
+
+  if ((list.regimentsOfRenown ?? []).length > MAX_REGIMENTS_OF_RENOWN) {
+    issues.push(issue(
+      "regiment-of-renown-limit",
+      "error",
+      "Demasiados Regimientos de Renombre",
+      "Solo puedes incluir 1 Regimiento de Renombre en el ejército.",
+      "list"
+    ));
+  }
+
   if ((effectiveFaction.battleFormations ?? []).length > 0 && !list.battleFormation) {
     issues.push(issue(
       "missing-formation",
@@ -109,7 +135,7 @@ export function validateArmyList(list) {
   regiments.forEach((regiment, regimentIndex) => {
     const targetId = `regiment-${regiment.id}`;
     const regimentLabel = regiment.hero?.name ?? `Regimiento ${regimentIndex + 1}`;
-    const limit = regimentIndex === 0 ? 4 : 3;
+    const limit = getRegimentUnitLimit(regimentIndex);
     const slotCount = (regiment.units ?? []).filter(countsTowardRegimentLimit).length;
 
     if (!regiment.hero) {

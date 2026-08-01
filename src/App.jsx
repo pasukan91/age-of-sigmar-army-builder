@@ -1683,11 +1683,12 @@ function App() {
       return;
     }
 
-    const alreadyIncluded = (currentList.regimentsOfRenown ?? []).some(
+    const selectedRegiments = currentList.regimentsOfRenown ?? [];
+    const alreadyIncluded = selectedRegiments.some(
       (item) => item.id === regiment.id
     );
 
-    if (alreadyIncluded) {
+    if (alreadyIncluded || selectedRegiments.length >= 1) {
       return;
     }
 

@@ -7,7 +7,7 @@ import {
   ghb2026BattleTacticsCards,
 } from "./ghb2026.js";
 
-test("contains the unique battleplans supplied in the GHB 2026-27 PDF", () => {
+test("contains the unique battleplans supplied in the reference photos", () => {
   assert.equal(ghb2026Battleplans.length, 12);
   assert.equal(new Set(ghb2026Battleplans.map((item) => item.id)).size, 12);
   assert.deepEqual(

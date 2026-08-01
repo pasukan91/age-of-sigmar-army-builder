@@ -1,4 +1,5 @@
 import createId from "../utils/createId";
+import { canAddRegiment } from "../utils/armyComposition";
 
 export function createArmyList({
   name,
@@ -65,6 +66,10 @@ export function createArmyList({
 }
 
 export function addRegiment(list, hero) {
+
+    if (!canAddRegiment(list)) {
+        return list;
+    }
 
     return {
 
