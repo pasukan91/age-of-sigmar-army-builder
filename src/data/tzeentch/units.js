@@ -21,7 +21,7 @@ const units = [
       ability("Master of Destiny", null, "Once each battle round, engineer an eligible visible friendly unit's D6 roll as an unmodifiable 6, or its 2D6 roll as an unmodifiable 9.", "Passive"),
       ability("Mastery of Magic", null, "When this unit makes a casting roll, change the lowest D6 to match the highest D6.", "Passive"),
       ability("Beacon of Sorcery", null, "Friendly Disciples of Tzeentch Wizards wholly within 12\" add 1 to casting and unbinding rolls; their Magical Intervention after an unbind costs no command point.", "Passive"),
-      ability("Fateful Reverse", "Your Hero Phase", "Spell: until your next turn, friendly units fighting the target have Strike-first if it charged, and its weapons cannot benefit from Charge (+1 Damage).", "Spell", ["Spell"]),
+      ability("Fateful Reverse", "Your Hero Phase", "Pick a visible enemy unit within 18\". Until your next turn, if it charged in the same turn, friendly Disciples of Tzeentch units in combat with it have Strike-first and its weapons cannot benefit from Charge (+1 Damage).", "Spell", ["Spell"], 8),
     ],
   }),
   createUnit({
@@ -37,7 +37,7 @@ const units = [
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, subtract 1 from its power level.", "Passive"),
       ability("Summon Daemons of Tzeentch", "Your Movement Phase", "Return a destroyed friendly non-Hero Daemon unit at half strength wholly within 12\" and more than 9\" from enemies.", "Once Per Turn (Army)"),
-      ability("Temporal Manipulation", "Your Hero Phase", "Spell: another visible friendly unit wholly within 18\" can make a Normal Move, ending closer to this unit.", "Spell", ["Spell"]),
+      ability("Temporal Manipulation", "Your Hero Phase", "Pick another visible friendly Disciples of Tzeentch unit wholly within 18\" that was not set up this turn. It can immediately use the Normal Move ability as if it were your movement phase, but must end closer to this unit.", "Spell", ["Spell"], 6),
       ability("Locus of Impossibility", null, "Add 1 to this unit's casting rolls. Subtract 1 from hit rolls that target friendly Daemon units wholly within 12\".", "Passive"),
     ],
   }),
@@ -52,7 +52,7 @@ const units = [
     abilities: [
       ability("Puckish Misdirection", null, "Friendly units wholly within 12\" can use Redeploy even if they were set up in the same turn.", "Passive"),
       ability("Arch-deceiver", "Your Hero Phase", "While masked by illusion, this unit can cast a spell measuring range and visibility from a model in another friendly unit."),
-      ability("Whispers of Treachery", "Your Hero Phase", "Spell: roll a die for each model in an enemy unit within 18\"; each 5+ inflicts 1 mortal damage.", "Spell", ["Spell"]),
+      ability("Whispers of Treachery", "Your Hero Phase", "Pick a visible enemy unit within 18\" and roll a die for each model in it. For each 5+, inflict 1 mortal damage on it.", "Spell", ["Spell"], 7),
     ],
   }),
   createUnit({
@@ -92,7 +92,7 @@ const units = [
     abilities: [
       ability("Masters of the Silver Towers", null, "Enemies cannot end a charge within 1/2\" of a friendly Argent Shard wholly within 12\" that was set up this turn.", "Passive"),
       ability("All Belongs to Tzeentch", "Start of Any Turn", "Once per battle, take control of an objective you controlled earlier in the battle.", "Once Per Battle (Army)"),
-      ability("Arcane Imprisonment", "Your Hero Phase", "Spell: if the unmodified casting roll exceeds the Health of an enemy Hero in combat, it is destroyed and cannot be replaced.", "Spell", ["Spell"]),
+      ability("Arcane Imprisonment", "Your Hero Phase", "Pick an enemy Hero in combat with this unit. If the unmodified casting roll exceeds its Health characteristic, it is destroyed and cannot be replaced for the rest of the battle.", "Spell", ["Spell"], 7),
     ],
   }),
   createUnit({
@@ -105,7 +105,7 @@ const units = [
     abilities: [
       ability("Masters of the Silver Towers", null, "Enemies cannot end a charge within 1/2\" of a friendly Argent Shard wholly within 12\" that was set up this turn.", "Passive"),
       ability("All Belongs to Tzeentch", "Start of Any Turn", "Once per battle, take control of an objective you controlled earlier in the battle.", "Once Per Battle (Army)"),
-      ability("Leaden Limbs", "Your Hero Phase", "Spell: halve the Move of an enemy within 18\" and suppress Fly until your next turn.", "Spell", ["Spell"]),
+      ability("Leaden Limbs", "Your Hero Phase", "Pick a visible enemy unit within 18\". Until your next turn, halve its Move characteristic and the effects of Fly do not apply to it.", "Spell", ["Spell"], 7),
     ],
   }),
   createUnit({

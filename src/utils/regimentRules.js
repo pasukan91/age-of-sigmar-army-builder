@@ -55,6 +55,11 @@ function normalizeOption(value) {
     "any blades of khorne daemon": "any-khorne-daemon",
     "any blades of khorne daemon cavalry": "any-khorne-daemon-cavalry",
     "any bloodbound": "any-bloodbound",
+    "any bloodbound warmonger": "bloodbound-warmonger",
+    "any claws of karanak": "claws-of-karanak",
+    "any flesh hounds": "flesh-hounds",
+    "any rotbringers": "any-rotbringers",
+    "any maggotkin of nurgle": "any-maggotkin-of-nurgle",
     "any slaves to darkness": "any-slaves-to-darkness",
     "any warriors of chaos": "any-warriors-of-chaos",
     "any darkoath": "any-darkoath",
@@ -439,7 +444,7 @@ function optionMatchesNonHero(unit, option) {
     case "any-mawseekers":
       return hasKeyword(unit, "Mawseekers");
     case "any-gnoblars":
-      return hasKeyword(unit, "Gnoblars");
+      return hasKeyword(unit, "Gnoblar") || hasKeyword(unit, "Gnoblars");
     case "any-gorger-mawpack":
       return unit.id === "gorger-mawpack";
     case "any-sigmarite":
@@ -447,7 +452,9 @@ function optionMatchesNonHero(unit, option) {
     case "any-sigmarite-infantry":
       return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "Infantry");
     case "any-allies-of-the-free-cities":
-      return hasKeyword(unit, "Allies of the Free Cities");
+      return hasKeyword(unit, "Allies of the Free Cities") ||
+        hasKeyword(unit, "Aelf") ||
+        hasKeyword(unit, "Duardin");
     case "any-ossiarch":
       return hasKeyword(unit, "Ossiarch Bonereapers");
     case "any-soulblight":
@@ -462,6 +469,10 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Blades of Khorne") && hasKeyword(unit, "Daemon") && hasKeyword(unit, "Cavalry");
     case "any-bloodbound":
       return hasKeyword(unit, "Bloodbound");
+    case "any-rotbringers":
+      return hasKeyword(unit, "Rotbringers");
+    case "any-maggotkin-of-nurgle":
+      return hasKeyword(unit, "Maggotkin of Nurgle");
     case "any-slaves-to-darkness":
       return hasKeyword(unit, "Slaves to Darkness");
     case "any-warriors-of-chaos":
@@ -525,6 +536,121 @@ const FREE_COMMAND_CORPS_UNITS = new Set([
   "freeguild-command-corps-whisperblade",
 ]);
 
+const DEPENDENT_UNIT_REQUIREMENTS = {
+  "tolls-companions": {
+    leaderIds: ["callis-and-toll"],
+    max: 1,
+  },
+  "singri-brand": {
+    leaderIds: ["gunnar-brand"],
+    max: 1,
+  },
+  "oathsworn-kin": {
+    leaderIds: ["gunnar-brand"],
+    max: 1,
+  },
+  "freeguild-command-auxiliaries": {
+    requiredUnitIds: ["freeguild-command-adjutants"],
+    max: 1,
+  },
+  "freeguild-command-corps-whisperblade": {
+    requiredUnitIds: ["freeguild-command-adjutants"],
+    max: 1,
+  },
+};
+
+function satisfiesDependentUnitRequirement(regiment, unit) {
+  const requirement = DEPENDENT_UNIT_REQUIREMENTS[unit?.id];
+
+  if (!requirement) {
+    return true;
+  }
+
+  if (
+    requirement.leaderIds &&
+    !requirement.leaderIds.includes(regiment?.hero?.id)
+  ) {
+    return false;
+  }
+
+  if (
+    requirement.requiredUnitIds &&
+    !requirement.requiredUnitIds.every((requiredId) =>
+      (regiment?.units ?? []).some((regimentUnit) =>
+        regimentUnit.id === requiredId
+      )
+    )
+  ) {
+    return false;
+  }
+
+  const count = (regiment?.units ?? []).filter(
+    (regimentUnit) => regimentUnit.id === unit.id
+  ).length;
+
+  return requirement.max == null || count < requirement.max;
+}
+
+function getDependentUnitCompositionErrors(regiment, regimentIndex) {
+  return Object.entries(DEPENDENT_UNIT_REQUIREMENTS).flatMap(
+    ([unitId, requirement]) => {
+      const units = (regiment?.units ?? []).filter((unit) => unit.id === unitId);
+
+      if (units.length === 0) {
+        return [];
+      }
+
+      const errors = [];
+      const label = units[0].name ?? unitId;
+
+      if (
+        requirement.leaderIds &&
+        !requirement.leaderIds.includes(regiment?.hero?.id)
+      ) {
+        errors.push({
+          regimentId: regiment.id,
+          regimentIndex,
+          role: unitId,
+          count: units.length,
+          message: `${label} no puede incluirse en el regimiento de este lider.`,
+        });
+      }
+
+      if (
+        requirement.requiredUnitIds &&
+        !requirement.requiredUnitIds.every((requiredId) =>
+          (regiment?.units ?? []).some((unit) => unit.id === requiredId)
+        )
+      ) {
+        errors.push({
+          regimentId: regiment.id,
+          regimentIndex,
+          role: unitId,
+          count: units.length,
+          message: `${label} requiere su unidad principal en el mismo regimiento.`,
+        });
+      }
+
+      if (requirement.max != null && units.length > requirement.max) {
+        errors.push({
+          regimentId: regiment.id,
+          regimentIndex,
+          role: unitId,
+          count: units.length,
+          max: requirement.max,
+          message: `${label} solo puede incluirse ${requirement.max} vez por regimiento.`,
+        });
+      }
+
+      return errors;
+    }
+  );
+}
+
+export function isMatchedPlayUnit(unit) {
+  return !normalize(unit?.source).includes("legends");
+}
+
 export function countsTowardRegimentLimit(unit) {
   return !FREE_COMMAND_CORPS_UNITS.has(unit?.id);
 }
@@ -549,6 +675,14 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   }
 
   if (!isAllowedByArmyOfRenown(list, unit)) {
+    return false;
+  }
+
+  if (!isMatchedPlayUnit(unit)) {
+    return false;
+  }
+
+  if (!satisfiesDependentUnitRequirement(regiment, unit)) {
     return false;
   }
 
@@ -608,7 +742,7 @@ export function getRegimentCompositionErrors(list) {
       .map(parseRegimentOption)
       .filter((option) => option.max !== null);
 
-    return options.flatMap((option) => {
+    const optionErrors = options.flatMap((option) => {
       const count = countUnitsForOption(regiment, option);
 
       if (count >= option.min && count <= option.max) {
@@ -642,6 +776,11 @@ export function getRegimentCompositionErrors(list) {
           `incluye ${count} unidades de ${option.label}; el máximo es ${option.max}.`,
       }];
     });
+
+    return [
+      ...optionErrors,
+      ...getDependentUnitCompositionErrors(regiment, regimentIndex),
+    ];
   });
 }
 
@@ -656,6 +795,7 @@ export function getAvailableUnitsForRegiment(list, regiment) {
     : list?.faction?.units ?? [];
 
   return units.filter((unit) =>
+    isMatchedPlayUnit(unit) &&
     canUnitJoinRegiment({ list, regiment, unit })
   );
 }
@@ -670,6 +810,7 @@ export function getAvailableRegimentLeaders(list) {
     (unit) =>
       unit.rules?.hero === true &&
       unit.rules?.canLeadRegiment !== false &&
+      isMatchedPlayUnit(unit) &&
       !isUnitUniqueInArmy(list, unit) &&
       isAllowedByArmyOfRenown(list, unit)
   );

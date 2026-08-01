@@ -10,13 +10,13 @@ export const weapon = (name, type, attacks, hit, wound, rend, damage, abilities 
   abilities,
 });
 
-export const ability = (name, phase, description, type = "Ability", keywords = []) => ({
+export const ability = (name, phase, description, type = "Ability", keywords = [], castingValue = null) => ({
   name,
   phase,
   type,
   description,
   keywords,
-  castingValue: null,
+  castingValue,
   lore: null,
 });
 

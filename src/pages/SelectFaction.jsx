@@ -8,7 +8,7 @@ import "../styles/aos-app.css";
 function SelectFaction({ alliance, onSelect, onBack }) {
   const [selectedFaction, setSelectedFaction] = useState(null);
   const factionList = factions.filter(
-    (faction) => faction.alliance === alliance?.id
+    (faction) => faction.alliance === alliance?.id && faction.units.length > 0
   );
   const background =
     alliance?.backgroundImage ??

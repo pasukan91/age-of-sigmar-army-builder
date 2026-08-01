@@ -139,6 +139,12 @@ function UnitWarscroll({
                 {unit.details.notes}
               </p>
             )}
+
+            {unit.source && (
+              <p className="aos-warscroll-meta__notes">
+                Fuente: {unit.source}
+              </p>
+            )}
           </div>
 
           <strong className="aos-warscroll-meta__points">

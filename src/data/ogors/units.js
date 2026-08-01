@@ -227,6 +227,7 @@ const units = [
   }),
   make({
     id: "hunters-with-sabrefangs", name: "Hunters with Sabrefangs", points: 160, models: 5, ...pendingBase,
+    image: "/images/factions/ogormawtribes.webp",
     move: '6"', health: 4, control: 2, save: "5+",
     keywords: ["Infantry", "Champion", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { companion: true },

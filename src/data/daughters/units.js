@@ -176,7 +176,7 @@ const units = [
   }),
   make({
     id: "doomfire-warlocks", name: "Doomfire Warlocks", points: 150, models: 5, move: '14"', health: 3, control: 1, save: "5+", ward: "6+", baseSize: "60 x 35mm",
-    notes: "Moves to Warhammer Legends on 1 June 2027.", keywords: ["Wizard (1)", "Cavalry", "Champion", "Ward (6+)", ...aelf], rules: { wizard: 1, ...wardRules, canBeReinforced: false, companion: true },
+    notes: "Moves to Warhammer Legends on 1 June 2027.", keywords: ["Wizard (1)", "Cavalry", "Champion", "Ward (6+)", ...aelf], rules: { wizard: 1, ...wardRules, companion: true },
     weapons: [weapon("Doomfire Crossbow", "Ranged", 2, "3+", "4+", "0", "1", [], '10"'), weapon("Cursed Scimitar", "Melee", 2, "3+", "4+", "1", "1"), weapon("Dark Steed's Vicious Bite", "Melee", 2, "5+", "3+", "0", "1", ["Companion"])],
     abilities: [ability("Outmanoeuvre", null, "When this unit uses Redeploy, a distance roll of 1-3 can be treated as 4.", "Passive")],
   }),

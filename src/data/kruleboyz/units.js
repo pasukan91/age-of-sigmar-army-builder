@@ -177,6 +177,7 @@ const units = [
   }),
   make({
     id: "kruleboyz-monsta-killaz", name: "Kruleboyz Monsta-killaz", points: 120, models: 7,
+    image: "/images/factions/kruleboyz.webp",
     move: '5"', health: 2, control: 1, save: "5+", baseSize: "40mm [1], 32mm [6], 28.5mm [1]",
     notes: "The 28.5mm base belongs to the Klutcha-grot token. This unit cannot be reinforced.",
     keywords: ["Infantry", "Champion (1/7)", "Musician (1/7)", "Destruction", "Kruleboyz"],

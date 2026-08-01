@@ -138,9 +138,9 @@ const units = [
   }),
   ...[
     { id: "weirdbrute-wrekkaz", name: "Weirdbrute Wrekkaz", points: 90, weaponName: "Chain-smasha", attacks: 6, ward: "5+", abilities: ["Anti-Infantry (+1 Rend)"], extra: [ability("Berserkers", null, "This unit can use Run abilities and still use Charge abilities later in the turn.", "Passive")] },
-    { id: "brute-ragerz", name: "Brute Ragerz", points: 100, weaponName: "Rager Weapons", attacks: 3, ward: null, abilities: ["Anti-Monster (+1 Rend)"], extra: [ability("Berserkers", null, "This unit can use Run abilities and still use Charge abilities later in the turn.", "Passive"), ability("Unleashed Rage", null, "This unit has Strike-first if it charged in the same turn.", "Passive")] },
+    { id: "brute-ragerz", name: "Brute Ragerz", points: 100, image: "/images/factions/ironjawz-army.webp", weaponName: "Rager Weapons", attacks: 3, ward: null, abilities: ["Anti-Monster (+1 Rend)"], extra: [ability("Berserkers", null, "This unit can use Run abilities and still use Charge abilities later in the turn.", "Passive"), ability("Unleashed Rage", null, "This unit has Strike-first if it charged in the same turn.", "Passive")] },
   ].map((entry) => make({
-    id: entry.id, name: entry.name, points: entry.points, models: 3,
+    id: entry.id, name: entry.name, points: entry.points, models: 3, image: entry.image,
     move: '4"', health: 3, control: 1, save: "5+", ward: entry.ward, baseSize: "40mm",
     keywords: ["Infantry", ...(entry.ward ? [`Ward (${entry.ward})`] : []), "Destruction", "Ironjawz", "Brute"],
     weapons: [weapon(entry.weaponName, "Melee", entry.attacks, "4+", entry.id === "brute-ragerz" ? "2+" : "3+", "1", "2", entry.abilities)],
@@ -158,9 +158,9 @@ const units = [
   }),
   ...[
     { id: "maw-grunta-with-hakkin-krew", name: "Maw-grunta with Hakkin' Krew", points: 250, ability: ability("Carve a Path", "Your Movement Phase", "If in combat, move up to this unit's Move through models and combat ranges but not ending in combat. Roll a D3 for each crossed enemy; on a 2+, inflict that much mortal damage, then gain 2 momentum.", "Once Per Turn (Army)", ["Core", "Move", "Rampage"]) },
-    { id: "maw-grunta-gougers", name: "Maw-grunta Gougers", points: 200, ability: ability("Flattened into the Mud", "Any Combat Phase", "After charging, pick an enemy within 1\", roll and add momentum. On a 5+, it has Strike-last for the rest of the turn.", "Once Per Turn (Army)", ["Rampage"]) },
+    { id: "maw-grunta-gougers", name: "Maw-grunta Gougers", points: 200, image: "/images/factions/ironjawz-army.webp", ability: ability("Flattened into the Mud", "Any Combat Phase", "After charging, pick an enemy within 1\", roll and add momentum. On a 5+, it has Strike-last for the rest of the turn.", "Once Per Turn (Army)", ["Rampage"]) },
   ].map((entry) => make({
-    id: entry.id, name: entry.name, points: entry.points,
+    id: entry.id, name: entry.name, points: entry.points, image: entry.image,
     move: '10"', health: 12, control: 5, save: "3+", baseSize: "120 × 92mm",
     keywords: ["Monster", "Destruction", "Ironjawz", "Maw-grunta"],
     rules: { monster: true, companion: true, canBeReinforced: false },

@@ -68,6 +68,7 @@ export function normalizeFaction(faction) {
 
   normalized.spellLores = normalized.spellLores.map(normalizeSpellLore);
   normalized.prayerLores = normalized.prayerLores.map(normalizePrayerLore);
+  normalized.units = normalized.units.map(normalizeUnit);
   normalized.manifestations = normalized.manifestations.map(normalizeManifestation);
   normalized.manifestationLores = normalizeManifestationLores({
     faction,
@@ -85,6 +86,55 @@ export function normalizeFaction(faction) {
     ...faction,
     ...normalized,
   };
+}
+
+function normalizeUnit(unit) {
+  return {
+    ...unit,
+    weapons: asArray(unit?.weapons),
+    abilities: asArray(unit?.abilities).map(normalizeAbility),
+    keywords: unique(asArray(unit?.keywords)),
+    details: {
+      ...unit?.details,
+      regimentOptions: asArray(unit?.details?.regimentOptions),
+      canJoinRegimentAs: asArray(unit?.details?.canJoinRegimentAs),
+    },
+  };
+}
+
+function normalizeAbility(ability) {
+  const description = String(ability?.description ?? "");
+  const keywords = unique(asArray(ability?.keywords));
+  const type = String(ability?.type ?? "Ability");
+  const isSpell = type.toLowerCase() === "spell" ||
+    keywords.some((keyword) => String(keyword).toLowerCase() === "spell");
+  const isPrayer = type.toLowerCase() === "prayer" ||
+    keywords.some((keyword) => String(keyword).toLowerCase() === "prayer");
+
+  return {
+    ...ability,
+    keywords,
+    castingValue: ability?.castingValue ??
+      (isSpell ? inferAbilityValue(description, "Spell", "casting") : null),
+    chantingValue: ability?.chantingValue ??
+      (isPrayer ? inferAbilityValue(description, "Prayer", "chanting") : null),
+  };
+}
+
+function inferAbilityValue(description, label, rollName) {
+  const patterns = [
+    new RegExp(`${label}\\s*\\(\\s*(\\d+)\\s*\\)`, "i"),
+    new RegExp(`${rollName} value(?: of)?\\s*(\\d+)`, "i"),
+  ];
+
+  for (const pattern of patterns) {
+    const match = description.match(pattern);
+    if (match) {
+      return Number(match[1]);
+    }
+  }
+
+  return null;
 }
 
 function normalizeArmyRules(rules, baseManifestations) {
@@ -287,6 +337,85 @@ export function getFactionValidationErrors(faction) {
     if (!Array.isArray(faction?.[field])) {
       errors.push(`${field} is not an array`);
     }
+  });
+
+  faction?.boonsOfShadow?.forEach((boon) => {
+    if (!Number.isFinite(boon?.points) || boon.points <= 0) {
+      errors.push(`boon of shadow missing points: ${boon?.id ?? "missing id"}`);
+    }
+  });
+
+  const unitIds = new Set();
+  faction?.units?.forEach((unit) => {
+    const label = unit?.id ?? "missing id";
+
+    if (!unit?.id || !unit?.name) {
+      errors.push(`unit missing id or name: ${label}`);
+    }
+    if (unitIds.has(unit?.id)) {
+      errors.push(`duplicate unit id: ${unit.id}`);
+    }
+    unitIds.add(unit?.id);
+
+    if (!Number.isFinite(unit?.points) || unit.points < 0) {
+      errors.push(`unit has invalid points: ${label}`);
+    }
+    if (!unit?.image) {
+      errors.push(`unit missing image: ${label}`);
+    }
+    if (
+      unit?.profile?.move == null ||
+      !Number.isFinite(unit?.profile?.health) ||
+      unit?.profile?.control == null ||
+      unit?.profile?.save == null
+    ) {
+      errors.push(`unit missing profile: ${label}`);
+    }
+    if (
+      !Number.isFinite(unit?.details?.models) ||
+      !unit?.details?.baseSize ||
+      !Array.isArray(unit?.details?.regimentOptions) ||
+      !Array.isArray(unit?.details?.canJoinRegimentAs)
+    ) {
+      errors.push(`unit missing composition details: ${label}`);
+    }
+    if (
+      !Array.isArray(unit?.weapons) ||
+      !Array.isArray(unit?.abilities) ||
+      !Array.isArray(unit?.keywords)
+    ) {
+      errors.push(`unit collections are invalid: ${label}`);
+      return;
+    }
+
+    unit.weapons.forEach((weapon) => {
+      if (
+        !weapon?.name ||
+        !weapon?.type ||
+        weapon?.attacks == null ||
+        weapon?.hit == null ||
+        weapon?.wound == null ||
+        weapon?.rend == null ||
+        weapon?.damage == null ||
+        !Array.isArray(weapon?.abilities)
+      ) {
+        errors.push(`invalid weapon on ${label}: ${weapon?.name ?? "unnamed"}`);
+      }
+    });
+
+    unit.abilities.forEach((ability) => {
+      if (!ability?.name || !ability?.type || !ability?.description) {
+        errors.push(`invalid ability on ${label}: ${ability?.name ?? "unnamed"}`);
+      }
+
+      const isSpell = String(ability?.type).toLowerCase() === "spell" ||
+        ability?.keywords?.some(
+          (keyword) => String(keyword).toLowerCase() === "spell"
+        );
+      if (isSpell && !Number.isFinite(ability?.castingValue)) {
+        errors.push(`spell missing casting value on ${label}: ${ability.name}`);
+      }
+    });
   });
 
   faction?.spellLores?.forEach((lore) => {

@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 
 import {
   canUnitJoinRegiment,
+  getAvailableRegimentLeaders,
+  getAvailableUnitsForRegiment,
   getRegimentCompositionErrors,
   hasIllegalRegimentComposition,
 } from "./regimentRules.js";
@@ -185,5 +187,192 @@ test("applies the Lumineth Paragon limit while still allowing Vanari units", () 
       unit: dawnriders,
     }),
     true
+  );
+});
+
+test("supports the Nurgle regiment option labels used by Rotbringer heroes", () => {
+  const list = makeList(["Any Rotbringers", "Any Maggotkin of Nurgle"]);
+  const blightking = {
+    id: "putrid-blightking",
+    name: "Putrid Blightking",
+    keywords: ["Rotbringers", "Maggotkin of Nurgle", "Infantry"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+
+  assert.equal(canUnitJoinRegiment({
+    list,
+    regiment: list.regiments[0],
+    unit: blightking,
+  }), true);
+});
+
+test("resolves Karanak and Bloodbound aliases to their exact units or roles", () => {
+  const karanakList = makeList(["Any Claws of Karanak", "Any Flesh Hounds"]);
+  const claws = {
+    id: "claws-of-karanak",
+    name: "Claws of Karanak",
+    keywords: ["Infantry"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const warmongerList = makeList(["Any Bloodbound Warmonger"]);
+  const warmonger = {
+    ...hero("bloodstoker", "bloodbound-warmonger"),
+    keywords: ["Hero", "Bloodbound"],
+  };
+
+  assert.equal(canUnitJoinRegiment({
+    list: karanakList,
+    regiment: karanakList.regiments[0],
+    unit: claws,
+  }), true);
+  assert.equal(canUnitJoinRegiment({
+    list: warmongerList,
+    regiment: warmongerList.regiments[0],
+    unit: warmonger,
+  }), true);
+});
+
+test("restricts zero-point companion units to their required leaders", () => {
+  const tollsCompanions = {
+    id: "tolls-companions",
+    name: "Toll's Companions",
+    keywords: ["Unique", "Infantry", "Sigmarite"],
+    rules: { unique: true },
+    details: { canJoinRegimentAs: [] },
+  };
+  const wrongList = makeList(["Any Sigmarite"]);
+  const callis = {
+    ...hero("callis-and-toll"),
+    keywords: ["Hero", "Sigmarite"],
+    details: { regimentOptions: ["Any Sigmarite"], canJoinRegimentAs: [] },
+  };
+  const rightList = {
+    faction: { units: [] },
+    regiments: [{ id: "callis", hero: callis, units: [] }],
+  };
+
+  assert.equal(canUnitJoinRegiment({
+    list: wrongList,
+    regiment: wrongList.regiments[0],
+    unit: tollsCompanions,
+  }), false);
+  assert.equal(canUnitJoinRegiment({
+    list: rightList,
+    regiment: rightList.regiments[0],
+    unit: tollsCompanions,
+  }), true);
+
+  rightList.regiments[0].units.push({
+    ...tollsCompanions,
+    instanceId: "tolls-1",
+  });
+  assert.equal(canUnitJoinRegiment({
+    list: rightList,
+    regiment: rightList.regiments[0],
+    unit: tollsCompanions,
+  }), false);
+});
+
+test("requires Gunnar Brand for both Oathsworn dependent units", () => {
+  const gunnar = {
+    ...hero("gunnar-brand"),
+    keywords: ["Hero", "Darkoath"],
+    details: {
+      regimentOptions: ["Singri Brand", "The Oathsworn Kin", "Any Darkoath"],
+      canJoinRegimentAs: [],
+    },
+  };
+  const list = {
+    faction: { units: [] },
+    regiments: [{ id: "gunnar", hero: gunnar, units: [] }],
+  };
+  const oathsworn = {
+    id: "oathsworn-kin",
+    name: "The Oathsworn Kin",
+    keywords: ["Unique", "Infantry", "Darkoath"],
+    rules: { unique: true },
+    details: { canJoinRegimentAs: [] },
+  };
+
+  assert.equal(canUnitJoinRegiment({
+    list,
+    regiment: list.regiments[0],
+    unit: oathsworn,
+  }), true);
+
+  const invalid = makeList(["Any Darkoath"], [oathsworn]);
+  assert.equal(hasIllegalRegimentComposition(invalid), true);
+});
+
+test("requires Command Corps Adjutants and limits each free attachment", () => {
+  const auxiliaries = {
+    id: "freeguild-command-auxiliaries",
+    name: "Freeguild Command Corps: Auxiliaries",
+    keywords: ["Infantry", "Sigmarite"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const adjutants = {
+    id: "freeguild-command-adjutants",
+    name: "Freeguild Command Corps: Adjutants",
+    keywords: ["Infantry", "Sigmarite"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const list = makeList(["Any Sigmarite"]);
+
+  assert.equal(canUnitJoinRegiment({
+    list,
+    regiment: list.regiments[0],
+    unit: auxiliaries,
+  }), false);
+
+  list.regiments[0].units.push(adjutants);
+  assert.equal(canUnitJoinRegiment({
+    list,
+    regiment: list.regiments[0],
+    unit: auxiliaries,
+  }), true);
+
+  list.regiments[0].units.push(auxiliaries);
+  assert.equal(canUnitJoinRegiment({
+    list,
+    regiment: list.regiments[0],
+    unit: auxiliaries,
+  }), false);
+});
+
+test("excludes Legends units from matched-play leaders and regiment choices", () => {
+  const leader = {
+    ...hero("current-leader"),
+    details: { regimentOptions: ["Any Kruleboyz"], canJoinRegimentAs: [] },
+  };
+  const legendLeader = {
+    ...hero("legend-leader"),
+    source: "Battletome Supplement / Legends",
+    details: { regimentOptions: ["Any Kruleboyz"], canJoinRegimentAs: [] },
+  };
+  const legendUnit = {
+    id: "legend-unit",
+    name: "Legend Unit",
+    source: "Legends",
+    keywords: ["Kruleboyz", "Infantry"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const list = {
+    faction: { units: [leader, legendLeader, legendUnit] },
+    regiments: [],
+  };
+
+  assert.deepEqual(
+    getAvailableRegimentLeaders(list).map((unit) => unit.id),
+    ["current-leader"]
+  );
+  assert.deepEqual(
+    getAvailableUnitsForRegiment(list, { hero: leader, units: [] }),
+    []
   );
 });

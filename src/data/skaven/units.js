@@ -10,13 +10,13 @@ const weapon = (name, type, attacks, hit, wound, rend, damage, abilities = [], r
   abilities,
 });
 
-const ability = (name, phase, description, type = "Ability", keywords = []) => ({
+const ability = (name, phase, description, type = "Ability", keywords = [], castingValue = null) => ({
   name,
   phase,
   type,
   description,
   keywords,
-  castingValue: null,
+  castingValue,
   lore: null,
 });
 
@@ -31,6 +31,8 @@ const commonRules = {
   companion: false,
   canBeReinforced: true,
 };
+
+const plagueclawBarrage = "Each time this unit uses a Shoot ability, if all its attacks targeted the same enemy unit, after that ability is resolved roll a die. If the result is less than or equal to the number of models slain in that enemy unit by this unit's Plagueclaw Catapult attacks that phase, that enemy unit has Strike-last for the rest of the turn.";
 
 function createUnit({
   id,
@@ -124,7 +126,7 @@ const units = [
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, Warpfire Braziers has 4 Attacks.", "Passive"),
       ability("Staff of the Horned Rat", null, "Add 1 to casting rolls for this unit.", "Passive"),
-      ability("Terrible Madness", "Your Hero Phase", "Spell: an enemy within 13\" cannot use commands until your next turn; roll one dice per model and inflict a mortal damage for each 6.", "Spell", ["Spell"]),
+      ability("Terrible Madness", "Your Hero Phase", "Pick a visible enemy unit within 13\". Until your next turn, it cannot use commands. Then, roll one die for each model in it; for each 6, inflict 1 mortal damage on it.", "Spell", ["Spell"], 7),
       ability("Boneripper Rampage", "Any Combat Phase", "On a 3-5 inflict D3 mortal damage on an enemy in combat; on a 6 inflict 2D3.", "Once Per Turn (Army)", ["Rampage"]),
       ability("Warp-amulet", "End of Any Turn", "Heal (D3) this unit."),
     ],
@@ -140,7 +142,7 @@ const units = [
     weapons: [weapon("Glaive of the Rat King", "Melee", 7, "3+", "2+", "2", "3", ["Crit (2 Hits)"])],
     abilities: [
       ability("The Thirteen-headed One", "Your Hero Phase", "Choose a different clan boon each battle round: improve Masterclan casting, Verminus charges, Skryre shooting, Eshin Rend, Pestilens chanting or heal Moulder units."),
-      ability("The Dreaded Thirteenth Spell", "Your Hero Phase", "Spell: roll 13 dice against an enemy within 13\". Each 5+ inflicts 1 mortal damage and can return a Clanrat model.", "Spell", ["Spell"]),
+      ability("The Dreaded Thirteenth Spell", "Your Hero Phase", "Pick a visible enemy unit within 13\" and roll 13 dice. For each 5+, inflict 1 mortal damage on it and you can return 1 slain model to a friendly Clanrats unit wholly within 13\".", "Spell", ["Spell"], 7),
       ability("Terrifying Monstrosity", "Any Combat Phase", "On a 3+, an enemy Infantry unit cannot use commands and loses control equal to the roll.", "Once Per Turn (Army)", ["Rampage"]),
     ],
   }),
@@ -191,7 +193,7 @@ const units = [
             : [
                 ability("Arch-manipulator", "Any Combat Phase", "On a 4+, an enemy in combat has Strike-last for the rest of the turn.", "Once Per Turn (Army)", ["Rampage"]),
                 ability("Hurl Scry-orb", "Any Combat Phase", "Once per battle, disable Divine the Future and on a 2+ inflict mortal damage equal to the roll on an enemy in combat.", "Once Per Battle"),
-                ability("Tectonic Splintering", "Your Hero Phase", "Spell: subtract 1 from the number of dice rolled for charge rolls made by a visible enemy within 18\" until your next turn.", "Spell", ["Spell"]),
+                ability("Tectonic Splintering", "Your Hero Phase", "Pick a visible enemy unit within 18\". Until your next turn, subtract 1 from the number of dice rolled for its charge rolls, to a minimum of 1.", "Spell", ["Spell"], 7),
               ]),
     ],
   })),
@@ -219,8 +221,8 @@ const units = [
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, Crushing Bulk has 4 Attacks.", "Passive"),
       ability("Altar of the Horned Rat", null, "Friendly Skaven Infantry units have Ward (6+) while wholly within 13\".", "Passive"),
-      ability("Peal of Doom", "Your Hero Phase", "Roll for magical backlash, a wall of unholy sound or apocalyptic mortal damage."),
-      ability("Cracks Call", "Your Hero Phase", "Spell: if the casting roll exceeds an enemy's Move, inflict mortal damage equal to the difference.", "Spell", ["Spell"]),
+      ability("Peal of Doom", "Your Hero Phase", "Roll a die. On a 1, inflict D3 mortal damage on this unit. On a 2-4, until your next turn subtract 1 from hit rolls for combat attacks made by enemy units wholly within 13\". On a 5-6, roll a D3 for each enemy unit within 13\"; on a 2+, inflict mortal damage equal to that roll on it."),
+      ability("Cracks Call", "Your Hero Phase", "Pick a visible enemy unit that does not have Fly and is within 13\". If the casting roll exceeds its Move characteristic, inflict mortal damage equal to the difference.", "Spell", ["Spell"], 6),
     ],
   }),
   createUnit({
@@ -402,7 +404,7 @@ const units = [
     keywords: entry.clans,
     rules: { monster: entry.clans.includes("Monster"), priest: entry.id === "plaguepack" ? 1 : 0, ward: entry.ward ?? null, canBeReinforced: entry.reinforce !== false },
     weapons: entry.weapons,
-    abilities: [ability(entry.abilityName, entry.abilityPhase ?? (entry.abilityName.includes("Hidden") ? null : "Ability"), entry.abilityText, entry.abilityType ?? (entry.abilityName.includes("Hidden") ? "Passive" : "Ability")), ...(entry.extraAbilities ?? [])],
+    abilities: [ability(entry.abilityName, entry.abilityPhase ?? (entry.abilityName.includes("Hidden") ? null : "Ability"), entry.id === "plagueclaw" ? plagueclawBarrage : entry.abilityText, entry.abilityType ?? (entry.abilityName.includes("Hidden") ? "Passive" : "Ability")), ...(entry.extraAbilities ?? [])],
   })),
 ];
 

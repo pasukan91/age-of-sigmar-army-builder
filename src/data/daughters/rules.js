@@ -80,9 +80,9 @@ export const artefacts = [
 ];
 
 export const boonsOfShadow = [
-  enhancement("ulguan-reactions", "Ulguan Reactions", "Each unmodified save roll of 6 against a combat attack inflicts 1 mortal damage on the attacking unit after its Fight ability resolves.", null, "Aqshy"),
-  enhancement("talismans-of-shadow", "Talismans of Shadow", "When you declare a Spell, Prayer or Unbind for a unit within 3\", spend 1 rage die. If your opponent's fury is lower, they increase it by 1, then add 1 to that roll.", "Reaction: Spell, Prayer or Unbind", "Aqshy"),
-  enhancement("tenebrous-aura", "Tenebrous Aura", "Pick an enemy in combat. It cannot Retreat and cannot be healed or have slain models returned for the rest of the turn.", "Start of Any Turn", "Aqshy"),
+  { ...enhancement("ulguan-reactions", "Ulguan Reactions", "Each unmodified save roll of 6 against a combat attack inflicts 1 mortal damage on the attacking unit after its Fight ability resolves.", null, "Aqshy"), points: 10 },
+  { ...enhancement("talismans-of-shadow", "Talismans of Shadow", "When you declare a Spell, Prayer or Unbind for a unit within 3\", spend 1 rage die. If your opponent's fury is lower, they increase it by 1, then add 1 to that roll.", "Reaction: Spell, Prayer or Unbind", "Aqshy"), points: 10 },
+  { ...enhancement("tenebrous-aura", "Tenebrous Aura", "Pick an enemy in combat. It cannot Retreat and cannot be healed or have slain models returned for the rest of the turn.", "Start of Any Turn", "Aqshy"), points: 10 },
 ];
 
 export const spellLores = [{

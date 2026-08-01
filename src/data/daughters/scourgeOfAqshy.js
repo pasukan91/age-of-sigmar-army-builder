@@ -18,7 +18,7 @@ const scourgeUnits = [
     id: "melusai-ironscale-scourge-of-aqshy",
     name: "Scourge of Aqshy Melusai Ironscale",
     points: 140,
-    details: { regimentOptions: ["Any Daughters of Khaine"], canJoinRegimentAs: [], notes: legalNote },
+    details: { regimentOptions: ["Any Daughters of Khaine"], canJoinRegimentAs: ["coven-matriarch"], notes: legalNote },
     weapons: [weapon("Keldrisaith", "Melee", 6, "3+", "4+", "1", "2", ["Crit (Mortal)"])],
     abilities: [ability("Frenzied Slaughter", "Your Hero Phase", "Pick a visible friendly Daughters of Khaine unit wholly within 12\" and roll a die, re-rolling if this unit is in combat. If the roll is lower than your fury level, add 1 to the Attacks of weapons used by this unit and the target until your next turn.", "Once Per Turn (Army)", ["Exalted"])],
   }),

@@ -20,7 +20,7 @@ const units = [
     w("Mighty Axe and Bloodflail","Melee",6,"3+","2+",2,4,["Anti-Hero (+1 Rend)",hungry]),
   ],[
     a("Battle Damaged","Passive","While this unit has 10 or more damage points, the Attacks characteristic of its Mighty Axe and Bloodflail is 4."),
-    a("Wrathful Dominance","Passive","+1 a impactar contra Heroes."),
+    a("Wrathful Dominance","Passive","Add 1 to hit rolls for this unit's attacks that target Heroes."),
     a("Vengeance Unleashed","Any Combat Phase","Pick an enemy Hero in combat with this unit and roll 8 dice. For each 4+, inflict 1 mortal damage on that Hero.","Once Per Turn (Army), Rampage"),
     a("Commander of Tyrants","Any Combat Phase","Pick another visible friendly non-Unique Khorne Daemon unit. Add 1 to the Attacks characteristic of that unit's combat weapons this turn.","Once Per Turn (Army)"),
   ],["0-1 Slaughter Seeker","0-1 Baleful Lord","Any Blades of Khorne"]),
