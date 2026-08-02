@@ -6,10 +6,10 @@
 - Unidades presentes en la app: 653.
 - Coincidencias inequívocas con el catálogo: 637.
 - Coincidencias ambiguas: 0.
-- Diferencias restantes en perfiles, armas, habilidades o descripciones entre las 637 coincidencias: 0.
+- Diferencias restantes entre las 637 coincidencias: 0. La segunda pasada exige igualdad literal para nombres, lore, notas, opciones de equipo, palabras clave, nombres de armas, habilidades de arma, nombres de habilidades y sus descripciones completas; no ignora mayúsculas, puntuación ni formato en esos textos.
 - Entradas locales sin coincidencia automática: 16; se enumeran al final para comprobación manual.
 
-La importación conserva movimiento, salud, salvación, control, ward, modelos, peana, puntos, armas completas, habilidades y sus textos, palabras clave, opciones de regimiento y restricciones. También se han incorporado rasgos de batalla, formaciones, rasgos heroicos, artefactos, saberes, plegarias, manifestaciones y terreno de facción cuando existen en la fuente.
+La importación conserva movimiento, salud, salvación, control, ward, modelos, peana, puntos, armas completas, habilidades y sus textos íntegros, palabras clave, opciones de regimiento y restricciones. También se han incorporado directamente desde la fuente rasgos de batalla, formaciones, rasgos heroicos, artefactos, saberes, plegarias, manifestaciones y terreno de facción cuando existen.
 
 ## Facciones añadidas por battletome de cuarta edición
 

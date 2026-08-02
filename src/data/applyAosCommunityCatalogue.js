@@ -19,6 +19,8 @@ export function applyAosCommunityCatalogue(unit, factionName) {
 
   return {
     ...unit,
+    name: source.name ?? unit.name,
+    lore: source.lore ?? unit.lore,
     points: source.points ?? unit.points,
     profile: {
       ...unit.profile,
@@ -28,7 +30,7 @@ export function applyAosCommunityCatalogue(unit, factionName) {
       ...unit.details,
       ...source.details,
     },
-    keywords: [...new Set([...(unit.keywords ?? []), ...source.keywords])],
+    keywords: source.keywords,
     weapons: source.weapons,
     abilities: source.abilities,
     catalogueSource: {

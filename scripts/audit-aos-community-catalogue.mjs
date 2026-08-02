@@ -111,6 +111,7 @@ function abilityDescription(ability) {
   if (ability.usedBy) sections.push(`Used By: ${ability.usedBy}`);
   if (ability.declare) sections.push(`Declare: ${ability.declare}`);
   if (ability.effect) sections.push(`Effect: ${ability.effect}`);
+  if (ability.additionalRulesText) sections.push(ability.additionalRulesText);
   return sections.join("\n\n") || ability.lore || "Sin descripción.";
 }
 
@@ -151,6 +152,8 @@ function generatedWeapon(weapon) {
 function generatedUnit(warscroll) {
   return {
     sourceId: warscroll.id,
+    name: warscroll.name,
+    lore: warscroll.lore,
     points: warscroll.points,
     profile: {
       move: warscroll.move,
@@ -162,6 +165,8 @@ function generatedUnit(warscroll) {
     details: {
       models: warscroll.modelCount,
       baseSize: warscroll.baseSize,
+      notes: warscroll.notes,
+      wargearOptionsText: warscroll.wargearOptionsText,
     },
     keywords: sourceKeywords(warscroll),
     weapons: (weaponsByWarscroll.get(warscroll.id) ?? []).map(generatedWeapon),
@@ -171,6 +176,23 @@ function generatedUnit(warscroll) {
 
 function diffUnit(appUnit, source) {
   const differences = [];
+  if (String(appUnit.name ?? "") !== String(source.name ?? "")) {
+    differences.push(`name: app=${JSON.stringify(appUnit.name)}, catÃ¡logo=${JSON.stringify(source.name)}`);
+  }
+  if (String(appUnit.lore ?? "") !== String(source.lore ?? "")) {
+    differences.push("lore: texto distinto");
+  }
+  if (String(appUnit.details?.notes ?? "") !== String(source.notes ?? "")) {
+    differences.push("notes: texto distinto");
+  }
+  if (String(appUnit.details?.wargearOptionsText ?? "") !== String(source.wargearOptionsText ?? "")) {
+    differences.push("wargearOptionsText: texto distinto");
+  }
+  const appKeywords = [...(appUnit.keywords ?? [])].sort();
+  const authoritativeKeywords = sourceKeywords(source).sort();
+  if (appKeywords.join(";") !== authoritativeKeywords.join(";")) {
+    differences.push("keywords: listado distinto");
+  }
   const checks = [
     ["points", appUnit.points, source.points],
     ["move", appUnit.profile.move, source.move],
@@ -204,6 +226,9 @@ function diffUnit(appUnit, source) {
       normalized(weapon.type) === normalized(appWeapon.type)
     );
     if (!sourceWeapon) continue;
+    if (String(appWeapon.name) !== String(sourceWeapon.name)) {
+      differences.push(`${sourceWeapon.name}: nombre de arma no literal`);
+    }
     for (const field of ["range", "attacks", "hit", "wound", "rend", "damage"]) {
       if (comparable(appWeapon[field]) !== comparable(sourceWeapon[field])) {
         differences.push(
@@ -212,8 +237,8 @@ function diffUnit(appUnit, source) {
         );
       }
     }
-    const sourceAbilities = generatedWeapon(sourceWeapon).abilities.map(normalized).sort();
-    const appAbilities = (appWeapon.abilities ?? []).map(normalized).sort();
+    const sourceAbilities = generatedWeapon(sourceWeapon).abilities;
+    const appAbilities = appWeapon.abilities ?? [];
     if (sourceAbilities.join(";") !== appAbilities.join(";")) {
       differences.push(
         `${appWeapon.name} habilidades de arma: app=[${appWeapon.abilities.join(", ")}], ` +
@@ -234,8 +259,11 @@ function diffUnit(appUnit, source) {
   for (const appAbility of appUnit.abilities) {
     const sourceAbility = sourceAbilities.find((ability) => normalized(ability.name) === normalized(appAbility.name));
     if (!sourceAbility) continue;
-    const current = normalized(appAbility.description);
-    const authoritative = normalized(abilityDescription(sourceAbility));
+    if (String(appAbility.name) !== String(sourceAbility.name)) {
+      differences.push(`${sourceAbility.name}: nombre de habilidad no literal`);
+    }
+    const current = String(appAbility.description ?? "");
+    const authoritative = abilityDescription(sourceAbility);
     if (current !== authoritative) differences.push(`${appAbility.name}: texto de habilidad distinto`);
   }
   return differences;
