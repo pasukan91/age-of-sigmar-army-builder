@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import BuilderHeader from "../components/armybuilder/BuilderHeader";
 import BuilderOption from "../components/armybuilder/BuilderOption";
@@ -85,7 +85,15 @@ function ArmyBuilder({
     calculateArmyPoints(list);
   const validation = validateArmyList(list);
   const swipeStart = useRef(null);
+  const resetScrollOnSectionChange = useRef(false);
   const activeTabIndex = BUILDER_TABS.findIndex(([id]) => id === section);
+
+  useEffect(() => {
+    if (!resetScrollOnSectionChange.current) return;
+
+    resetScrollOnSectionChange.current = false;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [section]);
 
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
     ? []
@@ -164,7 +172,14 @@ function ArmyBuilder({
     const currentIndex = BUILDER_TABS.findIndex(([id]) => id === section);
     const nextIndex = deltaX < 0 ? currentIndex + 1 : currentIndex - 1;
     const nextSection = BUILDER_TABS[nextIndex]?.[0];
-    if (nextSection) onSectionChange?.(nextSection);
+    if (nextSection) changeSection(nextSection);
+  }
+
+  function changeSection(nextSection) {
+    if (!nextSection || nextSection === section) return;
+
+    resetScrollOnSectionChange.current = true;
+    onSectionChange?.(nextSection);
   }
 
   return (
@@ -208,7 +223,7 @@ function ArmyBuilder({
             key={id}
             type="button"
             className={section === id ? "is-active" : ""}
-            onClick={() => onSectionChange?.(id)}
+            onClick={() => changeSection(id)}
             aria-current={section === id ? "page" : undefined}
           >
             <span aria-hidden="true">{icon}</span>
