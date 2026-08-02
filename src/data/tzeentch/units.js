@@ -8,7 +8,7 @@ const heroRules = (wizard = 1, extra = {}) => ({ hero: true, wizard, canBeReinfo
 const units = [
   createUnit({
     id: "kairos-fateweaver", name: "Kairos Fateweaver", points: 400,
-    move: '10"', health: 14, control: 5, save: "4+", ward: "5+", baseSize: "100mm",
+    move: '12"', health: 16, control: 5, save: "5+", ward: "5+", baseSize: "100mm",
     regimentOptions: ["0-1-tzeentchian-deceiver", "0-1-arcanite-cabalist", ...anyTzeentch],
     keywords: ["Warmaster", "Unique", "Hero", "Monster", "Wizard (3)", "Fly", "Ward (5+)", "Daemon"],
     rules: heroRules(3, { unique: true, monster: true, warmaster: true, ward: "5+" }),
@@ -26,7 +26,7 @@ const units = [
   }),
   createUnit({
     id: "lord-of-change", name: "Lord of Change", points: 380,
-    move: '10"', health: 14, control: 5, save: "4+", ward: "5+", baseSize: "100mm",
+    move: '12"', health: 14, control: 5, save: "5+", ward: "5+", baseSize: "100mm",
     regimentOptions: ["0-1-tzeentchian-deceiver", "0-1-arcanite-cabalist", ...anyTzeentch],
     keywords: ["Hero", "Monster", "Wizard (3)", "Fly", "Ward (5+)", "Daemon"],
     rules: heroRules(3, { monster: true, ward: "5+" }),
@@ -44,7 +44,7 @@ const units = [
   createUnit({
     id: "the-changeling", name: "The Changeling", points: 140,
     imageAlias: "changeling",
-    move: '5"', health: 5, control: 2, save: "5+", ward: "5+", baseSize: "40mm",
+    move: '5"', health: 6, control: 2, save: "5+", ward: "5+", baseSize: "40mm",
     regimentOptions: anyDaemon, canJoinRegimentAs: ["tzeentchian-deceiver"],
     keywords: ["Unique", "Hero", "Wizard (2)", "Infantry", "Ward (5+)", "Daemon"],
     rules: heroRules(2, { unique: true, ward: "5+" }),
@@ -57,7 +57,7 @@ const units = [
   }),
   createUnit({
     id: "fateskimmer", name: "Fateskimmer, Herald of Tzeentch on Burning Chariot", points: 140,
-    move: '14"', health: 8, control: 2, save: "5+", ward: "6+", baseSize: "120 x 92mm",
+    move: '12"', health: 10, control: 2, save: "5+", ward: "6+", baseSize: "120 x 92mm",
     regimentOptions: ["0-1-tzeentchian-deceiver", ...anyDaemon],
     keywords: ["Hero", "Wizard (1)", "War Machine", "Fly", "Ward (6+)", "Daemon"],
     rules: heroRules(1, { ward: "6+" }),
@@ -72,7 +72,7 @@ const units = [
   }),
   createUnit({
     id: "changecaster", name: "Changecaster, Herald of Tzeentch", points: 140,
-    move: '5"', health: 5, control: 2, save: "5+", ward: "6+", baseSize: "32mm",
+    move: '5"', health: 5, control: 2, save: "6+", ward: "6+", baseSize: "32mm",
     regimentOptions: anyDaemon, canJoinRegimentAs: ["tzeentchian-deceiver"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Daemon"],
     rules: heroRules(1, { ward: "6+" }),
@@ -84,7 +84,7 @@ const units = [
   }),
   createUnit({
     id: "gaunt-summoner-on-disc", name: "Gaunt Summoner on Disc of Tzeentch", points: 210,
-    imageAlias: "gaunt_summoner_disc", move: '14"', health: 7, control: 2, save: "4+", ward: "5+", baseSize: "40mm",
+    imageAlias: "gaunt_summoner_disc", move: '14"', health: 7, control: 2, save: "5+", ward: "5+", baseSize: "40mm",
     regimentOptions: ["0-1-tzeentchian-deceiver", ...anyTzeentch],
     keywords: ["Hero", "Wizard (2)", "Cavalry", "Fly", "Ward (5+)", "Daemon"],
     rules: heroRules(2, { ward: "5+" }),
@@ -167,7 +167,7 @@ const units = [
   }),
   createUnit({
     id: "tzaangor-shaman", name: "Tzaangor Shaman", points: 130,
-    move: '14"', health: 6, control: 2, save: "4+", baseSize: "40mm",
+    move: '14"', health: 6, control: 2, save: "5+", baseSize: "40mm",
     regimentOptions: ["0-1-arcanite-cabalist", ...anyArcanite],
     keywords: ["Hero", "Wizard (1)", "Cavalry", "Fly", "Arcanite", "Warflock"],
     rules: heroRules(1),
@@ -179,14 +179,14 @@ const units = [
   }),
   createUnit({
     id: "burning-chariot", name: "Burning Chariot of Tzeentch", points: 120,
-    move: '14"', health: 8, control: 1, save: "5+", ward: "6+", baseSize: "120 x 92mm",
+    move: '12"', health: 8, control: 2, save: "5+", ward: "6+", baseSize: "120 x 92mm",
     keywords: ["War Machine", "Fly", "Ward (6+)", "Daemon"], rules: { ward: "6+", canBeReinforced: true },
     weapons: [weapon("Wyrdflame Blast", "Ranged", 4, "2+", "4+", "0", "D3", ["Anti-Infantry (+1 Rend)", "Shoot in Combat"], '16"'), weapon("Flaming Maws and Blue Horrors' Jabs", "Melee", 6, "4+", "3+", "0", "1"), weapon("Screamers' Lamprey Bites", "Melee", 6, "4+", "4+", "1", "1", ["Charge (+1 Damage)", "Companion"])],
     abilities: [ability("Fiery Death from Above", "Any Charge Phase", "After charging, roll D3. On 1 gain a fate point. On 2+, inflict that much mortal damage on an enemy within 1\" and immediately Retreat without suffering mortal damage.", "Once Per Turn (Army)")],
   }),
   createUnit({
     id: "exalted-flamer", name: "Exalted Flamer of Tzeentch", points: 120,
-    move: '9"', health: 4, control: 1, save: "5+", ward: "6+", baseSize: "75 x 42mm",
+    move: '9"', health: 5, control: 1, save: "5+", ward: "6+", baseSize: "75 x 42mm",
     keywords: ["Infantry", "Fly", "Ward (6+)", "Daemon"], rules: { ward: "6+" },
     weapons: [weapon("Wyrdflame Blast", "Ranged", 4, "2+", "4+", "0", "D3", ["Anti-Infantry (+1 Rend)", "Shoot in Combat"], '16"')],
     abilities: [
@@ -216,14 +216,14 @@ const units = [
   }),
   createUnit({
     id: "pink-horrors", name: "Pink Horrors", points: 170, models: 10,
-    move: '5"', health: 1, control: 1, save: "6+", ward: "6+", baseSize: "32mm",
+    move: '6"', health: 2, control: 1, save: "5+", ward: "6+", baseSize: "32mm",
     keywords: ["Infantry", "Champion", "Musician (1/10)", "Standard Bearer (1/10)", "Ward (6+)", "Daemon"], rules: { ward: "6+" },
     weapons: [weapon("Magical Flames", "Ranged", 2, "4+", "4+", "0", "1", [], '12"'), weapon("Taloned Hands", "Melee", 2, "4+", "4+", "0", "1")],
     abilities: [ability("Lunatic Demise", null, "Each slain model either returns up to 2 slain Blue Horrors to a visible friendly Blue/Brimstone unit within 12\", or on a 5+ inflicts 1 mortal damage on an enemy in combat.", "Passive")],
   }),
   createUnit({
     id: "blue-horrors-and-brimstone-horrors", name: "Blue Horrors and Brimstone Horrors", points: 120, models: 10,
-    move: '5"', health: 1, control: 1, save: "6+", ward: "6+", baseSize: "25mm",
+    move: '6"', health: 1, control: 1, save: "6+", ward: "6+", baseSize: "25mm",
     keywords: ["Infantry", "Ward (6+)", "Daemon"], rules: { ward: "6+" },
     weapons: [weapon("Magical Flames", "Ranged", 2, "4+", "4+", "0", "1", [], '12"'), weapon("Taloned Hands", "Melee", 2, "4+", "4+", "0", "1")],
     abilities: [
@@ -264,7 +264,7 @@ const units = [
   }),
   createUnit({
     id: "jade-obelisk", name: "Jade Obelisk", points: 100, models: 9,
-    move: '5"', health: 1, control: 1, save: "5+", baseSize: "32mm / 28.5mm",
+    move: '5"', health: 1, control: 1, save: "4+", baseSize: "32mm / 28.5mm",
     keywords: ["Infantry", "Champion (1/9)", "Arcanite"], rules: { canBeReinforced: false },
     weapons: [weapon("Antithete Bow", "Ranged", 1, "4+", "3+", "1", "1", [], '18"'), weapon("Mason's Tools", "Melee", 2, "4+", "3+", "0", "1", ["Anti-Faction Terrain (+1 Rend)"])],
     abilities: [
@@ -275,7 +275,7 @@ const units = [
   }),
   createUnit({
     id: "chaos-spawn", name: "Chaos Spawn of Tzeentch", points: 60,
-    move: "2D6", health: 5, control: 1, save: "5+", baseSize: "50mm",
+    move: '2D6"', health: 5, control: 1, save: "5+", baseSize: "50mm",
     keywords: ["Beast"],
     weapons: [weapon("Freakish Mutations", "Melee", "2D6", "5+", "4+", "0", "1")],
     abilities: [

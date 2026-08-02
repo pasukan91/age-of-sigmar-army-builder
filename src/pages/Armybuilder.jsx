@@ -10,6 +10,10 @@ import GameMode, { BattleMission } from "../components/armybuilder/GameMode";
 import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
 import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
+import {
+  ghb2026Battleplans,
+  ghb2026BattleTacticsCards,
+} from "../data/ghb2026";
 import { validateArmyList } from "../utils/armyValidation";
 
 import {
@@ -228,6 +232,34 @@ function ArmyBuilder({
       />
 
       <section className="aos-builder-options">
+        <BuilderOption
+          id="battleplan-option"
+          title="Battleplan"
+          value={list.battleplan?.name ?? "No seleccionado"}
+          image={list.battleplan?.image}
+          onClick={() =>
+            openSelector({
+              title: "Battleplan",
+              property: "battleplan",
+              options: ghb2026Battleplans,
+            })
+          }
+        />
+
+        <BuilderOption
+          id="battle-tactics-option"
+          title="Battle tactics"
+          value={formatBattleTactics(list.battleTactics)}
+          onClick={() =>
+            openSelector({
+              title: "Battle tactics",
+              property: "battleTactics",
+              options: ghb2026BattleTacticsCards,
+              ui: { maxSelections: 2 },
+            })
+          }
+        />
+
         {battleFormations.length > 0 && (
         <BuilderOption
           id="battle-formation-option"
@@ -488,6 +520,18 @@ function normalizeBuilderSection(section) {
     list: "army",
     regiments: "units",
   }[section] ?? section ?? "army";
+}
+
+function formatBattleTactics(value) {
+  const selected = Array.isArray(value)
+    ? value
+    : value
+      ? [value]
+      : [];
+
+  return selected.length > 0
+    ? selected.map((card) => card.name).join(" + ")
+    : "Ninguna seleccionada";
 }
 
 export default ArmyBuilder;

@@ -114,7 +114,7 @@ const units = [
     ],
   }),
   make({
-    id: "grove-guardian", name: "Grove Guardian", points: 220, move: '4"', health: 9, control: 2, save: "5+", baseSize: "105 × 70mm",
+    id: "grove-guardian", name: "Grove Guardian", points: 220, move: '4"', health: 7, control: 2, save: "5+", baseSize: "105 × 70mm",
     regimentOptions: ["Any Sylvaneth"],
     keywords: ["Hero", "Priest (2)", "Infantry", ...sylvaneth, "Forest Elder"],
     rules: { ...heroRules, priest: 2, companion: true },

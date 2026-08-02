@@ -27,7 +27,7 @@ const units = [
   }),
   make({
     id: "grell-firefist", name: "Grell Firefist", points: 150, ...pendingBase,
-    move: '6"', health: 8, control: 3, save: "5+",
+    move: '6"', health: 8, control: 3, save: "4+",
     regimentOptions: ["Any Gutbusters"],
     keywords: ["Unique", "Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { hero: true, unique: true, canBeReinforced: false },
@@ -43,7 +43,7 @@ const units = [
   }),
   make({
     id: "tyrant-on-glutthorn", name: "Tyrant on Glutthorn", points: 400, ...pendingBase,
-    move: '10"', health: 16, control: 8, save: "3+",
+    move: '10"', health: 16, control: 10, save: "3+",
     regimentOptions: ["0-1 Bloodpelt Hunter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { hero: true, monster: true, companion: true, canBeReinforced: false },
@@ -59,7 +59,7 @@ const units = [
   }),
   make({
     id: "tyrant", name: "Tyrant", points: 130,
-    move: '6"', health: 10, control: 3, save: "3+", baseSize: "50mm",
+    move: '6"', health: 8, control: 3, save: "4+", baseSize: "50mm",
     regimentOptions: ["0-1 Bloodpelt Hunter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { hero: true, canBeReinforced: false },
@@ -73,7 +73,7 @@ const units = [
   make({
     id: "maulbeast-cavalry", name: "Maulbeast Cavalry", points: 280, models: 2,
     baseSize: "90 × 52mm",
-    move: '10"', health: 5, control: 1, save: "3+",
+    move: '10"', health: 7, control: 3, save: "3+",
     keywords: ["Cavalry", "Champion", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { companion: true },
     weapons: [
@@ -94,7 +94,7 @@ const units = [
   }),
   make({
     id: "ironguts", name: "Ironguts", points: 210, models: 4,
-    move: '4"', health: 4, control: 2, save: "4+", baseSize: "40mm",
+    move: '6"', health: 4, control: 2, save: "4+", baseSize: "40mm",
     keywords: ["Infantry", "Champion", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     weapons: [weapon("Irongut Weapon", "Melee", 3, "4+", "2+", "2", "3")],
     abilities: [
@@ -104,7 +104,7 @@ const units = [
   }),
   make({
     id: "ironblaster", name: "Ironblaster", points: 160,
-    move: '6"', health: 16, control: 2, save: "4+", baseSize: "120 × 92mm",
+    move: '9"', health: 9, control: 2, save: "4+", baseSize: "120 × 92mm",
     keywords: ["War Machine", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { companion: true, canBeReinforced: false },
     weapons: [
@@ -116,7 +116,7 @@ const units = [
   }),
   make({
     id: "gnoblar-scraplauncher", name: "Gnoblar Scraplauncher", points: 120,
-    move: '6"', health: 9, control: 2, save: "4+", baseSize: "120 × 92mm",
+    move: '9"', health: 9, control: 2, save: "4+", baseSize: "120 × 92mm",
     keywords: ["War Machine", "Destruction", "Ogor Mawtribes"],
     rules: { companion: true, canBeReinforced: false },
     weapons: [
@@ -288,7 +288,7 @@ const units = [
   }),
   make({
     id: "redd-the-maw", name: "Redd the Maw", points: 400, ...pendingBase,
-    move: '6"', health: 18, control: 10, save: "5+", ward: "5+",
+    move: '6"', health: 18, control: 10, save: "4+", ward: "5+",
     regimentOptions: ["Any Mawseekers"],
     keywords: ["Unique", "Hero", "Wizard (2)", "Infantry", "Ward (5+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { hero: true, unique: true, wizard: 2, ward: "5+", canBeReinforced: false },
@@ -305,7 +305,7 @@ const units = [
   }),
   make({
     id: "butcher", name: "Butcher", points: 150,
-    move: '6"', health: 8, control: 3, save: "6+", ward: "6+", baseSize: "50mm",
+    move: '6"', health: 8, control: 3, save: "5+", ward: "6+", baseSize: "50mm",
     regimentOptions: ["0-1 Gnoblar Scraplauncher", "Any Gutbusters", "Any Gnoblars", "Any Gorger Mawpack"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { hero: true, wizard: 1, ward: "6+", canBeReinforced: false },
@@ -325,7 +325,7 @@ const units = [
   }),
   make({
     id: "gutseers", name: "Gutseers", points: 200, models: 3, ...pendingBase,
-    move: '6"', health: 5, control: 2, save: "6+", ward: "6+",
+    move: '6"', health: 4, control: 2, save: "5+", ward: "6+",
     keywords: ["Infantry", "Champion", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { ward: "6+" },
     weapons: [weapon("Gutseer's Tools", "Melee", 3, "4+", "2+", "2", "3")],
@@ -336,7 +336,7 @@ const units = [
   }),
   make({
     id: "gorger-mawpack", name: "Gorger Mawpack", points: 240, models: 5,
-    move: '9"', health: 6, control: 2, save: "5+", ward: "6+", baseSize: "50mm",
+    move: '6"', health: 5, control: 2, save: "6+", ward: "6+", baseSize: "50mm",
     keywords: ["Infantry", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { ward: "6+", canBeReinforced: false },
     weapons: [weapon("Clubs, Claws and Jaws", "Melee", 5, "4+", "2+", "1", "2", ["Anti-Infantry (+1 Rend)"])],

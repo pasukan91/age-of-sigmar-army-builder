@@ -241,7 +241,7 @@ const units = [
   ...[
     {
       id: "arch-warlock", name: "Arch-Warlock", points: 140, clan: "Skryre", options: ["clanrats", "any-skryre"],
-      move: '5"', health: 6, save: "4+", base: "32mm", wizard: 1,
+      move: '6"', health: 5, save: "4+", base: "32mm", wizard: 1,
       weapons: [
         weapon("Warpfire Gauntlet", "Ranged", 3, "4+", "2+", "2", "1", ["Shoot in Combat"], '10"'),
         weapon("Stormcage Halberd", "Melee", 3, "3+", "4+", "1", "2"),
@@ -408,4 +408,16 @@ const units = [
   })),
 ];
 
-export default units;
+const correctedProfiles = {
+  "acolyte-globadiers": { health: 2 },
+  "ratling-warpblaster": { health: 7, save: "4+" },
+  "warp-lightning-cannon": { save: "4+" },
+};
+
+export default units.map((unit) => ({
+  ...unit,
+  profile: {
+    ...unit.profile,
+    ...correctedProfiles[unit.id],
+  },
+}));

@@ -205,12 +205,12 @@ const units = [
   }),
   make({
     id: "beast-skewer-killbow", name: "Beast-skewer Killbow", points: 130,
-    move: '3"', health: 5, control: 2, save: "5+", baseSize: "90 × 52mm",
+    move: '5"', health: 5, control: 2, save: "5+", baseSize: "90 × 52mm",
     keywords: ["War Machine", "Destruction", "Kruleboyz"],
     rules: { canBeReinforced: false },
     weapons: [
-      weapon("Beast-skewer Bolts", "Ranged", 2, "4+", "2+", "2", "2D6", ["Anti-Monster (+1 Rend)", "Crit (Auto-wound)"], '24"'),
-      weapon("Jaggedy Blades", "Melee", 3, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
+      weapon("Beast-skewer Bolts", "Ranged", 2, "4+", "2+", "2", "D6", ["Anti-Monster (+1 Rend)", "Crit (Auto-wound)"], '24"'),
+      weapon("Jaggedy Blades", "Melee", 2, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
     ],
     abilities: [
       ability("Skewering Bolts", "Your Shooting Phase", "For the rest of the turn, the Damage characteristic of this unit's Beast-skewer Bolts is 6 if the target is a Monster.", "Once Per Turn (Army)"),
@@ -219,7 +219,7 @@ const units = [
   }),
   make({
     id: "marshcrawla-sloggoth", name: "Marshcrawla Sloggoth", points: 130,
-    move: '7"', health: 10, control: 2, save: "4+", baseSize: "105 × 70mm",
+    move: '6"', health: 10, control: 2, save: "4+", baseSize: "105 × 70mm",
     keywords: ["War Machine", "Destruction", "Kruleboyz"],
     rules: { companion: true, canBeReinforced: false },
     weapons: [

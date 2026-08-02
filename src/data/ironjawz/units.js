@@ -148,7 +148,7 @@ const units = [
   })),
   make({
     id: "gore-gruntas", name: "Gore-gruntas", points: 160, models: 3,
-    move: '9"', health: 5, control: 1, save: "3+", baseSize: "90 × 52mm",
+    move: '9"', health: 5, control: 2, save: "3+", baseSize: "90 × 52mm",
     keywords: ["Cavalry", "Champion", "Destruction", "Ironjawz"],
     weapons: [
       weapon("Choppa or Hacka", "Melee", 4, "4+", "3+", "1", "1", ["Anti-Cavalry (+1 Rend)"]),
@@ -161,7 +161,9 @@ const units = [
     { id: "maw-grunta-gougers", name: "Maw-grunta Gougers", points: 200, image: "/images/factions/ironjawz-army.webp", ability: ability("Flattened into the Mud", "Any Combat Phase", "After charging, pick an enemy within 1\", roll and add momentum. On a 5+, it has Strike-last for the rest of the turn.", "Once Per Turn (Army)", ["Rampage"]) },
   ].map((entry) => make({
     id: entry.id, name: entry.name, points: entry.points, image: entry.image,
-    move: '10"', health: 12, control: 5, save: "3+", baseSize: "120 × 92mm",
+    move: '10"', health: 12, control: 5,
+    save: entry.id === "maw-grunta-gougers" ? "4+" : "3+",
+    baseSize: "120 × 92mm",
     keywords: ["Monster", "Destruction", "Ironjawz", "Maw-grunta"],
     rules: { monster: true, companion: true, canBeReinforced: false },
     weapons: [

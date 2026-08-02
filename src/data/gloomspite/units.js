@@ -714,4 +714,35 @@ const units = [
   }),
 ];
 
-export default units;
+const correctedProfiles = {
+  "skragrott-the-loonking": { move: '5"', save: "6+" },
+  "loonboss": { save: "4+" },
+  "loonboss-on-giant-cave-squig": { health: 6, control: 5 },
+  "squigboss-with-gnasha-squig": { health: 4, save: "6+" },
+  "droggz-da-sunchompa": { health: 7 },
+  "frazzlegit-shaman-on-war-wheela": { health: 9 },
+  "snarlboss": { health: 5, save: "5+" },
+  "snarlboss-on-war-wheela": { health: 9 },
+  "webspinner-shaman": { move: '6"', health: 4 },
+  "gobbapalooza": { health: 3, control: 2 },
+  "sneaky-snufflers": { health: 2 },
+  "moonclan-stabbas": { save: "5+" },
+  "boingrot-bounderz": { health: 2, save: "5+" },
+  "dankhold-troggoth": { control: 5 },
+  "fellwater-troggoths": { control: 2 },
+  "rockgut-troggoths": { control: 2 },
+  "wolfgit-retinue": { health: 2, save: "5+" },
+  "doom-diver-catapult": { move: '5"', health: 12 },
+  "snarlpack-cavalry": { health: 3 },
+  "snarlfang-riders": { health: 2 },
+  "spider-riders": { control: 2 },
+  "arachnarok-spider-with-flinger": { health: 14, control: 5 },
+};
+
+export default units.map((unit) => ({
+  ...unit,
+  profile: {
+    ...unit.profile,
+    ...correctedProfiles[unit.id],
+  },
+}));

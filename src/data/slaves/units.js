@@ -143,10 +143,10 @@ const units = [
     id: "eternus",
     name: "Eternus, Blade of the First Prince",
     points: 160,
-    move: '16"',
-    health: 10,
+    move: '9"',
+    health: 9,
     control: 2,
-    save: "4+",
+    save: "3+",
     baseSize: "90×52mm",
     keywords: ["Unique", "Hero", "Cavalry"],
     regimentOptions: anySlaves,
@@ -163,9 +163,9 @@ const units = [
     name: "Centaurion Marshal",
     points: 120,
     move: '8"',
-    health: 9,
+    health: 10,
     control: 2,
-    save: "3+",
+    save: "4+",
     baseSize: "80mm",
     imageAlias: "centaurion_marshall",
     keywords: ["Hero", "Cavalry"],
@@ -179,7 +179,7 @@ const units = [
     id: "daemon-prince",
     name: "Daemon Prince",
     points: 230,
-    move: '5"',
+    move: '8"',
     health: 10,
     control: 5,
     save: "3+",
@@ -272,7 +272,7 @@ const units = [
     points: 120,
     health: 5,
     control: 2,
-    save: "5+",
+    save: "4+",
     baseSize: "40mm",
     imageAlias: "chaos_sorcerer_lord",
     keywords: ["Hero", "Wizard (1)", "Infantry", "Warriors of Chaos"],
@@ -363,9 +363,9 @@ const units = [
     id: "gunnar-brand",
     name: "Gunnar Brand",
     points: 180,
-    health: 5,
+    health: 6,
     control: 2,
-    save: "4+",
+    save: "5+",
     baseSize: "32mm",
     imageAlias: "brands_oathbound",
     keywords: ["Unique", "Hero", "Infantry", "Darkoath", "Gunnar's Oathsworn"],
@@ -436,4 +436,6 @@ const units = [
   u({ id: "raptoryx", name: "Raptoryx", points: 100, models: 6, move: '10"', health: 2, save: "5+", baseSize: "60×35mm", imageAlias: "chaotic_beasts", keywords: ["Beast"], weapons: [w("Razor-sharp Beak and Talons", "Melee", 4, "4+", "4+", 0, 1, ["Companion"])], abilities: [a("Beast", "Passive", "This unit's maximum control score is 1."), a("Crazed Flock", "Passive", "If this unit charged this turn, add 1 to the Attacks characteristic of its combat weapons this turn, including Companion weapons.")] }),
 ];
 
-export default units;
+export default units.map((unit) => unit.id === "raptoryx"
+  ? { ...unit, profile: { ...unit.profile, save: "6+" } }
+  : unit);

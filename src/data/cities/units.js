@@ -514,7 +514,7 @@ const units = [
     models: 2,
     move: '5"',
     health: 3,
-    control: 2,
+    control: 1,
     save: "6+",
     baseSize: "40mm [1], 28.5mm [1]",
     keywords: ["Infantry", "Musician (1/2)", ...sigmarite],

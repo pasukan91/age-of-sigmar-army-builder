@@ -149,4 +149,17 @@ const units = [
     abilities:[a("Slaughterborn","Any Movement Phase","If this unit has been destroyed, roll 2D6. On an 8+, set up an identical replacement unit more than 9\" from all enemy units."),a("Murderous Paragon","Passive","While this unit is in combat, add 1 to the Attacks characteristic of combat weapons used by friendly Wrathmongers units wholly within 12\".")],rules:{hero:true,unique:true,canBeReinforced:false}}),
 ];
 
-export default units;
+const correctedProfiles = {
+  "skullgrinder": { control: 5 },
+  "lord-of-khorne-on-juggernaut": { move: '8"' },
+  "skullmaster-herald-of-khorne": { move: '8"' },
+  "skarr-bloodwrath": { health: 7 },
+};
+
+export default units.map((unit) => ({
+  ...unit,
+  profile: {
+    ...unit.profile,
+    ...correctedProfiles[unit.id],
+  },
+}));
