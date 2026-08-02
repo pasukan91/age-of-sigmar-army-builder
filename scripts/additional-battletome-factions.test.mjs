@@ -47,3 +47,35 @@ test("keeps complete profiles, weapons, abilities and descriptions", () => {
     }
   }
 });
+
+test("includes every Army of Renown from the five generated faction catalogues", () => {
+  assert.deepEqual(
+    Object.fromEntries([...factions].map(([id, faction]) => [id, faction.armiesOfRenown.length])),
+    { stormcast: 3, idoneth: 2, kharadron: 3, nighthaunt: 2, flesheater: 2 },
+  );
+  assert.deepEqual(
+    factions.get("idoneth").armiesOfRenown.map((army) => army.name).sort(),
+    ["The First Phalanx of Ionrach", "Wardens of the Chorrileum"],
+  );
+  assert.deepEqual(
+    factions.get("kharadron").armiesOfRenown.map((army) => army.name).sort(),
+    ["Grundstok Expeditionary Force", "Pioneer Outpost", "The Magnate's Crew"],
+  );
+});
+
+test("includes all universal manifestation lores with their catalogue points", () => {
+  assert.deepEqual(
+    catalogue.universalManifestationLores.map((lore) => lore.name).sort(),
+    [
+      "Aetherwrought Machineries",
+      "Forbidden Power",
+      "Krondspine Incarnate",
+      "Morbid Conjuration",
+      "Primal Energy",
+      "Twilit Sorceries",
+    ],
+  );
+  assert.equal(catalogue.universalManifestations.length, 18);
+  assert.equal(catalogue.universalManifestationLores.find((lore) => lore.name === "Morbid Conjuration").points, 20);
+  assert.equal(catalogue.universalManifestationLores.find((lore) => lore.name === "Primal Energy").points, 10);
+});

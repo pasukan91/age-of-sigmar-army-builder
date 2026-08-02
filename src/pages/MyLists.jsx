@@ -2,7 +2,10 @@ import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
 import { calculateArmyPoints } from "../utils/armyPoints";
-import { getFactionArtwork } from "../utils/factionArtwork";
+import {
+  getFactionArtwork,
+  getFactionArtworkPosition,
+} from "../utils/factionArtwork";
 
 function MyLists({
   lists = [],
@@ -68,7 +71,13 @@ function MyLists({
                     key={list.id}
                     className={`aos-list-card${artwork ? " aos-list-card--with-artwork" : ""}`}
                     style={artwork
-                      ? { "--aos-list-card-image": `url("${artwork}")` }
+                      ? {
+                          "--aos-list-card-image": `url("${artwork}")`,
+                          "--aos-list-card-position":
+                            getFactionArtworkPosition(list.faction, "list") ??
+                            list.faction?.imagePosition ??
+                            "center",
+                        }
                       : undefined}
                   >
                     <button

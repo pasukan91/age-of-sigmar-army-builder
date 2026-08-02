@@ -1713,7 +1713,10 @@ function App() {
       selectedRegiment?.requiredByArmyOfRenown ||
       (currentList.armyOfRenown?.requiredUnits ?? []).includes(
         selectedRegiment?.hero?.id
-      )
+      ) ||
+      (currentList.armyOfRenown?.requiredUnitGroups ?? [])
+        .flat()
+        .includes(selectedRegiment?.hero?.id)
     ) {
       window.alert(
         `${selectedRegiment.hero.name} es obligatorio en ${currentList.armyOfRenown.name} y su regimiento no se puede eliminar.`

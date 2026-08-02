@@ -243,6 +243,37 @@ export function validateArmyList(list) {
     ));
   });
 
+  (list.armyOfRenown?.requiredUnitGroups ?? []).forEach((unitIds, index) => {
+    const present = getArmyUnits(list).some(({ unit }) => unitIds.includes(unit.id));
+    if (present) return;
+    const names = unitIds.map((unitId) =>
+      effectiveFaction.units?.find((unit) => unit.id === unitId)?.name ?? unitId
+    );
+    issues.push(issue(
+      `missing-required-group-${index}`,
+      "error",
+      "Falta una unidad obligatoria",
+      `Debes incluir una de estas unidades en ${list.armyOfRenown.name}: ${names.join(" o ")}.`,
+      "regiments",
+      "regiments-section"
+    ));
+  });
+
+  (list.armyOfRenown?.requiredGeneralUnitGroups ?? []).forEach((unitIds, index) => {
+    if (unitIds.includes(regiments[0]?.hero?.id)) return;
+    const names = unitIds.map((unitId) =>
+      effectiveFaction.units?.find((unit) => unit.id === unitId)?.name ?? unitId
+    );
+    issues.push(issue(
+      `missing-required-general-group-${index}`,
+      "error",
+      "General obligatorio",
+      `El general de ${list.armyOfRenown.name} debe ser una de estas unidades: ${names.join(" o ")}.`,
+      "regiments",
+      "regiments-section"
+    ));
+  });
+
   const errors = issues.filter((item) => item.severity === "error");
   const warnings = issues.filter((item) => item.severity === "warning");
 

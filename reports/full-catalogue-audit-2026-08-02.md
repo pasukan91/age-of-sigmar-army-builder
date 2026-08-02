@@ -27,6 +27,12 @@ Fyreslayers, Seraphon y Sons of Behemat permanecen sin catálogo jugable porque 
 
 Cada una de las cinco facciones añadidas incluye sus warscrolls `Scourge of Aqshy` y sus mejoras de campaña aplicables. La selección, validación, guardado, restauración, cálculo de puntos, exportación y consulta del warscroll admiten ahora el nuevo campo de mejora de Aqshy.
 
+## Armies of Renown y manifestaciones universales
+
+El generador importa también los Armies of Renown del catálogo para las cinco facciones añadidas: 3 de Stormcast Eternals, 2 de Idoneth Deepkin, 3 de Kharadron Overlords, 2 de Nighthaunt y 2 de Flesh-eater Courts. Se conservan sus unidades permitidas, reglas, mejoras, saberes, manifestaciones y requisitos de unidad o general.
+
+Los 22 ejércitos jugables y sus Armies of Renown tienen disponibles los seis saberes universales del catálogo: Twilit Sorceries, Morbid Conjuration, Forbidden Power, Primal Energy, Krondspine Incarnate y Aetherwrought Machineries. En conjunto contienen 18 manifestaciones. Los costes del saber se incluyen en el total de la lista cuando el catálogo los especifica.
+
 ## Entradas que requieren comprobación manual
 
 - Hedonites of Slaanesh — Scourge of Aqshy Infernal Enrapturess

@@ -80,6 +80,35 @@ test("reports duplicate unique units", () => {
   assert.ok(result.errors.some((item) => item.id === "duplicate-unique-unique-unit"));
 });
 
+test("accepts one alternative from an Army of Renown required unit group", () => {
+  const required = unit({ id: "eidolon-sea", name: "Eidolon del Mar" });
+  const base = list();
+  const armyOfRenown = {
+    name: "Wardens",
+    requiredUnitGroups: [["eidolon-sea", "eidolon-storm"]],
+  };
+  const missing = validateArmyList({ ...base, armyOfRenown });
+  assert.ok(missing.errors.some((item) => item.id === "missing-required-group-0"));
+
+  const complete = validateArmyList({
+    ...base,
+    armyOfRenown,
+    faction: { ...base.faction, units: [...base.faction.units, required] },
+    regiments: [{ ...base.regiments[0], units: [required] }],
+  });
+  assert.ok(!complete.errors.some((item) => item.id === "missing-required-group-0"));
+});
+
+test("requires the correct alternative as an Army of Renown general", () => {
+  const base = list();
+  const armyOfRenown = {
+    name: "Ruination Brotherhood",
+    requiredGeneralUnitGroups: [["iridan", "iridan-aqshy"]],
+  };
+  const result = validateArmyList({ ...base, armyOfRenown });
+  assert.ok(result.errors.some((item) => item.id === "missing-required-general-group-0"));
+});
+
 test("rejects armies with more than five regiments", () => {
   const regiments = Array.from({ length: 6 }, (_, index) => ({
     id: `regiment-${index + 1}`,

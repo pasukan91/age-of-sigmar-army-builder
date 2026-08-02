@@ -2,7 +2,10 @@ import { useState } from "react";
 
 import factions from "../data/factions";
 import ChevronIcon from "../components/ChevronIcon";
-import { getFactionArtwork } from "../utils/factionArtwork";
+import {
+  getFactionArtwork,
+  getFactionArtworkPosition,
+} from "../utils/factionArtwork";
 import "../styles/aos-app.css";
 
 function SelectFaction({ alliance, onSelect, onBack }) {
@@ -23,7 +26,10 @@ function SelectFaction({ alliance, onSelect, onBack }) {
         className="aos-page aos-selection-page"
         style={{
           "--aos-page-background": `url("${getFactionArtwork(selectedFaction) ?? background}")`,
-          "--aos-page-background-position": selectedFaction.imagePosition ?? "center",
+          "--aos-page-background-position":
+            getFactionArtworkPosition(selectedFaction, "page") ??
+            selectedFaction.imagePosition ??
+            "center",
         }}
       >
         <header className="aos-topbar">
@@ -117,7 +123,10 @@ function SelectFaction({ alliance, onSelect, onBack }) {
                 }}
                 style={{
                   "--aos-card-image": `url("${image}")`,
-                  "--aos-card-position": faction.imagePosition ?? "center right",
+                  "--aos-card-position":
+                    getFactionArtworkPosition(faction, "card") ??
+                    faction.imagePosition ??
+                    "center right",
                 }}
               >
                 <span className="aos-selection-card__content">

@@ -281,8 +281,8 @@ function restoreList(savedList) {
     savedList.armyOfRenown,
     faction.armiesOfRenown
   );
-  const effectiveFaction = armyOfRenown?.rules?.units
-    ? { ...faction, units: armyOfRenown.rules.units }
+  const effectiveFaction = armyOfRenown?.rules
+    ? { ...faction, ...armyOfRenown.rules }
     : faction;
 
   const alliance = alliances.find(
@@ -329,7 +329,7 @@ function restoreList(savedList) {
       : 0,
     battleFormation: restoreOption(
       savedList.battleFormation,
-      faction.battleFormations
+      effectiveFaction.battleFormations
     ),
     battleplan: restoreOption(
       savedList.battleplan,
@@ -337,15 +337,15 @@ function restoreList(savedList) {
     ),
     spellLore: restoreOption(
       savedList.spellLore,
-      faction.spellLores
+      effectiveFaction.spellLores
     ),
     prayerLore: restoreOption(
       savedList.prayerLore,
-      faction.prayerLores
+      effectiveFaction.prayerLores
     ),
     manifestationLore: restoreOption(
       savedList.manifestationLore,
-      faction.manifestationLores
+      effectiveFaction.manifestationLores
     ),
     battleTactics: restoreBattleTacticsCards(savedList.battleTactics),
     completedBattleMissions: (Array.isArray(savedList.completedBattleMissions)
@@ -353,7 +353,7 @@ function restoreList(savedList) {
       : []).filter((missionId) => typeof missionId === "string"),
     terrain: restoreOption(
       savedList.terrain,
-      faction.terrain
+      effectiveFaction.terrain
     ),
     regiments,
     regimentsOfRenown: (savedList.regimentsOfRenown ?? [])

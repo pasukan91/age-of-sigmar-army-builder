@@ -42,6 +42,7 @@ function indexBy(rows, key) {
 }
 
 const factionByName = new Map(data.faction_keyword.map((row) => [row.name, row]));
+const factionById = new Map(data.faction_keyword.map((row) => [row.id, row]));
 const keywordById = new Map(data.keyword.map((row) => [row.id, row.name]));
 const warscrollById = new Map(data.warscroll.map((row) => [row.id, row]));
 const weaponsByWarscroll = indexBy(data.warscroll_weapon, "warscrollId");
@@ -60,6 +61,8 @@ const loreKeywordsByAbility = indexBy(data.lore_ability_keyword, "loreAbilityId"
 const linkedWarscrollsByLoreAbility = indexBy(data.lore_ability_linked_warscroll, "loreAbilityId");
 const requiredKeywordsByGroup = indexBy(data.ability_group_required_keyword, "abilityGroupId");
 const excludedKeywordsByGroup = indexBy(data.ability_group_excluded_keyword, "abilityGroupId");
+const requiredWarscrollsByFaction = indexBy(data.roster_faction_keyword_required_warscroll, "factionKeywordId");
+const requiredGeneralsByFaction = indexBy(data.roster_faction_keyword_required_general_warscroll, "factionKeywordId");
 
 function sourceKeywords(warscroll) {
   const linked = (keywordsByWarscroll.get(warscroll.id) ?? [])
@@ -189,8 +192,11 @@ function makeLoreAbility(ability) {
   return makeAbility(ability, loreKeywordsByAbility);
 }
 
-function makeLores(faction, factionWarscrollIds) {
-  const lores = data.lore.filter((lore) => lore.factionId === faction.id);
+function makeLores(faction, factionWarscrollIds, publicationId = null) {
+  const lores = data.lore.filter((lore) =>
+    lore.factionId === faction.id &&
+    (!publicationId || lore.publicationId === publicationId)
+  );
   const spellLores = [];
   const prayerLores = [];
   const manifestations = [];
@@ -227,6 +233,7 @@ function makeLores(faction, factionWarscrollIds) {
         id: slug(lore.name),
         name: lore.name,
         description: lore.restrictionText ?? "",
+        points: lore.points ?? 0,
         manifestations: uniqueLoreManifestations,
       });
       continue;
@@ -246,6 +253,36 @@ function makeLores(faction, factionWarscrollIds) {
     manifestations: [...new Map(manifestations.map((item) => [item.sourceId, item])).values()],
     manifestationLores,
   };
+}
+
+function selectableWarscrolls(factionId, imageFactionId) {
+  const warscrollIds = new Set((factionLinksByFaction.get(factionId) ?? []).map((link) => link.warscrollId));
+  return data.warscroll
+    .filter((warscroll) =>
+      warscrollIds.has(warscroll.id) &&
+      warscroll.points != null &&
+      !warscroll.isSpearhead &&
+      !warscroll.isLegends &&
+      !warscroll.hiddenFromStormForge &&
+      !warscroll.hiddenFromBattleProfiles &&
+      !sourceKeywords(warscroll).includes("Faction Terrain") &&
+      !sourceKeywords(warscroll).includes("Manifestation")
+    )
+    .map((warscroll) => makeWarscroll(warscroll, imageFactionId));
+}
+
+function terrainWarscrolls(factionId, imageFactionId, excludedIds = new Set()) {
+  const warscrollIds = new Set((factionLinksByFaction.get(factionId) ?? []).map((link) => link.warscrollId));
+  return data.warscroll
+    .filter((warscroll) =>
+      warscrollIds.has(warscroll.id) &&
+      !excludedIds.has(warscroll.id) &&
+      !warscroll.isSpearhead &&
+      !warscroll.isLegends &&
+      !warscroll.hiddenFromReference &&
+      sourceKeywords(warscroll).includes("Faction Terrain")
+    )
+    .map((warscroll) => makeWarscroll(warscroll, imageFactionId));
 }
 
 function makeEnhancementGroups(publicationId, groupType, source = "Battletome") {
@@ -281,30 +318,10 @@ function makeFaction(config) {
 
   const factionWarscrollIds = new Set((factionLinksByFaction.get(faction.id) ?? []).map((link) => link.warscrollId));
   const lores = makeLores(faction, factionWarscrollIds);
-  const units = data.warscroll
-    .filter((warscroll) =>
-      factionWarscrollIds.has(warscroll.id) &&
-      warscroll.points != null &&
-      !warscroll.isSpearhead &&
-      !warscroll.isLegends &&
-      !warscroll.hiddenFromStormForge &&
-      !warscroll.hiddenFromBattleProfiles &&
-      !sourceKeywords(warscroll).includes("Faction Terrain") &&
-      !sourceKeywords(warscroll).includes("Manifestation")
-    )
-    .map((warscroll) => makeWarscroll(warscroll, config.id));
+  const units = selectableWarscrolls(faction.id, config.id);
 
   const manifestationIds = new Set(lores.manifestations.map((item) => item.sourceId));
-  const terrain = data.warscroll
-    .filter((warscroll) =>
-      factionWarscrollIds.has(warscroll.id) &&
-      !manifestationIds.has(warscroll.id) &&
-      !warscroll.isSpearhead &&
-      !warscroll.isLegends &&
-      !warscroll.hiddenFromReference &&
-      sourceKeywords(warscroll).includes("Faction Terrain")
-    )
-    .map((warscroll) => makeWarscroll(warscroll, config.id));
+  const terrain = terrainWarscrolls(faction.id, config.id, manifestationIds);
 
   const battleFormations = data.battle_formation
     .filter((formation) => formation.factionId === faction.id && formation.publicationId === publication.id && !formation.isLegends)
@@ -328,6 +345,14 @@ function makeFaction(config) {
     ? makeEnhancementGroups(aqshyPublication.id, "otherEnhancements", "Aqshy")
     : [];
 
+  const armiesOfRenown = data.faction_keyword
+    .filter((keyword) =>
+      keyword.armyOfRenown &&
+      !keyword.isLegends &&
+      keyword.parentFactionKeywordId === faction.id
+    )
+    .map((keyword) => makeArmyOfRenown(keyword, config));
+
   return {
     id: config.id,
     alliance: config.alliance,
@@ -349,8 +374,61 @@ function makeFaction(config) {
     manifestationLores: lores.manifestationLores,
     terrain,
     units,
+    armiesOfRenown,
   };
 }
+
+function makeArmyOfRenown(faction, parentConfig) {
+  const publication = data.publication.find((item) =>
+    item.name === `Army of Renown: ${faction.name}`
+  );
+  if (!publication) throw new Error(`Missing Army of Renown publication for ${faction.name}`);
+
+  const factionWarscrollIds = new Set((factionLinksByFaction.get(faction.id) ?? []).map((link) => link.warscrollId));
+  const lores = makeLores(faction, factionWarscrollIds, publication.id);
+  const manifestationIds = new Set(lores.manifestations.map((item) => item.sourceId));
+  const requiredIds = (requiredWarscrollsByFaction.get(faction.id) ?? [])
+    .map((link) => slug(warscrollById.get(link.warscrollId)?.name))
+    .filter(Boolean);
+  const requiredGeneralIds = (requiredGeneralsByFaction.get(faction.id) ?? [])
+    .map((link) => slug(warscrollById.get(link.warscrollId)?.name))
+    .filter(Boolean);
+  const automaticallyAdded = [...new Set([
+    ...(requiredIds.length === 1 ? requiredIds : []),
+    ...(requiredGeneralIds.length === 1 ? requiredGeneralIds : []),
+  ])];
+  const units = selectableWarscrolls(faction.id, parentConfig.id);
+
+  return {
+    id: slug(faction.name),
+    name: faction.name,
+    description: String(faction.lore ?? "").split(/\n\s*\n/)[0],
+    lore: faction.lore,
+    image: faction.selectFactionImage || faction.factionHeaderImage || faction.rosterHeaderImage,
+    roster: units.map((unit) => unit.name),
+    requiredUnits: automaticallyAdded,
+    requiredUnitGroups: requiredIds.length > 1 ? [requiredIds] : [],
+    requiredGeneralUnitGroups: requiredGeneralIds.length > 1 ? [requiredGeneralIds] : [],
+    excludesRegimentsOfRenown: true,
+    source: publication.name,
+    rules: {
+      battleTraits: makeEnhancementGroups(publication.id, "battleTraits", publication.name),
+      heroicTraits: makeEnhancementGroups(publication.id, "heroicTraits", publication.name),
+      artefacts: makeEnhancementGroups(publication.id, "artefactsOfPower", publication.name),
+      spellLores: lores.spellLores,
+      prayerLores: lores.prayerLores,
+      manifestations: lores.manifestations,
+      manifestationLores: lores.manifestationLores,
+      terrain: terrainWarscrolls(faction.id, parentConfig.id, manifestationIds),
+      units,
+    },
+  };
+}
+
+const universalPublication = data.publication.find((item) => item.name === "Universal Manifestations");
+const universalLores = universalPublication
+  ? makeLores({ id: null, name: "Universal Manifestations" }, new Set(), universalPublication.id)
+  : { manifestations: [], manifestationLores: [] };
 
 const output = {
   metadata: {
@@ -360,6 +438,8 @@ const output = {
     generatedAt: new Date().toISOString(),
   },
   factions: TARGETS.map(makeFaction),
+  universalManifestations: universalLores.manifestations,
+  universalManifestationLores: universalLores.manifestationLores,
 };
 
 mkdirSync(dirname(resolve(outputPath)), { recursive: true });
@@ -375,4 +455,5 @@ console.log(output.factions.map((faction) => ({
   artefacts: faction.artefacts.length,
   spellLores: faction.spellLores.length,
   prayerLores: faction.prayerLores.length,
+  armiesOfRenown: faction.armiesOfRenown.length,
 })));

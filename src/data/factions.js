@@ -22,6 +22,8 @@ import {
   kharadron,
   nighthaunt,
   stormcast,
+  universalManifestationLores,
+  universalManifestations,
 } from "./additionalBattletomeFactions";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
@@ -72,6 +74,20 @@ const factions = [
     name: "Sons of Behemat",
   },
 ].map((faction) => {
+  const mergeUnique = (items) => [
+    ...new Map(items.map((item) => [item?.sourceId ?? item?.id ?? item?.name, item])).values(),
+  ];
+  const withUniversalManifestations = (rules = {}) => ({
+    ...rules,
+    manifestations: mergeUnique([
+      ...(rules.manifestations ?? []),
+      ...universalManifestations,
+    ]),
+    manifestationLores: mergeUnique([
+      ...(rules.manifestationLores ?? []),
+      ...universalManifestationLores,
+    ]),
+  });
   const addedArmies = (armiesOfRenownByFaction[faction.id] ?? []).map(
     ({ unitFilter, ...renownArmy }) => ({
       ...renownArmy,
@@ -84,12 +100,17 @@ const factions = [
     })
   );
 
+  const armiesByName = new Map();
+  [...addedArmies, ...(faction.armiesOfRenown ?? [])].forEach((army) => {
+    armiesByName.set(String(army.name ?? army.id).toLowerCase(), {
+      ...army,
+      rules: withUniversalManifestations(army.rules),
+    });
+  });
+
   return normalizeFaction({
-    ...faction,
-    armiesOfRenown: [
-      ...(faction.armiesOfRenown ?? []),
-      ...addedArmies,
-    ],
+    ...withUniversalManifestations(faction),
+    armiesOfRenown: [...armiesByName.values()],
   });
 });
 
