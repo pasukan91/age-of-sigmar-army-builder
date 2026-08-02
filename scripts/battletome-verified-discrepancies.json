@@ -1,0 +1,101 @@
+[
+  {
+    "faction": "Kruleboyz",
+    "unit": "Man-skewer Boltboyz",
+    "field": "Arma: Man-skewer Crossbow: Hasty Shot",
+    "app": "12\", A2, 3+/4+, R1, D2",
+    "official": "12\", A2, 4+/3+, R1, D2",
+    "source": "Orruk_Warclans_2025.pdf",
+    "page": 105
+  },
+  {
+    "faction": "Ironjawz",
+    "unit": "Zoggrok Anvilsmasha",
+    "field": "Arma: Ward-smashing Choppa",
+    "app": "A3, 2+/2+, R2, D2",
+    "official": "A2, 4+/2+, R2, D3",
+    "source": "Orruk_Warclans_2025.pdf",
+    "page": 82
+  },
+  {
+    "faction": "Skaven",
+    "unit": "Warlock Engineer",
+    "field": "Arma: Warpforged Dagger",
+    "app": "A3, 4+/4+, R0, D1",
+    "official": "A3, 4+/4+, R0, D2",
+    "source": "Skaven_2024-1.pdf",
+    "page": 97
+  },
+  {
+    "faction": "Skaven",
+    "unit": "Plague Priest on Plague Furnace",
+    "field": "Arma: Great Plague Censer",
+    "app": "A4, 4+/2+, R2, D3",
+    "official": "A4, 4+/2+, R1, D3",
+    "source": "Skaven_2024-1.pdf",
+    "page": 103
+  },
+  {
+    "faction": "Sylvaneth",
+    "unit": "Grove Guardian",
+    "field": "Arma: Grove Sickle or Shears",
+    "app": "A3, 4+/3+, R1, D3",
+    "official": "A3, 3+/4+, R1, D3",
+    "source": "Sylvaneth Battletome 4th ed.pdf",
+    "page": 72
+  },
+  {
+    "faction": "Sylvaneth",
+    "unit": "Branchwych",
+    "field": "Arma: Greenwood Scythe",
+    "app": "A3, 3+/3+, R1, D3; nombre sin 'and Bittergrub'",
+    "official": "A3, 3+/4+, R1, D3; Greenwood Scythe and Bittergrub",
+    "source": "Sylvaneth Battletome 4th ed.pdf",
+    "page": 76
+  },
+  {
+    "faction": "Gloomspite Gitz",
+    "unit": "Rabble-Rowza",
+    "field": "Arma: Moon-sickle and Basha",
+    "app": "A5, 4+/4+, R1, D2",
+    "official": "A5, 4+/4+, R1, D3",
+    "source": "Gloomspite_Gitz_2025.pdf",
+    "page": 90
+  },
+  {
+    "faction": "Gloomspite Gitz",
+    "unit": "Droggz Da Sunchompa",
+    "field": "Arma: Da Metal Toof",
+    "app": "A5, 3+/3+, R1, D2",
+    "official": "A5, 3+/4+, R1, D2",
+    "source": "Gloomspite_Gitz_2025.pdf",
+    "page": 95
+  },
+  {
+    "faction": "Gloomspite Gitz",
+    "unit": "Droggz Da Sunchompa",
+    "field": "Arma: Jaggedsnarl's Jaws",
+    "app": "A4, 4+/3+, R1, D2",
+    "official": "A4, 3+/3+, R1, D2",
+    "source": "Gloomspite_Gitz_2025.pdf",
+    "page": 95
+  },
+  {
+    "faction": "Gloomspite Gitz",
+    "unit": "Loonsmasha Fanatics",
+    "field": "Arma: Ball and Chain",
+    "app": "AD6, 4+/2+, R2, DD3",
+    "official": "AD6, 4+/3+, R2, DD3",
+    "source": "Gloomspite_Gitz_2025.pdf",
+    "page": 83
+  },
+  {
+    "faction": "Gloomspite Gitz",
+    "unit": "Rockgut Troggoths",
+    "field": "Arma: Throwin' Boulders",
+    "app": "10\", A1, 4+/2+, R2, D3 fijo",
+    "official": "10\", A1, 5+/2+, R2, DD3",
+    "source": "Gloomspite_Gitz_2025.pdf",
+    "page": 93
+  }
+]

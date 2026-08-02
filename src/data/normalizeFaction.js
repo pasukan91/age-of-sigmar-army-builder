@@ -1,4 +1,5 @@
 import { withEnhancementTiming } from "../utils/enhancementTiming";
+import { applyAosCommunityCatalogue } from "./applyAosCommunityCatalogue";
 
 const ARRAY_FIELDS = [
   "battleTraits",
@@ -68,7 +69,14 @@ export function normalizeFaction(faction) {
 
   normalized.spellLores = normalized.spellLores.map(normalizeSpellLore);
   normalized.prayerLores = normalized.prayerLores.map(normalizePrayerLore);
-  normalized.units = normalized.units.map(normalizeUnit);
+  normalized.units = normalized.units.map((unit) =>
+    normalizeUnit(
+      applyAosCommunityCatalogue(
+        unit,
+        faction.catalogueFactionName ?? faction.name
+      )
+    )
+  );
   normalized.manifestations = normalized.manifestations.map(normalizeManifestation);
   normalized.manifestationLores = normalizeManifestationLores({
     faction,
@@ -78,7 +86,7 @@ export function normalizeFaction(faction) {
   normalized.armiesOfRenown = normalized.armiesOfRenown.map((army) => ({
     ...army,
     rules: army.rules
-      ? normalizeArmyRules(army.rules, normalized.manifestations)
+      ? normalizeArmyRules(army.rules, normalized.manifestations, faction.name)
       : undefined,
   }));
 
@@ -137,15 +145,17 @@ function inferAbilityValue(description, label, rollName) {
   return null;
 }
 
-function normalizeArmyRules(rules, baseManifestations) {
+function normalizeArmyRules(rules, baseManifestations, catalogueFactionName) {
   const normalized = normalizeFaction({
     id: "army-of-renown",
     ...rules,
+    catalogueFactionName,
     manifestations: rules.manifestations ?? baseManifestations,
     armiesOfRenown: [],
   });
 
   delete normalized.id;
+  delete normalized.catalogueFactionName;
   return normalized;
 }
 
