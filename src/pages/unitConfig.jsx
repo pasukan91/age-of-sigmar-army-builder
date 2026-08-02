@@ -70,6 +70,8 @@ function UnitConfig({
     useState(unit?.ensorcelledBanner ?? null);
   const [boonOfShadow, setBoonOfShadow] =
     useState(unit?.boonOfShadow ?? null);
+  const [aqshyEnhancement, setAqshyEnhancement] =
+    useState(unit?.aqshyEnhancement ?? null);
 
   if (!unit) {
     return (
@@ -259,6 +261,23 @@ function UnitConfig({
     !isHero &&
     (faction?.boonsOfShadow?.length ?? 0) > 0;
 
+  const aqshyEnhancementOptions = (faction?.aqshyEnhancements ?? []).filter(
+    (option) => {
+      const required = (option.requiredKeywords ?? []).map((keyword) =>
+        String(keyword).trim().toLowerCase()
+      );
+      const excluded = (option.excludedKeywords ?? []).map((keyword) =>
+        String(keyword).trim().toLowerCase()
+      );
+      const hasRequired = required.length === 0 ||
+        (option.requireAnyKeyword
+          ? required.some((keyword) => keywords.includes(keyword))
+          : required.every((keyword) => keywords.includes(keyword)));
+      return hasRequired && !excluded.some((keyword) => keywords.includes(keyword));
+    }
+  );
+  const canSelectAqshyEnhancement = aqshyEnhancementOptions.length > 0;
+
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
     ...(faction?.aqshyArtefacts ?? []),
@@ -322,6 +341,7 @@ function UnitConfig({
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
   const monstrousTraitOwner = enhancementOwners.monstrousTrait?.unit ?? null;
   const accursedDeviceOwner = enhancementOwners.accursedDevice?.unit ?? null;
+  const aqshyEnhancementOwner = enhancementOwners.aqshyEnhancement?.unit ?? null;
 
   const totalModels =
     canBeReinforced && reinforced
@@ -349,7 +369,8 @@ function UnitConfig({
     Number(brazenMutation?.points ?? 0) +
     Number(brandOfDarkGod?.points ?? 0) +
     Number(ensorcelledBanner?.points ?? 0) +
-    Number(boonOfShadow?.points ?? 0);
+    Number(boonOfShadow?.points ?? 0) +
+    Number(aqshyEnhancement?.points ?? 0);
 
   function handleConfirm() {
     if (
@@ -456,6 +477,11 @@ function UnitConfig({
       boonOfShadow:
         canSelectBoonOfShadow
           ? boonOfShadow
+          : null,
+
+      aqshyEnhancement:
+        canSelectAqshyEnhancement
+          ? aqshyEnhancement
           : null,
     });
   }
@@ -573,7 +599,8 @@ function UnitConfig({
         canSelectMortisanRefinement ||
         canSelectVisionOfFate ||
         canSelectSpecialKnickKnack ||
-        canSelectDecorationForValour) && (
+        canSelectDecorationForValour ||
+        canSelectAqshyEnhancement) && (
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>
             Tamaño y mejoras de unidad
@@ -919,6 +946,25 @@ function UnitConfig({
           selected={boonOfShadow}
           onToggle={(option) =>
             toggleExclusiveOption(setBoonOfShadow, option)
+          }
+        />
+      )}
+
+      {canSelectAqshyEnhancement && (
+        <SelectionSection
+          title={aqshyEnhancementOptions[0]?.groupName ?? "Mejora de Aqshy"}
+          intro={aqshyEnhancementOptions[0]?.restrictionText}
+          source="Aqshy"
+          options={aqshyEnhancementOptions}
+          selected={aqshyEnhancement}
+          disabled={Boolean(aqshyEnhancementOwner)}
+          lockedMessage={
+            aqshyEnhancementOwner
+              ? `${aqshyEnhancementOwner.name} ya tiene ${aqshyEnhancementOwner.aqshyEnhancement?.name}. Cada mejora solo puede elegirse una vez por ejército.`
+              : null
+          }
+          onToggle={(option) =>
+            toggleExclusiveOption(setAqshyEnhancement, option)
           }
         />
       )}

@@ -113,6 +113,8 @@ function serializeUnit(unit) {
       unit.ensorcelledBanner ?? null,
     boonOfShadow:
       unit.boonOfShadow ?? null,
+    aqshyEnhancement:
+      unit.aqshyEnhancement ?? null,
   };
 }
 
@@ -208,6 +210,10 @@ function restoreUnit(savedUnit, faction) {
     boonOfShadow: restoreOption(
       savedUnit.boonOfShadow,
       faction?.boonsOfShadow
+    ),
+    aqshyEnhancement: restoreOption(
+      savedUnit.aqshyEnhancement,
+      faction?.aqshyEnhancements
     ),
   };
 }

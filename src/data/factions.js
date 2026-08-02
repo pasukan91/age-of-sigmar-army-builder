@@ -16,6 +16,13 @@ import lumineth from "./lumineth";
 import daughters from "./daughters";
 import armiesOfRenownByFaction from "./rulesOfRenownArmies";
 import { normalizeFaction } from "./normalizeFaction";
+import {
+  flesheater,
+  idoneth,
+  kharadron,
+  nighthaunt,
+  stormcast,
+} from "./additionalBattletomeFactions";
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
 
@@ -39,16 +46,8 @@ const factions = [
   daughters,
 
   // ORDEN
-  {
-    id: "stormcast",
-    alliance: "order",
-    name: "Stormcast Eternals",
-  },
-  {
-    id: "idoneth",
-    alliance: "order",
-    name: "Idoneth Deepkin",
-  },
+  stormcast,
+  idoneth,
   {
     id: "seraphon",
     alliance: "order",
@@ -59,23 +58,11 @@ const factions = [
     alliance: "order",
     name: "Fyreslayers",
   },
-  {
-    id: "kharadron",
-    alliance: "order",
-    name: "Kharadron Overlords",
-  },
+  kharadron,
 
   // MUERTE
-  {
-    id: "nighthaunt",
-    alliance: "death",
-    name: "Nighthaunt",
-  },
-  {
-    id: "flesheater",
-    alliance: "death",
-    name: "Flesh-eater Courts",
-  },
+  nighthaunt,
+  flesheater,
 
   // CAOS
   // DESTRUCCIÓN

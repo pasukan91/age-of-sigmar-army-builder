@@ -60,7 +60,6 @@ const weaponAbilitiesByWeapon = indexBy(data.warscroll_weapon_weapon_ability, "w
 const activeWarscrolls = data.warscroll.filter((warscroll) =>
   !warscroll.isSpearhead &&
   !warscroll.isLegends &&
-  !warscroll.hiddenFromReference &&
   !warscroll.hiddenFromStormForge &&
   !warscroll.hiddenFromBattleProfiles
 );

@@ -93,6 +93,7 @@ export function createOrrukUnit({
     specialKnickKnack: null,
     flawlessManoeuvre: null,
     boonOfShadow: null,
+    aqshyEnhancement: null,
     details: {
       models,
       baseSize,

@@ -42,6 +42,7 @@ const UNIT_ENHANCEMENTS = [
   ["decorationForValour", "Decoration for Valour"],
   ["ironweldInnovation", "Ironweld Innovation"],
   ["boonOfShadow", "Boon of Shadow"],
+  ["aqshyEnhancement", "Mejora de Aqshy"],
 ];
 
 function normalize(value) {

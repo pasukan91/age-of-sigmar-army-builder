@@ -1114,6 +1114,22 @@ function App() {
       }
     }
 
+    if (configuredUnit.aqshyEnhancement) {
+      const owner = findEnhancementOwner(
+        "aqshyEnhancement",
+        configuredUnit.aqshyEnhancement.id
+      );
+
+      if (owner) {
+        conflicts.push({
+          type: configuredUnit.aqshyEnhancement.groupName ?? "Mejora de Aqshy",
+          selected: configuredUnit.aqshyEnhancement.name,
+          owner: owner.unit.name,
+          existing: owner.unit.aqshyEnhancement?.name,
+        });
+      }
+    }
+
     if (
       conflicts.length === 0
     ) {
@@ -1660,6 +1676,7 @@ function App() {
       brandOfDarkGod: null,
       ensorcelledBanner: null,
       boonOfShadow: null,
+      aqshyEnhancement: null,
     };
 
     saveUpdatedList({
@@ -2076,6 +2093,7 @@ function App() {
             brandOfDarkGod: findEnhancementOwner("brandOfDarkGod"),
             ensorcelledBanner: findEnhancementOwner("ensorcelledBanner"),
             boonOfShadow: findEnhancementOwner("boonOfShadow"),
+            aqshyEnhancement: findEnhancementOwner("aqshyEnhancement"),
           }}
           faction={
             {

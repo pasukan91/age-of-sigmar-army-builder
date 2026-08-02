@@ -3,7 +3,7 @@ function normalize(value) {
 }
 
 function normalizeOption(value) {
-  const option = normalize(value).replace(
+  const option = normalize(value).replace(/\s*\(required\)\s*$/i, "").replace(
     /^\d+\s*[-–—]\s*\d+(?:\s+|-)/,
     ""
   );
@@ -107,7 +107,9 @@ function normalizeOption(value) {
     "baleful lord": "baleful-lord",
   };
 
-  return aliases[option] ?? option.replace(/\s+/g, "-");
+  return aliases[option] ?? option
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function parseRegimentOption(value) {
@@ -483,6 +485,16 @@ function optionMatchesNonHero(unit, option) {
       return hasKeyword(unit, "Lumineth Realm-lords");
     case "any-daughters-of-khaine":
       return hasKeyword(unit, "Daughters of Khaine");
+    case "any-stormcast-eternals":
+      return hasKeyword(unit, "Stormcast Eternals");
+    case "any-idoneth-deepkin":
+      return hasKeyword(unit, "Idoneth Deepkin");
+    case "any-kharadron-overlords":
+      return hasKeyword(unit, "Kharadron Overlords");
+    case "any-nighthaunt":
+      return hasKeyword(unit, "Nighthaunt");
+    case "any-flesh-eater-courts":
+      return hasKeyword(unit, "Flesh-eater Courts");
     case "any-aelf":
       return hasKeyword(unit, "Aelf");
     case "any-non-aelf":
@@ -498,7 +510,11 @@ function optionMatchesNonHero(unit, option) {
     case "sigmarite-war-machine":
       return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "War Machine");
     default:
-      return false;
+      return option === `any-${normalizeOption(unit?.id)}` ||
+        getKeywords(unit).some((keyword) =>
+          normalizeOption(keyword) === option ||
+          `any-${normalizeOption(keyword)}` === option
+        );
   }
 }
 
@@ -512,8 +528,12 @@ function unitMatchesRegimentOption(unit, option) {
       normalizeOption
     );
 
+    const optionRole = option.key.replace(/^any-/, "");
+    const alternativeRoles = optionRole.split("-or-");
     return option.key === normalizeOption(unit?.id) ||
-      joinRoles.includes(option.key);
+      joinRoles.includes(option.key) ||
+      joinRoles.includes(optionRole) ||
+      (alternativeRoles.length > 1 && alternativeRoles.some((role) => joinRoles.includes(role)));
   }
 
   return option.key === normalizeOption(unit?.id) ||

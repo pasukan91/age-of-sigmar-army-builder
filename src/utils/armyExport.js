@@ -20,6 +20,7 @@ const ENHANCEMENTS = [
   ["brandOfDarkGod", "Marca"],
   ["ensorcelledBanner", "Estandarte"],
   ["boonOfShadow", "Boon of Shadow"],
+  ["aqshyEnhancement", "Mejora de Aqshy"],
 ];
 
 function unitPoints(unit) {

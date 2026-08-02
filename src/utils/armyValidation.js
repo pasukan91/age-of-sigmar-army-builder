@@ -28,6 +28,7 @@ const ENHANCEMENT_FIELDS = [
   "brandOfDarkGod",
   "ensorcelledBanner",
   "boonOfShadow",
+  "aqshyEnhancement",
 ];
 
 function issue(id, severity, title, message, section, targetId = null) {

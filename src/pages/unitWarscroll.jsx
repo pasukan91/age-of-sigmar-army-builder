@@ -356,6 +356,13 @@ function UnitWarscroll({
           />
         )}
 
+        {unit.aqshyEnhancement && (
+          <EnhancementAccordion
+            title={unit.aqshyEnhancement.groupName ?? "Mejora de Aqshy"}
+            enhancement={unit.aqshyEnhancement}
+          />
+        )}
+
         {typeof onConfigure ===
           "function" &&
           !isUniqueUnit(unit) && (
@@ -594,6 +601,7 @@ function getDisplayedPoints(unit) {
     unit?.brandOfDarkGod,
     unit?.ensorcelledBanner,
     unit?.boonOfShadow,
+    unit?.aqshyEnhancement,
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),
