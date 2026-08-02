@@ -196,7 +196,7 @@ const units = [
     weapons: [
       weapon("Man-skewer Crossbow: Hasty Shot", "Ranged", 2, "3+", "4+", "1", "2", ["Crit (Auto-wound)"], '12"'),
       weapon("Man-skewer Crossbow: Aimed Shot", "Ranged", 1, "3+", "3+", "2", "2", ["Crit (Auto-wound)"], '18"'),
-      weapon("Jaggedy Blades", "Melee", 2, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
+      weapon("Jaggedy Blades", "Melee", 3, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
     ],
     abilities: [
       ability("Man-skewer Crossbows", null, "Each time this unit shoots, use either Hasty Shot or Aimed Shot for all its crossbow attacks.", "Passive"),
@@ -210,7 +210,7 @@ const units = [
     rules: { canBeReinforced: false },
     weapons: [
       weapon("Beast-skewer Bolts", "Ranged", 2, "4+", "2+", "2", "D6", ["Anti-Monster (+1 Rend)", "Crit (Auto-wound)"], '24"'),
-      weapon("Jaggedy Blades", "Melee", 2, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
+      weapon("Jaggedy Blades", "Melee", 3, "4+", "3+", "0", "1", ["Crit (Mortal)"]),
     ],
     abilities: [
       ability("Skewering Bolts", "Your Shooting Phase", "For the rest of the turn, the Damage characteristic of this unit's Beast-skewer Bolts is 6 if the target is a Monster.", "Once Per Turn (Army)"),
