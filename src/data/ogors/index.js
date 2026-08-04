@@ -60,6 +60,7 @@ const ogors = {
   id: "ogors",
   alliance: "destruction",
   name: "Ogor Mawtribes",
+  useAosCommunityCatalogue: false,
   image: "/images/factions/ogormawtribes.webp",
   battleTraits,
   battleFormations,

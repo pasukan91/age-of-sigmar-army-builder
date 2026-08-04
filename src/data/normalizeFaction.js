@@ -1,5 +1,6 @@
 import { withEnhancementTiming } from "../utils/enhancementTiming";
 import { applyAosCommunityCatalogue } from "./applyAosCommunityCatalogue";
+import { shouldUseAosCommunityCatalogue } from "./aosCommunityCataloguePolicy";
 
 const ARRAY_FIELDS = [
   "battleTraits",
@@ -61,6 +62,7 @@ const ENHANCEMENT_FIELDS = [
 ];
 
 export function normalizeFaction(faction) {
+  const useAosCommunityCatalogue = shouldUseAosCommunityCatalogue(faction);
   const normalized = Object.fromEntries(
     ARRAY_FIELDS.map((field) => [field, asArray(faction?.[field])])
   );
@@ -73,10 +75,12 @@ export function normalizeFaction(faction) {
   normalized.prayerLores = normalized.prayerLores.map(normalizePrayerLore);
   normalized.units = normalized.units.map((unit) =>
     normalizeUnit(
-      applyAosCommunityCatalogue(
-        unit,
-        faction.catalogueFactionName ?? faction.name
-      )
+      useAosCommunityCatalogue
+        ? applyAosCommunityCatalogue(
+            unit,
+            faction.catalogueFactionName ?? faction.name
+          )
+        : unit
     )
   );
   normalized.manifestations = normalized.manifestations.map(normalizeManifestation);
@@ -88,7 +92,12 @@ export function normalizeFaction(faction) {
   normalized.armiesOfRenown = normalized.armiesOfRenown.map((army) => ({
     ...army,
     rules: army.rules
-      ? normalizeArmyRules(army.rules, normalized.manifestations, faction.name)
+      ? normalizeArmyRules(
+          army.rules,
+          normalized.manifestations,
+          faction.name,
+          useAosCommunityCatalogue
+        )
       : undefined,
   }));
 
@@ -147,17 +156,24 @@ function inferAbilityValue(description, label, rollName) {
   return null;
 }
 
-function normalizeArmyRules(rules, baseManifestations, catalogueFactionName) {
+function normalizeArmyRules(
+  rules,
+  baseManifestations,
+  catalogueFactionName,
+  useAosCommunityCatalogue
+) {
   const normalized = normalizeFaction({
     id: "army-of-renown",
     ...rules,
     catalogueFactionName,
+    useAosCommunityCatalogue,
     manifestations: rules.manifestations ?? baseManifestations,
     armiesOfRenown: [],
   });
 
   delete normalized.id;
   delete normalized.catalogueFactionName;
+  delete normalized.useAosCommunityCatalogue;
   return normalized;
 }
 

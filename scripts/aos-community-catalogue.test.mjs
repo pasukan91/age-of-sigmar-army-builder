@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
+import { shouldUseAosCommunityCatalogue } from "../src/data/aosCommunityCataloguePolicy.js";
+
 const catalogue = JSON.parse(
   readFileSync(new URL("../src/data/aosCommunityCatalogue.generated.json", import.meta.url)),
 );
@@ -18,4 +20,15 @@ test("uses the current Beast-skewer Killbow movement and Jaggedy Blades profile"
   assert.equal(killbow.profile.move, '5"');
   assert.equal(jaggedyBlades.attacks, "3");
   assert.deepEqual(jaggedyBlades.abilities, ["Crit (Mortal)"]);
+});
+
+test("keeps Ogor Mawtribes on its pre-catalogue local data", () => {
+  const ogorConfig = readFileSync(
+    new URL("../src/data/ogors/index.js", import.meta.url),
+    "utf8"
+  );
+
+  assert.equal(shouldUseAosCommunityCatalogue({ useAosCommunityCatalogue: false }), false);
+  assert.equal(shouldUseAosCommunityCatalogue({ id: "kruleboyz" }), true);
+  assert.match(ogorConfig, /useAosCommunityCatalogue:\s*false/);
 });
