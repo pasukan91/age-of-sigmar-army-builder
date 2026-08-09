@@ -1,9 +1,14 @@
+import factions from "../../data/factions";
 import { calculateArmyPoints } from "../../utils/armyPoints";
+import { calculateArmyHealth } from "../../utils/armyHealth";
 import { validateArmyList } from "../../utils/armyValidation";
 
 function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
   const currentPoints =
     calculateArmyPoints(list);
+
+  const totalHealth =
+    calculateArmyHealth(list, factions);
 
   const pointsLimit =
     Number(
@@ -55,25 +60,38 @@ function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
         <div style={styles.divider} />
 
         <div style={styles.pointsRow}>
-          <div>
-            <span style={styles.pointsLabel}>
-              Puntos
-            </span>
-
-            <div
-              style={{
-                ...styles.pointsValue,
-
-                color: invalid
-                  ? "#ffd0cb"
-                  : "#ffffff",
-              }}
-            >
-              {currentPoints}
-              <span style={styles.limit}>
-                {" "}
-                / {pointsLimit}
+          <div style={styles.metrics}>
+            <div>
+              <span style={styles.pointsLabel}>
+                Puntos
               </span>
+
+              <div
+                style={{
+                  ...styles.pointsValue,
+
+                  color: invalid
+                    ? "#ffd0cb"
+                    : "#ffffff",
+                }}
+              >
+                {currentPoints}
+                <span style={styles.limit}>
+                  {" "}
+                  / {pointsLimit}
+                </span>
+              </div>
+            </div>
+
+            <div style={styles.healthMetric}>
+              <span style={styles.pointsLabel}>
+                Vida total
+              </span>
+
+              <div style={styles.pointsValue}>
+                {totalHealth}
+                <span style={styles.healthUnit}> PV</span>
+              </div>
             </div>
           </div>
 
@@ -202,6 +220,18 @@ const styles = {
     textTransform: "uppercase",
   },
 
+  metrics: {
+    display: "flex",
+    alignItems: "flex-end",
+    flexWrap: "wrap",
+    gap: "12px 24px",
+  },
+
+  healthMetric: {
+    paddingLeft: 20,
+    borderLeft: "1px solid rgba(255,255,255,0.3)",
+  },
+
   pointsValue: {
     marginTop: 2,
 
@@ -212,6 +242,11 @@ const styles = {
   limit: {
     color: "#dfd9cf",
     fontSize: 18,
+  },
+
+  healthUnit: {
+    color: "#e0c489",
+    fontSize: 14,
   },
 
   statusBadge: {
