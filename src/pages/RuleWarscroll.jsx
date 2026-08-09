@@ -2,6 +2,10 @@ import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
 import { getRuleArtwork } from "../utils/ruleReferences";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
+import {
+  getRegimentEligibleFactionNames,
+  getRegimentOrganisation,
+} from "../utils/regimentOfRenownReferences";
 import "../styles/aos-app.css";
 
 function RuleWarscroll({ reference, onBack }) {
@@ -13,6 +17,7 @@ function RuleWarscroll({ reference, onBack }) {
 
   const isManifestation = kind === "manifestation";
   const isTerrain = kind === "terrain";
+  const isRegimentOfRenown = kind === "regimentOfRenown";
   const profile = item.profile ?? {};
   const artwork = getRuleArtwork(item, kind);
   const primaryRule = isManifestation ? item.summonSpell : item;
@@ -29,6 +34,12 @@ function RuleWarscroll({ reference, onBack }) {
     (isManifestation ? getManifestationDeclare(item, primaryRule, isInvocation) : "");
   const effectText = ruleParts.effect ||
     (!ruleParts.declare ? primaryRule?.description : "");
+  const organisation = isRegimentOfRenown
+    ? getRegimentOrganisation(item)
+    : [];
+  const eligibleFactions = isRegimentOfRenown
+    ? getRegimentEligibleFactionNames(item)
+    : [];
 
   return (
     <main className="aos-page aos-warscroll-page aos-reference-warscroll">
@@ -68,6 +79,45 @@ function RuleWarscroll({ reference, onBack }) {
           </section>
         ) : (
           <>
+            {isRegimentOfRenown && (
+              <section className="aos-renown-reference-summary">
+                <div>
+                  <span>Coste</span>
+                  <strong>{item.points ?? "-"} pts</strong>
+                </div>
+                <div>
+                  <span>Unidades</span>
+                  <strong>{organisation.length}</strong>
+                </div>
+              </section>
+            )}
+
+            {isRegimentOfRenown && item.description && (
+              <section className="aos-reference-description">
+                <p>{item.description}</p>
+              </section>
+            )}
+
+            {isRegimentOfRenown && organisation.length > 0 && (
+              <Accordion title="Composición" subtitle={`${organisation.length}`} defaultOpen>
+                <ul className="aos-reference-list">
+                  {organisation.map((entry, index) => (
+                    <li key={`${entry}-${index}`}>{entry}</li>
+                  ))}
+                </ul>
+              </Accordion>
+            )}
+
+            {isRegimentOfRenown && eligibleFactions.length > 0 && (
+              <Accordion title="Facciones permitidas" subtitle={`${eligibleFactions.length}`}>
+                <div className="aos-keyword-list">
+                  {eligibleFactions.map((factionName) => (
+                    <span key={factionName}>{factionName}</span>
+                  ))}
+                </div>
+              </Accordion>
+            )}
+
             {(kind === "spell" || kind === "prayer" || isManifestation) && (
               <section className="aos-casting-card">
                 <div className="aos-casting-card__value">
@@ -82,7 +132,7 @@ function RuleWarscroll({ reference, onBack }) {
               </section>
             )}
 
-            {(declareText || effectText) && (
+            {!isRegimentOfRenown && (declareText || effectText) && (
               <section className="aos-rule-procedure">
                 <RuleStep title={isManifestation ? "Condiciones para manifestarla" : kind === "prayer" ? "Condiciones para entonarla" : "Condiciones para lanzarlo"} text={declareText} />
                 <RuleStep title="Efecto" text={effectText} variant="effect" />
@@ -215,7 +265,7 @@ function getManifestationDeclare(item, rule, invocation) {
 }
 
 function getKindLabel(kind) {
-  return { spell: "Hechizo", prayer: "Plegaria", manifestation: "Manifestación", terrain: "Escenografía de facción" }[kind] ?? "Regla";
+  return { spell: "Hechizo", prayer: "Plegaria", manifestation: "Manifestación", terrain: "Escenografía de facción", regimentOfRenown: "Regimiento de renombre" }[kind] ?? "Regla";
 }
 
 export default RuleWarscroll;

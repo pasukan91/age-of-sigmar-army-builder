@@ -3166,10 +3166,88 @@ body {
   cursor: not-allowed;
 }
 
+.aos-renown-card__actions .aos-renown-card__view {
+  border-color: #8f6c2e;
+  color: #5a421b;
+  background: #f4ead5;
+}
+
+.aos-renown-card__actions .aos-icon-delete {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+.aos-renown-reference-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.aos-renown-reference-summary > div {
+  padding: 14px;
+  border: 1px solid #c9bda6;
+  background: rgba(255, 254, 250, 0.94);
+}
+
+.aos-renown-reference-summary span,
+.aos-renown-reference-summary strong {
+  display: block;
+}
+
+.aos-renown-reference-summary span {
+  color: #6b6258;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.aos-renown-reference-summary strong {
+  margin-top: 3px;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 1.25rem;
+}
+
+.aos-reference-description,
+.aos-reference-list {
+  color: #4f473f;
+  line-height: 1.55;
+}
+
+.aos-reference-description {
+  margin-bottom: 14px;
+  padding: 14px;
+  border-left: 3px solid #8f6c2e;
+  background: rgba(244, 234, 213, 0.65);
+}
+
+.aos-reference-description p,
+.aos-reference-list {
+  margin: 0;
+}
+
+.aos-reference-list {
+  padding-left: 20px;
+}
+
+.aos-reference-list li + li {
+  margin-top: 7px;
+}
+
 @media (max-width: 620px) {
   .aos-renown-card {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .aos-renown-card__actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .aos-renown-card__actions strong {
+    margin-right: auto;
   }
 }
 .aos-unit-artwork {

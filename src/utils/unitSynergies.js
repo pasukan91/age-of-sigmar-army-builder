@@ -4,7 +4,10 @@ const TARGET_TERMS = [
   "Infantry",
   "Cavalry",
   "Hero",
+  "Unique",
   "Monster",
+  "Manifestation",
+  "Faction Terrain",
   "Daemon",
   "Sybarite",
   "Paragon",
@@ -51,9 +54,60 @@ function normalize(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[’']/g, "'")
-    .replace(/[^a-z0-9+ -]/g, " ")
+    .replace(/[\u2010-\u2015-]+/g, " ")
+    .replace(/[^a-z0-9+ ]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+const CLAUSE_MODIFIERS = new Set([
+  "a",
+  "an",
+  "another",
+  "any",
+  "each",
+  "eligible",
+  "friendly",
+  "nearby",
+  "other",
+  "or",
+  "the",
+  "up",
+  "to",
+  "visible",
+]);
+
+function getTagTokens(targetTags) {
+  return new Set(
+    [...targetTags].flatMap((tag) => tag.split(" ")).filter(Boolean)
+  );
+}
+
+function getResidualClauseGroups(clause, requiredTerms, excludedTerms) {
+  let residual = ` ${normalize(clause)} `;
+
+  [...requiredTerms, ...excludedTerms].forEach((term) => {
+    const normalizedTerm = normalize(term).replace(/ /g, "\\s+");
+    residual = residual.replace(
+      new RegExp(`\\b(?:non\\s+)?${normalizedTerm}\\b`, "g"),
+      " "
+    );
+  });
+
+  return residual
+    .trim()
+    .split(/\s+(?:or|and)\s+/)
+    .map((group) =>
+      group
+        .split(/\s+/)
+        .filter((token) => token && !CLAUSE_MODIFIERS.has(token))
+    );
+}
+
+function hasExplicitGenericRecipient(text) {
+  return /\bpick\b[^.!?]{0,100}?\bfriendly\s+(?:(?:visible|eligible|another|other)\s+)*units?\b/.test(
+    text
+  );
 }
 
 function includesTerm(text, term) {
@@ -62,6 +116,10 @@ function includesTerm(text, term) {
   return new RegExp(
     `(?:^|\\s)${normalizedTerm.replace(/ /g, "\\s+")}(?:$|\\s)`
   ).test(` ${text} `);
+}
+
+function includesNegatedTerm(text, term) {
+  return ` ${normalize(text)} `.includes(` non ${normalize(term)} `);
 }
 
 function getTargetTags(unit) {
@@ -90,9 +148,7 @@ function targetHasTag(targetTags, term) {
 }
 
 function matchesExplicitRule(synergy, unit) {
-  const targetKeywords = new Set(
-    (unit?.keywords ?? []).map(normalize)
-  );
+  const targetTags = getTargetTags(unit);
   const unitId = normalize(unit?.id);
   const requiredIds = (synergy?.unitIds ?? []).map(normalize);
   const rawRequiredKeywords = synergy?.includeKeywords ?? [];
@@ -105,10 +161,10 @@ function matchesExplicitRule(synergy, unit) {
 
   if (
     requiredKeywords.some(
-      (keyword) => !targetKeywords.has(keyword)
+      (keyword) => !targetHasTag(targetTags, keyword)
     ) ||
     excludedKeywords.some(
-      (keyword) => targetKeywords.has(keyword)
+      (keyword) => targetHasTag(targetTags, keyword)
     )
   ) {
     return null;
@@ -167,28 +223,27 @@ function inferAbilityMatch(ability, unit) {
   }
 
   const targetTags = getTargetTags(unit);
-  const targetName = normalize(unit?.name);
-
-  if (targetName && includesTerm(text, targetName)) {
-    return { matchedOn: [unit.name] };
-  }
+  const targetTagTokens = getTagTokens(targetTags);
 
   const clauses = [];
-  const clausePattern = /(?:friendly|nearby)\s+(.{0,120}?)(?:\s+units?\b|\s+target\b)/g;
+  const clausePattern = /(?:friendly|nearby)\s+(?:units?\b|(.{1,120}?)\s+units?\b|target\b|(.{1,120}?)\s+target\b)/g;
   let match = clausePattern.exec(text);
 
   while (match) {
-    clauses.push(match[1]);
+    clauses.push(match[1] ?? match[2] ?? "");
     match = clausePattern.exec(text);
   }
 
   for (const clause of clauses) {
+    const arbitraryExcludedTerms = [...clause.matchAll(/\bnon\s+([a-z0-9]+)/g)]
+      .map((negativeMatch) => negativeMatch[1]);
     const excludedTerms = TARGET_TERMS.filter((term) =>
-      includesTerm(clause, `non ${term}`)
+      includesNegatedTerm(clause, term)
     );
 
     if (
-      excludedTerms.some((term) => targetHasTag(targetTags, term))
+      excludedTerms.some((term) => targetHasTag(targetTags, term)) ||
+      arbitraryExcludedTerms.some((term) => targetTagTokens.has(term))
     ) {
       continue;
     }
@@ -196,16 +251,51 @@ function inferAbilityMatch(ability, unit) {
     const requiredTerms = TARGET_TERMS.filter(
       (term) =>
         includesTerm(clause, term) &&
-        !includesTerm(clause, `non ${term}`)
+        !includesNegatedTerm(clause, term)
     );
 
+    const residualGroups = getResidualClauseGroups(
+      clause,
+      requiredTerms,
+      [...excludedTerms, ...arbitraryExcludedTerms]
+    );
+    const residualTokens = residualGroups.flat();
+
+    const nonEmptyResidualGroups = residualGroups.filter(
+      (group) => group.length > 0
+    );
+    const residualMatches =
+      nonEmptyResidualGroups.length === 0 ||
+      nonEmptyResidualGroups.some((group) =>
+        group.every((token) => targetTagTokens.has(token))
+      );
+
+    const requiredMatches = clause.includes(" or ")
+      ? requiredTerms.length === 0 ||
+        requiredTerms.some((term) => targetHasTag(targetTags, term))
+      : requiredTerms.every((term) => targetHasTag(targetTags, term));
+
+    const hasSpecificRecipient =
+      requiredTerms.length > 0 || residualTokens.length > 0;
+
     if (
-      requiredTerms.every((term) => targetHasTag(targetTags, term))
+      requiredMatches &&
+      residualMatches &&
+      (hasSpecificRecipient || hasExplicitGenericRecipient(text))
     ) {
       return {
         matchedOn:
-          requiredTerms.length > 0
-            ? requiredTerms
+          hasSpecificRecipient
+            ? [
+                ...requiredTerms,
+                ...residualTokens
+                  .filter((token) => targetTagTokens.has(token))
+                  .map((token) =>
+                    [...(unit?.keywords ?? [])].find((keyword) =>
+                      normalize(keyword).split(" ").includes(token)
+                    ) ?? token
+                  ),
+              ]
             : ["Cualquier unidad amiga"],
       };
     }

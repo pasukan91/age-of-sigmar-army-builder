@@ -15,6 +15,7 @@ import {
   ghb2026BattleTacticsCards,
 } from "../data/ghb2026";
 import { validateArmyList } from "../utils/armyValidation";
+import { createRegimentOfRenownReference } from "../utils/regimentOfRenownReferences";
 
 import {
   calculateArmyPoints,
@@ -422,6 +423,9 @@ function ArmyBuilder({
         selected={getArray(list.regimentsOfRenown)}
         onAdd={onAddRegimentOfRenown}
         onRemove={onRemoveRegimentOfRenown}
+        onView={(regiment) => onViewRule?.(
+          createRegimentOfRenownReference(regiment)
+        )}
       />
 
         </>

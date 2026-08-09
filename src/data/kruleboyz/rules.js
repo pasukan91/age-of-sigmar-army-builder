@@ -58,7 +58,19 @@ export const battleFormations = [
 export const heroicTraits = [
   { id: "backstabba", name: "Backstabba", points: 0, source: "Battletome", phase: "End of Any Turn", description: "Pick an enemy Hero in combat with this unit and another friendly Kruleboyz unit. Inflict D3 mortal damage, plus 1 for each additional friendly Kruleboyz unit in combat with it." },
   { id: "slippery-skumbag", name: "Slippery Skumbag", points: 0, source: "Battletome", phase: "Any Combat Phase", description: "If this unit is in combat, roll a dice. On a 3+, it can immediately Retreat without suffering mortal damage." },
-  { id: "egomaniak", name: "Egomaniak", points: 10, source: "Battletome", phase: null, description: "While in the combat range of a friendly non-Hero Kruleboyz Infantry unit, this unit has Ward (4+). Successful wards allocate 1 damage to an eligible nearby friendly unit." },
+  {
+    id: "egomaniak",
+    name: "Egomaniak",
+    points: 10,
+    source: "Battletome",
+    phase: null,
+    synergy: {
+      includeKeywords: ["Kruleboyz", "Infantry"],
+      excludeKeywords: ["Hero"],
+      conditions: ["Debe estar dentro del alcance de combate del portador"],
+    },
+    description: "While in the combat range of a friendly non-Hero Kruleboyz Infantry unit, this unit has Ward (4+). Successful wards allocate 1 damage to an eligible nearby friendly unit.",
+  },
 ];
 
 export const artefacts = [

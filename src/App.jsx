@@ -1931,7 +1931,11 @@ function App() {
         />
         {builderReference && (
           <ReferenceOverlay
-            title={builderReference.type === "unit" ? "Ficha de unidad" : "Referencia de regla"}
+            title={builderReference.type === "unit"
+              ? "Ficha de unidad"
+              : builderReference.reference?.kind === "regimentOfRenown"
+                ? "Regimiento de renombre"
+                : "Referencia de regla"}
             onClose={closeBuilderReference}
           >
             {builderReference.type === "unit" ? (

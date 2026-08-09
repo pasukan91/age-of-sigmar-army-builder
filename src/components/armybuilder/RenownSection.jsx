@@ -1,21 +1,16 @@
 import { MAX_REGIMENTS_OF_RENOWN } from "../../utils/armyComposition";
+import { getRegimentOrganisation } from "../../utils/regimentOfRenownReferences";
 import TrashIcon from "../TrashIcon";
 
 function formatOrganisation(regiment) {
-  const organisation = Array.isArray(regiment.organisation)
-    ? regiment.organisation
-    : Array.isArray(regiment.units)
-      ? regiment.units
-      : Array.isArray(regiment.unitIds)
-        ? regiment.unitIds
-        : [];
+  const organisation = getRegimentOrganisation(regiment);
 
   return organisation.length > 0
     ? organisation.join(" · ")
     : "Composición no especificada";
 }
 
-function RenownSection({ available, selected, onAdd, onRemove }) {
+function RenownSection({ available, selected, onAdd, onRemove, onView }) {
   if (available.length === 0 && selected.length === 0) {
     return null;
   }
@@ -42,6 +37,13 @@ function RenownSection({ available, selected, onAdd, onRemove }) {
             <strong>{regiment.points} pts</strong>
             <button
               type="button"
+              className="aos-renown-card__view"
+              onClick={() => onView?.(regiment)}
+            >
+              Consultar
+            </button>
+            <button
+              type="button"
               className="aos-icon-delete"
               onClick={() => onRemove(regiment.instanceId)}
               aria-label={`Eliminar ${regiment.name}`}
@@ -61,6 +63,13 @@ function RenownSection({ available, selected, onAdd, onRemove }) {
           </div>
           <div className="aos-renown-card__actions">
             <strong>{regiment.points} pts</strong>
+            <button
+              type="button"
+              className="aos-renown-card__view"
+              onClick={() => onView?.(regiment)}
+            >
+              Consultar
+            </button>
             <button
               type="button"
               disabled={selectedIds.has(regiment.id) || limitReached}
