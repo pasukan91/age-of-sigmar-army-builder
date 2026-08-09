@@ -1,5 +1,8 @@
+import { useRef, useState } from "react";
+
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
+import DamageCalculator from "../components/DamageCalculator";
 import UnitArtwork from "../components/UnitArtwork";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
@@ -14,6 +17,9 @@ function UnitWarscroll({
   onBack,
   onConfigure,
 }) {
+  const [calculatorOpen, setCalculatorOpen] = useState(false);
+  const calculatorRef = useRef(null);
+
   if (!unit) {
     return (
       <main className="aos-page aos-warscroll-page">
@@ -59,6 +65,13 @@ function UnitWarscroll({
         String(keyword).trim().toLowerCase() ===
         "hedonites of slaanesh"
     );
+
+  function openCalculator() {
+    setCalculatorOpen(true);
+    window.requestAnimationFrame(() => {
+      calculatorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   return (
     <main className="aos-page aos-warscroll-page">
@@ -154,6 +167,31 @@ function UnitWarscroll({
           </strong>
         </section>
 
+        {(unit.weapons ?? []).length > 0 && (
+          <button
+            type="button"
+            className="aos-damage-calculator-launch"
+            onClick={openCalculator}
+          >
+            <span aria-hidden="true">∑</span>
+            <span>
+              <strong>Calculadora de daño</strong>
+              <small>Compara el promedio contra salvaciones de 2+ a 6+</small>
+            </span>
+          </button>
+        )}
+
+        {calculatorOpen && (
+          <div ref={calculatorRef} className="aos-damage-calculator-anchor">
+            <DamageCalculator
+              key={unit.id ?? unit.name}
+              unit={unit}
+              models={displayedModels}
+              onClose={() => setCalculatorOpen(false)}
+            />
+          </div>
+        )}
+
         <Accordion
           title="Melee Weapons"
           subtitle={
@@ -166,6 +204,7 @@ function UnitWarscroll({
           <WeaponList
             weapons={unit.weapons}
             type="Melee"
+            onCalculate={openCalculator}
           />
         </Accordion>
 
@@ -182,6 +221,7 @@ function UnitWarscroll({
             <WeaponList
               weapons={unit.weapons}
               type="Ranged"
+              onCalculate={openCalculator}
             />
           </Accordion>
         )}
@@ -406,6 +446,7 @@ function Stat({
 function WeaponList({
   weapons = [],
   type,
+  onCalculate,
 }) {
   const filteredWeapons =
     weapons.filter((weapon) => {
@@ -429,9 +470,20 @@ function WeaponList({
         key={`${weapon.name}-${index}`}
         style={styles.weapon}
       >
-        <h3 style={styles.weaponName}>
-          {weapon.name}
-        </h3>
+        <div className="aos-weapon-profile__heading">
+          <h3 style={styles.weaponName}>
+            {weapon.name}
+          </h3>
+          <button
+            type="button"
+            className="aos-weapon-profile__calculator"
+            onClick={onCalculate}
+            aria-label={`Calcular daño de ${weapon.name}`}
+            title="Abrir calculadora de daño"
+          >
+            ∑
+          </button>
+        </div>
 
         <div
           style={{
