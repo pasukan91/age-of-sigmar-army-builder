@@ -733,7 +733,10 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   );
   const isHero = isHeroUnit(unit);
 
-  if (!hasKeyword(regiment.hero, "Skryre")) {
+  if (
+    !hasKeyword(regiment.hero, "Skryre") &&
+    !hasKeyword(regiment.hero, "Ogor Mawtribes")
+  ) {
     const sameCategoryCount = (regiment.units ?? []).filter((armyUnit) =>
       hasKeyword(armyUnit, hasKeyword(unit, "Weapon Team") ? "Weapon Team" : "War Machine")
     ).length;

@@ -33,7 +33,10 @@ const scourgeUnits = [
       ability("Cool Tempers", "End of Your Turn", "If this unit is wholly outside friendly territory and not in combat, your opponent must reduce their fury level by 1, to a minimum of 0.", "Rampage"),
       ability("Everwinter's Ire", "Start of Any Turn", "For the rest of the turn, while your opponent's fury level is equal to or up to 2 levels below yours, add 1 to chanting rolls for this unit. While it is 3 or more levels below yours, add 2 to chanting rolls for this unit instead.", "Once Per Turn (Army)"),
     ],
-    details: { notes: legalNote },
+    details: {
+      notes: legalNote,
+      regimentOptions: ["Any Ogor Mawtribes"],
+    },
   }),
   alternate("frostlord-on-thundertusk", {
     id: "frostlord-on-thundertusk-scourge-of-aqshy",

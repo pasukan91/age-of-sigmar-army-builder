@@ -161,7 +161,7 @@ const units = [
   make({
     id: "huskard-on-stonehorn", name: "Huskard on Stonehorn", points: 300,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
-    regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["voice-of-the-everwinter"],
+    regimentOptions: ["Any Ogor Mawtribes"], canJoinRegimentAs: ["voice-of-the-everwinter"],
     keywords: ["Hero", "Monster", "Priest (1)", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { hero: true, monster: true, priest: 1, companion: true, canBeReinforced: false },
     weapons: [
@@ -178,7 +178,7 @@ const units = [
   make({
     id: "huskard-on-thundertusk", name: "Huskard on Thundertusk", points: 280,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
-    regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["voice-of-the-everwinter"],
+    regimentOptions: ["Any Ogor Mawtribes"], canJoinRegimentAs: ["voice-of-the-everwinter"],
     keywords: ["Hero", "Monster", "Priest (1)", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { hero: true, monster: true, priest: 1, companion: true, canBeReinforced: false },
     weapons: [
@@ -196,7 +196,7 @@ const units = [
   make({
     id: "bloodpelt-hunter", name: "Bloodpelt Hunter", points: 130,
     move: '6"', health: 8, control: 3, save: "5+", baseSize: "40mm",
-    regimentOptions: ["Any Gutbusters"], canJoinRegimentAs: ["tyrant-companion"],
+    regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["tyrant-companion"],
     keywords: ["Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { hero: true, canBeReinforced: false },
     weapons: [
@@ -305,7 +305,7 @@ const units = [
   make({
     id: "butcher", name: "Butcher", points: 170,
     move: '6"', health: 8, control: 3, save: "5+", ward: "6+", baseSize: "50mm",
-    regimentOptions: ["0-1 Gnoblar Scraplauncher", "Any Gutbusters", "Any Gnoblars", "Any Gorger Mawpack"],
+    regimentOptions: ["0-1 Gnoblar Scraplauncher", "Any Mawseekers"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { hero: true, wizard: 1, ward: "6+", canBeReinforced: false },
     weapons: [weapon("Butcher's Tools", "Melee", 4, "4+", "2+", "2", "3")],
