@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Generated 3D assets are kept locally; the packs are too large for GitHub.
+/outputs/ogor_camp_stl/
+/outputs/stl_procesado_20260809/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
