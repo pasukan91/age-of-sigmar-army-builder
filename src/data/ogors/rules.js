@@ -48,12 +48,12 @@ export const aqshyArtefacts = [
 
 export const monsterTraits = [
   { id: "extremely-obstinate", name: "Extremely Obstinate", source: "Aqshy", points: 10, phase: null, description: "This unit has a Control characteristic of 15." },
-  { id: "grumpy-alpha", name: "Grumpy Alpha", source: "Aqshy", points: 10, phase: "Enemy Charge Phase", description: "Spend 1 fury and pick another visible friendly Ogor Monster wholly within 12\" and not in combat. Roll a dice; it can move that distance, enter combat and counts as having charged. Rampage." },
+  { id: "grumpy-alpha", name: "Grumpy Alpha", source: "Aqshy", points: 10, phase: "Enemy Charge Phase", description: "If this unit is in combat, pick another visible friendly Ogor Monster wholly within 12\" that is not in combat. Spend 1 rage dice. If your opponent's fury level is lower than yours, they increase their fury level by 1, to a maximum of 7. Then roll a dice; the target can move up to that many inches, can end that move in combat and, if it does, has charged. Rampage." },
   { id: "horn-toss", name: "Horn Toss", source: "Aqshy", points: 10, phase: "Any Combat Phase", description: "If this unit charged, pick a 1-model enemy in combat, remove it and set it up within 1\". On a 2+, inflict mortal damage equal to a D3 roll. Rampage." },
 ];
 
 export const spellLores = [{
-  id: "lore-of-maw-magic", name: "Lore of Maw-magic",
+  id: "lore-of-gut-magic", name: "Lore of Gut Magic",
   spells: [
     { id: "blood-feast", name: "Blood Feast", castingValue: 6, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell", "Unlimited"], description: "Pick a visible friendly unit wholly within 12\". Add 1 to hit rolls for its combat attacks until your next turn." },
     { id: "shincruncher", name: "Shincruncher", castingValue: 7, type: "Spell", phase: "Your Hero Phase", keywords: ["Spell"], description: "Pick a visible enemy within 12\". Until your next turn, each time it ends a move or is set up, inflict D3 mortal damage on it." },

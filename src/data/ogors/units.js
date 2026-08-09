@@ -1,4 +1,4 @@
-import { ability, createOrrukUnit, weapon } from "../orrukWarclans/unitFactory";
+import { ability, createOrrukUnit, weapon } from "../orrukWarclans/unitFactory.js";
 
 const make = (config) => createOrrukUnit({ faction: "ogors", ...config });
 const pendingBase = {
@@ -22,7 +22,7 @@ const units = [
       ability("An Ogor's Ogor", null, "More than 1 effect of Eat 'Em Alive can apply to this unit at the same time, but each effect can only be applied once.", "Passive"),
       ability("A Light Snack", "Any Combat Phase", "Pick an enemy unit in combat and roll a dice. If the roll exceeds the target's Health characteristic, 1 model in it is slain.", "Once Per Turn (Army)", ["Rampage"]),
       ability("Been There, Ate That", "End of Any Turn", "If this unit's combat attacks destroyed a non-Monster enemy, Heal (D3). If they damaged and destroyed an enemy Monster, Heal (D3+3).", "Ability"),
-      ability("Violent Encouragement", "Any Combat Phase", "Pick a visible friendly Ogor Mawtribes unit wholly within 12\". Until the end of the phase, before it is damaged its attackers suffer 1 mortal damage after fighting for each unmodified hit roll of 1; after it is damaged, add 1 Attack to its melee weapons.", "Ability"),
+      ability("The Right Motivation", "Any Combat Phase", "Pick a visible friendly Ogor Mawtribes Infantry unit wholly within 12\". For the rest of the turn, while the target has no damage points allocated to it this phase, each unmodified hit roll of 1 for a combat attack that targets it inflicts 1 mortal damage on the attacking unit after its Fight ability is resolved. If the target has had any damage points allocated to it this phase, add 1 to the Attacks characteristic of its melee weapons instead.", "Ability"),
     ],
   }),
   make({
@@ -53,21 +53,20 @@ const units = [
     ],
     abilities: [
       ability("Battle Damaged", null, "While this unit has 10 or more damage points, Glutthorn's Horn and Hooves has 5 Attacks.", "Passive"),
-      ability("Gathering Momentum", null, "You can re-roll 1 dice in charge rolls for this unit.", "Passive"),
-      ability("Glutthorn Stampede", "Any Combat Phase", "If this unit charged, pick an enemy in combat and roll a dice. On a 3+, the target has Strike-last for the turn.", "Once Per Turn (Army)", ["Rampage"]),
+      ability("Pitiless Warlord", "Reaction: You declared a Charge ability", "When you declare a Charge ability for an Ogor Mawtribes unit wholly within 12\" of this unit, you can re-roll 1 dice in that charge roll.", "Once Per Turn (Army)"),
+      ability("Glutthorn Stampede", "Any Combat Phase", "If this unit charged this turn, pick an enemy unit in combat with it and roll a dice. Add 1 to the roll if the target is Infantry. On a 4+, the target has Strike-last for the rest of the turn.", "Once Per Turn (Army)", ["Rampage"]),
     ],
   }),
   make({
-    id: "tyrant", name: "Tyrant", points: 130,
-    move: '6"', health: 8, control: 3, save: "4+", baseSize: "50mm",
+    id: "tyrant", name: "Tyrant", points: 150,
+    move: '6"', health: 10, control: 3, save: "3+", baseSize: "50mm",
     regimentOptions: ["0-1 Bloodpelt Hunter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { hero: true, canBeReinforced: false },
     weapons: [weapon("Tyrant's Meatcleavers", "Melee", 4, "4+", "2+", "2", "3", ["Crit (Mortal)"])],
     abilities: [
       ability("Big Name", "Deployment Phase", "Choose Neck-wringer (enemy Infantry with Health 1 or 2 cannot contest objectives in combat with this unit), Steed-eater (enemy Cavalry cannot Retreat from this unit), or Giant-wrestler (enemy Monsters cannot use Rampages in combat with this unit).", "Ability"),
-      ability("Bully of the First Degree", null, "Enemy units cannot use Retreat abilities while they are in combat with this unit.", "Passive"),
-      ability("Command the Avalanche", "Reaction: You declared a Fight ability", "Pick a visible friendly non-Hero Ogor Mawtribes Infantry unit in this unit's combat range that has not fought. It can fight immediately after this unit and gains +1 to hit for the turn.", "Reaction"),
+      ability("Brawlerguts", "Reaction: You declared a Fight ability", "Pick a visible friendly non-Hero Ogor Mawtribes Infantry unit that has not used a Fight ability this turn and is within this unit's combat range. It can be picked to use a Fight ability immediately after this unit's Fight ability has been resolved. If it is picked to do so, add 1 to hit rolls for its combat attacks for the rest of the turn.", "Reaction"),
     ],
   }),
   make({
@@ -86,24 +85,24 @@ const units = [
     ],
   }),
   make({
-    id: "gluttons", name: "Ogor Gluttons", points: 220, models: 6,
+    id: "gluttons", name: "Ogor Gluttons", points: 200, models: 5,
     move: '6"', health: 4, control: 2, save: "5+", baseSize: "40mm",
-    keywords: ["Infantry", "Champion", "Musician (1/6)", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
+    keywords: ["Infantry", "Champion", "Musician (1/5)", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     weapons: [weapon("Glutton Weapons", "Melee", 4, "4+", "2+", "1", "2")],
     abilities: [ability("Wall of Meat", null, "Add 1 to save rolls for this unit if it has not charged this turn.", "Passive")],
   }),
   make({
-    id: "ironguts", name: "Ironguts", points: 210, models: 4,
+    id: "ironguts", name: "Ironguts", points: 200, models: 3,
     move: '6"', health: 4, control: 2, save: "4+", baseSize: "40mm",
     keywords: ["Infantry", "Champion", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     weapons: [weapon("Irongut Weapon", "Melee", 3, "4+", "2+", "2", "3")],
     abilities: [
-      ability("Down to the Ironguts", null, "Friendly Gutbusters Heroes have Ward (5+) while wholly within 6\" of this unit.", "Passive"),
-      ability("Violent Reminder", "Any Charge Phase", "This unit can use Bull Charge even if another friendly unit has used it this turn.", "Once Per Turn (Army)"),
+      ability("Personal Enforcers", null, "While this unit is within the combat ranges of any friendly Ogor Mawtribes Infantry Heroes, both this unit and those Heroes have Ward (5+).", "Passive"),
+      ability("Displays of Might", "Any Charge Phase", "This unit can use the 'Bull Charge' ability even if another friendly unit has used it this turn.", "Once Per Turn (Army)"),
     ],
   }),
   make({
-    id: "ironblaster", name: "Ironblaster", points: 160,
+    id: "ironblaster", name: "Ironblaster", points: 180,
     move: '9"', health: 9, control: 2, save: "4+", baseSize: "120 × 92mm",
     keywords: ["War Machine", "Destruction", "Ogor Mawtribes", "Ogor", "Gutbusters"],
     rules: { companion: true, canBeReinforced: false },
@@ -112,10 +111,10 @@ const units = [
       weapon("Clubbers", "Melee", 2, "4+", "2+", "1", "2"),
       weapon("Rhinox's Sharp Horns", "Melee", 4, "4+", "2+", "1", "D3", ["Companion"]),
     ],
-    abilities: [ability("Explosive Shells", "Any Shooting Phase", "After this unit shoots, pick the target and each other unit within 3\" of it. On a 3+, inflict mortal damage equal to the roll on the target and D3 mortal damage on each collateral target.", "Once Per Turn (Army)", ["Core", "Attack", "Shoot"])],
+    abilities: [ability("Obliterating Blast", "Your Shooting Phase", "If this unit has not used a Run or Retreat ability this turn, pick a visible enemy unit within 18\" and draw a straight line between the closest points on this unit's base and the target's base. Each other unit whose base is crossed by that line is a collateral target. Roll a dice. On a 3+, inflict an amount of mortal damage on the target equal to the roll and inflict D3 mortal damage on each collateral target.", "Once Per Turn (Army)", ["Core", "Attack", "Shoot"])],
   }),
   make({
-    id: "gnoblar-scraplauncher", name: "Gnoblar Scraplauncher", points: 120,
+    id: "gnoblar-scraplauncher", name: "Gnoblar Scraplauncher", points: 160,
     move: '9"', health: 9, control: 2, save: "4+", baseSize: "120 × 92mm",
     keywords: ["War Machine", "Destruction", "Ogor Mawtribes"],
     rules: { companion: true, canBeReinforced: false },
@@ -126,7 +125,7 @@ const units = [
     abilities: [ability("Rain of Crap", "Any Shooting Phase", "Pick an enemy damaged by this unit's shooting. Until your next turn, subtract the damage allocated by those attacks from its Move (minimum 1\"). On a 3+, it also cannot Run, Retreat or be removed and set up elsewhere.", "Once Per Turn (Army)")],
   }),
   make({
-    id: "frostlord-on-stonehorn", name: "Frostlord on Stonehorn", points: 320,
+    id: "frostlord-on-stonehorn", name: "Frostlord on Stonehorn", points: 340,
     move: '10"', health: 15, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["0-1 Voice of the Everwinter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -143,7 +142,7 @@ const units = [
     ],
   }),
   make({
-    id: "frostlord-on-thundertusk", name: "Frostlord on Thundertusk", points: 230,
+    id: "frostlord-on-thundertusk", name: "Frostlord on Thundertusk", points: 280,
     move: '10"', health: 15, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["0-1 Voice of the Everwinter", "Any Ogor Mawtribes"],
     keywords: ["Hero", "Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -160,7 +159,7 @@ const units = [
     ],
   }),
   make({
-    id: "huskard-on-stonehorn", name: "Huskard on Stonehorn", points: 290,
+    id: "huskard-on-stonehorn", name: "Huskard on Stonehorn", points: 300,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["voice-of-the-everwinter"],
     keywords: ["Hero", "Monster", "Priest (1)", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -177,7 +176,7 @@ const units = [
     ],
   }),
   make({
-    id: "huskard-on-thundertusk", name: "Huskard on Thundertusk", points: 220,
+    id: "huskard-on-thundertusk", name: "Huskard on Thundertusk", points: 280,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     regimentOptions: ["Any Beastclaw"], canJoinRegimentAs: ["voice-of-the-everwinter"],
     keywords: ["Hero", "Monster", "Priest (1)", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -195,7 +194,7 @@ const units = [
     ],
   }),
   make({
-    id: "bloodpelt-hunter", name: "Bloodpelt Hunter", points: 110,
+    id: "bloodpelt-hunter", name: "Bloodpelt Hunter", points: 130,
     move: '6"', health: 8, control: 3, save: "5+", baseSize: "40mm",
     regimentOptions: ["Any Gutbusters"], canJoinRegimentAs: ["tyrant-companion"],
     keywords: ["Hero", "Infantry", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
@@ -233,8 +232,8 @@ const units = [
     rules: { companion: true },
     weapons: [
       weapon("Hunter's Crossbow", "Ranged", 3, "4+", "3+", "1", "2", ["Anti-Monster (+1 Rend)"], '15"'),
-      weapon("Skinning Blades", "Melee", 2, "4+", "2+", "1", "2", ["Anti-Cavalry (+1 Rend)", "Anti-Monster (+1 Rend)"]),
-      weapon("Sabrefang's Tusks and Claws", "Melee", 4, "4+", "3+", "1", "2", ["Companion"]),
+      weapon("Skinning Blades", "Melee", 2, "4+", "2+", "1", "1", ["Anti-Cavalry (+1 Rend)", "Anti-Monster (+1 Rend)"]),
+      weapon("Sabrefang's Tusks and Claws", "Melee", 4, "4+", "3+", "1", "1", ["Companion"]),
     ],
     abilities: [
       ability("Through the Frosts", "Deployment Phase", "Remove this unit and set it up wholly within 3\" of terrain and more than 9\" from enemies. It cannot Move in the first turn of the first battle round.", "Once Per Battle (Army)"),
@@ -255,7 +254,7 @@ const units = [
     abilities: [ability("Relentless Predators", "Enemy Movement Phase", "If this unit is more than 9\" from all enemy units, it can move up to D6\". It cannot enter combat during that move.", "Once Per Turn (Army)")],
   }),
   make({
-    id: "stonehorn-beastriders", name: "Stonehorn Beastriders", points: 260,
+    id: "stonehorn-beastriders", name: "Stonehorn Beastriders", points: 280,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     keywords: ["Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { monster: true, companion: true, canBeReinforced: false },
@@ -266,11 +265,11 @@ const units = [
     ],
     abilities: [
       ability("Stone Skeleton", null, "Ignore the first damage point allocated to this unit in each phase.", "Passive"),
-      ability("Stonehorn Avalanche", "Any Charge Phase", "If this unit charged and did not use Bull Charge, pick an enemy in combat or enemy terrain in combat range. On a 3+, inflict mortal damage.", "Once Per Turn (Army)", ["Rampage"]),
+      ability("Stonehorn Avalanche", "Any Charge Phase", "If this unit charged this phase and has not used the 'Bull Charge' ability this turn, pick an enemy unit in combat with it or an enemy faction terrain feature within its combat range. Roll a dice. On a 3+, inflict 3 mortal damage if the target is a unit, or 6 mortal damage if the target is a terrain feature.", "Once Per Turn (Army)", ["Rampage"]),
     ],
   }),
   make({
-    id: "thundertusk-beastriders", name: "Thundertusk Beastriders", points: 180,
+    id: "thundertusk-beastriders", name: "Thundertusk Beastriders", points: 240,
     move: '10"', health: 14, control: 10, save: "4+", baseSize: "120 × 92mm",
     keywords: ["Monster", "Destruction", "Ogor Mawtribes", "Ogor", "Beastclaw"],
     rules: { monster: true, companion: true, canBeReinforced: false },
@@ -299,19 +298,19 @@ const units = [
     abilities: [
       ability("Battle Damaged", null, "At 10 or more damage, Mawseeker Acolytes' Blades and Gorger's Claws has 5 Attacks.", "Passive"),
       ability("Son of the Hungering One", null, "While wholly within 12\", friendly non-Mawseekers Ogor Mawtribes Infantry have Ward (6+) and friendly Mawseekers have Ward (5+).", "Passive"),
-      ability("High Slaughtermaster", "Your Hero Phase", "Pick a visible friendly Ogor Mawtribes unit wholly within 12\". It can immediately use Eat 'Em Alive as if it were the end of the turn.", "Ability"),
+      ability("From the Depths of the Cauldron", "Your Hero Phase", "Pick a visible friendly non-Hero Ogor Mawtribes unit wholly within 12\". The target can immediately use the 'Eat 'Em Alive' ability as if it were the end of the turn and it were eligible to use that ability.", "Ability"),
       ability("The Maw Opens", "Your Hero Phase", "Cast on 7. Pick a visible friendly Ogor Mawtribes unit wholly within 12\". Out of combat it moves D3+3\" towards the nearest visible enemy without entering combat. In combat, inflict D3 mortals on each enemy and Heal (D3), or 3 and Heal (3) if it is Mawseekers.", "Spell", ["Spell"], 7),
     ],
   }),
   make({
-    id: "butcher", name: "Butcher", points: 150,
+    id: "butcher", name: "Butcher", points: 170,
     move: '6"', health: 8, control: 3, save: "5+", ward: "6+", baseSize: "50mm",
     regimentOptions: ["0-1 Gnoblar Scraplauncher", "Any Gutbusters", "Any Gnoblars", "Any Gorger Mawpack"],
     keywords: ["Hero", "Wizard (1)", "Infantry", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { hero: true, wizard: 1, ward: "6+", canBeReinforced: false },
     weapons: [weapon("Butcher's Tools", "Melee", 4, "4+", "2+", "2", "3")],
     abilities: [
-      ability("Arcane Appetite", "Any Combat Phase", "If a friendly or enemy Wizard or Priest is within 6\", roll a dice. On a 3+, this unit's melee weapons gain Crit (2 Hits), or Crit (Mortal) if they already have it, for the turn.", "Ability"),
+      ability("Trogg-Guts", "Any Movement Phase", "Pick a visible friendly Ogor Mawtribes unit wholly within 12\" and roll a dice. On a 3+, the target has Ward (6+) until the start of your next turn. If the target has the Mawseekers keyword, it has Ward (5+) instead.", "Ability"),
       ability("More Meat for the Pot…", "End of Any Turn", "Once per battle, if an enemy damaged by this unit's combat attacks or its manifestation was destroyed this turn, add 1 to this unit's power level for the rest of the battle.", "Once Per Battle (Army)"),
     ],
   }),
@@ -337,12 +336,12 @@ const units = [
   make({
     id: "gorger-mawpack", name: "Gorger Mawpack", points: 240, models: 5,
     move: '6"', health: 5, control: 2, save: "6+", ward: "6+", baseSize: "50mm",
-    keywords: ["Infantry", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
+    keywords: ["Infantry", "Champion (1/5)", "Musician (1/5)", "Ward (6+)", "Destruction", "Ogor Mawtribes", "Ogor", "Mawseekers"],
     rules: { ward: "6+", canBeReinforced: false },
     weapons: [weapon("Clubs, Claws and Jaws", "Melee", 5, "4+", "2+", "1", "2", ["Anti-Infantry (+1 Rend)"])],
     abilities: [
-      ability("Lurking on the Fringes", "Deployment Phase", "Set this unit in reserve instead of deploying it.", "Deploy"),
-      ability("Driven by Hunger", "Your Movement Phase", "If lurking, set this unit up wholly within 9\" of a battlefield edge and more than 9\" from enemies.", "Ability"),
+      ability("Troglodytic Lurkers", "Deployment Phase", "Set this unit up in reserve lurking instead of setting it up on the battlefield. It has now been deployed.", "Deploy"),
+      ability("Frenzied Hunters", "Your Movement Phase", "If this unit is lurking, set it up wholly within 9\" of a battlefield edge and more than 9\" from all enemy units.", "Ability"),
     ],
   }),
 ];

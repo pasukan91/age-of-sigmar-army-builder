@@ -2,7 +2,10 @@ const terrain = [{
   id: "mawpit",
   name: "Mawpit",
   image: "/images/units/ogors/mawpit.jpg",
-  profile: { move: "-", health: 12, control: "-", save: "-", ward: "6+" },
+  profile: { move: "-", health: 12, control: "-", save: "4+", ward: "6+" },
+  weapons: [
+    { name: "Ever-hungry Pit", type: "Melee", attacks: "2D6", hit: "4+", wound: "2+", rend: "1", damage: "1", abilities: ["Crit (Mortal)"] },
+  ],
   universalAbilities: ["Cover", "Impassable"],
   abilities: [
     { name: "Feed the Maw", type: "Your Hero Phase", phase: "Your Hero Phase", description: "If this feature has no Head Butcher, place a friendly Butcher within 3\" and not in combat on it. That unit becomes its Head Butcher." },
