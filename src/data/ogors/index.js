@@ -60,6 +60,12 @@ const ogors = {
   id: "ogors",
   alliance: "destruction",
   name: "Ogor Mawtribes",
+  dataAuthority: {
+    warscrolls: "Scan de battletome aportado por el usuario",
+    points: "Excel de puntos aportado por el usuario",
+    botAllowed: false,
+  },
+  // No activar hasta que el usuario confirme que el bot vuelve a estar actualizado.
   useAosCommunityCatalogue: false,
   image: "/images/factions/ogormawtribes.webp",
   battleTraits,

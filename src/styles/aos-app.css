@@ -2866,6 +2866,7 @@ body {
 }
 
 .aos-list-card {
+  position: relative;
   width: 100%;
   min-height: 82px;
   display: block;
@@ -2932,10 +2933,17 @@ body {
 }
 
 .aos-list-card__delete {
-  width: 100%;
-  padding: 10px 16px;
-  border: 0;
-  border-top: 1px solid var(--aos-divider);
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  width: 36px;
+  min-height: 36px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(127, 32, 26, 0.34);
+  border-radius: 50%;
   color: #7f201a;
   background: rgba(137, 31, 24, 0.04);
   font-size: 12px;
@@ -2951,7 +2959,7 @@ body {
 
 .aos-list-card--with-artwork .aos-list-card__delete {
   color: var(--aos-white);
-  border-top-color: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.32);
   background: rgba(90, 15, 12, 0.7);
 }
 
@@ -4015,11 +4023,53 @@ select.aos-field__control:hover {
 }
 
 .aos-validation-panel > header {
-  display: flex;
-  gap: 13px;
-  align-items: flex-start;
-  padding: 18px;
+  padding: 0;
   background: linear-gradient(135deg, #fff4f1, #fffdf8);
+}
+
+.aos-validation-panel__summary {
+  display: flex;
+  width: 100%;
+  gap: 13px;
+  align-items: center;
+  padding: 15px 18px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+}
+
+.aos-validation-panel__copy {
+  display: block;
+  min-width: 0;
+  flex: 1;
+}
+
+.aos-validation-panel__title,
+.aos-validation-panel__description {
+  display: block;
+}
+
+.aos-validation-panel__title {
+  margin: 2px 0 3px;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.aos-validation-panel__description {
+  color: #655d53;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.aos-validation-panel__chevron {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  color: #6b5c4a;
 }
 
 .aos-validation-panel.is-valid > header {
@@ -4772,10 +4822,103 @@ select.aos-field__control:hover {
 
 .aos-option-card__button,
 .aos-icon-button,
-.aos-list-card__delete,
 .aos-unit-artwork-link,
 .aos-regiment-unit-card button {
   min-height: 44px;
+}
+
+.aos-icon-delete {
+  display: grid;
+  width: 36px;
+  min-height: 36px !important;
+  padding: 0 !important;
+  place-items: center;
+}
+
+.aos-empty-message--actionable p {
+  margin: 0 0 14px;
+}
+
+.aos-empty-message--actionable .aos-primary-action {
+  width: min(100%, 280px);
+  margin-inline: auto;
+}
+
+.aos-empty-message--actionable > button:not(.aos-primary-action),
+.aos-game-battle-card.is-empty > button {
+  min-height: 40px;
+  padding: 8px 13px;
+  border: 1px solid #8d7339;
+  border-radius: 6px;
+  color: #fffaf0;
+  background: linear-gradient(180deg, #846d39, #5f4d28);
+  font-weight: 800;
+}
+
+.aos-option-list--grouped {
+  gap: 22px;
+}
+
+.aos-option-group__header {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 9px;
+  padding: 9px 11px;
+  border: 1px solid #cbbd9f;
+  border-radius: 7px;
+  color: #f2e9d4;
+  background: linear-gradient(180deg, #3b423d, #20251f);
+  box-shadow: 0 4px 10px rgba(31, 28, 22, 0.18);
+}
+
+.aos-option-group__header h3 {
+  margin: 0;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.aos-option-group__header span {
+  display: grid;
+  min-width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 999px;
+  color: #29251e;
+  background: #d6bf7d;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.aos-option-group__items {
+  display: grid;
+  gap: 12px;
+}
+
+.aos-new-list-summary {
+  padding: 13px 14px;
+  border: 1px solid #d2c6b3;
+  border-radius: 7px;
+  background: #eee8dc;
+}
+
+.aos-new-list-summary span,
+.aos-new-list-summary strong {
+  display: block;
+}
+
+.aos-new-list-summary span {
+  margin-bottom: 3px;
+  color: #6e6559;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 @media (max-width: 620px) {

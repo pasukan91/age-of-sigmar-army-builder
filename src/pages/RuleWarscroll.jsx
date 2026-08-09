@@ -53,10 +53,10 @@ function RuleWarscroll({ reference, onBack }) {
 
       {(isManifestation || isTerrain) && (
         <section className="aos-profile-strip">
-          <Stat label="Move" value={profile.move} />
-          <Stat label="Health" value={profile.health} />
+          <Stat label="Movimiento" value={profile.move} />
+          <Stat label="Salud" value={profile.health} />
           <Stat label="Control" value={profile.control} />
-          <Stat label="Save" value={profile.save} variant="save" />
+          <Stat label="Salvación" value={profile.save} variant="save" />
         </section>
       )}
 
@@ -121,7 +121,7 @@ function RuleWarscroll({ reference, onBack }) {
               </Accordion>
             )}
 
-            <Accordion title="Keywords" subtitle={`${item.keywords?.length ?? 0}`}>
+            <Accordion title="Palabras clave" subtitle={`${item.keywords?.length ?? 0}`}>
               <RuleKeywords keywords={item.keywords} />
             </Accordion>
           </>

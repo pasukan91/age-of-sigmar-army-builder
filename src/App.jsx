@@ -1844,6 +1844,7 @@ function App() {
       return (
         <SelectFaction
           alliance={army.alliance}
+          initialFaction={army.faction}
           onSelect={
             handleSelectFaction
           }

@@ -1,6 +1,7 @@
 import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
+import TrashIcon from "../components/TrashIcon";
 import { calculateArmyPoints } from "../utils/armyPoints";
 import {
   getFactionArtwork,
@@ -53,8 +54,11 @@ function MyLists({
         </header>
 
         {lists.length === 0 ? (
-          <div className="aos-empty-message">
-            Aún no tienes listas creadas.
+          <div className="aos-empty-message aos-empty-message--actionable">
+            <p>Aún no tienes listas creadas.</p>
+            <button type="button" className="aos-primary-action" onClick={onCreate}>
+              Crear mi primera lista
+            </button>
           </div>
         ) : (
           <section className="aos-option-list">
@@ -112,8 +116,10 @@ function MyLists({
                       type="button"
                       className="aos-list-card__delete"
                       onClick={() => onDeleteList(list.id)}
+                      aria-label={`Eliminar la lista ${list.name}`}
+                      title="Eliminar lista"
                     >
-                      Eliminar lista
+                      <TrashIcon />
                     </button>
                   </article>
                 );

@@ -58,6 +58,7 @@ function UnitWarscroll({
 
   const potentialSynergies =
     getPotentialSynergies(list, unit);
+  const accordionPrefix = `storm-forge:warscroll:${unit.id ?? unit.name}`;
 
   const isHedonitesUnit =
     (unit.keywords ?? []).some(
@@ -98,12 +99,12 @@ function UnitWarscroll({
 
       <section className="aos-profile-strip">
         <Stat
-          label="Move"
+          label="Movimiento"
           value={unit.profile?.move}
         />
 
         <Stat
-          label="Health"
+          label="Salud"
           value={unit.profile?.health}
         />
 
@@ -113,7 +114,7 @@ function UnitWarscroll({
         />
 
         <Stat
-          label="Save"
+          label="Salvación"
           value={unit.profile?.save}
           variant="save"
         />
@@ -193,7 +194,8 @@ function UnitWarscroll({
         )}
 
         <Accordion
-          title="Melee Weapons"
+          title="Armas de combate"
+          storageKey={`${accordionPrefix}:melee-weapons`}
           subtitle={
             getWeaponCount(
               unit,
@@ -210,7 +212,8 @@ function UnitWarscroll({
 
         {hasWeaponProfile(unit, "Ranged") && (
           <Accordion
-            title="Ranged Weapons"
+            title="Armas a distancia"
+            storageKey={`${accordionPrefix}:ranged-weapons`}
             subtitle={
               getWeaponCount(
                 unit,
@@ -227,7 +230,8 @@ function UnitWarscroll({
         )}
 
         <Accordion
-          title="Abilities"
+          title="Habilidades"
+          storageKey={`${accordionPrefix}:abilities`}
           subtitle={
             `${unit.abilities?.length ?? 0}`
           }
@@ -245,11 +249,12 @@ function UnitWarscroll({
               : "detectadas"
           }`}
           defaultOpen={potentialSynergies.length > 0}
+          storageKey={`${accordionPrefix}:synergies`}
         >
           <SynergyList synergies={potentialSynergies} />
         </Accordion>
 
-        <Accordion title="Keywords">
+        <Accordion title="Palabras clave" storageKey={`${accordionPrefix}:keywords`}>
           <div style={styles.keywordList}>
             {(unit.keywords ?? []).map(
               (keyword) => (
@@ -265,7 +270,7 @@ function UnitWarscroll({
             {(unit.keywords ?? [])
               .length === 0 && (
               <p>
-                Sin keywords.
+                Sin palabras clave.
               </p>
             )}
           </div>
@@ -274,6 +279,7 @@ function UnitWarscroll({
         {unit.artefact && (
           <EnhancementAccordion
             title="Artefacto"
+            storageKey={`${accordionPrefix}:artefact`}
             enhancement={
               unit.artefact
             }
@@ -283,6 +289,7 @@ function UnitWarscroll({
         {unit.heroicTrait && (
           <EnhancementAccordion
             title="Rasgo heroico"
+            storageKey={`${accordionPrefix}:heroic-trait`}
             enhancement={
               unit.heroicTrait
             }
@@ -292,6 +299,7 @@ function UnitWarscroll({
         {unit.monstrousTrait && !isHedonitesUnit && (
           <EnhancementAccordion
             title="Rasgo monstruoso"
+            storageKey={`${accordionPrefix}:monstrous-trait`}
             enhancement={
               unit.monstrousTrait
             }
@@ -589,9 +597,13 @@ function AbilityList({
 function EnhancementAccordion({
   title,
   enhancement,
+  storageKey,
 }) {
   return (
-    <Accordion title={title}>
+    <Accordion
+      title={title}
+      storageKey={storageKey ?? `storm-forge:warscroll-enhancement:${enhancement.id ?? enhancement.name}`}
+    >
       <h3 style={styles.enhancementName}>
         {enhancement.name}
       </h3>

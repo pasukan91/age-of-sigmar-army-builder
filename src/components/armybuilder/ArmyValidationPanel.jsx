@@ -1,5 +1,10 @@
+import { useState } from "react";
+import ChevronIcon from "../ChevronIcon";
+
 function ArmyValidationPanel({ validation, onNavigateIssue }) {
   const { errors = [], warnings = [] } = validation ?? {};
+  const [expanded, setExpanded] = useState(false);
+  const hasIssues = errors.length > 0 || warnings.length > 0;
 
   return (
     <section
@@ -8,26 +13,39 @@ function ArmyValidationPanel({ validation, onNavigateIssue }) {
       aria-labelledby="validation-title"
     >
       <header>
-        <span className="aos-validation-panel__icon" aria-hidden="true">
-          {errors.length === 0 ? "✓" : "!"}
-        </span>
-        <div>
+        <button
+          type="button"
+          className="aos-validation-panel__summary"
+          onClick={() => hasIssues && setExpanded((current) => !current)}
+          aria-expanded={hasIssues ? expanded : undefined}
+          aria-controls={hasIssues ? "army-validation-issues" : undefined}
+        >
+          <span className="aos-validation-panel__icon" aria-hidden="true">
+            {errors.length === 0 ? "✓" : "!"}
+          </span>
+          <span className="aos-validation-panel__copy">
           <span className="aos-eyebrow">Comprobación de ejército</span>
-          <h2 id="validation-title">
+          <strong id="validation-title" className="aos-validation-panel__title">
             {errors.length === 0 ? "Lista legal" : `${errors.length} ${errors.length === 1 ? "error" : "errores"}`}
-          </h2>
-          <p>
+          </strong>
+          <span className="aos-validation-panel__description">
             {errors.length === 0
               ? warnings.length > 0
                 ? `La composición es legal; quedan ${warnings.length} elecciones recomendadas.`
                 : "No se han encontrado problemas de composición."
               : "Corrige estos problemas antes de presentar la lista."}
-          </p>
-        </div>
+          </span>
+          </span>
+          {hasIssues && (
+            <span className="aos-validation-panel__chevron" aria-hidden="true">
+              <ChevronIcon direction={expanded ? "up" : "down"} size={8} />
+            </span>
+          )}
+        </button>
       </header>
 
-      {(errors.length > 0 || warnings.length > 0) && (
-        <div className="aos-validation-panel__issues">
+      {hasIssues && expanded && (
+        <div className="aos-validation-panel__issues" id="army-validation-issues">
           {[...errors, ...warnings].map((item) => (
             <article key={item.id} className={`is-${item.severity}`}>
               <div>
@@ -47,4 +65,3 @@ function ArmyValidationPanel({ validation, onNavigateIssue }) {
 }
 
 export default ArmyValidationPanel;
-

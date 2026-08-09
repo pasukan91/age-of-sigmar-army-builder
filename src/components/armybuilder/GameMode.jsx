@@ -2,7 +2,7 @@ import { normalizeRuleItem } from "../../utils/ruleReferences";
 import { getUniqueListUnits } from "../../utils/listWarscrolls";
 import UnitArtwork from "../UnitArtwork";
 
-function GameMode({ list, onViewUnit, onViewRule }) {
+function GameMode({ list, onViewUnit, onViewRule, onGoToUnits, onGoToArmy }) {
   const units = getUniqueListUnits(list);
   const manifestations = getManifestations(list);
   const terrain = list?.terrain ? normalizeRuleItem(list.terrain) : null;
@@ -58,7 +58,10 @@ function GameMode({ list, onViewUnit, onViewRule }) {
           ))}
 
           {warscrollCount === 0 && (
-            <p className="aos-empty-message">Añade unidades o manifestaciones para consultarlas durante la partida.</p>
+            <div className="aos-empty-message aos-empty-message--actionable">
+              <p>Añade unidades o manifestaciones para consultarlas durante la partida.</p>
+              <button type="button" onClick={onGoToUnits}>Añadir unidades</button>
+            </div>
           )}
         </div>
       </section>
@@ -85,7 +88,10 @@ function GameMode({ list, onViewUnit, onViewRule }) {
               })}
             />
           ) : (
-            <p className="aos-empty-message">Selecciona el terreno de tu facción para tener su ficha disponible durante la partida.</p>
+            <div className="aos-empty-message aos-empty-message--actionable">
+              <p>Selecciona el terreno de tu facción para tener su ficha disponible durante la partida.</p>
+              <button type="button" onClick={onGoToArmy}>Elegir terreno</button>
+            </div>
           )}
         </div>
       </section>
@@ -94,7 +100,7 @@ function GameMode({ list, onViewUnit, onViewRule }) {
   );
 }
 
-function BattleMission({ list, onToggleMission }) {
+function BattleMission({ list, onToggleMission, onGoToArmy }) {
   const battleTactics = getBattleTactics(list);
   const completedMissions = new Set(list?.completedBattleMissions ?? []);
 
@@ -103,12 +109,12 @@ function BattleMission({ list, onToggleMission }) {
       <header className="aos-game-mode__hero">
         <span className="aos-eyebrow">Objetivos de batalla</span>
         <h2 id="mission-mode-title">Misión</h2>
-        <p>Consulta el battleplan, la puntuación y las tácticas elegidas sin mezclarlas con las fichas del ejército.</p>
+        <p>Consulta el plan de batalla, la puntuación y las tácticas elegidas sin mezclarlas con las fichas del ejército.</p>
       </header>
 
       <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
         <div className="aos-game-mode__section-title">
-          <h3 id="game-battle-setup-title">Battleplan y battle tactics</h3>
+          <h3 id="game-battle-setup-title">Plan y tácticas de batalla</h3>
           <span>Consulta rápida</span>
         </div>
 
@@ -127,20 +133,20 @@ function BattleMission({ list, onToggleMission }) {
               />
             ))}
             {battleTactics.length === 0 && (
-              <BattleTacticsCard card={null} />
+              <BattleTacticsCard card={null} onGoToArmy={onGoToArmy} />
             )}
           </div>
         </div>
 
-        <BattleplanCard battleplan={list?.battleplan} />
+        <BattleplanCard battleplan={list?.battleplan} onGoToArmy={onGoToArmy} />
       </section>
     </section>
   );
 }
 
-function BattleplanCard({ battleplan }) {
+function BattleplanCard({ battleplan, onGoToArmy }) {
   if (!battleplan) {
-    return <EmptyBattleCard title="Battleplan" message="Esta lista no tiene un battleplan asociado." />;
+    return <EmptyBattleCard title="Plan de batalla" message="Esta lista no tiene un plan de batalla asociado." action="Elegir plan de batalla" onAction={onGoToArmy} />;
   }
 
   return (
@@ -190,9 +196,9 @@ function BattleplanCard({ battleplan }) {
   );
 }
 
-function BattleTacticsCard({ card, completedMissions = new Set(), onToggleMission }) {
+function BattleTacticsCard({ card, completedMissions = new Set(), onToggleMission, onGoToArmy }) {
   if (!card) {
-    return <EmptyBattleCard title="Tácticas de batalla" message="Esta lista no tiene cartas de táctica asociadas." />;
+    return <EmptyBattleCard title="Tácticas de batalla" message="Esta lista no tiene cartas de táctica asociadas." action="Elegir tácticas" onAction={onGoToArmy} />;
   }
 
   return (
@@ -244,11 +250,12 @@ function BattleTacticsCard({ card, completedMissions = new Set(), onToggleMissio
   );
 }
 
-function EmptyBattleCard({ title, message }) {
+function EmptyBattleCard({ title, message, action, onAction }) {
   return (
     <article className="aos-game-battle-card is-empty">
       <small>{title}</small>
       <p>{message}</p>
+      {action && <button type="button" onClick={onAction}>{action}</button>}
     </article>
   );
 }

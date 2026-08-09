@@ -71,44 +71,10 @@ function NewListConfig({
         </header>
 
         <section className="aos-panel aos-form-panel">
-          {army.faction?.armiesOfRenown?.length > 0 && (
-            <label className="aos-field">
-              <span className="aos-field__label">
-                Tipo de ejército
-              </span>
-
-              <select
-                autoFocus
-                value={army.armyOfRenown?.id ?? "standard"}
-                onChange={(event) => {
-                  const selectedId = event.target.value;
-                  const selectedArmy = army.faction.armiesOfRenown.find(
-                    (option) => option.id === selectedId
-                  ) ?? null;
-
-                  setArmy((previousArmy) => ({
-                    ...previousArmy,
-                    armyOfRenown: selectedArmy,
-                  }));
-                }}
-                className="aos-field__control"
-              >
-                <option value="standard">
-                  Ejército estándar — {army.faction.name}
-                </option>
-
-                {army.faction.armiesOfRenown.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.name}
-                  </option>
-                ))}
-              </select>
-
-              <small className="aos-field__hint">
-                La selección determina qué unidades estarán disponibles al crear los regimientos.
-              </small>
-            </label>
-          )}
+          <div className="aos-new-list-summary" aria-label="Tipo de ejército elegido">
+            <span>Tipo de ejército</span>
+            <strong>{army.armyOfRenown?.name ?? `Ejército estándar — ${army.faction?.name}`}</strong>
+          </div>
 
           <label className="aos-field">
             <span className="aos-field__label">
@@ -116,6 +82,7 @@ function NewListConfig({
             </span>
 
             <input
+              autoFocus
               type="text"
               value={army.name}
               placeholder="Nueva Lista"

@@ -1,4 +1,5 @@
 import { MAX_REGIMENTS_OF_RENOWN } from "../../utils/armyComposition";
+import TrashIcon from "../TrashIcon";
 
 function formatOrganisation(regiment) {
   const organisation = Array.isArray(regiment.organisation)
@@ -39,7 +40,15 @@ function RenownSection({ available, selected, onAdd, onRemove }) {
           </div>
           <div className="aos-renown-card__actions">
             <strong>{regiment.points} pts</strong>
-            <button type="button" onClick={() => onRemove(regiment.instanceId)}>Eliminar</button>
+            <button
+              type="button"
+              className="aos-icon-delete"
+              onClick={() => onRemove(regiment.instanceId)}
+              aria-label={`Eliminar ${regiment.name}`}
+              title="Eliminar regimiento de renombre"
+            >
+              <TrashIcon size={17} />
+            </button>
           </div>
         </article>
       ))}

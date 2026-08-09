@@ -8,8 +8,8 @@ import {
 } from "../utils/factionArtwork";
 import "../styles/aos-app.css";
 
-function SelectFaction({ alliance, onSelect, onBack }) {
-  const [selectedFaction, setSelectedFaction] = useState(null);
+function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
+  const [selectedFaction, setSelectedFaction] = useState(initialFaction);
   const factionList = factions.filter(
     (faction) => faction.alliance === alliance?.id && faction.units.length > 0
   );

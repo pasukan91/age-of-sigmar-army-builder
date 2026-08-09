@@ -15,6 +15,9 @@ function OptionSelector({
 }) {
   const isMultiSelect = maxSelections > 1;
   const selectedIds = new Set(selectedOptions.map((option) => option.id));
+  const optionGroups = variant === "units"
+    ? groupUnitOptions(options)
+    : [{ id: "options", label: null, options }];
 
   function hasWarscroll(option) {
     return Boolean(
@@ -93,8 +96,17 @@ function OptionSelector({
             onToggle={onToggle}
           />
         ) : (
-        <section className="aos-option-list">
-          {options.map((option) => {
+        <section className={`aos-option-list${variant === "units" ? " aos-option-list--grouped" : ""}`}>
+          {optionGroups.map((group) => (
+            <section className="aos-option-group" key={group.id} aria-labelledby={`option-group-${group.id}`}>
+              {group.label && (
+                <header className="aos-option-group__header">
+                  <h3 id={`option-group-${group.id}`}>{group.label}</h3>
+                  <span>{group.options.length}</span>
+                </header>
+              )}
+              <div className="aos-option-group__items">
+          {group.options.map((option) => {
             const description =
               getDescription(option);
             const isSelected = selectedIds.has(option.id);
@@ -113,7 +125,7 @@ function OptionSelector({
                     <img
                       className="aos-option-card__map"
                       src={option.image}
-                      alt={`${option.name} battleplan map`}
+                      alt={`Mapa del plan de batalla ${option.name}`}
                       loading="lazy"
                     />
                   )}
@@ -210,6 +222,9 @@ function OptionSelector({
               </article>
             );
           })}
+              </div>
+            </section>
+          ))}
         </section>
         )}
 
@@ -224,6 +239,29 @@ function OptionSelector({
       </div>
     </main>
   );
+}
+
+const UNIT_GROUPS = [
+  ["hero", "Héroes"],
+  ["infantry", "Infantería"],
+  ["cavalry", "Caballería"],
+  ["monster", "Monstruos"],
+  ["war machine", "Máquinas de guerra"],
+  ["beast", "Bestias"],
+  ["terrain", "Terreno"],
+];
+
+function groupUnitOptions(options) {
+  const groups = new Map(UNIT_GROUPS.map(([id, label]) => [id, { id: id.replace(/\s+/g, "-"), label, options: [] }]));
+  const other = { id: "other", label: "Otras unidades", options: [] };
+
+  options.forEach((option) => {
+    const keywords = (option.keywords ?? []).map((keyword) => String(keyword).trim().toLowerCase());
+    const groupId = UNIT_GROUPS.find(([keyword]) => keywords.includes(keyword))?.[0];
+    (groupId ? groups.get(groupId) : other).options.push(option);
+  });
+
+  return [...groups.values(), other].filter((group) => group.options.length > 0);
 }
 
 function BattleTacticsOptions({

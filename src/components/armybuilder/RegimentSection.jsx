@@ -10,6 +10,7 @@ import {
   MAX_REGIMENTS_PER_ARMY,
 } from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
+import TrashIcon from "../TrashIcon";
 import { getEnhancementTiming } from "../../utils/enhancementTiming";
 import { isUniqueUnit } from "../../utils/unitIdentity";
 
@@ -263,8 +264,10 @@ function RegimentSection({
                   style={
                     styles.deleteRegimentButton
                   }
+                  aria-label={`Eliminar el regimiento de ${regiment.hero.name}`}
+                  title="Eliminar regimiento"
                 >
-                  Eliminar regimiento
+                  <TrashIcon size={17} />
                 </button>
               </header>
 
@@ -436,6 +439,7 @@ function RegimentSection({
 
                     options:
                       offeredUnits,
+                    ui: { variant: "units" },
                   });
 
                   setPage("selector");
@@ -485,6 +489,7 @@ function RegimentSection({
 
             options:
               availableHeroes,
+            ui: { variant: "units" },
           });
 
           setPage("selector");
@@ -645,8 +650,10 @@ function UnitCard({
               style={
                 styles.deleteUnitButton
               }
+              aria-label={`Eliminar ${unit.name}`}
+              title="Eliminar unidad"
             >
-              Eliminar
+              <TrashIcon size={17} />
             </button>
           </>
         )}
@@ -806,7 +813,12 @@ const styles = {
   },
 
   deleteUnitButton: {
-    padding: "9px 12px",
+    display: "grid",
+    width: 36,
+    height: 36,
+    minHeight: 36,
+    placeItems: "center",
+    padding: 0,
     border: "1px solid #a40000",
     borderRadius: 3,
     backgroundColor: "#ffffff",
@@ -815,7 +827,13 @@ const styles = {
   },
 
   deleteRegimentButton: {
-    padding: "8px 10px",
+    display: "grid",
+    width: 36,
+    height: 36,
+    minHeight: 36,
+    flex: "0 0 36px",
+    placeItems: "center",
+    padding: 0,
     border: "1px solid #a40000",
     borderRadius: 3,
     backgroundColor: "#ffffff",

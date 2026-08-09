@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChevronIcon from "./ChevronIcon";
 
 function Accordion({
@@ -7,9 +7,19 @@ function Accordion({
   children,
   defaultOpen = false,
   variant = "light",
+  storageKey,
 }) {
-  const [open, setOpen] =
-    useState(defaultOpen);
+  const [open, setOpen] = useState(() => getStoredState(storageKey, defaultOpen));
+
+  useEffect(() => {
+    if (!storageKey) return;
+
+    try {
+      window.localStorage.setItem(storageKey, open ? "open" : "closed");
+    } catch {
+      // La preferencia es opcional; el acordeón sigue funcionando sin almacenamiento.
+    }
+  }, [open, storageKey]);
 
   const isDark = variant === "dark";
 
@@ -56,6 +66,20 @@ function Accordion({
       )}
     </section>
   );
+}
+
+function getStoredState(storageKey, fallback) {
+  if (!storageKey || typeof window === "undefined") return fallback;
+
+  try {
+    const stored = window.localStorage.getItem(storageKey);
+    if (stored === "open") return true;
+    if (stored === "closed") return false;
+  } catch {
+    // Algunos navegadores bloquean localStorage en modo privado.
+  }
+
+  return fallback;
 }
 
 export default Accordion;

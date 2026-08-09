@@ -1,5 +1,5 @@
 body .aos-builder-page {
-  padding-bottom: calc(150px + env(safe-area-inset-bottom));
+  padding-bottom: calc(132px + env(safe-area-inset-bottom));
   touch-action: pan-y pinch-zoom;
   overscroll-behavior-x: contain;
 }
@@ -9,7 +9,7 @@ body .aos-builder-tabs {
   z-index: 24;
   top: auto;
   right: auto;
-  bottom: calc(65px + env(safe-area-inset-bottom));
+  bottom: calc(58px + env(safe-area-inset-bottom));
   left: 50%;
   width: min(100%, 900px);
   transform: translateX(-50%);
@@ -118,6 +118,30 @@ body .aos-builder-tabs button.is-active > span {
 
 body .aos-builder-footer {
   z-index: 25;
+  min-height: 58px;
+  padding-block: 7px max(7px, env(safe-area-inset-bottom));
+}
+
+body .aos-builder-footer__meters--points {
+  width: 100%;
+  justify-content: center;
+}
+
+body .aos-builder-footer__meters--battle {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+body .aos-builder-footer.is-battle-tools {
+  gap: 8px;
+  justify-content: center;
+}
+
+body .aos-builder-footer.is-battle-tools .aos-command-counter,
+body .aos-builder-footer.is-battle-tools .aos-fury-counter {
+  flex: 0 1 152px;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .aos-game-battle-card__tactic {

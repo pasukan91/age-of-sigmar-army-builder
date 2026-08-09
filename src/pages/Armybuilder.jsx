@@ -87,6 +87,7 @@ function ArmyBuilder({
   const swipeStart = useRef(null);
   const resetScrollOnSectionChange = useRef(false);
   const activeTabIndex = BUILDER_TABS.findIndex(([id]) => id === section);
+  const isBattleSection = section === "game" || section === "mission";
 
   useEffect(() => {
     if (!resetScrollOnSectionChange.current) return;
@@ -249,12 +250,12 @@ function ArmyBuilder({
       <section className="aos-builder-options">
         <BuilderOption
           id="battleplan-option"
-          title="Battleplan"
+          title="Plan de batalla"
           value={list.battleplan?.name ?? "No seleccionado"}
           image={list.battleplan?.image}
           onClick={() =>
             openSelector({
-              title: "Battleplan",
+              title: "Plan de batalla",
               property: "battleplan",
               options: ghb2026Battleplans,
             })
@@ -263,11 +264,11 @@ function ArmyBuilder({
 
         <BuilderOption
           id="battle-tactics-option"
-          title="Battle tactics"
+          title="Tácticas de batalla"
           value={formatBattleTactics(list.battleTactics)}
           onClick={() =>
             openSelector({
-              title: "Battle tactics",
+              title: "Tácticas de batalla",
               property: "battleTactics",
               options: ghb2026BattleTacticsCards,
               ui: { maxSelections: 2 },
@@ -431,6 +432,8 @@ function ArmyBuilder({
           list={list}
           onViewUnit={onBrowseUnit}
           onViewRule={onViewRule}
+          onGoToUnits={() => changeSection("units")}
+          onGoToArmy={() => changeSection("army")}
         />
       )}
 
@@ -445,11 +448,16 @@ function ArmyBuilder({
       )}
 
       {section === "mission" && (
-        <BattleMission list={list} onToggleMission={onBattleMissionToggle} />
+        <BattleMission
+          list={list}
+          onToggleMission={onBattleMissionToggle}
+          onGoToArmy={() => changeSection("army")}
+        />
       )}
 
-      <footer className="aos-builder-footer">
-        <div className="aos-builder-footer__meters">
+      <footer className={`aos-builder-footer ${isBattleSection ? "is-battle-tools" : "is-build-tools"}`}>
+        {!isBattleSection && (
+        <div className="aos-builder-footer__meters aos-builder-footer__meters--points">
           <div className="aos-points-summary">
             <div className="aos-points-summary__icon">
               ✓
@@ -469,7 +477,11 @@ function ArmyBuilder({
               </span>
             </div>
           </div>
+        </div>
+        )}
 
+        {isBattleSection && (
+        <div className="aos-builder-footer__meters aos-builder-footer__meters--battle">
           <div className="aos-command-counter" aria-label="Puntos de mando">
             <button
               type="button"
@@ -494,7 +506,9 @@ function ArmyBuilder({
             </button>
           </div>
         </div>
+        )}
 
+        {isBattleSection && (
         <div className="aos-fury-counter" aria-label="Puntos de furia">
           <button
             type="button"
@@ -519,6 +533,7 @@ function ArmyBuilder({
             +
           </button>
         </div>
+        )}
       </footer>
     </main>
   );
