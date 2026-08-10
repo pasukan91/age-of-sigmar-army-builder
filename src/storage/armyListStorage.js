@@ -400,12 +400,26 @@ function normalizeBattleLogEntry(entry) {
 
   return {
     id: String(entry.id),
+    actionId: entry.actionId ? String(entry.actionId) : "",
+    actor: entry.actor === "opponent" ? "opponent" : "self",
     label: String(entry.label),
     result: String(entry.result ?? ""),
     note: String(entry.note ?? ""),
+    values: normalizeBattleLogValues(entry.values),
     round: Math.min(5, Math.max(1, Number(entry.round) || 1)),
     createdAt: Number(entry.createdAt) || Date.now(),
   };
+}
+
+function normalizeBattleLogValues(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    Object.entries(value)
+      .filter(([, item]) => typeof item === "string" || typeof item === "number")
+  );
 }
 
 function enforceSingleArmyTraits(regiments) {

@@ -4436,6 +4436,61 @@ select.aos-field__control:hover {
   box-shadow: 0 4px 12px rgba(47, 38, 28, 0.08);
 }
 
+.aos-battle-log__actors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 8px;
+  background: #ded4c2;
+}
+
+.aos-battle-log__actors button {
+  min-height: 38px;
+  border: 0;
+  border-radius: 6px;
+  color: #665c50;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.aos-battle-log__actors button.is-active {
+  color: #fff;
+  background: #741b15;
+  box-shadow: 0 2px 7px rgba(57, 21, 16, 0.2);
+}
+
+.aos-battle-log__actors button:last-child.is-active {
+  background: #263f50;
+}
+
+.aos-battle-log__event-picker {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.aos-battle-log__event-picker > span,
+.aos-battle-log__form label > span {
+  color: #655d53;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-battle-log__event-picker select,
+.aos-battle-log__form select {
+  min-width: 0;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #b9aa93;
+  border-radius: 6px;
+  color: #301d19;
+  background: #fff;
+  font: inherit;
+}
+
 .aos-battle-log__actions {
   display: flex;
   gap: 6px;
@@ -4487,20 +4542,22 @@ select.aos-field__control:hover {
 
 .aos-battle-log__form {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 7px;
   align-items: end;
   margin-top: 9px;
 }
 
+.aos-battle-log__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  gap: 7px;
+}
+
 .aos-battle-log__form label {
   display: grid;
   gap: 4px;
-}
-
-.aos-battle-log__form label:first-child:last-of-type,
-.aos-battle-log__note:first-child {
-  grid-column: 1 / 3;
 }
 
 .aos-battle-log__form label > span {
@@ -4521,6 +4578,10 @@ select.aos-field__control:hover {
   font: inherit;
 }
 
+.aos-battle-log__note {
+  min-width: 0;
+}
+
 .aos-battle-log__save {
   min-height: 42px;
   padding: 8px 12px;
@@ -4539,6 +4600,136 @@ select.aos-field__control:hover {
   padding: 0;
   margin: 18px 0 0;
   list-style: none;
+}
+
+.aos-battle-stats {
+  margin-top: 14px;
+  overflow: hidden;
+  border: 1px solid #c9baa0;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.aos-battle-stats > header {
+  padding: 12px;
+  background: #302722;
+}
+
+.aos-battle-stats h4,
+.aos-battle-stats > header p {
+  margin: 0;
+  color: #fff;
+}
+
+.aos-battle-stats h4 {
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.aos-battle-stats > header p {
+  margin-top: 2px;
+  color: #d8cdbd;
+  font-size: 10px;
+}
+
+.aos-battle-stats__rounds {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.aos-battle-stats__rounds button {
+  min-width: 0;
+  min-height: 34px;
+  padding: 4px 2px;
+  border: 1px solid #665c53;
+  border-radius: 5px;
+  color: #e2d8ca;
+  background: #453b35;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.aos-battle-stats__rounds button.is-active {
+  border-color: #d5ac5b;
+  color: #2d2018;
+  background: #d5ac5b;
+}
+
+.aos-battle-stats__matrix {
+  display: grid;
+}
+
+.aos-battle-stats__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52px 52px;
+  align-items: center;
+  min-height: 34px;
+  border-top: 1px solid #e6ded1;
+}
+
+.aos-battle-stats__row > * {
+  padding: 7px 9px;
+}
+
+.aos-battle-stats__row span {
+  color: #544b43;
+  font-size: 11px;
+}
+
+.aos-battle-stats__row b {
+  border-left: 1px solid #e6ded1;
+  color: #5d1813;
+  font-size: 12px;
+  text-align: center;
+}
+
+.aos-battle-stats__row b:last-child {
+  color: #263f50;
+}
+
+.aos-battle-stats__row.is-header {
+  min-height: 30px;
+  border-top: 0;
+  background: #eee6d9;
+}
+
+.aos-battle-stats__row.is-header > * {
+  color: #665c50;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-battle-stats__details {
+  border-top: 1px solid #c9baa0;
+}
+
+.aos-battle-stats__details > summary {
+  padding: 12px;
+  color: #6a1a14;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.aos-battle-stats__group {
+  display: grid;
+}
+
+.aos-battle-stats__group h5 {
+  margin: 0;
+  padding: 9px;
+  border-top: 1px solid #c9baa0;
+  color: #392b24;
+  background: #f7f2e9;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .aos-battle-log__timeline > li {
@@ -4591,6 +4782,19 @@ select.aos-field__control:hover {
   font-size: 9px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.aos-battle-log__actor {
+  display: inline-block;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #fff;
+  background: #741b15;
+  font-size: 8px;
+}
+
+.aos-battle-log__actor.is-opponent {
+  background: #263f50;
 }
 
 .aos-battle-log__event {

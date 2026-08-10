@@ -2,6 +2,13 @@ import { useState } from "react";
 
 import { normalizeRuleItem } from "../../utils/ruleReferences";
 import { getUniqueListUnits } from "../../utils/listWarscrolls";
+import {
+  BATTLE_ACTORS,
+  BATTLE_EVENT_DEFINITIONS,
+  BATTLE_STAT_GROUPS,
+  getBattleEventDefinition,
+  summarizeBattleLog,
+} from "../../utils/battleStatistics";
 import UnitArtwork from "../UnitArtwork";
 
 function GameMode({
@@ -120,39 +127,42 @@ function GameMode({
   );
 }
 
-const BATTLE_LOG_ACTIONS = [
-  { id: "redeploy", label: "Redeploy", resultLabel: "Tirada", dice: 6 },
-  { id: "roll", label: "Tirada", resultLabel: "Resultado" },
-  { id: "damage", label: "Daño", resultLabel: "Heridas" },
-  { id: "heal", label: "Curación", resultLabel: "Heridas" },
-  { id: "note", label: "Nota", resultLabel: null },
-];
-
 function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
+  const [actor, setActor] = useState("self");
   const [actionId, setActionId] = useState("redeploy");
-  const [result, setResult] = useState("");
+  const [values, setValues] = useState(() => defaultBattleValues(getBattleEventDefinition("redeploy")));
   const [note, setNote] = useState("");
-  const action = BATTLE_LOG_ACTIONS.find((item) => item.id === actionId) ?? BATTLE_LOG_ACTIONS[0];
+  const [statisticsRound, setStatisticsRound] = useState("all");
+  const action = getBattleEventDefinition(actionId);
 
-  function addEntry(nextResult = result) {
-    const cleanResult = String(nextResult ?? "").trim();
+  function addEntry(nextValues = values) {
+    const cleanValues = Object.fromEntries(
+      Object.entries(nextValues).filter(([, value]) => String(value ?? "").trim() !== "")
+    );
     const cleanNote = note.trim();
-    if (action.resultLabel && !cleanResult && !cleanNote) return;
-    if (!action.resultLabel && !cleanNote) return;
+    if (action.id === "note" && !cleanNote) return;
+    if (action.fields.length > 0 && Object.keys(cleanValues).length === 0 && !cleanNote) return;
 
     onAdd?.({
+      actionId: action.id,
+      actor,
       label: action.label,
-      result: cleanResult,
+      result: formatBattleEventResult(action, cleanValues),
       note: cleanNote,
+      values: cleanValues,
       round,
     });
-    setResult("");
+    setValues(defaultBattleValues(action));
     setNote("");
   }
 
   function selectAction(nextActionId) {
     setActionId(nextActionId);
-    setResult("");
+    setValues(defaultBattleValues(getBattleEventDefinition(nextActionId)));
+  }
+
+  function changeValue(fieldId, value) {
+    setValues((current) => ({ ...current, [fieldId]: value }));
   }
 
   return (
@@ -170,24 +180,35 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
       </div>
 
       <div className="aos-battle-log__composer">
-        <div className="aos-battle-log__actions" role="group" aria-label="Tipo de anotación">
-          {BATTLE_LOG_ACTIONS.map((item) => (
+        <div className="aos-battle-log__actors" role="group" aria-label="Jugador del evento">
+          {BATTLE_ACTORS.map((item) => (
             <button
               key={item.id}
               type="button"
-              className={item.id === actionId ? "is-active" : ""}
-              onClick={() => selectAction(item.id)}
-              aria-pressed={item.id === actionId}
+              className={item.id === actor ? "is-active" : ""}
+              onClick={() => setActor(item.id)}
+              aria-pressed={item.id === actor}
             >
               {item.label}
             </button>
           ))}
         </div>
 
-        {action.dice && (
+        <label className="aos-battle-log__event-picker">
+          <span>¿Qué ha pasado?</span>
+          <select value={actionId} onChange={(event) => selectAction(event.target.value)}>
+            {groupBattleEvents().map(([group, actions]) => (
+              <optgroup key={group} label={group}>
+                {actions.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+              </optgroup>
+            ))}
+          </select>
+        </label>
+
+        {action.quickDice && (
           <div className="aos-battle-log__dice" aria-label="Resultado de la tirada">
-            {Array.from({ length: action.dice }, (_, index) => index + 1).map((value) => (
-              <button key={value} type="button" onClick={() => addEntry(value)} aria-label={`Registrar ${action.label}: ${value}`}>
+            {Array.from({ length: action.quickDice }, (_, index) => index + 1).map((value) => (
+              <button key={value} type="button" onClick={() => addEntry({ ...values, roll: value })} aria-label={`Registrar ${action.label}: ${value}`}>
                 {value}
               </button>
             ))}
@@ -201,20 +222,31 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
             addEntry();
           }}
         >
-          {action.resultLabel && !action.dice && (
-            <label>
-              <span>{action.resultLabel}</span>
-              <input
-                inputMode="numeric"
-                value={result}
-                onChange={(event) => setResult(event.target.value)}
-                placeholder="—"
-                aria-label={action.resultLabel}
-              />
-            </label>
+          {action.fields.length > 0 && !action.quickDice && (
+            <div className="aos-battle-log__fields">
+              {action.fields.map((field) => (
+                <label key={field.id}>
+                  <span>{field.label}</span>
+                  {field.type === "choice" ? (
+                    <select value={values[field.id] ?? ""} onChange={(event) => changeValue(field.id, event.target.value)}>
+                      {field.options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+                    </select>
+                  ) : (
+                    <input
+                      inputMode="numeric"
+                      type="number"
+                      min="0"
+                      value={values[field.id] ?? ""}
+                      onChange={(event) => changeValue(field.id, event.target.value)}
+                      placeholder="0"
+                    />
+                  )}
+                </label>
+              ))}
+            </div>
           )}
           <label className="aos-battle-log__note">
-            <span>{action.id === "note" ? "Qué ha pasado" : "Detalle opcional"}</span>
+            <span>{action.id === "note" ? "Qué ha pasado" : "Unidad o detalle opcional"}</span>
             <input
               value={note}
               onChange={(event) => setNote(event.target.value)}
@@ -225,6 +257,8 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
         </form>
       </div>
 
+      <BattleStatistics entries={entries} selectedRound={statisticsRound} onRoundChange={setStatisticsRound} />
+
       <ol className="aos-battle-log__timeline" aria-live="polite">
         {entries.length === 0 && (
           <li className="is-empty">Todavía no has registrado ningún evento.</li>
@@ -234,7 +268,7 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
             <span className="aos-battle-log__marker" aria-hidden="true" />
             <article>
               <header>
-                <span>Ronda {entry.round ?? 1}</span>
+                <span><b className={`aos-battle-log__actor ${entry.actor === "opponent" ? "is-opponent" : ""}`}>{entry.actor === "opponent" ? "Rival" : "Yo"}</b> · Ronda {entry.round ?? 1}</span>
                 <time dateTime={new Date(entry.createdAt).toISOString()}>{formatBattleLogTime(entry.createdAt)}</time>
               </header>
               <div className="aos-battle-log__event">
@@ -249,6 +283,108 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
       </ol>
     </section>
   );
+}
+
+function BattleStatistics({ entries, selectedRound, onRoundChange }) {
+  const summary = summarizeBattleLog(entries, selectedRound);
+  const headlineMetrics = [
+    ["victoryPoints", "PV"],
+    ["damage", "Daño"],
+    ["mortalDamage", "Daño mortal"],
+    ["battleTacticsCompleted", "Tácticas"],
+  ];
+
+  return (
+    <section className="aos-battle-stats" aria-labelledby="battle-stats-title">
+      <header>
+        <div>
+          <h4 id="battle-stats-title">Estadísticas de la partida</h4>
+          <p>Comparativa automática a partir del registro.</p>
+        </div>
+        <div className="aos-battle-stats__rounds" role="group" aria-label="Ronda de las estadísticas">
+          {["all", 1, 2, 3, 4, 5].map((value) => (
+            <button key={value} type="button" className={String(selectedRound) === String(value) ? "is-active" : ""} onClick={() => onRoundChange(value)}>
+              {value === "all" ? "Total" : `R${value}`}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      <div className="aos-battle-stats__matrix aos-battle-stats__matrix--headline">
+        <StatHeader />
+        {headlineMetrics.map(([key, label]) => <StatRow key={key} label={label} own={summary.self[key]} opponent={summary.opponent[key]} />)}
+      </div>
+
+      <details className="aos-battle-stats__details">
+        <summary>Ver todos los parámetros</summary>
+        <div className="aos-battle-stats__matrix">
+          <StatHeader />
+          {BATTLE_STAT_GROUPS.map((group) => (
+            <div key={group.id} className="aos-battle-stats__group">
+              <h5>{group.label}</h5>
+              {group.metrics.map(([key, label]) => <StatRow key={key} label={label} own={summary.self[key]} opponent={summary.opponent[key]} />)}
+            </div>
+          ))}
+          <div className="aos-battle-stats__group">
+            <h5>Porcentajes</h5>
+            {getRateMetrics(summary).map(([label, own, opponent]) => <StatRow key={label} label={label} own={own} opponent={opponent} />)}
+          </div>
+        </div>
+      </details>
+    </section>
+  );
+}
+
+function StatHeader() {
+  return <div className="aos-battle-stats__row is-header"><span>Parámetro</span><b>Yo</b><b>Rival</b></div>;
+}
+
+function StatRow({ label, own, opponent }) {
+  return <div className="aos-battle-stats__row"><span>{label}</span><b>{own}</b><b>{opponent}</b></div>;
+}
+
+function getRateMetrics(summary) {
+  const rate = (actor, numerator, denominator) => summary[actor][denominator]
+    ? `${Math.round((summary[actor][numerator] / summary[actor][denominator]) * 100)}%`
+    : "—";
+  const tacticRate = (actor) => {
+    const attempts = summary[actor].battleTacticsCompleted + summary[actor].battleTacticsFailed;
+    return attempts ? `${Math.round((summary[actor].battleTacticsCompleted / attempts) * 100)}%` : "—";
+  };
+
+  return [
+    ["Impactos / ataques", rate("self", "hits", "attacks"), rate("opponent", "hits", "attacks")],
+    ["Heridas / impactos", rate("self", "wounds", "hits"), rate("opponent", "wounds", "hits")],
+    ["Salvaciones", rate("self", "savesPassed", "saveAttempts"), rate("opponent", "savesPassed", "saveAttempts")],
+    ["Ward", rate("self", "wardsPassed", "wardAttempts"), rate("opponent", "wardsPassed", "wardAttempts")],
+    ["Cargas exitosas", rate("self", "successfulCharges", "chargeAttempts"), rate("opponent", "successfulCharges", "chargeAttempts")],
+    ["Lanzamientos exitosos", rate("self", "castsSuccessful", "castsAttempted"), rate("opponent", "castsSuccessful", "castsAttempted")],
+    ["Tácticas completadas", tacticRate("self"), tacticRate("opponent")],
+  ];
+}
+
+function groupBattleEvents() {
+  const groups = new Map();
+  BATTLE_EVENT_DEFINITIONS.forEach((event) => groups.set(event.group, [...(groups.get(event.group) ?? []), event]));
+  return [...groups.entries()];
+}
+
+function defaultBattleValues(action) {
+  return Object.fromEntries(
+    (action?.fields ?? [])
+      .filter((field) => field.type === "choice")
+      .map((field) => [field.id, field.options[0]?.value ?? ""])
+  );
+}
+
+function formatBattleEventResult(action, values) {
+  return (action?.fields ?? [])
+    .filter((field) => String(values[field.id] ?? "").trim() !== "")
+    .map((field) => {
+      const option = field.options?.find((item) => item.value === values[field.id]);
+      return `${field.label}: ${option?.label ?? values[field.id]}`;
+    })
+    .join(" · ");
 }
 
 function formatBattleLogTime(value) {

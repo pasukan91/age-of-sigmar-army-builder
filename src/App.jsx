@@ -50,9 +50,14 @@ function appendBattleLogEntry(list, event) {
     ...(list?.battleLog ?? []),
     {
       id: createId("battle-event"),
+      actionId: String(event?.actionId ?? "note"),
+      actor: event?.actor === "opponent" ? "opponent" : "self",
       label: String(event?.label ?? "Evento"),
       result: String(event?.result ?? "").trim(),
       note: String(event?.note ?? "").trim(),
+      values: event?.values && typeof event.values === "object"
+        ? { ...event.values }
+        : {},
       round: Math.min(
         5,
         Math.max(1, Number(event?.round ?? list?.battleRound) || 1)
@@ -564,9 +569,14 @@ function App() {
       battleLog: commandPoints === previousCommandPoints
         ? currentList.battleLog ?? []
         : appendBattleLogEntry(currentList, {
+            actionId: "command-points",
+            actor: "self",
             label: "Puntos de mando",
             result: `${previousCommandPoints} → ${commandPoints}`,
             note: commandPoints < previousCommandPoints ? "Gastado" : "Añadido",
+            values: commandPoints < previousCommandPoints
+              ? { spent: previousCommandPoints - commandPoints }
+              : { gained: commandPoints - previousCommandPoints },
           }),
     });
   }
@@ -592,8 +602,13 @@ function App() {
       battleLog: furyPoints === previousFuryPoints
         ? currentList.battleLog ?? []
         : appendBattleLogEntry(currentList, {
+            actionId: "fury",
+            actor: "self",
             label: "Furia",
             result: `${previousFuryPoints} → ${furyPoints}`,
+            values: furyPoints < previousFuryPoints
+              ? { spent: previousFuryPoints - furyPoints }
+              : { gained: furyPoints - previousFuryPoints },
           }),
     });
   }
@@ -621,9 +636,12 @@ function App() {
       ...currentList,
       completedBattleMissions: [...completedMissions],
       battleLog: appendBattleLogEntry(currentList, {
+        actionId: "battle-tactic",
+        actor: "self",
         label: "Táctica de batalla",
         result: completed ? "Completada" : "Desmarcada",
         note: tactic?.name ?? "",
+        values: { status: completed ? "completed" : "failed" },
       }),
     });
   }
@@ -642,6 +660,8 @@ function App() {
       ...currentList,
       battleRound,
       battleLog: appendBattleLogEntry(currentList, {
+        actionId: "round-change",
+        actor: "self",
         label: "Cambio de ronda",
         result: String(battleRound),
         round: battleRound,
