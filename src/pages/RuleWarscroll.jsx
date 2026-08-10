@@ -1,5 +1,6 @@
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
+import FormattedRulesText from "../components/FormattedRulesText";
 import { getRuleArtwork } from "../utils/ruleReferences";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
 import {
@@ -94,7 +95,7 @@ function RuleWarscroll({ reference, onBack }) {
 
             {isRegimentOfRenown && item.description && (
               <section className="aos-reference-description">
-                <p>{item.description}</p>
+                <p><FormattedRulesText text={item.description} /></p>
               </section>
             )}
 
@@ -207,7 +208,7 @@ function RuleStep({ title, text, variant = "" }) {
   return (
     <article className={`aos-rule-step ${variant ? `aos-rule-step--${variant}` : ""}`}>
       <h3>{title}</h3>
-      <p>{text}</p>
+      <p><FormattedRulesText text={text} /></p>
     </article>
   );
 }

@@ -2220,10 +2220,19 @@ body {
   display: none;
 }
 
-.aos-ability-card__timing strong {
+.aos-ability-card__timing-label {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(17px, 3.8vw, 22px);
+  font-weight: 700;
   line-height: 1.15;
+}
+
+.aos-ability-card__timing-label strong,
+.aos-ability-card__text strong,
+.aos-ability-card__step strong,
+.aos-rule-step strong,
+.aos-reference-description strong {
+  font-weight: 700;
 }
 
 .aos-ability-card__icon {

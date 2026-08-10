@@ -6,17 +6,18 @@ import {
   parseFormattedText,
 } from "../utils/abilityFormatting";
 import ChevronIcon from "./ChevronIcon";
+import FormattedRulesText from "./FormattedRulesText";
 
 function FormattedText({ text }) {
   const { lead, bullets } = parseFormattedText(text);
 
   return (
     <>
-      {lead && <p>{lead}</p>}
+      {lead && <p><FormattedRulesText text={lead} /></p>}
       {bullets.length > 0 && (
         <ul>
           {bullets.map((bullet, index) => (
-            <li key={`${bullet}-${index}`}>{bullet}</li>
+            <li key={`${bullet}-${index}`}><FormattedRulesText text={bullet} /></li>
           ))}
         </ul>
       )}
@@ -36,7 +37,9 @@ function AbilityCard({ ability, defaultOpen = true, context = null }) {
         <span className="aos-ability-card__icon" aria-hidden="true">
           {getAbilityPhaseIcon(ability)}
         </span>
-        <strong>{timing}</strong>
+        <span className="aos-ability-card__timing-label">
+          <FormattedRulesText text={timing} />
+        </span>
         {Number(ability.commandPoints) > 0 && (
           <span className="aos-ability-card__cost">{ability.commandPoints} PC</span>
         )}

@@ -6,6 +6,7 @@ import {
   groupAbilitiesByPhase,
   parseAbilityDescription,
   parseFormattedText,
+  parseInlineFormatting,
 } from "./abilityFormatting.js";
 
 test("maps common timings to official-style phase colour groups", () => {
@@ -53,4 +54,29 @@ test("turns bullet markers into a structured list", () => {
     lead: "Con 2+:",
     bullets: ["Inflige D3 daños.", "Resta 1 a herir."],
   });
+});
+
+test("parses catalogue bold and italic markers without exposing asterisks", () => {
+  assert.deepEqual(
+    parseInlineFormatting(
+      "Pick a friendly **STORMCAST ETERNALS HERO** with *no damage points*."
+    ),
+    [
+      { text: "Pick a friendly ", strong: false, emphasis: false },
+      { text: "Stormcast Eternals Hero", strong: true, emphasis: false },
+      { text: " with ", strong: false, emphasis: false },
+      { text: "no damage points", strong: false, emphasis: true },
+      { text: ".", strong: false, emphasis: false },
+    ]
+  );
+});
+
+test("cleans malformed trailing emphasis markers from catalogue text", () => {
+  const tokens = parseInlineFormatting(
+    "The target has **STRIKE-LAST***; roll D3 damage."
+  );
+
+  assert.equal(tokens.map((token) => token.text).join(""),
+    "The target has Strike-Last; roll D3 damage.");
+  assert.equal(tokens.some((token) => token.text.includes("*")), false);
 });

@@ -109,3 +109,60 @@ export function parseFormattedText(text = "") {
     bullets: bulletParts.map((part) => part.trim()).filter(Boolean),
   };
 }
+
+export function parseInlineFormatting(text = "") {
+  const source = repairInlineFormatting(String(text));
+  const pattern = /\*\*\*([^*\n]+?)\*\*\*|\*\*([^*\n]+?)\*\*|\*([^*\n]+?)\*/g;
+  const tokens = [];
+  let cursor = 0;
+
+  for (const match of source.matchAll(pattern)) {
+    if (match.index > cursor) {
+      tokens.push({
+        text: removeFormattingMarkers(source.slice(cursor, match.index)),
+        strong: false,
+        emphasis: false,
+      });
+    }
+
+    const value = match[1] ?? match[2] ?? match[3] ?? "";
+    const strong = match[1] != null || match[2] != null;
+    tokens.push({
+      text: strong ? makeKeywordCaseReadable(value) : value,
+      strong,
+      emphasis: match[1] != null || match[3] != null,
+    });
+    cursor = match.index + match[0].length;
+  }
+
+  if (cursor < source.length) {
+    tokens.push({
+      text: removeFormattingMarkers(source.slice(cursor)),
+      strong: false,
+      emphasis: false,
+    });
+  }
+
+  return tokens.filter((token) => token.text.length > 0);
+}
+
+function repairInlineFormatting(text) {
+  return text.replace(/(\*\*[^*\n]+)\*\*\*(?=[;,.])/g, "$1**");
+}
+
+function removeFormattingMarkers(text) {
+  return text.replace(/\*/g, "");
+}
+
+function makeKeywordCaseReadable(text) {
+  return text.replace(/[A-Z][A-Z0-9'’‑-]*(?:\s+[A-Z][A-Z0-9'’‑-]*)*/g, (phrase) =>
+    phrase
+      .split(/(\s+|‑|-)/)
+      .map((part) => {
+        if (/^(?:\d*D\d+|DPP)$/i.test(part)) return part.toUpperCase();
+        if (!/[A-Z]/.test(part)) return part;
+        return `${part.charAt(0)}${part.slice(1).toLowerCase()}`;
+      })
+      .join("")
+  );
+}
