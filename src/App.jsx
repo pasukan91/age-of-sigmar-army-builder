@@ -27,6 +27,7 @@ import {
   saveArmyLists,
 } from "./storage/armyListStorage";
 import { isUniqueUnit } from "./utils/unitIdentity";
+import createId from "./utils/createId";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -43,6 +44,23 @@ const INITIAL_ARMY = {
   points: 2000,
   name: "",
 };
+
+function appendBattleLogEntry(list, event) {
+  return [
+    ...(list?.battleLog ?? []),
+    {
+      id: createId("battle-event"),
+      label: String(event?.label ?? "Evento"),
+      result: String(event?.result ?? "").trim(),
+      note: String(event?.note ?? "").trim(),
+      round: Math.min(
+        5,
+        Math.max(1, Number(event?.round ?? list?.battleRound) || 1)
+      ),
+      createdAt: Date.now(),
+    },
+  ];
+}
 
 function App() {
   const [initialRoute] = useState(() =>
@@ -535,9 +553,21 @@ function App() {
       Math.max(0, Number(nextValue) || 0)
     );
 
+    const previousCommandPoints = Math.max(
+      0,
+      Number(currentList.commandPoints ?? 4) || 0
+    );
+
     saveUpdatedList({
       ...currentList,
       commandPoints,
+      battleLog: commandPoints === previousCommandPoints
+        ? currentList.battleLog ?? []
+        : appendBattleLogEntry(currentList, {
+            label: "Puntos de mando",
+            result: `${previousCommandPoints} → ${commandPoints}`,
+            note: commandPoints < previousCommandPoints ? "Gastado" : "Añadido",
+          }),
     });
   }
 
@@ -551,9 +581,20 @@ function App() {
       Math.max(0, Number(nextValue) || 0)
     );
 
+    const previousFuryPoints = Math.min(
+      7,
+      Math.max(0, Number(currentList.furyPoints ?? 0) || 0)
+    );
+
     saveUpdatedList({
       ...currentList,
       furyPoints,
+      battleLog: furyPoints === previousFuryPoints
+        ? currentList.battleLog ?? []
+        : appendBattleLogEntry(currentList, {
+            label: "Furia",
+            result: `${previousFuryPoints} → ${furyPoints}`,
+          }),
     });
   }
 
@@ -566,9 +607,67 @@ function App() {
     if (completed) completedMissions.add(missionId);
     else completedMissions.delete(missionId);
 
+    const tacticId = missionId.split(":").at(-1);
+    const tacticCards = Array.isArray(currentList.battleTactics)
+      ? currentList.battleTactics
+      : currentList.battleTactics
+        ? [currentList.battleTactics]
+        : [];
+    const tactic = tacticCards
+      .flatMap((card) => card.tactics ?? [])
+      .find((item) => item.id === tacticId);
+
     saveUpdatedList({
       ...currentList,
       completedBattleMissions: [...completedMissions],
+      battleLog: appendBattleLogEntry(currentList, {
+        label: "Táctica de batalla",
+        result: completed ? "Completada" : "Desmarcada",
+        note: tactic?.name ?? "",
+      }),
+    });
+  }
+
+  function handleBattleRoundChange(nextRound) {
+    if (!currentList) {
+      return;
+    }
+
+    const battleRound = Math.min(5, Math.max(1, Number(nextRound) || 1));
+    if (battleRound === Number(currentList.battleRound ?? 1)) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      battleRound,
+      battleLog: appendBattleLogEntry(currentList, {
+        label: "Cambio de ronda",
+        result: String(battleRound),
+        round: battleRound,
+      }),
+    });
+  }
+
+  function handleBattleLogAdd(event) {
+    if (!currentList || !event?.label) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      battleLog: appendBattleLogEntry(currentList, event),
+    });
+  }
+
+  function handleBattleLogRemove(eventId) {
+    if (!currentList || !eventId) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      battleLog: (currentList.battleLog ?? []).filter((event) => event.id !== eventId),
     });
   }
 
@@ -1924,6 +2023,9 @@ function App() {
           onCommandPointsChange={handleCommandPointsChange}
           onFuryPointsChange={handleFuryPointsChange}
           onBattleMissionToggle={handleBattleMissionToggle}
+          onBattleRoundChange={handleBattleRoundChange}
+          onBattleLogAdd={handleBattleLogAdd}
+          onBattleLogRemove={handleBattleLogRemove}
           onViewRule={openBuilderRuleReference}
           onBrowseUnit={openBuilderUnitReference}
           section={builderSection}

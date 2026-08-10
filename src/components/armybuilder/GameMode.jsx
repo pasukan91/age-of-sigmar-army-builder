@@ -1,8 +1,19 @@
+import { useState } from "react";
+
 import { normalizeRuleItem } from "../../utils/ruleReferences";
 import { getUniqueListUnits } from "../../utils/listWarscrolls";
 import UnitArtwork from "../UnitArtwork";
 
-function GameMode({ list, onViewUnit, onViewRule, onGoToUnits, onGoToArmy }) {
+function GameMode({
+  list,
+  onViewUnit,
+  onViewRule,
+  onGoToUnits,
+  onGoToArmy,
+  onRoundChange,
+  onLogAdd,
+  onLogRemove,
+}) {
   const units = getUniqueListUnits(list);
   const manifestations = getManifestations(list);
   const terrain = list?.terrain ? normalizeRuleItem(list.terrain) : null;
@@ -19,6 +30,7 @@ function GameMode({ list, onViewUnit, onViewRule, onGoToUnits, onGoToArmy }) {
       <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
         <a href="#game-warscrolls">Warscrolls</a>
         <a href="#game-terrain">Terreno</a>
+        <a href="#game-battle-log">Registro</a>
       </nav>
 
       <section id="game-warscrolls" className="aos-game-section aos-game-roster" aria-labelledby="game-roster-title">
@@ -96,8 +108,153 @@ function GameMode({ list, onViewUnit, onViewRule, onGoToUnits, onGoToArmy }) {
         </div>
       </section>
 
+      <BattleLog
+        entries={list?.battleLog ?? []}
+        round={list?.battleRound ?? 1}
+        onRoundChange={onRoundChange}
+        onAdd={onLogAdd}
+        onRemove={onLogRemove}
+      />
+
     </section>
   );
+}
+
+const BATTLE_LOG_ACTIONS = [
+  { id: "redeploy", label: "Redeploy", resultLabel: "Tirada", dice: 6 },
+  { id: "roll", label: "Tirada", resultLabel: "Resultado" },
+  { id: "damage", label: "Daño", resultLabel: "Heridas" },
+  { id: "heal", label: "Curación", resultLabel: "Heridas" },
+  { id: "note", label: "Nota", resultLabel: null },
+];
+
+function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
+  const [actionId, setActionId] = useState("redeploy");
+  const [result, setResult] = useState("");
+  const [note, setNote] = useState("");
+  const action = BATTLE_LOG_ACTIONS.find((item) => item.id === actionId) ?? BATTLE_LOG_ACTIONS[0];
+
+  function addEntry(nextResult = result) {
+    const cleanResult = String(nextResult ?? "").trim();
+    const cleanNote = note.trim();
+    if (action.resultLabel && !cleanResult && !cleanNote) return;
+    if (!action.resultLabel && !cleanNote) return;
+
+    onAdd?.({
+      label: action.label,
+      result: cleanResult,
+      note: cleanNote,
+      round,
+    });
+    setResult("");
+    setNote("");
+  }
+
+  function selectAction(nextActionId) {
+    setActionId(nextActionId);
+    setResult("");
+  }
+
+  return (
+    <section id="game-battle-log" className="aos-game-section aos-battle-log" aria-labelledby="game-battle-log-title">
+      <div className="aos-game-mode__section-title aos-battle-log__heading">
+        <div>
+          <h3 id="game-battle-log-title">Registro de batalla</h3>
+          <p>Anota tiradas y momentos clave sin salir de la partida.</p>
+        </div>
+        <div className="aos-battle-log__round" aria-label={`Ronda ${round}`}>
+          <button type="button" onClick={() => onRoundChange?.(round - 1)} disabled={round <= 1} aria-label="Ronda anterior">−</button>
+          <span><small>Ronda</small><strong>{round}</strong></span>
+          <button type="button" onClick={() => onRoundChange?.(round + 1)} disabled={round >= 5} aria-label="Ronda siguiente">+</button>
+        </div>
+      </div>
+
+      <div className="aos-battle-log__composer">
+        <div className="aos-battle-log__actions" role="group" aria-label="Tipo de anotación">
+          {BATTLE_LOG_ACTIONS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={item.id === actionId ? "is-active" : ""}
+              onClick={() => selectAction(item.id)}
+              aria-pressed={item.id === actionId}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+        {action.dice && (
+          <div className="aos-battle-log__dice" aria-label="Resultado de la tirada">
+            {Array.from({ length: action.dice }, (_, index) => index + 1).map((value) => (
+              <button key={value} type="button" onClick={() => addEntry(value)} aria-label={`Registrar ${action.label}: ${value}`}>
+                {value}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <form
+          className="aos-battle-log__form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            addEntry();
+          }}
+        >
+          {action.resultLabel && !action.dice && (
+            <label>
+              <span>{action.resultLabel}</span>
+              <input
+                inputMode="numeric"
+                value={result}
+                onChange={(event) => setResult(event.target.value)}
+                placeholder="—"
+                aria-label={action.resultLabel}
+              />
+            </label>
+          )}
+          <label className="aos-battle-log__note">
+            <span>{action.id === "note" ? "Qué ha pasado" : "Detalle opcional"}</span>
+            <input
+              value={note}
+              onChange={(event) => setNote(event.target.value)}
+              placeholder={action.id === "redeploy" ? "Ej.: Ardboys tras la ruina" : "Añadir contexto…"}
+            />
+          </label>
+          <button type="submit" className="aos-battle-log__save">Guardar</button>
+        </form>
+      </div>
+
+      <ol className="aos-battle-log__timeline" aria-live="polite">
+        {entries.length === 0 && (
+          <li className="is-empty">Todavía no has registrado ningún evento.</li>
+        )}
+        {entries.map((entry) => (
+          <li key={entry.id}>
+            <span className="aos-battle-log__marker" aria-hidden="true" />
+            <article>
+              <header>
+                <span>Ronda {entry.round ?? 1}</span>
+                <time dateTime={new Date(entry.createdAt).toISOString()}>{formatBattleLogTime(entry.createdAt)}</time>
+              </header>
+              <div className="aos-battle-log__event">
+                <strong>{entry.label}</strong>
+                {entry.result && <b>{entry.result}</b>}
+              </div>
+              {entry.note && <p>{entry.note}</p>}
+            </article>
+            <button type="button" className="aos-battle-log__delete" onClick={() => onRemove?.(entry.id)} aria-label={`Eliminar ${entry.label}`} title="Eliminar">🗑</button>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function formatBattleLogTime(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
 }
 
 function BattleMission({ list, onToggleMission, onGoToArmy }) {

@@ -51,6 +51,10 @@ export function createArmyList({
 
     battleTactics: [],
 
+    battleRound: 1,
+
+    battleLog: [],
+
     terrain: null,
 
     regiments: requiredRegiments,

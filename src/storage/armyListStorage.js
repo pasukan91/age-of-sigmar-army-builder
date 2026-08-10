@@ -241,6 +241,8 @@ function serializeList(list) {
     completedBattleMissions: (Array.isArray(list.completedBattleMissions)
       ? list.completedBattleMissions
       : []).filter((missionId) => typeof missionId === "string"),
+    battleRound: Math.min(5, Math.max(1, Number(list.battleRound) || 1)),
+    battleLog: serializeBattleLog(list.battleLog),
     terrain: list.terrain ?? null,
     regiments: (list.regiments ?? []).map((regiment) => ({
       id: regiment.id,
@@ -351,6 +353,8 @@ function restoreList(savedList) {
     completedBattleMissions: (Array.isArray(savedList.completedBattleMissions)
       ? savedList.completedBattleMissions
       : []).filter((missionId) => typeof missionId === "string"),
+    battleRound: Math.min(5, Math.max(1, Number(savedList.battleRound) || 1)),
+    battleLog: restoreBattleLog(savedList.battleLog),
     terrain: restoreOption(
       savedList.terrain,
       effectiveFaction.terrain
@@ -376,6 +380,31 @@ function restoreList(savedList) {
       .filter(Boolean),
     createdAt: savedList.createdAt ?? Date.now(),
     updatedAt: savedList.updatedAt ?? savedList.createdAt ?? Date.now(),
+  };
+}
+
+function serializeBattleLog(value) {
+  return (Array.isArray(value) ? value : [])
+    .map(normalizeBattleLogEntry)
+    .filter(Boolean);
+}
+
+function restoreBattleLog(value) {
+  return serializeBattleLog(value);
+}
+
+function normalizeBattleLogEntry(entry) {
+  if (!entry || typeof entry !== "object" || !entry.id || !entry.label) {
+    return null;
+  }
+
+  return {
+    id: String(entry.id),
+    label: String(entry.label),
+    result: String(entry.result ?? ""),
+    note: String(entry.note ?? ""),
+    round: Math.min(5, Math.max(1, Number(entry.round) || 1)),
+    createdAt: Number(entry.createdAt) || Date.now(),
   };
 }
 
