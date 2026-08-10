@@ -242,6 +242,7 @@ function serializeList(list) {
       ? list.completedBattleMissions
       : []).filter((missionId) => typeof missionId === "string"),
     battleRound: Math.min(5, Math.max(1, Number(list.battleRound) || 1)),
+    battleTurnActor: list.battleTurnActor === "opponent" ? "opponent" : "self",
     battleLog: serializeBattleLog(list.battleLog),
     terrain: list.terrain ?? null,
     regiments: (list.regiments ?? []).map((regiment) => ({
@@ -354,6 +355,7 @@ function restoreList(savedList) {
       ? savedList.completedBattleMissions
       : []).filter((missionId) => typeof missionId === "string"),
     battleRound: Math.min(5, Math.max(1, Number(savedList.battleRound) || 1)),
+    battleTurnActor: savedList.battleTurnActor === "opponent" ? "opponent" : "self",
     battleLog: restoreBattleLog(savedList.battleLog),
     terrain: restoreOption(
       savedList.terrain,

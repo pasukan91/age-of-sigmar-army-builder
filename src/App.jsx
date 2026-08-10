@@ -669,6 +669,52 @@ function App() {
     });
   }
 
+  function handleBattleTurnChange(nextActor) {
+    if (!currentList) return;
+    const battleTurnActor = nextActor === "opponent" ? "opponent" : "self";
+    if (battleTurnActor === (currentList.battleTurnActor ?? "self")) return;
+
+    saveUpdatedList({
+      ...currentList,
+      battleTurnActor,
+      battleLog: appendBattleLogEntry(currentList, {
+        actionId: "turn-start",
+        actor: battleTurnActor,
+        label: "Inicio de turno",
+        result: battleTurnActor === "self" ? "Mi turno" : "Turno rival",
+      }),
+    });
+  }
+
+  function handleBattleInitiativeResolve({ winner, selfRoll, opponentRoll }) {
+    if (!currentList || Number(currentList.battleRound ?? 1) >= 5) return;
+    const winnerActor = winner === "opponent" ? "opponent" : "self";
+    const previousActor = currentList.battleTurnActor === "opponent" ? "opponent" : "self";
+    const nextRound = Math.min(5, Number(currentList.battleRound ?? 1) + 1);
+    const isDoubleTurn = winnerActor === previousActor;
+    const ownRoll = Math.min(6, Math.max(1, Number(selfRoll) || 1));
+    const rivalRoll = Math.min(6, Math.max(1, Number(opponentRoll) || 1));
+
+    saveUpdatedList({
+      ...currentList,
+      battleRound: nextRound,
+      battleTurnActor: winnerActor,
+      battleLog: appendBattleLogEntry(currentList, {
+        actionId: "priority",
+        actor: winnerActor,
+        label: "Tirada de iniciativa",
+        result: `${ownRoll} - ${rivalRoll}`,
+        note: isDoubleTurn ? "Doble turno" : "Turno alterno",
+        round: nextRound,
+        values: {
+          selfRoll: ownRoll,
+          opponentRoll: rivalRoll,
+          doubleTurn: isDoubleTurn ? "yes" : "no",
+        },
+      }),
+    });
+  }
+
   function handleBattleLogAdd(event) {
     if (!currentList || !event?.label) {
       return;
@@ -2044,6 +2090,8 @@ function App() {
           onFuryPointsChange={handleFuryPointsChange}
           onBattleMissionToggle={handleBattleMissionToggle}
           onBattleRoundChange={handleBattleRoundChange}
+          onBattleTurnChange={handleBattleTurnChange}
+          onBattleInitiativeResolve={handleBattleInitiativeResolve}
           onBattleLogAdd={handleBattleLogAdd}
           onBattleLogRemove={handleBattleLogRemove}
           onViewRule={openBuilderRuleReference}

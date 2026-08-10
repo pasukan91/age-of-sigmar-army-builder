@@ -4,7 +4,8 @@ export const BATTLE_ACTORS = [
 ];
 
 export const BATTLE_EVENT_DEFINITIONS = [
-  { id: "priority", label: "Prioridad ganada", group: "Ronda", fields: [] },
+  { id: "turn-start", label: "Inicio de turno", group: "Ronda", fields: [] },
+  { id: "priority", label: "Tirada de iniciativa", group: "Ronda", fields: [numberField("selfRoll", "Mi tirada"), numberField("opponentRoll", "Tirada rival"), choiceField("doubleTurn", "Doble turno", [["no", "No"], ["yes", "Sí"]])] },
   { id: "victory-points", label: "Puntos de victoria", group: "Puntuación", fields: [numberField("points", "PV")] },
   { id: "objectives", label: "Objetivos controlados", group: "Puntuación", fields: [numberField("controlled", "Objetivos")] },
   { id: "battle-tactic", label: "Táctica de batalla", group: "Puntuación", fields: [choiceField("status", "Resultado", [["completed", "Completada"], ["failed", "Fallida"]])] },
@@ -44,7 +45,9 @@ export const BATTLE_STAT_GROUPS = [
       ["objectives", "Objetivos"],
       ["battleTacticsCompleted", "Tácticas completadas"],
       ["battleTacticsFailed", "Tácticas fallidas"],
-      ["priorityWins", "Prioridades"],
+      ["priorityWins", "Iniciativas ganadas"],
+      ["turnsPlayed", "Turnos iniciados"],
+      ["doubleTurns", "Dobles turnos"],
       ["commandPointsGained", "PC ganados"],
       ["commandPointsSpent", "PC gastados"],
       ["furyGained", "Furia ganada"],
@@ -141,8 +144,12 @@ function applyEntry(summary, entry) {
   const legacyResult = numeric(entry?.result);
 
   switch (actionId) {
+    case "turn-start":
+      summary.turnsPlayed += 1;
+      break;
     case "priority":
       summary.priorityWins += 1;
+      if (values.doubleTurn === "yes") summary.doubleTurns += 1;
       break;
     case "victory-points":
       summary.victoryPoints += number("points", legacyResult);

@@ -53,6 +53,8 @@ export function createArmyList({
 
     battleRound: 1,
 
+    battleTurnActor: "self",
+
     battleLog: [],
 
     terrain: null,

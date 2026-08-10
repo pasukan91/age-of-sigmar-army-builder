@@ -48,6 +48,8 @@ function ArmyBuilder({
   onFuryPointsChange,
   onBattleMissionToggle,
   onBattleRoundChange,
+  onBattleTurnChange,
+  onBattleInitiativeResolve,
   onBattleLogAdd,
   onBattleLogRemove,
   onViewRule,
@@ -442,6 +444,8 @@ function ArmyBuilder({
           onGoToUnits={() => changeSection("units")}
           onGoToArmy={() => changeSection("army")}
           onRoundChange={onBattleRoundChange}
+          onTurnChange={onBattleTurnChange}
+          onInitiativeResolve={onBattleInitiativeResolve}
           onLogAdd={onBattleLogAdd}
           onLogRemove={onBattleLogRemove}
         />

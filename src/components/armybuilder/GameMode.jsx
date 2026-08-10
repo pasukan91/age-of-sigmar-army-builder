@@ -18,6 +18,8 @@ function GameMode({
   onGoToUnits,
   onGoToArmy,
   onRoundChange,
+  onTurnChange,
+  onInitiativeResolve,
   onLogAdd,
   onLogRemove,
 }) {
@@ -118,7 +120,10 @@ function GameMode({
       <BattleLog
         entries={list?.battleLog ?? []}
         round={list?.battleRound ?? 1}
+        turnActor={list?.battleTurnActor ?? "self"}
         onRoundChange={onRoundChange}
+        onTurnChange={onTurnChange}
+        onInitiativeResolve={onInitiativeResolve}
         onAdd={onLogAdd}
         onRemove={onLogRemove}
       />
@@ -127,13 +132,17 @@ function GameMode({
   );
 }
 
-function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
-  const [actor, setActor] = useState("self");
+function BattleLog({ entries, round, turnActor, onRoundChange, onTurnChange, onInitiativeResolve, onAdd, onRemove }) {
   const [actionId, setActionId] = useState("redeploy");
   const [values, setValues] = useState(() => defaultBattleValues(getBattleEventDefinition("redeploy")));
   const [note, setNote] = useState("");
   const [statisticsRound, setStatisticsRound] = useState("all");
   const action = getBattleEventDefinition(actionId);
+  const actor = turnActor;
+
+  function selectTurnActor(nextActor) {
+    onTurnChange?.(nextActor);
+  }
 
   function addEntry(nextValues = values) {
     const cleanValues = Object.fromEntries(
@@ -172,21 +181,22 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
           <h3 id="game-battle-log-title">Registro de batalla</h3>
           <p>Anota tiradas y momentos clave sin salir de la partida.</p>
         </div>
-        <div className="aos-battle-log__round" aria-label={`Ronda ${round}`}>
+        <div className="aos-battle-log__round" aria-label={`Ronda de batalla ${round}`}>
           <button type="button" onClick={() => onRoundChange?.(round - 1)} disabled={round <= 1} aria-label="Ronda anterior">−</button>
-          <span><small>Ronda</small><strong>{round}</strong></span>
+          <span><small>Ronda de batalla</small><strong>{round}</strong></span>
           <button type="button" onClick={() => onRoundChange?.(round + 1)} disabled={round >= 5} aria-label="Ronda siguiente">+</button>
         </div>
       </div>
 
       <div className="aos-battle-log__composer">
-        <div className="aos-battle-log__actors" role="group" aria-label="Jugador del evento">
+        <span className="aos-battle-log__turn-label">Turno activo</span>
+        <div className="aos-battle-log__actors" role="group" aria-label="Turno activo">
           {BATTLE_ACTORS.map((item) => (
             <button
               key={item.id}
               type="button"
               className={item.id === actor ? "is-active" : ""}
-              onClick={() => setActor(item.id)}
+              onClick={() => selectTurnActor(item.id)}
               aria-pressed={item.id === actor}
             >
               {item.label}
@@ -257,6 +267,12 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
         </form>
       </div>
 
+      <InitiativePanel
+        round={round}
+        lastTurnActor={turnActor}
+        onResolve={onInitiativeResolve}
+      />
+
       <BattleStatistics entries={entries} selectedRound={statisticsRound} onRoundChange={setStatisticsRound} />
 
       <ol className="aos-battle-log__timeline" aria-live="polite">
@@ -281,6 +297,56 @@ function BattleLog({ entries, round, onRoundChange, onAdd, onRemove }) {
           </li>
         ))}
       </ol>
+    </section>
+  );
+}
+
+function InitiativePanel({ round, lastTurnActor, onResolve }) {
+  const [selfRoll, setSelfRoll] = useState("");
+  const [opponentRoll, setOpponentRoll] = useState("");
+  const own = Number(selfRoll);
+  const rival = Number(opponentRoll);
+  const automaticWinner = selfRoll && opponentRoll && own !== rival
+    ? own > rival ? "self" : "opponent"
+    : "";
+  const [tieWinner, setTieWinner] = useState("self");
+  const winner = automaticWinner || tieWinner;
+  const isDoubleTurn = winner === lastTurnActor;
+
+  function resolve() {
+    if (!selfRoll || !opponentRoll || round >= 5) return;
+    onResolve?.({ winner, selfRoll: own, opponentRoll: rival });
+    setSelfRoll("");
+    setOpponentRoll("");
+  }
+
+  return (
+    <section className="aos-initiative" aria-labelledby="initiative-title">
+      <header>
+        <div>
+          <h4 id="initiative-title">Iniciativa</h4>
+          <p>Al terminar la ronda, decide quién comienza la siguiente.</p>
+        </div>
+        <b>R{round} → R{Math.min(5, round + 1)}</b>
+      </header>
+      <div className="aos-initiative__rolls">
+        <label><span>Mi dado</span><input type="number" min="1" max="6" inputMode="numeric" value={selfRoll} onChange={(event) => setSelfRoll(event.target.value)} placeholder="D6" /></label>
+        <label><span>Dado rival</span><input type="number" min="1" max="6" inputMode="numeric" value={opponentRoll} onChange={(event) => setOpponentRoll(event.target.value)} placeholder="D6" /></label>
+      </div>
+      {selfRoll && opponentRoll && own === rival && (
+        <div className="aos-initiative__tie">
+          <span>Empate: indica quién gana el desempate</span>
+          <div role="group" aria-label="Ganador del desempate">
+            {BATTLE_ACTORS.map((item) => <button key={item.id} type="button" className={tieWinner === item.id ? "is-active" : ""} onClick={() => setTieWinner(item.id)}>{item.label}</button>)}
+          </div>
+        </div>
+      )}
+      <div className="aos-initiative__result" aria-live="polite">
+        {selfRoll && opponentRoll ? (
+          <span>Empieza <strong>{winner === "self" ? "Yo" : "Rival"}</strong>{isDoubleTurn && <b>Doble turno</b>}</span>
+        ) : <span>Introduce ambas tiradas</span>}
+        <button type="button" onClick={resolve} disabled={!selfRoll || !opponentRoll || round >= 5}>Empezar siguiente ronda</button>
+      </div>
     </section>
   );
 }

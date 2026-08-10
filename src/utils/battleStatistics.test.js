@@ -51,3 +51,15 @@ test("keeps legacy entries useful in the new statistics", () => {
   assert.equal(summary.redeployDistance, 4);
   assert.equal(summary.damage, 6);
 });
+
+test("attributes initiative wins and double turns to the correct player", () => {
+  const summary = summarizeBattleLog([
+    { actor: "opponent", round: 2, actionId: "priority", values: { selfRoll: 3, opponentRoll: 5, doubleTurn: "yes" } },
+    { actor: "opponent", round: 2, actionId: "turn-start", values: {} },
+  ], 2);
+
+  assert.equal(summary.self.priorityWins, 0);
+  assert.equal(summary.opponent.priorityWins, 1);
+  assert.equal(summary.opponent.doubleTurns, 1);
+  assert.equal(summary.opponent.turnsPlayed, 1);
+});
