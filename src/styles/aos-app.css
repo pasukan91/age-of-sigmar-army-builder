@@ -4795,35 +4795,135 @@ select.aos-field__control:hover {
   font-size: 10px;
 }
 
+.aos-battle-stats__selector {
+  margin-top: 11px;
+  padding: 8px;
+  border: 1px solid #67594f;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    #211b18;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.06),
+    0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.aos-battle-stats__selector-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 2px 7px;
+}
+
+.aos-battle-stats__selector-heading span {
+  color: #d9be82;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aos-battle-stats__selector-heading small {
+  overflow: hidden;
+  color: #f5eee4;
+  font-size: 9px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .aos-battle-stats__rounds {
   display: grid;
-  grid-template-columns: 1.25fr repeat(5, 1fr);
+  grid-template-columns: 1.18fr repeat(5, 1fr);
   gap: 4px;
-  margin-top: 10px;
-  padding: 3px;
-  border: 1px solid #62554c;
-  border-radius: 7px;
-  background: #211b18;
 }
 
 .aos-battle-stats__rounds button {
+  position: relative;
+  display: grid;
   min-width: 0;
-  min-height: 34px;
+  min-height: 48px;
+  place-content: center;
+  gap: 1px;
   padding: 4px 2px;
-  border: 1px solid #665c53;
-  border-radius: 5px;
-  color: #e2d8ca;
-  background: #453b35;
-  font-size: 10px;
+  overflow: hidden;
+  border: 1px solid #594d46;
+  border-radius: 7px;
+  color: #d8cec1;
+  background: linear-gradient(180deg, #443a34, #322a26);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.055),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.aos-battle-stats__rounds button:not(:last-child)::after {
+  position: absolute;
+  right: -3px;
+  width: 1px;
+  height: 20px;
+  align-self: center;
+  content: "";
+  background: rgba(213, 172, 91, 0.22);
+}
+
+.aos-battle-stats__rounds button b,
+.aos-battle-stats__rounds button span {
+  display: block;
+  line-height: 1;
+  text-align: center;
+}
+
+.aos-battle-stats__rounds button b {
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 17px;
+}
+
+.aos-battle-stats__rounds button span {
+  margin-top: 3px;
+  color: #a99e92;
+  font-size: 7px;
   font-weight: 900;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .aos-battle-stats__rounds button.is-active {
-  border-color: #d5ac5b;
+  z-index: 1;
+  border-color: #f0cf7e;
   color: #2d2018;
-  background: linear-gradient(180deg, #e2c071, #bd913f);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 42%),
+    linear-gradient(180deg, #e5c476, #b98837);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 244, 201, 0.35),
+    0 3px 9px rgba(0, 0, 0, 0.38);
+  transform: translateY(-1px);
+}
+
+.aos-battle-stats__rounds button.is-active::before {
+  position: absolute;
+  right: 8px;
+  bottom: 3px;
+  left: 8px;
+  height: 2px;
+  border-radius: 99px;
+  content: "";
+  background: #5d1813;
+}
+
+.aos-battle-stats__rounds button.is-active span {
+  color: #5d3b1c;
+}
+
+.aos-battle-stats__rounds button:active {
+  transform: translateY(1px);
+}
+
+.aos-battle-stats__rounds button:focus-visible {
+  outline: 2px solid #fff1bd;
+  outline-offset: 2px;
 }
 
 .aos-battle-stats__export {

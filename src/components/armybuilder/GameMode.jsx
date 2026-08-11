@@ -386,12 +386,29 @@ function BattleStatistics({ entries, listName, selectedRound, onRoundChange }) {
           <h4 id="battle-stats-title">Estadísticas de la partida</h4>
           <p>Comparativa automática a partir del registro.</p>
         </div>
-        <div className="aos-battle-stats__rounds" role="group" aria-label="Ronda de las estadísticas">
-          {["all", 1, 2, 3, 4, 5].map((value) => (
-            <button key={value} type="button" className={String(selectedRound) === String(value) ? "is-active" : ""} onClick={() => onRoundChange(value)}>
-              {value === "all" ? "Total" : `R${value}`}
-            </button>
-          ))}
+        <div className="aos-battle-stats__selector">
+          <div className="aos-battle-stats__selector-heading">
+            <span>Periodo analizado</span>
+            <small>{selectedRound === "all" ? "Partida completa" : `Ronda de batalla ${selectedRound}`}</small>
+          </div>
+          <div className="aos-battle-stats__rounds" role="group" aria-label="Ronda de las estadísticas">
+            {["all", 1, 2, 3, 4, 5].map((value) => {
+              const isActive = String(selectedRound) === String(value);
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  className={isActive ? "is-active" : ""}
+                  onClick={() => onRoundChange(value)}
+                  aria-label={value === "all" ? "Estadísticas de toda la partida" : `Estadísticas de la ronda ${value}`}
+                  aria-pressed={isActive}
+                >
+                  <b>{value === "all" ? "Σ" : value}</b>
+                  <span>{value === "all" ? "Total" : "Ronda"}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
         <button type="button" className="aos-battle-stats__export" onClick={downloadStatistics}>
           <span aria-hidden="true">⇩</span> Exportar CSV
