@@ -753,6 +753,8 @@ textarea {
 }
 
 .aos-damage-calculator {
+  width: 100%;
+  max-width: 100%;
   margin-bottom: 12px;
   overflow: hidden;
   border: 1px solid #a98842;
@@ -891,46 +893,112 @@ textarea {
   font-size: 12px;
 }
 
-.aos-damage-calculator__table-wrap {
-  overflow-x: auto;
+.aos-damage-calculator__results {
   padding: 13px;
   background: #e8e0d1;
 }
 
-.aos-damage-calculator__table {
-  width: 100%;
-  min-width: 520px;
-  border-collapse: collapse;
-  background: #fff;
-  font-size: 11px;
-}
-
-.aos-damage-calculator__table th,
-.aos-damage-calculator__table td {
-  padding: 8px;
-  border: 1px solid #d5cbb9;
-  text-align: center;
-}
-
-.aos-damage-calculator__table thead th {
+.aos-damage-calculator__results > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 5px 5px 0 0;
   color: #fff;
   background: #343a36;
   font-family: "Oswald", "Arial Narrow", sans-serif;
   font-size: 10px;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.035em;
   text-transform: uppercase;
 }
 
-.aos-damage-calculator__table tbody th {
-  color: #fff;
-  background: #891f18;
-  font-size: 13px;
+.aos-damage-calculator__result-list {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid #c9bda8;
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  background: #c9bda8;
 }
 
-.aos-damage-calculator__table tbody td:last-child {
+.aos-damage-calculator__result-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 58px;
+  align-items: stretch;
+  min-width: 0;
+  background: #fff;
+}
+
+.aos-damage-calculator__save,
+.aos-damage-calculator__total {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-width: 0;
+  padding: 7px 4px;
+  text-align: center;
+}
+
+.aos-damage-calculator__save {
+  color: #fff;
+  background: #891f18;
+}
+
+.aos-damage-calculator__total {
+  border-left: 1px solid #ded4c1;
   color: #6e120c;
   background: #f4e7c7;
-  font-size: 13px;
+}
+
+.aos-damage-calculator__save small,
+.aos-damage-calculator__total small {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aos-damage-calculator__save strong,
+.aos-damage-calculator__total strong {
+  margin-top: 2px;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.aos-damage-calculator__result-row ul {
+  display: grid;
+  min-width: 0;
+  padding: 6px 9px;
+  margin: 0;
+  list-style: none;
+}
+
+.aos-damage-calculator__result-row li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+  padding: 3px 0;
+  color: #5e564c;
+  font-size: 9px;
+}
+
+.aos-damage-calculator__result-row li + li {
+  border-top: 1px dotted #ddd2c0;
+}
+
+.aos-damage-calculator__result-row li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.aos-damage-calculator__result-row li b {
+  color: #2d2925;
+  font-size: 11px;
 }
 
 .aos-damage-calculator__profiles {
@@ -960,6 +1028,10 @@ textarea {
   cursor: pointer;
 }
 
+.aos-damage-profile__trigger > span:first-child {
+  min-width: 0;
+}
+
 .aos-damage-profile.is-open .aos-damage-profile__trigger {
   color: #fff;
   background: #353b37;
@@ -971,6 +1043,7 @@ textarea {
 }
 
 .aos-damage-profile__trigger strong {
+  overflow-wrap: anywhere;
   font-family: "Oswald", "Arial Narrow", sans-serif;
   font-size: 14px;
   text-transform: uppercase;

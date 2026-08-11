@@ -98,31 +98,33 @@ function DamageCalculator({ unit, models = 1, onClose }) {
         </label>
       </div>
 
-      <div className="aos-damage-calculator__table-wrap">
-        <table className="aos-damage-calculator__table">
-          <thead>
-            <tr>
-              <th>Salvación</th>
-              {profiles.map((profile, index) => (
-                <th key={`${profile.name}-${index}`}>{profile.name}</th>
-              ))}
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((row) => (
-              <tr key={row.save}>
-                <th>{row.save}+</th>
+      <div className="aos-damage-calculator__results" aria-label="Daño medio por salvación">
+        <header>
+          <span>Salvación objetivo</span>
+          <strong>Daño medio</strong>
+        </header>
+        <div className="aos-damage-calculator__result-list">
+          {results.map((row) => (
+            <article key={row.save} className="aos-damage-calculator__result-row">
+              <div className="aos-damage-calculator__save">
+                <small>Salv.</small>
+                <strong>{row.save}+</strong>
+              </div>
+              <ul>
                 {row.weapons.map((value, index) => (
-                  <td key={`${row.save}-${profiles[index].name}-${index}`}>
-                    {value.toFixed(2)}
-                  </td>
+                  <li key={`${row.save}-${profiles[index].name}-${index}`}>
+                    <span>{profiles[index].name}</span>
+                    <b>{value.toFixed(2)}</b>
+                  </li>
                 ))}
-                <td><strong>{row.total.toFixed(2)}</strong></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+              </ul>
+              <div className="aos-damage-calculator__total">
+                <small>Total</small>
+                <strong>{row.total.toFixed(2)}</strong>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
 
       <div className="aos-damage-calculator__profiles">
