@@ -8,6 +8,8 @@
     "build": "vite build",
     "test": "node --test",
     "validate:data": "node scripts/validate-factions.mjs",
+    "audit:unit-images": "node scripts/audit-unit-images.mjs",
+    "sync:unit-images": "python scripts/download-unit-images.py",
     "deploy:apache": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-apache.ps1 -Clean",
     "lint": "eslint .",
     "preview": "vite preview"

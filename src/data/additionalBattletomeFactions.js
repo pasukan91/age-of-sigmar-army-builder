@@ -1,6 +1,7 @@
 import catalogue from "./additionalBattletomeFactions.generated.json";
+import additionalUnitImages from "./additionalUnitImages.generated.json";
 
-const LOCAL_IMAGES = {
+const CURATED_LOCAL_IMAGES = {
   idoneth: {
     faction: "/images/factions/Idoneth.webp",
     units: {
@@ -49,6 +50,19 @@ const LOCAL_IMAGES = {
     },
   },
 };
+
+const LOCAL_IMAGES = Object.fromEntries(
+  [...new Set([
+    ...Object.keys(additionalUnitImages),
+    ...Object.keys(CURATED_LOCAL_IMAGES),
+  ])].map((factionId) => [factionId, {
+    ...(CURATED_LOCAL_IMAGES[factionId] ?? {}),
+    units: {
+      ...(additionalUnitImages[factionId] ?? {}),
+      ...(CURATED_LOCAL_IMAGES[factionId]?.units ?? {}),
+    },
+  }])
+);
 
 function withLocalImages(items, factionId, imageMap) {
   return (items ?? []).map((item) => ({
