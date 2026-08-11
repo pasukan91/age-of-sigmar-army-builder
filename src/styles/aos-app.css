@@ -4826,6 +4826,49 @@ select.aos-field__control:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
 }
 
+.aos-battle-stats__export {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 8px;
+  border: 1px solid #d5ac5b;
+  border-radius: 6px;
+  color: #f4d890;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aos-battle-stats__export span {
+  display: grid;
+  width: 21px;
+  height: 21px;
+  place-items: center;
+  border-radius: 50%;
+  color: #302722;
+  background: #d5ac5b;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.aos-battle-stats__export:active {
+  color: #302722;
+  background: #d5ac5b;
+}
+
+.aos-battle-stats > header .aos-battle-stats__export-status {
+  margin-top: 6px;
+  color: #d9be82;
+  font-size: 9px;
+  font-weight: 800;
+  text-align: center;
+}
+
 .aos-battle-stats__matrix {
   display: grid;
 }

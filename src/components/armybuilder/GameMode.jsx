@@ -6,9 +6,14 @@ import {
   BATTLE_ACTORS,
   BATTLE_EVENT_DEFINITIONS,
   BATTLE_STAT_GROUPS,
+  getBattleRateMetrics,
   getBattleEventDefinition,
   summarizeBattleLog,
 } from "../../utils/battleStatistics";
+import {
+  formatBattleStatisticsCsv,
+  getBattleStatisticsFilename,
+} from "../../utils/battleStatisticsExport";
 import UnitArtwork from "../UnitArtwork";
 
 function GameMode({
@@ -119,6 +124,7 @@ function GameMode({
 
       <BattleLog
         entries={list?.battleLog ?? []}
+        listName={list?.name}
         round={list?.battleRound ?? 1}
         turnActor={list?.battleTurnActor ?? "self"}
         onRoundChange={onRoundChange}
@@ -132,7 +138,7 @@ function GameMode({
   );
 }
 
-function BattleLog({ entries, round, turnActor, onRoundChange, onTurnChange, onInitiativeResolve, onAdd, onRemove }) {
+function BattleLog({ entries, listName, round, turnActor, onRoundChange, onTurnChange, onInitiativeResolve, onAdd, onRemove }) {
   const [actionId, setActionId] = useState("redeploy");
   const [values, setValues] = useState(() => defaultBattleValues(getBattleEventDefinition("redeploy")));
   const [note, setNote] = useState("");
@@ -273,7 +279,7 @@ function BattleLog({ entries, round, turnActor, onRoundChange, onTurnChange, onI
         onResolve={onInitiativeResolve}
       />
 
-      <BattleStatistics entries={entries} selectedRound={statisticsRound} onRoundChange={setStatisticsRound} />
+      <BattleStatistics entries={entries} listName={listName} selectedRound={statisticsRound} onRoundChange={setStatisticsRound} />
 
       <ol className="aos-battle-log__timeline" aria-live="polite">
         {entries.length === 0 && (
@@ -351,7 +357,8 @@ function InitiativePanel({ round, lastTurnActor, onResolve }) {
   );
 }
 
-function BattleStatistics({ entries, selectedRound, onRoundChange }) {
+function BattleStatistics({ entries, listName, selectedRound, onRoundChange }) {
+  const [exportStatus, setExportStatus] = useState("");
   const summary = summarizeBattleLog(entries, selectedRound);
   const headlineMetrics = [
     ["victoryPoints", "PV"],
@@ -359,6 +366,18 @@ function BattleStatistics({ entries, selectedRound, onRoundChange }) {
     ["mortalDamage", "Daño mortal"],
     ["battleTacticsCompleted", "Tácticas"],
   ];
+
+  function downloadStatistics() {
+    const csv = formatBattleStatisticsCsv(entries);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = getBattleStatisticsFilename(listName);
+    link.click();
+    URL.revokeObjectURL(url);
+    setExportStatus("CSV completo descargado");
+  }
 
   return (
     <section className="aos-battle-stats" aria-labelledby="battle-stats-title">
@@ -374,6 +393,10 @@ function BattleStatistics({ entries, selectedRound, onRoundChange }) {
             </button>
           ))}
         </div>
+        <button type="button" className="aos-battle-stats__export" onClick={downloadStatistics}>
+          <span aria-hidden="true">⇩</span> Exportar CSV
+        </button>
+        {exportStatus && <p className="aos-battle-stats__export-status" role="status">{exportStatus}</p>}
       </header>
 
       <div className="aos-battle-stats__matrix aos-battle-stats__matrix--headline">
@@ -393,7 +416,7 @@ function BattleStatistics({ entries, selectedRound, onRoundChange }) {
           ))}
           <div className="aos-battle-stats__group">
             <h5>Porcentajes</h5>
-            {getRateMetrics(summary).map(([label, own, opponent]) => <StatRow key={label} label={label} own={own} opponent={opponent} />)}
+            {getBattleRateMetrics(summary).map(([label, own, opponent]) => <StatRow key={label} label={label} own={own} opponent={opponent} />)}
           </div>
         </div>
       </details>
@@ -407,26 +430,6 @@ function StatHeader() {
 
 function StatRow({ label, own, opponent }) {
   return <div className="aos-battle-stats__row"><span>{label}</span><b>{own}</b><b>{opponent}</b></div>;
-}
-
-function getRateMetrics(summary) {
-  const rate = (actor, numerator, denominator) => summary[actor][denominator]
-    ? `${Math.round((summary[actor][numerator] / summary[actor][denominator]) * 100)}%`
-    : "—";
-  const tacticRate = (actor) => {
-    const attempts = summary[actor].battleTacticsCompleted + summary[actor].battleTacticsFailed;
-    return attempts ? `${Math.round((summary[actor].battleTacticsCompleted / attempts) * 100)}%` : "—";
-  };
-
-  return [
-    ["Impactos / ataques", rate("self", "hits", "attacks"), rate("opponent", "hits", "attacks")],
-    ["Heridas / impactos", rate("self", "wounds", "hits"), rate("opponent", "wounds", "hits")],
-    ["Salvaciones", rate("self", "savesPassed", "saveAttempts"), rate("opponent", "savesPassed", "saveAttempts")],
-    ["Ward", rate("self", "wardsPassed", "wardAttempts"), rate("opponent", "wardsPassed", "wardAttempts")],
-    ["Cargas exitosas", rate("self", "successfulCharges", "chargeAttempts"), rate("opponent", "successfulCharges", "chargeAttempts")],
-    ["Lanzamientos exitosos", rate("self", "castsSuccessful", "castsAttempted"), rate("opponent", "castsSuccessful", "castsAttempted")],
-    ["Tácticas completadas", tacticRate("self"), tacticRate("opponent")],
-  ];
 }
 
 function groupBattleEvents() {

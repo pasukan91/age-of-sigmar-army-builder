@@ -137,6 +137,26 @@ export function summarizeBattleLog(entries, selectedRound = "all") {
   return summary;
 }
 
+export function getBattleRateMetrics(summary) {
+  const rate = (actor, numerator, denominator) => summary[actor][denominator]
+    ? `${Math.round((summary[actor][numerator] / summary[actor][denominator]) * 100)}%`
+    : "—";
+  const tacticRate = (actor) => {
+    const attempts = summary[actor].battleTacticsCompleted + summary[actor].battleTacticsFailed;
+    return attempts ? `${Math.round((summary[actor].battleTacticsCompleted / attempts) * 100)}%` : "—";
+  };
+
+  return [
+    ["Impactos / ataques", rate("self", "hits", "attacks"), rate("opponent", "hits", "attacks")],
+    ["Heridas / impactos", rate("self", "wounds", "hits"), rate("opponent", "wounds", "hits")],
+    ["Salvaciones", rate("self", "savesPassed", "saveAttempts"), rate("opponent", "savesPassed", "saveAttempts")],
+    ["Ward", rate("self", "wardsPassed", "wardAttempts"), rate("opponent", "wardsPassed", "wardAttempts")],
+    ["Cargas exitosas", rate("self", "successfulCharges", "chargeAttempts"), rate("opponent", "successfulCharges", "chargeAttempts")],
+    ["Lanzamientos exitosos", rate("self", "castsSuccessful", "castsAttempted"), rate("opponent", "castsSuccessful", "castsAttempted")],
+    ["Tácticas completadas", tacticRate("self"), tacticRate("opponent")],
+  ];
+}
+
 function applyEntry(summary, entry) {
   const values = entry?.values && typeof entry.values === "object" ? entry.values : {};
   const actionId = entry?.actionId || legacyActionId(entry?.label);
