@@ -368,7 +368,7 @@ function BattleStatistics({ entries, listName, selectedRound, onRoundChange }) {
   ];
 
   function downloadStatistics() {
-    const csv = formatBattleStatisticsCsv(entries);
+    const csv = formatBattleStatisticsCsv(entries, { listName });
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -376,7 +376,7 @@ function BattleStatistics({ entries, listName, selectedRound, onRoundChange }) {
     link.download = getBattleStatisticsFilename(listName);
     link.click();
     URL.revokeObjectURL(url);
-    setExportStatus("CSV completo descargado");
+    setExportStatus("Informe descargado: resumen, rondas y cronología");
   }
 
   return (
@@ -411,7 +411,7 @@ function BattleStatistics({ entries, listName, selectedRound, onRoundChange }) {
           </div>
         </div>
         <button type="button" className="aos-battle-stats__export" onClick={downloadStatistics}>
-          <span aria-hidden="true">⇩</span> Exportar CSV
+          <span aria-hidden="true">⇩</span> Exportar informe
         </button>
         {exportStatus && <p className="aos-battle-stats__export-status" role="status">{exportStatus}</p>}
       </header>
