@@ -198,6 +198,11 @@ function PredefinedLists({ onBack, onCreate }) {
                     <div><p>Plantilla {summary.list.preset.season}</p><h3>{type.name}</h3></div>
                   </div>
                   <p className="aos-preset-card__description">{type.description}</p>
+                  {summary.list.preset.doctrine && (
+                    <p className="aos-preset-card__doctrine">
+                      <strong>Plan de juego:</strong> {summary.list.preset.doctrine}
+                    </p>
+                  )}
                   <dl className="aos-preset-card__stats">
                     <div><dt>Puntos</dt><dd>{summary.points}/2000</dd></div>
                     <div><dt>Regimientos</dt><dd>{summary.regiments}</dd></div>
@@ -206,7 +211,7 @@ function PredefinedLists({ onBack, onCreate }) {
                   <div className="aos-preset-card__details">
                     <span>{summary.list.battleFormation?.name ?? "Sin formación"}</span>
                     <span>{formatComposition(type.id, summary.composition)}</span>
-                    <span>2 cartas de tácticas</span>
+                    <span>Tácticas: {summary.list.battleTactics.map((card) => card.name).join(" + ")}</span>
                     <span>Reglas y mejoras incluidas</span>
                   </div>
                   <details className="aos-preset-card__preview">

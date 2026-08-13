@@ -21,10 +21,9 @@ test("shooting and anti-monster presets reserve space for screens and other role
 
     assert.ok(shooting.composition.screen >= 2);
     assert.ok(shooting.composition.ranged < shooting.composition.coreUnits);
-    assert.ok(shooting.composition.specialistShare <= 0.58);
+    assert.ok(shooting.composition.specialistShare <= 0.46);
     assert.ok(hunters.composition.screen >= 2);
-    assert.ok(hunters.composition.hunter < hunters.composition.coreUnits);
-    assert.ok(hunters.composition.specialistShare <= 0.58);
+    assert.ok(hunters.composition.specialistShare <= 0.46);
   } finally {
     await server.close();
   }

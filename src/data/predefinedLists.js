@@ -9,8 +9,10 @@ import {
   canUnitJoinRegiment,
   countsTowardRegimentLimit,
   getAvailableRegimentLeaders,
+  getRegimentCompositionErrors,
 } from "../utils/regimentRules";
 import { getRegimentUnitLimit } from "../utils/armyComposition";
+import { getPotentialSynergies } from "../utils/unitSynergies";
 import createId from "../utils/createId";
 
 export const PREDEFINED_LIST_TYPES = [
@@ -58,7 +60,44 @@ const PRESET_SOURCE = {
     "https://listhammer.info/aos",
     "https://aos-events.com/",
     "https://www.warhammer-community.com/en-gb/articles/dwshnd8s/warhammer-age-of-sigmar-quarterly-battlescroll-updates/",
+    "https://www.warhammer-community.com/en-gb/articles/yb8viq2m/head-to-aqshy-with-the-new-generals-handbook/",
+    "https://www.warhammer-community.com/en-gb/articles/ilauiwfp/threshold-tactics-on-the-new-generals-handbook/",
   ],
+};
+
+export const PRESET_DOCTRINES = {
+  "anti-monsters": {
+    roleMinimums: { screen: 2, hunter: 2, combat: 2, mobile: 1 },
+    specialistRole: "hunter",
+    specialistPointCap: 0.46,
+    battleplan: 1,
+    tacticCards: [0, 4],
+    plan: "Dos pantallas absorben la primera carga; los cazadores responden sobre el objetivo prioritario y una pieza móvil conserva la capacidad de puntuar.",
+  },
+  shooting: {
+    roleMinimums: { screen: 2, ranged: 2, combat: 2, mobile: 1 },
+    specialistRole: "ranged",
+    specialistPointCap: 0.46,
+    battleplan: 0,
+    tacticCards: [0, 1],
+    plan: "Las pantallas crean distancia y protegen las líneas de tiro; al menos dos amenazas de combate despejan objetivos y una pieza móvil completa tácticas.",
+  },
+  control: {
+    roleMinimums: { screen: 2, objective: 3, mobile: 2, combat: 2 },
+    specialistRole: null,
+    specialistPointCap: 1,
+    battleplan: 8,
+    tacticCards: [2, 4],
+    plan: "Varias unidades autónomas ocupan zonas distintas, mientras las amenazas de combate castigan al rival por disputar los objetivos.",
+  },
+  resilient: {
+    roleMinimums: { durable: 3, screen: 1, combat: 2, mobile: 1 },
+    specialistRole: null,
+    specialistPointCap: 1,
+    battleplan: 0,
+    tacticCards: [1, 3],
+    plan: "El yunque ocupa el centro, una pantalla evita intercambios desfavorables y las amenazas de respuesta impiden que el rival lo ignore.",
+  },
 };
 
 const SPECIAL_ENHANCEMENTS = [
@@ -174,6 +213,14 @@ function isRangedSpecialist(unit) {
 }
 
 function isMonsterHunter(unit) {
+  return isDedicatedMonsterHunter(unit) ||
+    (
+      !isScreen(unit) &&
+      antiMonsterOutput(unit) / Math.sqrt(Math.max(60, Number(unit?.points) || 0)) >= 0.55
+    );
+}
+
+function isDedicatedMonsterHunter(unit) {
   const weapons = asArray(unit?.weapons);
   const rulesText = searchableText([
     weapons.map((weapon) => weapon.abilities),
@@ -186,6 +233,11 @@ function isMonsterHunter(unit) {
   return rulesText.includes("anti-monster") ||
     rulesText.includes("anti monster") ||
     antiMonsterOutput(unit) > ordinaryOutput * 1.35;
+}
+
+function matchesSpecialistRole(unit, role) {
+  if (role === "hunter") return isDedicatedMonsterHunter(unit);
+  return Boolean(classifyPresetUnit(unit)[role]);
 }
 
 function isScreen(unit) {
@@ -202,7 +254,12 @@ function isScreen(unit) {
 
 function isMobileScorer(unit) {
   const move = profileNumber(unit?.profile?.move ?? unit?.move);
-  return move >= 8 || keywordText(unit).includes("fly");
+  const text = searchableText(unit?.abilities);
+  return move >= 8 || keywordText(unit).includes("fly") ||
+    text.includes("set it up again") ||
+    text.includes("set up this unit") ||
+    text.includes("remove this unit from the battlefield") ||
+    text.includes("teleport");
 }
 
 function isCombatThreat(unit) {
@@ -213,6 +270,23 @@ function isDurableUnit(unit) {
   return durability(unit) / Math.max(60, Number(unit?.points) || 0) >= 0.09;
 }
 
+function isObjectiveUnit(unit) {
+  const points = Math.max(60, Number(unit?.points) || 0);
+  return boardControl(unit) / Math.sqrt(points) >= 1.35;
+}
+
+function isSupportUnit(unit) {
+  const text = searchableText(unit?.abilities);
+  return utility(unit) > 0 || [
+    "friendly unit",
+    "add 1 to hit",
+    "add 1 to wound",
+    "subtract 1 from hit",
+    "ward (",
+    "heal (",
+  ].some((term) => text.includes(term));
+}
+
 export function classifyPresetUnit(unit) {
   return {
     screen: isScreen(unit),
@@ -221,24 +295,30 @@ export function classifyPresetUnit(unit) {
     mobile: isMobileScorer(unit),
     combat: isCombatThreat(unit),
     durable: isDurableUnit(unit),
+    objective: isObjectiveUnit(unit),
+    support: isSupportUnit(unit),
   };
 }
-
-const BALANCED_ROLE_ROTATIONS = {
-  "anti-monsters": ["screen", "hunter", "screen", "combat", "hunter", "mobile"],
-  shooting: ["screen", "ranged", "screen", "combat", "ranged", "mobile"],
-  control: ["screen", "combat", "mobile", "durable", "combat", "screen"],
-  resilient: ["durable", "combat", "mobile", "screen", "durable", "combat"],
-};
 
 function selectedCoreUnits(list) {
   return asArray(list?.regiments).flatMap((regiment) => asArray(regiment?.units));
 }
 
-function roleForNextUnit(list, typeId) {
-  const rotation = BALANCED_ROLE_ROTATIONS[typeId];
-  if (!rotation) return null;
-  return rotation[selectedCoreUnits(list).length % rotation.length];
+function roleForNextUnit(list, typeId, candidates) {
+  const doctrine = PRESET_DOCTRINES[typeId];
+  if (!doctrine) return null;
+
+  const selected = selectedCoreUnits(list);
+  const deficits = Object.entries(doctrine.roleMinimums)
+    .filter(([role]) => candidates.some((unit) => classifyPresetUnit(unit)[role]))
+    .map(([role, minimum]) => ({
+      role,
+      deficit: minimum - selected.filter((unit) => classifyPresetUnit(unit)[role]).length,
+    }))
+    .filter(({ deficit }) => deficit > 0)
+    .sort((left, right) => right.deficit - left.deficit);
+
+  return deficits[0]?.role ?? null;
 }
 
 function balancedCandidateScore(unit, list, typeId, desiredRole = null) {
@@ -249,18 +329,27 @@ function balancedCandidateScore(unit, list, typeId, desiredRole = null) {
   const selected = selectedCoreUnits(list);
   const duplicateCount = selected.filter((item) => item.id === unit.id).length;
   const roleMatch = desiredRole && roles[desiredRole];
-  const specialistRole = typeId === "shooting" ? "ranged"
-    : typeId === "anti-monsters" ? "hunter"
-      : null;
+  const specialistRole = PRESET_DOCTRINES[typeId]?.specialistRole ?? null;
   const specialistCount = specialistRole
     ? selected.filter((item) => classifyPresetUnit(item)[specialistRole]).length
     : 0;
   const specialistSaturated = specialistRole && roles[specialistRole] &&
     specialistCount >= Math.ceil(Math.max(1, selected.length) * 0.5);
+  const synergyCount = getPotentialSynergies(list, unit).length;
+  const synergyMultiplier = 1 + Math.min(0.6, synergyCount * 0.12);
 
   return base * (roleMatch ? 3.2 : 1)
     * (specialistSaturated ? 0.28 : 1)
-    * Math.pow(0.62, duplicateCount);
+    * Math.pow(0.62, duplicateCount)
+    * synergyMultiplier;
+}
+
+function sortBalancedCandidates(candidates, list, typeId, desiredRole) {
+  const scores = new Map(candidates.map((unit) => [
+    unit,
+    balancedCandidateScore(unit, list, typeId, desiredRole),
+  ]));
+  return candidates.sort((left, right) => scores.get(right) - scores.get(left));
 }
 
 export function scoreUnitForPreset(unit, typeId) {
@@ -366,8 +455,15 @@ function addRegiments(list, faction, typeId) {
     const remainingBeforeLeader = list.pointsLimit - calculateArmyPoints(list);
     if (remainingBeforeLeader < lowestUnitPoints + 70) break;
     const leaders = selectLeaders(list, typeId, remainingBeforeLeader - lowestUnitPoints);
+    const leaderBudget = typeId === "meta"
+      ? remainingBeforeLeader - lowestUnitPoints
+      : Math.min(
+        regimentIndex === 0 ? list.pointsLimit * 0.27 : list.pointsLimit * 0.24,
+        remainingBeforeLeader - lowestUnitPoints * 2
+      );
     const leader = leaders.find((candidate) =>
-      !candidate.rules?.unique || !list.regiments.some((regiment) => regiment.hero.id === candidate.id)
+      Number(candidate.points) <= leaderBudget &&
+      (!candidate.rules?.unique || !list.regiments.some((regiment) => regiment.hero.id === candidate.id))
     );
     if (!leader) break;
 
@@ -377,18 +473,20 @@ function addRegiments(list, faction, typeId) {
     const slotLimit = getRegimentUnitLimit(regimentIndex);
     while (regiment.units.filter(countsTowardRegimentLimit).length < slotLimit) {
       const remaining = list.pointsLimit - calculateArmyPoints(list);
-      const desiredRole = roleForNextUnit(list, typeId);
       const candidates = asArray(faction.units)
         .filter((unit) => !unit.rules?.hero && Number(unit.points) > 0)
         .filter((unit) => Number(unit.points) <= remaining)
         .filter((unit) => canUnitJoinRegiment({ list, regiment, unit }))
         .filter((unit) => typeId === "meta" ||
-          selectedCoreUnits(list).filter((selected) => selected.id === unit.id).length < 2)
-        .sort((left, right) =>
-          balancedCandidateScore(right, list, typeId, desiredRole)
-          - balancedCandidateScore(left, list, typeId, desiredRole)
-        );
-      const selected = candidates[0];
+          selectedCoreUnits(list).filter((selected) => selected.id === unit.id).length < 2);
+      const desiredRole = roleForNextUnit(list, typeId, candidates);
+      sortBalancedCandidates(candidates, list, typeId, desiredRole);
+      const selected = candidates.find((candidate) => {
+        regiment.units.push(cloneUnit(candidate));
+        const legal = getRegimentCompositionErrors(list).length === 0;
+        regiment.units.pop();
+        return legal;
+      });
       if (!selected) break;
       regiment.units.push(cloneUnit(selected));
     }
@@ -404,35 +502,34 @@ function addRegiments(list, faction, typeId) {
 function reinforceCoreUnits(list, typeId) {
   const candidates = list.regiments
     .flatMap((regiment) => regiment.units)
-    .filter((unit) => unit.rules?.canBeReinforced !== false && !unit.reinforced)
-    .sort((left, right) => {
-      if (typeId === "meta") {
-        return scoreUnitForPreset(right, typeId) - scoreUnitForPreset(left, typeId);
-      }
-      const desiredRole = roleForNextUnit(list, typeId);
-      return balancedCandidateScore(right, list, typeId, desiredRole)
-        - balancedCandidateScore(left, list, typeId, desiredRole);
-    });
+    .filter((unit) => unit.rules?.canBeReinforced !== false && !unit.reinforced);
+  const desiredRole = roleForNextUnit(list, typeId, candidates);
+  if (typeId === "meta") {
+    candidates.sort(
+      (left, right) => scoreUnitForPreset(right, typeId) - scoreUnitForPreset(left, typeId)
+    );
+  } else {
+    sortBalancedCandidates(candidates, list, typeId, desiredRole);
+  }
 
   candidates.forEach((unit) => {
     const remaining = list.pointsLimit - calculateArmyPoints(list);
     const projectedPoints = calculateArmyPoints(list) + Number(unit.points);
-    const specialistRole = typeId === "shooting" ? "ranged"
-      : typeId === "anti-monsters" ? "hunter"
-        : null;
+    const doctrine = PRESET_DOCTRINES[typeId];
+    const specialistRole = doctrine?.specialistRole ?? null;
     const specialistPoints = specialistRole
       ? selectedCoreUnits(list).reduce((total, selected) => {
-        if (!classifyPresetUnit(selected)[specialistRole]) return total;
+        if (!matchesSpecialistRole(selected, specialistRole)) return total;
         return total + Number(selected.points || 0) * (selected.reinforced ? 2 : 1);
       }, 0)
       : 0;
     const projectedSpecialistPoints = specialistPoints + (
-      specialistRole && classifyPresetUnit(unit)[specialistRole]
+      specialistRole && matchesSpecialistRole(unit, specialistRole)
         ? Number(unit.points || 0)
         : 0
     );
     const withinSpecialistCap = !specialistRole ||
-      projectedSpecialistPoints / Math.max(1, projectedPoints) <= 0.58;
+      projectedSpecialistPoints / Math.max(1, projectedPoints) <= doctrine.specialistPointCap;
 
     if (
       Number(unit.points) > 0 &&
@@ -453,13 +550,20 @@ export function getPredefinedComposition(list, typeId = list?.preset?.id) {
       if (matches) counts[role] += 1;
     });
     return counts;
-  }, { screen: 0, ranged: 0, hunter: 0, mobile: 0, combat: 0, durable: 0 });
-  const specialistRole = typeId === "shooting" ? "ranged"
-    : typeId === "anti-monsters" ? "hunter"
-      : null;
+  }, {
+    screen: 0,
+    ranged: 0,
+    hunter: 0,
+    mobile: 0,
+    combat: 0,
+    durable: 0,
+    objective: 0,
+    support: 0,
+  });
+  const specialistRole = PRESET_DOCTRINES[typeId]?.specialistRole ?? null;
   const specialistPoints = specialistRole
     ? units.reduce((total, unit) => total + (
-      classifyPresetUnit(unit)[specialistRole]
+      matchesSpecialistRole(unit, specialistRole)
         ? Number(unit.points || 0) * (unit.reinforced ? 2 : 1)
         : 0
     ), 0)
@@ -470,6 +574,25 @@ export function getPredefinedComposition(list, typeId = list?.preset?.id) {
     coreUnits: units.length,
     specialistShare: specialistRole ? specialistPoints / totalPoints : 0,
   };
+}
+
+function describeAdaptedDoctrine(typeId, composition) {
+  const doctrine = PRESET_DOCTRINES[typeId];
+  if (!doctrine) return "Composición flexible orientada al entorno competitivo.";
+
+  const adaptations = [];
+  if (composition.screen >= 2) adaptations.push(`${composition.screen} pantallas`);
+  if (composition.mobile >= 1) adaptations.push(`${composition.mobile} piezas móviles`);
+  if (composition.objective >= 2) adaptations.push(`${composition.objective} unidades de control`);
+  if (composition.combat >= 2) adaptations.push(`${composition.combat} amenazas de combate`);
+  if (typeId === "shooting") adaptations.unshift(`${composition.ranged} unidades de disparo`);
+  if (typeId === "anti-monsters") adaptations.unshift(`${composition.hunter} cazadores`);
+  if (typeId === "resilient") adaptations.unshift(`${composition.durable} unidades resistentes`);
+
+  const fallback = composition.mobile === 0
+    ? " La facción no dispone de una pieza móvil clara, así que compensa con más presencia y capas defensivas."
+    : "";
+  return `${doctrine.plan} Composición resultante: ${adaptations.slice(0, 4).join(", ")}.${fallback}`;
 }
 
 export function createPredefinedArmyList({ faction, typeId = "meta" }) {
@@ -494,25 +617,31 @@ export function createPredefinedArmyList({ faction, typeId = "meta" }) {
   });
 
   list.battleFormation = pickOption(faction.battleFormations, type.id);
+  const doctrine = PRESET_DOCTRINES[type.id];
   list.battleplan = ghb2026Battleplans[
-    { meta: 0, "anti-monsters": 1, shooting: 5, control: 8, resilient: 3 }[type.id] ?? 0
+    doctrine?.battleplan ?? 0
   ] ?? ghb2026Battleplans[0];
-  list.battleTactics = {
-    meta: [1, 2],
-    "anti-monsters": [0, 4],
-    shooting: [0, 3],
-    control: [2, 5],
-    resilient: [1, 3],
-  }[type.id].map((index) => ghb2026BattleTacticsCards[index]).filter(Boolean);
+  list.battleTactics = (
+    doctrine?.tacticCards ?? [1, 2]
+  ).map((index) => ghb2026BattleTacticsCards[index]).filter(Boolean);
   list.spellLore = pickOption(faction.spellLores, type.id);
   list.prayerLore = pickOption(faction.prayerLores, type.id);
   list.manifestationLore = pickOption(faction.manifestationLores, type.id);
   list.terrain = pickOption(faction.terrain, type.id);
-  list.preset = { ...PRESET_SOURCE, id: type.id, name: type.name };
+  list.preset = {
+    ...PRESET_SOURCE,
+    id: type.id,
+    name: type.name,
+    doctrine: doctrine?.plan ?? "Composición flexible orientada al entorno competitivo.",
+  };
 
   addRegiments(list, faction, type.id);
   reinforceCoreUnits(list, type.id);
   addEnhancements(list, faction, type.id);
+  list.preset.doctrine = describeAdaptedDoctrine(
+    type.id,
+    getPredefinedComposition(list, type.id)
+  );
   list.updatedAt = Date.now();
   return list;
 }
