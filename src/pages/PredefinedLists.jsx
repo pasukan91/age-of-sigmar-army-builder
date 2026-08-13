@@ -205,6 +205,7 @@ function PredefinedLists({ onBack, onCreate }) {
                   </dl>
                   <div className="aos-preset-card__details">
                     <span>{summary.list.battleFormation?.name ?? "Sin formación"}</span>
+                    <span>{formatComposition(type.id, summary.composition)}</span>
                     <span>2 cartas de tácticas</span>
                     <span>Reglas y mejoras incluidas</span>
                   </div>
@@ -239,6 +240,22 @@ function normalizeSearch(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim();
+}
+
+function formatComposition(typeId, composition) {
+  if (typeId === "shooting") {
+    return `${composition.ranged} de disparo · ${composition.screen} pantallas`;
+  }
+  if (typeId === "anti-monsters") {
+    return `${composition.hunter} cazadores · ${composition.screen} pantallas`;
+  }
+  if (typeId === "control") {
+    return `${composition.screen} unidades de línea · ${composition.combat} amenazas`;
+  }
+  if (typeId === "resilient") {
+    return `${composition.durable} resistentes · ${composition.combat} amenazas`;
+  }
+  return "Composición competitiva equilibrada";
 }
 
 export default PredefinedLists;

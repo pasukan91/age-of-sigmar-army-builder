@@ -26,28 +26,28 @@ export const PREDEFINED_LIST_TYPES = [
     name: "Cazamonstruos",
     shortName: "Antimonstruos",
     icon: "⌖",
-    description: "Prioriza Perforar, daño alto, heridas mortales y reglas Anti-Monstruo para derribar objetivos grandes.",
+    description: "Incluye cazadores de gran daño apoyados por pantallas y unidades de control para no regalar la mesa mientras derriba objetivos grandes.",
   },
   {
     id: "shooting",
     name: "Potencia de disparo",
     shortName: "Disparo",
     icon: "➶",
-    description: "Concentra ataques a distancia, alcance y apoyos para presionar al rival antes del combate.",
+    description: "Combina una base de disparo con pantallas, presencia de combate y control para proteger las piezas clave y disputar objetivos.",
   },
   {
     id: "control",
     name: "Control de mesa",
     shortName: "Control",
     icon: "◆",
-    description: "Favorece cuerpos numerosos, movilidad y puntuación de control para dominar objetivos y completar tácticas.",
+    description: "Combina cuerpos numerosos y movilidad con amenazas de daño suficientes para dominar objetivos y completar tácticas.",
   },
   {
     id: "resilient",
     name: "Yunque resistente",
     shortName: "Resistencia",
     icon: "⬟",
-    description: "Selecciona unidades con muchas heridas, buena salvación y wards para aguantar en los puntos clave.",
+    description: "Construye un núcleo resistente acompañado de movilidad y pegada para aguantar sin renunciar a puntuar ni responder al rival.",
   },
 ];
 
@@ -167,6 +167,102 @@ function utility(unit) {
     + (abilities.includes("return") || abilities.includes("replacement") ? 3 : 0);
 }
 
+function isRangedSpecialist(unit) {
+  const ranged = weaponOutput(unit, "ranged");
+  const melee = weaponOutput(unit, "melee");
+  return ranged >= 1.5 && ranged > melee * 1.15;
+}
+
+function isMonsterHunter(unit) {
+  const weapons = asArray(unit?.weapons);
+  const rulesText = searchableText([
+    weapons.map((weapon) => weapon.abilities),
+    unit?.abilities,
+  ]);
+  const ordinaryOutput = weapons.reduce(
+    (total, weapon) => total + weaponOutput({ ...unit, weapons: [weapon] }),
+    0
+  );
+  return rulesText.includes("anti-monster") ||
+    rulesText.includes("anti monster") ||
+    antiMonsterOutput(unit) > ordinaryOutput * 1.35;
+}
+
+function isScreen(unit) {
+  const models = unitModels(unit);
+  const points = Number(unit?.points) || 0;
+  const keywords = keywordText(unit);
+  return !unit?.rules?.hero &&
+    !unit?.rules?.monster &&
+    !keywords.includes("monster") &&
+    models >= 5 &&
+    points / models <= 32 &&
+    (!isRangedSpecialist(unit) || points / models <= 18);
+}
+
+function isMobileScorer(unit) {
+  const move = profileNumber(unit?.profile?.move ?? unit?.move);
+  return move >= 8 || keywordText(unit).includes("fly");
+}
+
+function isCombatThreat(unit) {
+  return weaponOutput(unit, "melee") >= Math.max(2, weaponOutput(unit, "ranged") * 0.65);
+}
+
+function isDurableUnit(unit) {
+  return durability(unit) / Math.max(60, Number(unit?.points) || 0) >= 0.09;
+}
+
+export function classifyPresetUnit(unit) {
+  return {
+    screen: isScreen(unit),
+    ranged: isRangedSpecialist(unit),
+    hunter: isMonsterHunter(unit),
+    mobile: isMobileScorer(unit),
+    combat: isCombatThreat(unit),
+    durable: isDurableUnit(unit),
+  };
+}
+
+const BALANCED_ROLE_ROTATIONS = {
+  "anti-monsters": ["screen", "hunter", "screen", "combat", "hunter", "mobile"],
+  shooting: ["screen", "ranged", "screen", "combat", "ranged", "mobile"],
+  control: ["screen", "combat", "mobile", "durable", "combat", "screen"],
+  resilient: ["durable", "combat", "mobile", "screen", "durable", "combat"],
+};
+
+function selectedCoreUnits(list) {
+  return asArray(list?.regiments).flatMap((regiment) => asArray(regiment?.units));
+}
+
+function roleForNextUnit(list, typeId) {
+  const rotation = BALANCED_ROLE_ROTATIONS[typeId];
+  if (!rotation) return null;
+  return rotation[selectedCoreUnits(list).length % rotation.length];
+}
+
+function balancedCandidateScore(unit, list, typeId, desiredRole = null) {
+  const base = scoreUnitForPreset(unit, typeId);
+  if (typeId === "meta") return base;
+
+  const roles = classifyPresetUnit(unit);
+  const selected = selectedCoreUnits(list);
+  const duplicateCount = selected.filter((item) => item.id === unit.id).length;
+  const roleMatch = desiredRole && roles[desiredRole];
+  const specialistRole = typeId === "shooting" ? "ranged"
+    : typeId === "anti-monsters" ? "hunter"
+      : null;
+  const specialistCount = specialistRole
+    ? selected.filter((item) => classifyPresetUnit(item)[specialistRole]).length
+    : 0;
+  const specialistSaturated = specialistRole && roles[specialistRole] &&
+    specialistCount >= Math.ceil(Math.max(1, selected.length) * 0.5);
+
+  return base * (roleMatch ? 3.2 : 1)
+    * (specialistSaturated ? 0.28 : 1)
+    * Math.pow(0.62, duplicateCount);
+}
+
 export function scoreUnitForPreset(unit, typeId) {
   const points = Math.max(60, Number(unit?.points) || 0);
   const melee = weaponOutput(unit, "melee");
@@ -224,8 +320,11 @@ function selectLeaders(list, typeId, remainingPoints) {
     .sort((left, right) => {
       const leftBonus = left.rules?.unique ? 0 : 0.35;
       const rightBonus = right.rules?.unique ? 0 : 0.35;
-      return scoreUnitForPreset(right, typeId) + rightBonus
-        - scoreUnitForPreset(left, typeId) - leftBonus;
+      const selectedLeaders = list.regiments.map((regiment) => regiment.hero);
+      const leftDuplicates = selectedLeaders.filter((unit) => unit.id === left.id).length;
+      const rightDuplicates = selectedLeaders.filter((unit) => unit.id === right.id).length;
+      return (scoreUnitForPreset(right, typeId) + rightBonus) * Math.pow(0.7, rightDuplicates)
+        - (scoreUnitForPreset(left, typeId) + leftBonus) * Math.pow(0.7, leftDuplicates);
     });
 }
 
@@ -278,11 +377,17 @@ function addRegiments(list, faction, typeId) {
     const slotLimit = getRegimentUnitLimit(regimentIndex);
     while (regiment.units.filter(countsTowardRegimentLimit).length < slotLimit) {
       const remaining = list.pointsLimit - calculateArmyPoints(list);
+      const desiredRole = roleForNextUnit(list, typeId);
       const candidates = asArray(faction.units)
         .filter((unit) => !unit.rules?.hero && Number(unit.points) > 0)
         .filter((unit) => Number(unit.points) <= remaining)
         .filter((unit) => canUnitJoinRegiment({ list, regiment, unit }))
-        .sort((left, right) => scoreUnitForPreset(right, typeId) - scoreUnitForPreset(left, typeId));
+        .filter((unit) => typeId === "meta" ||
+          selectedCoreUnits(list).filter((selected) => selected.id === unit.id).length < 2)
+        .sort((left, right) =>
+          balancedCandidateScore(right, list, typeId, desiredRole)
+          - balancedCandidateScore(left, list, typeId, desiredRole)
+        );
       const selected = candidates[0];
       if (!selected) break;
       regiment.units.push(cloneUnit(selected));
@@ -300,18 +405,81 @@ function reinforceCoreUnits(list, typeId) {
   const candidates = list.regiments
     .flatMap((regiment) => regiment.units)
     .filter((unit) => unit.rules?.canBeReinforced !== false && !unit.reinforced)
-    .sort((left, right) => scoreUnitForPreset(right, typeId) - scoreUnitForPreset(left, typeId));
+    .sort((left, right) => {
+      if (typeId === "meta") {
+        return scoreUnitForPreset(right, typeId) - scoreUnitForPreset(left, typeId);
+      }
+      const desiredRole = roleForNextUnit(list, typeId);
+      return balancedCandidateScore(right, list, typeId, desiredRole)
+        - balancedCandidateScore(left, list, typeId, desiredRole);
+    });
 
   candidates.forEach((unit) => {
     const remaining = list.pointsLimit - calculateArmyPoints(list);
-    if (Number(unit.points) > 0 && Number(unit.points) <= remaining) {
+    const projectedPoints = calculateArmyPoints(list) + Number(unit.points);
+    const specialistRole = typeId === "shooting" ? "ranged"
+      : typeId === "anti-monsters" ? "hunter"
+        : null;
+    const specialistPoints = specialistRole
+      ? selectedCoreUnits(list).reduce((total, selected) => {
+        if (!classifyPresetUnit(selected)[specialistRole]) return total;
+        return total + Number(selected.points || 0) * (selected.reinforced ? 2 : 1);
+      }, 0)
+      : 0;
+    const projectedSpecialistPoints = specialistPoints + (
+      specialistRole && classifyPresetUnit(unit)[specialistRole]
+        ? Number(unit.points || 0)
+        : 0
+    );
+    const withinSpecialistCap = !specialistRole ||
+      projectedSpecialistPoints / Math.max(1, projectedPoints) <= 0.58;
+
+    if (
+      Number(unit.points) > 0 &&
+      Number(unit.points) <= remaining &&
+      withinSpecialistCap
+    ) {
       unit.reinforced = true;
     }
   });
 }
 
+export function getPredefinedComposition(list, typeId = list?.preset?.id) {
+  const units = selectedCoreUnits(list ?? {});
+  const totalPoints = Math.max(1, calculateArmyPoints(list));
+  const roleCounts = units.reduce((counts, unit) => {
+    const roles = classifyPresetUnit(unit);
+    Object.entries(roles).forEach(([role, matches]) => {
+      if (matches) counts[role] += 1;
+    });
+    return counts;
+  }, { screen: 0, ranged: 0, hunter: 0, mobile: 0, combat: 0, durable: 0 });
+  const specialistRole = typeId === "shooting" ? "ranged"
+    : typeId === "anti-monsters" ? "hunter"
+      : null;
+  const specialistPoints = specialistRole
+    ? units.reduce((total, unit) => total + (
+      classifyPresetUnit(unit)[specialistRole]
+        ? Number(unit.points || 0) * (unit.reinforced ? 2 : 1)
+        : 0
+    ), 0)
+    : 0;
+
+  return {
+    ...roleCounts,
+    coreUnits: units.length,
+    specialistShare: specialistRole ? specialistPoints / totalPoints : 0,
+  };
+}
+
 export function createPredefinedArmyList({ faction, typeId = "meta" }) {
   if (!faction || asArray(faction.units).length === 0) return null;
+  if (
+    typeId === "shooting" &&
+    !asArray(faction.units).some((unit) => !unit.rules?.hero && isRangedSpecialist(unit))
+  ) {
+    return null;
+  }
   const type = PREDEFINED_LIST_TYPES.find((item) => item.id === typeId)
     ?? PREDEFINED_LIST_TYPES[0];
   const alliance = alliances.find((item) => item.id === faction.alliance) ?? {
@@ -357,5 +525,6 @@ export function getPredefinedListSummary(faction, typeId) {
     points: calculateArmyPoints(list),
     regiments: list.regiments.length,
     units: list.regiments.reduce((total, regiment) => total + 1 + regiment.units.length, 0),
+    composition: getPredefinedComposition(list, typeId),
   };
 }
