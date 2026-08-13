@@ -265,6 +265,7 @@ function serializeList(list) {
       .filter(Boolean),
     createdAt: list.createdAt,
     updatedAt: list.updatedAt,
+    preset: list.preset ?? null,
   };
 }
 
@@ -382,6 +383,7 @@ function restoreList(savedList) {
       .filter(Boolean),
     createdAt: savedList.createdAt ?? Date.now(),
     updatedAt: savedList.updatedAt ?? savedList.createdAt ?? Date.now(),
+    preset: savedList.preset ?? null,
   };
 }
 

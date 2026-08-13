@@ -1,6 +1,7 @@
 import MainNav from "../components/MainNav";
 
 function Home({
+  onPredefinedLists,
   onNewList,
   onMyLists,
   onSettings,
@@ -38,20 +39,11 @@ function Home({
         <div className="aos-home__actions">
           <button
             type="button"
-            onClick={onNewList}
+            onClick={onPredefinedLists}
             className="aos-primary-action"
           >
-            <span aria-hidden="true">＋</span>
-            Nueva lista
-          </button>
-
-          <button
-            type="button"
-            onClick={onMyLists}
-            className="aos-secondary-action"
-          >
-            <span aria-hidden="true">▤</span>
-            Mis listas
+            <span aria-hidden="true">★</span>
+            Crear lista predefinida
           </button>
         </div>
 

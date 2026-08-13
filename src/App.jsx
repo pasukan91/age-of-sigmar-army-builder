@@ -11,6 +11,7 @@ import UnitWarscroll from "./pages/unitWarscroll";
 import UnitConfig from "./pages/unitConfig";
 import RuleWarscroll from "./pages/RuleWarscroll";
 import Settings from "./pages/Settings";
+import PredefinedLists from "./pages/PredefinedLists";
 import ReferenceOverlay from "./components/ReferenceOverlay";
 
 import {
@@ -1955,6 +1956,22 @@ function App() {
     navigate("settings", { listId: null });
   }
 
+  function openPredefinedLists() {
+    navigate("predefined", { listId: null });
+  }
+
+  function handleCreatePredefinedList(newList) {
+    if (!newList) return;
+
+    setLists((previousLists) => [...previousLists, newList]);
+    setCurrentList(newList);
+    setSelectedUnit(null);
+    setUnitEditor(null);
+    resetSelector();
+    setBuilderSection("army");
+    navigate("builder", { listId: newList.id, resetToLists: true });
+  }
+
   /*
    * =====================================================
    * PÁGINAS
@@ -1962,6 +1979,14 @@ function App() {
    */
 
   switch (page) {
+    case "predefined":
+      return (
+        <PredefinedLists
+          onBack={goBack}
+          onCreate={handleCreatePredefinedList}
+        />
+      );
+
     case "lists":
       return (
         <MyLists
@@ -2297,6 +2322,7 @@ function App() {
     default:
       return (
         <Home
+          onPredefinedLists={openPredefinedLists}
           onNewList={startNewList}
           onMyLists={openLists}
           onSettings={openSettings}
@@ -2316,6 +2342,7 @@ function getInitialRoute(pathname) {
   if (listId) return { page: "builder", listId };
   if (pathname === "/listas") return { page: "lists", listId: null };
   if (pathname === "/ajustes") return { page: "settings", listId: null };
+  if (pathname === "/predefinidas") return { page: "predefined", listId: null };
   if (pathname === "/nueva/alianza") return { page: "alliance", listId: null };
   if (pathname === "/nueva/faccion") return { page: "faction", listId: null };
   if (pathname === "/nueva/configuracion") return { page: "config", listId: null };
@@ -2331,6 +2358,7 @@ function getPagePath(page, listId = null) {
     home: "/",
     lists: "/listas",
     settings: "/ajustes",
+    predefined: "/predefinidas",
     alliance: "/nueva/alianza",
     faction: "/nueva/faccion",
     config: "/nueva/configuracion",
