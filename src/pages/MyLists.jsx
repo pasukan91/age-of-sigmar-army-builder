@@ -3,6 +3,7 @@ import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
 import TrashIcon from "../components/TrashIcon";
 import { calculateArmyPoints } from "../utils/armyPoints";
+import { validateArmyList } from "../utils/armyValidation";
 import {
   getFactionArtwork,
   getFactionArtworkPosition,
@@ -16,6 +17,7 @@ function MyLists({
   goBack,
   onLists,
   onCreate,
+  onCreatePredefined,
   onSettings,
   deletedList,
   onUndoDelete,
@@ -55,9 +57,13 @@ function MyLists({
 
         {lists.length === 0 ? (
           <div className="aos-empty-message aos-empty-message--actionable">
-            <p>Aún no tienes listas creadas.</p>
-            <button type="button" className="aos-primary-action" onClick={onCreate}>
-              Crear mi primera lista
+            <strong>Empieza tu primer ejército</strong>
+            <p>Una plantilla te da una composición completa que después puedes editar.</p>
+            <button type="button" className="aos-primary-action" onClick={onCreatePredefined}>
+              Crear lista predefinida
+            </button>
+            <button type="button" className="aos-secondary-action" onClick={onCreate}>
+              Empezar desde cero
             </button>
           </div>
         ) : (
@@ -69,6 +75,16 @@ function MyLists({
               )
               .map((list) => {
                 const artwork = getFactionArtwork(list.faction);
+                const validation = validateArmyList(list);
+                const unitCount = (list.regiments ?? []).reduce(
+                  (total, regiment) => total + 1 + (regiment.units?.length ?? 0),
+                  0
+                ) + (list.regimentsOfRenown ?? []).reduce(
+                  (total, regiment) => total + (regiment.organisation?.length ?? 0),
+                  0
+                );
+                const regimentCount = (list.regiments?.length ?? 0)
+                  + (list.regimentsOfRenown?.length ?? 0);
 
                 return (
                   <article
@@ -95,6 +111,17 @@ function MyLists({
                         </small>
 
                         <strong>{list.name}</strong>
+                        <span className="aos-list-card__meta">
+                          <span className={`aos-list-status${validation.errors.length > 0 ? " is-error" : validation.warnings.length > 0 ? " is-warning" : " is-valid"}`}>
+                            {validation.errors.length > 0
+                              ? `${validation.errors.length} ${validation.errors.length === 1 ? "error" : "errores"}`
+                              : validation.warnings.length > 0
+                                ? `${validation.warnings.length} ${validation.warnings.length === 1 ? "pendiente" : "pendientes"}`
+                                : "Lista legal"}
+                          </span>
+                          <span>{regimentCount} reg. · {unitCount} unidades</span>
+                          {list.preset?.name && <span>Plantilla {list.preset.name}</span>}
+                        </span>
                         <span className="aos-list-card__updated">
                           Actualizada {formatSavedDate(list.updatedAt)}
                         </span>

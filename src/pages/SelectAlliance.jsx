@@ -1,5 +1,6 @@
 import alliances from "../data/alliances";
 import ChevronIcon from "../components/ChevronIcon";
+import StepProgress from "../components/StepProgress";
 
 import "../styles/aos-app.css";
 
@@ -24,7 +25,11 @@ function SelectAlliance({
       />
 
       <section className="aos-selection-content">
-        <p className="aos-selection-step">Paso 1 de 4</p>
+        <StepProgress
+          steps={["Alianza", "Facción", "Tipo", "Detalles"]}
+          current={1}
+          variant="dark"
+        />
         <h2 className="aos-selection-heading">
           Selecciona una Gran Alianza
         </h2>

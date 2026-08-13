@@ -55,31 +55,41 @@ function RenownSection({ available, selected, onAdd, onRemove, onView }) {
         </article>
       ))}
 
-      {available.map((regiment) => (
-        <article className="aos-renown-card" key={regiment.id}>
-          <div>
-            <h3>{regiment.name}</h3>
-            <p>{formatOrganisation(regiment)}</p>
+      {available.length > 0 && (
+        <details className="aos-renown-catalogue">
+          <summary>
+            <span>Explorar regimientos disponibles</span>
+            <small>{available.length} opciones</small>
+          </summary>
+          <div className="aos-renown-catalogue__content">
+            {available.map((regiment) => (
+              <article className="aos-renown-card" key={regiment.id}>
+                <div>
+                  <h3>{regiment.name}</h3>
+                  <p>{formatOrganisation(regiment)}</p>
+                </div>
+                <div className="aos-renown-card__actions">
+                  <strong>{regiment.points} pts</strong>
+                  <button
+                    type="button"
+                    className="aos-renown-card__view"
+                    onClick={() => onView?.(regiment)}
+                  >
+                    Consultar
+                  </button>
+                  <button
+                    type="button"
+                    disabled={selectedIds.has(regiment.id) || limitReached}
+                    onClick={() => onAdd(regiment)}
+                  >
+                    {selectedIds.has(regiment.id) ? "Incluido" : "Añadir"}
+                  </button>
+                </div>
+              </article>
+            ))}
           </div>
-          <div className="aos-renown-card__actions">
-            <strong>{regiment.points} pts</strong>
-            <button
-              type="button"
-              className="aos-renown-card__view"
-              onClick={() => onView?.(regiment)}
-            >
-              Consultar
-            </button>
-            <button
-              type="button"
-              disabled={selectedIds.has(regiment.id) || limitReached}
-              onClick={() => onAdd(regiment)}
-            >
-              {selectedIds.has(regiment.id) ? "Incluido" : "Añadir"}
-            </button>
-          </div>
-        </article>
-      ))}
+        </details>
+      )}
     </section>
   );
 }

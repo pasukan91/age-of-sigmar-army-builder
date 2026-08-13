@@ -25,7 +25,7 @@ function FormattedText({ text }) {
   );
 }
 
-function AbilityCard({ ability, defaultOpen = true, context = null }) {
+function AbilityCard({ ability, defaultOpen = false, context = null }) {
   const timing = getAbilityTiming(ability);
   const tone = getAbilityPhaseTone(ability);
   const { introduction, sections } = parseAbilityDescription(ability.description);

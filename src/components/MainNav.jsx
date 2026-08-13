@@ -1,8 +1,8 @@
 function MainNav({ active, onLists, onCreate, onSettings }) {
   const items = [
-    { id: "lists", label: "Mis listas", icon: "☰", onClick: onLists },
-    { id: "create", label: "Crear", icon: "+", onClick: onCreate },
-    { id: "settings", label: "Ajustes", icon: "⚙", onClick: onSettings },
+    { id: "lists", label: "Mis listas", icon: "▤", onClick: onLists },
+    { id: "create", label: "Nueva lista", icon: "+", onClick: onCreate },
+    { id: "settings", label: "Ayuda", icon: "i", onClick: onSettings },
   ];
 
   return (

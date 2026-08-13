@@ -1,4 +1,6 @@
 import BackButton from "../components/BackButton";
+import ContextNote from "../components/ContextNote";
+import StepProgress from "../components/StepProgress";
 
 import {
   createArmyList,
@@ -10,8 +12,11 @@ function NewListConfig({
   setLists,
   setCurrentList,
   setPage,
+  onListCreated,
   onBack,
 }) {
+  const suggestedName = `${army.faction?.name ?? "Age of Sigmar"} · ${army.points} pts`;
+
   function handleCreateList() {
     if (!army.faction) {
       window.alert(
@@ -24,7 +29,7 @@ function NewListConfig({
     const newList = createArmyList({
       name:
         army.name.trim() ||
-        "Nueva Lista",
+        suggestedName,
 
       faction: army.faction,
       alliance: army.alliance,
@@ -38,6 +43,7 @@ function NewListConfig({
     ]);
 
     setCurrentList(newList);
+    onListCreated?.();
     setPage("builder", { listId: newList.id, resetToLists: true });
   }
 
@@ -59,7 +65,10 @@ function NewListConfig({
 
       <div className="aos-screen-content">
         <header className="aos-form-intro">
-          <p className="aos-selection-step aos-selection-step--light">Paso 4 de 4</p>
+          <StepProgress
+            steps={["Alianza", "Facción", "Tipo", "Detalles"]}
+            current={4}
+          />
           <p className="aos-kicker">
             Storm Forge
           </p>
@@ -69,6 +78,11 @@ function NewListConfig({
               "Selecciona una facción"}
           </h2>
         </header>
+
+        <ContextNote title="Último paso">
+          Ponle un nombre reconocible y elige el tamaño de partida. Después podrás
+          añadir regimientos, unidades y reglas desde el constructor.
+        </ContextNote>
 
         <section className="aos-panel aos-form-panel">
           <div className="aos-new-list-summary" aria-label="Tipo de ejército elegido">
@@ -85,7 +99,7 @@ function NewListConfig({
               autoFocus
               type="text"
               value={army.name}
-              placeholder="Nueva Lista"
+              placeholder={suggestedName}
               onChange={(event) =>
                 setArmy((previousArmy) => ({
                   ...previousArmy,
@@ -94,6 +108,9 @@ function NewListConfig({
               }
               className="aos-field__control"
             />
+            <small className="aos-field__hint">
+              Si lo dejas vacío, usaremos “{suggestedName}”.
+            </small>
           </label>
 
           <label className="aos-field">

@@ -1,9 +1,12 @@
-import { useState } from "react";
 import ChevronIcon from "../ChevronIcon";
 
-function ArmyValidationPanel({ validation, onNavigateIssue }) {
+function ArmyValidationPanel({
+  validation,
+  onNavigateIssue,
+  expanded = false,
+  onExpandedChange,
+}) {
   const { errors = [], warnings = [] } = validation ?? {};
-  const [expanded, setExpanded] = useState(false);
   const hasIssues = errors.length > 0 || warnings.length > 0;
 
   return (
@@ -16,7 +19,7 @@ function ArmyValidationPanel({ validation, onNavigateIssue }) {
         <button
           type="button"
           className="aos-validation-panel__summary"
-          onClick={() => hasIssues && setExpanded((current) => !current)}
+          onClick={() => hasIssues && onExpandedChange?.(!expanded)}
           aria-expanded={hasIssues ? expanded : undefined}
           aria-controls={hasIssues ? "army-validation-issues" : undefined}
         >
@@ -26,7 +29,11 @@ function ArmyValidationPanel({ validation, onNavigateIssue }) {
           <span className="aos-validation-panel__copy">
           <span className="aos-eyebrow">Comprobación de ejército</span>
           <strong id="validation-title" className="aos-validation-panel__title">
-            {errors.length === 0 ? "Lista legal" : `${errors.length} ${errors.length === 1 ? "error" : "errores"}`}
+            {errors.length === 0
+              ? warnings.length > 0
+                ? `Lista legal · ${warnings.length} ${warnings.length === 1 ? "pendiente" : "pendientes"}`
+                : "Lista legal"
+              : `${errors.length} ${errors.length === 1 ? "error" : "errores"}${warnings.length > 0 ? ` · ${warnings.length} ${warnings.length === 1 ? "pendiente" : "pendientes"}` : ""}`}
           </strong>
           <span className="aos-validation-panel__description">
             {errors.length === 0

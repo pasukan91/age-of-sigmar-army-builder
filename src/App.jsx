@@ -46,6 +46,21 @@ const INITIAL_ARMY = {
   name: "",
 };
 
+const PAGE_TITLES = {
+  home: "Inicio",
+  lists: "Mis listas",
+  predefined: "Listas predefinidas",
+  settings: "Ayuda y datos",
+  alliance: "Elige alianza",
+  faction: "Elige facción",
+  config: "Nueva lista",
+  builder: "Constructor",
+  selector: "Seleccionar opción",
+  warscroll: "Ficha de unidad",
+  unitConfig: "Configurar unidad",
+  ruleWarscroll: "Referencia de reglas",
+};
+
 function appendBattleLogEntry(list, event) {
   return [
     ...(list?.battleLog ?? []),
@@ -72,17 +87,19 @@ function App() {
   const [initialRoute] = useState(() =>
     getInitialRoute(window.location.pathname)
   );
+  const [initialEntryKey] = useState(() => createId("nav"));
 
   const [lists, setLists] =
     useState(() => loadArmyLists());
 
   const [navigation, setNavigation] =
-    useState({
+    useState(() => ({
       page: initialRoute.page,
       history: [],
-    });
+      entryKey: initialEntryKey,
+    }));
 
-  const { page, history } = navigation;
+  const { page, history, entryKey } = navigation;
   const scrollPositions = useRef(new Map());
 
   const [storageStatus, setStorageStatus] =
@@ -113,17 +130,23 @@ function App() {
 
   useEffect(() => {
     window.history.replaceState(
-      { page: initialRoute.page, depth: 0, listId: initialRoute.listId ?? null },
+      {
+        page: initialRoute.page,
+        depth: 0,
+        listId: initialRoute.listId ?? null,
+        entryKey: initialEntryKey,
+      },
       "",
       getPagePath(initialRoute.page, initialRoute.listId)
     );
-  }, [initialRoute]);
+  }, [initialEntryKey, initialRoute]);
 
   useEffect(() => {
     const handlePopState = (event) => {
       const nextPage = event.state?.page ?? getInitialRoute(window.location.pathname).page;
       const nextDepth = Math.max(0, Number(event.state?.depth) || 0);
       const listId = event.state?.listId ?? getListIdFromPath(window.location.pathname);
+      const nextEntryKey = event.state?.entryKey ?? `${nextPage}-${nextDepth}-${listId ?? "root"}`;
 
       if (listId) {
         const routedList = lists.find((list) => list.id === listId);
@@ -133,6 +156,7 @@ function App() {
       setNavigation((previous) => ({
         page: nextPage,
         history: previous.history.slice(0, nextDepth),
+        entryKey: nextEntryKey,
       }));
     };
 
@@ -141,16 +165,24 @@ function App() {
   }, [lists]);
 
   useEffect(() => {
+    document.title = `${PAGE_TITLES[page] ?? "Storm Forge"} · Storm Forge`;
+
     const frame = window.requestAnimationFrame(() => {
       window.scrollTo({
-        top: scrollPositions.current.get(page) ?? 0,
+        top: scrollPositions.current.get(entryKey) ?? 0,
         left: 0,
         behavior: "auto",
       });
+
+      const pageHeading = document.querySelector("main h1");
+      if (pageHeading instanceof HTMLElement) {
+        pageHeading.tabIndex = -1;
+        pageHeading.focus({ preventScroll: true });
+      }
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [page]);
+  }, [entryKey, page]);
 
   const [selectedUnit, setSelectedUnit] =
     useState(null);
@@ -202,17 +234,19 @@ function App() {
       : currentList?.id ?? null;
 
     if (options.resetToLists === true) {
+      const listsEntryKey = createId("nav");
+      const nextEntryKey = createId("nav");
       window.history.replaceState(
-        { page: "lists", depth: 0, listId: null },
+        { page: "lists", depth: 0, listId: null, entryKey: listsEntryKey },
         "",
         "/listas"
       );
       window.history.pushState(
-        { page: nextPage, depth: 1, listId },
+        { page: nextPage, depth: 1, listId, entryKey: nextEntryKey },
         "",
         getPagePath(nextPage, listId)
       );
-      setNavigation({ page: nextPage, history: ["lists"] });
+      setNavigation({ page: nextPage, history: ["lists"], entryKey: nextEntryKey });
       return;
     }
 
@@ -220,7 +254,7 @@ function App() {
       return;
     }
 
-    scrollPositions.current.set(page, window.scrollY);
+    scrollPositions.current.set(entryKey, window.scrollY);
 
     const nextHistory = replace
       ? history
@@ -229,6 +263,7 @@ function App() {
       page: nextPage,
       depth: nextHistory.length,
       listId,
+      entryKey: createId("nav"),
     };
     const path = getPagePath(nextPage, listId);
 
@@ -241,11 +276,12 @@ function App() {
     setNavigation({
       page: nextPage,
       history: nextHistory,
+      entryKey: browserState.entryKey,
     });
   }
 
   function goBack() {
-    scrollPositions.current.set(page, window.scrollY);
+    scrollPositions.current.set(entryKey, window.scrollY);
 
     if (history.length === 0) {
       navigate("home", { replace: true });
@@ -1994,6 +2030,7 @@ function App() {
           storageStatus={storageStatus}
           onOpenList={(list) => {
             setCurrentList(list);
+            setBuilderSection("army");
             setSelectedUnit(null);
             setUnitEditor(null);
             resetSelector();
@@ -2006,6 +2043,7 @@ function App() {
           goBack={goBack}
           onLists={openLists}
           onCreate={startNewList}
+          onCreatePredefined={openPredefinedLists}
           onSettings={openSettings}
         />
       );
@@ -2051,6 +2089,7 @@ function App() {
           setCurrentList={
             setCurrentList
           }
+          onListCreated={() => setBuilderSection("units")}
           onBack={goBack}
 
           /*
@@ -2066,23 +2105,14 @@ function App() {
     case "builder":
       if (!currentList) {
         return (
-          <main
-            style={
-              styles.emptyPage
-            }
-          >
-            <p>
-              No hay ninguna lista
-              abierta.
-            </p>
-
-            <button
-              type="button"
-              onClick={goBack}
-            >
-              Volver
-            </button>
-          </main>
+          <RouteRecovery
+            title="No encontramos esta lista"
+            description="Puede haberse eliminado o no estar disponible en este dispositivo."
+            primaryLabel="Ir a Mis listas"
+            onPrimary={openLists}
+            secondaryLabel="Crear lista predefinida"
+            onSecondary={openPredefinedLists}
+          />
         );
       }
 
@@ -2224,23 +2254,14 @@ function App() {
     case "warscroll":
       if (!selectedUnit) {
         return (
-          <main
-            style={
-              styles.emptyPage
-            }
-          >
-            <p>
-              No hay ninguna unidad
-              seleccionada.
-            </p>
-
-            <button
-              type="button"
-              onClick={goBack}
-            >
-              Volver
-            </button>
-          </main>
+          <RouteRecovery
+            title="Esta unidad ya no está disponible"
+            description="Vuelve al constructor y selecciona otra unidad."
+            primaryLabel="Volver a la lista"
+            onPrimary={goBack}
+            secondaryLabel="Ir a Mis listas"
+            onSecondary={openLists}
+          />
         );
       }
 
@@ -2264,23 +2285,14 @@ function App() {
     case "unitConfig":
       if (!selectedUnit) {
         return (
-          <main
-            style={
-              styles.emptyPage
-            }
-          >
-            <p>
-              No hay ninguna unidad
-              seleccionada.
-            </p>
-
-            <button
-              type="button"
-              onClick={goBack}
-            >
-              Volver
-            </button>
-          </main>
+          <RouteRecovery
+            title="No hay una unidad para configurar"
+            description="La selección anterior ya no está disponible."
+            primaryLabel="Volver a la lista"
+            onPrimary={goBack}
+            secondaryLabel="Ir a Mis listas"
+            onSecondary={openLists}
+          />
         );
       }
 
@@ -2331,6 +2343,31 @@ function App() {
   }
 }
 
+function RouteRecovery({
+  title,
+  description,
+  primaryLabel,
+  onPrimary,
+  secondaryLabel,
+  onSecondary,
+}) {
+  return (
+    <main className="aos-shell aos-route-recovery">
+      <section className="aos-empty-message aos-empty-message--actionable">
+        <span className="aos-route-recovery__icon" aria-hidden="true">!</span>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <button type="button" className="aos-primary-action" onClick={onPrimary}>
+          {primaryLabel}
+        </button>
+        <button type="button" className="aos-secondary-action" onClick={onSecondary}>
+          {secondaryLabel}
+        </button>
+      </section>
+    </main>
+  );
+}
+
 function getListIdFromPath(pathname) {
   const match = String(pathname ?? "").match(/^\/listas\/([^/]+)/);
   return match ? decodeURIComponent(match[1]) : null;
@@ -2368,15 +2405,5 @@ function getPagePath(page, listId = null) {
     unitConfig: `${listBase}/unidad/configurar`,
   }[page] ?? "/";
 }
-
-const styles = {
-  emptyPage: {
-    minHeight: "100vh",
-    padding: 20,
-    backgroundColor:
-      "#eeeeee",
-    color: "#111111",
-  },
-};
 
 export default App;

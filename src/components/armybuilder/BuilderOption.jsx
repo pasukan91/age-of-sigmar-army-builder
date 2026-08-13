@@ -4,14 +4,21 @@ function BuilderOption({
   id,
   title,
   value,
+  description,
   image,
   onClick,
+  required = false,
+  recommended = false,
   disabled = false,
 }) {
-  const hasValue =
-    value &&
-    value !== "No seleccionada" &&
-    value !== "No seleccionado";
+  const hasValue = Boolean(value) && !/^(no |ninguna)/i.test(String(value).trim());
+  const status = hasValue
+    ? "Elegido"
+    : required
+      ? "Obligatorio"
+      : recommended
+        ? "Recomendado"
+        : "Opcional";
 
   return (
     <div
@@ -84,29 +91,17 @@ function BuilderOption({
             minWidth: 0,
           }}
         >
-          <span
-            style={{
-              display: "block",
-
-              color: "#68666a",
-
-              fontSize: 11,
-              fontWeight: 900,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            {title}
+          <span className="aos-builder-option-card__heading">
+            <span>{title}</span>
+            <small className={hasValue ? "is-complete" : required ? "is-required" : ""}>
+              {status}
+            </small>
           </span>
 
           <strong
             style={{
               display: "block",
               marginTop: 5,
-
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
 
               fontFamily:
                 '"Oswald", "Arial Narrow", sans-serif',
@@ -117,6 +112,12 @@ function BuilderOption({
           >
             {value}
           </strong>
+
+          {description && (
+            <span className="aos-builder-option-card__description">
+              {description}
+            </span>
+          )}
         </div>
 
         <span

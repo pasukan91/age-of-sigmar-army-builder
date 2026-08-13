@@ -159,7 +159,11 @@ function RegimentSection({
     <section style={styles.section}>
       {regiments.length === 0 && (
         <div style={styles.emptyCard}>
-          No hay ningún regimiento.
+          <strong>Tu ejército todavía está vacío</strong>
+          <span>
+            Empieza añadiendo un regimiento. Primero elegirás su líder y después
+            podrás incorporar hasta cuatro unidades compatibles.
+          </span>
         </div>
       )}
 
@@ -214,21 +218,20 @@ function RegimentSection({
               (error) =>
                 error.regimentId === regiment.id
             );
+          const regimentPoints = getUnitPoints(regiment.hero)
+            + units.reduce((total, unit) => total + getUnitPoints(unit), 0);
 
           return (
-            <article
+            <details
               id={`regiment-${regiment.id}`}
               key={regiment.id}
               className="aos-regiment-card"
+              open={regimentIndex === 0 || regimentErrors.length > 0}
               style={
                 styles.regimentCard
               }
             >
-              <header
-                style={
-                  styles.regimentHeader
-                }
-              >
+              <summary className="aos-regiment-card__summary">
                 <div>
                   <h3
                     style={
@@ -252,6 +255,19 @@ function RegimentSection({
                       : ""}
                   </p>
                 </div>
+
+                <span className="aos-regiment-card__overview">
+                  {units.filter(countsTowardRegimentLimit).length}/{limit} unidades · {regimentPoints} pts
+                </span>
+              </summary>
+
+              <div className="aos-regiment-card__body">
+              <header
+                className="aos-regiment-card__actions"
+              >
+                <span>
+                  {availableSlots} {availableSlots === 1 ? "plaza disponible" : "plazas disponibles"}
+                </span>
 
                 <button
                   type="button"
@@ -356,7 +372,8 @@ function RegimentSection({
                     styles.emptyUnitCard
                   }
                 >
-                  Todavía no hay unidades.
+                  <strong>Este regimiento necesita unidades</strong>
+                  <span>Usa el botón inferior para ver solo las unidades que puede liderar {regiment.hero.name}.</span>
                 </div>
               )}
 
@@ -462,7 +479,8 @@ function RegimentSection({
                   ? "Regimiento completo"
                   : "+ Añadir unidad"}
               </button>
-            </article>
+              </div>
+            </details>
           );
         }
       )}
@@ -668,6 +686,8 @@ const styles = {
   },
 
   emptyCard: {
+    display: "grid",
+    gap: 7,
     padding: 18,
     marginBottom: 20,
     border: "1px dashed #aaa092",
@@ -814,9 +834,9 @@ const styles = {
 
   deleteUnitButton: {
     display: "grid",
-    width: 36,
-    height: 36,
-    minHeight: 36,
+    width: 44,
+    height: 44,
+    minHeight: 44,
     placeItems: "center",
     padding: 0,
     border: "1px solid #a40000",
@@ -828,10 +848,10 @@ const styles = {
 
   deleteRegimentButton: {
     display: "grid",
-    width: 36,
-    height: 36,
-    minHeight: 36,
-    flex: "0 0 36px",
+    width: 44,
+    height: 44,
+    minHeight: 44,
+    flex: "0 0 44px",
     placeItems: "center",
     padding: 0,
     border: "1px solid #a40000",
@@ -869,6 +889,8 @@ const styles = {
   },
 
   emptyUnitCard: {
+    display: "grid",
+    gap: 5,
     padding: 14,
     marginBottom: 10,
     border: "1px dashed #cccccc",

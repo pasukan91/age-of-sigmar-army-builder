@@ -1,0 +1,980 @@
+/* UX clarity layer — intentionally last in the cascade. */
+:root {
+  --aos-readable: #433d35;
+  --aos-subtle: #665f55;
+  --aos-focus: #f0c96c;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.aos-home,
+.aos-shell,
+.aos-page,
+.aos-selection-page,
+.aos-presets-page,
+.aos-builder-page {
+  min-height: 100dvh;
+}
+
+p,
+li,
+dd,
+.aos-option-card__profile,
+.aos-validation-panel__description {
+  text-wrap: pretty;
+}
+
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+.aos-screen-content,
+.aos-selection-content {
+  container-type: inline-size;
+}
+
+.aos-form-intro {
+  margin-bottom: 24px;
+}
+
+.aos-heading {
+  max-width: 760px;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.12;
+}
+
+.aos-kicker,
+.aos-field__label,
+.aos-selection-step {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.aos-primary-action,
+.aos-secondary-action {
+  min-height: 58px;
+  border-radius: 8px;
+  line-height: 1.2;
+}
+
+.aos-primary-action:focus-visible,
+.aos-secondary-action:focus-visible,
+.aos-builder-tabs button:focus-visible,
+.aos-main-nav button:focus-visible {
+  outline-color: var(--aos-focus);
+  outline-offset: 3px;
+}
+
+.aos-context-note {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border: 1px solid #c8b98f;
+  border-left: 4px solid #866e37;
+  border-radius: 8px;
+  color: var(--aos-readable);
+  background: linear-gradient(90deg, #f6eed8, #fffdf7);
+  box-shadow: 0 3px 12px rgba(47, 38, 28, 0.08);
+}
+
+.aos-context-note.is-success {
+  border-color: #9dae8e;
+  border-left-color: #526d4c;
+  background: linear-gradient(90deg, #eaf0e4, #fbfdf8);
+}
+
+.aos-context-note.is-warning {
+  border-color: #c99e91;
+  border-left-color: #8a4138;
+  background: linear-gradient(90deg, #f6e7e2, #fffaf8);
+}
+
+.aos-context-note__icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #75602f;
+  font-family: Georgia, serif;
+  font-weight: 900;
+}
+
+.aos-context-note.is-success .aos-context-note__icon { background: #526d4c; }
+.aos-context-note.is-warning .aos-context-note__icon { background: #8a4138; }
+.aos-context-note strong { display: block; margin-bottom: 2px; font-size: 15px; }
+.aos-context-note p { margin: 0; color: var(--aos-subtle); font-size: 14px; line-height: 1.5; }
+
+.aos-step-progress {
+  margin: 0 0 24px;
+}
+
+.aos-step-progress ol {
+  display: grid;
+  grid-template-columns: repeat(var(--step-count, 4), minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.aos-step-progress li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: #777066;
+  text-align: center;
+}
+
+.aos-step-progress li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 16px;
+  left: calc(50% + 18px);
+  width: calc(100% - 36px);
+  height: 2px;
+  background: #c8bfae;
+}
+
+.aos-step-progress__number {
+  position: relative;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #b8ae9f;
+  border-radius: 50%;
+  color: #655e55;
+  background: #f8f5ee;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.aos-step-progress__label {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aos-step-progress li.is-current { color: #59302c; }
+.aos-step-progress li.is-current .aos-step-progress__number {
+  border-color: #68403b;
+  color: #fff;
+  background: #68403b;
+  box-shadow: 0 0 0 4px rgba(104, 64, 59, 0.13);
+}
+.aos-step-progress li.is-complete { color: #4d6748; }
+.aos-step-progress li.is-complete .aos-step-progress__number {
+  border-color: #5c7455;
+  color: #fff;
+  background: #5c7455;
+}
+.aos-step-progress li.is-complete::after { background: #7d9175; }
+.aos-step-progress > p {
+  display: none;
+  margin: 0;
+  font-size: 13px;
+}
+
+.aos-step-progress--dark li { color: rgba(255,255,255,0.72); }
+.aos-step-progress--dark li:not(:last-child)::after { background: rgba(255,255,255,0.32); }
+.aos-step-progress--dark .aos-step-progress__number {
+  border-color: rgba(255,255,255,0.56);
+  color: #fff;
+  background: rgba(16,20,19,0.72);
+}
+.aos-step-progress--dark li.is-current { color: #fff; }
+.aos-step-progress--dark li.is-current .aos-step-progress__number {
+  border-color: #d6bb78;
+  color: #201b13;
+  background: #d6bb78;
+}
+.aos-step-progress--dark li.is-complete .aos-step-progress__number {
+  border-color: #91a986;
+  background: #58704f;
+}
+
+.aos-home__content {
+  padding-bottom: calc(102px + env(safe-area-inset-bottom));
+}
+
+.aos-home__copy {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.aos-home__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 0;
+  margin: 16px 0 0;
+  list-style: none;
+  color: #eee8dc;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.aos-home__benefits li { display: inline-flex; align-items: center; gap: 6px; }
+.aos-home__benefits span { color: #d2b96f; }
+.aos-home__manual-note { margin: 13px 0 0; color: #c6c0b5; font-size: 13px; line-height: 1.45; }
+.aos-home__private-note { margin-bottom: 0; }
+
+.aos-selector-tools {
+  position: sticky;
+  z-index: 5;
+  top: 82px;
+  margin: 0 0 20px;
+  padding: 12px;
+  border: 1px solid #c9beaa;
+  border-radius: 10px;
+  background: rgba(245, 241, 231, 0.97);
+  box-shadow: 0 8px 22px rgba(36, 29, 21, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.aos-selector-search {
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+  padding: 0 8px 0 12px;
+  border: 1px solid #aaa092;
+  border-radius: 8px;
+  color: #5c554c;
+  background: #fff;
+}
+
+.aos-selector-search > span:not(.aos-visually-hidden) { font-size: 24px; }
+.aos-selector-search input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: #29251f;
+  background: transparent;
+  font-size: 16px;
+}
+.aos-selector-search button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  color: #5f574d;
+  background: #eee8dc;
+  font-size: 24px;
+}
+.aos-selector-filters {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 10px 0 2px;
+  scrollbar-width: thin;
+}
+.aos-selector-filters button,
+.aos-preset-filters button {
+  min-height: 44px;
+  flex: 0 0 auto;
+  padding: 8px 13px;
+  border: 1px solid #aaa092;
+  border-radius: 999px;
+  color: #554e46;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+.aos-selector-filters button.is-active {
+  border-color: #5a3935;
+  color: #fff;
+  background: #5a3935;
+}
+.aos-selector-result-count { margin: 9px 2px 0; color: #655e55; font-size: 13px; font-weight: 700; }
+.aos-empty-message { display: grid; gap: 5px; border-radius: 9px; font-size: 14px; }
+
+.aos-builder-section-guide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 22px;
+  border-bottom: 1px solid #cbbfa9;
+  color: #302b25;
+  background: rgba(250, 248, 242, 0.94);
+}
+.aos-builder-section-guide__eyebrow {
+  display: block;
+  margin-bottom: 3px;
+  color: #725c30;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.aos-builder-section-guide h2 { margin: 0; font-family: Georgia, serif; font-size: 24px; line-height: 1.15; }
+.aos-builder-section-guide p { max-width: 650px; margin: 6px 0 0; color: #655e55; font-size: 14px; line-height: 1.5; }
+.aos-builder-section-guide__status {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid #b9ab8e;
+  border-radius: 999px;
+  color: #493f30;
+  background: #eee4cf;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.aos-builder-section-guide__status.is-army { color: #fff; background: #5d4c2c; }
+
+.aos-builder-preset-note {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  margin: 18px 16px 0;
+  padding: 14px;
+  border: 1px solid #c7b37c;
+  border-radius: 9px;
+  color: #453a27;
+  background: #f5ecd6;
+}
+.aos-builder-preset-note > span { color: #836d36; font-size: 27px; text-align: center; }
+.aos-builder-preset-note strong { font-size: 15px; }
+.aos-builder-preset-note p { margin: 3px 0 0; color: #665b49; font-size: 13px; line-height: 1.45; }
+
+.aos-builder-option-card__heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  color: #5f5950;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.aos-builder-option-card__heading small {
+  padding: 3px 6px;
+  border-radius: 999px;
+  color: #655e55;
+  background: #e5dfd4;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.aos-builder-option-card__heading small.is-complete { color: #fff; background: #58704f; }
+.aos-builder-option-card__heading small.is-required { color: #fff; background: #82433c; }
+.aos-builder-option-card__description {
+  display: block;
+  margin-top: 6px;
+  color: #716a60;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.aos-builder-option-card strong { white-space: normal !important; line-height: 1.25; }
+
+.aos-army-type-card__kind {
+  display: block;
+  color: #d8bd76;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aos-army-type-card__description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  line-height: 1.45;
+}
+
+.aos-army-type-card p.aos-army-type-card__description {
+  grid-column: auto;
+  margin: 5px 0 0;
+  color: #cfc9bf;
+  font-size: 13px;
+}
+
+article.aos-army-type-card {
+  cursor: default;
+}
+
+article.aos-army-type-card > div {
+  min-width: 0;
+}
+
+.aos-army-type-card__details {
+  margin-top: 8px;
+}
+
+.aos-army-type-card__details summary {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: #f0d892;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.aos-army-type-card__details p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.aos-army-type-card__details p small {
+  display: block;
+  margin-bottom: 5px;
+  color: #d8bd76;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aos-army-type-card__choose {
+  min-width: 96px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(240, 216, 146, 0.62);
+  border-radius: 8px;
+  color: #201a12;
+  background: #d9bd72;
+  font-weight: 900;
+}
+
+@media (max-width: 560px) {
+  article.aos-army-type-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aos-army-type-card__choose {
+    width: 100%;
+  }
+}
+
+.aos-regiment-unit-card button,
+.aos-icon-delete,
+.aos-list-card__delete,
+.aos-validation-panel__issues button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.aos-points-summary__icon.is-error {
+  color: #fff;
+  background: #8d332d;
+  box-shadow: 0 0 0 3px rgba(141, 51, 45, 0.2);
+}
+
+.aos-main-nav button { min-height: 58px; font-size: 12px; }
+.aos-main-nav button > span { font-size: 23px; }
+body .aos-builder-tabs button > small { font-size: 11px; letter-spacing: 0.03em; }
+body .aos-builder-tabs button { min-height: 60px; }
+
+.aos-option-card__profile { color: #5f584f; font-size: 14px; line-height: 1.55; }
+.aos-option-card__button { min-height: 46px; font-size: 15px; }
+.aos-preset-card__title-row p,
+.aos-preset-card__details span,
+.aos-preset-card__stats dt,
+.aos-preset-faction small { font-size: 11px; }
+.aos-preset-card__description { color: #5b544b; font-size: 15px; }
+.aos-presets-intro { color: #5e574e; font-size: 16px; }
+
+@media (max-width: 620px) {
+  .aos-step-progress__label { display: none; }
+  .aos-step-progress > p { display: block; margin-top: 9px; text-align: center; }
+  .aos-step-progress li:not(:last-child)::after { width: calc(100% - 34px); }
+  .aos-builder-section-guide { align-items: flex-start; padding: 15px 16px; }
+  .aos-builder-section-guide h2 { font-size: 20px; }
+  .aos-builder-section-guide p { font-size: 13px; }
+  .aos-builder-section-guide__status { display: none; }
+  .aos-builder-page { padding-bottom: calc(142px + env(safe-area-inset-bottom)); }
+  .aos-selector-tools { top: 76px; margin-inline: -4px; }
+  .aos-home__title { font-size: clamp(44px, 14vw, 65px); line-height: 0.98; }
+  .aos-home__copy { font-size: 16px; }
+}
+
+@media (max-width: 380px) {
+  .aos-screen-header,
+  .aos-topbar { grid-template-columns: 48px minmax(0, 1fr) 48px; padding-inline: 8px; }
+  .aos-screen-header__title,
+  .aos-topbar__title { font-size: 19px; }
+  .aos-home__benefits { display: grid; }
+  .aos-builder-section-guide p { display: none; }
+  .aos-builder-section-guide { min-height: 66px; align-items: center; }
+}
+
+/* Components introduced by the UX pass. */
+.aos-preset-card__preview {
+  margin: 0 0 16px;
+  border: 1px solid #cec2ad;
+  border-radius: 7px;
+  background: #fffdf8;
+}
+
+.aos-preset-card,
+.aos-preset-faction {
+  min-width: 0;
+}
+
+.aos-preset-card__preview summary {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  color: #594b31;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.aos-preset-card__preview pre {
+  max-height: 360px;
+  overflow: auto;
+  margin: 0;
+  padding: 14px;
+  border-top: 1px solid #ded4c2;
+  color: #3d3831;
+  background: #f6f1e7;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.aos-list-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.aos-list-card__meta > span {
+  padding: 3px 7px;
+  border: 1px solid rgba(113, 98, 73, 0.35);
+  border-radius: 999px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.aos-list-status.is-valid {
+  color: #ecf5e8;
+  background: rgba(70, 105, 64, 0.75);
+}
+
+.aos-list-status.is-warning {
+  color: #332711;
+  background: #dbc982;
+}
+
+.aos-list-status.is-error {
+  color: #fff;
+  background: #873a34;
+}
+
+.aos-empty-message--actionable .aos-secondary-action {
+  width: min(100%, 280px);
+  margin: 10px auto 0;
+}
+
+.aos-route-recovery {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #302b25;
+  background: #eee8dc;
+}
+
+.aos-route-recovery .aos-empty-message {
+  width: min(100%, 520px);
+  padding: 28px;
+  border: 1px solid #c9beaa;
+  background: #fffdf8;
+  box-shadow: 0 12px 34px rgba(47, 38, 28, 0.14);
+  text-align: center;
+}
+
+.aos-route-recovery h1 {
+  margin: 5px 0;
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 6vw, 38px);
+}
+
+.aos-route-recovery__icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  border-radius: 50%;
+  color: #fff;
+  background: #7c2d27;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.aos-renown-catalogue {
+  margin-top: 14px;
+  border: 1px solid #cbbfa9;
+  border-radius: 9px;
+  background: #f7f2e8;
+}
+
+.aos-renown-catalogue > summary {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  color: #40382e;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.aos-renown-catalogue > summary small {
+  color: #665f55;
+  font-size: 12px;
+}
+
+.aos-renown-catalogue__content {
+  display: grid;
+  gap: 12px;
+  padding: 0 12px 12px;
+}
+
+.aos-regiment-card {
+  overflow: hidden;
+}
+
+.aos-regiment-card__summary {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 12px;
+  margin: -16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.aos-regiment-card__summary::-webkit-details-marker {
+  display: none;
+}
+
+.aos-regiment-card__summary::after {
+  content: "⌄";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: center;
+  color: #6d572c;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.aos-regiment-card[open] .aos-regiment-card__summary {
+  margin-bottom: 0;
+  border-bottom: 1px solid #d4cec1;
+}
+
+.aos-regiment-card[open] .aos-regiment-card__summary::after {
+  transform: rotate(180deg);
+}
+
+.aos-regiment-card__overview {
+  grid-column: 1;
+  color: #665f55;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.aos-regiment-card__body {
+  padding-top: 14px;
+}
+
+.aos-regiment-card__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center !important;
+  margin-bottom: 12px;
+  color: #665f55;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Effective overrides for rules declared later in the legacy stylesheet. */
+:root {
+  --aos-focus: #5f120e;
+}
+
+.aos-selector-search:focus-within {
+  border-color: #5f120e;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #5f120e;
+}
+
+.aos-quick-search__field:focus-within,
+.aos-synergy-card__summary:focus-visible,
+.aos-config-option-trigger:focus-visible,
+.aos-field__control:focus-visible,
+.aos-option-card__button:focus-visible,
+.aos-preset-card summary:focus-visible {
+  outline: 3px solid #5f120e;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #fff;
+}
+
+.aos-selection-page button:focus-visible,
+.aos-home button:focus-visible,
+.aos-topbar button:focus-visible,
+.aos-builder-tabs button:focus-visible,
+.aos-builder-footer button:focus-visible {
+  outline: 3px solid #f0c96c;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #151916;
+}
+
+.aos-builder-tabs button:focus-visible,
+.aos-main-nav button:focus-visible {
+  outline-color: #f0c96c;
+}
+
+.aos-main-nav button {
+  min-height: 58px;
+  font-size: 12px;
+}
+
+body .aos-builder-tabs button {
+  min-height: 60px;
+}
+
+body .aos-builder-tabs button > small {
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.aos-icon-delete,
+.aos-list-card__delete,
+.aos-renown-card__actions button,
+.aos-regiment-unit-card button,
+.aos-command-counter button,
+.aos-fury-counter button,
+.aos-validation-panel__issues button,
+.aos-pwa-controls button,
+.aos-battle-log__actions button {
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+.aos-battle-log__actors button,
+.aos-battle-log__dice button,
+.aos-battle-log__round button,
+.aos-battle-log__save,
+.aos-battle-log__form input,
+.aos-battle-log__form select,
+.aos-initiative__tie button,
+.aos-initiative__result > button,
+.aos-battle-stats__rounds button,
+.aos-battle-stats__export,
+.aos-battle-stats__details > summary,
+.aos-damage-calculator__choice-row button,
+.aos-damage-calculator__header > button,
+.aos-damage-calculator__reset,
+.aos-weapon-profile__calculator,
+.aos-damage-calculator input,
+.aos-damage-calculator select {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.aos-battle-stats__rounds button span,
+.aos-damage-calculator__save small,
+.aos-damage-calculator__total small,
+.aos-battle-log__actors button,
+.aos-battle-log__actions button {
+  font-size: 12px;
+}
+
+.aos-initiative__result > button,
+.aos-battle-stats__export,
+.aos-battle-stats__details > summary,
+.aos-damage-calculator legend,
+.aos-damage-calculator__result-row li,
+.aos-damage-calculator__results > header,
+.aos-battle-log label > span,
+.aos-battle-log__turn-label,
+.aos-battle-log__event-picker > span {
+  font-size: 12px;
+}
+
+.aos-battle-log__round small,
+.aos-initiative header p,
+.aos-initiative__rolls span,
+.aos-battle-stats__selector-heading,
+.aos-battle-stats__row.is-header,
+.aos-battle-log__actor,
+.aos-damage-calculator__header span,
+.aos-damage-profile__field > span {
+  font-size: 12px;
+}
+
+.aos-battle-stats__rounds {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+.aos-battle-stats__rounds button {
+  flex: 0 0 44px;
+}
+
+.aos-preset-filters {
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
+.aos-preset-filters button {
+  min-height: 44px;
+  font-size: 12px;
+}
+
+.aos-preset-card__title-row p,
+.aos-preset-card__details span,
+.aos-preset-card__stats dt {
+  color: #665f55;
+  font-size: 11px;
+}
+
+.aos-preset-faction small {
+  font-size: 11px;
+}
+
+.aos-preset-card__description {
+  color: #5b544b;
+  font-size: 15px;
+}
+
+.aos-presets-intro {
+  color: #5e574e;
+  font-size: 16px;
+}
+
+.aos-option-card__button {
+  min-height: 46px;
+  font-size: 15px;
+}
+
+.aos-option-list--grouped .aos-option-group__header {
+  position: static;
+}
+
+.aos-points-summary__icon:not(.is-error) {
+  color: #211c13;
+  background: #c1a45b;
+}
+
+@media (max-width: 360px) {
+  .aos-command-counter button,
+  .aos-fury-counter button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 620px) {
+  .aos-preset-grid,
+  .aos-preset-factions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aos-presets-page .aos-step-progress {
+    margin-bottom: 12px;
+  }
+
+  .aos-presets-page .aos-step-progress ol {
+    display: none;
+  }
+
+  .aos-presets-page .aos-step-progress > p {
+    display: block;
+    margin: 0;
+    color: #5f574e;
+    text-align: left;
+  }
+
+  .aos-preset-faction-tools {
+    position: static;
+    padding: 10px;
+  }
+
+  .aos-preset-faction-tools .aos-selector-filters {
+    max-width: 100%;
+  }
+}
+
+@media (max-height: 680px) {
+  .aos-home__masthead {
+    padding-block: max(12px, env(safe-area-inset-top)) 9px;
+  }
+
+  .aos-home__mark {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 6px;
+    font-size: 23px;
+  }
+
+  .aos-home__content {
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding-top: 22px;
+    padding-bottom: calc(104px + env(safe-area-inset-bottom));
+  }
+
+  .aos-home__title {
+    font-size: clamp(39px, 10vw, 54px);
+  }
+
+  .aos-home__copy {
+    margin-bottom: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

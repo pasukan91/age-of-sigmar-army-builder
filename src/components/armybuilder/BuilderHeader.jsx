@@ -33,9 +33,9 @@ function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
           </p>
         )}
 
-        <h1 style={styles.title}>
+        <h2 style={styles.title}>
           {list.name}
-        </h1>
+        </h2>
 
         <div
           role="status"
@@ -85,12 +85,12 @@ function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
 
             <div style={styles.healthMetric}>
               <span style={styles.pointsLabel}>
-                Vida total
+                Salud total
               </span>
 
               <div style={styles.pointsValue}>
                 {totalHealth}
-                <span style={styles.healthUnit}> PV</span>
+                <span style={styles.healthUnit}> heridas</span>
               </div>
             </div>
           </div>
@@ -107,9 +107,9 @@ function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
             }}
           >
             {invalid
-              ? `${validation.errors.length} ${validation.errors.length === 1 ? "error" : "errores"}`
+              ? `${validation.errors.length} ${validation.errors.length === 1 ? "error" : "errores"}${validation.warnings.length > 0 ? ` · ${validation.warnings.length} ${validation.warnings.length === 1 ? "pendiente" : "pendientes"}` : ""}`
               : validation.warnings.length > 0
-                ? `${validation.warnings.length} pendientes`
+                ? `${validation.warnings.length} ${validation.warnings.length === 1 ? "pendiente" : "pendientes"}`
                 : "Lista válida"}
           </button>
         </div>

@@ -6,6 +6,7 @@ import { initializePwa } from "./pwa/pwaClient";
 
 import "./styles/global.css";
 import "./styles/aos-app.css";
+import "./styles/ux.css";
 
 initializePwa();
 

@@ -8,6 +8,7 @@ import {
 function ArmySharePanel({ list }) {
   const [status, setStatus] = useState("");
   const text = formatArmyListText(list);
+  const deployments = getArmyDrops(list);
 
   async function copyList() {
     try {
@@ -62,7 +63,9 @@ function ArmySharePanel({ list }) {
           <span className="aos-eyebrow">Preparada para el torneo</span>
           <h2 id="share-panel-title">Compartir y exportar</h2>
         </div>
-        <span className="aos-share-panel__drops">{getArmyDrops(list)} drops</span>
+        <span className="aos-share-panel__drops">
+          {deployments} {deployments === 1 ? "despliegue" : "despliegues"}
+        </span>
       </header>
 
       <p>Genera un resumen compacto con regimientos, mejoras, puntos y estado de legalidad.</p>

@@ -46,21 +46,22 @@ export function getArmyDrops(list) {
 
 export function formatArmyListText(list) {
   const validation = validateArmyList(list);
+  const deployments = getArmyDrops(list);
   const lines = [
     String(list?.name ?? "Lista sin nombre"),
     `${list?.faction?.name ?? "Age of Sigmar"}${list?.armyOfRenown?.name ? ` — ${list.armyOfRenown.name}` : ""}`,
-    `${calculateArmyPoints(list)}/${Number(list?.pointsLimit ?? list?.points) || 0} pts · ${getArmyDrops(list)} drops · ${validation.isValid ? "Lista válida" : `${validation.errors.length} errores`}`,
+    `${calculateArmyPoints(list)}/${Number(list?.pointsLimit ?? list?.points) || 0} pts · ${deployments} ${deployments === 1 ? "despliegue" : "despliegues"} · ${validation.isValid ? "Lista válida" : `${validation.errors.length} errores`}`,
     "",
   ];
 
-  if (list?.battleplan?.name) lines.push(`Battleplan: ${list.battleplan.name}`);
+  if (list?.battleplan?.name) lines.push(`Plan de batalla: ${list.battleplan.name}`);
   const battleTactics = Array.isArray(list?.battleTactics)
     ? list.battleTactics
     : list?.battleTactics
       ? [list.battleTactics]
       : [];
   if (battleTactics.length > 0) {
-    lines.push(`Battle tactics: ${battleTactics.map((card) => card.name).join(", ")}`);
+    lines.push(`Tácticas de batalla: ${battleTactics.map((card) => card.name).join(", ")}`);
   }
   if (list?.battleFormation?.name) lines.push(`Formación: ${list.battleFormation.name}`);
   if (list?.spellLore?.name) lines.push(`Hechizos: ${list.spellLore.name}`);

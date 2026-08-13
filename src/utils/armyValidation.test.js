@@ -157,14 +157,14 @@ test("uses four unit slots for the general and three for other regiments", () =>
   assert.ok(result.errors.some((item) => item.id === "slots-other-regiment"));
 });
 
-test("exports points, drops and regiment structure", () => {
+test("exports points, deployments and regiment structure", () => {
   const army = list();
   const text = formatArmyListText(army);
 
   assert.equal(getArmyDrops(army), 1);
   assert.match(text, /Lista de prueba/);
   assert.match(text, /REGIMIENTO 1 — GENERAL/);
-  assert.match(text, /100\/2000 pts · 1 drops/);
+  assert.match(text, /100\/2000 pts · 1 despliegue/);
 });
 
 test("exports both selected battle tactics cards", () => {
@@ -177,7 +177,7 @@ test("exports both selected battle tactics cards", () => {
 
   assert.match(
     text,
-    /Battle tactics: Battle Tactics Card 1, Battle Tactics Card 2/
+    /Tácticas de batalla: Battle Tactics Card 1, Battle Tactics Card 2/
   );
 });
 

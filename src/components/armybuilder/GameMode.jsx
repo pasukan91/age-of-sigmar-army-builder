@@ -279,7 +279,14 @@ function BattleLog({ entries, listName, round, turnActor, onRoundChange, onTurnC
         onResolve={onInitiativeResolve}
       />
 
-      <BattleStatistics entries={entries} listName={listName} selectedRound={statisticsRound} onRoundChange={setStatisticsRound} />
+      {entries.length > 0 && (
+        <BattleStatistics
+          entries={entries}
+          listName={listName}
+          selectedRound={statisticsRound}
+          onRoundChange={setStatisticsRound}
+        />
+      )}
 
       <ol className="aos-battle-log__timeline" aria-live="polite">
         {entries.length === 0 && (

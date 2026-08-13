@@ -2,12 +2,19 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  getAbilityTiming,
   getAbilityPhaseTone,
   groupAbilitiesByPhase,
   parseAbilityDescription,
   parseFormattedText,
   parseInlineFormatting,
 } from "./abilityFormatting.js";
+
+test("translates common ability timings for the Spanish interface", () => {
+  assert.equal(getAbilityTiming({ phase: "Passive" }), "Pasiva");
+  assert.equal(getAbilityTiming({ phase: "Your Movement Phase" }), "Tu fase de movimiento");
+  assert.equal(getAbilityTiming({ phase: "End of Your Turn" }), "Final de tu turno");
+});
 
 test("maps common timings to official-style phase colour groups", () => {
   assert.equal(getAbilityPhaseTone({ phase: "Passive" }), "passive");

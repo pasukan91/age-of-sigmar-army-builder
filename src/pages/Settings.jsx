@@ -6,14 +6,14 @@ function Settings({ onBack, onLists, onCreate, onSettings }) {
     <main className="aos-shell aos-page-with-main-nav">
       <header className="aos-screen-header">
         <BackButton onClick={onBack} light compact />
-        <h1 className="aos-screen-header__title">Ajustes</h1>
+        <h1 className="aos-screen-header__title">Ayuda y datos</h1>
         <span aria-hidden="true" />
       </header>
 
       <div className="aos-screen-content">
         <header className="aos-form-intro">
           <p className="aos-kicker">Storm Forge</p>
-          <h2 className="aos-heading">Aplicación</h2>
+          <h2 className="aos-heading">Cómo funciona la app</h2>
         </header>
 
         <section className="aos-panel aos-settings-panel">

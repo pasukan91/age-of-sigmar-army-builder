@@ -17,7 +17,7 @@ function BackButton({
         gap: 8,
 
         minWidth: compact ? 44 : undefined,
-        minHeight: 42,
+        minHeight: 44,
         padding: compact
           ? "8px 10px"
           : "8px 12px",

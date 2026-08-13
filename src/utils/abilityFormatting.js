@@ -13,7 +13,38 @@ export const ABILITY_PHASE_GROUPS = [
 ];
 
 export function getAbilityTiming(ability = {}) {
-  return String(ability.phase ?? ability.type ?? "Pasiva").trim() || "Pasiva";
+  const timing = String(ability.phase ?? ability.type ?? "Pasiva").trim() || "Pasiva";
+  return translateAbilityTiming(timing);
+}
+
+function translateAbilityTiming(timing) {
+  const exactTranslations = new Map([
+    ["passive", "Pasiva"],
+    ["deployment phase", "Fase de despliegue"],
+    ["your hero phase", "Tu fase de héroe"],
+    ["enemy hero phase", "Fase de héroe enemiga"],
+    ["any hero phase", "Cualquier fase de héroe"],
+    ["your movement phase", "Tu fase de movimiento"],
+    ["enemy movement phase", "Fase de movimiento enemiga"],
+    ["any movement phase", "Cualquier fase de movimiento"],
+    ["your shooting phase", "Tu fase de disparo"],
+    ["enemy shooting phase", "Fase de disparo enemiga"],
+    ["any shooting phase", "Cualquier fase de disparo"],
+    ["your charge phase", "Tu fase de carga"],
+    ["enemy charge phase", "Fase de carga enemiga"],
+    ["any charge phase", "Cualquier fase de carga"],
+    ["your combat phase", "Tu fase de combate"],
+    ["enemy combat phase", "Fase de combate enemiga"],
+    ["any combat phase", "Cualquier fase de combate"],
+    ["start of your turn", "Inicio de tu turno"],
+    ["end of your turn", "Final de tu turno"],
+    ["start of any turn", "Inicio de cualquier turno"],
+    ["end of any turn", "Final de cualquier turno"],
+    ["start of the battle round", "Inicio de la ronda de batalla"],
+    ["end of the battle round", "Final de la ronda de batalla"],
+  ]);
+
+  return exactTranslations.get(timing.toLowerCase()) ?? timing;
 }
 
 export function getAbilityPhaseTone(ability = {}) {

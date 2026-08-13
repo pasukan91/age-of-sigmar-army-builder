@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import factions from "../data/factions";
 import ChevronIcon from "../components/ChevronIcon";
+import StepProgress from "../components/StepProgress";
 import {
   getFactionArtwork,
   getFactionArtworkPosition,
@@ -17,6 +18,45 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
     alliance?.backgroundImage ??
     alliance?.image ??
     `/images/backgrounds/${alliance?.id ?? "factions"}.webp`;
+
+  useEffect(() => {
+    function handlePopState(event) {
+      if (event.state?.factionStep !== "army-type") {
+        setSelectedFaction(null);
+        return;
+      }
+
+      const faction = factions.find(
+        (item) => item.id === event.state?.selectedFactionId && item.alliance === alliance?.id
+      );
+      setSelectedFaction(faction ?? null);
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [alliance?.id]);
+
+  function showArmyTypes(faction) {
+    setSelectedFaction(faction);
+    window.history.pushState(
+      {
+        ...window.history.state,
+        factionStep: "army-type",
+        selectedFactionId: faction.id,
+      },
+      "",
+      window.location.href
+    );
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }
+
+  function returnToFactions() {
+    if (window.history.state?.factionStep === "army-type") {
+      window.history.back();
+      return;
+    }
+    setSelectedFaction(null);
+  }
 
   if (selectedFaction) {
     const variants = selectedFaction.armiesOfRenown ?? [];
@@ -36,7 +76,7 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
           <button
             type="button"
             className="aos-icon-button"
-            onClick={() => setSelectedFaction(null)}
+            onClick={returnToFactions}
             aria-label="Volver a las facciones"
           >
             <ChevronIcon direction="left" size={10} thickness={3} />
@@ -46,7 +86,11 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
         </header>
 
         <section className="aos-selection-content aos-army-type-screen">
-          <p className="aos-selection-step">Paso 3 de 4</p>
+          <StepProgress
+            steps={["Alianza", "Facción", "Tipo", "Detalles"]}
+            current={3}
+            variant="dark"
+          />
           <h2 className="aos-selection-heading">{selectedFaction.name}</h2>
           <p className="aos-army-type-screen__hint">
             Elige las reglas y unidades disponibles para esta lista.
@@ -63,16 +107,29 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
           </button>
 
           {variants.map((variant) => (
-            <button
+            <article
               key={variant.id}
-              type="button"
               className="aos-army-type-card"
-              onClick={() => onSelect(selectedFaction, variant)}
             >
-              <strong>{variant.name}</strong>
-              <span>{variant.description}</span>
-              <ChevronIcon direction="right" size={9} thickness={3} />
-            </button>
+              <div>
+                <small className="aos-army-type-card__kind">Ejército de renombre</small>
+                <strong>{variant.name}</strong>
+                <p className="aos-army-type-card__description" lang="en">
+                  {variant.description}
+                </p>
+                <details className="aos-army-type-card__details">
+                  <summary>Ver detalles</summary>
+                  <p lang="en"><small>Texto original (EN)</small>{variant.description}</p>
+                </details>
+              </div>
+              <button
+                type="button"
+                className="aos-army-type-card__choose"
+                onClick={() => onSelect(selectedFaction, variant)}
+              >
+                Elegir <ChevronIcon direction="right" size={9} thickness={3} />
+              </button>
+            </article>
           ))}
         </section>
       </main>
@@ -99,7 +156,11 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
       </header>
 
       <section className="aos-selection-content">
-        <p className="aos-selection-step">Paso 2 de 4</p>
+        <StepProgress
+          steps={["Alianza", "Facción", "Tipo", "Detalles"]}
+          current={2}
+          variant="dark"
+        />
         <h2 className="aos-selection-heading">
           {alliance?.name ?? "Selecciona una facción"}
         </h2>
@@ -118,9 +179,7 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
               <button
                 type="button"
                 className="aos-selection-card"
-                onClick={() => {
-                  setSelectedFaction(faction);
-                }}
+                onClick={() => showArmyTypes(faction)}
                 style={{
                   "--aos-card-image": `url("${image}")`,
                   "--aos-card-position":
