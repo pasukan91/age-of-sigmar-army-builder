@@ -98,6 +98,7 @@ function NewListConfig({
             <input
               autoFocus
               type="text"
+              maxLength={80}
               value={army.name}
               placeholder={suggestedName}
               onChange={(event) =>

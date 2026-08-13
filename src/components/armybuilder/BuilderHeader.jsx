@@ -42,18 +42,20 @@ function BuilderHeader({ list, storageStatus = "saved", onShowValidation }) {
           aria-live="polite"
           style={{
             ...styles.saveStatus,
-            ...(storageStatus === "error"
+            ...(["error", "recovered"].includes(storageStatus)
               ? styles.saveStatusError
               : {}),
           }}
         >
           <span aria-hidden="true">
-            {storageStatus === "error" ? "!" : "✓"}
+            {["error", "recovered"].includes(storageStatus) ? "!" : "✓"}
           </span>
           {storageStatus === "saving"
             ? "Guardando…"
             : storageStatus === "error"
               ? "No se pudo guardar"
+              : storageStatus === "recovered"
+                ? "Recuperada · revisa tus listas"
               : "Guardada en este dispositivo"}
         </div>
 

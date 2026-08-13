@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MAX_BATTLE_LOG_TEXT_LENGTH } from "../../utils/battleLogLimits";
 
 import { normalizeRuleItem } from "../../utils/ruleReferences";
 import { getUniqueListUnits } from "../../utils/listWarscrolls";
@@ -265,6 +266,7 @@ function BattleLog({ entries, listName, round, turnActor, onRoundChange, onTurnC
             <span>{action.id === "note" ? "Qué ha pasado" : "Unidad o detalle opcional"}</span>
             <input
               value={note}
+              maxLength={MAX_BATTLE_LOG_TEXT_LENGTH}
               onChange={(event) => setNote(event.target.value)}
               placeholder={action.id === "redeploy" ? "Ej.: Ardboys tras la ruina" : "Añadir contexto…"}
             />

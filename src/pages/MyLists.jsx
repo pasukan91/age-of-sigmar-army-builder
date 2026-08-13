@@ -50,8 +50,10 @@ function MyLists({
 
           <p className="aos-storage-note" role="status">
             {storageStatus === "error"
-              ? "No se ha podido acceder al almacenamiento del dispositivo."
-              : "Las listas se guardan automáticamente en este dispositivo y funcionan sin conexión."}
+              ? "No se ha podido guardar. La copia anterior se ha protegido para evitar perder datos."
+              : storageStatus === "recovered"
+                ? "Se han aislado datos dañados. Revisa las listas recuperadas antes de continuar."
+                : "Las listas se guardan automáticamente en este dispositivo y funcionan sin conexión."}
           </p>
         </header>
 

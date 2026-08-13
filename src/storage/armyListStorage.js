@@ -6,9 +6,15 @@ import {
   ghb2026BattleTactics,
   ghb2026BattleTacticsCards,
 } from "../data/ghb2026";
+import {
+  limitBattleLogEntries,
+  truncateBattleLogText,
+} from "../utils/battleLogLimits";
 
 const STORAGE_KEY = "storm-forge.army-lists.v1";
+const RECOVERY_STORAGE_KEY = "storm-forge.army-lists.recovery";
 const STORAGE_VERSION = 1;
+let recoveryGuardActive = false;
 
 function asArray(value) {
   if (Array.isArray(value)) {
@@ -37,14 +43,11 @@ function getSelectableFactions() {
 }
 
 function restoreOption(savedOption, canonicalOptions) {
-  if (!savedOption) {
+  if (!savedOption || typeof savedOption !== "object") {
     return null;
   }
 
-  return (
-    findById(canonicalOptions, savedOption.id) ??
-    savedOption
-  );
+  return findById(canonicalOptions, savedOption.id);
 }
 
 function restoreBattleTacticsCards(savedValue) {
@@ -388,7 +391,7 @@ function restoreList(savedList) {
 }
 
 function serializeBattleLog(value) {
-  return (Array.isArray(value) ? value : [])
+  return limitBattleLogEntries(value)
     .map(normalizeBattleLogEntry)
     .filter(Boolean);
 }
@@ -404,11 +407,11 @@ function normalizeBattleLogEntry(entry) {
 
   return {
     id: String(entry.id),
-    actionId: entry.actionId ? String(entry.actionId) : "",
+    actionId: entry.actionId ? truncateBattleLogText(entry.actionId) : "",
     actor: entry.actor === "opponent" ? "opponent" : "self",
-    label: String(entry.label),
-    result: String(entry.result ?? ""),
-    note: String(entry.note ?? ""),
+    label: truncateBattleLogText(entry.label),
+    result: truncateBattleLogText(entry.result),
+    note: truncateBattleLogText(entry.note),
     values: normalizeBattleLogValues(entry.values),
     round: Math.min(5, Math.max(1, Number(entry.round) || 1)),
     createdAt: Number(entry.createdAt) || Date.now(),
@@ -465,42 +468,173 @@ function enforceSingleArmyTraits(regiments) {
   }));
 }
 
-export function loadArmyLists() {
-  if (typeof window === "undefined") {
-    return [];
+function hasInvalidListShape(savedList) {
+  if (!savedList || typeof savedList !== "object" || Array.isArray(savedList)) {
+    return true;
   }
 
+  const arrayFields = [
+    "regiments",
+    "regimentsOfRenown",
+    "auxiliaries",
+    "battleLog",
+    "completedBattleMissions",
+  ];
+
+  if (arrayFields.some(
+    (field) => savedList[field] != null && !Array.isArray(savedList[field])
+  )) {
+    return true;
+  }
+
+  return (savedList.regiments ?? []).some(
+    (regiment) => !regiment ||
+      typeof regiment !== "object" ||
+      Array.isArray(regiment) ||
+      (regiment.units != null && !Array.isArray(regiment.units))
+  );
+}
+
+function countRestoredUnits(list) {
+  return (list?.regiments ?? []).reduce(
+    (total, regiment) => total + 1 + (regiment.units ?? []).length,
+    (list?.auxiliaries ?? []).length
+  );
+}
+
+function countSavedUnits(list) {
+  return (list?.regiments ?? []).reduce(
+    (total, regiment) => total + (regiment?.hero ? 1 : 0) + (regiment?.units ?? []).length,
+    (list?.auxiliaries ?? []).length
+  );
+}
+
+function preserveRecoveryPayload(rawValue) {
   try {
-    const rawValue = window.localStorage.getItem(STORAGE_KEY);
+    window.localStorage.setItem(RECOVERY_STORAGE_KEY, rawValue);
+    return true;
+  } catch (error) {
+    console.error("No se pudo crear la copia de recuperación de las listas.", error);
+    return false;
+  }
+}
+
+function failedLoadResult(rawValue, error, status = "error") {
+  const backupCreated = rawValue ? preserveRecoveryPayload(rawValue) : false;
+  recoveryGuardActive = Boolean(rawValue) && !backupCreated;
+
+  if (error) {
+    console.error("No se pudieron cargar todas las listas guardadas.", error);
+  }
+
+  return {
+    lists: [],
+    status,
+    recoveredCount: 0,
+    rejectedCount: 0,
+    backupCreated,
+  };
+}
+
+export function loadArmyListsResult() {
+  if (typeof window === "undefined") {
+    return {
+      lists: [],
+      status: "empty",
+      recoveredCount: 0,
+      rejectedCount: 0,
+      backupCreated: false,
+    };
+  }
+
+  recoveryGuardActive = false;
+  let rawValue = "";
+
+  try {
+    rawValue = window.localStorage.getItem(STORAGE_KEY);
 
     if (!rawValue) {
-      return [];
+      return {
+        lists: [],
+        status: "empty",
+        recoveredCount: 0,
+        rejectedCount: 0,
+        backupCreated: false,
+      };
     }
 
     const payload = JSON.parse(rawValue);
 
-    if (
-      payload?.version !== STORAGE_VERSION ||
-      !Array.isArray(payload.lists)
-    ) {
-      return [];
+    if (payload?.version !== STORAGE_VERSION || !Array.isArray(payload.lists)) {
+      return failedLoadResult(
+        rawValue,
+        new Error(`Formato de almacenamiento no compatible: ${String(payload?.version)}`),
+        "unsupported"
+      );
     }
 
-    return payload.lists
-      .map(restoreList)
-      .filter(Boolean)
-      .sort(
-        (left, right) =>
-          Number(right.updatedAt) - Number(left.updatedAt)
-      );
+    const lists = [];
+    let rejectedCount = 0;
+    let repairedCount = 0;
+
+    payload.lists.forEach((savedList) => {
+      try {
+        if (hasInvalidListShape(savedList)) {
+          throw new TypeError("La lista guardada no tiene una estructura válida.");
+        }
+
+        const restored = restoreList(savedList);
+        if (!restored) {
+          throw new Error("La facción o el identificador de la lista ya no existe.");
+        }
+
+        if (
+          countRestoredUnits(restored) !== countSavedUnits(savedList) ||
+          restored.regimentsOfRenown.length !== (savedList.regimentsOfRenown ?? []).length
+        ) {
+          repairedCount += 1;
+        }
+
+        lists.push(restored);
+      } catch (error) {
+        rejectedCount += 1;
+        console.error("Se ha aislado una lista guardada que no se pudo recuperar.", error);
+      }
+    });
+
+    lists.sort(
+      (left, right) => Number(right.updatedAt) - Number(left.updatedAt)
+    );
+
+    const recovered = rejectedCount > 0 || repairedCount > 0;
+    const backupCreated = recovered ? preserveRecoveryPayload(rawValue) : false;
+    recoveryGuardActive = recovered && !backupCreated;
+
+    return {
+      lists,
+      status: recovered ? "recovered" : "loaded",
+      recoveredCount: lists.length,
+      rejectedCount,
+      backupCreated,
+    };
   } catch (error) {
-    console.error("No se pudieron cargar las listas guardadas.", error);
-    return [];
+    return failedLoadResult(rawValue, error);
   }
+}
+
+export function loadArmyLists() {
+  return loadArmyListsResult().lists;
 }
 
 export function saveArmyLists(lists) {
   if (typeof window === "undefined") {
+    return false;
+  }
+
+  if (recoveryGuardActive) {
+    console.error(
+      "Guardado bloqueado: no se pudo proteger la copia original de las listas."
+    );
     return false;
   }
 
@@ -523,4 +657,4 @@ export function saveArmyLists(lists) {
   }
 }
 
-export { STORAGE_KEY };
+export { RECOVERY_STORAGE_KEY, STORAGE_KEY };

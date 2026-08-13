@@ -13,6 +13,11 @@ export function initializePwa() {
     dispatchPwaEvent("storm-forge:installable", false);
   });
 
+  if (!window.isSecureContext) {
+    console.warn("La instalación y el modo offline requieren HTTPS.");
+    return;
+  }
+
   if (!("serviceWorker" in navigator)) {
     return;
   }

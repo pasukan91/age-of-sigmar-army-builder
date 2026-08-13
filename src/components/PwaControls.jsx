@@ -10,7 +10,8 @@ function PwaControls() {
   const [online, setOnline] = useState(() => navigator.onLine);
   const [showIosHelp, setShowIosHelp] = useState(false);
   const standalone = isStandalonePwa();
-  const showIosInstall = isIosDevice() && !standalone;
+  const secureContext = window.isSecureContext;
+  const showIosInstall = secureContext && isIosDevice() && !standalone;
 
   useEffect(() => {
     const handleInstallable = (event) => setInstallable(Boolean(event.detail));
@@ -28,13 +29,19 @@ function PwaControls() {
     };
   }, []);
 
-  if (!installable && online && !showIosInstall) {
+  if (!installable && online && !showIosInstall && secureContext) {
     return null;
   }
 
   return (
     <aside className="aos-pwa-controls" aria-live="polite">
       {!online && <span className="aos-pwa-controls__offline">Modo sin conexión</span>}
+
+      {!secureContext && (
+        <span className="aos-pwa-controls__offline">
+          Abre Storm Forge con HTTPS para instalarla y usarla sin conexión
+        </span>
+      )}
 
       {installable && (
         <button type="button" onClick={requestPwaInstall}>

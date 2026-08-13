@@ -98,7 +98,7 @@ export function createArmyPrintHtml(list) {
   const escaped = escapeHtml(text);
   const title = escapeHtml(String(list?.name ?? "Lista"));
 
-  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${title}</title><style>body{font:15px/1.45 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 24px;color:#181512}h1{font-family:Georgia,serif;color:#741b15}pre{white-space:pre-wrap;font:inherit}footer{margin-top:30px;border-top:1px solid #aaa;padding-top:10px;color:#666}@media print{body{margin:0;max-width:none}}</style></head><body><h1>${title}</h1><pre>${escaped}</pre><footer>Storm Forge · ${new Date().toLocaleDateString("es-ES")}</footer><script>window.addEventListener('load',()=>window.print())</script></body></html>`;
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${title}</title><style>body{font:15px/1.45 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 24px;color:#181512}h1{font-family:Georgia,serif;color:#741b15}pre{white-space:pre-wrap;font:inherit}footer{margin-top:30px;border-top:1px solid #aaa;padding-top:10px;color:#666}@media print{body{margin:0;max-width:none}}</style></head><body><h1>${title}</h1><pre>${escaped}</pre><footer>Storm Forge · ${new Date().toLocaleDateString("es-ES")}</footer></body></html>`;
 }
 
 function escapeHtml(value) {

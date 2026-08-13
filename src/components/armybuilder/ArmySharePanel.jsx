@@ -53,6 +53,7 @@ function ArmySharePanel({ list }) {
     printWindow.opener = null;
     printWindow.document.write(createArmyPrintHtml(list));
     printWindow.document.close();
+    window.setTimeout(() => printWindow.print(), 0);
     setStatus("Vista de impresión preparada. También puedes guardarla como PDF.");
   }
 

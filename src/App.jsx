@@ -5,7 +5,7 @@ import MyLists from "./pages/MyLists";
 import SelectAlliance from "./pages/SelectAlliance";
 import SelectFaction from "./pages/SelectFaction";
 import NewListConfig from "./pages/NewListConfig";
-import ArmyBuilder from "./pages/Armybuilder";
+import ArmyBuilder from "./pages/ArmyBuilder";
 import OptionSelector from "./pages/OptionSelector";
 import UnitWarscroll from "./pages/unitWarscroll";
 import UnitConfig from "./pages/unitConfig";
@@ -24,11 +24,15 @@ import {
   isUnitUniqueInArmy,
 } from "./utils/regimentRules";
 import {
-  loadArmyLists,
+  loadArmyListsResult,
   saveArmyLists,
 } from "./storage/armyListStorage";
 import { isUniqueUnit } from "./utils/unitIdentity";
 import createId from "./utils/createId";
+import {
+  limitBattleLogEntries,
+  truncateBattleLogText,
+} from "./utils/battleLogLimits";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -62,15 +66,15 @@ const PAGE_TITLES = {
 };
 
 function appendBattleLogEntry(list, event) {
-  return [
+  return limitBattleLogEntries([
     ...(list?.battleLog ?? []),
     {
       id: createId("battle-event"),
-      actionId: String(event?.actionId ?? "note"),
+      actionId: truncateBattleLogText(event?.actionId ?? "note"),
       actor: event?.actor === "opponent" ? "opponent" : "self",
-      label: String(event?.label ?? "Evento"),
-      result: String(event?.result ?? "").trim(),
-      note: String(event?.note ?? "").trim(),
+      label: truncateBattleLogText(event?.label ?? "Evento"),
+      result: truncateBattleLogText(event?.result).trim(),
+      note: truncateBattleLogText(event?.note).trim(),
       values: event?.values && typeof event.values === "object"
         ? { ...event.values }
         : {},
@@ -80,7 +84,7 @@ function appendBattleLogEntry(list, event) {
       ),
       createdAt: Date.now(),
     },
-  ];
+  ]);
 }
 
 function App() {
@@ -89,8 +93,11 @@ function App() {
   );
   const [initialEntryKey] = useState(() => createId("nav"));
 
-  const [lists, setLists] =
-    useState(() => loadArmyLists());
+  const [initialStorageLoad] = useState(() => loadArmyListsResult());
+  const [lists, setLists] = useState(() => initialStorageLoad.lists);
+  const skipInitialSave = useRef(
+    !["empty", "loaded"].includes(initialStorageLoad.status)
+  );
 
   const [navigation, setNavigation] =
     useState(() => ({
@@ -102,10 +109,18 @@ function App() {
   const { page, history, entryKey } = navigation;
   const scrollPositions = useRef(new Map());
 
-  const [storageStatus, setStorageStatus] =
-    useState("saved");
+  const [storageStatus, setStorageStatus] = useState(() => {
+    if (initialStorageLoad.status === "recovered") return "recovered";
+    if (["error", "unsupported"].includes(initialStorageLoad.status)) return "error";
+    return "saved";
+  });
 
   useEffect(() => {
+    if (skipInitialSave.current) {
+      skipInitialSave.current = false;
+      return undefined;
+    }
+
     const saveTimer = window.setTimeout(() => {
       const saved = saveArmyLists(lists);
 

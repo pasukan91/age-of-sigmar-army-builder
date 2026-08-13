@@ -30,6 +30,7 @@ if (-not (Test-Path -LiteralPath $TargetRoot -PathType Container)) {
 
 $resolvedTarget = (Resolve-Path -LiteralPath $TargetRoot).Path
 $resolvedProject = (Resolve-Path -LiteralPath $projectRoot).Path
+$deploymentMarker = ".storm-forge-deploy"
 
 if (
   $resolvedTarget -eq $resolvedProject -or
@@ -41,6 +42,21 @@ if (
 
 if ($resolvedTarget -match "^[A-Za-z]:\\$") {
   throw "No se permite publicar directamente en la raíz de una unidad. Destino recibido: '$resolvedTarget'."
+}
+
+if ($Clean) {
+  $targetEntries = @(Get-ChildItem -LiteralPath $resolvedTarget -Force)
+  $markerPath = Join-Path $resolvedTarget $deploymentMarker
+  $indexPath = Join-Path $resolvedTarget "index.html"
+  $looksLikeStormForge = Test-Path -LiteralPath $markerPath -PathType Leaf
+
+  if (-not $looksLikeStormForge -and (Test-Path -LiteralPath $indexPath -PathType Leaf)) {
+    $looksLikeStormForge = (Get-Content -LiteralPath $indexPath -Raw) -match "Storm Forge"
+  }
+
+  if ($targetEntries.Count -gt 0 -and -not $looksLikeStormForge) {
+    throw "Destino rechazado: '$resolvedTarget' contiene archivos que no pertenecen a Storm Forge."
+  }
 }
 
 Push-Location $projectRoot
@@ -59,43 +75,23 @@ try {
 
   Write-Host "[2/3] Publicando los archivos en Apache..." -ForegroundColor Yellow
 
+  $copyTarget = $resolvedTarget
+  $stagingTarget = $null
+  $backupTarget = $null
+
   if ($Clean) {
-    Write-Host "      Limpiando únicamente los archivos web generados..." -ForegroundColor DarkYellow
-
-    $generatedEntries = @(
-      "index.html",
-      ".htaccess",
-      "favicon.svg",
-      "icons.svg",
-      "manifest.webmanifest",
-      "offline.html",
-      "sw.js",
-      "pwa-icon.svg",
-      "pwa-icon-192.png",
-      "pwa-icon-512.png",
-      "apple-touch-icon.png",
-      "_headers",
-      "assets",
-      "images"
-    )
-
-    foreach ($entry in $generatedEntries) {
-      $publishedEntry = Join-Path $resolvedTarget $entry
-
-      if (Test-Path -LiteralPath $publishedEntry) {
-        try {
-          Remove-Item -LiteralPath $publishedEntry -Recurse -Force -ErrorAction Stop
-        }
-        catch {
-          Write-Warning "No se pudo eliminar '$publishedEntry'. Se sobrescribirá cuando sea posible. Detalle: $($_.Exception.Message)"
-        }
-      }
-    }
+    $targetParent = Split-Path -Parent $resolvedTarget
+    $deploymentId = [guid]::NewGuid().ToString("N")
+    $stagingTarget = Join-Path $targetParent ".storm-forge-stage-$deploymentId"
+    $backupTarget = Join-Path $targetParent ".storm-forge-backup-$deploymentId"
+    New-Item -ItemType Directory -Path $stagingTarget -ErrorAction Stop | Out-Null
+    $copyTarget = $stagingTarget
+    Write-Host "      Preparando una publicación atómica antes de sustituir la actual..." -ForegroundColor DarkYellow
   }
 
   & robocopy `
     $distRoot `
-    $resolvedTarget `
+    $copyTarget `
     /E `
     /R:2 `
     /W:1 `
@@ -111,6 +107,40 @@ try {
     throw "Robocopy no ha podido publicar la aplicación. Código: $robocopyExitCode."
   }
 
+  $copiedIndex = Join-Path $copyTarget "index.html"
+  $copiedMarker = Join-Path $copyTarget $deploymentMarker
+
+  if (
+    -not (Test-Path -LiteralPath $copiedIndex -PathType Leaf) -or
+    -not (Test-Path -LiteralPath $copiedMarker -PathType Leaf)
+  ) {
+    throw "La copia preparada no contiene index.html y su marcador de seguridad."
+  }
+
+  if ($Clean) {
+    try {
+      Move-Item -LiteralPath $resolvedTarget -Destination $backupTarget -ErrorAction Stop
+      Move-Item -LiteralPath $stagingTarget -Destination $resolvedTarget -ErrorAction Stop
+      $stagingTarget = $null
+    }
+    catch {
+      if (
+        -not (Test-Path -LiteralPath $resolvedTarget) -and
+        (Test-Path -LiteralPath $backupTarget)
+      ) {
+        Move-Item -LiteralPath $backupTarget -Destination $resolvedTarget -ErrorAction SilentlyContinue
+      }
+      throw "No se pudo activar la nueva publicación; se ha intentado restaurar la anterior. Detalle: $($_.Exception.Message)"
+    }
+
+    try {
+      Remove-Item -LiteralPath $backupTarget -Recurse -Force -ErrorAction Stop
+    }
+    catch {
+      Write-Warning "La publicación terminó, pero la copia anterior quedó en '$backupTarget' y puede eliminarse manualmente."
+    }
+  }
+
   $publishedIndex = Join-Path $resolvedTarget "index.html"
 
   if (-not (Test-Path -LiteralPath $publishedIndex -PathType Leaf)) {
@@ -119,9 +149,13 @@ try {
 
   Write-Host "[3/3] Despliegue verificado." -ForegroundColor Green
   Write-Host ""
-  Write-Host "Abre desde el móvil: http://10.100.100.101/" -ForegroundColor Green
+  Write-Host "Abre desde el móvil: https://10.100.100.101/" -ForegroundColor Green
+  Write-Host "HTTPS es obligatorio para instalar la PWA y usar el modo sin conexión." -ForegroundColor Yellow
   Write-Host "Fecha de publicación: $((Get-Item -LiteralPath $publishedIndex).LastWriteTime)"
 }
 finally {
+  if ($stagingTarget -and (Test-Path -LiteralPath $stagingTarget)) {
+    Remove-Item -LiteralPath $stagingTarget -Recurse -Force -ErrorAction SilentlyContinue
+  }
   Pop-Location
 }
