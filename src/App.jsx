@@ -255,7 +255,7 @@ function App() {
       window.history.replaceState(
         { page: "lists", depth: 0, listId: null, entryKey: listsEntryKey },
         "",
-        "/listas"
+        getPagePath("lists")
       );
       window.history.pushState(
         { page: nextPage, depth: 1, listId, entryKey: nextEntryKey },
@@ -2402,11 +2402,12 @@ function RouteRecovery({
 }
 
 function getListIdFromPath(pathname) {
-  const match = String(pathname ?? "").match(/^\/listas\/([^/]+)/);
+  const match = stripAppBase(pathname).match(/^\/listas\/([^/]+)/);
   return match ? decodeURIComponent(match[1]) : null;
 }
 
 function getInitialRoute(pathname) {
+  pathname = stripAppBase(pathname);
   const listId = getListIdFromPath(pathname);
 
   if (listId) return { page: "builder", listId };
@@ -2424,7 +2425,7 @@ function getPagePath(page, listId = null) {
   const encodedListId = listId ? encodeURIComponent(listId) : null;
   const listBase = encodedListId ? `/listas/${encodedListId}` : "/listas";
 
-  return {
+  const appPath = {
     home: "/",
     lists: "/listas",
     settings: "/ajustes",
@@ -2437,6 +2438,24 @@ function getPagePath(page, listId = null) {
     warscroll: `${listBase}/unidad`,
     unitConfig: `${listBase}/unidad/configurar`,
   }[page] ?? "/";
+
+  return `${getAppBase()}${appPath === "/" ? "/" : appPath}`;
+}
+
+function getAppBase() {
+  return import.meta.env.BASE_URL === "/"
+    ? ""
+    : import.meta.env.BASE_URL.replace(/\/$/, "");
+}
+
+function stripAppBase(pathname) {
+  const normalizedPath = String(pathname ?? "") || "/";
+  const appBase = getAppBase();
+  if (!appBase) return normalizedPath;
+  if (normalizedPath === appBase) return "/";
+  return normalizedPath.startsWith(`${appBase}/`)
+    ? normalizedPath.slice(appBase.length)
+    : normalizedPath;
 }
 
 export default App;

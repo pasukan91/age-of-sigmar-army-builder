@@ -1,5 +1,17 @@
 # Storm Forge — AoS Army Builder
 
+## Publicación automática con GitHub Pages
+
+Cada cambio enviado a `main` se compila y publica automáticamente mediante
+GitHub Actions. La app queda disponible en:
+
+```text
+https://pasukan91.github.io/age-of-sigmar-army-builder/
+```
+
+El workflow está en `.github/workflows/deploy-pages.yml` y no depende de la
+unidad `Z:` ni del servidor Apache local.
+
 ## Publicar en el Apache local
 
 La carpeta pública compartida de Apache está mapeada como `Z:\`. El virtual host sirve `Z:\html\dist` y está disponible en `http://10.100.100.101/`.
