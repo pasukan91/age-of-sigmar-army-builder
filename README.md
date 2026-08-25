@@ -1,5 +1,14 @@
 # Storm Forge — AoS Army Builder
 
+## Publicación automática
+
+La rama `main` está conectada al Worker de Cloudflare `almogavers-aos`. Cada
+`push` a GitHub ejecuta `npm run deploy` y actualiza la misma URL donde está
+instalada la PWA. La configuración se conserva en `wrangler.jsonc`.
+
+El despliegue manual en Apache descrito a continuación queda disponible solo
+como alternativa local.
+
 ## Publicar en el Apache local
 
 La carpeta pública compartida de Apache está mapeada como `Z:\`. El virtual host sirve `Z:\html\dist` y está disponible en `http://10.100.100.101/`.

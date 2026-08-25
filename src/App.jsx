@@ -5,7 +5,7 @@ import MyLists from "./pages/MyLists";
 import SelectAlliance from "./pages/SelectAlliance";
 import SelectFaction from "./pages/SelectFaction";
 import NewListConfig from "./pages/NewListConfig";
-import ArmyBuilder from "./pages/ArmyBuilder";
+import ArmyBuilder from "./pages/Armybuilder";
 import OptionSelector from "./pages/OptionSelector";
 import UnitWarscroll from "./pages/unitWarscroll";
 import UnitConfig from "./pages/unitConfig";
