@@ -1035,11 +1035,80 @@ body .aos-builder-tabs button > small {
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 4px 14px rgba(41, 31, 20, 0.07);
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.aos-game-round-change {
+  display: flex;
+  padding: 13px 14px;
+  margin-top: 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid #baa67f;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fffaf0, #efe3cd);
+}
+
+.aos-game-round-change small,
+.aos-game-round-change strong,
+.aos-game-round-change div > span {
+  display: block;
+}
+
+.aos-game-round-change small {
+  color: #7f241c;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aos-game-round-change strong {
+  margin-top: 2px;
+  color: #251b15;
+}
+
+.aos-game-round-change div > span {
+  margin-top: 3px;
+  color: #665b50;
+  font-size: 12px;
+}
+
+.aos-game-round-change > button {
+  display: flex;
+  min-height: 46px;
+  padding: 9px 13px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #7e211a;
+  border-radius: 6px;
+  color: #fff;
+  background: #8d2018;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.aos-game-round-change > button:disabled {
+  border-color: #a69c8c;
+  color: #686159;
+  background: #ddd7cd;
 }
 
 .aos-game-unit-card.is-destroyed {
   border-left-color: #706a62;
   background: #f4f1ec;
+}
+
+.aos-game-unit-card.is-in-combat {
+  border-color: #15110f;
+  border-left-color: #d2ad58;
+  background: #27211e;
+  box-shadow: 0 6px 20px rgba(20, 12, 9, 0.28);
+}
+
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__warscroll img {
+  filter: brightness(0.78) contrast(1.08);
 }
 
 .aos-game-unit-card__warscroll {
@@ -1092,6 +1161,41 @@ body .aos-builder-tabs button > small {
   display: block;
 }
 
+.aos-game-unit-card__heading-row {
+  display: flex;
+  margin-bottom: 4px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.aos-game-unit-card__heading-row small {
+  min-width: 0;
+  margin: 0;
+}
+
+.aos-game-unit-card__combat-toggle {
+  display: inline-flex;
+  min-height: 32px;
+  padding: 5px 8px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #b7a78e;
+  border-radius: 999px;
+  color: #574d42;
+  background: #f6f1e8;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.aos-game-unit-card__combat-toggle[aria-pressed="true"] {
+  border-color: #d2ad58;
+  color: #21170d;
+  background: #e3c36f;
+}
+
 .aos-game-unit-card__heading small {
   margin-bottom: 3px;
   color: #8d2018;
@@ -1110,6 +1214,33 @@ body .aos-builder-tabs button > small {
   margin-top: 3px;
   color: #6b6258;
   font-size: 12px;
+}
+
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__heading strong,
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__models label {
+  color: #fff8eb;
+}
+
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__heading small {
+  color: #e4c779;
+}
+
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__heading > span,
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__counter > span,
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__modifiers p,
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__custom-modifier label {
+  color: #d8cfc4;
+}
+
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__modifier-toggle {
+  border-color: #c5a55c;
+  color: #fff6df;
+  background: #514331;
+}
+
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__modifiers,
+.aos-game-unit-card.is-in-combat .aos-game-unit-card__custom-modifier {
+  border-color: #65594c;
 }
 
 .aos-game-unit-card__models {
@@ -1176,14 +1307,22 @@ body .aos-builder-tabs button > small {
   gap: 5px;
 }
 
-.aos-game-unit-card__active span {
+.aos-game-unit-card__active button {
+  display: inline-flex;
   padding: 4px 7px;
+  align-items: center;
+  gap: 4px;
   border: 1px solid #84a36e;
   border-radius: 999px;
   color: #234819;
   background: #edf5e7;
   font-size: 10px;
   font-weight: 900;
+}
+
+.aos-game-unit-card__active button > span {
+  font-size: 14px;
+  line-height: 0.8;
 }
 
 .aos-game-unit-card__modifier-toggle {
@@ -1215,6 +1354,53 @@ body .aos-builder-tabs button > small {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
+}
+
+.aos-game-unit-card__custom-modifier {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #cfc3b0;
+}
+
+.aos-game-unit-card__custom-modifier label {
+  display: block;
+  margin-bottom: 5px;
+  color: #4f473e;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.aos-game-unit-card__custom-modifier > div {
+  display: flex;
+  gap: 6px;
+}
+
+.aos-game-unit-card__custom-modifier input {
+  min-width: 0;
+  min-height: 42px;
+  padding: 8px 9px;
+  flex: 1;
+  border: 1px solid #a99b85;
+  border-radius: 5px;
+  color: #28221c;
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+}
+
+.aos-game-unit-card__modifiers .aos-game-unit-card__custom-modifier button {
+  min-height: 42px;
+  padding: 8px 12px;
+  border-color: #7e211a;
+  color: #fff;
+  background: #8d2018;
+  text-align: center;
+}
+
+.aos-game-unit-card__modifiers .aos-game-unit-card__custom-modifier button:disabled {
+  border-color: #b8afa1;
+  color: #746e65;
+  background: #e3ded6;
 }
 
 .aos-game-unit-card__modifiers button {
@@ -1254,6 +1440,11 @@ body .aos-builder-tabs button > small {
 }
 
 @media (max-width: 760px) {
+  .aos-game-round-change {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .aos-game-unit-card {
     grid-template-columns: 118px minmax(0, 1fr);
   }
@@ -1274,7 +1465,7 @@ body .aos-builder-tabs button > small {
     flex-direction: column;
   }
 
-  .aos-game-unit-card__modifiers > div {
+  .aos-game-unit-card__quick-modifiers {
     grid-template-columns: 1fr;
   }
 }

@@ -33,6 +33,7 @@ import {
   limitBattleLogEntries,
   truncateBattleLogText,
 } from "./utils/battleLogLimits";
+import { clearBattleUnitModifiers } from "./utils/battleUnitState";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -711,6 +712,7 @@ function App() {
     saveUpdatedList({
       ...currentList,
       battleRound,
+      battleUnitStates: clearBattleUnitModifiers(currentList.battleUnitStates),
       battleLog: appendBattleLogEntry(currentList, {
         actionId: "round-change",
         actor: "self",
@@ -751,6 +753,7 @@ function App() {
       ...currentList,
       battleRound: nextRound,
       battleTurnActor: winnerActor,
+      battleUnitStates: clearBattleUnitModifiers(currentList.battleUnitStates),
       battleLog: appendBattleLogEntry(currentList, {
         actionId: "priority",
         actor: winnerActor,

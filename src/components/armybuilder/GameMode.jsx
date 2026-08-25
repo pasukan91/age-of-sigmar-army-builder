@@ -6,6 +6,8 @@ import { getListUnitInstances } from "../../utils/listWarscrolls";
 import {
   getBattleUnitState,
   getUnitStartingModels,
+  MAX_CUSTOM_MODIFIER_LENGTH,
+  MAX_CUSTOM_MODIFIERS,
   POSITIVE_UNIT_MODIFIERS,
 } from "../../utils/battleUnitState";
 import {
@@ -53,6 +55,22 @@ function GameMode({
         <a href="#game-terrain">Terreno</a>
         <a href="#game-battle-log">Registro</a>
       </nav>
+
+      <div className="aos-game-round-change">
+        <div>
+          <small>Ronda actual</small>
+          <strong>{list?.battleRound ?? 1} de 5</strong>
+          <span>Conserva las bajas y elimina todos los modificadores temporales.</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => onRoundChange?.(Math.min(5, Number(list?.battleRound ?? 1) + 1))}
+          disabled={Number(list?.battleRound ?? 1) >= 5}
+        >
+          <span aria-hidden="true">↻</span>
+          Cambio de ronda
+        </button>
+      </div>
 
       <section id="game-warscrolls" className="aos-game-section aos-game-roster" aria-labelledby="game-roster-title">
         <div className="aos-game-mode__section-title">
@@ -145,12 +163,14 @@ function GameMode({
 
 function GameUnitCard({ instance, value, onView, onChange }) {
   const [modifiersOpen, setModifiersOpen] = useState(false);
+  const [customModifier, setCustomModifier] = useState("");
   const { unit, groupLabel, roleLabel, copyIndex, copyCount } = instance;
   const startingModels = getUnitStartingModels(unit);
   const state = getBattleUnitState(value, unit);
   const activeModifiers = POSITIVE_UNIT_MODIFIERS.filter((modifier) =>
     state.modifiers.includes(modifier.id)
   );
+  const activeModifierCount = activeModifiers.length + state.customModifiers.length;
 
   function setRemainingModels(nextValue) {
     const remainingModels = Math.min(
@@ -167,10 +187,44 @@ function GameUnitCard({ instance, value, onView, onChange }) {
     onChange?.({ ...state, modifiers });
   }
 
+  function addCustomModifier(event) {
+    event.preventDefault();
+    const label = customModifier.replace(/\s+/g, " ").trim();
+    if (!label || state.customModifiers.length >= MAX_CUSTOM_MODIFIERS || state.customModifiers.some(
+      (modifier) => modifier.toLocaleLowerCase("es") === label.toLocaleLowerCase("es")
+    )) return;
+
+    onChange?.({
+      ...state,
+      customModifiers: [...state.customModifiers, label],
+    });
+    setCustomModifier("");
+  }
+
+  function removeCustomModifier(label) {
+    onChange?.({
+      ...state,
+      customModifiers: state.customModifiers.filter((modifier) => modifier !== label),
+    });
+  }
+
+  function toggleCombat() {
+    onChange?.({ ...state, inCombat: !state.inCombat });
+  }
+
+  function handleCardClick(event) {
+    if (event.target.closest("button, input, form, label")) return;
+    toggleCombat();
+  }
+
   const copyLabel = copyCount > 1 ? ` · Copia ${copyIndex} de ${copyCount}` : "";
 
   return (
-    <article className={`aos-game-unit-card${state.remainingModels === 0 ? " is-destroyed" : ""}`}>
+    <article
+      className={`aos-game-unit-card${state.remainingModels === 0 ? " is-destroyed" : ""}${state.inCombat ? " is-in-combat" : ""}`}
+      onClick={handleCardClick}
+      data-combat-state={state.inCombat ? "active" : "inactive"}
+    >
       <button
         type="button"
         className="aos-game-unit-card__warscroll"
@@ -183,7 +237,19 @@ function GameUnitCard({ instance, value, onView, onChange }) {
 
       <div className="aos-game-unit-card__content">
         <div className="aos-game-unit-card__heading">
-          <small>{groupLabel} · {roleLabel}{copyLabel}</small>
+          <div className="aos-game-unit-card__heading-row">
+            <small>{groupLabel} · {roleLabel}{copyLabel}</small>
+            <button
+              type="button"
+              className="aos-game-unit-card__combat-toggle"
+              onClick={toggleCombat}
+              aria-pressed={state.inCombat}
+              aria-label={`${state.inCombat ? "Quitar de combate" : "Marcar en combate"}: ${unit.name}`}
+            >
+              <span aria-hidden="true">⚔</span>
+              {state.inCombat ? "En combate" : "Marcar combate"}
+            </button>
+          </div>
           <strong>{unit.name}</strong>
           <span>{unit.points ?? 0} pts · {unit.profile?.health ?? "-"} salud · {unit.profile?.save ?? "-"} salvación</span>
         </div>
@@ -217,10 +283,27 @@ function GameUnitCard({ instance, value, onView, onChange }) {
           </div>
         </div>
 
-        {activeModifiers.length > 0 && (
+        {activeModifierCount > 0 && (
           <div className="aos-game-unit-card__active" aria-label="Modificadores activos">
             {activeModifiers.map((modifier) => (
-              <span key={modifier.id}>{modifier.shortLabel}</span>
+              <button
+                type="button"
+                key={modifier.id}
+                onClick={() => toggleModifier(modifier.id)}
+                aria-label={`Desactivar ${modifier.label}`}
+              >
+                {modifier.shortLabel} <span aria-hidden="true">×</span>
+              </button>
+            ))}
+            {state.customModifiers.map((modifier) => (
+              <button
+                type="button"
+                key={modifier}
+                onClick={() => removeCustomModifier(modifier)}
+                aria-label={`Desactivar ${modifier}`}
+              >
+                {modifier} <span aria-hidden="true">×</span>
+              </button>
             ))}
           </div>
         )}
@@ -232,15 +315,15 @@ function GameUnitCard({ instance, value, onView, onChange }) {
           aria-expanded={modifiersOpen}
         >
           <span aria-hidden="true">＋</span>
-          {activeModifiers.length > 0
-            ? `Modificadores (${activeModifiers.length})`
+          {activeModifierCount > 0
+            ? `Modificadores (${activeModifierCount})`
             : "Añadir modificadores"}
         </button>
 
         {modifiersOpen && (
           <div className="aos-game-unit-card__modifiers">
             <p>Bonificadores activos para esta copia:</p>
-            <div>
+            <div className="aos-game-unit-card__quick-modifiers">
               {POSITIVE_UNIT_MODIFIERS.map((modifier) => {
                 const active = state.modifiers.includes(modifier.id);
                 return (
@@ -257,6 +340,23 @@ function GameUnitCard({ instance, value, onView, onChange }) {
                 );
               })}
             </div>
+            <form className="aos-game-unit-card__custom-modifier" onSubmit={addCustomModifier}>
+              <label htmlFor={`custom-modifier-${instance.key}`}>Modificador personalizado</label>
+              <div>
+                <input
+                  id={`custom-modifier-${instance.key}`}
+                  type="text"
+                  value={customModifier}
+                  maxLength={MAX_CUSTOM_MODIFIER_LENGTH}
+                  placeholder="Ej.: Ataca primero"
+                  onChange={(event) => setCustomModifier(event.target.value)}
+                />
+                <button
+                  type="submit"
+                  disabled={!customModifier.trim() || state.customModifiers.length >= MAX_CUSTOM_MODIFIERS}
+                >Añadir</button>
+              </div>
+            </form>
           </div>
         )}
       </div>

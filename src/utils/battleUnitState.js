@@ -8,6 +8,8 @@ export const POSITIVE_UNIT_MODIFIERS = [
 
 const modifierIds = new Set(POSITIVE_UNIT_MODIFIERS.map((modifier) => modifier.id));
 const MAX_TRACKED_UNIT_STATES = 128;
+export const MAX_CUSTOM_MODIFIERS = 10;
+export const MAX_CUSTOM_MODIFIER_LENGTH = 60;
 
 export function getUnitStartingModels(unit) {
   const configuredModels = Number(unit?.configuredModels);
@@ -30,6 +32,8 @@ export function getBattleUnitState(value, unit) {
   return {
     remainingModels,
     modifiers: normalizeModifiers(value?.modifiers),
+    customModifiers: normalizeCustomModifiers(value?.customModifiers),
+    inCombat: Boolean(value?.inCombat),
   };
 }
 
@@ -43,7 +47,19 @@ export function normalizeBattleUnitStates(value) {
       .map(([key, state]) => [String(key).slice(0, 160), {
         remainingModels: Math.min(999, Math.max(0, Math.floor(Number(state.remainingModels) || 0))),
         modifiers: normalizeModifiers(state.modifiers),
+        customModifiers: normalizeCustomModifiers(state.customModifiers),
+        inCombat: Boolean(state.inCombat),
       }]),
+  );
+}
+
+export function clearBattleUnitModifiers(value) {
+  return Object.fromEntries(
+    Object.entries(normalizeBattleUnitStates(value)).map(([key, state]) => [key, {
+      ...state,
+      modifiers: [],
+      customModifiers: [],
+    }]),
   );
 }
 
@@ -52,4 +68,20 @@ function normalizeModifiers(value) {
     (Array.isArray(value) ? value : [])
       .filter((modifierId) => modifierIds.has(modifierId)),
   )];
+}
+
+function normalizeCustomModifiers(value) {
+  const result = [];
+  const seen = new Set();
+
+  (Array.isArray(value) ? value : []).forEach((modifier) => {
+    const label = String(modifier ?? "").replace(/\s+/g, " ").trim()
+      .slice(0, MAX_CUSTOM_MODIFIER_LENGTH);
+    const key = label.toLocaleLowerCase("es");
+    if (!label || seen.has(key) || result.length >= MAX_CUSTOM_MODIFIERS) return;
+    seen.add(key);
+    result.push(label);
+  });
+
+  return result;
 }
