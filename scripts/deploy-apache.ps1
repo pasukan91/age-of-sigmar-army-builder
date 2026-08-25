@@ -63,7 +63,13 @@ Push-Location $projectRoot
 
 try {
   Write-Host "[1/3] Compilando la aplicación..." -ForegroundColor Yellow
-  & npm.cmd run build
+  $viteCli = Join-Path $projectRoot "node_modules\vite\bin\vite.js"
+
+  if (-not (Test-Path -LiteralPath $viteCli -PathType Leaf)) {
+    throw "No se encuentra Vite en '$viteCli'. Instala las dependencias antes de publicar."
+  }
+
+  & node $viteCli build
 
   if ($LASTEXITCODE -ne 0) {
     throw "La compilación ha fallado con el código $LASTEXITCODE."
