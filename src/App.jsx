@@ -789,6 +789,20 @@ function App() {
     });
   }
 
+  function handleBattleUnitStateChange(instanceKey, nextState) {
+    if (!currentList || !instanceKey || !nextState) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      battleUnitStates: {
+        ...(currentList.battleUnitStates ?? {}),
+        [instanceKey]: nextState,
+      },
+    });
+  }
+
   /*
    * =====================================================
    * SELECTOR, WARSCROLL Y CONFIGURACIÓN
@@ -2164,6 +2178,7 @@ function App() {
           onBattleInitiativeResolve={handleBattleInitiativeResolve}
           onBattleLogAdd={handleBattleLogAdd}
           onBattleLogRemove={handleBattleLogRemove}
+          onBattleUnitStateChange={handleBattleUnitStateChange}
           onViewRule={openBuilderRuleReference}
           onBrowseUnit={openBuilderUnitReference}
           section={builderSection}

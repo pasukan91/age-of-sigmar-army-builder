@@ -1024,3 +1024,257 @@ body .aos-builder-tabs button > small {
     transition-duration: 0.01ms !important;
   }
 }
+
+.aos-game-unit-card {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 150px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid #c9baa0;
+  border-left: 4px solid #8d2018;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(41, 31, 20, 0.07);
+}
+
+.aos-game-unit-card.is-destroyed {
+  border-left-color: #706a62;
+  background: #f4f1ec;
+}
+
+.aos-game-unit-card__warscroll {
+  position: relative;
+  min-height: 190px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-right: 1px solid #d7cbb8;
+  border-radius: 0;
+  background: #2f1713;
+  cursor: pointer;
+}
+
+.aos-game-unit-card__warscroll img {
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  object-fit: cover;
+}
+
+.aos-game-unit-card__warscroll > span {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  left: 7px;
+  padding: 5px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 5px;
+  color: #fff;
+  background: rgba(27, 16, 13, 0.9);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.aos-game-unit-card__content {
+  display: flex;
+  min-width: 0;
+  padding: 12px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aos-game-unit-card__heading small,
+.aos-game-unit-card__heading strong,
+.aos-game-unit-card__heading > span {
+  display: block;
+}
+
+.aos-game-unit-card__heading small {
+  margin-bottom: 3px;
+  color: #8d2018;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.aos-game-unit-card__heading strong {
+  color: #211c17;
+  line-height: 1.2;
+}
+
+.aos-game-unit-card__heading > span {
+  margin-top: 3px;
+  color: #6b6258;
+  font-size: 12px;
+}
+
+.aos-game-unit-card__models {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.aos-game-unit-card__models label {
+  color: #4e463e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.aos-game-unit-card__counter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.aos-game-unit-card__counter button {
+  display: grid;
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid #b9a98e;
+  border-radius: 5px;
+  color: #3c241d;
+  background: #f8f3ea;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.aos-game-unit-card__counter button:disabled {
+  opacity: 0.4;
+}
+
+.aos-game-unit-card__counter input {
+  width: 44px;
+  height: 38px;
+  padding: 4px;
+  border: 1px solid #96866e;
+  border-radius: 5px;
+  color: #211c17;
+  background: #fff;
+  font: inherit;
+  font-weight: 900;
+  text-align: center;
+}
+
+.aos-game-unit-card__counter > span {
+  color: #6b6258;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.aos-game-unit-card__active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.aos-game-unit-card__active span {
+  padding: 4px 7px;
+  border: 1px solid #84a36e;
+  border-radius: 999px;
+  color: #234819;
+  background: #edf5e7;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.aos-game-unit-card__modifier-toggle {
+  display: flex;
+  min-height: 40px;
+  padding: 8px 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid #9f8b68;
+  border-radius: 5px;
+  color: #503322;
+  background: #f3eadb;
+  font-weight: 900;
+}
+
+.aos-game-unit-card__modifiers {
+  padding-top: 9px;
+  border-top: 1px solid #ded4c5;
+}
+
+.aos-game-unit-card__modifiers p {
+  margin: 0 0 7px;
+  color: #62584e;
+  font-size: 11px;
+}
+
+.aos-game-unit-card__modifiers > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.aos-game-unit-card__modifiers button {
+  display: flex;
+  min-height: 42px;
+  padding: 7px 8px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #c6baa6;
+  border-radius: 5px;
+  color: #3f3932;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.aos-game-unit-card__modifiers button span {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8e0d4;
+}
+
+.aos-game-unit-card__modifiers button.is-active {
+  border-color: #5e8a47;
+  color: #244a18;
+  background: #edf5e7;
+}
+
+.aos-game-unit-card__modifiers button.is-active span {
+  color: #fff;
+  background: #4f7a3b;
+}
+
+@media (max-width: 760px) {
+  .aos-game-unit-card {
+    grid-template-columns: 118px minmax(0, 1fr);
+  }
+
+  .aos-game-unit-card__warscroll,
+  .aos-game-unit-card__warscroll img {
+    min-height: 170px;
+  }
+}
+
+@media (max-width: 380px) {
+  .aos-game-unit-card {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+
+  .aos-game-unit-card__models {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .aos-game-unit-card__modifiers > div {
+    grid-template-columns: 1fr;
+  }
+}

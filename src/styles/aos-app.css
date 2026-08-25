@@ -5820,7 +5820,7 @@ select.aos-field__control:hover {
   gap: 8px;
 }
 
-.aos-game-roster__grid button {
+.aos-game-roster__grid > button {
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr);
   min-height: 116px;

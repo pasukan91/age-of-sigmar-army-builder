@@ -2,7 +2,12 @@ import { useState } from "react";
 import { MAX_BATTLE_LOG_TEXT_LENGTH } from "../../utils/battleLogLimits";
 
 import { normalizeRuleItem } from "../../utils/ruleReferences";
-import { getUniqueListUnits } from "../../utils/listWarscrolls";
+import { getListUnitInstances } from "../../utils/listWarscrolls";
+import {
+  getBattleUnitState,
+  getUnitStartingModels,
+  POSITIVE_UNIT_MODIFIERS,
+} from "../../utils/battleUnitState";
 import {
   BATTLE_ACTORS,
   BATTLE_EVENT_DEFINITIONS,
@@ -28,18 +33,19 @@ function GameMode({
   onInitiativeResolve,
   onLogAdd,
   onLogRemove,
+  onUnitStateChange,
 }) {
-  const units = getUniqueListUnits(list);
+  const unitInstances = getListUnitInstances(list);
   const manifestations = getManifestations(list);
   const terrain = list?.terrain ? normalizeRuleItem(list.terrain) : null;
-  const warscrollCount = units.length + manifestations.length;
+  const warscrollCount = unitInstances.length + manifestations.length;
 
   return (
     <section className="aos-game-mode" aria-labelledby="game-mode-title">
       <header className="aos-game-mode__hero">
         <span className="aos-eyebrow">Mesa de juego</span>
         <h2 id="game-mode-title">Modo partida</h2>
-        <p>Ten a mano los warscrolls, manifestaciones y terreno que consultarás durante la partida.</p>
+        <p>Controla cada unidad por separado: abre su warscroll, anota bajas y aplica bonificadores durante la partida.</p>
       </header>
 
       <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
@@ -55,15 +61,13 @@ function GameMode({
         </div>
 
         <div className="aos-game-roster__grid">
-          {units.map((unit) => (
-            <WarscrollCard
-              key={unit.instanceId ?? unit.id}
-              artwork={<UnitArtwork unit={unit} />}
-              type="Unidad"
-              name={unit.name}
-              summary={`${unit.points ?? 0} pts`}
-              details={`${unit.profile?.health ?? "-"} salud · ${unit.profile?.save ?? "-"} salvación`}
-              onClick={() => onViewUnit?.(unit)}
+          {unitInstances.map((instance) => (
+            <GameUnitCard
+              key={instance.key}
+              instance={instance}
+              value={list?.battleUnitStates?.[instance.key]}
+              onView={() => onViewUnit?.(instance.unit)}
+              onChange={(nextState) => onUnitStateChange?.(instance.key, nextState)}
             />
           ))}
 
@@ -136,6 +140,127 @@ function GameMode({
       />
 
     </section>
+  );
+}
+
+function GameUnitCard({ instance, value, onView, onChange }) {
+  const [modifiersOpen, setModifiersOpen] = useState(false);
+  const { unit, groupLabel, roleLabel, copyIndex, copyCount } = instance;
+  const startingModels = getUnitStartingModels(unit);
+  const state = getBattleUnitState(value, unit);
+  const activeModifiers = POSITIVE_UNIT_MODIFIERS.filter((modifier) =>
+    state.modifiers.includes(modifier.id)
+  );
+
+  function setRemainingModels(nextValue) {
+    const remainingModels = Math.min(
+      startingModels,
+      Math.max(0, Math.floor(Number(nextValue) || 0)),
+    );
+    onChange?.({ ...state, remainingModels });
+  }
+
+  function toggleModifier(modifierId) {
+    const modifiers = state.modifiers.includes(modifierId)
+      ? state.modifiers.filter((id) => id !== modifierId)
+      : [...state.modifiers, modifierId];
+    onChange?.({ ...state, modifiers });
+  }
+
+  const copyLabel = copyCount > 1 ? ` · Copia ${copyIndex} de ${copyCount}` : "";
+
+  return (
+    <article className={`aos-game-unit-card${state.remainingModels === 0 ? " is-destroyed" : ""}`}>
+      <button
+        type="button"
+        className="aos-game-unit-card__warscroll"
+        onClick={onView}
+        aria-label={`Abrir warscroll de ${unit.name}, ${groupLabel}${copyLabel}`}
+      >
+        <UnitArtwork unit={unit} />
+        <span>Ver warscroll</span>
+      </button>
+
+      <div className="aos-game-unit-card__content">
+        <div className="aos-game-unit-card__heading">
+          <small>{groupLabel} · {roleLabel}{copyLabel}</small>
+          <strong>{unit.name}</strong>
+          <span>{unit.points ?? 0} pts · {unit.profile?.health ?? "-"} salud · {unit.profile?.save ?? "-"} salvación</span>
+        </div>
+
+        <div className="aos-game-unit-card__models">
+          <label htmlFor={`remaining-models-${instance.key}`}>Miniaturas restantes</label>
+          <div className="aos-game-unit-card__counter">
+            <button
+              type="button"
+              onClick={() => setRemainingModels(state.remainingModels - 1)}
+              disabled={state.remainingModels === 0}
+              aria-label={`Restar una miniatura a ${unit.name}`}
+            >−</button>
+            <input
+              id={`remaining-models-${instance.key}`}
+              type="number"
+              inputMode="numeric"
+              min="0"
+              max={startingModels}
+              value={state.remainingModels}
+              onChange={(event) => setRemainingModels(event.target.value)}
+              aria-describedby={`starting-models-${instance.key}`}
+            />
+            <span id={`starting-models-${instance.key}`}>/ {startingModels}</span>
+            <button
+              type="button"
+              onClick={() => setRemainingModels(state.remainingModels + 1)}
+              disabled={state.remainingModels === startingModels}
+              aria-label={`Añadir una miniatura a ${unit.name}`}
+            >+</button>
+          </div>
+        </div>
+
+        {activeModifiers.length > 0 && (
+          <div className="aos-game-unit-card__active" aria-label="Modificadores activos">
+            {activeModifiers.map((modifier) => (
+              <span key={modifier.id}>{modifier.shortLabel}</span>
+            ))}
+          </div>
+        )}
+
+        <button
+          type="button"
+          className="aos-game-unit-card__modifier-toggle"
+          onClick={() => setModifiersOpen((current) => !current)}
+          aria-expanded={modifiersOpen}
+        >
+          <span aria-hidden="true">＋</span>
+          {activeModifiers.length > 0
+            ? `Modificadores (${activeModifiers.length})`
+            : "Añadir modificadores"}
+        </button>
+
+        {modifiersOpen && (
+          <div className="aos-game-unit-card__modifiers">
+            <p>Bonificadores activos para esta copia:</p>
+            <div>
+              {POSITIVE_UNIT_MODIFIERS.map((modifier) => {
+                const active = state.modifiers.includes(modifier.id);
+                return (
+                  <button
+                    type="button"
+                    key={modifier.id}
+                    className={active ? "is-active" : ""}
+                    aria-pressed={active}
+                    onClick={() => toggleModifier(modifier.id)}
+                  >
+                    <span aria-hidden="true">{active ? "✓" : "+"}</span>
+                    {modifier.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </article>
   );
 }
 

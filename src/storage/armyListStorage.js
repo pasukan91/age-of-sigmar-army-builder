@@ -10,6 +10,7 @@ import {
   limitBattleLogEntries,
   truncateBattleLogText,
 } from "../utils/battleLogLimits";
+import { normalizeBattleUnitStates } from "../utils/battleUnitState";
 
 const STORAGE_KEY = "storm-forge.army-lists.v1";
 const RECOVERY_STORAGE_KEY = "storm-forge.army-lists.recovery";
@@ -247,6 +248,7 @@ function serializeList(list) {
     battleRound: Math.min(5, Math.max(1, Number(list.battleRound) || 1)),
     battleTurnActor: list.battleTurnActor === "opponent" ? "opponent" : "self",
     battleLog: serializeBattleLog(list.battleLog),
+    battleUnitStates: normalizeBattleUnitStates(list.battleUnitStates),
     terrain: list.terrain ?? null,
     regiments: (list.regiments ?? []).map((regiment) => ({
       id: regiment.id,
@@ -361,6 +363,7 @@ function restoreList(savedList) {
     battleRound: Math.min(5, Math.max(1, Number(savedList.battleRound) || 1)),
     battleTurnActor: savedList.battleTurnActor === "opponent" ? "opponent" : "self",
     battleLog: restoreBattleLog(savedList.battleLog),
+    battleUnitStates: normalizeBattleUnitStates(savedList.battleUnitStates),
     terrain: restoreOption(
       savedList.terrain,
       effectiveFaction.terrain
