@@ -4,16 +4,14 @@ const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media-${CACHE_VERSION}`;
 const MAX_MEDIA_ENTRIES = 120;
-const APP_ROOT = new URL("./", self.location.href).pathname;
-const appFile = (path) => `${APP_ROOT}${path}`;
 const CORE_FILES = [
-  APP_ROOT,
-  appFile("index.html"),
-  appFile("offline.html"),
-  appFile("manifest.webmanifest"),
-  appFile("apple-touch-icon.png"),
-  appFile("pwa-icon-192.png"),
-  appFile("pwa-icon-512.png"),
+  "/",
+  "/index.html",
+  "/offline.html",
+  "/manifest.webmanifest",
+  "/apple-touch-icon.png",
+  "/pwa-icon-192.png",
+  "/pwa-icon-512.png",
 ];
 
 self.addEventListener("install", (event) => {
@@ -28,7 +26,7 @@ self.addEventListener("install", (event) => {
           })
         );
 
-        const hasAppShell = await cache.match(appFile("index.html"));
+        const hasAppShell = await cache.match("/index.html");
         if (!hasAppShell) {
           throw new Error("No se pudo instalar la pantalla principal offline.");
         }
@@ -96,9 +94,9 @@ async function networkFirstPage(request) {
   } catch {
     return (
       await caches.match(request) ||
-      await caches.match(appFile("index.html")) ||
-      await caches.match(APP_ROOT) ||
-      await caches.match(appFile("offline.html"))
+      await caches.match("/index.html") ||
+      await caches.match("/") ||
+      await caches.match("/offline.html")
     );
   }
 }

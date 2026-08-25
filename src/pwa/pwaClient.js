@@ -29,9 +29,8 @@ export function initializePwa() {
 
   window.addEventListener("load", async () => {
     try {
-      const appBase = new URL(import.meta.env.BASE_URL, window.location.origin).pathname;
-      const registration = await navigator.serviceWorker.register(`${appBase}sw.js`, {
-        scope: appBase,
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
         updateViaCache: "none",
       });
 
