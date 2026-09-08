@@ -5770,6 +5770,58 @@ select.aos-field__control:hover {
   line-height: 1.4;
 }
 
+.aos-battle-tactic-copy {
+  margin-top: 10px;
+  padding: 10px 11px;
+  border-radius: 5px;
+}
+
+.aos-battle-tactic-copy > span {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.aos-battle-tactic-copy > p {
+  margin: 0;
+  color: #302b26;
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.aos-battle-tactic-copy--lore {
+  border-left: 4px solid #9a7d43;
+  background: #f2ead8;
+}
+
+.aos-battle-tactic-copy--lore > span {
+  color: #725b2e;
+}
+
+.aos-battle-tactic-copy--lore > p {
+  color: #51493f;
+  font-style: italic;
+}
+
+.aos-battle-tactic-copy--rule {
+  border: 1px solid #d3b8a9;
+  border-left: 4px solid #8d2018;
+  background: #fff;
+}
+
+.aos-battle-tactic-copy--rule > span {
+  color: #7c1d17;
+}
+
+.aos-battle-tactic-copy--rule > p {
+  font-size: 15px;
+  font-weight: 600;
+}
+
 .aos-game-battle-card__tactic-heading {
   display: flex;
   align-items: center;

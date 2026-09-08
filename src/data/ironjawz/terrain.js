@@ -2,7 +2,7 @@ const terrain = [
   {
     id: "bossrokk-tower",
     name: "Bossrokk Tower",
-    image: "/images/terrain/ironjawz/bossrokk-tower.webp",
+    image: "/images/factions/ironjawz-army.webp",
     profile: { move: "-", health: 12, control: "-", save: "4+", ward: null },
     universalAbilities: ["Cover", "Impassable"],
     abilities: [

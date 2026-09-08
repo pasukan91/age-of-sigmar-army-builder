@@ -29,35 +29,30 @@ const BUILDER_TABS = [
     label: "Ejército",
     icon: "♜",
     title: "Configuración del ejército",
-    description: "Elige formación, cartas, saberes y escenario. Aquí también puedes comprobar si la lista es legal.",
   },
   {
     id: "units",
     label: "Unidades",
     icon: "⚔",
     title: "Regimientos y unidades",
-    description: "Añade primero un líder a cada regimiento y después completa sus plazas con unidades compatibles.",
   },
   {
     id: "rules",
     label: "Reglas",
     icon: "▤",
     title: "Biblioteca de reglas",
-    description: "Consulta en un solo lugar las reglas de facción, formación, saberes y mejoras seleccionadas.",
   },
   {
     id: "game",
     label: "Partida",
     icon: "◉",
     title: "Herramientas de partida",
-    description: "Controla la ronda, el turno, los puntos de mando y los eventos mientras juegas.",
   },
   {
     id: "mission",
     label: "Misión",
     icon: "⌖",
     title: "Objetivos y tácticas",
-    description: "Marca las tácticas completadas y consulta las condiciones de puntuación durante la partida.",
   },
 ];
 
@@ -125,6 +120,7 @@ function ArmyBuilder({
     () => validation.errors.length > 0
   );
   const resetScrollOnSectionChange = useRef(false);
+  const sectionSwipeStart = useRef(null);
   const activeTab = BUILDER_TABS.find((tab) => tab.id === section) ?? BUILDER_TABS[0];
   const isBattleSection = section === "game" || section === "mission";
 
@@ -209,9 +205,50 @@ function ArmyBuilder({
     });
   }
 
+  function handleSectionSwipeStart(event) {
+    if (
+      event.touches.length !== 1 ||
+      event.target.closest?.("input, textarea, select, [contenteditable='true'], [data-section-swipe='off']")
+    ) {
+      sectionSwipeStart.current = null;
+      return;
+    }
+
+    const touch = event.touches[0];
+    sectionSwipeStart.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+    };
+  }
+
+  function handleSectionSwipeEnd(event) {
+    const start = sectionSwipeStart.current;
+    sectionSwipeStart.current = null;
+    if (!start || !window.matchMedia("(max-width: 760px)").matches) return;
+
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+    const isHorizontalSwipe =
+      Math.abs(deltaX) >= 56 &&
+      Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
+
+    if (!isHorizontalSwipe) return;
+
+    const currentIndex = BUILDER_TABS.findIndex((tab) => tab.id === section);
+    const nextIndex = currentIndex + (deltaX < 0 ? 1 : -1);
+    const nextTab = BUILDER_TABS[nextIndex];
+    if (nextTab) changeSection(nextTab.id);
+  }
+
   return (
     <main
       className="aos-page aos-builder-page"
+      onTouchStart={handleSectionSwipeStart}
+      onTouchEnd={handleSectionSwipeEnd}
+      onTouchCancel={() => { sectionSwipeStart.current = null; }}
     >
       <header className="aos-topbar">
         <button
@@ -231,15 +268,14 @@ function ArmyBuilder({
       </header>
 
       <nav className="aos-builder-tabs" aria-label="Secciones de la lista">
-        {BUILDER_TABS.map(({ id, label, icon, description }) => (
+        {BUILDER_TABS.map(({ id, label, icon }) => (
           <button
             key={id}
             type="button"
             className={section === id ? "is-active" : ""}
             onClick={() => changeSection(id)}
             aria-current={section === id ? "page" : undefined}
-            aria-label={`${label}: ${description}`}
-            title={description}
+            aria-label={label}
           >
             <span aria-hidden="true">{icon}</span>
             <small>{label}</small>
@@ -249,9 +285,7 @@ function ArmyBuilder({
 
       <section className="aos-builder-section-guide" aria-labelledby="builder-section-title">
         <div>
-          <span className="aos-builder-section-guide__eyebrow">Estás en</span>
           <h2 id="builder-section-title" tabIndex="-1">{activeTab.title}</h2>
-          <p>{activeTab.description}</p>
         </div>
         <span className={`aos-builder-section-guide__status is-${section}`}>
           {getSectionStatus({ section, list, validation, currentPoints })}
@@ -279,7 +313,6 @@ function ArmyBuilder({
           id="battleplan-option"
           title="Plan de batalla"
           value={list.battleplan?.name ?? "No seleccionado"}
-          description="Escenario, reglas especiales y forma de puntuar esta partida."
           image={list.battleplan?.image}
           onClick={() =>
             openSelector({
@@ -294,7 +327,6 @@ function ArmyBuilder({
           id="battle-tactics-option"
           title="Tácticas de batalla"
           value={formatBattleTactics(list.battleTactics)}
-          description="Escoge hasta dos cartas; cada una contiene tres misiones puntuables."
           recommended
           onClick={() =>
             openSelector({
@@ -314,7 +346,6 @@ function ArmyBuilder({
             list.battleFormation?.name ??
             "No seleccionada"
           }
-          description="Regla global que define el estilo de juego del ejército."
           required
           onClick={() =>
             openSelector({
@@ -337,7 +368,6 @@ function ArmyBuilder({
             list.spellLore?.name ??
             "No seleccionada"
           }
-          description="Hechizos disponibles para todos los magos que puedan usarlos."
           recommended
           onClick={() =>
             openSelector({
@@ -357,7 +387,6 @@ function ArmyBuilder({
               list.prayerLore?.name ??
               "No seleccionada"
             }
-            description="Plegarias disponibles para los sacerdotes del ejército."
             recommended
             onClick={() =>
               openSelector({
@@ -381,7 +410,6 @@ function ArmyBuilder({
               ?.name ??
             "No seleccionada"
           }
-          description="Manifestaciones que tus magos o sacerdotes podrán invocar."
           recommended
           onClick={() =>
             openSelector({
@@ -403,7 +431,6 @@ function ArmyBuilder({
               list.terrain?.name ??
               "No seleccionado"
             }
-            description="Elemento de terreno propio y sus reglas durante la batalla."
             recommended
             onClick={() =>
               openSelector({

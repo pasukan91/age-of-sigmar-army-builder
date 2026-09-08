@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import Accordion from "../components/Accordion";
 import BackButton from "../components/BackButton";
-import ContextNote from "../components/ContextNote";
 import UnitArtwork from "../components/UnitArtwork";
 
 function OptionSelector({
@@ -35,7 +34,6 @@ function OptionSelector({
   const optionGroups = variant === "units"
     ? groupUnitOptions(filteredOptions)
     : [{ id: "options", label: null, options: filteredOptions }];
-  const guidance = getSelectorGuidance({ title, variant, isMultiSelect, maxSelections });
 
   function hasWarscroll(option) {
     return Boolean(
@@ -98,10 +96,6 @@ function OptionSelector({
               : "Elige una opción"}
           </h2>
         </div>
-
-        <ContextNote title={guidance.title}>
-          {guidance.description}
-        </ContextNote>
 
         {variant === "units" && options.length > 8 && (
           <section className="aos-selector-tools" aria-label="Buscar y filtrar unidades">
@@ -335,37 +329,6 @@ function normalizeSearch(value) {
     .trim();
 }
 
-function getSelectorGuidance({ title, variant, isMultiSelect, maxSelections }) {
-  if (variant === "units") {
-    return {
-      title: "Cómo elegir una unidad",
-      description:
-        "Toca la imagen para consultar su warscroll. Revisa puntos y perfil; después pulsa Seleccionar para añadirla.",
-    };
-  }
-
-  if (variant === "battleTactics" || isMultiSelect) {
-    return {
-      title: "Selección múltiple",
-      description: `Puedes elegir hasta ${maxSelections} opciones. Pulsa de nuevo una opción seleccionada para quitarla y confirma al terminar.`,
-    };
-  }
-
-  if (String(title).toLowerCase().includes("formación")) {
-    return {
-      title: "Define el estilo del ejército",
-      description:
-        "La formación es obligatoria y añade una regla global. Abre la descripción para comparar antes de elegir.",
-    };
-  }
-
-  return {
-    title: "Revisa antes de elegir",
-    description:
-      "Abre la descripción para entender el efecto. Al pulsar Seleccionar volverás al constructor con la opción aplicada.",
-  };
-}
-
 function BattleTacticsOptions({
   cards,
   selectedIds,
@@ -417,8 +380,16 @@ function BattleTacticsOptions({
                 <b>{tactic.points} PV</b>
               </div>
               <strong>{tactic.name}</strong>
-              {tactic.flavour && <em>{tactic.flavour}</em>}
-              <p>{tactic.condition}</p>
+              {tactic.flavour && (
+                <div className="aos-battle-tactic-copy aos-battle-tactic-copy--lore">
+                  <span>Trasfondo</span>
+                  <p>{tactic.flavour}</p>
+                </div>
+              )}
+              <div className="aos-battle-tactic-copy aos-battle-tactic-copy--rule">
+                <span>Regla</span>
+                <p>{tactic.condition}</p>
+              </div>
             </div>
             ))}
           </Accordion>

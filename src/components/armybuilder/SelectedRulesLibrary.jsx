@@ -38,7 +38,6 @@ function SelectedRulesLibrary({ list, onViewRule }) {
       <header className="aos-selected-rules__header">
         <span className="aos-eyebrow">Biblioteca de batalla</span>
         <h2 id="selected-rules-title">Warscrolls y reglas seleccionadas</h2>
-        <p>Abre cada ficha para consultar sus requisitos, fase y efecto durante la partida.</p>
       </header>
 
       {groups.map((group) => (
@@ -69,6 +68,7 @@ function SelectedRulesLibrary({ list, onViewRule }) {
                       src={item.image}
                       alt=""
                       loading="lazy"
+                      onError={(event) => { event.currentTarget.hidden = true; }}
                     />
                   )}
                   <span>

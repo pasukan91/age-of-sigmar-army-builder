@@ -31,6 +31,7 @@ export default {
   spellLores,
   prayerLores: [],
   manifestations,
+  manifestationLoreName: "Manifestations of Malevolence",
   terrain,
   units: [...units, ...scourgeUnits],
   armiesOfRenown,

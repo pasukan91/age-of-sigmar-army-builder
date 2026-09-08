@@ -226,7 +226,7 @@ function RegimentSection({
               id={`regiment-${regiment.id}`}
               key={regiment.id}
               className="aos-regiment-card"
-              open={regimentIndex === 0 || regimentErrors.length > 0}
+              open
               style={
                 styles.regimentCard
               }

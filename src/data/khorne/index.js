@@ -10,5 +10,5 @@ export default {
   id:"khorne",alliance:"chaos",name:"Blades of Khorne",image:"/images/factions/blades.webp",
   battleTraits,battleFormations,heroicTraits,monsterTraits:[],artefacts,
   brazenMutations,spellLores:[],prayerLores:[...prayerLores,...aqshyPrayerLores],aqshyPrayerLores,
-  manifestations,terrain,units:[...units,...scourgeUnits],armiesOfRenown,regimentsOfRenown,
+  manifestations,manifestationLoreName:"Manifestations of Khorne",terrain,units:[...units,...scourgeUnits],armiesOfRenown,regimentsOfRenown,
 };

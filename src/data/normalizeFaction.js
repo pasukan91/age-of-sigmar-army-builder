@@ -1,6 +1,7 @@
 import { withEnhancementTiming } from "../utils/enhancementTiming";
 import { applyAosCommunityCatalogue } from "./applyAosCommunityCatalogue";
 import { shouldUseAosCommunityCatalogue } from "./aosCommunityCataloguePolicy";
+import { ensureManifestationLoreCoverage } from "./ensureManifestationLoreCoverage.js";
 
 const ARRAY_FIELDS = [
   "battleTraits",
@@ -278,7 +279,7 @@ function normalizeManifestationLores({ faction, lores, manifestations }) {
         }]
       : [];
 
-  return sourceLores.map((lore) => {
+  const resolvedLores = sourceLores.map((lore) => {
     const listedManifestations = asArray(lore.manifestations);
     const resolved = listedManifestations.length > 0
       ? listedManifestations.map((item) =>
@@ -292,6 +293,12 @@ function normalizeManifestationLores({ faction, lores, manifestations }) {
         ? resolved
         : [createPendingManifestation(slugify(lore.name), lore.name)],
     };
+  });
+
+  return ensureManifestationLoreCoverage({
+    faction,
+    lores: resolvedLores,
+    manifestations,
   });
 }
 
@@ -465,6 +472,17 @@ export function getFactionValidationErrors(faction) {
         );
       }
     });
+  });
+
+  const manifestationsInLores = new Set(
+    faction?.manifestationLores?.flatMap((lore) =>
+      lore.manifestations?.map((manifestation) => manifestation?.id) ?? []
+    ) ?? []
+  );
+  faction?.manifestations?.forEach((manifestation) => {
+    if (!manifestationsInLores.has(manifestation.id)) {
+      errors.push(`manifestation not available in a lore: ${manifestation.id}`);
+    }
   });
 
   faction?.manifestations?.forEach((manifestation) => {

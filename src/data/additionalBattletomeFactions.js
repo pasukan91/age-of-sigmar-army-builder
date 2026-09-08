@@ -73,20 +73,42 @@ function withLocalImages(items, factionId, imageMap) {
   }));
 }
 
+function withLocalManifestationImages(items) {
+  return (items ?? []).map((item) => ({
+    ...item,
+    image: /^https?:\/\//i.test(item.image ?? "")
+      ? `/images/manifestations/catalogue/${item.id}.webp`
+      : item.image,
+  }));
+}
+
+function withLocalManifestationLoreImages(lores) {
+  return (lores ?? []).map((lore) => ({
+    ...lore,
+    manifestations: withLocalManifestationImages(lore.manifestations),
+  }));
+}
+
 function applyLocalImages(faction) {
   const local = LOCAL_IMAGES[faction.id];
   if (!local) return faction;
   const updateRules = (rules = {}) => ({
     ...rules,
     units: withLocalImages(rules.units, faction.id, local.units),
-    manifestations: withLocalImages(rules.manifestations, faction.id, local.units),
+    manifestations: withLocalManifestationImages(
+      withLocalImages(rules.manifestations, faction.id, local.units)
+    ),
+    manifestationLores: withLocalManifestationLoreImages(rules.manifestationLores),
     terrain: withLocalImages(rules.terrain, faction.id, local.units),
   });
   return {
     ...faction,
     image: local.faction,
     units: withLocalImages(faction.units, faction.id, local.units),
-    manifestations: withLocalImages(faction.manifestations, faction.id, local.units),
+    manifestations: withLocalManifestationImages(
+      withLocalImages(faction.manifestations, faction.id, local.units)
+    ),
+    manifestationLores: withLocalManifestationLoreImages(faction.manifestationLores),
     terrain: withLocalImages(faction.terrain, faction.id, local.units),
     armiesOfRenown: (faction.armiesOfRenown ?? []).map((army) => ({
       ...army,
@@ -95,13 +117,35 @@ function applyLocalImages(faction) {
   };
 }
 
-const hydratedFactions = catalogue.factions.map(applyLocalImages);
+const hydratedFactions = catalogue.factions.map((faction) =>
+  applyLocalImages({
+    ...faction,
+    manifestations: withLocalManifestationImages(faction.manifestations),
+    manifestationLores: withLocalManifestationLoreImages(faction.manifestationLores),
+    armiesOfRenown: (faction.armiesOfRenown ?? []).map((army) => ({
+      ...army,
+      rules: army.rules
+        ? {
+            ...army.rules,
+            manifestations: withLocalManifestationImages(army.rules.manifestations),
+            manifestationLores: withLocalManifestationLoreImages(
+              army.rules.manifestationLores
+            ),
+          }
+        : army.rules,
+    })),
+  })
+);
 const factions = Object.fromEntries(
   hydratedFactions.map((faction) => [faction.id, faction])
 );
 
-export const universalManifestations = catalogue.universalManifestations ?? [];
-export const universalManifestationLores = catalogue.universalManifestationLores ?? [];
+export const universalManifestations = withLocalManifestationImages(
+  catalogue.universalManifestations
+);
+export const universalManifestationLores = withLocalManifestationLoreImages(
+  catalogue.universalManifestationLores
+);
 export const stormcast = factions.stormcast;
 export const idoneth = factions.idoneth;
 export const kharadron = factions.kharadron;

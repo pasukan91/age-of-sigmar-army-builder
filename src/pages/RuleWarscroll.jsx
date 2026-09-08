@@ -56,6 +56,7 @@ function RuleWarscroll({ reference, onBack }) {
             className="aos-reference-hero__image"
             src={artwork}
             alt={`${item.name}, miniatura oficial de Warhammer`}
+            onError={(event) => { event.currentTarget.hidden = true; }}
           />
         )}
         <span className="aos-reference-hero__kind">{getKindLabel(kind)}</span>

@@ -47,7 +47,6 @@ function GameMode({
       <header className="aos-game-mode__hero">
         <span className="aos-eyebrow">Mesa de juego</span>
         <h2 id="game-mode-title">Modo partida</h2>
-        <p>Controla cada unidad por separado: abre su warscroll, anota bajas y aplica bonificadores durante la partida.</p>
       </header>
 
       <nav className="aos-game-mode__anchors" aria-label="Apartados del modo partida">
@@ -722,7 +721,6 @@ function BattleMission({ list, onToggleMission, onGoToArmy }) {
       <header className="aos-game-mode__hero">
         <span className="aos-eyebrow">Objetivos de batalla</span>
         <h2 id="mission-mode-title">Misión</h2>
-        <p>Consulta el plan de batalla, la puntuación y las tácticas elegidas sin mezclarlas con las fichas del ejército.</p>
       </header>
 
       <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
@@ -852,8 +850,16 @@ function BattleTacticsCard({ card, completedMissions = new Set(), onToggleMissio
                 <b>{tactic.points} PV</b>
               </div>
               <strong>{tactic.name}</strong>
-              {tactic.flavour && <em>{tactic.flavour}</em>}
-              <p>{tactic.condition}</p>
+              {tactic.flavour && (
+                <div className="aos-battle-tactic-copy aos-battle-tactic-copy--lore">
+                  <span>Trasfondo</span>
+                  <p>{tactic.flavour}</p>
+                </div>
+              )}
+              <div className="aos-battle-tactic-copy aos-battle-tactic-copy--rule">
+                <span>Regla</span>
+                <p>{tactic.condition}</p>
+              </div>
             </div>
           </label>
           );
@@ -877,7 +883,22 @@ function WarscrollCard({ artwork, image, type, name, summary, details, fallback 
   return (
     <button type="button" onClick={onClick}>
       <span className="aos-game-roster__artwork">
-        {artwork ?? (image ? <img src={image} alt="" loading="lazy" /> : <i aria-hidden="true">{fallback}</i>)}
+        {artwork ?? (
+          <>
+            {image && (
+              <img
+                src={image}
+                alt=""
+                loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.hidden = true;
+                  event.currentTarget.nextElementSibling?.removeAttribute("hidden");
+                }}
+              />
+            )}
+            <i aria-hidden="true" hidden={Boolean(image)}>{fallback}</i>
+          </>
+        )}
       </span>
       <span className="aos-game-roster__body">
         <small className="aos-game-roster__type">{type}</small>
