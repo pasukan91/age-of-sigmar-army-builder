@@ -1160,6 +1160,22 @@ textarea {
   }
 }
 
+@media (max-width: 360px) {
+  .aos-game-mode__anchors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    overflow-x: visible;
+  }
+
+  .aos-game-mode__anchors a {
+    min-width: 0;
+    padding-right: 4px;
+    padding-left: 4px;
+    overflow-wrap: anywhere;
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 390px) {
   :root {
     --aos-page-gutter: 9px;
@@ -1730,5 +1746,62 @@ textarea {
 
   .aos-game-unit-card__quick-modifiers {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Final button containment layer. This must remain last because some game-mode
+   rules above intentionally arrived after the general mobile layout pass. */
+button {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+button > span,
+button > small,
+button > strong,
+button > em {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .aos-primary-action,
+  .aos-secondary-action,
+  .aos-configure-button,
+  .aos-builder-option-card,
+  .aos-option-card__button,
+  .aos-army-type-card__choose,
+  .aos-validation-panel__issues button,
+  .aos-share-panel__actions button,
+  .aos-regiment-card__actions button,
+  .aos-regiment-card__body > button,
+  .aos-renown-card__actions button,
+  .aos-game-round-change__actions > button,
+  .aos-game-unit-card__modifier-toggle,
+  .aos-game-unit-card__modifiers button,
+  .aos-initiative__result > button,
+  .aos-game-battle-card.is-empty > button,
+  .aos-battle-stats__export,
+  .aos-pwa-controls button,
+  .aos-route-recovery button {
+    min-width: 0;
+    height: auto;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aos-game-round-change__actions > button {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .aos-builder-option-card__heading,
+  .aos-option-card__button,
+  .aos-game-round-change__actions > button,
+  .aos-game-unit-card__modifier-toggle,
+  .aos-game-unit-card__modifiers button,
+  .aos-initiative__result > button {
+    overflow-wrap: anywhere;
   }
 }
