@@ -78,6 +78,7 @@ function ArmyBuilder({
   onBattleLogAdd,
   onBattleLogRemove,
   onBattleUnitStateChange,
+  onBattleUnitStatesReset,
   onViewRule,
   onBrowseUnit,
   section = "units",
@@ -516,6 +517,7 @@ function ArmyBuilder({
           onLogAdd={onBattleLogAdd}
           onLogRemove={onBattleLogRemove}
           onUnitStateChange={onBattleUnitStateChange}
+          onUnitStatesReset={onBattleUnitStatesReset}
         />
       )}
 

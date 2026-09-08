@@ -36,11 +36,19 @@ function GameMode({
   onLogAdd,
   onLogRemove,
   onUnitStateChange,
+  onUnitStatesReset,
 }) {
   const unitInstances = getListUnitInstances(list);
   const manifestations = getManifestations(list);
   const terrain = list?.terrain ? normalizeRuleItem(list.terrain) : null;
   const warscrollCount = unitInstances.length + manifestations.length;
+
+  function resetUnitStates() {
+    const confirmed = window.confirm(
+      "¿Restablecer todas las miniaturas y eliminar todos los buffs y modificadores?\n\nLa ronda y el registro de batalla no se borrarán."
+    );
+    if (confirmed) onUnitStatesReset?.();
+  }
 
   return (
     <section className="aos-game-mode" aria-labelledby="game-mode-title">
@@ -61,14 +69,25 @@ function GameMode({
           <strong>{list?.battleRound ?? 1} de 5</strong>
           <span>Conserva las bajas y elimina todos los modificadores temporales.</span>
         </div>
-        <button
-          type="button"
-          onClick={() => onRoundChange?.(Math.min(5, Number(list?.battleRound ?? 1) + 1))}
-          disabled={Number(list?.battleRound ?? 1) >= 5}
-        >
-          <span aria-hidden="true">↻</span>
-          Cambio de ronda
-        </button>
+        <div className="aos-game-round-change__actions">
+          <button
+            type="button"
+            className="is-reset"
+            onClick={resetUnitStates}
+            disabled={unitInstances.length === 0}
+          >
+            <span aria-hidden="true">↺</span>
+            Resetear unidades y buffs
+          </button>
+          <button
+            type="button"
+            onClick={() => onRoundChange?.(Math.min(5, Number(list?.battleRound ?? 1) + 1))}
+            disabled={Number(list?.battleRound ?? 1) >= 5}
+          >
+            <span aria-hidden="true">↻</span>
+            Cambio de ronda
+          </button>
+        </div>
       </div>
 
       <section id="game-warscrolls" className="aos-game-section aos-game-roster" aria-labelledby="game-roster-title">

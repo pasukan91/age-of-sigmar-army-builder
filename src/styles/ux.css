@@ -1074,7 +1074,13 @@ body .aos-builder-tabs button > small {
   font-size: 12px;
 }
 
-.aos-game-round-change > button {
+.aos-game-round-change__actions {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.aos-game-round-change__actions > button {
   display: flex;
   min-height: 46px;
   padding: 9px 13px;
@@ -1089,7 +1095,13 @@ body .aos-builder-tabs button > small {
   white-space: nowrap;
 }
 
-.aos-game-round-change > button:disabled {
+.aos-game-round-change__actions > button.is-reset {
+  border-color: #806e4a;
+  color: #4b3d25;
+  background: #fffaf0;
+}
+
+.aos-game-round-change__actions > button:disabled {
   border-color: #a69c8c;
   color: #686159;
   background: #ddd7cd;
@@ -1443,6 +1455,15 @@ body .aos-builder-tabs button > small {
   .aos-game-round-change {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .aos-game-round-change__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .aos-game-round-change__actions > button {
+    width: 100%;
   }
 
   .aos-game-unit-card {

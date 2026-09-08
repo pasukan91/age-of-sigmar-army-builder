@@ -806,6 +806,17 @@ function App() {
     });
   }
 
+  function handleBattleUnitStatesReset() {
+    if (!currentList) {
+      return;
+    }
+
+    saveUpdatedList({
+      ...currentList,
+      battleUnitStates: {},
+    });
+  }
+
   /*
    * =====================================================
    * SELECTOR, WARSCROLL Y CONFIGURACIÓN
@@ -2182,6 +2193,7 @@ function App() {
           onBattleLogAdd={handleBattleLogAdd}
           onBattleLogRemove={handleBattleLogRemove}
           onBattleUnitStateChange={handleBattleUnitStateChange}
+          onBattleUnitStatesReset={handleBattleUnitStatesReset}
           onViewRule={openBuilderRuleReference}
           onBrowseUnit={openBuilderUnitReference}
           section={builderSection}
