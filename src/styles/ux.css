@@ -1160,6 +1160,94 @@ textarea {
   }
 }
 
+.aos-list-import {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.aos-list-import__toggle {
+  width: 100%;
+}
+
+.aos-list-import__panel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #b9aa91;
+  border-radius: 8px;
+  background: #f8f3e9;
+  box-shadow: 0 5px 16px rgba(38, 29, 20, 0.1);
+}
+
+.aos-list-import__panel label {
+  color: #332a20;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aos-list-import__panel textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid #998b74;
+  border-radius: 6px;
+  color: #29231c;
+  background: #fff;
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.aos-list-import__panel textarea:focus-visible {
+  outline: 3px solid rgba(130, 99, 44, 0.28);
+  outline-offset: 2px;
+}
+
+.aos-list-import__message {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 11px 12px;
+  overflow-wrap: anywhere;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.aos-list-import__message.is-error {
+  border: 1px solid #b86158;
+  color: #681f19;
+  background: #fbe9e6;
+}
+
+.aos-list-import__message.is-success {
+  border: 1px solid #7c9a69;
+  color: #28491d;
+  background: #edf5e7;
+}
+
+.aos-list-import__message ul {
+  margin: 0;
+  padding-left: 19px;
+}
+
+.aos-list-import__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 9px;
+}
+
+.aos-list-import__actions button {
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px;
+}
+
 @media (max-width: 360px) {
   .aos-game-mode__anchors {
     grid-template-columns: repeat(3, minmax(0, 1fr));

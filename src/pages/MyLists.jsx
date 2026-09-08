@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
@@ -18,10 +19,29 @@ function MyLists({
   onLists,
   onCreate,
   onCreatePredefined,
+  onImportList,
   onSettings,
   deletedList,
   onUndoDelete,
 }) {
+  const [showImporter, setShowImporter] = useState(false);
+  const [importText, setImportText] = useState("");
+  const [importResult, setImportResult] = useState(null);
+  const [importError, setImportError] = useState("");
+
+  function handleImport() {
+    setImportError("");
+    setImportResult(null);
+
+    try {
+      const result = onImportList(importText);
+      setImportResult(result);
+      setImportText("");
+    } catch (error) {
+      setImportError(error?.message ?? "No se ha podido importar la lista.");
+    }
+  }
+
   return (
     <main className="aos-shell">
       <header className="aos-screen-header">
@@ -56,6 +76,77 @@ function MyLists({
             </p>
           )}
         </header>
+
+        <section className="aos-list-import">
+          <button
+            type="button"
+            className="aos-secondary-action aos-list-import__toggle"
+            onClick={() => {
+              setShowImporter((visible) => !visible);
+              setImportError("");
+              setImportResult(null);
+            }}
+            aria-expanded={showImporter}
+            aria-controls="official-list-import"
+          >
+            Importar desde AoS App
+          </button>
+
+          {showImporter && (
+            <div id="official-list-import" className="aos-list-import__panel">
+              <label htmlFor="official-list-text">Lista exportada</label>
+              <textarea
+                id="official-list-text"
+                value={importText}
+                onChange={(event) => setImportText(event.target.value)}
+                placeholder="Pega aquí el texto completo de la app oficial…"
+                rows={10}
+                maxLength={60000}
+                autoFocus
+              />
+
+              {importError && (
+                <p className="aos-list-import__message is-error" role="alert">
+                  {importError}
+                </p>
+              )}
+
+              {importResult && (
+                <div className="aos-list-import__message is-success" role="status">
+                  <strong>“{importResult.list.name}” importada.</strong>
+                  {importResult.warnings.length > 0 && (
+                    <>
+                      <span>Revisa estos avisos:</span>
+                      <ul>
+                        {importResult.warnings.map((warning) => (
+                          <li key={warning}>{warning}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              )}
+
+              <div className="aos-list-import__actions">
+                <button
+                  type="button"
+                  className="aos-secondary-action"
+                  onClick={() => setShowImporter(false)}
+                >
+                  Cerrar
+                </button>
+                <button
+                  type="button"
+                  className="aos-primary-action"
+                  onClick={handleImport}
+                  disabled={!importText.trim()}
+                >
+                  Importar lista
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
 
         {lists.length === 0 ? (
           <div className="aos-empty-message aos-empty-message--actionable">

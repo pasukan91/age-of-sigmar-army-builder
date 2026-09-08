@@ -13,6 +13,8 @@ import RuleWarscroll from "./pages/RuleWarscroll";
 import Settings from "./pages/Settings";
 import PredefinedLists from "./pages/PredefinedLists";
 import ReferenceOverlay from "./components/ReferenceOverlay";
+import factions from "./data/factions";
+import alliances from "./data/alliances";
 
 import {
   calculateArmyPoints,
@@ -34,6 +36,7 @@ import {
   truncateBattleLogText,
 } from "./utils/battleLogLimits";
 import { clearBattleUnitModifiers } from "./utils/battleUnitState";
+import { importOfficialArmyList } from "./utils/officialListImport";
 
 const EMPTY_SELECTOR = {
   title: "",
@@ -2051,6 +2054,13 @@ function App() {
     navigate("builder", { listId: newList.id, resetToLists: true });
   }
 
+  function handleImportOfficialList(text) {
+    const result = importOfficialArmyList(text, { factions, alliances });
+
+    setLists((previousLists) => [...previousLists, result.list]);
+    return result;
+  }
+
   /*
    * =====================================================
    * PÁGINAS
@@ -2087,6 +2097,7 @@ function App() {
           onLists={openLists}
           onCreate={startNewList}
           onCreatePredefined={openPredefinedLists}
+          onImportList={handleImportOfficialList}
           onSettings={openSettings}
         />
       );
