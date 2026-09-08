@@ -1,5 +1,4 @@
 import BackButton from "../components/BackButton";
-import ContextNote from "../components/ContextNote";
 import StepProgress from "../components/StepProgress";
 
 import {
@@ -79,11 +78,6 @@ function NewListConfig({
           </h2>
         </header>
 
-        <ContextNote title="Último paso">
-          Ponle un nombre reconocible y elige el tamaño de partida. Después podrás
-          añadir regimientos, unidades y reglas desde el constructor.
-        </ContextNote>
-
         <section className="aos-panel aos-form-panel">
           <div className="aos-new-list-summary" aria-label="Tipo de ejército elegido">
             <span>Tipo de ejército</span>
@@ -109,9 +103,6 @@ function NewListConfig({
               }
               className="aos-field__control"
             />
-            <small className="aos-field__hint">
-              Si lo dejas vacío, usaremos “{suggestedName}”.
-            </small>
           </label>
 
           <label className="aos-field">

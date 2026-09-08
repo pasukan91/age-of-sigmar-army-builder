@@ -955,6 +955,248 @@ body .aos-builder-tabs button > small {
   }
 }
 
+/* Mobile framing and overflow pass. Keep page scrolling vertical and confine
+   wide controls to their own component instead of widening the whole app. */
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+#root > *,
+.aos-page,
+.aos-shell,
+.aos-builder-page,
+.aos-screen-content,
+.aos-selection-content,
+.aos-warscroll-content,
+.aos-game-mode,
+.aos-game-section {
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+.aos-screen-content > *,
+.aos-selection-content > *,
+.aos-warscroll-content > *,
+.aos-builder-options > *,
+.aos-game-mode > *,
+.aos-game-section > *,
+.aos-regiment-card__body > *,
+.aos-accordion__content > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.aos-panel,
+.aos-option-card,
+.aos-list-card,
+.aos-regiment-card,
+.aos-renown-card,
+.aos-rule-card,
+.aos-ability-card,
+.aos-game-battle-card,
+.aos-game-unit-card,
+.aos-share-panel,
+.aos-validation-panel,
+.aos-damage-calculator {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.aos-accordion__label,
+.aos-option-card__title,
+.aos-builder-option-card__heading,
+.aos-regiment-card__summary > div,
+.aos-game-mode__section-title > *,
+.aos-share-panel > header > *,
+.aos-reference-weapon > *,
+.aos-rule-link-card > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+.aos-builder-tabs,
+.aos-game-mode__anchors,
+.aos-battle-log__actions,
+.aos-battle-stats__rounds {
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --aos-page-gutter: 12px;
+  }
+
+  .aos-screen-content,
+  .aos-selection-content,
+  .aos-warscroll-content {
+    width: 100%;
+    padding-right: var(--aos-page-gutter);
+    padding-left: var(--aos-page-gutter);
+  }
+
+  .aos-builder-section-guide,
+  .aos-builder-options,
+  .aos-builder-section-title,
+  .aos-builder-preset-note,
+  .aos-renown-section,
+  .aos-selected-rules,
+  .aos-rules-reference {
+    margin-right: var(--aos-page-gutter);
+    margin-left: var(--aos-page-gutter);
+  }
+
+  .aos-validation-panel,
+  .aos-share-panel,
+  .aos-game-mode {
+    width: auto;
+    margin-right: var(--aos-page-gutter);
+    margin-left: var(--aos-page-gutter);
+  }
+
+  .aos-game-mode,
+  .aos-share-panel {
+    padding: 14px;
+  }
+
+  .aos-builder-options,
+  .aos-game-roster__grid,
+  .aos-selected-rules__grid,
+  .aos-game-tactics-reference__grid,
+  .aos-game-battle-setup__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aos-regiment-card,
+  .aos-option-card,
+  .aos-list-card,
+  .aos-accordion,
+  .aos-game-unit-card,
+  .aos-game-battle-card {
+    border-radius: 8px;
+  }
+
+  .aos-regiment-card__summary {
+    grid-template-columns: minmax(0, 1fr) 28px;
+    gap: 8px;
+    padding: 13px 14px;
+  }
+
+  .aos-regiment-card__overview {
+    line-height: 1.35;
+  }
+
+  .aos-share-panel > header,
+  .aos-game-mode__section-title,
+  .aos-battle-log__heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .aos-share-panel__drops,
+  .aos-game-mode__section-title > span {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .aos-option-card__actions,
+  .aos-share-panel__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aos-option-card__actions button,
+  .aos-share-panel__actions button,
+  .aos-game-round-change__actions button {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .aos-game-mode__anchors {
+    grid-template-columns: repeat(3, minmax(84px, 1fr));
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .aos-battle-log__composer,
+  .aos-initiative,
+  .aos-battle-stats,
+  .aos-damage-calculator {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .aos-battle-log__form,
+  .aos-battle-log__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aos-battle-log__form > *,
+  .aos-battle-log__fields > * {
+    grid-column: 1;
+  }
+
+  .aos-damage-calculator__result-row,
+  .aos-damage-profile__grid,
+  .aos-reference-weapon > div {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  :root {
+    --aos-page-gutter: 9px;
+  }
+
+  .aos-topbar,
+  .aos-screen-header {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: 4px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .aos-topbar__title,
+  .aos-screen-header__title {
+    font-size: 19px;
+  }
+
+  .aos-game-mode,
+  .aos-share-panel {
+    padding: 11px;
+  }
+
+  .aos-share-panel__actions,
+  .aos-option-card__actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aos-game-unit-card {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .aos-game-unit-card__content {
+    padding: 9px;
+  }
+}
+
 @media (max-width: 620px) {
   .aos-preset-grid,
   .aos-preset-factions {

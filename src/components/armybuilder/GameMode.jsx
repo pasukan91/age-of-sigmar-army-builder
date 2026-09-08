@@ -67,7 +67,6 @@ function GameMode({
         <div>
           <small>Ronda actual</small>
           <strong>{list?.battleRound ?? 1} de 5</strong>
-          <span>Conserva las bajas y elimina todos los modificadores temporales.</span>
         </div>
         <div className="aos-game-round-change__actions">
           <button
@@ -126,7 +125,6 @@ function GameMode({
 
           {warscrollCount === 0 && (
             <div className="aos-empty-message aos-empty-message--actionable">
-              <p>Añade unidades o manifestaciones para consultarlas durante la partida.</p>
               <button type="button" onClick={onGoToUnits}>Añadir unidades</button>
             </div>
           )}
@@ -156,7 +154,6 @@ function GameMode({
             />
           ) : (
             <div className="aos-empty-message aos-empty-message--actionable">
-              <p>Selecciona el terreno de tu facción para tener su ficha disponible durante la partida.</p>
               <button type="button" onClick={onGoToArmy}>Elegir terreno</button>
             </div>
           )}
@@ -429,7 +426,6 @@ function BattleLog({ entries, listName, round, turnActor, onRoundChange, onTurnC
       <div className="aos-game-mode__section-title aos-battle-log__heading">
         <div>
           <h3 id="game-battle-log-title">Registro de batalla</h3>
-          <p>Anota tiradas y momentos clave sin salir de la partida.</p>
         </div>
         <div className="aos-battle-log__round" aria-label={`Ronda de batalla ${round}`}>
           <button type="button" onClick={() => onRoundChange?.(round - 1)} disabled={round <= 1} aria-label="Ronda anterior">−</button>
@@ -583,7 +579,6 @@ function InitiativePanel({ round, lastTurnActor, onResolve }) {
       <header>
         <div>
           <h4 id="initiative-title">Iniciativa</h4>
-          <p>Al terminar la ronda, decide quién comienza la siguiente.</p>
         </div>
         <b>R{round} → R{Math.min(5, round + 1)}</b>
       </header>
@@ -636,7 +631,6 @@ function BattleStatistics({ entries, listName, selectedRound, onRoundChange }) {
       <header>
         <div>
           <h4 id="battle-stats-title">Estadísticas de la partida</h4>
-          <p>Comparativa automática a partir del registro.</p>
         </div>
         <div className="aos-battle-stats__selector">
           <div className="aos-battle-stats__selector-heading">
@@ -745,7 +739,6 @@ function BattleMission({ list, onToggleMission, onGoToArmy }) {
       <section id="game-battle-setup" className="aos-game-section aos-game-battle-setup" aria-labelledby="game-battle-setup-title">
         <div className="aos-game-mode__section-title">
           <h3 id="game-battle-setup-title">Plan y tácticas de batalla</h3>
-          <span>Consulta rápida</span>
         </div>
 
         <div className="aos-game-tactics-reference">

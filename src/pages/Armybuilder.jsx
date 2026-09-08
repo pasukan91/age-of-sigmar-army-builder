@@ -458,10 +458,6 @@ function ArmyBuilder({
           <span aria-hidden="true">★</span>
           <div>
             <strong>{list.preset.name}</strong>
-            <p>
-              Esta plantilla ya está completa, pero puedes cambiar cualquier unidad,
-              refuerzo o mejora. Los puntos y la legalidad se recalculan automáticamente.
-            </p>
           </div>
         </aside>
       )}

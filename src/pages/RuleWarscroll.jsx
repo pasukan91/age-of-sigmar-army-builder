@@ -145,7 +145,6 @@ function RuleWarscroll({ reference, onBack }) {
               <section className="aos-banishment-card">
                 <span>Destierro</span>
                 <strong>{profile.banishment}</strong>
-                <p>Valor que debe alcanzarse para desterrar esta manifestación.</p>
               </section>
             )}
 

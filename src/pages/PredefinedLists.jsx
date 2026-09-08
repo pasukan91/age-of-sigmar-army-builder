@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
-import ContextNote from "../components/ContextNote";
 import StepProgress from "../components/StepProgress";
 import factions from "../data/factions";
 import {
@@ -93,10 +92,6 @@ function PredefinedLists({ onBack, onCreate }) {
               <StepProgress steps={["Facción", "Estilo"]} current={1} />
               <p className="aos-kicker">Plantillas competitivas 2026–27</p>
               <h2 className="aos-heading">Elige tu facción</h2>
-              <p className="aos-presets-intro">
-                Cada plantilla se completa con formación, tácticas, saberes,
-                terreno, mejoras y regimientos listos para editar.
-              </p>
             </header>
             <section className="aos-selector-tools aos-preset-faction-tools" aria-label="Buscar y filtrar facciones">
               <label className="aos-selector-search">
@@ -173,15 +168,7 @@ function PredefinedLists({ onBack, onCreate }) {
               <StepProgress steps={["Facción", "Estilo"]} current={2} />
               <p className="aos-kicker">{selectedFaction.name}</p>
               <h2 className="aos-heading">Elige un estilo</h2>
-              <p className="aos-presets-intro">
-                Son puntos de partida competitivos: puedes cambiar cualquier
-                unidad o regla en el constructor después de crearla.
-              </p>
             </header>
-            <ContextNote title="Todo incluido" tone="success">
-              Al crearla recibirás una lista editable con regimientos, unidades,
-              formación, cartas de tácticas, saberes, terreno y mejoras compatibles.
-            </ContextNote>
             <div className="aos-preset-filters" role="group" aria-label="Filtrar estilos">
               <button type="button" className={typeFilter === "all" ? "is-active" : ""} onClick={() => setTypeFilter("all")} aria-pressed={typeFilter === "all"}>Todas</button>
               {PREDEFINED_LIST_TYPES.map((type) => (
@@ -224,10 +211,6 @@ function PredefinedLists({ onBack, onCreate }) {
                 </article>
               ))}
             </section>
-            <p className="aos-preset-disclaimer">
-              Basadas en datos competitivos recientes y en el catálogo vigente de la app.
-              El meta cambia con cada Battlescroll: revisa la lista antes de un torneo.
-            </p>
           </>
         )}
       </div>

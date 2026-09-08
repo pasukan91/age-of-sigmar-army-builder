@@ -16,7 +16,6 @@ function ArmyRulesReference({ battleTraits, battleFormation }) {
       <header className="aos-rules-reference__header">
         <p className="aos-kicker">Referencia de batalla</p>
         <h2 id="army-rules-title">Reglas del ejército</h2>
-        <p>Consulta las habilidades de tu facción y las reglas universales sin salir de la lista.</p>
       </header>
 
       <Accordion

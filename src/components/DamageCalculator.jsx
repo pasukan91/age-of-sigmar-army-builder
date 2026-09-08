@@ -53,7 +53,6 @@ function DamageCalculator({ unit, models = 1, onClose }) {
         <div>
           <span>Promedio estadístico</span>
           <h2 id="damage-calculator-title">Calculadora de daño</h2>
-          <p>Perfiles precargados desde el warscroll de {unit.name}.</p>
         </div>
 
         <button type="button" onClick={onClose} aria-label="Cerrar calculadora">

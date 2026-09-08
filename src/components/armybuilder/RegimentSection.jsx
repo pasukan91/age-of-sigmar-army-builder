@@ -160,10 +160,6 @@ function RegimentSection({
       {regiments.length === 0 && (
         <div style={styles.emptyCard}>
           <strong>Tu ejército todavía está vacío</strong>
-          <span>
-            Empieza añadiendo un regimiento. Primero elegirás su líder y después
-            podrás incorporar hasta cuatro unidades compatibles.
-          </span>
         </div>
       )}
 
@@ -373,7 +369,6 @@ function RegimentSection({
                   }
                 >
                   <strong>Este regimiento necesita unidades</strong>
-                  <span>Usa el botón inferior para ver solo las unidades que puede liderar {regiment.hero.name}.</span>
                 </div>
               )}
 

@@ -48,19 +48,18 @@ function MyLists({
             Tus ejércitos
           </h2>
 
-          <p className="aos-storage-note" role="status">
-            {storageStatus === "error"
-              ? "No se ha podido guardar. La copia anterior se ha protegido para evitar perder datos."
-              : storageStatus === "recovered"
-                ? "Se han aislado datos dañados. Revisa las listas recuperadas antes de continuar."
-                : "Las listas se guardan automáticamente en este dispositivo y funcionan sin conexión."}
-          </p>
+          {(storageStatus === "error" || storageStatus === "recovered") && (
+            <p className="aos-storage-note" role="alert">
+              {storageStatus === "error"
+                ? "No se ha podido guardar. La copia anterior se ha protegido para evitar perder datos."
+                : "Se han aislado datos dañados. Revisa las listas recuperadas antes de continuar."}
+            </p>
+          )}
         </header>
 
         {lists.length === 0 ? (
           <div className="aos-empty-message aos-empty-message--actionable">
             <strong>Empieza tu primer ejército</strong>
-            <p>Una plantilla te da una composición completa que después puedes editar.</p>
             <button type="button" className="aos-primary-action" onClick={onCreatePredefined}>
               Crear lista predefinida
             </button>

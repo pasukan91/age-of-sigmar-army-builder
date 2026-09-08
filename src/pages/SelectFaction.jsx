@@ -92,9 +92,6 @@ function SelectFaction({ alliance, onSelect, onBack, initialFaction = null }) {
             variant="dark"
           />
           <h2 className="aos-selection-heading">{selectedFaction.name}</h2>
-          <p className="aos-army-type-screen__hint">
-            Elige las reglas y unidades disponibles para esta lista.
-          </p>
 
           <button
             type="button"

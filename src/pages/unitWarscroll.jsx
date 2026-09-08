@@ -177,7 +177,6 @@ function UnitWarscroll({
             <span aria-hidden="true">∑</span>
             <span>
               <strong>Calculadora de daño</strong>
-              <small>Compara el promedio contra salvaciones de 2+ a 6+</small>
             </span>
           </button>
         )}
@@ -684,9 +683,6 @@ function SynergyList({ synergies }) {
       <section className="aos-synergy-empty">
         <span className="aos-synergy-empty__icon" aria-hidden="true">◇</span>
         <h2>Sin sinergias detectadas</h2>
-        <p>
-          Añade unidades de apoyo, asigna mejoras o selecciona una formación de batalla para descubrir combinaciones aplicables.
-        </p>
       </section>
     );
   }
@@ -698,10 +694,6 @@ function SynergyList({ synergies }) {
 
   return (
     <section className="aos-synergy-list" aria-label="Sinergias potenciales">
-      <p className="aos-synergy-note">
-        Estas reglas proceden de unidades y opciones presentes en tu ejército. La app no decide si las condiciones se cumplen durante la partida: solo te muestra todas las combinaciones posibles.
-      </p>
-
       <div className="aos-ability-groups">
         {groups.map((group) => (
           <section className="aos-ability-group" key={group.id}>

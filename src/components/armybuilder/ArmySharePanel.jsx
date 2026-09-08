@@ -69,8 +69,6 @@ function ArmySharePanel({ list }) {
         </span>
       </header>
 
-      <p>Genera un resumen compacto con regimientos, mejoras, puntos y estado de legalidad.</p>
-
       <div className="aos-share-panel__actions">
         <button type="button" className="is-primary" onClick={shareList}>Compartir</button>
         <button type="button" onClick={copyList}>Copiar texto</button>
