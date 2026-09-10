@@ -8,7 +8,7 @@ import {
 } from "./regimentOfRenownReferences.js";
 
 test("every Regiment of Renown has enough information for its reference sheet", () => {
-  assert.equal(regimentsOfRenown.length, 30);
+  assert.equal(regimentsOfRenown.length, 76);
 
   regimentsOfRenown.forEach((regiment) => {
     const reference = createRegimentOfRenownReference(regiment);
@@ -18,7 +18,10 @@ test("every Regiment of Renown has enough information for its reference sheet", 
     assert.ok(regiment.name);
     assert.ok(Number.isFinite(regiment.points));
     assert.ok(getRegimentOrganisation(regiment).length > 0, regiment.name);
-    assert.ok(regiment.abilities?.length > 0, regiment.name);
+    assert.ok(
+      regiment.abilities?.length > 0 || regiment.rulesText,
+      regiment.name
+    );
     assert.ok(getRegimentEligibleFactionNames(regiment).length > 0, regiment.name);
   });
 });

@@ -103,11 +103,51 @@ export function normalizeFaction(faction) {
         )
       : undefined,
   }));
+  normalized.armiesOfRenown = resolveArmyArtwork(normalized);
 
   return {
     ...authoritativeFaction,
     ...normalized,
   };
+}
+
+function resolveArmyArtwork(faction) {
+  const indexes = {
+    units: artworkIndex(faction.units),
+    manifestations: artworkIndex(faction.manifestations),
+    terrain: artworkIndex(faction.terrain),
+  };
+
+  return faction.armiesOfRenown.map((army) => ({
+    ...army,
+    rules: army.rules
+      ? {
+          ...army.rules,
+          units: reuseArtwork(army.rules.units, indexes.units),
+          manifestations: reuseArtwork(
+            army.rules.manifestations,
+            indexes.manifestations
+          ),
+          terrain: reuseArtwork(army.rules.terrain, indexes.terrain),
+        }
+      : army.rules,
+  }));
+}
+
+function artworkIndex(items) {
+  return new Map(
+    (items ?? []).flatMap((item) => [
+      [item.id, item.image],
+      [slugify(item.name), item.image],
+    ]).filter(([, image]) => image)
+  );
+}
+
+function reuseArtwork(items, index) {
+  return (items ?? []).map((item) => ({
+    ...item,
+    image: index.get(item.id) ?? index.get(slugify(item.name)) ?? item.image,
+  }));
 }
 
 function normalizeUnit(unit) {

@@ -7,6 +7,23 @@ if (!cataloguePath || !outputPath) {
 }
 
 const TARGETS = [
+  { id: "kruleboyz", alliance: "destruction", name: "Kruleboyz", publication: "Kruleboyz" },
+  { id: "ironjawz", alliance: "destruction", name: "Ironjawz", publication: "Ironjawz" },
+  { id: "hedonites", alliance: "chaos", name: "Hedonites of Slaanesh", publication: "Chaos Battletome: Hedonites of Slaanesh" },
+  { id: "skaven", alliance: "chaos", name: "Skaven", publication: "Chaos Battletome: Skaven" },
+  { id: "ogors", alliance: "destruction", name: "Ogor Mawtribes", publication: "Destruction Battletome: Ogor Mawtribes" },
+  { id: "sylvaneth", alliance: "order", name: "Sylvaneth", publication: "Order Battletome: Sylvaneth" },
+  { id: "gloomspite", alliance: "destruction", name: "Gloomspite Gitz", publication: "Destruction Battletome: Gloomspite Gitz" },
+  { id: "cities", alliance: "order", name: "Cities of Sigmar", publication: "Order Battletome: Cities of Sigmar" },
+  { id: "tzeentch", alliance: "chaos", name: "Disciples of Tzeentch", publication: "Chaos Battletome: Disciples of Tzeentch" },
+  { id: "ossiarch", alliance: "death", name: "Ossiarch Bonereapers", publication: "Death Battletome: Ossiarch Bonereapers" },
+  { id: "soulblight", alliance: "death", name: "Soulblight Gravelords", publication: "Death Battletome: Soulblight Gravelords" },
+  { id: "hashut", alliance: "chaos", name: "Helsmiths of Hashut", publication: "Chaos Battletome: Helsmiths of Hashut" },
+  { id: "khorne", alliance: "chaos", name: "Blades of Khorne", publication: "Chaos Battletome: Blades of Khorne" },
+  { id: "std", alliance: "chaos", name: "Slaves to Darkness", publication: "Chaos Battletome: Slaves to Darkness" },
+  { id: "nurgle", alliance: "chaos", name: "Maggotkin of Nurgle", publication: "Chaos Battletome: Maggotkin of Nurgle" },
+  { id: "lumineth", alliance: "order", name: "Lumineth Realm-lords", publication: "Order Battletome: Lumineth Realm-lords" },
+  { id: "daughters", alliance: "order", name: "Daughters of Khaine", publication: "Order Battletome: Daughters of Khaine" },
   { id: "stormcast", alliance: "order", name: "Stormcast Eternals", publication: "Order Battletome: Stormcast Eternals" },
   { id: "idoneth", alliance: "order", name: "Idoneth Deepkin", publication: "Order Battletome: Idoneth Deepkin" },
   { id: "kharadron", alliance: "order", name: "Kharadron Overlords", publication: "Order Battletome: Kharadron Overlords" },
@@ -163,7 +180,7 @@ function makeWarscroll(warscroll, factionId, { manifestation = false } = {}) {
       models: warscroll.modelCount,
       baseSize: warscroll.baseSize,
       regimentOptions,
-      canJoinRegimentAs: isHero ? keywords : [],
+      canJoinRegimentAs: [],
       notes: warscroll.notes,
     },
     keywords,
@@ -361,10 +378,7 @@ function makeFaction(config) {
     sourcePublication: config.publication,
     battleTraits: makeEnhancementGroups(publication.id, "battleTraits"),
     battleFormations,
-    heroicTraits: [
-      ...makeEnhancementGroups(publication.id, "heroicTraits"),
-      ...aqshyHeroicTraits,
-    ],
+    heroicTraits: makeEnhancementGroups(publication.id, "heroicTraits"),
     artefacts: makeEnhancementGroups(publication.id, "artefactsOfPower"),
     aqshyArtefacts,
     aqshyEnhancements,
@@ -379,9 +393,15 @@ function makeFaction(config) {
 }
 
 function makeArmyOfRenown(faction, parentConfig) {
-  const publication = data.publication.find((item) =>
-    item.name === `Army of Renown: ${faction.name}`
+  const expectedPublication = normalizedPublicationName(
+    `Army of Renown: ${faction.name}`
   );
+  const publication = data.publication.find((item) => {
+    const candidate = normalizedPublicationName(item.name);
+    return candidate === expectedPublication ||
+      candidate === expectedPublication.replace("army of renown the ", "army of renown ") ||
+      candidate.replace("army of renown the ", "army of renown ") === expectedPublication;
+  });
   if (!publication) throw new Error(`Missing Army of Renown publication for ${faction.name}`);
 
   const factionWarscrollIds = new Set((factionLinksByFaction.get(faction.id) ?? []).map((link) => link.warscrollId));
@@ -423,6 +443,16 @@ function makeArmyOfRenown(faction, parentConfig) {
       units,
     },
   };
+}
+
+function normalizedPublicationName(value = "") {
+  return String(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[‘’‛`´]/g, "'")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
 
 const universalPublication = data.publication.find((item) => item.name === "Universal Manifestations");

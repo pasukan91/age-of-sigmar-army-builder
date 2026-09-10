@@ -2,8 +2,17 @@ import catalogue from "./additionalBattletomeFactions.generated.json";
 import additionalUnitImages from "./additionalUnitImages.generated.json";
 
 const CURATED_LOCAL_IMAGES = {
+  stormcast: {
+    faction: "/images/factions/stormcast.webp",
+    terrain: {
+      "stormreach-portal": "stormreach-portal.webp",
+    },
+  },
   idoneth: {
     faction: "/images/factions/Idoneth.webp",
+    terrain: {
+      "gloomtide-shipwreck": "gloomtide-shipwreck.webp",
+    },
     units: {
       "akhelian-allopex": "akhelian_allopex.jpg",
       "akhelian-ishlaen-guard": "akhelian_ishlaen_guard.jpg",
@@ -29,6 +38,9 @@ const CURATED_LOCAL_IMAGES = {
   },
   kharadron: {
     faction: "/images/factions/kharadron.webp",
+    terrain: {
+      "zontari-endrin-dock": "zontari-endrin-dock.webp",
+    },
     units: {
       "aetheric-navigator": "Navigator.jpg",
       "arkanaut-admiral": "ArkanautAdmiral.jpg",
@@ -49,6 +61,18 @@ const CURATED_LOCAL_IMAGES = {
       "zontari-endrin-dock": "zontari_endrin_dock.jpg",
     },
   },
+  nighthaunt: {
+    faction: "/images/factions/nighthaunt.webp",
+    terrain: {
+      "nexus-of-grief": "nexus-of-grief.webp",
+    },
+  },
+  flesheater: {
+    faction: "/images/factions/flesheater.webp",
+    terrain: {
+      "charnel-throne": "charnel-throne.webp",
+    },
+  },
 };
 
 const LOCAL_IMAGES = Object.fromEntries(
@@ -61,6 +85,7 @@ const LOCAL_IMAGES = Object.fromEntries(
       ...(additionalUnitImages[factionId] ?? {}),
       ...(CURATED_LOCAL_IMAGES[factionId]?.units ?? {}),
     },
+    terrain: CURATED_LOCAL_IMAGES[factionId]?.terrain ?? {},
   }])
 );
 
@@ -69,6 +94,15 @@ function withLocalImages(items, factionId, imageMap) {
     ...item,
     image: imageMap[item.id]
       ? `/images/units/${factionId}/${imageMap[item.id]}`
+      : item.image,
+  }));
+}
+
+function withLocalTerrainImages(items, factionId, imageMap) {
+  return (items ?? []).map((item) => ({
+    ...item,
+    image: imageMap[item.id]
+      ? `/images/terrain/${factionId}/${imageMap[item.id]}`
       : item.image,
   }));
 }
@@ -99,7 +133,7 @@ function applyLocalImages(faction) {
       withLocalImages(rules.manifestations, faction.id, local.units)
     ),
     manifestationLores: withLocalManifestationLoreImages(rules.manifestationLores),
-    terrain: withLocalImages(rules.terrain, faction.id, local.units),
+    terrain: withLocalTerrainImages(rules.terrain, faction.id, local.terrain),
   });
   return {
     ...faction,
@@ -109,7 +143,7 @@ function applyLocalImages(faction) {
       withLocalImages(faction.manifestations, faction.id, local.units)
     ),
     manifestationLores: withLocalManifestationLoreImages(faction.manifestationLores),
-    terrain: withLocalImages(faction.terrain, faction.id, local.units),
+    terrain: withLocalTerrainImages(faction.terrain, faction.id, local.terrain),
     armiesOfRenown: (faction.armiesOfRenown ?? []).map((army) => ({
       ...army,
       rules: updateRules(army.rules),

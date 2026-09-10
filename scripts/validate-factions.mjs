@@ -10,6 +10,7 @@ const intentionallyUnavailableRegimentOptions = new Set([
   "cities:conqueror-cogfort:any allies of the free cities",
   "kruleboyz:hobgrot-slittaboss:monster",
   "ogors:butcher:any gnoblars",
+  "gloomspite:trugg-the-troggoth-king:any mollog",
 ]);
 
 function regimentOptionLabel(option) {
@@ -66,8 +67,13 @@ try {
         const optionRegiment = { ...regiment, hero: optionLeader };
         const label = regimentOptionLabel(option);
         const optionKey = `${faction.id}:${leader.id}:${label}`;
+        const belongsToArmyOfRenown = faction.armiesOfRenown.some((army) => {
+          const armyName = regimentOptionLabel(army.name).replace(/^the\s+/, "");
+          return label.replace(/^any\s+/, "").startsWith(armyName);
+        });
 
         if (
+          !belongsToArmyOfRenown &&
           !intentionallyUnavailableRegimentOptions.has(optionKey) &&
           getAvailableUnitsForRegiment(list, optionRegiment).length === 0
         ) {

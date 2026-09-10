@@ -16,6 +16,7 @@ import lumineth from "./lumineth";
 import daughters from "./daughters";
 import armiesOfRenownByFaction from "./rulesOfRenownArmies";
 import { normalizeFaction } from "./normalizeFaction";
+import { applyAosCommunityFactionData } from "./applyAosCommunityFactionData";
 import {
   flesheater,
   idoneth,
@@ -73,7 +74,8 @@ const factions = [
     alliance: "destruction",
     name: "Sons of Behemat",
   },
-].map((faction) => {
+].map((localFaction) => {
+  const faction = applyAosCommunityFactionData(localFaction);
   const mergeUnique = (items) => [
     ...new Map(items.map((item) => [item?.sourceId ?? item?.id ?? item?.name, item])).values(),
   ];
@@ -88,7 +90,11 @@ const factions = [
       ...universalManifestationLores,
     ]),
   });
-  const addedArmies = (armiesOfRenownByFaction[faction.id] ?? []).map(
+  const addedArmies = (
+    faction.catalogueDataVersion
+      ? []
+      : armiesOfRenownByFaction[faction.id] ?? []
+  ).map(
     ({ unitFilter, ...renownArmy }) => ({
       ...renownArmy,
       rules: {
@@ -113,5 +119,12 @@ const factions = [
     armiesOfRenown: [...armiesByName.values()],
   });
 });
+
+const kruleboyzFaction = factions.find((faction) => faction.id === "kruleboyz");
+const ironjawzFaction = factions.find((faction) => faction.id === "ironjawz");
+if (kruleboyzFaction && ironjawzFaction) {
+  kruleboyzFaction.regimentAllies = ironjawzFaction.units;
+  ironjawzFaction.regimentAllies = kruleboyzFaction.units;
+}
 
 export default factions;

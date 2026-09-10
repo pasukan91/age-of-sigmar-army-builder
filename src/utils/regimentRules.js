@@ -451,7 +451,7 @@ function optionMatchesNonHero(unit, option) {
     case "any-mawseekers":
       return hasKeyword(unit, "Mawseekers");
     case "any-gnoblars":
-      return hasKeyword(unit, "Gnoblar") || hasKeyword(unit, "Gnoblars");
+      return unit.id === "gnoblars" || hasKeyword(unit, "Gnoblar") || hasKeyword(unit, "Gnoblars");
     case "any-gorger-mawpack":
       return unit.id === "gorger-mawpack";
     case "any-sigmarite":
@@ -515,12 +515,42 @@ function optionMatchesNonHero(unit, option) {
     case "sigmarite-war-machine":
       return hasKeyword(unit, "Sigmarite") && hasKeyword(unit, "War Machine");
     default:
-      return option === `any-${normalizeOption(unit?.id)}` ||
+      return option === normalizeOption(unit?.name) ||
+        option === `any-${normalizeOption(unit?.id)}` ||
         getKeywords(unit).some((keyword) =>
           normalizeOption(keyword) === option ||
           `any-${normalizeOption(keyword)}` === option
-        );
+        ) || matchesKeywordExpression(unit, option);
   }
+}
+
+function matchesKeywordExpression(unit, option) {
+  let expression = String(option).replace(/^any-/, "");
+  const excluded = [...expression.matchAll(/(?:^|-)non-([a-z0-9-]+)/g)]
+    .map((match) => match[1].split("-")[0]);
+  if (excluded.some((keyword) => hasKeyword(unit, keyword))) return false;
+  expression = expression.replace(/(?:^|-)non-[a-z0-9-]+/g, "");
+
+  const candidates = [
+    normalizeOption(unit?.id),
+    ...getKeywords(unit).map((keyword) => keyword.replace(/[^a-z0-9]+/g, "-")),
+  ]
+    .filter(Boolean)
+    .sort((left, right) => right.length - left.length);
+  let matched = false;
+  for (const candidate of candidates) {
+    const pattern = new RegExp(`(^|-)${escapeRegExp(candidate)}(?=-|$)`, "g");
+    const nextExpression = expression.replace(pattern, "$1");
+    if (nextExpression !== expression) {
+      matched = true;
+      expression = nextExpression;
+    }
+  }
+  return matched && expression.replace(/^-+|-+$/g, "") === "";
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function isHeroUnit(unit) {
@@ -538,7 +568,8 @@ function unitMatchesRegimentOption(unit, option) {
     return option.key === normalizeOption(unit?.id) ||
       joinRoles.includes(option.key) ||
       joinRoles.includes(optionRole) ||
-      (alternativeRoles.length > 1 && alternativeRoles.some((role) => joinRoles.includes(role)));
+      (alternativeRoles.length > 1 && alternativeRoles.some((role) => joinRoles.includes(role))) ||
+      (optionRole.includes("-") && matchesKeywordExpression(unit, option.key));
   }
 
   return option.key === normalizeOption(unit?.id) ||
@@ -820,7 +851,10 @@ export function getAvailableUnitsForRegiment(list, regiment) {
   const armyUnits = list?.armyOfRenown?.rules?.units;
   const units = Array.isArray(armyUnits) && armyUnits.length > 0
     ? armyUnits
-    : list?.faction?.units ?? [];
+    : [
+        ...(list?.faction?.units ?? []),
+        ...(list?.faction?.regimentAllies ?? []),
+      ];
 
   return units.filter((unit) =>
     isMatchedPlayUnit(unit) &&
