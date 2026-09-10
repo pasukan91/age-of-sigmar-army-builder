@@ -142,45 +142,79 @@ export function parseFormattedText(text = "") {
 }
 
 export function parseInlineFormatting(text = "") {
-  const source = repairInlineFormatting(String(text));
-  const pattern = /\*\*\*([^*\n]+?)\*\*\*|\*\*([^*\n]+?)\*\*|\*([^*\n]+?)\*/g;
-  const tokens = [];
-  let cursor = 0;
+  return tokenizeInlineFormatting(text).tokens;
+}
 
-  for (const match of source.matchAll(pattern)) {
-    if (match.index > cursor) {
-      tokens.push({
-        text: removeFormattingMarkers(source.slice(cursor, match.index)),
-        strong: false,
-        emphasis: false,
-      });
+export function inspectInlineFormatting(text = "") {
+  return tokenizeInlineFormatting(text);
+}
+
+function tokenizeInlineFormatting(text) {
+  const source = decodeNumericEntities(String(text));
+  const parsed = tokenizeInlineSource(source);
+  return parsed.balanced
+    ? parsed
+    : tokenizeInlineSource(repairInlineFormatting(source));
+}
+
+function tokenizeInlineSource(source) {
+  const tokens = [];
+  let strong = false;
+  let emphasis = false;
+  let buffer = "";
+
+  const flush = () => {
+    if (!buffer) return;
+    const previous = tokens.at(-1);
+    if (previous?.strong === strong && previous?.emphasis === emphasis) {
+      previous.text += buffer;
+    } else {
+      tokens.push({ text: buffer, strong, emphasis });
+    }
+    buffer = "";
+  };
+
+  for (let index = 0; index < source.length;) {
+    if (source[index] !== "*") {
+      buffer += source[index];
+      index += 1;
+      continue;
     }
 
-    const value = match[1] ?? match[2] ?? match[3] ?? "";
-    const strong = match[1] != null || match[2] != null;
-    tokens.push({
-      text: value,
-      strong,
-      emphasis: match[1] != null || match[3] != null,
-    });
-    cursor = match.index + match[0].length;
+    flush();
+    const run = source.slice(index).match(/^\*+/)?.[0].length ?? 1;
+    let remaining = run;
+    while (remaining > 0) {
+      if (remaining >= 3) {
+        strong = !strong;
+        emphasis = !emphasis;
+        remaining -= 3;
+      } else if (remaining === 2) {
+        strong = !strong;
+        remaining = 0;
+      } else {
+        emphasis = !emphasis;
+        remaining = 0;
+      }
+    }
+    index += run;
   }
+  flush();
 
-  if (cursor < source.length) {
-    tokens.push({
-      text: removeFormattingMarkers(source.slice(cursor)),
-      strong: false,
-      emphasis: false,
-    });
-  }
-
-  return tokens.filter((token) => token.text.length > 0);
+  return {
+    tokens: tokens.filter((token) => token.text.length > 0),
+    balanced: !strong && !emphasis,
+  };
 }
 
 function repairInlineFormatting(text) {
   return text.replace(/(\*\*[^*\n]+)\*\*\*(?=[;,.])/g, "$1**");
 }
 
-function removeFormattingMarkers(text) {
-  return text.replace(/\*/g, "");
+function decodeNumericEntities(text) {
+  return text.replace(/&#(x[0-9a-f]+|\d+);/gi, (_, encoded) => {
+    const hexadecimal = encoded[0].toLowerCase() === "x";
+    const value = Number.parseInt(hexadecimal ? encoded.slice(1) : encoded, hexadecimal ? 16 : 10);
+    return Number.isFinite(value) ? String.fromCodePoint(value) : "";
+  });
 }

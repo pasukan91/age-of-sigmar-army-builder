@@ -87,3 +87,17 @@ test("cleans malformed trailing emphasis markers from catalogue text", () => {
     "The target has STRIKE-LAST; roll D3 damage.");
   assert.equal(tokens.some((token) => token.text.includes("*")), false);
 });
+
+test("renders nested bold and italic catalogue wording", () => {
+  assert.deepEqual(parseInlineFormatting("**1 - *Magical Backlash***"), [
+    { text: "1 - ", strong: true, emphasis: false },
+    { text: "Magical Backlash", strong: true, emphasis: true },
+  ]);
+});
+
+test("decodes numeric HTML entities before rendering", () => {
+  assert.deepEqual(parseInlineFormatting("**MANIFESTATION’**&#x73; rule"), [
+    { text: "MANIFESTATION’", strong: true, emphasis: false },
+    { text: "s rule", strong: false, emphasis: false },
+  ]);
+});
