@@ -334,7 +334,7 @@ function ArmyBuilder({
               title: "Tácticas de batalla",
               property: "battleTactics",
               options: ghb2026BattleTacticsCards,
-              ui: { maxSelections: 2 },
+              ui: { maxSelections: 2, variant: "battleTactics" },
             })
           }
         />

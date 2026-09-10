@@ -23,6 +23,7 @@ import {
   getBattleStatisticsFilename,
 } from "../../utils/battleStatisticsExport";
 import UnitArtwork from "../UnitArtwork";
+import RuleCopyBlocks from "../RuleCopyBlocks";
 
 function GameMode({
   list,
@@ -862,16 +863,11 @@ function BattleTacticsCard({ card, completedMissions = new Set(), onToggleMissio
                 <b>{tactic.points} PV</b>
               </div>
               <strong>{tactic.name}</strong>
-              {tactic.flavour && (
-                <div className="aos-battle-tactic-copy aos-battle-tactic-copy--lore">
-                  <span>Trasfondo</span>
-                  <p>{tactic.flavour}</p>
-                </div>
-              )}
-              <div className="aos-battle-tactic-copy aos-battle-tactic-copy--rule">
-                <span>Regla</span>
-                <p>{tactic.condition}</p>
-              </div>
+              <RuleCopyBlocks
+                lore={tactic.flavour}
+                rule={tactic.condition}
+                ruleLabel="Condición para puntuar"
+              />
             </div>
           </label>
           );

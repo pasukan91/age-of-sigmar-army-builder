@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
+import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { isUniqueUnit } from "../utils/unitIdentity";
 
@@ -651,6 +652,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={
                     allConsumingObsession?.id === option.id
@@ -693,6 +695,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={moulderMutation?.id === option.id}
                   onChange={() =>
@@ -734,6 +737,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={mortisanRefinement?.id === option.id}
                   onChange={() =>
@@ -766,6 +770,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={originOfTerrifyingFolkTale?.id === option.id}
                   onChange={() =>
@@ -803,6 +808,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={visionOfFate?.id === option.id}
                   onChange={() =>
@@ -843,6 +849,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={specialKnickKnack?.id === option.id}
                   onChange={() =>
@@ -883,6 +890,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={flawlessManoeuvre?.id === option.id}
                   onChange={() =>
@@ -914,6 +922,7 @@ function UnitConfig({
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
                   description={option.description}
+                  lore={option.lore}
                   source={option.source}
                   checked={decorationForValour?.id === option.id}
                   onChange={() =>
@@ -1204,6 +1213,7 @@ function SelectionSection({
           description={
             option.description
           }
+          lore={option.lore}
           phase={getEnhancementTiming(option)}
           source={option.source}
           disabled={disabled}
@@ -1222,6 +1232,7 @@ function SelectionSection({
 function CheckboxOption({
   title,
   description,
+  lore,
   phase,
   source,
   disabled = false,
@@ -1300,15 +1311,9 @@ function CheckboxOption({
         </label>
       </div>
 
-      {open && description && (
+      {open && (description || lore) && (
         <div className="aos-config-option-description">
-          <p
-            style={
-              styles.optionDescription
-            }
-          >
-            {description}
-          </p>
+          <RuleCopyBlocks lore={lore} rule={description} />
         </div>
       )}
     </article>

@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
 import DamageCalculator from "../components/DamageCalculator";
+import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
@@ -617,9 +618,7 @@ function EnhancementAccordion({
         </span>
       )}
 
-      <p style={styles.preservedText}>
-        {enhancement.description}
-      </p>
+      <RuleCopyBlocks lore={enhancement.lore} rule={enhancement.description} />
     </Accordion>
   );
 }

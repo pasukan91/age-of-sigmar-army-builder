@@ -7,6 +7,7 @@ import {
 } from "../utils/abilityFormatting";
 import ChevronIcon from "./ChevronIcon";
 import FormattedRulesText from "./FormattedRulesText";
+import RuleCopyBlocks from "./RuleCopyBlocks";
 
 function FormattedText({ text }) {
   const { lead, bullets } = parseFormattedText(text);
@@ -58,6 +59,11 @@ function AbilityCard({ ability, defaultOpen = false, context = null }) {
         )}
 
         {context}
+
+        <RuleCopyBlocks
+          lore={ability.lore}
+          className="aos-ability-card__lore"
+        />
 
         {introduction && (
           <div className="aos-ability-card__text">

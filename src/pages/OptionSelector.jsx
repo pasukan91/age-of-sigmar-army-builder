@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Accordion from "../components/Accordion";
 import BackButton from "../components/BackButton";
+import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 
 function OptionSelector({
@@ -258,17 +259,10 @@ function OptionSelector({
                   </div>
                 </div>
 
-                {description && (
+                {(description || option.lore) && (
                   <div style={{ marginTop: 14 }}>
                     <Accordion title="Descripción">
-                      <p
-                        style={{
-                          margin: 0,
-                          whiteSpace: "pre-line",
-                        }}
-                      >
-                        {description}
-                      </p>
+                      <RuleCopyBlocks lore={option.lore} rule={description} />
                     </Accordion>
                   </div>
                 )}
@@ -380,16 +374,11 @@ function BattleTacticsOptions({
                 <b>{tactic.points} PV</b>
               </div>
               <strong>{tactic.name}</strong>
-              {tactic.flavour && (
-                <div className="aos-battle-tactic-copy aos-battle-tactic-copy--lore">
-                  <span>Trasfondo</span>
-                  <p>{tactic.flavour}</p>
-                </div>
-              )}
-              <div className="aos-battle-tactic-copy aos-battle-tactic-copy--rule">
-                <span>Regla</span>
-                <p>{tactic.condition}</p>
-              </div>
+              <RuleCopyBlocks
+                lore={tactic.flavour}
+                rule={tactic.condition}
+                ruleLabel="Condición para puntuar"
+              />
             </div>
             ))}
           </Accordion>

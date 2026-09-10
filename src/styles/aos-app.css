@@ -5750,12 +5750,15 @@ select.aos-field__control:hover {
   background: #faf7f0;
 }
 
-.aos-game-battle-card__tactic strong,
-.aos-game-battle-card__tactic em {
+.aos-game-battle-card__tactic > strong,
+.aos-game-battle-card__tactic > em,
+.aos-game-battle-card__tactic-content > strong,
+.aos-game-battle-card__tactic-content > em {
   display: block;
 }
 
-.aos-game-battle-card__tactic strong {
+.aos-game-battle-card__tactic > strong,
+.aos-game-battle-card__tactic-content > strong {
   margin-top: 6px;
   color: #301d19;
   font-family: "Oswald", "Arial Narrow", sans-serif;
@@ -5763,63 +5766,95 @@ select.aos-field__control:hover {
   text-transform: uppercase;
 }
 
-.aos-game-battle-card__tactic em {
+.aos-game-battle-card__tactic > em,
+.aos-game-battle-card__tactic-content > em {
   margin-top: 5px;
   color: #746c62;
   font-size: 11px;
   line-height: 1.4;
 }
 
-.aos-battle-tactic-copy {
-  margin-top: 10px;
-  padding: 10px 11px;
-  border-radius: 5px;
+.aos-rule-copy-group {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  margin-top: 11px;
 }
 
-.aos-battle-tactic-copy > span {
+.aos-rule-copy {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 7px;
+}
+
+.aos-rule-copy__label {
   display: block;
-  margin-bottom: 5px;
+  padding: 6px 10px;
   font-family: "Oswald", "Arial Narrow", sans-serif;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.09em;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
-.aos-battle-tactic-copy > p {
+.aos-rule-copy > p {
   margin: 0;
-  color: #302b26;
+  padding: 11px 12px 12px;
   font-size: 14px;
-  line-height: 1.58;
+  line-height: 1.62;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
 }
 
-.aos-battle-tactic-copy--lore {
-  border-left: 4px solid #9a7d43;
-  background: #f2ead8;
+.aos-rule-copy--lore {
+  border: 1px solid #bea66e;
+  border-left: 5px solid #876a2f;
+  background: #eee5d1;
 }
 
-.aos-battle-tactic-copy--lore > span {
-  color: #725b2e;
+.aos-rule-copy--lore .aos-rule-copy__label {
+  color: #fffaf0;
+  background: #68552e;
 }
 
-.aos-battle-tactic-copy--lore > p {
-  color: #51493f;
+.aos-rule-copy--lore > p {
+  color: #51483c;
+  font-family: Georgia, "Times New Roman", serif;
   font-style: italic;
 }
 
-.aos-battle-tactic-copy--rule {
-  border: 1px solid #d3b8a9;
-  border-left: 4px solid #8d2018;
-  background: #fff;
+.aos-rule-copy--rule {
+  border: 1px solid #bd7c75;
+  border-left: 5px solid #7f1d17;
+  background: #fffdf9;
+  box-shadow: 0 2px 7px rgba(69, 23, 17, 0.08);
 }
 
-.aos-battle-tactic-copy--rule > span {
-  color: #7c1d17;
+.aos-rule-copy--rule .aos-rule-copy__label {
+  color: #ffffff;
+  background: #7f1d17;
 }
 
-.aos-battle-tactic-copy--rule > p {
-  font-size: 15px;
+.aos-rule-copy--rule > p {
+  color: #28231f;
+  font-size: 14.5px;
   font-weight: 600;
+}
+
+.aos-ability-card__lore {
+  margin: 14px 20px 2px;
+}
+
+@media (max-width: 520px) {
+  .aos-rule-copy > p {
+    padding: 10px 11px 11px;
+  }
+
+  .aos-ability-card__lore {
+    margin-right: 14px;
+    margin-left: 14px;
+  }
 }
 
 .aos-game-battle-card__tactic-heading {

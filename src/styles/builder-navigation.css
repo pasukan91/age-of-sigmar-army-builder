@@ -144,7 +144,7 @@ body .aos-builder-footer.is-battle-tools .aos-fury-counter {
   min-width: 0;
 }
 
-.aos-game-battle-card__tactic {
+.aos-game-tactic-reference .aos-game-battle-card__tactic {
   position: relative;
   display: grid;
   grid-template-columns: 32px minmax(0, 1fr);
@@ -153,13 +153,13 @@ body .aos-builder-footer.is-battle-tools .aos-fury-counter {
   cursor: pointer;
 }
 
-.aos-game-battle-card__tactic::before {
+.aos-game-tactic-reference .aos-game-battle-card__tactic::before {
   content: "";
   position: absolute;
   inset: -8px;
 }
 
-.aos-game-battle-card__tactic > input {
+.aos-game-tactic-reference .aos-game-battle-card__tactic > input {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -180,18 +180,18 @@ body .aos-builder-footer.is-battle-tools .aos-fury-counter {
   transition: 140ms ease;
 }
 
-.aos-game-battle-card__tactic > input:focus-visible + .aos-game-mission-check {
+.aos-game-tactic-reference .aos-game-battle-card__tactic > input:focus-visible + .aos-game-mission-check {
   outline: 3px solid #5f120e;
   outline-offset: 2px;
   box-shadow: 0 0 0 5px #fff;
 }
 
-.aos-game-battle-card__tactic.is-completed {
+.aos-game-tactic-reference .aos-game-battle-card__tactic.is-completed {
   border-color: #a78d4f;
   background: #f1ecdf;
 }
 
-.aos-game-battle-card__tactic.is-completed .aos-game-mission-check {
+.aos-game-tactic-reference .aos-game-battle-card__tactic.is-completed .aos-game-mission-check {
   border-color: #92783c;
   color: #211c13;
   background: linear-gradient(180deg, #b49a59, #75602e);
