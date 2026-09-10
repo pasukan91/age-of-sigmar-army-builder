@@ -66,7 +66,6 @@ const ogors = {
     botAllowed: false,
   },
   // No activar hasta que el usuario confirme que el bot vuelve a estar actualizado.
-  useAosCommunityCatalogue: false,
   image: "/images/factions/ogormawtribes.webp",
   battleTraits,
   battleFormations,

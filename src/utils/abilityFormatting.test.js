@@ -70,7 +70,7 @@ test("parses catalogue bold and italic markers without exposing asterisks", () =
     ),
     [
       { text: "Pick a friendly ", strong: false, emphasis: false },
-      { text: "Stormcast Eternals Hero", strong: true, emphasis: false },
+      { text: "STORMCAST ETERNALS HERO", strong: true, emphasis: false },
       { text: " with ", strong: false, emphasis: false },
       { text: "no damage points", strong: false, emphasis: true },
       { text: ".", strong: false, emphasis: false },
@@ -84,6 +84,6 @@ test("cleans malformed trailing emphasis markers from catalogue text", () => {
   );
 
   assert.equal(tokens.map((token) => token.text).join(""),
-    "The target has Strike-Last; roll D3 damage.");
+    "The target has STRIKE-LAST; roll D3 damage.");
   assert.equal(tokens.some((token) => token.text.includes("*")), false);
 });

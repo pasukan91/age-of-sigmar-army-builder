@@ -8,8 +8,8 @@ const catalogue = JSON.parse(
   readFileSync(new URL("../src/data/aosCommunityCatalogue.generated.json", import.meta.url)),
 );
 
-test("keeps the extracted catalogue version and update date", () => {
-  assert.equal(catalogue.metadata.dataVersion, 459);
+test("keeps the current authoritative bot catalogue version and update date", () => {
+  assert.equal(catalogue.metadata.dataVersion, 476);
   assert.equal(catalogue.metadata.databaseUpdated, "2026-07-08");
 });
 
@@ -22,13 +22,12 @@ test("uses the current Beast-skewer Killbow movement and Jaggedy Blades profile"
   assert.deepEqual(jaggedyBlades.abilities, ["Crit (Mortal)"]);
 });
 
-test("keeps Ogor Mawtribes on its pre-catalogue local data", () => {
+test("uses the bot catalogue for Ogor Mawtribes", () => {
   const ogorConfig = readFileSync(
     new URL("../src/data/ogors/index.js", import.meta.url),
     "utf8"
   );
 
-  assert.equal(shouldUseAosCommunityCatalogue({ useAosCommunityCatalogue: false }), false);
   assert.equal(shouldUseAosCommunityCatalogue({ id: "kruleboyz" }), true);
-  assert.match(ogorConfig, /useAosCommunityCatalogue:\s*false/);
+  assert.doesNotMatch(ogorConfig, /useAosCommunityCatalogue:\s*false/);
 });

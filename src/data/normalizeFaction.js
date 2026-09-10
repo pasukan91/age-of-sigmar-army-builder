@@ -2,6 +2,7 @@ import { withEnhancementTiming } from "../utils/enhancementTiming";
 import { applyAosCommunityCatalogue } from "./applyAosCommunityCatalogue";
 import { shouldUseAosCommunityCatalogue } from "./aosCommunityCataloguePolicy";
 import { ensureManifestationLoreCoverage } from "./ensureManifestationLoreCoverage.js";
+import { applyAosCommunityWording } from "./applyAosCommunityWording.js";
 
 const ARRAY_FIELDS = [
   "battleTraits",
@@ -63,9 +64,10 @@ const ENHANCEMENT_FIELDS = [
 ];
 
 export function normalizeFaction(faction) {
-  const useAosCommunityCatalogue = shouldUseAosCommunityCatalogue(faction);
+  const authoritativeFaction = applyAosCommunityWording(faction);
+  const useAosCommunityCatalogue = shouldUseAosCommunityCatalogue(authoritativeFaction);
   const normalized = Object.fromEntries(
-    ARRAY_FIELDS.map((field) => [field, asArray(faction?.[field])])
+    ARRAY_FIELDS.map((field) => [field, asArray(authoritativeFaction?.[field])])
   );
 
   ENHANCEMENT_FIELDS.forEach((field) => {
@@ -79,14 +81,14 @@ export function normalizeFaction(faction) {
       useAosCommunityCatalogue
         ? applyAosCommunityCatalogue(
             unit,
-            faction.catalogueFactionName ?? faction.name
+            authoritativeFaction.catalogueFactionName ?? authoritativeFaction.name
           )
         : unit
     )
   );
   normalized.manifestations = normalized.manifestations.map(normalizeManifestation);
   normalized.manifestationLores = normalizeManifestationLores({
-    faction,
+    faction: authoritativeFaction,
     lores: normalized.manifestationLores,
     manifestations: normalized.manifestations,
   });
@@ -103,7 +105,7 @@ export function normalizeFaction(faction) {
   }));
 
   return {
-    ...faction,
+    ...authoritativeFaction,
     ...normalized,
   };
 }

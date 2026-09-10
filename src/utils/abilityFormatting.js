@@ -159,7 +159,7 @@ export function parseInlineFormatting(text = "") {
     const value = match[1] ?? match[2] ?? match[3] ?? "";
     const strong = match[1] != null || match[2] != null;
     tokens.push({
-      text: strong ? makeKeywordCaseReadable(value) : value,
+      text: value,
       strong,
       emphasis: match[1] != null || match[3] != null,
     });
@@ -183,17 +183,4 @@ function repairInlineFormatting(text) {
 
 function removeFormattingMarkers(text) {
   return text.replace(/\*/g, "");
-}
-
-function makeKeywordCaseReadable(text) {
-  return text.replace(/[A-Z][A-Z0-9'’‑-]*(?:\s+[A-Z][A-Z0-9'’‑-]*)*/g, (phrase) =>
-    phrase
-      .split(/(\s+|‑|-)/)
-      .map((part) => {
-        if (/^(?:\d*D\d+|DPP)$/i.test(part)) return part.toUpperCase();
-        if (!/[A-Z]/.test(part)) return part;
-        return `${part.charAt(0)}${part.slice(1).toLowerCase()}`;
-      })
-      .join("")
-  );
 }

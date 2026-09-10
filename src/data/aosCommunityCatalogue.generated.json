@@ -1,9 +1,9 @@
 {
   "metadata": {
     "source": "https://aos-telegram-app.onrender.com/",
-    "dataVersion": 459,
+    "dataVersion": 476,
     "databaseUpdated": "2026-07-08",
-    "generatedAt": "2026-08-02T19:18:00.632Z"
+    "generatedAt": "2026-09-10T03:40:53.086Z"
   },
   "factions": {
     "Kruleboyz": {
@@ -1466,7 +1466,7 @@
         "sourceId": "35aae12f-86ff-4a81-b0c4-020f241bcadd",
         "name": "Scourge of Aqshy: Killaboss on Great Gnashtoof",
         "lore": "Killabosses bound for Aqshy often ride Great Gnashtoofs; already foul tempered and hot headed, these beasts are quick to adjust to the battlegrounds of the Bright Realm, ready to snatch up unsuspecting prey in their powerful jaws.",
-        "points": 230,
+        "points": 150,
         "profile": {
           "move": "10\"",
           "health": 10,
@@ -1477,7 +1477,7 @@
         "details": {
           "models": 1,
           "baseSize": "105 x 70mm",
-          "notes": "This unit is legal for Matched Play for battles fought using the *General’s Handbook 2026-27* battlepack.",
+          "notes": "This **HERO** can join an eligible regiment as a *Swamp Beast*.\nThis unit is legal for Matched Play for battles fought using the *General’s Handbook 2026-27* battlepack.",
           "wargearOptionsText": null
         },
         "keywords": [
@@ -3077,7 +3077,7 @@
             "name": "Supernatural Grace",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: This unit can use **CHARGE** abilities even if it used a **RETREAT** ability in the same turn. In addition, no mortal damage is inflicted on this unit by **RETREAT** abilities.&#x20;",
+            "description": "Effect: This unit can use **CHARGE** abilities even if it used a **RETREAT** ability in the same turn. In addition, no mortal damage is inflicted on this unit by **RETREAT** abilities.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -3104,18 +3104,18 @@
             "name": "An Exquisite Trophy",
             "phase": "Any Combat Phase",
             "type": "Ability",
-            "description": "Declare: Pick an enemy **HERO** or **MONSTER** in combat with this unit to be the target.&#x20;\n\nEffect: For the rest of the phase, the following effects apply:&#x20;\n\n• This unit's combat attacks that target that enemy unit have **Crit (2 Hits)** and score critical hits on unmodified hit roll of 5+.\n\n• If the target is destroyed by this unit's combat attacks this phase, add 1 to the Attacks characteristic of melee weapons used by other friendly **HEDONITES OF SLAANESH DAEMON** units while they are wholly within 12\" of and visible to this unit.&#x20;",
+            "description": "Declare: Pick an enemy **HERO** or **MONSTER** in combat with this unit to be the target.\n\nEffect: For the rest of the phase, the following effects apply:\n\n• This unit's combat attacks that target that enemy unit have **Crit (2 Hits)** and score critical hits on unmodified hit roll of 5+.\n\n• If the target is destroyed by this unit's combat attacks this phase, add 1 to the Attacks characteristic of melee weapons used by other friendly **HEDONITES OF SLAANESH DAEMON** units while they are wholly within 12\" of and visible to this unit.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Shalaxi Helbane delights in making examples of the enemy's greatest champions, redoubling their aggression to ensure victory and shatter enemy morale.&#x20;"
+            "lore": "Shalaxi Helbane delights in making examples of the enemy's greatest champions, redoubling their aggression to ensure victory and shatter enemy morale."
           },
           {
             "name": "Refine Senses",
             "phase": "Your Hero Phase",
             "type": "Spell",
-            "description": "Declare: Pick a visible friendly **HEDONITES OF SLAANESH** unit wholly within 12\" of this unit to be the target, then make a casting roll of 2D6. Add 1 to the casting roll if this unit is the target.&#x20;\n\nEffect: The target has **STRIKE-FIRST** for the rest of the turn.&#x20;",
+            "description": "Declare: Pick a visible friendly **HEDONITES OF SLAANESH** unit wholly within 12\" of this unit to be the target, then make a casting roll of 2D6. Add 1 to the casting roll if this unit is the target.\n\nEffect: The target has **STRIKE-FIRST** for the rest of the turn.",
             "keywords": [
               "Spell"
             ],
@@ -3305,19 +3305,6 @@
             "lore": "Dexcessa rarely stays locked in combat in one place for long, flitting swiftly all over the battlefield and bringing death wherever they alight."
           },
           {
-            "name": "Redolence of Violence",
-            "phase": "Once Per Turn (Army), End of Any Turn",
-            "type": "Ability",
-            "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll 2D6. If this unit charged this turn, add 2 to the roll. If the roll exceeds the target’s Health characteristic, 1 model in the target is automatically slain. If the target is a **MANIFESTATION** and the roll exceeds its banishment value, it is banished.",
-            "keywords": [
-              "Rampage"
-            ],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "Should Dexcessa fall into a truly ecstatic rampage, very little can hope to survive the whirling, spiteful onslaught that they unleash – let alone remain in one piece."
-          },
-          {
             "name": "You! Amuse Us!",
             "phase": "Reaction: You declared a FIGHT ability for this unit",
             "type": "Ability",
@@ -3327,6 +3314,19 @@
             "chantingValue": null,
             "commandPoints": null,
             "lore": "Cruel Dexcessa is patron to many warrior-champions, and they expect these favoured souls to prove their worth."
+          },
+          {
+            "name": "Redolence of Violence",
+            "phase": "Once Per Turn (Army), End of Any Turn",
+            "type": "Ability",
+            "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll 2D6. If this unit charged this turn, add 2 to the roll. If the roll exceeds the target’s Health characteristic, 1 model in the target is automatically slain. If the target is a **MANIFESTATION** and the roll exceeds its banishment value, it is banished and removed from play.",
+            "keywords": [
+              "Rampage"
+            ],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Should Dexcessa fall into a truly ecstatic rampage, very little can hope to survive the whirling, spiteful onslaught that they unleash – let alone remain in one piece."
           }
         ]
       },
@@ -3764,7 +3764,7 @@
             "name": "The Mirror's Depths",
             "phase": "Once Per Turn (Army), Enemy Hero Phase",
             "type": "Ability",
-            "description": "Declare: Pick a visible enemy unit within 18\" of this unit to be the target.\n\nEffect: If the target is within 6\" of this unit, the target is **gazing into eternity** until the start of your next turn. Otherwise, roll a dice. On a 3+, the target is **gazing into eternity** until the start of your next turn.&#x20;\n\nWhile the target is **gazing into eternity**, it must end all moves no further from this unit than it was at the start of the move and it cannot be removed from the battlefield by an ability that would allow it to be set up again on the battlefield.&#x20;\n\n**Designer’s Note:** *This includes pile-in moves.*",
+            "description": "Declare: Pick a visible enemy unit within 18\" of this unit to be the target.\n\nEffect: If the target is within 6\" of this unit, the target is **gazing into eternity** until the start of your next turn. Otherwise, roll a dice. On a 3+, the target is **gazing into eternity** until the start of your next turn.\n\nWhile the target is **gazing into eternity**, it must end all moves no further from this unit than it was at the start of the move and it cannot be removed from the battlefield by an ability that would allow it to be set up again on the battlefield.\n\n**Designer’s Note:** *This includes pile-in moves.*",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -3775,7 +3775,7 @@
             "name": "Swallow Energy",
             "phase": "Once Per Turn (Army), End of Any Turn",
             "type": "Ability",
-            "description": "Declare: Pick a visible **MANIFESTATION** within 12\" of this unit and that was not summoned this turn to be the target, then make a banishment roll of 2D6.\n\nEffect: If the banishment roll equals or exceeds the banishment value on the target’s warscroll, it is banished and removed from play.&#x20;\n\nThe next time a visible friendly unit wholly within 12\" of this unit uses a **SUMMON** ability, roll an additional D6, to a maximum of 3, when making the casting roll for that ability.",
+            "description": "Declare: Pick a visible **MANIFESTATION** within 12\" of this unit and that was not summoned this turn to be the target, then make a banishment roll of 2D6.\n\nEffect: If the banishment roll equals or exceeds the banishment value on the target’s warscroll, it is banished and removed from play.\n\nThe next time a visible friendly unit wholly within 12\" of this unit uses a **SUMMON** ability, roll an additional D6, to a maximum of 3, when making the casting roll for that ability.",
             "keywords": [
               "Banish"
             ],
@@ -4119,7 +4119,7 @@
           },
           {
             "name": "Instinctive Advance",
-            "phase": "Once Per Turn (Army), Reaction: Opponent declared a command for a unit within 12\" of this unit&#x20;",
+            "phase": "Once Per Turn (Army), Reaction: Opponent declared a command for a unit within 12\" of this unit",
             "type": "Ability",
             "description": "Effect: This unit can move 3\" immediately after that command has been resolved, unless that command is a reaction, in which case this unit can move after the ability that it was reacting to has been resolved. It can pass through the combat ranges of enemy units and can end that move in combat. If this unit was in combat at the start of the move, it must end that move in combat with the units it was already in combat with at the start of the move.",
             "keywords": [],
@@ -4638,7 +4638,7 @@
         "abilities": [
           {
             "name": "Bargain with the Mist-Daemons",
-            "phase": "Once per Turn (Army), Reaction: You declared a **SPELL** ability for this unit&#x20;",
+            "phase": "Once per Turn (Army), Reaction: You declared a **SPELL** ability for this unit",
             "type": "Ability",
             "description": "Effect: Roll a dice. On a 1, inflict 2 mortal damage on this unit. On a 3+, add 2 to the casting roll.",
             "keywords": [],
@@ -8070,7 +8070,7 @@
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Night Runners are experts at scaling vertical terrain with their grapnels, either to ambush an unwary foe or retreat to where the enemy cannot follow.&#x20;"
+            "lore": "Night Runners are experts at scaling vertical terrain with their grapnels, either to ambush an unwary foe or retreat to where the enemy cannot follow."
           },
           {
             "name": "Smoke Bombs",
@@ -8365,37 +8365,139 @@
       }
     },
     "Ogor Mawtribes": {
-      "tyrant": {
-        "sourceId": "64ade6f4-bcef-41a2-b6f9-a6c0bfa86a76",
-        "name": "Tyrant",
-        "lore": "The leaders of the warglutts are known simply as Tyrants. That title is well earned, for they rule with an iron fist – often quite literally. Every one of them relishes the act of beating those who challenge them and eating the remains; no ogor stays on the top of the gigantic, fleshy heap for long without committing egregious amounts of physical harm. Sometimes they just roar, compelling those around them to do their bidding with bellowed threats and blasting them with foul-smelling breath. In battle, a Tyrant holds the line with their meaty, grasping arms as much as with any kind of tactical ability.\n\nThe weapons used by Tyrants are usually as heavy as their owners. The thundermace is a great example: a giant black-iron tenderiser so imbued with the earthy magic of the ogors that it can send tremors through the ranks of the foe. There is also the long, stout polearm called a beastskewer glaive, often nicknamed a ‘Big Spike’. This giant spear is capable of slashing open the guts of a Ghurish monstrosity; often a Tyrant will rush under a lumbering behemoth and slice it open along its length before feasting on the drizzling innards and offal that falls into their waiting mouth.",
-        "points": 130,
+      "grell firefist": {
+        "sourceId": "e36649e5-1ed8-416e-8ed8-69b8c9c2ebcf",
+        "name": "Grell Firefist",
+        "lore": "If there is something someone needs killing, then Grell Firefist has likely killed its kind before - and taken a bite out of it too. This veteran mercenary has travelled all over the Mortal Realms, selling her skills with her beloved cannon Blastbelch to the highest bidder. Grell keeps a fondness for her ogor kin and can usually be convinced to join a passing raid - for the right price.",
+        "points": 150,
         "profile": {
           "move": "6\"",
           "health": 8,
-          "control": "5",
+          "control": "3",
           "save": "4+",
           "ward": null
         },
         "details": {
           "models": 1,
           "baseSize": "50mm",
-          "notes": null,
+          "notes": "This **HERO** can join an eligible regiment as a *Maw Nomad.*",
           "wargearOptionsText": null
         },
         "keywords": [
+          "Unique",
+          "Hero",
+          "Infantry",
           "Ogor",
           "Gutbusters",
-          "Infantry",
-          "Hero",
+          "Maw Nomad",
           "Destruction",
           "Ogor Mawtribes"
         ],
         "weapons": [
           {
-            "name": "Thundermace",
+            "name": "Blastbelch",
+            "type": "Ranged",
+            "range": "12\"",
+            "attacks": "D3+2",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "2",
+            "abilities": []
+          },
+          {
+            "name": "Maneater Cleaver",
             "type": "Melee",
-            "attacks": "3",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "2",
+            "abilities": [
+              "Crit (Mortal)"
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Ogor-Made Ammunition",
+            "phase": "Any Shooting Phase",
+            "type": "Ability",
+            "description": "Declare: Pick a visible enemy unit within 6\" of this unit to be the target.\n\nEffect: For the rest of the phase:\n•  All of this unit’s shooting attacks must target that enemy unit.\n•  The Attacks characteristic of this unit’s **Blastbelch** is D6+2 instead of D3+2.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Anything that could even slightly be considered as ammunition is shoved into Grell’s pilfered cannon."
+          },
+          {
+            "name": "Thunderous Diversion",
+            "phase": "Your Shooting Phase",
+            "type": "Ability",
+            "description": "Declare: Pick a friendly **OGOR MAWTRIBES** unit that is in combat with an enemy unit that had any damage inflicted on it this turn by this unit’s shooting attacks to be the target.\n\nEffect: The target can immediately use a **RETREAT** ability as if it were your movement phase and can still use **CHARGE** abilities later in the turn. No mortal damage is inflicted on the target by that **RETREAT** ability.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Ogors who have fought alongside Grell for any length of time learn to take advantage of the distraction caused by the blasting mayhem she wreaks to avoid more troublesome foes, freeing them up to pursue easier meat."
+          },
+          {
+            "name": "Oi! Pay Attention, Slobs!",
+            "phase": "Once Per Turn (Army), Reaction: Opponent declared a command for a visible enemy unit within 6\" of this unit",
+            "type": "Ability",
+            "description": "Effect: You must allocate D3 damage points to another visible friendly **OGOR MAWTRIBES** unit within 3\" of this unit (ward rolls cannot be made for those damage points). Then, that command has no effect and still counts as having been used, but the command points spent to use it are regained by your opponent.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Grell’s many mercenary adventures have taught her how to counter many tactics – though sometimes, other ogors need heavy-handed ‘encouragement’ to listen…"
+          }
+        ]
+      },
+      "tyrant on glutthorn": {
+        "sourceId": "a3a02af6-466c-4d5a-86cb-e4f6b0e9b2ff",
+        "name": "Tyrant on Glutthorn",
+        "lore": "Tyrants who really want to impress with size and status require a suitable mount, and few are seen as more suitable than the glutthorns. Bulky and bad-tempered, these beasts shake the earth with every step, snorting in simple annoyance at suffering apparently grievous wounds, while the Tyrant crushes skulls and bellows for tardy underlings to start pulling their weight.",
+        "points": 400,
+        "profile": {
+          "move": "10\"",
+          "health": 16,
+          "control": "10",
+          "save": "3+",
+          "ward": null
+        },
+        "details": {
+          "models": 1,
+          "baseSize": "120 x 92mm",
+          "notes": null,
+          "wargearOptionsText": null
+        },
+        "keywords": [
+          "Hero",
+          "Monster",
+          "Ogor",
+          "Gutbusters",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Glutthorn's Horn and Hooves",
+            "type": "Melee",
+            "attacks": "7",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "3",
+            "abilities": [
+              "Charge (+1 Damage)",
+              "Companion"
+            ]
+          },
+          {
+            "name": "Tyrant's Meatcleavers",
+            "type": "Melee",
+            "attacks": "4",
             "hit": "4+",
             "wound": "2+",
             "rend": "2",
@@ -8403,141 +8505,211 @@
             "abilities": [
               "Crit (Mortal)"
             ]
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Battle Damaged",
+            "phase": "Passive",
+            "type": "Ability",
+            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Glutthorn’s Horn and Hooves** is 5.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": null
           },
           {
-            "name": "Beastskewer Glaive",
+            "name": "Pitiless Warlord",
+            "phase": "Once Per Turn (Army), Reaction: You declared a **CHARGE** ability for an **OGOR MAWTRIBES** unit wholly within 12\" of this unit",
+            "type": "Ability",
+            "description": "Effect: Re-roll 1 dice in that charge roll.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Anyone caught slacking under the gaze of a Tyrant is sure to regret it; better to put the effort in before they notice."
+          },
+          {
+            "name": "Glutthorn Stampede",
+            "phase": "Once Per Turn (Army), Any Combat Phase",
+            "type": "Ability",
+            "description": "Declare: If this unit charged this turn, pick an enemy unit in combat with it to be the target.\n\nEffect: Roll a dice. Add 1 to the roll if the target is **INFANTRY**. On a 4+, the target has **STRIKE-LAST** for the rest of the turn.",
+            "keywords": [
+              "Rampage"
+            ],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Glutthorns are heavy and ponderous beasts, and when they pick up momentum on the charge, the very earth shakes at their onset. Any foes who avoid being gored or trampled in the initial impact are sent sprawling, and it takes crucial moments for them to regather themselves."
+          }
+        ]
+      },
+      "tyrant": {
+        "sourceId": "c801b5dc-1f31-47c8-9f6f-035d7d97ee56",
+        "name": "Tyrant",
+        "lore": "The ferocious warleaders of the Gutbuster warglutts, Tyrants are living mountains of iron and blubbery flesh. Despite their girth, they move with surprising speed, hacking their prey into bloody chunks for easier consumption.",
+        "points": 150,
+        "profile": {
+          "move": "6\"",
+          "health": 8,
+          "control": "3",
+          "save": "4+",
+          "ward": null
+        },
+        "details": {
+          "models": 1,
+          "baseSize": "50mm",
+          "notes": "This Hero can join an eligible regiment as a *Maw Nomad*.",
+          "wargearOptionsText": null
+        },
+        "keywords": [
+          "Ogor",
+          "Gutbusters",
+          "Infantry",
+          "Hero",
+          "Maw Nomad",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Tyrant's Meatcleavers",
             "type": "Melee",
-            "attacks": "2",
+            "attacks": "4",
             "hit": "4+",
             "wound": "2+",
-            "rend": "1",
-            "damage": "2",
+            "rend": "2",
+            "damage": "3",
             "abilities": [
-              "Anti-MONSTER (+1 Rend)"
-            ]
-          },
-          {
-            "name": "Ogor Pistols",
-            "type": "Ranged",
-            "range": "10\"",
-            "attacks": "2",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": [
-              "Shoot in Combat"
+              "Crit (Mortal)"
             ]
           }
         ],
         "abilities": [
           {
             "name": "Brawlerguts",
-            "phase": "Passive",
+            "phase": "Reaction: You delcared a **FIGHT** ability for this unit",
             "type": "Ability",
-            "description": "Effect: Add 1 to the D3 roll made when this unit uses the ‘Trampling Charge’ ability.",
+            "description": "Effect: Pick a visible friendly non-**HERO OGOR MAWTRIBES INFANTRY** unit that has not used a **FIGHT** ability this turn and is within this unit’s combat range to be the target. The target can be picked to use a **FIGHT** ability immediately after the **FIGHT** ability used by this unit has been resolved. If it is picked to do so, add 1 to hit rolls for the target’s combat attacks for the rest of the turn.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Combining brutish strength with devastating bulk, this ogor enters combat like an avalanche."
+            "lore": "Combining brutish strength with devastating bulk, the Tyrant leads other ogors into combat like the crown of an avalanche."
           },
           {
-            "name": "Bully of the First Degree",
-            "phase": "Your Hero Phase",
+            "name": "Big Name",
+            "phase": "Deployment Phase",
             "type": "Ability",
-            "description": "Declare: Pick another friendly **OGOR MAWTRIBES** unit wholly within 12\" of this unit to be the target.\n\nEffect: Add 3 to the target’s control score until the start of your next turn.",
+            "description": "Effect: Pick 1 of the following effects to apply for the rest of the battle. You cannot pick an effect that has already been picked for another friendly **Tyrant**.\n\n• ***Neck-wringer***: Enemy **INFANTRY** units that have a Health characteristic of 1 or 2 cannot contest objectives while they are in combat with this unit.\n\n• ***Steed-eater***: Enemy **CAVALRY** units cannot use **RETREAT** abilities while they are in combat with this unit.\n\n• ***Giant-wrestler***: Enemy **MONSTERS** cannot use **RAMPAGE** abilities while they are in combat with this unit.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Tyrants use constant violence to help them maintain an iron rule, and they never let their underlings forget it."
+            "lore": "Tyrants are fond of assuming crudely grandiose titles that speak of their monstrous deeds."
           }
         ]
       },
-      "ogor gluttons": {
-        "sourceId": "01cf2e41-5363-46fc-ad20-92466bc18849",
-        "name": "Ogor Gluttons",
-        "lore": "The blubbery mass of each ogor warglutt is composed of Gluttons. These ravenous warriors have a very straightforward approach to warfare, in that they usually just barrel straight forward and meet whatever is in front of them head-on. By banding together into one vast, stinking scrum of flesh, their mass is roughly that of a herd of rhinoxen. They ensure the enemy is knocked reeling even before they bring their clubs, fists and heads to bear. The ever-useful gut-plate plays a big part in this, for with the weight of the ogor concentrated behind a stout metal disc, the effect of a charging Glutton is much like that of a rampaging bull. Even if they are charging a spear-wall, they will still barge forward without hesitation; an ogor’s skin, fat, muscle and bone is so dense that most polearms will break in two rather than impale them.\n\nWhen Gluttons hit home, their foes are crushed bodily into the ranks of their fellows. The ogors capitalise on their crashing charge, staving in ribcages with their clubs and hacking clean through limbs with their oversized, rust-pitted blades. Should any be left standing, the Gluttons will lunge forward to crush enemy skulls with one almighty head-shattering bite.",
-        "points": 220,
+      "maulbeast cavalry": {
+        "sourceId": "62b71cb3-86df-4e44-9882-5be4a51a0de4",
+        "name": "Maulbeast Cavalry",
+        "lore": "Maulbeast Cavalry are unleashed when a Gutbuster warlord wants something properly and thoroughly savaged. The brutish beasts these veterans ride upon are far from intelligent, but they are always hungry and up for the hunt. When such mountains of frenzied meat crash into the foe, the mess left behind must be seen to be believed.",
+        "points": 280,
         "profile": {
-          "move": "6\"",
-          "health": 4,
-          "control": "2",
-          "save": "5+",
+          "move": "10\"",
+          "health": 7,
+          "control": "3",
+          "save": "3+",
           "ward": null
         },
         "details": {
-          "models": 6,
-          "baseSize": "40mm",
+          "models": 2,
+          "baseSize": "90 x 52mm",
           "notes": null,
           "wargearOptionsText": null
         },
         "keywords": [
           "Champion",
-          "Standard Bearer",
-          "Musician",
           "Ogor",
           "Gutbusters",
-          "Infantry",
-          "Musician (1/6)",
-          "Standard Bearer (1/6)",
+          "Cavalry",
           "Destruction",
           "Ogor Mawtribes"
         ],
         "weapons": [
           {
-            "name": "Glutton Weapons",
+            "name": "Gutbiter Weapons",
+            "type": "Melee",
+            "attacks": "3",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "3",
+            "abilities": []
+          },
+          {
+            "name": "Maulbeast's Horns and Fangs",
             "type": "Melee",
             "attacks": "4",
             "hit": "4+",
             "wound": "2+",
             "rend": "1",
             "damage": "2",
-            "abilities": []
+            "abilities": [
+              "Charge (+1 Damage)",
+              "Companion"
+            ]
           }
         ],
         "abilities": [
           {
-            "name": "Insatiable Gluttony",
+            "name": "Ravenous Counter-Attack",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: If you have used the ‘Feast on Flesh’ ability this battle, add 1 to the control score of this unit for each model in this unit.",
+            "description": "Effect: Enemy units do not count as having charged while they are in combat with this unit.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Once Gluttons have started eating, it is nearly impossible to shift them."
+            "lore": "Maulbeasts are always hungry; they do not let foes get close without leaping to attack."
+          },
+          {
+            "name": "Shock and Gore",
+            "phase": "Once Per Turn (Army), Any Combat Phase",
+            "type": "Ability",
+            "description": "Declare: If this unit charged this turn, pick an enemy unit in combat with it to be the target.\n\nEffect: Roll a dice. On a 3+, for the rest of the turn, subtract 1 from wound rolls for the target’s attacks.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "The impact and ferocity of a Maulbeast Cavalry charge inevitably leave any survivors staggered and shaken."
           }
         ]
       },
       "ironguts": {
-        "sourceId": "1574b308-eba1-4522-a39e-1e6e05768b3f",
+        "sourceId": "3b6a8545-1a8e-454f-9ca8-2c5e2aebcab6",
         "name": "Ironguts",
-        "lore": "Should an ogor survive long enough, they will eventually amass enough status and equipment to rise through the tribe’s ranks. Provided they earn the favour of their Tyrant, these chosen few become Ironguts, their leader’s dedicated bodyguards. These are the biggest, hardest and gnarliest of all the warglutt’s ogors save the chieftain himself, and each is a veteran of more battles than they can count. While ogors are not much good at counting, those who insist that an Irongut prove their right to the title soon find that one good wallop is all it takes to straighten the matter out.\n\nThe weapons of choice for these battle-scarred veterans are usually at least as long as they are tall: twelve-foot clubs of stone and iron, battered and blunted scimitars that can fell a gnarloak with a few swipes, and billhooks perfect for slicing open the bellies of mammoths. The gut-plates they wear tend to be more ornate than those of the Gluttons, and it is common practice for Ironguts to strap shields and bucklers taken from their downed foes to their torsos. These trophies are a welcome sign to their allies should a battle be going badly – for when the Ironguts smash into the press of battle, they can turn the tide of a fight all by themselves.",
-        "points": 210,
+        "lore": "Ironguts are the meanest ogors around, the elite warriors of their warglutt. Protected by thick metal armour plates and carrying immense two-handed weapons, they wade into the thick of the fighting, hacking and bashing their foes to bloody chunks.",
+        "points": 200,
         "profile": {
           "move": "6\"",
           "health": 4,
           "control": "2",
-          "save": "5+",
+          "save": "4+",
           "ward": null
         },
         "details": {
-          "models": 4,
+          "models": 3,
           "baseSize": "40mm",
           "notes": null,
           "wargearOptionsText": null
         },
         "keywords": [
           "Champion",
-          "Standard Bearer",
-          "Musician",
           "Ogor",
           "Gutbusters",
           "Infantry",
-          "Musician (1/4)",
-          "Standard Bearer (1/4)",
           "Destruction",
           "Ogor Mawtribes"
         ],
@@ -8555,33 +8727,111 @@
         ],
         "abilities": [
           {
-            "name": "Down to the Ironguts",
-            "phase": "Once Per Battle, Any Combat Phase",
-            "type": "Ability",
-            "description": "Effect: This unit can use 2 **FIGHT** abilities this phase. After the first is used, however, this unit has **STRIKE-LAST** for the rest of the turn.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "It is not often that a mawtribe’s battleline falters, but if it does, the Tyrant will call upon their Ironguts to turn the battle back in their favour."
-          },
-          {
-            "name": "Protect the Tyrant",
+            "name": "Personal Enforcers",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: While this unit is within the combat ranges of any friendly **Tyrants**, both this unit and those **Tyrants** have **WARD (6+)**.",
+            "description": "Effect: While this unit is within the combat ranges of any friendly **OGOR MAWTRIBES INFANTRY HEROES**, both this unit and those **HEROES** have **WARD (5+)**.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Ironguts have risen through the tribe’s ranks not only by amassing status and equipment but also by earning the favour of their Tyrant."
+            "lore": "Ironguts are the bodyguards and cronies of the tribe’s toughest leaders."
+          },
+          {
+            "name": "Displays of Might",
+            "phase": "Once Per Turn (Army), Any Charge Phase",
+            "type": "Ability",
+            "description": "Effect: This unit can use the ‘Bull Charge’ ability even if another friendly unit has used it this turn.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Ironguts love any opportunity to remind everyone watching of just how violent they can be."
           }
         ]
       },
       "ironblaster": {
         "sourceId": "16846bfb-03bb-4b16-914e-3d05ee3ca547",
         "name": "Ironblaster",
-        "lore": "The titanic artillery pieces known as Ironblasters dwarf conventional cannons. The earliest examples were scavenged from the remains of a Ghyranite empire that hovered over the Scabrous Sprawl – these were the creations of the Sky- Titans, a race of gargants who made their home upon the metalith known as the Great Green Torc. Ogor legend has it that an ancient mawtribe climbed up to the Torc from the swampy lands below and declared war on the gargants they found there. The cannons of the Sky-Titans roared their wrath, their owners wading in with blade and fist, but in the end, it was not enough. One by one, they were toppled and devoured by those ancient ogors in a war above the clouds.\n\nThe ogors have found that loading Ironblasters with conventional cannonballs – by the dozen, if possible – yields impressive results, with pillars of flame shooting from each discharge as heavy metal shot thunders in a devastating column of destruction. The gunners who crew these outrageous weapons are usually deaf, and so they watch like a hawk for their moment to discharge their prized artillery. Any who decide to attack the cannon before it can be reloaded are charged in turn by a badtempered rhinox and a roaring, indignant ogor.",
+        "lore": "The most destructive blackpowder weapon deployed by the Gutbuster warglutts, the Ironblaster is an immense cannon that hurls solid shot into the heart of the enemy’s ranks, blasting foes into scraps of charred meat.",
+        "points": 180,
+        "profile": {
+          "move": "9\"",
+          "health": 9,
+          "control": "2",
+          "save": "4+",
+          "ward": null
+        },
+        "details": {
+          "models": 1,
+          "baseSize": "120 x 92mm",
+          "notes": null,
+          "wargearOptionsText": null
+        },
+        "keywords": [
+          "War Machine",
+          "Ogor",
+          "Gutbusters",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Ironblaster Cannon Shot",
+            "type": "Ranged",
+            "range": "18\"",
+            "attacks": "2",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "5",
+            "abilities": []
+          },
+          {
+            "name": "Clubbers",
+            "type": "Melee",
+            "attacks": "2",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "1",
+            "damage": "2",
+            "abilities": []
+          },
+          {
+            "name": "Rhinox's Sharp Horns",
+            "type": "Melee",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "1",
+            "damage": "D3",
+            "abilities": [
+              "Companion"
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Obliterating Blast",
+            "phase": "Once Per Turn (Army), Your Shooting Phase",
+            "type": "Ability",
+            "description": "Declare: If this unit has not used a **RUN** or **RETREAT** ability this turn, pick a visible enemy unit within 18\" of it to be the target. Then, draw a straight line between the closest points on the bases of this unit and the target. Each other unit (friendly and enemy) that the line passes across is a **collateral damage target**.\n\nEffect: Roll a dice. On a 3+:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• Inflict D3 mortal damage on each **collateral damage target**.",
+            "keywords": [
+              "Core",
+              "Attack",
+              "Shoot"
+            ],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "The sheer size of an Ironblaster means that collateral damage is effectively guaranteed – not that the ogors care."
+          }
+        ]
+      },
+      "gnoblar scraplauncher": {
+        "sourceId": "a0132362-6020-4763-bcd9-c94b98523917",
+        "name": "Gnoblar Scraplauncher",
+        "lore": "The height of gnoblar ingenuity is the Scraplauncher, a catapult that hurls bucketfuls of sharp metal high into the air to rain down upon the enemy. Despite its crude construction, it is a surprisingly lethal war machine.",
         "points": 160,
         "profile": {
           "move": "9\"",
@@ -8598,28 +8848,14 @@
         },
         "keywords": [
           "War Machine",
-          "Ogor",
-          "Rhinox",
-          "Gutbusters",
           "Destruction",
           "Ogor Mawtribes"
         ],
         "weapons": [
           {
-            "name": "Ironblaster Cannon: Hail Shot",
-            "type": "Ranged",
-            "range": "12\"",
-            "attacks": "8",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "2",
-            "abilities": []
-          },
-          {
-            "name": "Rhinox’s Sharp Horns",
+            "name": "Rhinox’s Sharp Horns and Crew's Weapons",
             "type": "Melee",
-            "attacks": "2",
+            "attacks": "3",
             "hit": "4+",
             "wound": "2+",
             "rend": "1",
@@ -8627,135 +8863,40 @@
             "abilities": [
               "Companion"
             ]
-          },
-          {
-            "name": "Ironblaster Cannon: Big Shot",
-            "type": "Ranged",
-            "range": "18\"",
-            "attacks": "2",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "2",
-            "damage": "D3+3",
-            "abilities": []
-          },
-          {
-            "name": "Clubber",
-            "type": "Melee",
-            "attacks": "2",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "-",
-            "damage": "2",
-            "abilities": []
-          }
-        ],
-        "abilities": [
-          {
-            "name": "Lethal Payload",
-            "phase": "Passive",
-            "type": "Ability",
-            "description": "Effect: Each time this unit uses a **SHOOT** ability, pick either the **Big Shot** or **Hail Shot** weapon characteristics for all the attacks it makes with its **Ironblaster** **Cannon**.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "An Ironblaster’s rifled barrel can be loaded with projectiles that fill its copious width or with several smaller cannonballs to cover a wider area."
-          }
-        ]
-      },
-      "gnoblar scraplauncher": {
-        "sourceId": "a0132362-6020-4763-bcd9-c94b98523917",
-        "name": "Gnoblar Scraplauncher",
-        "lore": "The Scraplaunchers favoured by groups of Gnoblars are haphazard constructions of wood, horn and metal hauled by angry rhinoxen. The concept behind these peculiar catapults is to sling a barrelful of loot and weaponry taken from previous conquests – after all, the weapons of humans, aelves and duardin are too large for Gnoblars to wield and too small for ogors to do anything more than use them as backscratchers. Thus, the Gnoblars ‘give ’em back’ in the most violent way they can by launching them at high speed towards the enemy. It is not only weapons that are fired from a Scraplauncher but also shields, horseshoes, cutlery, jars of poison, bits of armour and even the odd captive. The entire mass is flung high into the air before dropping down amongst the enemy to impale, sever and score the odd kill.\n\nAt first glance, the horde of Gnoblars that ride these Scraplaunchers are a rowdy mob of pint-sized idiots wielding broken bottles, blunted hatchets and the odd sharpened implement. Yet one should not underestimate their good aim when it comes to the business of pelting the enemy with scrap metal, or their ramshackle, underdog ingenuity.",
-        "points": 120,
-        "profile": {
-          "move": "9\"",
-          "health": 9,
-          "control": "2",
-          "save": "4+",
-          "ward": null
-        },
-        "details": {
-          "models": 1,
-          "baseSize": "120 x 92mm",
-          "notes": null,
-          "wargearOptionsText": null
-        },
-        "keywords": [
-          "War Machine",
-          "Rhinox",
-          "Destruction",
-          "Ogor Mawtribes"
-        ],
-        "weapons": [
-          {
-            "name": "Rhinox’s Sharp Horns",
-            "type": "Melee",
-            "attacks": "2",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": [
-              "Companion"
-            ]
-          },
-          {
-            "name": "Scrappers’ Stabbers",
-            "type": "Melee",
-            "attacks": "7",
-            "hit": "5+",
-            "wound": "5+",
-            "rend": "-",
-            "damage": "1",
-            "abilities": []
           },
           {
             "name": "Piles of Old Scrap",
             "type": "Ranged",
-            "range": "24\"",
-            "attacks": "3D6",
+            "range": "18\"",
+            "attacks": "12",
             "hit": "4+",
-            "wound": "4+",
-            "rend": "-",
+            "wound": "2+",
+            "rend": "1",
             "damage": "1",
             "abilities": [
-              "Anti-INFANTRY (+1 Rend)",
-              "Crit (Auto-wound)"
+              "Crit (2 Hits)"
             ]
           }
         ],
         "abilities": [
           {
             "name": "Rain of Scrap",
-            "phase": "Your Shooting Phase",
+            "phase": "Once Per Turn (Army), Any Shooting Phase",
             "type": "Ability",
-            "description": "Declare: Pick an enemy unit that had any models slain this turn by this unit’s shooting attacks to be the target.\n\nEffect: Subtract 1 from hit rolls for the target’s attacks for the rest of the turn.",
+            "description": "Declare: Pick an enemy unit that had any damage points allocated to it this phase by this unit’s shooting attacks to be the target.\n\nEffect: Until the start of your next turn, subtract **X**\" from the target’s Move characteristic (to a minimum Move characteristic of 1\"), where **X** is the number of damage points allocated to the target this phase by this unit’s shooting attacks.\n\nThen, roll a dice. On a 3+, until the start of your next turn, the target cannot use **RUN** or **RETREAT** abilities and cannot use or be picked to be the target of abilities that would allow it to be set up on the battlefield.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Salvaged weapons and shards of metal rain down upon the enemy, forcing them to take cover or dodge out of the way."
-          },
-          {
-            "name": "Load It Up!",
-            "phase": "Your Shooting Phase",
-            "type": "Ability",
-            "description": "Effect: If this unit is within the combat range of a friendly **Gnoblars** unit, this unit’s shooting attacks score critical hits on unmodified hit rolls of 5+ until the start of your next turn.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "Gnoblars close to a Scraplauncher will diligently scavenge any nearby scrap to pile upon the catapult. After all, looking busy is a good way to avoid getting stepped on by an angry ogor!"
+            "lore": "Salvaged weapons, shards of metal and the odd screaming gnoblar rain down upon the enemy, forcing them to take cover or dodge out of the way."
           }
         ]
       },
       "frostlord on stonehorn": {
         "sourceId": "4abcb00a-b60e-4769-9c68-05d8cfc8e01a",
         "name": "Frostlord on Stonehorn",
-        "lore": "The ground shakes and turns white as if in fear as the Frostlord’s massive steed lumbers forward. Even over the howling gales, the roaring, bellowing voice of this great-bellied champion booms out, shaking icicles from the overhangs of nearby cliffs. They are the most cold-hearted and stony of all the Beastclaw Raiders, and at their command are cities cast down and former paradises frozen over. Any Frostlord worth their salt will have conquered a massive, hairy beast of the mountains with which to lead the charge. They have a natural affinity with Stonehorns and Thundertusks – both breeds so powerful they can stamp an ogor into the ground.\n\nThe Stonehorn is a monster with a skeleton of living stone. Its skull-like face has most of the flesh and skin battered from it before full adulthood, and its granite-tough horns are bladed and edged like knapped flint. The Beastclaw ogors make great use of Stonehorns as linebreakers and battering rams. They value them not for the king’s ransom of jewels that can be found in their guts but simply for their raw and undeniable stompiness.",
-        "points": 320,
+        "lore": "A Frostlord and their Stonehorn are an unstoppable force. The warlord’s booming voice directs the raiders while the bodies of foes are broken and ground to a bloody paste by the horns and hooves of their granite-boned steed.",
+        "points": 340,
         "profile": {
           "move": "10\"",
           "health": 15,
@@ -8771,7 +8912,7 @@
         },
         "keywords": [
           "Monster",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Hero",
           "Destruction",
@@ -8779,9 +8920,9 @@
         ],
         "weapons": [
           {
-            "name": "Stonehorn’s Rock-hard Horns",
+            "name": "Stonehorn’s Rock-hard Horns and Hooves",
             "type": "Melee",
-            "attacks": "6",
+            "attacks": "7",
             "hit": "4+",
             "wound": "2+",
             "rend": "2",
@@ -8802,18 +8943,6 @@
             "abilities": [
               "Charge (+1 Damage)"
             ]
-          },
-          {
-            "name": "Stonehorn's Hooves",
-            "type": "Melee",
-            "attacks": "D6",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": [
-              "Companion"
-            ]
           }
         ],
         "abilities": [
@@ -8832,7 +8961,7 @@
             "name": "Battle Damaged",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Stonehorn’s Rock-hard Horns** is 4.",
+            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Stonehorn’s Rock-hard Horns** **and Hooves** is 4.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -8843,7 +8972,7 @@
             "name": "Earth-shattering Charge",
             "phase": "Once Per Turn (Army), Any Charge Phase",
             "type": "Ability",
-            "description": "Declare: If this unit charged this phase, pick an enemy unit within 1\" of it to be the target.\n\nEffect: Inflict D3 mortal damage on the target. Then, roll 2D6. This unit can move a distance up to the value of the roll. During that move, it can pass through models in the target unit but must end that move in combat.",
+            "description": "Declare: If this unit charged this turn and has not used the ‘Bull Charge’ ability this turn, pick a visible enemy unit within 1\" of it to be the target.\n\nEffect: Inflict D3 mortal damage on the target and then roll 2D6. This unit can move a distance in inches up to the value of the roll. It can pass through models in the target unit but must end that move in combat.",
             "keywords": [
               "Rampage"
             ],
@@ -8853,23 +8982,23 @@
             "lore": "Enemies are crushed and trampled beneath the unstoppable ferocity of a Frostlord upon a charging Stonehorn."
           },
           {
-            "name": "Frost Spear",
+            "name": "Enraged Roar",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: If any damage points are allocated to an enemy **HERO** or **MONSTER** by attacks made with this unit’s **Frost Spear**, subtract 1 from the Attacks characteristic of that enemy unit’s melee weapons until the start of your next turn.",
+            "description": "Effect: While this unit is damaged, add 1 to the Attacks characteristic of **Companion** weapons used by other friendly **OGOR MAWTRIBES** units while they are within this unit’s combat range.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Blessed by the Everwinter, the bite of this ogor’s Frost Spear chills the enemy with crippling cold."
+            "lore": "The ear-splitting enraged roar of a Stonehorn sends the beasts of the Mawpath into a frenzy."
           }
         ]
       },
       "frostlord on thundertusk": {
         "sourceId": "5cbccfe1-4174-4149-b170-8d7590ea4695",
         "name": "Frostlord on Thundertusk",
-        "lore": "The ground shakes and turns white as if in fear as the Frostlord’s massive steed lumbers forward. Even over the howling gales, the roaring, bellowing voice of this great-bellied champion booms out, shaking icicles from the overhangs of nearby cliffs. They are the most cold-hearted and stony of all the Beastclaw Raiders, and at their command are cities cast down and former paradises frozen over. Any Frostlord worth their salt will have conquered a massive, hairy beast of the mountains with which to lead the charge. They have a natural affinity with Stonehorns and Thundertusks – both breeds so powerful they can stamp an ogor into the ground.\n\nThe Thundertusk is a true force of destruction. Its enormous, jutting tusks, already formidable even before plates of spiked metal are bolted to their edges, are strong enough to batter apart a cogfort. The beast’s signature attack, however, is the spherical blast of ice it spits from its gullet, a boulder-sized projectile that can freeze enemy warriors solid in an instant. This is highly gratifying for the ogors; not only is each blast a decisive blow against the foe, but it also leaves their cadavers frozen and ready to be retrieved at leisure.",
-        "points": 230,
+        "lore": "A Frostlord who rides to battle on a Thundertusk is a blizzard-cloaked warlord, a true herald of the Everwinter. The permanent aura of cold emanating from their mount has chilled the ogor’s very soul, leaving them a pitiless master of the frozen wastes.",
+        "points": 280,
         "profile": {
           "move": "10\"",
           "health": 15,
@@ -8885,7 +9014,7 @@
         },
         "keywords": [
           "Monster",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Hero",
           "Destruction",
@@ -8944,21 +9073,10 @@
             "lore": null
           },
           {
-            "name": "Bellowing Voice",
-            "phase": "Once Per Battle (Army), Your Charge Phase",
-            "type": "Ability",
-            "description": "Declare: Pick any number of friendly **BEASTCLAW RAIDERS** units wholly within 12\" of this unit to be the targets.\n\nEffect: Each target can add 1 to the D3 roll made if that unit uses the ‘Trampling Charge’ ability this turn.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "With their booming voice, the Frostlord signals the hunt."
-          },
-          {
             "name": "Sweeping Tusks",
             "phase": "Once per Turn (Army), Any Movement Phase",
             "type": "Ability",
-            "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a dice. On a 3+, roll a dice for each model in the target unit. For each 5+, inflict 1 mortal damage on the target.",
+            "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a dice for each model in the target unit. For each 5+, inflict 1 mortal damage on the target.",
             "keywords": [
               "Rampage"
             ],
@@ -8966,14 +9084,25 @@
             "chantingValue": null,
             "commandPoints": null,
             "lore": "With a deafening bellow, the Thundertusk swings its huge frost-wreathed tusks from side to side, sending enemies flying."
+          },
+          {
+            "name": "Blessed of the Old Ice",
+            "phase": "Once Per Turn (Army), Your Movement Phase",
+            "type": "Ability",
+            "description": "Declare: Pick a visible friendly **OGOR MAWTRIBES** unit wholly within 12\" of this unit to be the target.\n\nEffect: Roll a dice. On a 3+, for the rest of the turn, the target can still use **SHOOT** and/or **CHARGE** abilities even if it used a **RETREAT** or **RUN** ability in the same turn.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "The chilling presence of a Frostlord and the freezing breath of their Thundertusk mount invigorates Beastclaw warriors."
           }
         ]
       },
       "huskard on stonehorn": {
         "sourceId": "a7a95d39-4cd6-40f5-88a6-99abe22a0241",
         "name": "Huskard on Stonehorn",
-        "lore": "All across the realms, the people of the mountains have learnt to fear the Huskards, for they bring with them a snowstorm so merciless that it can devour the sun and tear flesh from bone. When the Everwinter rages, Huskards pray to its arctic sentience, channelling an aspect of the Gulping God’s power. The roaring of the blizzard then intensifies, surrounding the chanter with a swirling white aura. Creatures of the Everwinter lope to join them, a fell light glowing in their eyes. The wind drives the Huskard’s beasts on and lends them a fierce primal strength. Even the storm joins in the violence, head-sized chunks of ice raining down to hammer and pulverise those who earn the Huskard’s wrath.\n\nThe Stonehorn is a monster with a skeleton of living stone. Its skull-like face has most of the flesh and skin battered from it before full adulthood, and its granite-tough horns are bladed and edged like knapped flint. The Beastclaw ogors make great use of Stonehorns as linebreakers and battering rams. They value them not  for the king’s ransom of jewels that can be found in their guts but simply for their  raw and undeniable stompiness.",
-        "points": 290,
+        "lore": "Many Huskard Jorls and Huskard Eurls lead their warriors from atop the backs of formidable Stonehorns. Together, the beasts and their brutish riders are master linebreakers, using their impressive strength to batter their way through all obstacles.",
+        "points": 300,
         "profile": {
           "move": "10\"",
           "health": 14,
@@ -8984,14 +9113,13 @@
         "details": {
           "models": 1,
           "baseSize": "120 x 92mm",
-          "notes": "This **HERO** can join an eligible regiment as a *Voice of the Everwinter*.",
-          "wargearOptionsText": "***This unit is armed with Punches and Kicks, Stonehorn’s Rock-hard Horns, Stonehorn’s Hooves and 1 of the following options:***\n\n• ***Chaintrap***\n• ***Harpoon Launcher***\n• ***Blood Vulture***"
+          "notes": null,
+          "wargearOptionsText": null
         },
         "keywords": [
           "Priest",
-          "Voice of the Everwinter",
           "Monster",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Hero",
           "Priest (1)",
@@ -9000,20 +9128,30 @@
         ],
         "weapons": [
           {
-            "name": "Blood Vulture",
+            "name": "Chaintrap, Harpoon Launcher or Blood Vulture",
             "type": "Ranged",
-            "range": "24\"",
+            "range": "15\"",
             "attacks": "1",
-            "hit": "2+",
+            "hit": "4+",
             "wound": "3+",
-            "rend": "-",
+            "rend": "1",
+            "damage": "3",
+            "abilities": []
+          },
+          {
+            "name": "Huskard's Punches and Kicks",
+            "type": "Melee",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "1",
             "damage": "1",
             "abilities": []
           },
           {
-            "name": "Stonehorn's Rock-hard horns",
+            "name": "Stonehorn's Rock-hard Horns and Hooves",
             "type": "Melee",
-            "attacks": "6",
+            "attacks": "7",
             "hit": "4+",
             "wound": "2+",
             "rend": "2",
@@ -9022,52 +9160,6 @@
               "Charge (+1 Damage)",
               "Companion"
             ]
-          },
-          {
-            "name": "Stonehorn's Hooves",
-            "type": "Melee",
-            "attacks": "D6",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": [
-              "Companion"
-            ]
-          },
-          {
-            "name": "Harpoon Launcher",
-            "type": "Ranged",
-            "range": "18\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": []
-          },
-          {
-            "name": "Chaintrap",
-            "type": "Ranged",
-            "range": "12\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "3",
-            "abilities": [
-              "Anti-MONSTER (+1 Rend)"
-            ]
-          },
-          {
-            "name": "Punches and Kicks",
-            "type": "Melee",
-            "attacks": "3",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "-",
-            "damage": "1",
-            "abilities": []
           }
         ],
         "abilities": [
@@ -9083,36 +9175,36 @@
             "lore": "The thick, rocklike skeletons of these beasts can take substantial punishment."
           },
           {
-            "name": "Everwinter's Goad",
+            "name": "Battle Damaged",
+            "phase": "Passive",
+            "type": "Ability",
+            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Stonehorn’s Rock-hard Horns and Hooves** is 4.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": null
+          },
+          {
+            "name": "Primal Bellow",
             "phase": "Once Per Turn (Army), Any Combat Phase",
             "type": "Ability",
-            "description": "Declare: Pick each friendly and enemy **MONSTER** within this unit’s combat range to be the targets.\n\nEffect: Roll a dice for each target. On a 3+:\n\n• If the target is a friendly **OGOR MAWTRIBES** unit, its **Companion** weapons have **Crit (2 Hits)** for the rest of the turn.\n• If the target is an enemy unit, subtract 1 from hit rolls for attacks made with its **Companion** weapons for the rest of the turn.",
+            "description": "Declare: Pick a friendly **OGOR MAWTRIBES** unit within this unit’s combat range to be the target or pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a dice. Add 2 to the roll if this unit charged this turn. On a 4+:\n\n•  If the target is a friendly unit, its **Companion** weapons have **Crit (2 Hits)** for the rest of the turn.\n\n•  If the target is an enemy unit, subtract 1 from hit rolls for the target’s attacks for the rest of the turn.",
             "keywords": [
               "Rampage"
             ],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "This ogor’s Stonehorn unleashes a mighty roar that drives nearby monsters into a frenzy."
-          },
-          {
-            "name": "Battle Damaged",
-            "phase": "Passive",
-            "type": "Ability",
-            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Stonehorn’s Rock-hard Horns** is 4.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": null
+            "lore": "The Huskard drives their Stonehorn to unleash a mighty roar that sends nearby monsters into a frenzy."
           }
         ]
       },
       "huskard on thundertusk": {
         "sourceId": "2cb54b6b-ba74-4217-8cd5-549edb3acaa9",
         "name": "Huskard on Thundertusk",
-        "lore": "All across the realms, the people of the mountains have learnt to fear the Huskards, for they bring with them a snowstorm so merciless that it can devour the sun and tear flesh from bone. When the Everwinter rages, Huskards pray to its arctic sentience, channelling an aspect of the Gulping God’s power. The roaring of the blizzard then intensifies, surrounding the chanter with a swirling white aura. Creatures of the Everwinter lope to join them, a fell light glowing in their eyes. The wind drives the Huskard’s beasts on and lends them a fierce primal strength. Even the storm joins in the violence, head-sized chunks of ice raining down to hammer and pulverise those who earn the Huskard’s wrath.\n\nThe Thundertusk is a true force of destruction. Its enormous, jutting tusks, already formidable even before plates of spiked metal are bolted to their edges, are strong enough to batter apart a cogfort. The beast’s signature attack, however, is the spherical blast of ice it spits from its gullet, a boulder-sized projectile that can freeze enemy warriors solid in an instant. This is highly gratifying for the ogors; not only is each blast a decisive blow against the foe, but it also leaves their cadavers frozen and ready to be retrieved at leisure.",
-        "points": 220,
+        "lore": "The Huskard Torr leads the Thundertusks to war. At the ogor elder’s command, the creatures breathe out gales of frost. The ground on all sides grows thick with ice as enemies are turned into gleaming statues and the very life is leeched from their bones.",
+        "points": 280,
         "profile": {
           "move": "10\"",
           "health": 14,
@@ -9123,14 +9215,13 @@
         "details": {
           "models": 1,
           "baseSize": "120 x 92mm",
-          "notes": "This **HERO** can join an eligible regiment as a *Voice of the Everwinter*.",
-          "wargearOptionsText": "***This unit is armed with an Ice Blast, Punches and Kicks, Thundertusk’s Colossal Tusks, and 1 of the following options:***\n\n• ***Chaintrap***\n• ***Harpoon Launcher***\n• ***Blood Vulture***"
+          "notes": null,
+          "wargearOptionsText": null
         },
         "keywords": [
           "Priest",
-          "Voice of the Everwinter",
           "Monster",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Hero",
           "Priest (1)",
@@ -9139,35 +9230,13 @@
         ],
         "weapons": [
           {
-            "name": "Punches and Kicks",
+            "name": "Huskard's Punches and Kicks",
             "type": "Melee",
-            "attacks": "3",
+            "attacks": "4",
             "hit": "4+",
             "wound": "2+",
-            "rend": "-",
-            "damage": "1",
-            "abilities": []
-          },
-          {
-            "name": "Blood Vulture",
-            "type": "Ranged",
-            "range": "24\"",
-            "attacks": "1",
-            "hit": "2+",
-            "wound": "3+",
-            "rend": "-",
-            "damage": "1",
-            "abilities": []
-          },
-          {
-            "name": "Harpoon Launcher",
-            "type": "Ranged",
-            "range": "18\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
             "rend": "1",
-            "damage": "D3",
+            "damage": "1",
             "abilities": []
           },
           {
@@ -9184,19 +9253,6 @@
             ]
           },
           {
-            "name": "Chaintrap",
-            "type": "Ranged",
-            "range": "12\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "3",
-            "abilities": [
-              "Anti-MONSTER (+1 Rend)"
-            ]
-          },
-          {
             "name": "Thundertusk’s Colossal Tusks",
             "type": "Melee",
             "attacks": "3",
@@ -9208,6 +9264,17 @@
               "Anti-INFANTRY (+1 Rend)",
               "Companion"
             ]
+          },
+          {
+            "name": "Chaintrap, Harpoon Launcher or Blood Vulture",
+            "type": "Ranged",
+            "range": "15\"",
+            "attacks": "1",
+            "hit": "4+",
+            "wound": "3+",
+            "rend": "1",
+            "damage": "3",
+            "abilities": []
           }
         ],
         "abilities": [
@@ -9215,14 +9282,14 @@
             "name": "Freezing Aura",
             "phase": "Once Per Turn (Army), Any Combat Phase",
             "type": "Ability",
-            "description": "Declare: Pick an enemy **INFANTRY** unit in combat with this unit to be the target.\n\nEffect: Roll a dice. Add 1 to the roll if the target had **STRIKE‑LAST** as a result of this ability in the previous turn. On a 4+, the target has **STRIKE‑LAST** for the rest of the turn.",
+            "description": "Declare: If this unit did not charge this turn, pick an enemy unit in combat with it to be the target.\n\nEffect: Roll a dice. On a 3+, subtract 1 from the Attacks characteristic of the target’s melee weapons for the rest of the turn.",
             "keywords": [
               "Rampage"
             ],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Winter storms gather about this Huskard, freezing and slowing those foolish enough to close in on them on foot."
+            "lore": "Winter storms gather about this Huskard, freezing and slowing those foolish enough to remain in their presence for long."
           },
           {
             "name": "Battle Damaged",
@@ -9234,59 +9301,60 @@
             "chantingValue": null,
             "commandPoints": null,
             "lore": null
+          },
+          {
+            "name": "Winter's Cruelty",
+            "phase": "Once Per Turn (Army), Any Shooting Phase",
+            "type": "Ability",
+            "description": "Declare: Pick a visible enemy unit to be the target.\n\nEffect: Roll a dice. If the roll is equal to or less than the number of damage points allocated to the target by attacks made with this unit’s **Ice Blast** this phase, subtract 1 from the Damage characteristic of the target’s weapons until the start of your next turn.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "A Huskard Torr can compel the Everwinter to blast cowardly foes with its full, icy disdain."
           }
         ]
       },
       "bloodpelt hunter": {
         "sourceId": "f49d3347-6cc0-4fb4-93e3-5771c051aa3c",
         "name": "Bloodpelt Hunter",
-        "lore": "The Bloodpelt Hunter is not really that interested in getting food for their tribe, though they do so nonetheless. Truly, all they care about is glory. They are concerned only with the largest and flashiest kills, ranging ahead on the mawpath to slay the best of the beasts and take the choicest cuts of meat before the rest of the tribe can get there.\n\nA Bloodpelt Hunter will sometimes keep parts of their kills to wear as trophies or to use as tools. The roughly cut-off heads of drakes and megadons are worn around the waist and stuffed with the barbed bolts fired by their ballista-sized crossbows. The pelt of a cave bear forms a hardy cape to be drawn against the hostile elements. The antlers of great elk are strapped to the head to convince myopic prey, when downwind, that the approaching shape is a herbivore rather than a grisly, ravenous omnivore who stalks them with a killer’s eye. In battle, these glory hogs will go after the choicest targets, bloodily slaying enemy heroes and warbeasts to the disappointed groans of their kin in the main battleline who had hoped to make the big kill for themselves.",
-        "points": 110,
+        "lore": "Bloodpelt Hunters seek out the largest and most formidable creatures in battle, stalking them unseen with the guile and cunning of an alpha predator. When their quarry is within reach, they close in for the kill, maiming the creature with crude iron crossbow bolts before hacking them apart with their axe and machete.",
+        "points": 130,
         "profile": {
           "move": "6\"",
           "health": 8,
-          "control": "5",
+          "control": "3",
           "save": "5+",
           "ward": null
         },
         "details": {
           "models": 1,
           "baseSize": "40mm",
-          "notes": "This **HERO** can join a **Tyrant**’s regiment.",
+          "notes": "This **HERO** can join an eligible regiment as a *Maw Nomad.*",
           "wargearOptionsText": null
         },
         "keywords": [
+          "Beastclaw",
           "Ogor",
-          "Gutbusters",
           "Infantry",
           "Hero",
+          "Maw Nomad",
           "Destruction",
           "Ogor Mawtribes"
         ],
         "weapons": [
           {
-            "name": "Impaling Spear",
+            "name": "Skullshatter Crossbow and Impaling Spear",
             "type": "Ranged",
-            "range": "12\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "1",
-            "damage": "D6",
-            "abilities": [
-              "Anti-MONSTER (+1 Rend)"
-            ]
-          },
-          {
-            "name": "Skullshatter Crossbow",
-            "type": "Ranged",
-            "range": "18\"",
-            "attacks": "2",
+            "range": "15\"",
+            "attacks": "4",
             "hit": "4+",
             "wound": "3+",
             "rend": "1",
-            "damage": "D3",
-            "abilities": []
+            "damage": "D3+1",
+            "abilities": [
+              "Anti-MONSTER (+1 Rend)"
+            ]
           },
           {
             "name": "Hacker-axe and Meatblade",
@@ -9303,26 +9371,26 @@
         ],
         "abilities": [
           {
-            "name": "Beast-breaker",
+            "name": "Biggest-Game Hunter",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: If the target is a **MONSTER**, the Damage characteristic of this unit’s **Skullshatter** **Crossbow** is 3 and the **Damage** characteristic of its **Impaling** **Spear** is 6.",
+            "description": "Effect: The Damage characteristic of this unit’s **Skullshatter Crossbow and Impaling Spear** is 4 if the target is a **MONSTER**.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Bloodpelt Hunters will seek out the largest creatures in battle, slaying them and devouring their still-warm flesh."
+            "lore": "A Bloodpelt Hunter’s arsenal is tailored to the killing of the largest prey."
           },
           {
-            "name": "Unrelenting Hunter",
-            "phase": "Once Per Turn (Army), Enemy Movement Phase",
+            "name": "The First Shot's Mine",
+            "phase": "Once Per Turn (Army), Your Shooting Phase",
             "type": "Ability",
-            "description": "Effect: If this unit is more than 9\" from all enemy units, it can use the ‘Normal Move’ ability as if it were your movement phase.",
+            "description": "Declare: Pick an enemy unit that had any damage points allocated to it this turn by this unit’s shooting attacks to be the target.\n\nEffect: For the rest of the phase, add 1 to hit rolls for shooting attacks made by friendly **BEASTCLAW** units that target that enemy unit.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "With brutish cunning, Bloodpelt Hunters relentlessly track their quarry, always making sure they stay one step ahead."
+            "lore": "Glory-seekers all, Bloodpelt Hunters insist on shooting first. Their example and confidence inevitably inspires other ogors to follow suit."
           }
         ]
       },
@@ -9340,16 +9408,16 @@
         },
         "details": {
           "models": 1,
-          "baseSize": "40mm [1] 50 x 25mm [1], 25mm [3]",
-          "notes": "This **HERO** can join an eligible regiment as a *Voice of the Everwinter*",
+          "baseSize": "40mm",
+          "notes": "This Hero can join an eligible regiment as a Maw Nomad.",
           "wargearOptionsText": null
         },
         "keywords": [
-          "Voice of the Everwinter",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Infantry",
           "Hero",
+          "Maw Nomad",
           "Destruction",
           "Ogor Mawtribes"
         ],
@@ -9365,7 +9433,7 @@
             "abilities": []
           },
           {
-            "name": "Mantrapper Launcher",
+            "name": "Mantrap Launcher",
             "type": "Ranged",
             "range": "15\"",
             "attacks": "4",
@@ -9394,7 +9462,7 @@
             "name": "Trapped!",
             "phase": "Once Per Turn (Army), Any Shooting Phase",
             "type": "Ability",
-            "description": "Declare: Pick an enemy unit that had any damage points allocated to it this turn by this unit’s shooting attacks to be the target.\n\nEffect: Make a **trapped roll** of D6. Subtract 1 from the roll for each friendly **Mantrapper accomplice** next to the target.\n\nIf the roll is less than the target’s Save characteristic, until the start of your next turn:\n\n• Subtract 1 from the number of dice rolled when making charge rolls for the target, to a minimum of 1.\n• The target does not have **FLY**.",
+            "description": "Declare: Pick an enemy unit that had any damage points allocated to it this turn by this unit’s shooting attacks to be the target.\n\nEffect: Make a **trapped roll** of D6. Subtract 1 from the roll for each friendly **Mantrapper accomplice** next to the target. If the roll is less than the target’s Save characteristic, until the start of your next turn:\n\n• Subtract 1 from the number of dice rolled when making charge rolls for the target, to a minimum of 1.\n\n• The target does not have **FLY**.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -9414,11 +9482,180 @@
           }
         ]
       },
+      "hunters with sabrefangs": {
+        "sourceId": "26015cac-bb01-43df-b65f-160329c4b844",
+        "name": "Hunters with Sabrefangs",
+        "lore": "Hunters form the bulk of the Beastclaw alfrostuns. Each of these hardy ogors is well versed in facing down the elemental wilds and the monsters that lurk therein. They are skilled tamers and trackers, and thanks to the perpetual frosty mists that dog their steps, they can often move into position to take a satisfying crossbow shot long before the prey ever notices their presence.",
+        "points": 160,
+        "profile": {
+          "move": "6\"",
+          "health": 4,
+          "control": "2",
+          "save": "5+",
+          "ward": null
+        },
+        "details": {
+          "models": 5,
+          "baseSize": "40mm [3], 60 x 35mm [2]",
+          "notes": null,
+          "wargearOptionsText": "**3/5 models in this unit are Hunters and are armed with a Hunter’s Crossbow and Skinning Blades.**\n**2/5 models in this unit are Sabrefangs and are armed with Sabrefang’s Tusks and Claws.**\n**A Sabrefang cannot be the unit champion.**"
+        },
+        "keywords": [
+          "Champion",
+          "Beastclaw",
+          "Ogor",
+          "Infantry",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Hunter's Crossbow",
+            "type": "Ranged",
+            "range": "15\"",
+            "attacks": "3",
+            "hit": "4+",
+            "wound": "3+",
+            "rend": "1",
+            "damage": "2",
+            "abilities": [
+              "Anti-MONSTER (+1 Rend)"
+            ]
+          },
+          {
+            "name": "Skinning Blades",
+            "type": "Melee",
+            "attacks": "2",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "1",
+            "damage": "1",
+            "abilities": [
+              "Anti-CAVALRY (+1 Rend)",
+              "Anti-MONSTER (+1 Rend)"
+            ]
+          },
+          {
+            "name": "Sabrefang's Tusks and Claws",
+            "type": "Melee",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "3+",
+            "rend": "1",
+            "damage": "1",
+            "abilities": [
+              "Companion"
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Through the Frosts",
+            "phase": "Once Per Battle (Army), Deployment Phase",
+            "type": "Ability",
+            "description": "Effect: Remove this unit from the battlefield and set it up again wholly within 3\" of a terrain feature and more than 9\" from all enemy units. This unit cannot use **MOVE** abilities in the first turn of the first battle round.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Despite their size, Hunters are skilled in the art of the ambush, advancing under the cover of lingering icy mists."
+          },
+          {
+            "name": "Ferocious Sabrefangs",
+            "phase": "Once Per Turn (Army), Any Combat Phase",
+            "type": "Ability",
+            "description": "Declare: Pick an enemy unit in combat with this unit and that charged this turn to be the target.\n\nEffect: Roll 2 dice for each **Sabrefang** in this unit. For each 3+, inflict 1 mortal damage on the target.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Sabrefangs are apex predators in their natural environment. Suffering no competitors, they will meet any aggression towards them with terrifying savagery."
+          }
+        ]
+      },
+      "maulbeast raiders": {
+        "sourceId": "528e48b0-9304-402c-b485-9a102aa35b66",
+        "name": "Maulbeast Raiders",
+        "lore": "Where icy winds howl, packs of Maulbeast Raiders can often be found on the hunt. These Beastclaw cavalry ride brutish quadrupeds, but they choose their specific mounts for signs of low cunning as much as ferocity. The most important trait, though, is tenacity – a quality that Maulbeasts possess in abundance, allowing their riders to keep pace with their quarry and impair them with cruel, maiming crossbow shots.",
+        "points": 230,
+        "profile": {
+          "move": "10\"",
+          "health": 7,
+          "control": "3",
+          "save": "4+",
+          "ward": null
+        },
+        "details": {
+          "models": 2,
+          "baseSize": "90 x 52mm",
+          "notes": null,
+          "wargearOptionsText": null
+        },
+        "keywords": [
+          "Champion",
+          "Beastclaw",
+          "Ogor",
+          "Cavalry",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Hunter Crossbow and Blood Vulture",
+            "type": "Ranged",
+            "range": "15\"",
+            "attacks": "3",
+            "hit": "4+",
+            "wound": "3+",
+            "rend": "1",
+            "damage": "2",
+            "abilities": [
+              "Shoot in Combat"
+            ]
+          },
+          {
+            "name": "Punches and Kicks",
+            "type": "Melee",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "1",
+            "damage": "1",
+            "abilities": []
+          },
+          {
+            "name": "Maulbeast's Horns and Fangs",
+            "type": "Melee",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "1",
+            "damage": "2",
+            "abilities": [
+              "Charge (+1 Damage)",
+              "Companion"
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Relentless Predators",
+            "phase": "Once Per Turn (Army), Enemy Movement Phase",
+            "type": "Ability",
+            "description": "Effect: If this unit is more than 9\" from all enemy units, it can move up to D6\". It cannot move into combat during any part of that move.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Maulbeast Raiders are ever on the move, pursuing their quarry with impressive stamina and determination in even the harshest conditions."
+          }
+        ]
+      },
       "stonehorn beastriders": {
         "sourceId": "16429e17-8ff4-4079-8a5a-15b32eacc0e9",
         "name": "Stonehorn Beastriders",
-        "lore": "The Stonehorn is a monster with a skeleton of living stone. Its skull-like face has most of the flesh and skin battered from it before full adulthood, and its granite-tough horns are bladed and edged like knapped flint. The Beastclaw ogors make great use of Stonehorns as linebreakers and battering rams. They value them not for the king’s ransom of jewels that can be found in their guts but simply for their raw and undeniable stompiness.\n\nIt is common for a pair of ogors to tie ropes, timber and animal furs to a Stonehorn’s back so that it can carry them into battle atop a double throne of sorts. Owing to their looming vantage point, the riders usually either hunt with spring-jawed chaintraps, which they use to grab their prey and haul it up to be eaten; harpoon launchers the size of artillery pieces; or trained blood vultures that soar forth to peck at the eyes of the ogors’ foes. All Stonehorns are prized by the ogors – any creature that can barge through a duardin hold or shatter the bones of a Mega‑Gargant with a single charge has to be worthy of serious respect.",
-        "points": 260,
+        "lore": "The ground shakes under a Stonehorn’s headlong charge, each footfall a toll of doom. From its back, a pair of Beastriders bring down foes with snapping chaintraps and harpoons, hauling in their kills to add to the mawtribe’s meat harvest.",
+        "points": 280,
         "profile": {
           "move": "10\"",
           "health": 14,
@@ -9430,33 +9667,31 @@
           "models": 1,
           "baseSize": "120 x 92mm",
           "notes": null,
-          "wargearOptionsText": "***This unit is armed with a Harpoon Launcher, Punches and Kicks, Stonehorn’s Rock‑hard Horns, Stonehorn’s Hooves and 1 of the following options:***\n\n• ***Chaintrap***\n• ***Blood Vulture***"
+          "wargearOptionsText": null
         },
         "keywords": [
           "Monster",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Destruction",
           "Ogor Mawtribes"
         ],
         "weapons": [
           {
-            "name": "Chaintrap",
+            "name": "Chaintrap, Harpoon Launcher or Blood Vulture",
             "type": "Ranged",
-            "range": "12\"",
+            "range": "15\"",
             "attacks": "1",
             "hit": "4+",
             "wound": "3+",
             "rend": "1",
             "damage": "3",
-            "abilities": [
-              "Anti-MONSTER (+1 Rend)"
-            ]
+            "abilities": []
           },
           {
-            "name": "Stonehorn’s Rock-hard Horns",
+            "name": "Stonehorn’s Rock-hard Horns and Hooves",
             "type": "Melee",
-            "attacks": "6",
+            "attacks": "7",
             "hit": "4+",
             "wound": "2+",
             "rend": "2",
@@ -9469,73 +9704,15 @@
           {
             "name": "Punches and Kicks",
             "type": "Melee",
-            "attacks": "6",
-            "hit": "4+",
-            "wound": "2+",
-            "rend": "-",
-            "damage": "1",
-            "abilities": []
-          },
-          {
-            "name": "Harpoon Launcher",
-            "type": "Ranged",
-            "range": "18\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": []
-          },
-          {
-            "name": "Stonehorn’s Hooves",
-            "type": "Melee",
-            "attacks": "D6",
+            "attacks": "4",
             "hit": "4+",
             "wound": "2+",
             "rend": "1",
-            "damage": "D3",
-            "abilities": [
-              "Companion"
-            ]
-          },
-          {
-            "name": "Blood Vulture",
-            "type": "Ranged",
-            "range": "24\"",
-            "attacks": "1",
-            "hit": "2+",
-            "wound": "3+",
-            "rend": "-",
             "damage": "1",
             "abilities": []
           }
         ],
         "abilities": [
-          {
-            "name": "Stonehorn Avalanche",
-            "phase": "Once Per Turn (Army), Any Combat Phase",
-            "type": "Ability",
-            "description": "Effect: If this unit charged this turn, roll a dice. On a 3+, when this unit makes a pile-in move this phase, add D6\" to the distance it can move.",
-            "keywords": [
-              "Rampage"
-            ],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "With hearty roars, the Beastriders pick their target and send their Stonehorn crashing forward with the force of a mountain’s worth of snow and rock."
-          },
-          {
-            "name": "Battle Damaged",
-            "phase": "Passive",
-            "type": "Ability",
-            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Stonehorn’s Rock-hard Horns** is 4.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": null
-          },
           {
             "name": "Stone Skeleton",
             "phase": "Passive",
@@ -9546,14 +9723,38 @@
             "chantingValue": null,
             "commandPoints": null,
             "lore": "The thick, rocklike skeletons of these beasts can take substantial punishment."
+          },
+          {
+            "name": "Battle Damaged",
+            "phase": "Passive",
+            "type": "Ability",
+            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its **Stonehorn’s Rock-hard Horns and Hooves** is 4.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": null
+          },
+          {
+            "name": "Stonehorn Avalanche",
+            "phase": "Once Per Turn (Army), Any Charge Phase",
+            "type": "Ability",
+            "description": "Declare: If this unit charged this turn and has not used the ‘Bull Charge’ ability this turn, pick an enemy unit in combat with this unit or an enemy faction terrain feature within this unit’s combat range to be the target.\n\nEffect: Roll a dice. On a 3+:\n• If the target is a unit, inflict 3 mortal damage on it.\n• If the target is a faction terrain feature, inflict 6 mortal damage on it.",
+            "keywords": [
+              "Rampage"
+            ],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Stonehorns will headbutt mountains without flinching. Needless to say, lesser edifices and foes in the path of their charge are crushed with practical impunity."
           }
         ]
       },
       "thundertusk beastriders": {
         "sourceId": "5021cef3-733e-444d-b601-420147a597bf",
         "name": "Thundertusk Beastriders",
-        "lore": "The Thundertusk is a true force of destruction. Its enormous, jutting tusks, already formidable even before plates of spiked metal are bolted to their edges, are strong enough to batter apart a cogfort. The beast’s signature attack, however, is the spherical blast of ice it spits from its gullet, a boulder-sized projectile that can freeze enemy warriors solid in an instant. This is highly gratifying for the ogors; not only is each blast a decisive blow against the foe, but it also leaves their cadavers frozen and ready to be retrieved at leisure.\n\nThe ice magic that runs in a Thundertusk’s veins gives it an aura of cold that will numb anything without a robust constitution merely through proximity – enemies fumble their swords from frostbitten fingers even as their breath catches ice-cold in their lungs. Sitting astride one is well worth the cold-deadened buttocks that follow, for the creature gives its rider – or riders, if more than one dares the climb – a great vantage point from which to pick their next kill. Better yet, with its flanks so cold, the creature can be strapped with stowage to keep raw meat and choice cuts frozen for as long as needed.",
-        "points": 180,
+        "lore": "The Everwinter clings to the Thundertusks and follows them wherever they tread, the air around them thick with glimmering frost. Guided into battle by a pair of savage Beastriders, these mammoth beasts smash and grind their prey to bloody ruin.",
+        "points": 240,
         "profile": {
           "move": "10\"",
           "health": 14,
@@ -9565,27 +9766,16 @@
           "models": 1,
           "baseSize": "120 x 92mm",
           "notes": null,
-          "wargearOptionsText": "***This unit is armed with an Ice Blast, Harpoon Launcher, Punches and Kicks, Thundertusk’s Colossal Tusks, and 1 of the following options:***\n\n• ***Chaintrap***\n• ***Blood Vulture***"
+          "wargearOptionsText": null
         },
         "keywords": [
           "Monster",
-          "Beastclaw Raiders",
+          "Beastclaw",
           "Ogor",
           "Destruction",
           "Ogor Mawtribes"
         ],
         "weapons": [
-          {
-            "name": "Harpoon Launcher",
-            "type": "Ranged",
-            "range": "18\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "D3",
-            "abilities": []
-          },
           {
             "name": "Thundertusk’s Colossal Tusks",
             "type": "Melee",
@@ -9597,30 +9787,6 @@
             "abilities": [
               "Anti-INFANTRY (+1 Rend)",
               "Companion"
-            ]
-          },
-          {
-            "name": "Blood Vulture",
-            "type": "Ranged",
-            "range": "24\"",
-            "attacks": "1",
-            "hit": "2+",
-            "wound": "3+",
-            "rend": "-",
-            "damage": "1",
-            "abilities": []
-          },
-          {
-            "name": "Chaintrap",
-            "type": "Ranged",
-            "range": "12\"",
-            "attacks": "1",
-            "hit": "4+",
-            "wound": "3+",
-            "rend": "1",
-            "damage": "3",
-            "abilities": [
-              "Anti-MONSTER (+1 Rend)"
             ]
           },
           {
@@ -9637,12 +9803,23 @@
             ]
           },
           {
+            "name": "Chaintrap, Harpoon Launcher or Blood Vulture",
+            "type": "Ranged",
+            "range": "15\"",
+            "attacks": "1",
+            "hit": "4+",
+            "wound": "3+",
+            "rend": "1",
+            "damage": "3",
+            "abilities": []
+          },
+          {
             "name": "Punches and Kicks",
             "type": "Melee",
-            "attacks": "6",
+            "attacks": "4",
             "hit": "4+",
             "wound": "2+",
-            "rend": "-",
+            "rend": "1",
             "damage": "1",
             "abilities": []
           }
@@ -9660,31 +9837,42 @@
             "lore": null
           },
           {
-            "name": "Everwinter's Assault",
-            "phase": "Once Per Turn (Army), End of Any Turn",
+            "name": "Plough the Icepath",
+            "phase": "Once Per Turn (Army), Reaction: You declared a non-**CHARGE MOVE** ability for this unit in your movement phase",
             "type": "Ability",
-            "description": "Declare: If this unit charged this turn, pick an enemy unit in combat with it to be the target.\n\nEffect: Roll a dice. On a 3+, for the rest of the turn:\n\n• If the target is a **MONSTER**, subtract 3 from its control score.\n• If the target is a non-**MONSTER** unit, subtract 5 from its control score.",
+            "description": "Effect: Pick a friendly **OGOR MAWTRIBES INFANTRY** unit that has not been reinforced, is wholly within 6\" of this unit and has not been set up this turn to be the target. Remove the target from the battlefield. After this unit ends its move, you must set up the target unit wholly within 6\" of this unit and not in combat. The target cannot use **CHARGE** abilities for the rest of the turn.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "Thundertusks are hardy creatures capable of shovelling through huge snowdrifts, and it is not uncommon for nearby ogors to hitch a ride by grabbing on to their shaggy hides."
+          },
+          {
+            "name": "Chilling Onslaught",
+            "phase": "Once Per Turn (Army), Any Combat Phase",
+            "type": "Ability",
+            "description": "Declare: If this unit charged this turn, pick an enemy unit in combat with it to be the target.\n\nEffect: Roll a dice. On a 4+, for the rest of the turn, subtract 1 from hit rolls for the target’s attacks.",
             "keywords": [
               "Rampage"
             ],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "The enemy are left scattered and reeling before the combination of the Thundertusk’s charge and the great missiles loosed by its riders, forced to give ground until they can regather their wits."
+            "lore": "Gales of punishing cold drive before an oncoming Thundertusk, numbing or entirely freezing enemies’ limbs."
           }
         ]
       },
       "butcher": {
         "sourceId": "eb242b63-0aa8-4ab4-a723-bd8d8c42aa23",
         "name": "Butcher",
-        "lore": "The holy ogors of each warglutt are known as Butchers. These grunting, sweaty monsters act as the tribe’s cooks, but more importantly, their connection to the art of ingestion makes them expert gastromancers, shamans whose spiritual link with the Gulping God allows them to call upon uncanny powers. It will come as no surprise, then, that their powers are summoned through the act of eating things.\n\nEach of the Butchers’ recipes hinges around the consumption of something with a potent spiritual component, using a resonant magic to impart the strength of the thing being devoured to themselves or those around them. Such materials range from strings of troggoth intestines filled with vitriolic bile to iron-hard rocks that must be eaten whole. So hastily are these ingredients scoffed down that they can cause internal damage, not only because of the sheer mass or density of the feast but also because of the magical energies unleashed. The gruel of blood and magic that roils in the Butcher’s throat heals more often than it hurts, though, the ever-hungry shaman growing strong on their invocations as their wounds close up with a ruddy sheen of health.",
-        "points": 150,
+        "lore": "The Gulping God speaks through the blood-smeared shamans known as Butchers. Channelling the gastromantic magic of their deity, these swollen brutes can cause the very earth to come alive and munch upon their foes.",
+        "points": 170,
         "profile": {
           "move": "6\"",
-          "health": 7,
-          "control": "5",
+          "health": 8,
+          "control": "3",
           "save": "5+",
-          "ward": null
+          "ward": "6+"
         },
         "details": {
           "models": 1,
@@ -9695,9 +9883,10 @@
         "keywords": [
           "Wizard",
           "Ogor",
-          "Gutbusters",
           "Infantry",
           "Hero",
+          "Ward (6+)",
+          "Mawseekers",
           "Wizard (1)",
           "Destruction",
           "Ogor Mawtribes"
@@ -9706,39 +9895,167 @@
           {
             "name": "Butcher's Tools",
             "type": "Melee",
-            "attacks": "3",
+            "attacks": "4",
             "hit": "4+",
             "wound": "2+",
-            "rend": "1",
+            "rend": "2",
             "damage": "3",
             "abilities": []
           }
         ],
         "abilities": [
           {
-            "name": "Savage Hunger",
-            "phase": "Passive",
+            "name": "Trogg-Guts",
+            "phase": "Once Per Turn (Army), Any Movement Phase",
             "type": "Ability",
-            "description": "Effect: While they are wholly within 12\" of this unit, friendly **GUTBUSTERS** units can use **CHARGE** abilities even if they used a **RUN** ability in the same turn.",
+            "description": "Declare: Pick a visible friendly **OGOR MAWTRIBES** unit wholly within 12\" of this unit to be the target.\n\nEffect: Roll a dice. On a 3+, the target has **WARD (6+)** until the start of your next turn. If you picked a **MAWSEEKERS** unit, it has **WARD (5+)** until the start of your next turn instead.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "The Butcher stokes the hunger of a group of nearby ogors, causing even slight belly-rumbles to erupt into the nigh-uncontrollable desire to feast."
+            "lore": "By wolfing down the thick guts of a troggoth, a Butcher can mystically imbue fellow ogors with greater resilience. Or, sometimes, they just get indigestion."
+          },
+          {
+            "name": "More Meat for the Pot",
+            "phase": "Once Per Battle (Army), End of Any Turn",
+            "type": "Ability",
+            "description": "Effect: If any damage points were allocated to an enemy unit this turn by this unit’s combat attacks or by combat attacks made by a **MANIFESTATION** summoned by this unit, and that enemy unit has been destroyed, add 1 to this unit’s power level for the rest of the battle.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "The more bloody ingredients a Butcher tosses into their sacred cauldron, the more their arcane power seems to grow."
+          }
+        ]
+      },
+      "cleavers": {
+        "sourceId": "fba5cf66-8e96-4e8e-99e4-ade2cd7359e9",
+        "name": "Cleavers",
+        "lore": "The most numerous of the Mawseekers, Cleavers are ogor zealots who have entirely given themselves to the Gulping God and his demand for mindless, cosmic consumption. They serve the Butchers by collecting bloody ‘ingredients’ for the meat-masters’ pots, empowering their primitive magics while seeking enemy mages and invokers to feast on.",
+        "points": 220,
+        "profile": {
+          "move": "6\"",
+          "health": 4,
+          "control": "2",
+          "save": "5+",
+          "ward": "6+"
+        },
+        "details": {
+          "models": 3,
+          "baseSize": "40mm",
+          "notes": null,
+          "wargearOptionsText": null
+        },
+        "keywords": [
+          "Infantry",
+          "Champion",
+          "Ward (6+)",
+          "Ogor",
+          "Mawseekers",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Cleaver's Tools",
+            "type": "Melee",
+            "attacks": "4",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "3",
+            "abilities": []
+          }
+        ],
+        "abilities": [
+          {
+            "name": "A Taste for the Arcane",
+            "phase": "Any Combat Phase",
+            "type": "Ability",
+            "description": "Effect: If a friendly or enemy **WIZARD** or **PRIEST** is within 6\" of this unit, roll a dice. On a 3+, pick 1 of the following effects to apply for the rest of the turn:\n\n• This unit’s melee weapons have **Crit (2 Hits)**.\n\n• If this unit’s melee weapons already have **Crit (2 Hits)**, they have **Crit (Mortal)**.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "The flesh of shamans and other cunning folk is a prized delicacy to the Cleavers. Simply being in the presence of those who are mystically attuned, be they friend or foe, whets their palate for carnage, seeing them lay into the enemy with terrifying vigour."
+          }
+        ]
+      },
+      "gutseers": {
+        "sourceId": "f574e6e0-6b22-4354-96c4-c4d8a33a4b85",
+        "name": "Gutseers",
+        "lore": "Gutseers are amongst the most unnerving acolytes of the Mawseeker cult, for they think they have perceived the infinite ravenous truth of the great god of ogorkind. Their belching chants disrupt the aether, while their bodies - bloated by the strange and vile ingredients they digest - can channel the gastromantic power of ogor shamans.",
+        "points": 200,
+        "profile": {
+          "move": "6\"",
+          "health": 4,
+          "control": "2",
+          "save": "5+",
+          "ward": "6+"
+        },
+        "details": {
+          "models": 3,
+          "baseSize": "40mm",
+          "notes": null,
+          "wargearOptionsText": null
+        },
+        "keywords": [
+          "Infantry",
+          "Champion",
+          "Ward (6+)",
+          "Ogor",
+          "Mawseekers",
+          "Destruction",
+          "Ogor Mawtribes"
+        ],
+        "weapons": [
+          {
+            "name": "Gutseer's Tools",
+            "type": "Melee",
+            "attacks": "3",
+            "hit": "4+",
+            "wound": "2+",
+            "rend": "2",
+            "damage": "3",
+            "abilities": []
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Arcane Contortions",
+            "phase": "Passive",
+            "type": "Ability",
+            "description": "Effect: Subtract 1 from casting rolls and chanting rolls for visible enemy units while they are within 12\" of this unit.\n\nAdd 1 to casting rolls for visible friendly **MAWSEEKERS WIZARDS** while they are wholly within 12\" of this unit.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "While not shamans themselves, the gastromantic practices of the Gutseers twist the flow of magic around them."
+          },
+          {
+            "name": "Conduits of Gut Magic",
+            "phase": "Once Per Turn (Army), Any Hero Phase",
+            "type": "Ability",
+            "description": "Effect: Measure the range and visibility of the next **SPELL** ability used by a friendly **OGOR MAWTRIBES WIZARD** that is wholly within 12\" of and visible to this unit from this unit instead of that **WIZARD**. This unit is treated as the caster for the purpose of other abilities or spell effects, such as ‘Unbind’.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": "The Gutseers’ faith and grisly acts of divination make them conduits of the gastromantic magic of the Butchers, who can channel their power through these disciples of the Maw."
           }
         ]
       },
       "gorger mawpack": {
         "sourceId": "ff260598-5963-4e41-830a-46fbd8527dbe",
         "name": "Gorger Mawpack",
-        "lore": "It takes a great deal to scare the brutish ogors, who can carve through thinling foes as easily as an axe through flesh. Yet as they sit around their cookfires, they trade hushed warnings of what happens to those who dare anger the Gulping God. Should an ogor fail to pay gory tribute, they will find their body fat wasting away and all feelings of satiation evaporating into bottomless hunger. This affliction is known as the Empty Belly curse, and those who suffer from it are known as Gorgers, so desperate is their unending desire to feed.\n\nGorger Mawpacks trail behind their ogor brethren on the hunt, ripping apart and slurping up discarded offal like rabid hounds. Their curse has devolved them into slavering creatures that communicate in grunts and howls. Many exhibit fingernails that have long since distended into claws, allowing them to attack with quick, wide swipes that cut straight to the bone. They often struggle to tell friend from foe; to them, anyone who competes for their prey is an enemy – leading them even to consume other Gorgers. The only beings these creatures seem to listen to are the ogor Butchers, for these gastromantic shamans enjoy feeding the Gorgers everything from leftovers to bold new recipes.",
+        "lore": "The Gorger Mawpacks are strange gatherings of ogors afflicted with the Empty Belly curse. Wild-eyed and starving, they launch themselves at their prey, using huge clubs or their bare hands to pulverise those unfortunate enough to be their next unsatisfying meal.",
         "points": 240,
         "profile": {
           "move": "6\"",
           "health": 5,
           "control": "2",
           "save": "6+",
-          "ward": null
+          "ward": "6+"
         },
         "details": {
           "models": 5,
@@ -9751,6 +10068,8 @@
           "Musician",
           "Ogor",
           "Infantry",
+          "Ward (6+)",
+          "Mawseekers",
           "Champion (1/5)",
           "Musician (1/5)",
           "Destruction",
@@ -9800,7 +10119,7 @@
       "kragnos the end of empires": {
         "sourceId": "d27418c2-8e18-43cd-bc6f-7b07fb2fb7cd",
         "name": "Kragnos, the End of Empires",
-        "lore": "One of the most destructive races to have ever lived, the Drogrukh were centauroid warriors who built a great nation in the Realm of Beasts. From their number rose a champion so powerful that he ascended to godhood: Kragnos, the End of Empires. Having led his people in warfare against a draconic empire that left the Drogrukh all but extinct, Kragnos was sealed away for the protection of the realms – only to be freed centuries later. Though he currently wages a protracted war in the Realm of Life, Kragnos can still be drawn to battle by the most ferocious fighting, his arrival announced by the smashing of enemy lines and the crushing of foes under his thunderous hooves.\n\nAlready a natural disaster made manifest, Kragnos’s rampages are further augmented by his legendary armaments. The shield Tuskbreaker is said to have been cast aside by Gorkamorka himself, deity of the orruks and other brutish beings. The spells of enemy mages break instantly upon its surface, supposedly due to the residual divine essence that suffuses it. The Dread Mace, Kragnos’s massive studded club, is powerful enough to shatter walls of solid rock. Legends say that Kragnos retrieved the weapon’s head from an ancient geomantic nexus, and that it is infused with Ghur’s own destructive animus.",
+        "lore": "A roaring, trampling god of earthquakes and wanton destruction, Kragnos is known as the End of Empires. In his gnarled hands, the Dread Mace can shatter the walls of cities even as the shield Tuskbreaker keeps him all but inviolate.",
         "points": 580,
         "profile": {
           "move": "10\"",
@@ -9860,17 +10179,6 @@
         ],
         "abilities": [
           {
-            "name": "Battle Damaged",
-            "phase": "Passive",
-            "type": "Ability",
-            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of **The Dread Mace** is 4 and this unit has a Control characteristic of 10.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": null
-          },
-          {
             "name": "Rampaging Destruction",
             "phase": "Once Per Turn (Army), Any Charge Phase",
             "type": "Ability",
@@ -9907,7 +10215,7 @@
           },
           {
             "name": "The End of Empires",
-            "phase": "Your Charge Phase.",
+            "phase": "Your Charge Phase",
             "type": "Ability",
             "description": "Effect: For the rest of the turn, add 1 to the number of dice rolled when making charge rolls for friendly **DESTRUCTION** units while they are wholly within 12\" of this unit, to a maximum of 3.",
             "keywords": [],
@@ -9915,6 +10223,17 @@
             "chantingValue": null,
             "commandPoints": null,
             "lore": "Where Kragnos goes, the hordes of Destruction follow."
+          },
+          {
+            "name": "Battle Damaged",
+            "phase": "Passive",
+            "type": "Ability",
+            "description": "Effect: While this unit has 10 or more damage points, the Attacks characteristic of **The Dread Mace** is 4 and this unit has a Control characteristic of 10.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": null,
+            "lore": null
           }
         ]
       },
@@ -9933,7 +10252,7 @@
         "details": {
           "models": 1,
           "baseSize": "120 x 92mm",
-          "notes": "This unit is legal for Matched Play for battles fought using the *General’s Handbook 2026-27* battlepack.",
+          "notes": "This **HERO** can join an eligible regiment as a *Voice of the Everwinter*.\nThis unit is legal for Matched Play for battles fought using the *General’s Handbook 2026-27* battlepack.",
           "wargearOptionsText": "***This unit is armed with an Ice Blast, Punches and Kicks, Thundertusk’s Colossal Tusks, and 1 of the following options:***\n\n• ***Chaintrap***\n• ***Harpoon Launcher***\n• ***Blood Vulture***"
         },
         "keywords": [
@@ -9942,6 +10261,7 @@
           "Beastclaw Raiders",
           "Ogor",
           "Hero",
+          "Voice of the Everwinter",
           "Priest (1)",
           "Destruction",
           "Ogor Mawtribes"
@@ -10879,7 +11199,7 @@
         },
         "details": {
           "models": 1,
-          "baseSize": "90 × 52mm",
+          "baseSize": "105 × 70mm",
           "notes": null,
           "wargearOptionsText": null
         },
@@ -11996,7 +12316,7 @@
             "name": "Arcane Osmosis",
             "phase": "Once Per Turn (Army), Your Hero Phase",
             "type": "Ability",
-            "description": "Effect: For the rest of the turn:\n\n• Each time you make a casting roll for this unit, add D3 to the roll.\n•  This unit cannot move or be removed from the battlefield by an ability that would allow it to be set up elsewhere on the battlefield or in reserve.&#x20;",
+            "description": "Effect: For the rest of the turn:\n\n• Each time you make a casting roll for this unit, add D3 to the roll.\n•  This unit cannot move or be removed from the battlefield by an ability that would allow it to be set up elsewhere on the battlefield or in reserve.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -12014,7 +12334,7 @@
             "castingValue": 7,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "The Treelord weaves the energies of life into a wall of viridescent light that disrupts and repels hostile magics.&#x20;"
+            "lore": "The Treelord weaves the energies of life into a wall of viridescent light that disrupts and repels hostile magics."
           }
         ]
       }
@@ -13906,9 +14226,9 @@
         "keywords": [
           "Moonclan",
           "Beast",
-          "Squig",
           "Destruction",
-          "Gloomspite Gitz"
+          "Gloomspite Gitz",
+          "Squig"
         ],
         "weapons": [
           {
@@ -15618,7 +15938,7 @@
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "It is a great honour for a Relic Envoy to serve beneath a Freeguild Marshal. Their duties include hand- delivering messages to the soldiers of the line.&#x20;"
+            "lore": "It is a great honour for a Relic Envoy to serve beneath a Freeguild Marshal. Their duties include hand- delivering messages to the soldiers of the line."
           },
           {
             "name": "Front-Line Commander",
@@ -15848,7 +16168,7 @@
             "name": "Lantern of All-Knowledge",
             "phase": "Your Hero Phase",
             "type": "Ability",
-            "description": "Effect: If this unit is wholly within 9\" of a corner of the battlefield, pick 1 of the following effects to apply until the start of your next turn:\n\n***Searing Brilliance:*** Friendly **SIGMARITE** units are not visible to enemy units more than 6\" from them while those friendly units are wholly within 6\" of and visible to this unit.\n\n***Lambent Aura:*** Add 1 to this unit’s power level.&#x20;\n\n***Luminous Authority***: Add 2 to arcane manipulation rolls for this unit.\n\n***Prismatic Diffusion:*** Add 3 to the Attacks characteristic of this unit’s **Rod of Radiance** and set its Damage characteristic to 3.",
+            "description": "Effect: If this unit is wholly within 9\" of a corner of the battlefield, pick 1 of the following effects to apply until the start of your next turn:\n\n***Searing Brilliance:*** Friendly **SIGMARITE** units are not visible to enemy units more than 6\" from them while those friendly units are wholly within 6\" of and visible to this unit.\n\n***Lambent Aura:*** Add 1 to this unit’s power level.\n\n***Luminous Authority***: Add 2 to arcane manipulation rolls for this unit.\n\n***Prismatic Diffusion:*** Add 3 to the Attacks characteristic of this unit’s **Rod of Radiance** and set its Damage characteristic to 3.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -16571,7 +16891,7 @@
             "name": "Storm of Steel",
             "phase": "Once Per Turn (Army), Any Charge Phase",
             "type": "Ability",
-            "description": "Declare: If this unit is in combat and has not charged this turn, pick an enemy unit that it is in combat with and up to 1 friendly **Freeguild Cavalier-Marshal** within this unit’s combat range to be the targets.\n\nEffect: If this unit is **under orders**, apply the effect below. Otherwise, roll a dice. On a 3+, apply the effect below.&#x20;\n\nThis unit and the friendly target can use the ‘Charge’ ability even if it is not your charge phase and even if those units are in combat. Both friendly units must end that move in combat with the enemy target.",
+            "description": "Declare: If this unit is in combat and has not charged this turn, pick an enemy unit that it is in combat with and up to 1 friendly **Freeguild Cavalier-Marshal** within this unit’s combat range to be the targets.\n\nEffect: If this unit is **under orders**, apply the effect below. Otherwise, roll a dice. On a 3+, apply the effect below.\n\nThis unit and the friendly target can use the ‘Charge’ ability even if it is not your charge phase and even if those units are in combat. Both friendly units must end that move in combat with the enemy target.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -16895,7 +17215,7 @@
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Blackpowder Squires ensure their fellows are well prepared to deliver point-blank volleys as the enemy closes.&#x20;"
+            "lore": "Blackpowder Squires ensure their fellows are well prepared to deliver point-blank volleys as the enemy closes."
           },
           {
             "name": "Fortified Position",
@@ -17113,7 +17433,7 @@
             "name": "Special Ammunition",
             "phase": "Once Per Turn (Army), Reaction: You declared a **SHOOT** ability for this unit",
             "type": "Ability",
-            "description": "Effect: If this unit is **under orders**, roll a dice. On a 3+, pick 1 of the following effects.\n\n***Nullshot:*** Subtract 1 from ward rolls for damage points inflicted by attacks made with this unit’s **Godbreaker Cannon** this phase.&#x20;\n\n***Heavy Shot:*** Add 1 to the Rend characteristic of this unit’s **Godbreaker Cannon** this phase.\n\n***Grapeshot:*** After that **SHOOT** ability has been resolved, if all of the attacks made with this unit’s **Godbreaker Cannon** targeted the same enemy unit, inflict D3 mortal damage on each other enemy unit within that enemy unit’s combat range.",
+            "description": "Effect: If this unit is **under orders**, roll a dice. On a 3+, pick 1 of the following effects.\n\n***Nullshot:*** Subtract 1 from ward rolls for damage points inflicted by attacks made with this unit’s **Godbreaker Cannon** this phase.\n\n***Heavy Shot:*** Add 1 to the Rend characteristic of this unit’s **Godbreaker Cannon** this phase.\n\n***Grapeshot:*** After that **SHOOT** ability has been resolved, if all of the attacks made with this unit’s **Godbreaker Cannon** targeted the same enemy unit, inflict D3 mortal damage on each other enemy unit within that enemy unit’s combat range.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -18073,7 +18393,7 @@
             "name": "Masters of the Silver Towers",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: &#x20;Enemy units cannot end a charge move within 1/2\" of a friendly **Argent Shard** that is wholly within 12\" of this unit and was set up on the battlefield in the same turn.",
+            "description": "Effect: Enemy units cannot end a charge move within 1/2\" of a friendly **Argent Shard** that is wholly within 12\" of this unit and was set up on the battlefield in the same turn.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -18929,7 +19249,7 @@
             "name": "Lunatic Demise",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: Each time a model in this unit is slain, before removing the model from play, pick 1 of the following effects:\n\n***Split:*** Pick a visible friendly **Blue Horrors and Brimstone Horrors** unit within 12\" of this unit. Return up to 2 slain **Blue Horror** models to that unit.\n\n***Petty Vengeance:*** Pick an enemy unit in combat with this unit to be the target, then roll a dice. On a 5+, inflict 1 mortal damage on the target.",
+            "description": "Effect: Each time a model in this unit is slain, before removing the model from play, pick 1 of the following effects:\n\n***Split:*** Pick a visible friendly **BLUE HORRORS AND BRIMSTONE HORRORS** unit within 12\" of this unit. Return up to 2 slain **Blue Horror** models to that unit.\n\n***Petty Vengeance:*** Pick an enemy unit in combat with this unit to be the target, then roll a dice. On a 5+, inflict 1 mortal damage on the target.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -18993,7 +19313,7 @@
             "name": "Split Again",
             "phase": "End of Any Turn",
             "type": "Ability",
-            "description": "Effect: Roll a dice for each **Blue Horror** model in this unit that is slain. For each 3+, if there are fewer **Brimstone Horrors** models in this unit than its starting size, you can add 1 **Brimstone Horrors** model to this unit.&#x20;\n\n**Designer’s Note:** *Dice are only rolled for Blue Horror models that are currently slain – models that have been slain and returned to this unit do not count until they are slain once more. When adding Brimstone Horrors to this unit, do not count slain Brimstone Horrors towards the maximum.*",
+            "description": "Effect: Roll a dice for each **Blue Horror** model in this unit that is slain. For each 3+, if there are fewer **Brimstone Horrors** models in this unit than its starting size, you can add 1 **Brimstone Horrors** model to this unit.\n\n**Designer’s Note:** *Dice are only rolled for Blue Horror models that are currently slain – models that have been slain and returned to this unit do not count until they are slain once more. When adding Brimstone Horrors to this unit, do not count slain Brimstone Horrors towards the maximum.*",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -19500,7 +19820,7 @@
         "sourceId": "38fdb9ff-4661-44e2-806a-b297c4a2089a",
         "name": "Scourge of Aqshy: Ogroid Thaumaturge",
         "lore": "Creatures of magic as well as brawn, Ogroid Thaumaturges are proud of their cerebral gifts, and many Arcanite cults in the Bright Realm worship them as living idols. Nevertheless, at heart, they are hulking monsters, ever ready to rip and impale the foe with their colossal horns.",
-        "points": 210,
+        "points": 140,
         "profile": {
           "move": "6\"",
           "health": 8,
@@ -31497,7 +31817,7 @@
             "name": "Festering Bulwark",
             "phase": "Once Per Turn (Army), Any Combat Phase",
             "type": "Ability",
-            "description": "Declare: Pick this unit and a friendly **PUTRID BLIGHTKINGS**  unit within 3\" of this unit to be the targets.\n\nEffect: Roll a dice. On a 3+, ignore negative modifiers to save rolls for the targets for the rest of the turn.",
+            "description": "Declare: Pick this unit and a friendly **PUTRID BLIGHTKINGS** unit within 3\" of this unit to be the targets.\n\nEffect: Roll a dice. On a 3+, ignore negative modifiers to save rolls for the targets for the rest of the turn.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -31664,7 +31984,7 @@
             "name": "Lord of Nurglings",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: While any friendly **NURGLINGS**  units are wholly within 12\" of this unit:\n• Ignore the first damage point that would be allocated to that **NURGLINGS**  unit each phase.\n• That **NURGLINGS**  unit can ignore the effect of the ‘Beast’ ability.",
+            "description": "Effect: While any friendly **NURGLINGS** units are wholly within 12\" of this unit:\n• Ignore the first damage point that would be allocated to that **NURGLINGS** unit each phase.\n• That **NURGLINGS** unit can ignore the effect of the ‘Beast’ ability.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -31686,7 +32006,7 @@
             "name": "Tide of Nurglings",
             "phase": "Once Per Turn (Army), Any Combat Phase",
             "type": "Ability",
-            "description": "Declare: Pick up to 2 friendly **NURGLINGS**  units wholly within 12\" of this unit to be the targets.\n\nEffect: Roll a dice for each target. On a 2+:\n• If the target is not in combat, it can move a number of inches equal to the roll but cannot end that move in combat.\n• If the target is in combat, it can make a pile-in move.",
+            "description": "Declare: Pick up to 2 friendly **NURGLINGS** units wholly within 12\" of this unit to be the targets.\n\nEffect: Roll a dice for each target. On a 2+:\n• If the target is not in combat, it can move a number of inches equal to the roll but cannot end that move in combat.\n• If the target is in combat, it can make a pile-in move.",
             "keywords": [
               "Rampage"
             ],
@@ -31791,7 +32111,7 @@
             "name": "Acid Ichor",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: Each time you make an unmodified save roll of 6 for a combat attack that targets this unit, inflict 1 mortal damage on the attacking unit after the **FIGHT** ability has been resolved.",
+            "description": "Effect: Each time you make an unmodified save roll of 1 for a combat attack that targets this unit, inflict 1 mortal damage on the attacking unit after the **FIGHT** ability has been resolved.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -34278,6 +34598,17 @@
         ],
         "abilities": [
           {
+            "name": "Valorous Intervention",
+            "phase": "Any Combat Phase",
+            "type": "Ability",
+            "description": "Declare: This unit cannot use this ability if it is in combat. Pick a friendly **LUMINETH REALM-LORDS** unit that is in combat to be the target.\n\nEffect: Remove this unit from the battlefield and set it up again within 1\" of the target, within 1\" of an enemy unit and in combat. This unit has charged.",
+            "keywords": [],
+            "castingValue": null,
+            "chantingValue": null,
+            "commandPoints": 1,
+            "lore": "The Light of Eltharion manifests alongside his allies in their time of greatest need."
+          },
+          {
             "name": "Supreme Swordmaster",
             "phase": "Passive",
             "type": "Ability",
@@ -34287,17 +34618,6 @@
             "chantingValue": null,
             "commandPoints": null,
             "lore": "The Light of Eltharion is a consummate warrior and one of the greatest swordmasters of all time."
-          },
-          {
-            "name": "Valorous intervention",
-            "phase": "Any Combat Phase",
-            "type": "Ability",
-            "description": "Declare: This unit cannot use this ability if it is in combat. Pick a friendly **LUMINETH REALM-LORDS** unit that is in combat to be the target.\n\nEffect: Remove this unit from the battlefield and set it up again within 1\" of the target, within 1\" of an enemy unit and in combat. This unit has charged.",
-            "keywords": [],
-            "castingValue": null,
-            "chantingValue": null,
-            "commandPoints": null,
-            "lore": "The Light of Eltharion manifests alongside his allies in their time of greatest need."
           }
         ]
       },
@@ -36742,7 +37062,7 @@
         "details": {
           "models": 1,
           "baseSize": "40mm",
-          "notes": "This unit is legal for Matched Play for battles fought using the *General’s Handbook 2026-27* battlepack.",
+          "notes": "This **HERO** can join an eligible regiment as a *Coven Matriarch*.\nThis unit is legal for Matched Play for battles fought using the *General’s Handbook 2026-27* battlepack.",
           "wargearOptionsText": null
         },
         "keywords": [
@@ -36838,7 +37158,7 @@
             "name": "Shadow Lariat",
             "phase": "Once Per Turn (Army), End of Any Turn",
             "type": "Ability",
-            "description": "Declare: If this unit is not in combat, pick a visible enemy **INFANTRY** or **CAVALRY HERO** that has no more than 1 model and is within 12\" of this unit to be the target.\n\nEffect: If the target is more than 3\" from all other friendly units, apply the effect below. Otherwise, roll a dice. On a 3+, apply the effect below.\n\nYour opponent must remove the target from the battlefield and set it up again in combat with this unit.",
+            "description": "Declare: If this unit is not in combat, pick a visible enemy **INFANTRY** or **CAVALRY HERO** that has no more than 1 model and is within 12\" of this unit to be the target.\n\nEffect: If the target is more than 3\" from all other enemy units, apply the effect below. Otherwise, roll a dice. On a 3+, apply the effect below.\n\nYour opponent must remove the target from the battlefield and set it up again in combat with this unit.",
             "keywords": [],
             "castingValue": null,
             "chantingValue": null,
@@ -41981,7 +42301,7 @@
         "sourceId": "61f1d11e-26de-498a-bb8d-2022b98793e6",
         "name": "Scourge of Aqshy: Iridan the Witness",
         "lore": "Able to endure the horrors of the Gnaw for far longer than their brethren, Iridan the Witness leads the Stormcasts of the Ruination chambers into battle with the resurgent Skaven in the easternmost Great Parch. Champion of the death god Morrda, they ride atop the Morrgryph Ariax and seek to reawaken their companions’ memories of past glories.",
-        "points": 360,
+        "points": 320,
         "profile": {
           "move": "12\"",
           "health": 12,
@@ -41996,12 +42316,12 @@
           "wargearOptionsText": null
         },
         "keywords": [
-          "Ruination Chamber",
-          "Priest",
-          "Monster",
           "Unique",
           "Fly",
           "Hero",
+          "Ruination Chamber",
+          "Priest",
+          "Monster",
           "Priest (1)",
           "Ward (6+)",
           "Order",
@@ -42063,7 +42383,7 @@
             "name": "On Wings of Death",
             "phase": "Once Per Turn (Army), Any Combat Phase",
             "type": "Ability",
-            "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: &#x20;If the target charged this turn, apply the effects below. Otherwise, roll a dice. On a 3+, apply the effects below:\n\n• You can remove this unit from the battlefield and set it up again within 1\" of the target.\n• Subtract 1 from hit rolls for the target’s attacks for the rest of the turn.",
+            "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: If the target charged this turn, apply the effects below. Otherwise, roll a dice. On a 3+, apply the effects below:\n\n• You can remove this unit from the battlefield and set it up again within 1\" of the target.\n• Subtract 1 from hit rolls for the target’s attacks for the rest of the turn.",
             "keywords": [
               "Rampage"
             ],
@@ -42163,7 +42483,7 @@
             "castingValue": null,
             "chantingValue": null,
             "commandPoints": null,
-            "lore": "Stormstrike Palladors are masters at performing devastating charges into the unguarded flanks of enemies already engaged in combat.&#x20;"
+            "lore": "Stormstrike Palladors are masters at performing devastating charges into the unguarded flanks of enemies already engaged in combat."
           }
         ]
       }
@@ -43321,7 +43641,7 @@
         "abilities": [
           {
             "name": "Merciless Hunters",
-            "phase": "Once Per Turn (Army), Reaction: You declared a **SHOOT** ability for this unit&#x20;",
+            "phase": "Once Per Turn (Army), Reaction: You declared a **SHOOT** ability for this unit",
             "type": "Ability",
             "description": "Effect: After that **SHOOT** ability has been resolved, if all of this unit’s attacks targeted the same enemy unit and any models in that unit were slain, pick 1 of the effects below to apply for the rest of the turn. If all of this unit’s attacks targeted the same enemy unit and no models in that unit were slain, roll a dice. On a 3+, pick 1 of the effects below to apply for the rest of the turn:\n\n• Subtract 1 from ward rolls for the target.\n• Ignore positive modifiers to save rolls for the target.",
             "keywords": [],
@@ -44772,7 +45092,7 @@
           "models": 10,
           "baseSize": "25mm",
           "notes": null,
-          "wargearOptionsText": "• ***Each model in this unit is armed with a Privateer Pistol and Arkanaut Hand Weapon.***\n• ***2/10 models can replace their Privateer Pistol with a Privateer Heavy Weapon (Aethermatic Volley Gun or Light Skyhook).***\n• ***1/10 models can replace both their weapons with a Skypike.***&#x20;\n• ***The champion cannot replace their weapons.***"
+          "wargearOptionsText": "• ***Each model in this unit is armed with a Privateer Pistol and Arkanaut Hand Weapon.***\n• ***2/10 models can replace their Privateer Pistol with a Privateer Heavy Weapon (Aethermatic Volley Gun or Light Skyhook).***\n• ***1/10 models can replace both their weapons with a Skypike.***\n• ***The champion cannot replace their weapons.***"
         },
         "keywords": [
           "Champion",
@@ -46184,7 +46504,7 @@
       "hexwraiths": {
         "sourceId": "604a584d-c84e-4ed8-a5a5-65a53e3c930c",
         "name": "Hexwraiths",
-        "lore": "Upon ghostly steeds, the Hexwraiths ride straight through their foes, turning blood to ice and snatching souls from screaming warriors. Once knights both proud and cruel, these ethereal killers are bound by Nagash to ride eternally, visiting pain and death upon the living in his name.&#x20;",
+        "lore": "Upon ghostly steeds, the Hexwraiths ride straight through their foes, turning blood to ice and snatching souls from screaming warriors. Once knights both proud and cruel, these ethereal killers are bound by Nagash to ride eternally, visiting pain and death upon the living in his name.",
         "points": 150,
         "profile": {
           "move": "12\"",
@@ -46358,7 +46678,7 @@
       "lord vitriolic": {
         "sourceId": "6afba9d9-895f-4744-931b-7fd47f8d328e",
         "name": "Lord Vitriolic",
-        "lore": "An arch poisoner, a Lord Vitriolic creates all manner of potions that they hurl at their foes. Fear-inducing gases, scorching acids and spirit-withering elixirs are all part of their deadly alchemical arsenal each baleful concoction blighting the soul as well as the flesh.&#x20;",
+        "lore": "An arch poisoner, a Lord Vitriolic creates all manner of potions that they hurl at their foes. Fear-inducing gases, scorching acids and spirit-withering elixirs are all part of their deadly alchemical arsenal each baleful concoction blighting the soul as well as the flesh.",
         "points": 120,
         "profile": {
           "move": "8\"",
@@ -47077,7 +47397,7 @@
       "knight of shrouds": {
         "sourceId": "d8d3709b-61e1-459b-9529-ee0bc535e5c9",
         "name": "Knight of Shrouds",
-        "lore": "In life, each Knight of Shrouds was an arch traitor who chose to betray their people in order to delay their own inevitable doom. Nagash interpreted their treason not as cowardice, but as wisdom, seeing value in commanders who understand that to resist his will was madness. Seized upon death and remade into cloaked wraiths, the shroud-knights now lead the hosts of the Nighthaunt into battle.&#x20;",
+        "lore": "In life, each Knight of Shrouds was an arch traitor who chose to betray their people in order to delay their own inevitable doom. Nagash interpreted their treason not as cowardice, but as wisdom, seeing value in commanders who understand that to resist his will was madness. Seized upon death and remade into cloaked wraiths, the shroud-knights now lead the hosts of the Nighthaunt into battle.",
         "points": 100,
         "profile": {
           "move": "8\"",
@@ -47543,7 +47863,7 @@
       "knight of shrouds on ethereal steed": {
         "sourceId": "f034990b-c285-4212-897d-f3ef9897667a",
         "name": "Knight of Shrouds on Ethereal Steed",
-        "lore": "Many a Knight of Shrouds takes to the battlefield atop an ethereal steed, favouring the speed and killing power of such a baleful creature. They cut a fearsome sight as they order their procession forward in a gushing tide of ectoplasm, spurring them on to take their vengeance against the living.&#x20;",
+        "lore": "Many a Knight of Shrouds takes to the battlefield atop an ethereal steed, favouring the speed and killing power of such a baleful creature. They cut a fearsome sight as they order their procession forward in a gushing tide of ectoplasm, spurring them on to take their vengeance against the living.",
         "points": 160,
         "profile": {
           "move": "12\"",
@@ -49309,7 +49629,7 @@
             "name": "For The Kingdom!",
             "phase": "Passive",
             "type": "Ability",
-            "description": "Effect: While you believe this **DELUSION**, add 1 to charge rolls for friendly Knights units and friendly **FLESH-EATER COURTS MONSTERS** while they are wholly within 12\" of any friendly **FLESH-EATER COURTS HEROES**.\n\nAdd 2 to charge rolls for friendly **KNIGHTS** units and friendly **FLESH-EATER COURTS MONSTERS** instead while they are wholly within 12\" of any friendly **Abhorrant Ghoul Kings on Royal Zombie Dragons**.",
+            "description": "Effect: While you believe this **DELUSION**, add 1 to charge rolls for friendly **KNIGHTS** units and friendly **FLESH-EATER COURTS MONSTERS** while they are wholly within 12\" of any friendly **FLESH-EATER COURTS HEROES**.\n\nAdd 2 to charge rolls for friendly **KNIGHTS** units and friendly **FLESH-EATER COURTS MONSTERS** instead while they are wholly within 12\" of any friendly **Abhorrant Ghoul Kings on Royal Zombie Dragons**.",
             "keywords": [
               "Delusion"
             ],
