@@ -95,6 +95,7 @@ const lofnirDrothkeepers = army(
     manifestations: [{
       id: "molten-infernoth",
       name: "Molten Infernoth",
+      image: "/images/catalogue/3c8965c2-03d7-41cb-a670-b10511d8d5ed.webp",
       castingValue: 4,
       summonSpell: {
         name: "Summon Molten Infernoth",

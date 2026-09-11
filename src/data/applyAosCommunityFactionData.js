@@ -62,7 +62,9 @@ function mergeCollection(current = [], authoritative = []) {
       ...existing,
       ...source,
       id: existing.id ?? source.id,
-      image: localImage(existing.image) ?? source.image,
+      image: (String(existing.image ?? "").startsWith("/images/factions/")
+        ? source.image ?? existing.image
+        : localImage(existing.image) ?? source.image),
       synergy: existing.synergy,
     };
 

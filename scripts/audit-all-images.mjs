@@ -19,7 +19,9 @@ function imageStatus(image) {
 
 function collect(items, faction, kind, output) {
   for (const item of items ?? []) {
-    const status = imageStatus(item?.image);
+    const status = kind.endsWith("unit") && item?.image?.startsWith("/images/factions/")
+      ? "generic-unit-image"
+      : imageStatus(item?.image);
     if (status !== "local") {
       output.push({ faction, kind, id: item?.id, name: item?.name, image: item?.image ?? null, status });
     }
@@ -32,6 +34,18 @@ try {
     "/src/data/regimentsOfRenown.js"
   );
   const issues = [];
+
+  // Inspect nested lore entries and army cards too, even in factions without units.
+  function inspectNested(value, location) {
+    if (Array.isArray(value)) return value.forEach((item, index) => inspectNested(item, `${location}[${index}]`));
+    if (!value || typeof value !== "object") return;
+    if (value.image || (value.name && value.profile)) {
+      collect([value], location, "nested-reference", issues);
+    }
+    Object.entries(value).forEach(([key, item]) => inspectNested(item, `${location}.${key}`));
+  }
+  inspectNested(factions, "factions");
+  inspectNested(regimentsOfRenown, "regiments");
 
   for (const faction of factions.filter((item) => item.units?.length > 0)) {
     const factionStatus = imageStatus(faction.image);
@@ -50,6 +64,7 @@ try {
   collect(regimentsOfRenown, "Regiments of Renown", "regiment", issues);
 
   console.log(JSON.stringify({ total: issues.length, issues }, null, 2));
+  if (issues.length) process.exitCode = 1;
   const manifestPath = process.argv[2];
   if (manifestPath) {
     const generated = JSON.parse(
