@@ -34,8 +34,18 @@ export function initializePwa() {
         updateViaCache: "none",
       });
 
-      await registration.update();
       watchRegistration(registration);
+      await registration.update();
+      let lastCheck = Date.now();
+      const checkForUpdate = () => {
+        if (document.visibilityState === "hidden" || Date.now() - lastCheck < 60_000) return;
+        lastCheck = Date.now();
+        registration.update().catch((error) => {
+          console.warn("No se pudo comprobar la actualización de Storm Forge.", error);
+        });
+      };
+      window.addEventListener("online", checkForUpdate);
+      document.addEventListener("visibilitychange", checkForUpdate);
     } catch (error) {
       console.warn("No se ha podido activar el modo PWA.", error);
     }

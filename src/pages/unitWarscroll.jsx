@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { getDisplayKeywords } from "../utils/displayKeywords";
 
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
@@ -256,7 +257,7 @@ function UnitWarscroll({
 
         <Accordion title="Palabras clave" storageKey={`${accordionPrefix}:keywords`}>
           <div style={styles.keywordList}>
-            {(unit.keywords ?? []).map(
+            {getDisplayKeywords(unit.keywords).map(
               (keyword) => (
                 <span
                   key={keyword}

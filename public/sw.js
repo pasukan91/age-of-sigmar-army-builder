@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v7";
+const CACHE_VERSION = "v8";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media-${CACHE_VERSION}`;
@@ -85,18 +85,21 @@ self.addEventListener("fetch", (event) => {
 
 async function networkFirstPage(request) {
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { cache: "no-cache" });
     if (response.ok) {
       const cache = await caches.open(RUNTIME_CACHE);
       await safelyCacheResponse(cache, request, response.clone());
     }
     return response;
   } catch {
+    const runtime = await caches.open(RUNTIME_CACHE);
+    const installed = await caches.open(STATIC_CACHE);
     return (
-      await caches.match(request) ||
-      await caches.match("/index.html") ||
-      await caches.match("/") ||
-      await caches.match("/offline.html")
+      await runtime.match(request) ||
+      await runtime.match("/index.html") ||
+      await runtime.match("/") ||
+      await installed.match("/index.html") ||
+      await installed.match("/offline.html")
     );
   }
 }
