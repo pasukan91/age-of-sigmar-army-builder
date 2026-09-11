@@ -27,6 +27,27 @@ test("the bot is authoritative for every active faction and reference collection
       const faction = factions.find((item) => item.id === source.id);
       assert.ok(faction, source.name);
       assert.equal(faction.catalogueDataVersion, 476, source.name);
+      for (const field of [
+        "monsterTraits",
+        "allConsumingObsessions",
+        "moulderMutations",
+        "mortisanRefinements",
+        "originsOfTerrifyingFolkTales",
+        "visionsOfFate",
+        "specialKnickKnacks",
+        "flawlessManoeuvres",
+        "plaguefathersPoxes",
+        "decorationsForValour",
+        "ironweldInnovations",
+        "accursedDevices",
+        "brazenMutations",
+        "brandsOfTheDarkGods",
+        "ensorcelledBanners",
+        "boonsOfShadow",
+        "aqshyPrayerLores",
+      ]) {
+        assert.deepEqual(faction[field], [], `${source.name}: obsolete local ${field}`);
+      }
 
       for (const field of [
         "battleTraits",
@@ -38,6 +59,8 @@ test("the bot is authoritative for every active faction and reference collection
         "aqshyEnhancements",
         "spellLores",
         "prayerLores",
+        "manifestations",
+        "manifestationLores",
         "terrain",
         "units",
         "armiesOfRenown",
@@ -62,6 +85,12 @@ test("the bot is authoritative for every active faction and reference collection
         const actual = faction.units.find((item) => item.name === unit.name);
         assert.deepEqual(actual.profile, unit.profile, `${source.name}: ${unit.name} profile`);
         assert.deepEqual(actual.weapons, unit.weapons, `${source.name}: ${unit.name} weapons`);
+        assert.deepEqual(actual.abilities, unit.abilities, `${source.name}: ${unit.name} abilities`);
+        const { canJoinRegimentAs: _actualLinks, ...actualDetails } = actual.details;
+        const { canJoinRegimentAs: _sourceLinks, ...sourceDetails } = unit.details;
+        assert.deepEqual(actualDetails, sourceDetails, `${source.name}: ${unit.name} details`);
+        assert.deepEqual(actual.rules, unit.rules, `${source.name}: ${unit.name} rules`);
+        assert.deepEqual(actual.keywords, unit.keywords, `${source.name}: ${unit.name} keywords`);
       }
     }
   } finally {

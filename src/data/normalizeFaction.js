@@ -65,7 +65,8 @@ const ENHANCEMENT_FIELDS = [
 
 export function normalizeFaction(faction) {
   const authoritativeFaction = applyAosCommunityWording(faction);
-  const useAosCommunityCatalogue = shouldUseAosCommunityCatalogue(authoritativeFaction);
+  const useAosCommunityCatalogue = !authoritativeFaction.catalogueDataVersion &&
+    shouldUseAosCommunityCatalogue(authoritativeFaction);
   const normalized = Object.fromEntries(
     ARRAY_FIELDS.map((field) => [field, asArray(authoritativeFaction?.[field])])
   );

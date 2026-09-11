@@ -17,6 +17,29 @@ const AUTHORITATIVE_FIELDS = [
   "armiesOfRenown",
 ];
 
+// These local collections predate the bot's unified aqshyEnhancements field.
+// Keeping both makes the same enhancement appear twice under different UI
+// sections (for example Gloomspite Special Knick-knacks).
+const LEGACY_ENHANCEMENT_FIELDS = [
+  "monsterTraits",
+  "allConsumingObsessions",
+  "moulderMutations",
+  "mortisanRefinements",
+  "originsOfTerrifyingFolkTales",
+  "visionsOfFate",
+  "specialKnickKnacks",
+  "flawlessManoeuvres",
+  "plaguefathersPoxes",
+  "decorationsForValour",
+  "ironweldInnovations",
+  "accursedDevices",
+  "brazenMutations",
+  "brandsOfTheDarkGods",
+  "ensorcelledBanners",
+  "boonsOfShadow",
+  "aqshyPrayerLores",
+];
+
 const factionsByName = new Map(
   catalogue.factions.map((faction) => [normalizedName(faction.name), faction])
 );
@@ -33,6 +56,7 @@ export function applyAosCommunityFactionData(faction) {
       localizeCatalogueImages(source[field])
     );
   }
+  for (const field of LEGACY_ENHANCEMENT_FIELDS) result[field] = [];
 
   return {
     ...result,
@@ -90,6 +114,11 @@ function mergeRules(current = {}, authoritative = {}) {
     if (field in authoritative) {
       result[field] = mergeCollection(current?.[field], authoritative[field]);
     }
+  }
+  const isArmyRuleSet = AUTHORITATIVE_FIELDS.some((field) => field in authoritative) ||
+    LEGACY_ENHANCEMENT_FIELDS.some((field) => field in current);
+  if (isArmyRuleSet) {
+    for (const field of LEGACY_ENHANCEMENT_FIELDS) result[field] = [];
   }
   return result;
 }

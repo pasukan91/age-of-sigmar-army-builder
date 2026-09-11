@@ -110,12 +110,16 @@ const factions = [
   [...addedArmies, ...(faction.armiesOfRenown ?? [])].forEach((army) => {
     armiesByName.set(String(army.name ?? army.id).toLowerCase(), {
       ...army,
-      rules: withUniversalManifestations(army.rules),
+      rules: faction.catalogueDataVersion
+        ? army.rules
+        : withUniversalManifestations(army.rules),
     });
   });
 
   return normalizeFaction({
-    ...withUniversalManifestations(faction),
+    ...(faction.catalogueDataVersion
+      ? faction
+      : withUniversalManifestations(faction)),
     armiesOfRenown: [...armiesByName.values()],
   });
 });
