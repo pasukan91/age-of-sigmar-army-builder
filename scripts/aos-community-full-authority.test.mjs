@@ -33,6 +33,9 @@ test("the bot is authoritative for every active faction and reference collection
         "battleFormations",
         "heroicTraits",
         "artefacts",
+        "aqshyArtefacts",
+        "aqshyHeroicTraits",
+        "aqshyEnhancements",
         "spellLores",
         "prayerLores",
         "terrain",
@@ -41,9 +44,18 @@ test("the bot is authoritative for every active faction and reference collection
       ]) {
         const actualNames = new Set(faction[field].map((item) => item.name));
         assert.ok(
-          source[field].every((item) => actualNames.has(item.name)),
+          (source[field] ?? []).every((item) => actualNames.has(item.name)),
           `${source.name}: ${field}`
         );
+        assert.equal(faction[field].length, (source[field] ?? []).length, `${source.name}: ${field} must not import other publications`);
+        for (const expected of source[field] ?? []) {
+          const actual = faction[field].find((item) => item.name === expected.name);
+          for (const key of ["description", "lore", "groupName"]) {
+            if (expected[key] != null) {
+              assert.equal(actual[key], expected[key], `${source.name}: ${expected.name} ${key}`);
+            }
+          }
+        }
       }
 
       for (const unit of source.units) {

@@ -26,10 +26,28 @@ export function applyAosCommunityWording(faction) {
   const source = catalogue.factions?.[sourceName];
   if (!source) return faction;
 
-  return applyRules(faction, source);
+  return applyRules(faction, source, Boolean(faction.catalogueDataVersion));
 }
 
-function applyRules(rules, source) {
+function applyRules(rules, source, hasAuthoritativeCollections = false) {
+  // The full catalogue already selects the publication and carries its exact
+  // wording. The wording index also contains Spearhead and older seasons;
+  // rebuilding collections from that index would reintroduce unrelated rules.
+  if (hasAuthoritativeCollections) {
+    const result = { ...rules, catalogueWordingVersion: catalogue.metadata.dataVersion };
+    for (const field of RULE_COLLECTIONS) {
+      if (field !== "aqshyEnhancements") {
+        result[field] = mergeExistingCollection(rules[field], source.rules);
+      }
+    }
+    result.armiesOfRenown = (rules.armiesOfRenown ?? []).map((army) => {
+      const armySource = source.armiesOfRenown?.[normalizedName(army.name)];
+      return armySource && army.rules
+        ? { ...army, rules: applyRules(army.rules, armySource, true) }
+        : army;
+    });
+    return result;
+  }
   const result = {
     ...rules,
     catalogueWordingVersion: catalogue.metadata.dataVersion,
@@ -154,8 +172,15 @@ function pickRule(item, rulesByName = {}) {
   const candidates = rulesByName?.[normalizedName(item?.name)] ?? [];
   if (candidates.length <= 1) return candidates[0] ?? null;
 
-  const phase = normalizedName(item?.phase);
-  return candidates.find((candidate) => normalizedName(candidate.phase) === phase) ?? candidates[0];
+  const sourceId = item.sourceId ?? item.catalogueSource?.id;
+  const exact = candidates.find((candidate) => candidate.sourceId === sourceId);
+  if (exact) return exact;
+  const matching = candidates.filter((candidate) =>
+    item.groupName && normalizedName(candidate.groupName) === normalizedName(item.groupName)
+  );
+  if (matching.length === 1) return matching[0];
+  // Timing alone cannot identify a rule across game modes or publications.
+  return candidates.find((candidate) => candidate.description === item.description) ?? null;
 }
 
 function seasonalItems(items = [], seasonal) {
