@@ -67,6 +67,10 @@ test("includes the highlighted September rules changes", async () => {
     assert.equal(get("ogors", "gluttons").points, 210);
     assert.equal(get("ogors", "maw-cult-fanatics").points, 10);
 
+    assert.equal(get("lumineth", "alarith-spirit-of-the-mountain").rules.canBeReinforced, false);
+    assert.equal(get("sylvaneth", "treelord").rules.canBeReinforced, false);
+    assert.equal(get("khorne", "skull-cannon").rules.canBeReinforced, false);
+
     assert.equal(get("nighthaunt", "shadowy-aura").phase, "Passive");
     assert.match(get("skaven", "lightning-master").description, /set the Attacks characteristic/i);
     assert.equal(get("skaven", "a-reputation-for-cunning").commandPoints, null);

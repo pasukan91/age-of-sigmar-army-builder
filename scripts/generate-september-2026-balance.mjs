@@ -106,9 +106,11 @@ for (const entry of changedProfiles) {
       canJoinRegimentAs: note.match(/join an eligible regiment as (?:a|an) ([^.]+)\./i)?.[1]
         ? [slug(note.match(/join an eligible regiment as (?:a|an) ([^.]+)\./i)[1])]
         : null,
-      canBeReinforced: Number(row[1]) > 1 && !target.rules?.hero
-        ? !note.includes("cannot be reinforced")
-        : false,
+      canBeReinforced:
+        Number(row[1]) > 1 &&
+        target.rules?.hero !== true &&
+        target.rules?.unique !== true &&
+        !note.toLowerCase().includes("cannot be reinforced"),
       page: entry.page,
     };
     continue;
