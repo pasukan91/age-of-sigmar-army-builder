@@ -588,6 +588,9 @@ function unitMatchesRegimentOption(unit, option) {
     const specificMatch = names.length === 0 && roles.length === 0
       ? true
       : namedMatch || roleMatch;
+    if (isHeroUnit(unit) && names.length === 0 && roles.length === 0) {
+      return false;
+    }
     return specificMatch && keywordsMatch && exclusionsMatch;
   }
 
@@ -800,22 +803,6 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
     parseRegimentOption
   );
   const isHero = isHeroUnit(unit);
-
-  if (
-    !hasKeyword(regiment.hero, "Skryre") &&
-    !hasKeyword(regiment.hero, "Ogor Mawtribes")
-  ) {
-    const sameCategoryCount = (regiment.units ?? []).filter((armyUnit) =>
-      hasKeyword(armyUnit, hasKeyword(unit, "Weapon Team") ? "Weapon Team" : "War Machine")
-    ).length;
-
-    if (
-      (hasKeyword(unit, "Weapon Team") || hasKeyword(unit, "War Machine")) &&
-      sameCategoryCount >= 1
-    ) {
-      return false;
-    }
-  }
 
   if (isHero) {
     return options.some(

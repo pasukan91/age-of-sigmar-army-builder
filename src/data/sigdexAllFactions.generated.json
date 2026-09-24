@@ -2,7 +2,7 @@
   "metadata": {
     "source": "https://sigdex.io/",
     "api": "https://api.sigdex.io/blob?name=main",
-    "generatedAt": "2026-09-24T10:56:19.772Z",
+    "generatedAt": "2026-09-24T11:13:17.927Z",
     "serverVersion": "3.1.10",
     "bsdataVersion": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
     "battleProfilesVersion": "2025-08-27"
@@ -29946,7 +29946,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any unit"
+                "label": "Any non-Aelf"
               }
             ],
             "regimentOptionRules": [
@@ -30114,7 +30114,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any unit"
+                "label": "Any non-Aelf"
               }
             ],
             "regimentOptionRules": [
@@ -30843,7 +30843,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any unit"
+                "label": "Any non-Aelf"
               }
             ],
             "regimentOptionRules": [
@@ -32434,7 +32434,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any unit"
+                "label": "Any non-Aelf"
               }
             ],
             "regimentOptionRules": [
@@ -36894,7 +36894,7 @@
                       ],
                       "subhero_categories": [],
                       "unit_names": [],
-                      "label": "Any unit"
+                      "label": "Any non-Aelf"
                     }
                   ],
                   "regimentOptionRules": [
@@ -37063,7 +37063,7 @@
                       ],
                       "subhero_categories": [],
                       "unit_names": [],
-                      "label": "Any unit"
+                      "label": "Any non-Aelf"
                     }
                   ],
                   "regimentOptionRules": [
@@ -37203,7 +37203,7 @@
                       ],
                       "subhero_categories": [],
                       "unit_names": [],
-                      "label": "Any unit"
+                      "label": "Any non-Aelf"
                     }
                   ],
                   "regimentOptionRules": [
@@ -38108,7 +38108,7 @@
                       ],
                       "subhero_categories": [],
                       "unit_names": [],
-                      "label": "Any unit"
+                      "label": "Any non-Aelf"
                     }
                   ],
                   "regimentOptionRules": [
@@ -83171,7 +83171,7 @@
                 "unit_names": [
                   "Synessa, the Voice of Slaanesh"
                 ],
-                "label": "Synessa, the Voice of Slaanesh"
+                "label": "Synessa, the Voice of Slaanesh or Slaaneshi Beguiler"
               },
               {
                 "min": 0,
@@ -85084,7 +85084,7 @@
                 "unit_names": [
                   "Dexcessa, the Talon of Slaanesh"
                 ],
-                "label": "Dexcessa, the Talon of Slaanesh"
+                "label": "Dexcessa, the Talon of Slaanesh or Slaaneshi Beguiler"
               },
               {
                 "min": 0,
@@ -88257,7 +88257,7 @@
                       "unit_names": [
                         "Synessa, the Voice of Slaanesh"
                       ],
-                      "label": "Synessa, the Voice of Slaanesh"
+                      "label": "Synessa, the Voice of Slaanesh or Slaaneshi Beguiler"
                     },
                     {
                       "min": 0,
@@ -88947,7 +88947,7 @@
                       "unit_names": [
                         "Dexcessa, the Talon of Slaanesh"
                       ],
-                      "label": "Dexcessa, the Talon of Slaanesh"
+                      "label": "Dexcessa, the Talon of Slaanesh or Slaaneshi Beguiler"
                     },
                     {
                       "min": 0,
@@ -199014,7 +199014,7 @@
                   "Skink Starpriest",
                   "Skink Starseer"
                 ],
-                "label": "Skink Starpriest or Skink Starseer"
+                "label": "Skink Starpriest or Skink Starseer or Favoured Spawning"
               },
               {
                 "min": 0,
@@ -200382,7 +200382,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any Skink"
+                "label": "Any non-Monster Skink"
               }
             ],
             "regimentOptionRules": [
@@ -200575,7 +200575,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any Skink"
+                "label": "Any non-Monster Skink"
               }
             ],
             "regimentOptionRules": [
@@ -200777,7 +200777,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any Skink"
+                "label": "Any non-Monster Skink"
               }
             ],
             "regimentOptionRules": [
@@ -200981,7 +200981,7 @@
                   "Skink Starpriest",
                   "Skink Starseer"
                 ],
-                "label": "Skink Starpriest or Skink Starseer"
+                "label": "Skink Starpriest or Skink Starseer or Favoured Spawning"
               },
               {
                 "min": 0,
@@ -201214,7 +201214,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any Skink"
+                "label": "Any non-Monster Skink"
               }
             ],
             "regimentOptionRules": [
@@ -204447,7 +204447,7 @@
                 "unit_names": [
                   "Skink Starpriest"
                 ],
-                "label": "Skink Starpriest"
+                "label": "Skink Starpriest or Favoured Spawning"
               },
               {
                 "min": 0,
@@ -220561,7 +220561,7 @@
                 "unit_names": [
                   "Eternus, Blade of the First Prince"
                 ],
-                "label": "Eternus, Blade of the First Prince"
+                "label": "Eternus, Blade of the First Prince or Ruinous Champion"
               },
               {
                 "min": 0,
@@ -226476,7 +226476,7 @@
                       "unit_names": [
                         "Eternus, Blade of the First Prince"
                       ],
-                      "label": "Eternus, Blade of the First Prince"
+                      "label": "Eternus, Blade of the First Prince or Ruinous Champion"
                     },
                     {
                       "min": 0,
@@ -271881,7 +271881,7 @@
                 ],
                 "subhero_categories": [],
                 "unit_names": [],
-                "label": "Any Sylvaneth"
+                "label": "Any non-Monster Sylvaneth"
               }
             ],
             "regimentOptionRules": [
@@ -278647,7 +278647,7 @@
                       ],
                       "subhero_categories": [],
                       "unit_names": [],
-                      "label": "Any Sylvaneth"
+                      "label": "Any non-Monster Sylvaneth"
                     }
                   ],
                   "regimentOptionRules": [
@@ -280432,7 +280432,7 @@
                       ],
                       "subhero_categories": [],
                       "unit_names": [],
-                      "label": "Any Sylvaneth"
+                      "label": "Any non-Monster Sylvaneth"
                     }
                   ],
                   "regimentOptionRules": [

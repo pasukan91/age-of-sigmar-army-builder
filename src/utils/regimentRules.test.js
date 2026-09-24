@@ -428,3 +428,68 @@ test("matches structured SigDex regiment options exactly", () => {
   assert.equal(doesUnitMatchRegimentOption(nonUniqueGargant, option), true);
   assert.equal(doesUnitMatchRegimentOption(uniqueGargant, option), false);
 });
+
+test("does not treat a generic structured unit option as permission to add heroes", () => {
+  const option = {
+    label: "Any Seraphon",
+    min: 0,
+    max: -1,
+    unit_names: [],
+    keywords: ["Seraphon"],
+    nonKeywords: [],
+    subhero_categories: [],
+  };
+  const ordinaryUnit = {
+    id: "saurus-warriors",
+    name: "Saurus Warriors",
+    keywords: ["Seraphon", "Infantry"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const heroUnit = {
+    id: "saurus-oldblood",
+    name: "Saurus Oldblood",
+    keywords: ["Seraphon", "Hero", "Saurus"],
+    rules: { hero: true },
+    details: { canJoinRegimentAs: [] },
+  };
+
+  assert.equal(doesUnitMatchRegimentOption(ordinaryUnit, option), true);
+  assert.equal(doesUnitMatchRegimentOption(heroUnit, option), false);
+});
+
+test("allows only explicitly named or categorised heroes in structured options", () => {
+  const option = {
+    label: "Eternus or Ruinous Champion",
+    min: 0,
+    max: 1,
+    unit_names: ["Eternus, Blade of the First Prince"],
+    keywords: [],
+    nonKeywords: [],
+    subhero_categories: ["Ruinous Champion"],
+  };
+  const eternus = {
+    id: "eternus",
+    name: "Eternus, Blade of the First Prince",
+    keywords: ["Hero"],
+    rules: { hero: true },
+    details: { canJoinRegimentAs: [] },
+  };
+  const champion = {
+    id: "chaos-lord",
+    name: "Chaos Lord",
+    keywords: ["Hero"],
+    rules: { hero: true },
+    details: { canJoinRegimentAs: ["Ruinous Champion"] },
+  };
+  const unrelatedHero = {
+    ...champion,
+    id: "sorcerer-lord",
+    name: "Chaos Sorcerer Lord",
+    details: { canJoinRegimentAs: [] },
+  };
+
+  assert.equal(doesUnitMatchRegimentOption(eternus, option), true);
+  assert.equal(doesUnitMatchRegimentOption(champion, option), true);
+  assert.equal(doesUnitMatchRegimentOption(unrelatedHero, option), false);
+});

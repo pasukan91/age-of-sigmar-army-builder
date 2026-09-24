@@ -97,12 +97,14 @@ function weaponProfiles(unit) {
 
 function regimentOptionText(option) {
   const names = option.unit_names ?? [];
-  if (names.length) return names.join(" or ");
-  const keywords = option.keywords ?? [];
   const roles = option.subhero_categories ?? [];
-  if (roles.length && !keywords.length) return roles.join(" or ");
-  if (keywords.length) return `Any ${keywords.join(" ")}`;
-  return "Any unit";
+  const namedOrRole = [...names, ...roles];
+  if (namedOrRole.length) return namedOrRole.join(" or ");
+  const keywords = option.keywords ?? [];
+  const exclusions = option.nonKeywords ?? [];
+  const exclusionText = exclusions.map((keyword) => `non-${keyword}`).join(" ");
+  const restriction = [exclusionText, ...keywords].filter(Boolean).join(" ");
+  return restriction ? `Any ${restriction}` : "Any unit";
 }
 
 function unit(item, factionId, imageIndex = new Map(), fallbackImage = `/images/factions/${factionId}.webp`) {
