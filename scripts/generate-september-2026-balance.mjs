@@ -100,8 +100,8 @@ for (const entry of changedProfiles) {
       name: target.name,
       points: points(row[2]),
       regimentOptions: String(row[3] ?? "")
-        .split(/,|\n/)
-        .map((item) => item.trim())
+        .split(/,/)
+        .map(normalized)
         .filter(Boolean),
       canJoinRegimentAs: note.match(/join an eligible regiment as (?:a|an) ([^.]+)\./i)?.[1]
         ? [slug(note.match(/join an eligible regiment as (?:a|an) ([^.]+)\./i)[1])]

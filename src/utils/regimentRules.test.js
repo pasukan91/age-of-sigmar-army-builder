@@ -376,3 +376,26 @@ test("excludes Legends units from matched-play leaders and regiment choices", ()
     []
   );
 });
+
+test("combines a non-keyword exclusion with a required keyword", () => {
+  const skinks = {
+    id: "skinks",
+    name: "Skinks",
+    keywords: ["Seraphon", "Skink", "Infantry"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const monsterSkink = {
+    ...skinks,
+    id: "monster-skink",
+    name: "Monster Skink",
+    keywords: ["Seraphon", "Skink", "Monster"],
+  };
+  const list = makeList(["Any non-Monster Skink"]);
+  list.faction.units = [skinks, monsterSkink];
+
+  assert.deepEqual(
+    getAvailableUnitsForRegiment(list, list.regiments[0]).map((unit) => unit.id),
+    ["skinks"]
+  );
+});

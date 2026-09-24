@@ -434,7 +434,7 @@
           "name": "Auric Runemaster",
           "points": 160,
           "regimentOptions": [
-            "0-1 Grimnir’s Chosen",
+            "0-1 Grimnir's Chosen",
             "Any Fyreslayers"
           ],
           "canJoinRegimentAs": null,
@@ -678,7 +678,7 @@
           "points": 330,
           "regimentOptions": [
             "0-1 Lumineth Paragon",
-            "Any Lumineth Realm‑lords"
+            "Any Lumineth Realm-lords"
           ],
           "canJoinRegimentAs": null,
           "canBeReinforced": false,
@@ -797,8 +797,7 @@
           "points": 140,
           "regimentOptions": [
             "0-1 Ydrilan Riverblades",
-            "Any Vanari",
-            "Auralan Wardens",
+            "Any Vanari Auralan Wardens",
             "Any Alarith"
           ],
           "canJoinRegimentAs": null,
@@ -887,8 +886,7 @@
           "points": 410,
           "regimentOptions": [
             "0-1 Skink Starpriest",
-            "Skink Starseer or",
-            "Favoured Spawning",
+            "Skink Starseer or Favoured Spawning",
             "Any Seraphon"
           ],
           "canJoinRegimentAs": null,
@@ -935,8 +933,7 @@
           "regimentOptions": [
             "0-1 Monster",
             "Any Beast",
-            "Any",
-            "Kroxigor",
+            "Any Kroxigor",
             "Any non-Monster Skink"
           ],
           "canJoinRegimentAs": null,
@@ -948,8 +945,7 @@
           "points": 260,
           "regimentOptions": [
             "0-1 Skink Starpriest",
-            "Skink Starseer or",
-            "Favoured Spawning",
+            "Skink Starseer or Favoured Spawning",
             "Any Seraphon"
           ],
           "canJoinRegimentAs": null,
@@ -1021,7 +1017,7 @@
           "name": "Knight-Arcanum",
           "points": 110,
           "regimentOptions": [
-            "0-1 Gryph‑hounds",
+            "0-1 Gryph-hounds",
             "Any Warrior Chamber"
           ],
           "canJoinRegimentAs": [
@@ -1058,7 +1054,7 @@
           "points": 100,
           "regimentOptions": [
             "0-1 Questor Soulsworn",
-            "0-1 Gryph‑hounds",
+            "0-1 Gryph-hounds",
             "Any Ruination Chamber"
           ],
           "canJoinRegimentAs": [
@@ -1071,7 +1067,7 @@
           "name": "Knight-Relictor",
           "points": 120,
           "regimentOptions": [
-            "0-1 Gryph‑hounds",
+            "0-1 Gryph-hounds",
             "Any Warrior Chamber"
           ],
           "canJoinRegimentAs": [
@@ -1084,7 +1080,7 @@
           "name": "Lord-Aquilor",
           "points": 140,
           "regimentOptions": [
-            "Any Gryph‑hounds",
+            "Any Gryph-hounds",
             "Any Vanguard Chamber"
           ],
           "canJoinRegimentAs": [
@@ -1098,7 +1094,7 @@
           "points": 100,
           "regimentOptions": [
             "0-1 Stormcast Exemplar",
-            "0-1 Gryph‑hounds",
+            "0-1 Gryph-hounds",
             "Any Warrior Chamber"
           ],
           "canJoinRegimentAs": [
@@ -1112,7 +1108,7 @@
           "points": 110,
           "regimentOptions": [
             "0-1 Stormcast Exemplar",
-            "0-1 Gryph‑hounds",
+            "0-1 Gryph-hounds",
             "Any Ruination Chamber",
             "Any Warrior Chamber"
           ],
@@ -2038,8 +2034,7 @@
           "points": 200,
           "regimentOptions": [
             "0-1 Ruinous Champion",
-            "Any Slaves to",
-            "Darkness"
+            "Any Slaves to Darkness"
           ],
           "canJoinRegimentAs": [
             "ruinous-champion"
@@ -2152,7 +2147,7 @@
           "points": 120,
           "regimentOptions": [
             "0-1 Royal Attendant",
-            "Any Flesh‑eater Courts"
+            "Any Flesh-eater Courts"
           ],
           "canJoinRegimentAs": [
             "royal-attendant"
@@ -2180,7 +2175,7 @@
           "points": 100,
           "regimentOptions": [
             "0-1 Royal Attendant",
-            "Any Flesh‑eater Courts"
+            "Any Flesh-eater Courts"
           ],
           "canJoinRegimentAs": [
             "royal-attendant"

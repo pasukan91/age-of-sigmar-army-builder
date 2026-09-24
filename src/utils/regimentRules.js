@@ -526,10 +526,10 @@ function optionMatchesNonHero(unit, option) {
 
 function matchesKeywordExpression(unit, option) {
   let expression = String(option).replace(/^any-/, "");
-  const excluded = [...expression.matchAll(/(?:^|-)non-([a-z0-9-]+)/g)]
-    .map((match) => match[1].split("-")[0]);
+  const excluded = [...expression.matchAll(/(?:^|-)non-([a-z0-9]+)/g)]
+    .map((match) => match[1]);
   if (excluded.some((keyword) => hasKeyword(unit, keyword))) return false;
-  expression = expression.replace(/(?:^|-)non-[a-z0-9-]+/g, "");
+  expression = expression.replace(/(?:^|-)non-[a-z0-9]+/g, "");
 
   const candidates = [
     normalizeOption(unit?.id),

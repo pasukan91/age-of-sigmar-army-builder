@@ -11,6 +11,7 @@
     "audit:unit-images": "node scripts/audit-unit-images.mjs",
     "audit:duplicates": "node scripts/audit-catalogue-duplicates.mjs",
     "sync:unit-images": "python scripts/download-unit-images.py",
+    "sync:catalogue-images": "python scripts/download-catalogue-images.py",
     "sync:manifestation-images": "python scripts/download-manifestation-images.py",
     "deploy:apache": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-apache.ps1 -Clean",
     "lint": "eslint .",

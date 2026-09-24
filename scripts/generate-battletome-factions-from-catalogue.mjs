@@ -268,8 +268,8 @@ function makeLores(faction, factionWarscrollIds, publicationId = null) {
     }
   }
   return {
-    spellLores,
-    prayerLores,
+    spellLores: [...new Map(spellLores.map((item) => [item.id, item])).values()],
+    prayerLores: [...new Map(prayerLores.map((item) => [item.id, item])).values()],
     manifestations: [...new Map(manifestations.map((item) => [item.sourceId, item])).values()],
     manifestationLores,
   };
