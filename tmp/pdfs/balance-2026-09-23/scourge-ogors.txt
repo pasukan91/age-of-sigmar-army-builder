@@ -1,0 +1,178 @@
+S
+COURGE AQSHY
+OF
+FACTION RULES:
+OGOR M AWTR IBES
+ARTEFACTS OF POWER
+You can pick an artefact from this table instead of from other Artefacts of Power tables available to this faction.
+PLUNDER OF THE MAWTRIBES (Hero only)
+Passive Passive Deployment Phase
+A CHOICE CUT: The sight of RUSTY GRATER: KEY TO THE LARDER:
+this colossal slab of meat being By attaching this crudely This ogor has promised their
+awkwardly hefted across the perforated metal sheet to their favoured warriors access to
+battlefield inspires nearby ogors favoured blade, this ogor is one of the legendary larders in
+to fight through the pain – the gifted a snack of shredded flesh the Great Gutfort – if they are
+quicker they flatten the foe, the when they wield their weapon suitably impressive in battle.
+quicker they can get to feasting. with enough ferocity.
+Declare: Pick a friendly
+Effect: Effect: Each time this unit uses Ogor Infantry unit on the
+• This unit cannot use the ‘Eruption of Fury’ ability, battlefield to be the target.
+Run abilities. after that ability has been
+• Ignore the first damage resolved, Heal (D3) this unit. Effect: For the rest of the battle,
+point that would be allocated ignore negative modifiers to hit
+to each friendly Ogor rolls and wound rolls for the
+Infantry unit each phase target’s combat attacks while
+while they are wholly within they are wholly within 12" of
+12" of and visible to this unit. and visible to this unit.
+MONSTROUS TRAITS
+Monstrous Traits are unique enhancements that can only be given to Monsters.
+A unit can only have 1 Monstrous Trait.
+WELL-FED BEASTS (Ogor Mawtribes Monster only)
+Passive Enemy Charge Phase
+EXTREMELY OBSTINATE: Once this beast GRUMPY ALPHA: Having established its
+has laid claim to something, there is no shifting it. dominance, this irascible beast can bring another
+member of the herd to its side with a single bellow.
+Effect: This unit has a Control characteristic of 15.
+Declare: If this unit is in combat, pick another
+visible friendly Ogor Monster wholly within 12"
+Any Combat Phase of this unit that is not in combat to be the target.
+HORN TOSS: Dipping its head against an
+onrushing foe, with an effortless flick of its horns, Effect: Spend 1 rage dice. If your opponent’s fury
+this beast sends its attacker flying into the air. level is lower than yours, they must increase their
+fury level by 1, to a maximum of 7.
+Declare: Pick an enemy unit that has no more than
+1 model, that is in combat with this unit and that Then, roll a dice. The target can move a distance
+has charged this turn to be the target. in inches up to the roll. It can end that move in
+combat. If it does so, the target has charged.
+Effect: Remove the target from the battlefield and
+Keywords Rampage
+set it up again within 1" of this unit. Then, roll a
+D3. On a 2+, inflict an amount of mortal damage
+on the target equal to the roll.
+Keywords Rampage
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+COURGE AQSHY
+OF
+MOVE
+• SCOURGE OF AQSHY WARSCROLL •
+10"
+H
+T S HUSK A R D
+L 14 4+ A
+A V
+E E ON THUNDERTUSK
+H
+10
+CONTROL RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Ice Blast
+12" 1 4+ 2+ 1 D3+2
+Companion
+Said to have been chosen Chaintrap
+by the Everwinter itself, a 12" 1 4+ 3+ 1 3
+Anti-Monster (+1 Rend)
+Huskard Torr always rides a
+Thundertusk, possessing a
+natural affinity with the ice- Harpoon Launcher 18" 1 4+ 3+ 1 D3
+wreathed beast. As they journey
+across the Great Parch, the pair
+Blood Vulture 24" 1 2+ 3+ - 1
+channel the magical blizzard
+to see the realm’s elemental
+fury quenched. MMEELLEEEE WWEEAAPPOONNSS AAttkk Hit WWnndd RRnndd Dmg
+PPuunncchheess aanndd KKiicckkss 3 4+ 2+ - 1
+ThThuunnddeerrttuusskk’’ss CCoolloossssaall TTuusskkss
+3 4+ 2+ 1 5
+Anti-Infantry ((++11 RReenndd)),, CCoommppaanniioonn
+This unit is armed with an Ice Blast, Punches and
+Kicks, Thundertusk’s Colossal Tusks, and 1 of the
+following options:
+• Chaintrap
+• Harpoon Launcher
+• Blood Vulture
+Passive
+BATTLE DAMAGED
+Effect: While this unit has 10 or more damage
+points, the Attacks characteristic of its
+Thundertusk’s Colossal Tusks is 2.
+Once Per Turn (Army), Start of Any Turn
+EVERWINTER’S IRE: As the Everwinter
+rages, the Huskard draws power from its
+icy embrace.
+Effect: For the rest of the turn:
+• While your opponent’s fury level is equal to
+or up to 2 levels below your fury level,add 1 to
+chanting rolls for this unit.
+• While your opponent’s fury level is 3 or more
+levels below your fury level, add 2 to chanting
+rolls for this unit.
+Once Per Turn (Army), End of Your Turn
+COOL TEMPERS: So bitterly cold is the aura
+that surrounds a Thundertusk that it can even
+extinguish the fires of rage that burn within those
+who fight in the Bright Realm.
+Effect: If this unit is wholly outside friendly
+territory and not in combat, your opponent
+must reduce their fury level by 1, to a minimum
+of 0.
+Keywords Rampage
+Hero, Monster, Priest (1)
+KEYWORDS
+Destruction, Ogor Mawtribes, Ogor, Beastclaw
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+S COURGE AQSHY COURGE OF AQSHY
+OF
+• SCOURGE OF AQSHY WARSCROLL •
+FROSTLOR D
+ON THUNDERTUSK
+MOVE
+10"
+H The frigid aura that emanates from a Thundertusk
+T S cannot be quelled even by the arid climes of the
+A L 15 4+ A V Aqshian deserts, and Frostlord warleaders who ride
+E E upon these mammoth-like mounts have a particular
+H
+10 connection to the eldritch Everwinter.
+CONTROL
+RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Ice Blast
+12" 1 4+ 2+ 1 D3+2
+Companion
+MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+Frost Spear
+4 4+ 2+ 2 2
+Charge (+1 Damage)
+Thundertusk’s
+Colossal Tusks
+3 4+ 2+ 1 5
+Anti-Infantry (+1 Rend),
+Companion
+Passive
+BATTLE DAMAGED
+Effect: While this unit has 10 or more damage points, the Attacks
+characteristic of its Thundertusk’s Colossal Tusks is 2.
+Once Per Turn (Army), Your Charge Phase
+SNOW PLOUGH: Thundertusks are massive creatures whose broad
+frames and long, scooping tusks allow them to crash through snow drifts
+and enemy formations with equal ease.
+Effect: This unit can use Charge abilities this turn even if it is in
+combat. If the charge roll is 2 or less when it does so, it does not count
+as having charged.
+Keywords Rampage
+Reaction: You declared the ‘Eruption of Fury’ ability for this unit
+COLD FURY: The elemental energies of the Everwinter and the Realm
+of Fire combine within the Thundertusk to explosive effect.
+Effect: When resolving attacks as part of that ability:
+• For each unmodified hit roll of 6, inflict an additional 3 mortal
+damage on each enemy unit in combat with this unit instead of D3.
+• For each unmodified hit roll of 1, allocate 1 mortal damage
+to this unit instead of D3 (ward rolls cannot be made for that
+damage point).
+Hero, Monster
+KEYWORDS
+Destruction, Ogor Mawtribes, Ogor,
+Beastclaw
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026

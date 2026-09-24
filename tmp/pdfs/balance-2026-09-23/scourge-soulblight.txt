@@ -1,0 +1,167 @@
+S
+COURGE AQSHY
+OF
+FACTION RULES:
+SOULBLIGHT GR AVELOR DS
+HEROIC TRAITS
+You can pick a heroic trait from this table instead of from other Heroic Traits tables available to this faction.
+THE CURSED BLOODLINES (Hero only)
+Passive Deployment Phase
+IMMORTAL EGO: Few mortals would claim ETERNAL THRALL: Such is this warlord’s
+to be the mightiest slayer in the Mortal Realms notoriety that they have acquired something of a
+or to have a peerless mastery of the blade, given cult following. One of their most ardent supporters
+the existence of gods, daemons, demigods and is renowned in their own right, and they bask in the
+more besides. This unliving paragon’s ego has no adulation of this follower the most.
+such frailties.
+Declare: Pick another friendly non-Unique
+Effect: Each phase, you can re-roll 1 hit roll, Soulblight Gravelords Infantry Hero to
+1 wound roll and 1 save roll for this unit. be the target.
+Effect: For the rest of the battle, while the target is
+Passive on the battlefield:
+FURIOUS ENDINGS: This being can harness • If this unit is a Necromancer, add 1 to this unit’s
+the power created when Shyishan and Aqshian power level.
+magics mingle, which often occurs when arcane • If this unit is a Vampire, add 1 to unbinding
+manifestations meet their end in the Bright Realm. rolls for this unit.
+• If this unit is Deathrattle, ignore the first
+Effect: Each time a Manifestation within 12" of damage point that would be allocated to this
+this unit is removed from play, gain 1 rage dice. unit in each phase.
+ORIGINS OF TERRIFYING FOLK TALES
+Origins of Terrifying Folk Tales are unique enhancements that can be given to non-Hero
+Soulblight Gravelords Infantry units. A unit can only have 1 Origin of Terrifying Folk Tales.
+Deployment Phase Any Hero Phase End of Any Turn
+THE EMPTY THE NEVER-DEAD: It is THE INCARNADINE
+GRAVEYARD: Folks tell of a said that there is a rampaging KILLERS: Beware the
+cemetery where the day after a band of warriors who yearn for Incarnadine Killers, for they are
+mass funeral, each newly filled the sweet release of death, but as cursed with an insatiable lust
+burial plot was found empty, punishment for transgressions for slaughter. Do not think that
+with footprints leading away past, Elder Bones refuses to let distance shall keep you safe;
+from them into the wilds… them die. should you spy their bloodied
+forms upon the horizon one
+Effect: Remove this unit Effect: Spend 1 rage dice. If moment, their blades will be
+from the battlefield and set it your opponent’s fury level is lodged in your throat the next.
+up again more than 9" from lower than yours, they must
+all enemy units and either increase their fury level by 1, to Effect: If this unit is not in
+wholly within 7" of a terrain a maximum of 7. combat and an enemy unit was
+feature or wholly within 7" of destroyed by its combat attacks
+the battlefield edge. This unit Then, for the rest of the this turn, this unit can move
+cannot use Move abilities turn, each time you make an up to D6". It can end that move
+in the first turn of the first unmodified save roll of 5+ for in combat.
+battle round. an attack that targets this unit,
+the attack fails and the attack
+sequence ends.
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+COURGE AQSHY
+OF
+6+
+MOVE
+• SCOURGE OF AQSHY WARSCROLL •
+12"
+H
+T S
+L 16 5+ A R EVENA NT DR ACONITH
+A V
+E E
+H
+5
+CONTROL RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Pestilential Miasma
+10" 5 3+ 3+ 1 2
+Shoot in Combat, Companion
+Rotted heirs of the godbeast MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+Dracothion, Revenant Draconith
+are the decaying corpses of Draconic Maw 3 4+ 2+ 2 3
+great drakes animated by Companion
+necromancy. With a deep-seated
+animosity for all living things, Draconic Claws 7 4+ 2+ 1 2
+they swoop down through the Companion
+Aqshian skies to disgorge their
+flesh-melting breath over the
+Passive Once Per Turn (Army), Any Combat Phase
+enemy, lashing out with raking
+talons in a hate-filled frenzy. BATTLE DAMAGED VOLATILE ANIMUS: The furious energies of Aqshy combine with the
+Effect: While this unit has 10 or forces animating the Revenant Draconith to make it highly unpredictable.
+more damage points, the Attacks
+Effect: Spend 1 rage dice. If your opponent’s fury level is lower than yours,
+characteristic of its Draconic
+they must increase their fury level by 1, to a maximum of 7. Then, pick 1 of
+Claws is 5.
+the following effects:
+Once Per Turn (Army), Retaliatory Posture: For the rest of the turn:
+Enemy Hero Phase • Ignore positive modifiers to hit rolls and wound rolls for attacks made by
+enemy units while they are in combat with this unit.
+BRIMMING WITH
+• Add 1 to save rolls for this unit.
+RANCOUR: The Revenant
+• Add 1 to hit rolls for this unit’s attacks, including attacks made with
+Draconith turns towards a foe, the
+Companion weapons, that target an enemy unit that used a Fight
+witchlights of its eyes flickering.
+ability this phase.
+Radiating pure malevolence, the
+enemy dares not approach its Unrelenting Ferocity: For the rest of the turn:
+mouldering form. • Ignore negative modifiers to hit rolls and wound rolls for this
+unit’s attacks.
+Declare: Pick a visible enemy unit
+• Add 1 to the Rend and Damage characteristics of this unit’s Companion
+to be the target.
+melee weapons for attacks that target an enemy unit that has not used a
+Effect: For the rest of the turn, the Fight ability this phase.
+target cannot end moves made
+as part of a non-Charge Move
+ability within X" of this unit,
+where X is equal to your current
+fury level.
+Keywords Rampage
+Monster, Fly, Ward (6+)
+KEYWORDS
+Death, Soulblight Gravelords
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+S COURGE AQSHY COURGE OF AQSHY
+OF
+• SCOURGE OF AQSHY WARSCROLL •
+VENGOR I A N LOR D
+6+
+MOVE
+10"
+H Such is the self-hatred felt by the Vengorian
+T S Lords that they cannot bear even to see their own
+A L 11 4+ A V reflections. Their forms twisted through exposure to
+E E unbound magics, these vampires traverse the Great
+H
+5 Parch, feasting messily on the living.
+CONTROL
+MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+Nightmare Sabre 4 3+ 3+ 1 2
+Gore-drenched Talons 3 3+ 2+ 3 3
+Passive
+NIGHTMARE’S MIASMA: The strange curse of the Vengorians
+sees shining blades and hallowed relics crumble and patinate in
+their presence.
+Effect: Subtract 1 from the Rend characteristic of melee weapons used
+by enemy units while they are in combat with this unit.
+Once Per Turn (Army), Any Combat Phase
+INDIGNANT OUTBURST: Filled with self-loathing and seething
+resentment, once the Vengorian Lord has a target for their simmering
+ire, they let their outrage boil over.
+Effect: If this unit is in combat, gain 1 rage dice.
+Once Per Turn (Army), Any Charge Phase
+FRENZIED SURGE: As the Vengorian Lord tears through the press
+of combat to sate their desperate hunger, nearby undead find themselves
+swept along by their rabidity.
+Declare: You can pick another visible friendly non-Hero
+Soulblight Gravelords Infantry or Monster unit wholly
+within 12" of this unit to be the target.
+Effect: This unit can move up to X", where X is your fury level. It must
+end that move in combat.
+Then, the target can move up to X", where X is your fury level. It can
+move through enemy models and the combat ranges of enemy units
+during that move but must end that move in combat with an enemy
+unit that this unit is in combat with.
+Hero, Monster, Wizard (1), Fly, Ward (6+)
+KEYWORDS
+Death, Soulblight Gravelords, Vampire
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026

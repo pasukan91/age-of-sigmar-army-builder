@@ -1,0 +1,115 @@
+SS
+CCOOUURRGGEE AAQQSSHHYY
+OOFF
+FACTION RULES:
+IDONETH DEEPKIN
+HEROIC TRAITS
+You can pick a heroic trait from this table instead of from other Heroic Traits tables available to this faction.
+CHAMPIONS OF THE TIDES (Hero only)
+Once Per Battle, Any Hero Phase Your Hero Phase
+ABYSSAL DWELLER: Hailing from the lightless depths, ADHERENT OF KIR-NADARR:
+this champion can manipulate the ethersea so as to plunge areas This Idoneth has embraced the bellicose
+into total darkness. Way of the Storm, and so too do their
+warriors seek to embody the surging
+Declare: Pick an objective within 18" of this unit to be
+force of destruction.
+the target.
+Declare: Pick a visible enemy unit
+Effect: For the rest of the battle, while enemy units are
+within 12" of this unit to be the target.
+contesting the target objective, those units cannot use Run,
+Retreat or Charge abilities. Effect: You can spend 1 rage dice. If
+you do:
+• Apply the effect below.
+End of Your Turn
+• If your opponent’s fury level is lower
+CURSED LINEAGE: This Idoneth channels the profound
+than yours, they must increase their
+despair once felt by the Cythai and reflects it back at the foe,
+fury level by 1, to a maximum of 7.
+causing soul-deep wounds.
+Otherwise, roll a dice. On a 3+, apply
+Declare: Pick a visible enemy unit within 12" of this unit to be the effect below.
+the target.
+For the rest of the turn, ignore negative
+Effect: Roll a number of dice equal to your opponent’s fury modifiers to hit rolls and wound rolls
+level. For each 3+, inflict 1 mortal damage on the target. for combat attacks made by friendly
+Idoneth Deepkin units that target
+that enemy unit.
+ETHERSEA COMPANIONS
+Ethersea Companions are unique enhancements that can be given to non-Hero Idoneth Deepkin units.
+A unit can only have 1 Ethersea Companion.
+Passive Any Charge Phase
+IRONSHELL BARNACLES: Attaching AQSHIAN SEA NETTLES: Floating around
+themselves to hides and armour, the extra durability their owners, these jellyfish instinctively lash out at
+granted by these crustaceans is welcomed. nearby foes, causing panic and confusion.
+Effect: Declare: Pick an enemy unit in combat with this
+• If this unit is Infantry, subtract 1 from the unit and that charged this turn to be the target.
+Damage characteristic of weapons used for
+Effect: Spend 1 rage dice. If your opponent’s fury
+attacks that target it.
+level is lower than yours, they must increase their
+• If this unit is Cavalry, subtract 1 from the
+fury level by 1, to a maximum of 7.
+Rend characteristic of weapons used for attacks
+that target it. Then, for the rest of the turn:
+• If this unit is a Monster, ignore negative • Other enemy units cannot use Fight abilities if
+modifiers to run rolls and charge rolls for it. the target is eligible to be picked.
+• If possible, this unit must be picked to be the
+Your Movement Phase target of pile-in moves made by the target.
+STONEFOOT ANEMONE: The toxins in this • All attacks made by models in the target unit
+creature’s sting render foes briefly immobile. within this unit’s combat range must target
+this unit.
+Declare: Pick a visible enemy unit within 12" of
+this unit to be the target. Designer’s Note: This ability does not override the
+Strike-first or Strike-last constraints.
+Effect: Roll a dice. On a 3+, the target cannot use
+Move abilities for the rest of the turn.
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+S COURGE AQSHY COURGE OF AQSHY
+OF
+• SCOURGE OF AQSHY WARSCROLL • • SCOURGE OF AQSHY WARSCROLL •
+ISH A R A NN TIDECASTER NA M A RTI R EAVERS
+MOVE MOVE
+6" 7"
+H True masters of the ethersea, Isharann Tidecasters H Fast‑moving scouts and archers, the eyeless Namarti
+T S can manipulate this eldritch ocean to protect their T S
+A L E 5 5+ E A V a S l e l a ie t s o a t n h d e d C e h s a t r r r o w y i t n h d e i C r o fo a e s s t, . e Th ns e u y r b in ri g n i g t t is h e th S e e y a w ri h n o g A L E 1 5+ E A V wh R is e p a e v r e b r o s w a s r e u a p s o u n n t c h a e n s n co il r y c a h c e c d u e r a a r te th w o i f t h th t e h e G i r r e at
+H H Parch as they are beneath the waves.
+2 control the ebb and flow of battle. 1
+CONTROL CONTROL
+MELEE WEAPONS Atk Hit Wnd Rnd Dmg RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Whisperbow
+Pelagic Staff 4 3+ 4+ 1 D3 12" 2 3+ 4+ 1 1
+Crit (Auto-wound)
+MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+Once Per Turn (Army), Your Hero Phase
+Keening Blade 1 3+ 4+ - 1
+MASTER OF THE ETHERSEA: The Tidecaster channels and
+manipulates the deep-sea magic of the ethersea in order to empower
+and defend their kin. Once Per Turn (Army), Reaction: You declared a Shoot ability for
+Declare: Pick a visible friendly Idoneth Deepkin unit wholly this unit
+within 12" of this unit to be the target. MERCILESS HUNTERS: Namarti Reavers can fire arrows with
+such accuracy as to impair any defence, no matter how strong.
+Effect: If the target is Namarti, pick 1 of the following effects to
+apply until the start of your next turn. Otherwise, make an Isharann Effect: After that Shoot ability has been resolved, if all of this unit’s
+ritual roll of D6. On a 3+, pick 1 of the following effects to apply until attacks targeted the same enemy unit and any models in that unit were
+the start of your next turn. slain, pick 1 of the effects below to apply for the rest of the turn.
+If all of this unit’s attacks targeted the same enemy unit and no
+Torrent of Blows: Pick 1 of the target’s melee weapons. That weapon
+models in that unit were slain, roll a dice. On a 3+, pick 1 of the effects
+has Crit (2 Hits).
+below to apply for the rest of the turn:
+Protection of the Waves: While this unit is within 3" of and visible to
+• Subtract 1 from ward rolls for the target.
+the target, both units have Ward (5+).
+• Ignore positive modifiers to save rolls for the target.
+Frenzy of the Ethersea: For each unmodified hit roll of 1 for a combat
+attack that targets that friendly unit, inflict 1 mortal damage on the
+attacking unit after the Fight ability has been resolved.
+Hero, Wizard (1), Infantry Infantry, Champion
+KEYWORDS KEYWORDS
+Order, Idoneth Deepkin, Aelf, Isharann Order, Idoneth Deepkin, Aelf, Namarti
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026

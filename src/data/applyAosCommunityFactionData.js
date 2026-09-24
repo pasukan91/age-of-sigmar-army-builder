@@ -1,4 +1,5 @@
 import catalogue from "./aosCommunityAllFactions.generated.json" with { type: "json" };
+import { applySeptember2026Balance } from "./applySeptember2026Balance";
 
 const AUTHORITATIVE_FIELDS = [
   "battleTraits",
@@ -46,7 +47,9 @@ const factionsByName = new Map(
 
 export function applyAosCommunityFactionData(faction) {
   const sourceName = faction?.catalogueFactionName ?? faction?.name;
-  const source = factionsByName.get(normalizedName(sourceName));
+  const source = applySeptember2026Balance(
+    factionsByName.get(normalizedName(sourceName))
+  );
   if (!source) return faction;
 
   const result = { ...faction };
@@ -62,6 +65,7 @@ export function applyAosCommunityFactionData(faction) {
     ...result,
     name: source.name,
     sourcePublication: source.sourcePublication,
+    balancePublicationDate: source.balancePublicationDate,
     image: localImage(faction.image) ?? localizeImage(source.image),
     catalogueDataVersion: catalogue.metadata.dataVersion,
   };
@@ -77,7 +81,7 @@ function mergeCollection(current = [], authoritative = []) {
       return source.details
         ? {
             ...source,
-            details: { ...source.details, canJoinRegimentAs: [] },
+            details: { ...source.details },
           }
         : source;
     }
@@ -96,8 +100,9 @@ function mergeCollection(current = [], authoritative = []) {
       merged.details = {
         ...existing.details,
         ...source.details,
-        canJoinRegimentAs:
-          existing.details?.canJoinRegimentAs ?? source.details.canJoinRegimentAs,
+        canJoinRegimentAs: source.balanceSource
+          ? source.details.canJoinRegimentAs
+          : existing.details?.canJoinRegimentAs ?? source.details.canJoinRegimentAs,
       };
     }
 

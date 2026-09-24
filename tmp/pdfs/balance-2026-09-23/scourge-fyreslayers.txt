@@ -1,0 +1,187 @@
+S
+COURGE AQSHY
+OF
+FACTION RULES: FYR ESLAYERS
+MARKS OF VULCATRIX
+Marks of Vulcatrix are unique enhancements that can be given to Magmadroths.
+A unit can only have 1 Mark of Vulcatrix.
+Passive Any Shooting Phase
+THICKENED SCALES: This beast’s hide is so tough INTENSE FYRESTREAM: The
+that blades bend upon contact and ordinary missiles simply potency of this beast’s scalding breath is
+bounce off it. incomparable, melting both nearby and
+distant foes into blackened slurry.
+Effect: Subtract 1 from the Rend characteristic of weapons
+used for attacks that target this unit. Effect: Spend 1 rage dice. If your
+opponent’s fury level is lower than yours,
+Reaction: You declared a Fight ability for this unit they must increase their fury level by 1,
+to a maximum of 7. Then, for the rest of
+AUREATE HIDE: This Magmadroth is revered by the
+the turn:
+Zharrgrim priesthood for its glittering scales, which evoke
+• Add X" to the Range characteristic and X
+the divine essence of Grimnir.
+to the Attacks characteristic of this unit’s
+Effect: After that Fight ability has been resolved, if any Companion ranged weapons, where X is
+enemy models were slain by that Fight ability, you can equal to your fury level.
+pick a visible friendly Fyreslayers Priest wholly • This unit’s Companion ranged weapons
+within 12" of this unit. Give that Priest D3 ritual points. have Shoot in Combat.
+PRAYER LORE
+VULKYN GIFTS
+Your Hero Phase 3 Your Hero Phase 4
+ICHOR OF THE FURY OF VULCATRIX: Eyes blazing white-hot, the
+UR‑SALAMANDER: The priest priest fills their allies with the rage of the Ur-Salamander.
+blesses the warriors’ blood with the
+Declare: Pick a friendly Fyreslayers Priest to chant this
+legendary lethality of Vulcatrix herself.
+prayer, pick a visible friendly Fyreslayers unit wholly
+Declare: Pick a friendly Fyreslayers within 12" of them to be the target, then make a chanting roll
+Priest to chant this prayer, pick a of D6.
+visible friendly Fyreslayers unit
+Effect: Add 1 to hit rolls for the target’s combat attacks,
+wholly within 12" of them to be the
+including those made with Companion weapons, until the
+target, then make a chanting roll of D6.
+start of your next turn.
+Effect: If the chanting roll was 6+, you
+In addition, if the chanting roll was 8+, add 1 to the Attacks
+can pick another eligible unit to be a
+characteristic of the target’s melee weapons, including
+second target. Until the start of your
+Companion weapons, until the start of your next turn.
+next turn:
+• If the target is a Magmadroth, Keywords Prayer
+each time its ‘Volcanic Blood’ ability
+would inflict 1 mortal damage on Your Hero Phase 5
+an enemy unit, inflict D3 mortal
+damage instead. BLAZING IMPETUS: The priest bellows a prayer, sparks
+• If the target is a non‑Magmadroth fly from their mouth and nearby Fyreslayers leap into battle.
+unit, each time you make an Declare: Pick a friendly Fyreslayers Priest to chant this
+unmodified save roll of 1 for a prayer, pick a visible friendly Fyreslayers unit that was not
+combat attack that targets that set up this turn and that is wholly within 12" of them to be the
+unit, inflict 1 mortal damage on the target, then make a chanting roll of D6.
+attacking unit after the Fight ability
+has been resolved. Effect: If the chanting roll was 10+, you can pick another
+eligible unit to be a second target. Each target can use
+Keywords Prayer, Unlimited the ‘Normal Move’ or ‘Retreat’ ability as if it were your
+movement phase.
+Keywords Prayer
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+COURGE AQSHY
+OF
+6+
+MOVE
+• SCOURGE OF AQSHY WARSCROLL •
+10"
+H
+T S AUR IC RUNESON
+L 14 4+ A
+A V
+E E ON MAGMADROTH
+H
+5
+CONTROL RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Roaring Fyrestream
+10" 4 3+ 3+ 1 D3
+Anti-Infantry (+1 Rend), Companion
+Heirs to the throne of their MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+lodge, Auric Runesons are
+fearless duardin warriors who Ancestral Weapons 5 3+ 3+ 1 2
+hunger for glory. Many of them Anti-Monster (+1 Rend)
+are borne to battle by flame-
+spewing Magmadroths, giant Magmadroth’s Claws and Horns 6 4+ 2+ 1 2
+reptiles that are quite at home Companion
+among Aqshy’s volcanic peaks
+Magmadroth’s Blazing Maw
+and lava plains. 2 4+ 2+ 2 3
+Companion
+Passive Deployment Phase Passive
+VOLCANIC BLOOD: Born FIRE, BLOOD AND BATTLE DAMAGED
+of fire and flame, Magmadroths VENGEANCE: Should their sire Effect: While this unit has 10 or
+pulse with the throbbing heat of the be imperilled, an Auric Runeson more damage points, the Attacks
+volcanic caverns in which they make will fly into a berserk rage. Their characteristic of its Magmadroth’s
+their fyrenests. mount echoes their fury, for the Claws and Horns is 4.
+Magmadroth’s own progenitor is
+Effect: Each time you make an likely to be in just as much danger.
+unmodified save roll of 1 for a
+combat attack that targets this Declare: Pick a friendly Auric
+unit, inflict 1 mortal damage on Runefather on Magmadroth on
+the attacking unit after the Fight the battlefield to be the target.
+ability has been resolved.
+Effect: Add 1 to the Damage
+characteristic of this unit’s melee
+Once Per Turn (Army), weapons, including Companion
+Any Combat Phase weapons, while the target is in
+SEEING RED: As it reaches combat, damaged or destroyed.
+boiling point, the hot-blooded
+Magmadroth lets loose a furious
+bellow that serves either as a
+precursor to a violent rampage
+or as a means to therapeutically
+vent its rage.
+Effect: Spend 1 rage dice. If
+your opponent’s fury level is
+lower than yours, they must
+increase their fury level by 1, to a
+maximum of 7. Then, pick 1 of the
+following effects:
+Channelled Ire: Add 1 to the
+Attacks characteristic of this unit’s
+Companion melee weapons for the
+rest of the turn.
+Cathartic Release: Roll a number
+of dice equal to your fury level. For
+each 4+, Heal (1) this unit.
+Shield of Anger: This unit has
+Ward (5+) for the rest of the turn.
+Keywords Rampage
+Hero, Monster, Ward (6+)
+KEYWORDS
+Order, Fyreslayers, Duardin, Magmadroth
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+S COURGE AQSHY COURGE OF AQSHY
+OF
+• SCOURGE OF AQSHY WARSCROLL •
+V ULK Y N FLA MESEEK ERS
+6+
+MOVE
+4"
+H Vulkyn Flameseekers are beast-taming Fyreslayers
+T S who seek out Magmadroth eggs with pertinacity. It is
+A L 2 5+ A V no surprise that their quest has brought the duardin
+E E to the Realm of Fire, for the spawn of Vulcatrix are
+H
+1 well suited to its magmatic environments.
+CONTROL
+MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+Vulkyn Weapons
+3 3+ 3+ 1 1
+Anti-Monster (+1 Rend)
+Emberteeth
+1 3+ 3+ - 2
+Crit (Mortal), Companion
+Each model in this unit is armed with Vulkyn Weapons.
+• 1/9 models is a Kyndledroth and must replace their weapons
+with Emberteeth.
+• The champion is a Vulkyn Runefather and cannot replace
+their weapons.
+Once Per Turn (Army), Your Hero Phase
+FIERY DISPOSITION: By channelling the volatile spirit of the
+Magmadroths they so venerate, the Flameseekers are imbued with a
+portion of Vulcatrix’s power.
+Effect: Spend 1 rage dice. If your opponent’s fury level is lower than
+yours, they must increase their fury level by 1, to a maximum of 7.
+Then, pick 1 of the following effects to apply until the start of your
+next turn, where X is equal to your fury level.
+Vigour of the Ur-Salamander: Add X" to this unit’s
+Move characteristic.
+Fiery Determination: Add X to this unit’s control score.
+Kyndlewrath: Add X to the Attacks characteristic of this
+unit’s Emberteeth.
+Infantry, Champion (1/9), Ward (6+)
+KEYWORDS
+Order, Fyreslayers, Duardin
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026

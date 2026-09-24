@@ -29,6 +29,9 @@ const TARGETS = [
   { id: "kharadron", alliance: "order", name: "Kharadron Overlords", publication: "Order Battletome: Kharadron Overlords" },
   { id: "nighthaunt", alliance: "death", name: "Nighthaunt", publication: "Death Battletome: Nighthaunt" },
   { id: "flesheater", alliance: "death", name: "Flesh-eater Courts", publication: "Death Battletome: Flesh-eater Courts" },
+  { id: "seraphon", alliance: "order", name: "Seraphon", publication: "Faction Pack: Seraphon" },
+  { id: "fyreslayers", alliance: "order", name: "Fyreslayers", publication: "Faction Pack: Fyreslayers" },
+  { id: "behemat", alliance: "destruction", name: "Sons of Behemat", publication: "Faction Pack: Sons of Behemat" },
 ];
 
 const catalogue = JSON.parse(readFileSync(cataloguePath, "utf8"));
@@ -380,6 +383,7 @@ function makeFaction(config) {
     battleFormations,
     heroicTraits: makeEnhancementGroups(publication.id, "heroicTraits"),
     artefacts: makeEnhancementGroups(publication.id, "artefactsOfPower"),
+    aqshyHeroicTraits,
     aqshyArtefacts,
     aqshyEnhancements,
     spellLores: lores.spellLores,

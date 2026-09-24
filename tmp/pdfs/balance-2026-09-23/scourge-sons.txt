@@ -1,0 +1,161 @@
+S
+COURGE AQSHY
+OF
+FACTION RULES:
+SONS OF BEHEM AT
+CRACKED HEELS
+Cracked Heels are unique enhancements that can be given to Mancrusher Gargants.
+A unit can only have 1 Cracked Heel.
+Your Hero Phase Passive
+THAT BOY’S NOT RIGHT: This gargant is UP FOR IT: This gargant is loud, rowdy and
+just plain barmy. They bellow at rocks, flap their absolutely ready to dish out some serious damage.
+arms like a bird and do weird little dances, all to the
+amusement of their bigger cousins. When the spirit Effect: This unit’s melee weapons have
+of Behemat appears to answer such seemingly inane Charge (+1 Damage).
+antics, that laughter is usually cut short.
+Effect: Roll a dice. On a 5+, this unit can use a Passive
+Prayer ability from the prayer lore you picked ALWAYS ON GUARD: This gargant is
+during army composition as if it had Priest (1). especially wary around their biggers and betters,
+Instead of making a chanting roll for that prayer, for they are always expecting a quick clip on the ear
+the chanting roll is 5 and cannot be modified. from their surly bosses.
+Effect: This unit has Ward (5+) while it is wholly
+within 12" of and visible to a friendly Big unit.
+PRAYER LORE
+BRODD’S BELLOWS
+Your Hero Phase 3 Your Hero Phase 4 Your Hero Phase 5
+ROCK BOTTOM: The THE TERRIBLE TOES: VOCAL TECTONICS:
+priest dulls the gargants’ already Yelling incomprehensibly, the As the priest hums a single,
+monumentally low intelligence, priest jumps up and down. low note, the earth shakes and
+turning them into primal beasts Nearby, enemies are squashed buckles around them, staggering
+that cannot feel pain. flat by invisible forces that leave nearby enemies.
+massive footprints in the ground.
+Declare: Pick a friendly Sons Declare: Pick a friendly Sons
+of Behemat Priest to chant Declare: Pick a friendly Sons of Behemat Priest to chant
+this prayer, pick a visible of Behemat Priest to chant this prayer, pick a visible enemy
+friendly Sons of Behemat this prayer, pick a visible enemy unit within 12" of them to be
+unit wholly within 12" of them unit within 18" of them to be the target, then make a chanting
+to be the target, then make a the target, then make a chanting roll of D6.
+chanting roll of D6. roll of D6.
+Effect: If the chanting roll
+Effect: If the chanting roll was Effect: Roll a dice for each was 10+, you can pick another
+6+, you can pick another eligible model in the target unit. If the eligible unit to be a second
+unit to be a second target. Until chanting roll was 8+, add 1 to target. Until the start of
+the start of your next turn: the roll. For each 6+, inflict 1 your next turn, each target
+mortal damage on the target. has Strike-last.
+• Ignore the effects of the Then, if any enemy models are
+Keywords Prayer
+‘Battle Damaged’ ability on slain by this ability, halve the
+each target. target’s Move characteristic
+• Each target has Ward (6+). until the start of your next turn.
+Keywords Prayer, Unlimited Keywords Prayer
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+COURGE AQSHY
+OF
+MOVE
+• SCOURGE OF AQSHY WARSCROLL •
+10"
+H
+T S GATEBR EA K ER
+L 25 4+ A
+A V
+E E MEGA‑GARGANT
+H
+10
+CONTROL RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Hurled Boulder 18" 1 3+ 2+ 2 4
+Already prone to rage-filled MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+outbursts at the sight of any
+trappings of civilisation, the Fortcrusha Flail: Calamitous Sweep 16 3+ 3+ 1 1
+furious spirit of Aqshy sees the Crit (Auto-wound)
+Gatebreakers become even more
+unrestrainedly destructive. Fortcrusha Flail: Crushing Blow 6 4+ 2+ 2 4
+There is no stronghold, no hovel,
+no intentional pile of stones that
+will not draw their terrific ire. Almighty Stomp 3 4+ 2+ 2 D3
+Passive Once Per Battle (Army),
+Your Hero Phase
+BATTLE DAMAGED
+Effect: While this unit has 15 or IT’S GOIN’ DOWN: Narrowing
+more damage points, the Attacks their eyes at a particularly
+characteristic of its Fortcrusha bothersome example of a pipsqueak
+Flail is 11 for Calamitous Sweep construction, the Gatebreaker
+and 4 for Crushing Blow. cracks their neck, rolls their
+shoulders, tucks a giant boulder
+under their arm and takes off
+Passive running towards it.
+FORTCRUSHA FLAIL: The
+Effect: Until the start of your
+immense weapons wielded by
+next turn:
+Mega-Gargants can be brought
+down for an obliteratingly heavy • This unit has a Move
+strike or swept through enemy ranks characteristic of 4D6".
+like a battering ram. • While this unit is within 1" of
+a terrain feature, the Attacks
+Effect: Each time this unit uses
+characteristic of its Hurled
+a Fight ability, pick either the
+Boulder is D6 instead of 1.
+Calamitous Sweep or Crushing
+Blow weapon characteristics for
+all the attacks it makes with its
+Fortcrusha Flail.
+Once Per Turn (Army),
+Your Movement Phase
+OFF IN A HUFF: In a fit of pique,
+the Gatebreaker storms off, showing
+wanton disregard for anything that
+might happen to be in their path.
+Effect: You and your opponent
+must roll off. Each player adds
+their fury level to their roll. Then,
+this unit can move a distance up
+to its Move characteristic. It can
+move through the combat ranges of
+enemy units, but it cannot end that
+move in combat unless you won
+the roll-off.
+Keywords Core, Move
+Hero, Monster
+KEYWORDS
+Destruction, Sons of Behemat, Big
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026
+
+S
+S COURGE AQSHY COURGE OF AQSHY
+OF
+• SCOURGE OF AQSHY WARSCROLL •
+M A NCRUSHER GA RGA NT
+MOVE
+8"
+H Inspired to violence by their towering Mega-Gargant
+T S brethren, the Great Parch echoes to the tread of
+A L 12 5+ A V Mancrusher Gargants stomping into the fray.
+E E Hurling rocks and walloping pipsqueaks, they cause
+H
+10 utter havoc among the enemy lines.
+CONTROL
+RANGED WEAPONS Rng Atk Hit Wnd Rnd Dmg
+Throwin’ Rocks 12" 1 5+ 2+ 2 D3
+MELEE WEAPONS Atk Hit Wnd Rnd Dmg
+Massive Club 4 4+ 2+ 1 2
+’Eadbutt 1 4+ 2+ 2 4
+Mighty Kick 1 4+ 2+ 2 D3
+Once Per Turn (Army), Your Shooting Phase
+STATUE TOSSING: When throwing rocks gets a bit monotonous,
+Mancrushers seek out weighty sculptures to lob at the enemy instead –
+turns out smashing the foe with their own statuary is a great way to let
+off steam.
+Effect: For the rest of the turn, the Damage characteristic of this unit’s
+Throwin’ Rocks is 3 instead of D3.
+Then, you can spend up to 3 rage dice. If you do:
+• For each rage dice spent, add 2 to the Attacks characteristic of this
+unit’s Throwin’ Rocks for the rest of the turn.
+• If your opponent’s fury level is lower than yours, they must increase
+their fury level by 1, to a maximum of 7.
+Monster
+KEYWORDS
+Destruction, Sons of Behemat, Little
+Permission to download/print for personal use only. © Copyright Games Workshop Limited 2026

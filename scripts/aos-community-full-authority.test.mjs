@@ -19,14 +19,19 @@ test("the bot is authoritative for every active faction and reference collection
 
   try {
     const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
+    const { applySeptember2026Balance } = await server.ssrLoadModule(
+      "/src/data/applySeptember2026Balance.js"
+    );
     assert.equal(catalogue.metadata.dataVersion, 476);
-    assert.equal(catalogue.factions.length, 22);
+    assert.equal(catalogue.factions.length, 25);
     assert.equal(regiments.regiments.length, 76);
 
-    for (const source of catalogue.factions) {
+    for (const rawSource of catalogue.factions) {
+      const source = applySeptember2026Balance(rawSource);
       const faction = factions.find((item) => item.id === source.id);
       assert.ok(faction, source.name);
       assert.equal(faction.catalogueDataVersion, 476, source.name);
+      assert.equal(faction.balancePublicationDate, "2026-09-23", source.name);
       for (const field of [
         "monsterTraits",
         "allConsumingObsessions",

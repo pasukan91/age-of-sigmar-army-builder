@@ -91,7 +91,13 @@ export function calculateArmyPoints(list) {
       )
     : 0;
 
-  return regimentsPoints + armyOptionsPoints + renownPoints;
+  const auxiliaries = Array.isArray(list.auxiliaries) ? list.auxiliaries : [];
+  const auxiliaryPoints = auxiliaries.reduce(
+    (total, unit, index) => total + getUnitPoints(unit) + index * 20,
+    0
+  );
+
+  return regimentsPoints + armyOptionsPoints + renownPoints + auxiliaryPoints;
 }
 
 export function hasExceededPointsLimit(list) {

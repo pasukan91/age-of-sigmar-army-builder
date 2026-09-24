@@ -1,0 +1,3144 @@
+{
+  "metadata": {
+    "source": "https://www.warhammer-community.com/en-gb/downloads/warhammer-age-of-sigmar/",
+    "publicationDate": "2026-09-23",
+    "document": "Battle Profiles - September 2026"
+  },
+  "factions": {
+    "cities": {
+      "units": {
+        "alchemite-warforger": {
+          "name": "Alchemite Warforger",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Sigmarite War Machine",
+            "Any Sigmarite Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "thaumaturgical-specialist"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "amethyst-knellmage": {
+          "name": "Amethyst Knellmage",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Sigmarite War Machine",
+            "Any Sigmarite Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "thaumaturgical-specialist"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "aqshian-pyrocaster": {
+          "name": "Aqshian Pyrocaster",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Sigmarite War Machine",
+            "Any Sigmarite Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "thaumaturgical-specialist"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "battlemage": {
+          "name": "Battlemage",
+          "points": 100,
+          "regimentOptions": [
+            "Any Sigmarite Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "thaumaturgical-specialist"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "cannonade-cogfort": {
+          "name": "Cannonade Cogfort",
+          "points": 530,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite",
+            "Any Allies of the Free Cities"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "conqueror-cogfort": {
+          "name": "Conqueror Cogfort",
+          "points": 420,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite",
+            "Any Allies of the Free Cities"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "erasmus-zonn-the-enlightened-one": {
+          "name": "Erasmus Zonn, the Enlightened One",
+          "points": 160,
+          "regimentOptions": [
+            "Any Sigmarite"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "freeguild-cavalier-marshal": {
+          "name": "Freeguild Cavalier-Marshal",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite",
+            "Any Allies of the Free Cities"
+          ],
+          "canJoinRegimentAs": [
+            "freeguild-veteran"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "freeguild-marshal-and-relic-envoy": {
+          "name": "Freeguild Marshal and Relic Envoy",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite",
+            "Any Allies of the Free Cities"
+          ],
+          "canJoinRegimentAs": [
+            "freeguild-veteran"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "freeguild-marshal-on-griffon": {
+          "name": "Freeguild Marshal on Griffon",
+          "points": 230,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "fusil-major-on-ogor-warhulk": {
+          "name": "Fusil-Major on Ogor Warhulk",
+          "points": 160,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite",
+            "Any Allies of the Free Cities"
+          ],
+          "canJoinRegimentAs": [
+            "freeguild-veteran"
+          ],
+          "canBeReinforced": false,
+          "page": 3
+        },
+        "jorvan-kreel-heir-of-the-kraken": {
+          "name": "Jorvan Kreel, Heir of the Kraken",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite"
+          ],
+          "canJoinRegimentAs": [
+            "freeguild-veteran"
+          ],
+          "canBeReinforced": false,
+          "page": 4
+        },
+        "mallus-forgepriest": {
+          "name": "Mallus Forgepriest",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Sigmarite War Machine",
+            "Any Sigmarite Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "thaumaturgical-specialist"
+          ],
+          "canBeReinforced": false,
+          "page": 4
+        },
+        "pontifex-zenestra-matriarch-of-the-great-wheel": {
+          "name": "Pontifex Zenestra, Matriarch of the Great Wheel",
+          "points": 170,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 4
+        },
+        "tahlia-vedra-lioness-of-the-parch": {
+          "name": "Tahlia Vedra, Lioness of the Parch",
+          "points": 340,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 4
+        },
+        "scourge-of-aqshy-pontifex-zenestra-matriarch-of-the-great-wheel": {
+          "name": "Scourge of Aqshy: Pontifex Zenestra, Matriarch of the Great Wheel",
+          "points": 160,
+          "regimentOptions": [
+            "0-1 Freeguild Veteran",
+            "0-1 Thaumaturgical Specialist",
+            "Any Sigmarite"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 4
+        },
+        "scourge-of-aqshy-alchemite-warforger": {
+          "name": "Scourge of Aqshy: Alchemite Warforger",
+          "points": 90,
+          "regimentOptions": [
+            "0-1 Sigmarite War Machine",
+            "Any Sigmarite Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "thaumaturgical-specialist"
+          ],
+          "canBeReinforced": false,
+          "page": 4
+        },
+        "freeguild-cavaliers": {
+          "name": "Freeguild Cavaliers",
+          "points": 180,
+          "regimentOptions": [
+            "Sigmarite",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 5
+        },
+        "freeguild-gallants": {
+          "name": "Freeguild Gallants",
+          "points": 110,
+          "regimentOptions": [
+            "Sigmarite",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 6
+        },
+        "freeguild-grenadiers": {
+          "name": "Freeguild Grenadiers",
+          "points": 140,
+          "regimentOptions": [
+            "Sigmarite",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 6
+        },
+        "freeguild-steelhelms": {
+          "name": "Freeguild Steelhelms",
+          "points": 110,
+          "regimentOptions": [
+            "Sigmarite",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 6
+        },
+        "wildercorps-hunters": {
+          "name": "Wildercorps Hunters",
+          "points": 120,
+          "regimentOptions": [
+            "Sigmarite",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 6
+        }
+      },
+      "collections": {
+        "artefacts:the-last-blade-of-embergard": {
+          "field": "artefacts",
+          "id": "the-last-blade-of-embergard",
+          "name": "The Last Blade of Embergard",
+          "points": 10,
+          "page": 7
+        }
+      }
+    },
+    "daughters": {
+      "units": {
+        "hag-queen": {
+          "name": "Hag Queen",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Coven Matriarch",
+            "Any Aelf"
+          ],
+          "canJoinRegimentAs": [
+            "coven-matriarch"
+          ],
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "hag-queen-on-cauldron-of-blood": {
+          "name": "Hag Queen on Cauldron of Blood",
+          "points": 280,
+          "regimentOptions": [
+            "0-1 Coven Matriarch",
+            "Any Aelf"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "melusai-ironscale": {
+          "name": "Melusai Ironscale",
+          "points": 100,
+          "regimentOptions": [
+            "Any non-Aelf"
+          ],
+          "canJoinRegimentAs": [
+            "coven-matriarch"
+          ],
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "morathi-khaine": {
+          "name": "Morathi-Khaine",
+          "points": 770,
+          "regimentOptions": [
+            "The Shadow Queen (required)",
+            "0-1 Coven Matriarch",
+            "Any Daughters of Khaine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "slaughter-queen": {
+          "name": "Slaughter Queen",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Coven Matriarch",
+            "Any Aelf"
+          ],
+          "canJoinRegimentAs": [
+            "coven-matriarch"
+          ],
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "scourge-of-aqshy-melusai-ironscale": {
+          "name": "Scourge of Aqshy: Melusai Ironscale",
+          "points": 150,
+          "regimentOptions": [
+            "Any non-Aelf"
+          ],
+          "canJoinRegimentAs": [
+            "coven-matriarch"
+          ],
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "blood-sisters": {
+          "name": "Blood Sisters",
+          "points": 170,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 8
+        },
+        "khainite-shadowstalkers": {
+          "name": "Khainite Shadowstalkers",
+          "points": 100,
+          "regimentOptions": [
+            "Aelf",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 8
+        },
+        "scourge-of-aqshy-khainite-shadowstalkers": {
+          "name": "Scourge of Aqshy: Khainite Shadowstalkers",
+          "points": 120,
+          "regimentOptions": [
+            "Aelf",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 8
+        }
+      },
+      "collections": {
+        "battleFormations:coven-of-blood": {
+          "field": "battleFormations",
+          "id": "coven-of-blood",
+          "name": "Coven of Blood",
+          "points": 20,
+          "page": 9
+        },
+        "battleFormations:fervent-ritualists": {
+          "field": "battleFormations",
+          "id": "fervent-ritualists",
+          "name": "Fervent Ritualists",
+          "points": 10,
+          "page": 9
+        }
+      }
+    },
+    "fyreslayers": {
+      "units": {
+        "auric-flamekeeper": {
+          "name": "Auric Flamekeeper",
+          "points": 80,
+          "regimentOptions": [
+            "Any Fyreslayers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 10
+        },
+        "auric-runemaster": {
+          "name": "Auric Runemaster",
+          "points": 160,
+          "regimentOptions": [
+            "0-1 Grimnir’s Chosen",
+            "Any Fyreslayers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 10
+        },
+        "auric-runesmiter": {
+          "name": "Auric Runesmiter",
+          "points": 110,
+          "regimentOptions": [
+            "Any Fyreslayers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 10
+        },
+        "auric-runesmiter-on-magmadroth": {
+          "name": "Auric Runesmiter on Magmadroth",
+          "points": 280,
+          "regimentOptions": [
+            "Any Fyreslayers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 10
+        },
+        "auric-hearthguard": {
+          "name": "Auric Hearthguard",
+          "points": 120,
+          "regimentOptions": [
+            "Duardin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 10
+        },
+        "vulkyn-flameseekers": {
+          "name": "Vulkyn Flameseekers",
+          "points": 160,
+          "regimentOptions": [
+            "Duardin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 10
+        },
+        "scourge-of-aqshy-vulkyn-flameseekers": {
+          "name": "Scourge of Aqshy: Vulkyn Flameseekers",
+          "points": 190,
+          "regimentOptions": [
+            "Duardin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 10
+        }
+      },
+      "collections": {
+        "artefacts:ash-cloud-rune": {
+          "field": "artefacts",
+          "id": "ash-cloud-rune",
+          "name": "Ash-cloud Rune",
+          "points": 20,
+          "page": 11
+        }
+      }
+    },
+    "idoneth": {
+      "units": {
+        "akhelian-thrallmaster": {
+          "name": "Akhelian Thrallmaster",
+          "points": 70,
+          "regimentOptions": [
+            "Any Idoneth Deepkin"
+          ],
+          "canJoinRegimentAs": [
+            "akhelian-raidmaster"
+          ],
+          "canBeReinforced": false,
+          "page": 12
+        },
+        "eidolon-of-mathlann-aspect-of-the-sea": {
+          "name": "Eidolon of Mathlann, Aspect of the Sea",
+          "points": 310,
+          "regimentOptions": [
+            "0-1 Isharann Emissary",
+            "Any Idoneth Deepkin"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 12
+        },
+        "ikon-of-the-sea": {
+          "name": "Ikon of the Sea",
+          "points": 110,
+          "regimentOptions": [
+            "Any Idoneth Deepkin"
+          ],
+          "canJoinRegimentAs": [
+            "akhelian-raidmaster"
+          ],
+          "canBeReinforced": false,
+          "page": 12
+        },
+        "isharann-tidecaster": {
+          "name": "Isharann Tidecaster",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Isharann Emissary",
+            "Any Namarti"
+          ],
+          "canJoinRegimentAs": [
+            "isharann-emissary"
+          ],
+          "canBeReinforced": false,
+          "page": 12
+        },
+        "lotann-warden-of-the-soul-ledgers": {
+          "name": "Lotann, Warden of the Soul Ledgers",
+          "points": 90,
+          "regimentOptions": [
+            "Any Idoneth Deepkin"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 12
+        },
+        "scourge-of-aqshy-isharann-tidecaster": {
+          "name": "Scourge of Aqshy: Isharann Tidecaster",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Isharann Emissary",
+            "Any Namarti"
+          ],
+          "canJoinRegimentAs": [
+            "isharann-emissary"
+          ],
+          "canBeReinforced": false,
+          "page": 12
+        }
+      },
+      "collections": {}
+    },
+    "kharadron": {
+      "units": {
+        "scourge-of-aqshy-null-khemist": {
+          "name": "Scourge of Aqshy: Null-Khemist",
+          "points": 160,
+          "regimentOptions": [
+            "0-1 Guild Officer",
+            "0-1 Skyvessel",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "guild-officer"
+          ],
+          "canBeReinforced": false,
+          "page": 14
+        },
+        "arkanaut-frigate": {
+          "name": "Arkanaut Frigate",
+          "points": 280,
+          "regimentOptions": [
+            "Duardin",
+            "Skyvessel",
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 14
+        },
+        "arkanaut-ironclad": {
+          "name": "Arkanaut Ironclad",
+          "points": 430,
+          "regimentOptions": [
+            "Duardin",
+            "Skyvessel",
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 14
+        },
+        "endrinriggers": {
+          "name": "Endrinriggers",
+          "points": 90,
+          "regimentOptions": [
+            "Duardin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 14
+        },
+        "scourge-of-aqshy-endrinriggers": {
+          "name": "Scourge of Aqshy: Endrinriggers",
+          "points": 120,
+          "regimentOptions": [
+            "Duardin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 14
+        }
+      },
+      "collections": {}
+    },
+    "lumineth": {
+      "units": {
+        "alarith-stonemage": {
+          "name": "Alarith Stonemage",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Alarith"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "avalenor-the-stoneheart-king": {
+          "name": "Avalenor, The Stoneheart King",
+          "points": 390,
+          "regimentOptions": [
+            "0-1 Alarith Stonemage",
+            "0-1 Lumineth Paragon",
+            "Any Vanari",
+            "Any Alarith"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "ellania-and-ellathor-eclipsian-warsages": {
+          "name": "Ellania and Ellathor, Eclipsian Warsages",
+          "points": 330,
+          "regimentOptions": [
+            "0-1 Lumineth Paragon",
+            "Any Lumineth Realm‑lords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "hurakan-windmage": {
+          "name": "Hurakan Windmage",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Hurakan"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "scinari-calligrave": {
+          "name": "Scinari Calligrave",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Vanari Bladelords"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "scinari-cathallar": {
+          "name": "Scinari Cathallar",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Vanari Bladelords"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "scinari-enlightener": {
+          "name": "Scinari Enlightener",
+          "points": 180,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Vanari Bladelords"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "scinari-loreseeker": {
+          "name": "Scinari Loreseeker",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Vanari Bladelords"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "sevireth-lord-of-the-seventh-wind": {
+          "name": "Sevireth, Lord of the Seventh Wind",
+          "points": 350,
+          "regimentOptions": [
+            "0-1 Hurakan Windmage",
+            "0-1 Lumineth Paragon",
+            "Any Vanari",
+            "Any Hurakan"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "vanari-lord-regent": {
+          "name": "Vanari Lord Regent",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "vanari-lord-regent-on-lightcourser": {
+          "name": "Vanari Lord Regent on Lightcourser",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Lumineth Paragon",
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "scourge-of-aqshy-alarith-stonemage": {
+          "name": "Scourge of Aqshy: Alarith Stonemage",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari",
+            "Auralan Wardens",
+            "Any Alarith"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "scourge-of-aqshy-scinari-loreseeker": {
+          "name": "Scourge of Aqshy: Scinari Loreseeker",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Ydrilan Riverblades",
+            "Any Vanari Auralan Wardens",
+            "Any Vanari Bladelords"
+          ],
+          "canJoinRegimentAs": [
+            "lumineth-paragon"
+          ],
+          "canBeReinforced": false,
+          "page": 16
+        },
+        "alarith-spirit-of-the-mountain": {
+          "name": "Alarith Spirit of the Mountain",
+          "points": 300,
+          "regimentOptions": [
+            "Alarith",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 17
+        },
+        "alarith-stoneguard": {
+          "name": "Alarith Stoneguard",
+          "points": 120,
+          "regimentOptions": [
+            "Aelf",
+            "Alarith",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 17
+        },
+        "hurakan-windchargers": {
+          "name": "Hurakan Windchargers",
+          "points": 180,
+          "regimentOptions": [
+            "Aelf",
+            "Hurakan",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 17
+        },
+        "vanari-bladelords": {
+          "name": "Vanari Bladelords",
+          "points": 140,
+          "regimentOptions": [
+            "Aelf",
+            "Vanari",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 17
+        },
+        "ydrilan-riverblades": {
+          "name": "Ydrilan Riverblades",
+          "points": 150,
+          "regimentOptions": [
+            "Aelf",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 17
+        }
+      },
+      "collections": {}
+    },
+    "seraphon": {
+      "units": {
+        "lord-kroak": {
+          "name": "Lord Kroak",
+          "points": 410,
+          "regimentOptions": [
+            "0-1 Skink Starpriest",
+            "Skink Starseer or",
+            "Favoured Spawning",
+            "Any Seraphon"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "saurus-oldblood": {
+          "name": "Saurus Oldblood",
+          "points": 80,
+          "regimentOptions": [
+            "0-1 Favoured Spawning",
+            "Any Seraphon"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "saurus-oldblood-on-carnosaur": {
+          "name": "Saurus Oldblood on Carnosaur",
+          "points": 210,
+          "regimentOptions": [
+            "0-1 Favoured Spawning",
+            "Any Seraphon"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "saurus-scar-veteran-on-carnosaur": {
+          "name": "Saurus Scar-Veteran on Carnosaur",
+          "points": 190,
+          "regimentOptions": [
+            "0-1 Favoured Spawning",
+            "0-1 Monster",
+            "Any Saurus"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "skink-starseer": {
+          "name": "Skink Starseer",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Monster",
+            "Any Beast",
+            "Any",
+            "Kroxigor",
+            "Any non-Monster Skink"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "slann-starmaster": {
+          "name": "Slann Starmaster",
+          "points": 260,
+          "regimentOptions": [
+            "0-1 Skink Starpriest",
+            "Skink Starseer or",
+            "Favoured Spawning",
+            "Any Seraphon"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "scourge-of-aqshy-saurus-scar-veteran-on-aggradon": {
+          "name": "Scourge of Aqshy: Saurus Scar-Veteran on Aggradon",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Favoured Spawning",
+            "Any Saurus"
+          ],
+          "canJoinRegimentAs": [
+            "favoured-spawning"
+          ],
+          "canBeReinforced": false,
+          "page": 18
+        },
+        "hunters-of-huanchi-with-dartpipes": {
+          "name": "Hunters of Huanchi with Dartpipes",
+          "points": 80,
+          "regimentOptions": [
+            "Skink",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 19
+        },
+        "hunters-of-huanchi-with-starstone-bolas": {
+          "name": "Hunters of Huanchi with Starstone Bolas",
+          "points": 90,
+          "regimentOptions": [
+            "Skink",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 19
+        },
+        "skinks": {
+          "name": "Skinks",
+          "points": 70,
+          "regimentOptions": [
+            "Skink",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 19
+        },
+        "terrawings": {
+          "name": "Terrawings",
+          "points": 70,
+          "regimentOptions": [
+            "Beast"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 19
+        }
+      },
+      "collections": {}
+    },
+    "stormcast": {
+      "units": {
+        "knight-arcanum": {
+          "name": "Knight-Arcanum",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Gryph‑hounds",
+            "Any Warrior Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 20
+        },
+        "knight-azyros": {
+          "name": "Knight-Azyros",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Warrior Chamber",
+            "Any Ruination Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 20
+        },
+        "knight-draconis": {
+          "name": "Knight-Draconis",
+          "points": 200,
+          "regimentOptions": [
+            "Any Extremis Chamber"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 20
+        },
+        "knight-questor": {
+          "name": "Knight-Questor",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Questor Soulsworn",
+            "0-1 Gryph‑hounds",
+            "Any Ruination Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 20
+        },
+        "knight-relictor": {
+          "name": "Knight-Relictor",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Gryph‑hounds",
+            "Any Warrior Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 20
+        },
+        "lord-aquilor": {
+          "name": "Lord-Aquilor",
+          "points": 140,
+          "regimentOptions": [
+            "Any Gryph‑hounds",
+            "Any Vanguard Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 21
+        },
+        "lord-celestant": {
+          "name": "Lord-Celestant",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Stormcast Exemplar",
+            "0-1 Gryph‑hounds",
+            "Any Warrior Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 21
+        },
+        "lord-veritant": {
+          "name": "Lord-Veritant",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Stormcast Exemplar",
+            "0-1 Gryph‑hounds",
+            "Any Ruination Chamber",
+            "Any Warrior Chamber"
+          ],
+          "canJoinRegimentAs": [
+            "stormcast-exemplar"
+          ],
+          "canBeReinforced": false,
+          "page": 21
+        },
+        "tornus-the-redeemed": {
+          "name": "Tornus the Redeemed",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Stormcast Exemplar",
+            "Any Stormcast Eternals"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 21
+        },
+        "stormdrake-guard": {
+          "name": "Stormdrake Guard",
+          "points": 290,
+          "regimentOptions": [
+            "Extremis Chamber",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 22
+        },
+        "stormdrake-guard-1-model": {
+          "name": "Stormdrake Guard (1 model)",
+          "points": 150,
+          "regimentOptions": [
+            "Extremis Chamber",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 22
+        },
+        "vanguard-hunters": {
+          "name": "Vanguard-Hunters",
+          "points": 110,
+          "regimentOptions": [
+            "Vanguard Chamber",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 22
+        },
+        "vanguard-palladors-with-shock-handaxes": {
+          "name": "Vanguard-Palladors with Shock Handaxes",
+          "points": 240,
+          "regimentOptions": [
+            "Vanguard Chamber",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 22
+        },
+        "scourge-of-aqshy-stormstrike-palladors": {
+          "name": "Scourge of Aqshy: Stormstrike Palladors",
+          "points": 210,
+          "regimentOptions": [
+            "Warrior Chamber",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 22
+        }
+      },
+      "collections": {}
+    },
+    "sylvaneth": {
+      "units": {
+        "arch-revenant": {
+          "name": "Arch-Revenant",
+          "points": 90,
+          "regimentOptions": [
+            "Any non-Monster Sylvaneth"
+          ],
+          "canJoinRegimentAs": [
+            "forest-sentinel"
+          ],
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "branchwych": {
+          "name": "Branchwych",
+          "points": 100,
+          "regimentOptions": [
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "forest-sentinel"
+          ],
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "grove-guardian": {
+          "name": "Grove Guardian",
+          "points": 200,
+          "regimentOptions": [
+            "Any Sylvaneth"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "treelord-ancient": {
+          "name": "Treelord Ancient",
+          "points": 260,
+          "regimentOptions": [
+            "0-1 Forest Sentinel",
+            "Any Sylvaneth"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "warsong-revenant": {
+          "name": "Warsong Revenant",
+          "points": 190,
+          "regimentOptions": [
+            "Any Sylvaneth"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "treelord": {
+          "name": "Treelord",
+          "points": 200,
+          "regimentOptions": [
+            "Forest Elder",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "the-twistweald": {
+          "name": "The Twistweald",
+          "points": 160,
+          "regimentOptions": [
+            "Revenant",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 24
+        },
+        "scourge-of-aqshy-kurnoth-hunters-with-greatswords": {
+          "name": "Scourge of Aqshy: Kurnoth Hunters with Greatswords",
+          "points": 220,
+          "regimentOptions": [
+            "Kurnothi",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 24
+        }
+      },
+      "collections": {}
+    },
+    "khorne": {
+      "units": {
+        "bloodmaster-herald-of-khorne": {
+          "name": "Bloodmaster, Herald of Khorne",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Slaughter Seeker",
+            "Any Blades of Khorne Daemon"
+          ],
+          "canJoinRegimentAs": [
+            "slaughter-seeker"
+          ],
+          "canBeReinforced": false,
+          "page": 26
+        },
+        "deathbringer": {
+          "name": "Deathbringer",
+          "points": 110,
+          "regimentOptions": [
+            "Any Bloodbound"
+          ],
+          "canJoinRegimentAs": [
+            "bloodbound-warmonger"
+          ],
+          "canBeReinforced": false,
+          "page": 26
+        },
+        "herald-of-khorne-on-blood-throne": {
+          "name": "Herald of Khorne on Blood Throne",
+          "points": 150,
+          "regimentOptions": [
+            "0-1 Slaughter Seeker",
+            "Any Blades of Khorne Daemon"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 26
+        },
+        "realmgore-ritualist": {
+          "name": "Realmgore Ritualist",
+          "points": 110,
+          "regimentOptions": [
+            "Any Bloodbound"
+          ],
+          "canJoinRegimentAs": [
+            "bloodbound-warmonger"
+          ],
+          "canBeReinforced": false,
+          "page": 26
+        },
+        "skullgrinder": {
+          "name": "Skullgrinder",
+          "points": 100,
+          "regimentOptions": [
+            "Any Bloodbound"
+          ],
+          "canJoinRegimentAs": [
+            "bloodbound-warmonger"
+          ],
+          "canBeReinforced": false,
+          "page": 26
+        },
+        "slaughterpriest": {
+          "name": "Slaughterpriest",
+          "points": 120,
+          "regimentOptions": [
+            "Any Bloodbound"
+          ],
+          "canJoinRegimentAs": [
+            "bloodbound-warmonger"
+          ],
+          "canBeReinforced": false,
+          "page": 26
+        },
+        "claws-of-karanak": {
+          "name": "Claws of Karanak",
+          "points": 100,
+          "regimentOptions": [
+            "Bloodbound",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 27
+        },
+        "skull-cannon": {
+          "name": "Skull Cannon",
+          "points": 120,
+          "regimentOptions": [
+            "Daemon",
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 27
+        },
+        "scourge-of-aqshy-bloodletters": {
+          "name": "Scourge of Aqshy: Bloodletters",
+          "points": 140,
+          "regimentOptions": [
+            "Daemon",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 27
+        }
+      },
+      "collections": {}
+    },
+    "tzeentch": {
+      "units": {
+        "changecaster-herald-of-tzeentch": {
+          "name": "Changecaster, Herald of Tzeentch",
+          "points": 130,
+          "regimentOptions": [
+            "Any Daemon"
+          ],
+          "canJoinRegimentAs": [
+            "tzeentchian-deceiver"
+          ],
+          "canBeReinforced": false,
+          "page": 28
+        },
+        "fateskimmer-herald-of-tzeentch-on-burning-chariot": {
+          "name": "Fateskimmer, Herald of Tzeentch on Burning Chariot",
+          "points": 150,
+          "regimentOptions": [
+            "0-1 Tzeentchian Deceiver",
+            "Any Daemon"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 28
+        },
+        "gaunt-summoner": {
+          "name": "Gaunt Summoner",
+          "points": 160,
+          "regimentOptions": [
+            "0-1 Tzeentchian Deceiver",
+            "Any Disciples of Tzeentch"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 28
+        },
+        "gaunt-summoner-on-disc-of-tzeentch": {
+          "name": "Gaunt Summoner on Disc of Tzeentch",
+          "points": 190,
+          "regimentOptions": [
+            "0-1 Tzeentchian Deceiver",
+            "Any Disciples of Tzeentch"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 28
+        },
+        "ogroid-thaumaturge": {
+          "name": "Ogroid Thaumaturge",
+          "points": 120,
+          "regimentOptions": [
+            "Any Arcanite"
+          ],
+          "canJoinRegimentAs": [
+            "arcanite-cabalist"
+          ],
+          "canBeReinforced": false,
+          "page": 28
+        },
+        "tzaangor-shaman": {
+          "name": "Tzaangor Shaman",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Arcanite Cabalist",
+            "Any Arcanite"
+          ],
+          "canJoinRegimentAs": [
+            "arcanite-cabalist"
+          ],
+          "canBeReinforced": false,
+          "page": 28
+        },
+        "burning-chariot-of-tzeentch": {
+          "name": "Burning Chariot of Tzeentch",
+          "points": 130,
+          "regimentOptions": [
+            "Daemon",
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 29
+        },
+        "exalted-flamer-of-tzeentch": {
+          "name": "Exalted Flamer of Tzeentch",
+          "points": 110,
+          "regimentOptions": [
+            "Daemon",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 29
+        },
+        "jade-obelisk": {
+          "name": "Jade Obelisk",
+          "points": 100,
+          "regimentOptions": [
+            "Arcanite",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 29
+        },
+        "scourge-of-aqshy-screamers-of-tzeentch": {
+          "name": "Scourge of Aqshy: Screamers of Tzeentch",
+          "points": 120,
+          "regimentOptions": [
+            "Daemon",
+            "Beast"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 29
+        }
+      },
+      "collections": {
+        "heroicTraits:silver-summoner": {
+          "field": "heroicTraits",
+          "id": "silver-summoner",
+          "name": "Silver Summoner",
+          "points": 10,
+          "page": 29
+        }
+      }
+    },
+    "hedonites": {
+      "units": {
+        "contorted-epitome": {
+          "name": "Contorted Epitome",
+          "points": 150,
+          "regimentOptions": [
+            "0-1 Slaaneshi Beguiler",
+            "Any Daemon"
+          ],
+          "canJoinRegimentAs": [
+            "slaaneshi-beguiler"
+          ],
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "dexcessa-the-talon-of-slaanesh": {
+          "name": "Dexcessa, the Talon of Slaanesh",
+          "points": 260,
+          "regimentOptions": [
+            "0-1 Synessa or Slaaneshi Beguiler",
+            "Any Hedonites of Slaanesh"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "keeper-of-secrets": {
+          "name": "Keeper of Secrets",
+          "points": 410,
+          "regimentOptions": [
+            "0-1 Slaaneshi Beguiler",
+            "Any Hedonites of Slaanesh"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "lord-of-hysteria": {
+          "name": "Lord of Hysteria",
+          "points": 140,
+          "regimentOptions": [
+            "Any Sybarite"
+          ],
+          "canJoinRegimentAs": [
+            "dark-egotist"
+          ],
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "lord-of-pain": {
+          "name": "Lord of Pain",
+          "points": 110,
+          "regimentOptions": [
+            "Any Sybarite"
+          ],
+          "canJoinRegimentAs": [
+            "dark-egotist"
+          ],
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "shardspeaker-of-slaanesh": {
+          "name": "Shardspeaker of Slaanesh",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Dark Egotist",
+            "Any Sybarite"
+          ],
+          "canJoinRegimentAs": [
+            "dark-egotist"
+          ],
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "syll-esske-the-vengeful-allegiance": {
+          "name": "Syll'Esske, the Vengeful Allegiance",
+          "points": 240,
+          "regimentOptions": [
+            "0-1 Slaaneshi Beguiler or Dark Egotist",
+            "Any Hedonites of Slaanesh"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "synessa-the-voice-of-slaanesh": {
+          "name": "Synessa, the Voice of Slaanesh",
+          "points": 220,
+          "regimentOptions": [
+            "0-1 Dexcessa or Slaaneshi Beguiler",
+            "Any Hedonites of Slaanesh"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "the-masque": {
+          "name": "The Masque",
+          "points": 140,
+          "regimentOptions": [
+            "Any Daemon"
+          ],
+          "canJoinRegimentAs": [
+            "slaaneshi-beguiler"
+          ],
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "scourge-of-aqshy-infernal-enrapturess-herald-of-slaanesh": {
+          "name": "Scourge of Aqshy: Infernal Enrapturess, Herald of Slaanesh",
+          "points": 80,
+          "regimentOptions": [
+            "Any Daemon"
+          ],
+          "canJoinRegimentAs": [
+            "slaaneshi-beguiler"
+          ],
+          "canBeReinforced": false,
+          "page": 30
+        },
+        "daemonettes": {
+          "name": "Daemonettes",
+          "points": 100,
+          "regimentOptions": [
+            "Daemon",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 30
+        },
+        "myrmidesh-painbringers": {
+          "name": "Myrmidesh Painbringers",
+          "points": 130,
+          "regimentOptions": [
+            "Sybarite",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 30
+        }
+      },
+      "collections": {
+        "battleFormations:depraved-carnival": {
+          "field": "battleFormations",
+          "id": "depraved-carnival",
+          "name": "Depraved Carnival",
+          "points": 10,
+          "page": 31
+        },
+        "aqshyEnhancements:obsession-with-control": {
+          "field": "aqshyEnhancements",
+          "id": "obsession-with-control",
+          "name": "Obsession with Control",
+          "points": 20,
+          "page": 31
+        },
+        "aqshyHeroicTraits:incensed": {
+          "field": "aqshyHeroicTraits",
+          "id": "incensed",
+          "name": "Incensed",
+          "points": 10,
+          "page": 31
+        }
+      }
+    },
+    "hashut": {
+      "units": {
+        "ashen-elder": {
+          "name": "Ashen Elder",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Hashutite Commander",
+            "Any Helsmiths of Hashut"
+          ],
+          "canJoinRegimentAs": [
+            "hashutite-commander"
+          ],
+          "canBeReinforced": false,
+          "page": 32
+        },
+        "daemonsmith": {
+          "name": "Daemonsmith",
+          "points": 80,
+          "regimentOptions": [
+            "0-1 Hashutite Commander",
+            "Any Helsmiths of Hashut"
+          ],
+          "canJoinRegimentAs": [
+            "hashutite-commander"
+          ],
+          "canBeReinforced": false,
+          "page": 32
+        },
+        "daemonsmith-on-infernal-taurus": {
+          "name": "Daemonsmith on Infernal Taurus",
+          "points": 270,
+          "regimentOptions": [
+            "0-1 Hashutite Commander",
+            "Any Helsmiths of Hashut"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 32
+        },
+        "dominator-engine-with-bane-maces": {
+          "name": "Dominator Engine with Bane Maces",
+          "points": 140,
+          "regimentOptions": [
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 32
+        },
+        "dominator-engine-with-immolation-cannons": {
+          "name": "Dominator Engine with Immolation Cannons",
+          "points": 150,
+          "regimentOptions": [
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 32
+        }
+      },
+      "collections": {}
+    },
+    "nurgle": {
+      "units": {
+        "cankerborn": {
+          "name": "Cankerborn",
+          "points": 170,
+          "regimentOptions": [
+            "Any Daemon"
+          ],
+          "canJoinRegimentAs": [
+            "plague-scion"
+          ],
+          "canBeReinforced": false,
+          "page": 34
+        },
+        "gelgus-pust": {
+          "name": "Gelgus Pust",
+          "points": 190,
+          "regimentOptions": [
+            "0-1 Plague Scion",
+            "Any Maggotkin of Nurgle"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 34
+        },
+        "morbidex-twiceborn": {
+          "name": "Morbidex Twiceborn",
+          "points": 230,
+          "regimentOptions": [
+            "0-1 Rotbringer Lord",
+            "Any Maggotkin of Nurgle"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 34
+        },
+        "orghotts-daemonspew": {
+          "name": "Orghotts Daemonspew",
+          "points": 250,
+          "regimentOptions": [
+            "0-1 Rotbringer Lord",
+            "Any Maggotkin of Nurgle"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 34
+        },
+        "rotbringer-sorcerer": {
+          "name": "Rotbringer Sorcerer",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Rotbringer Lord",
+            "Any Rotbringers"
+          ],
+          "canJoinRegimentAs": [
+            "rotbringer-lord"
+          ],
+          "canBeReinforced": false,
+          "page": 34
+        },
+        "rotmire-creed": {
+          "name": "Rotmire Creed",
+          "points": 110,
+          "regimentOptions": [
+            "Rotbringers",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 35
+        },
+        "scourge-of-aqshy-sloven-knights": {
+          "name": "Scourge of Aqshy: Sloven Knights",
+          "points": 180,
+          "regimentOptions": [
+            "Rotbringers",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 35
+        }
+      },
+      "collections": {}
+    },
+    "skaven": {
+      "units": {
+        "arch-warlock": {
+          "name": "Arch-Warlock",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Clanrats",
+            "Any Skryre"
+          ],
+          "canJoinRegimentAs": [
+            "skaven-overclaw"
+          ],
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "clawlord-on-gnaw-beast": {
+          "name": "Clawlord on Gnaw-beast",
+          "points": 90,
+          "regimentOptions": [
+            "Any Verminus"
+          ],
+          "canJoinRegimentAs": [
+            "skaven-overclaw"
+          ],
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "lord-skreech-verminking": {
+          "name": "Lord Skreech Verminking",
+          "points": 350,
+          "regimentOptions": [
+            "0-1 Skaven Overclaw",
+            "Any Skaven"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "verminlord-deceiver": {
+          "name": "Verminlord Deceiver",
+          "points": 360,
+          "regimentOptions": [
+            "0-1 Skaven Overclaw",
+            "Any Skaven"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "scourge-of-aqshy-verminlord-corruptor": {
+          "name": "Scourge of Aqshy: Verminlord Corruptor",
+          "points": 290,
+          "regimentOptions": [
+            "0-1 Skaven Overclaw",
+            "Any Skaven"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "brood-terror": {
+          "name": "Brood Terror",
+          "points": 200,
+          "regimentOptions": [
+            "Moulder",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "gutter-runners": {
+          "name": "Gutter Runners",
+          "points": 150,
+          "regimentOptions": [
+            "Eshin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "night-runners": {
+          "name": "Night Runners",
+          "points": 130,
+          "regimentOptions": [
+            "Eshin",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 36
+        },
+        "rat-ogors": {
+          "name": "Rat Ogors",
+          "points": 130,
+          "regimentOptions": [
+            "Moulder",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 37
+        },
+        "ratling-guns": {
+          "name": "Ratling Guns",
+          "points": 160,
+          "regimentOptions": [
+            "Skryre",
+            "Infantry",
+            "Weapon Team"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 37
+        }
+      },
+      "collections": {}
+    },
+    "std": {
+      "units": {
+        "abraxia-spear-of-the-everchosen": {
+          "name": "Abraxia, Spear of the Everchosen",
+          "points": 230,
+          "regimentOptions": [
+            "0-1 Ruinous Champion",
+            "Any Slaves to Darkness"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "archaon-the-everchosen": {
+          "name": "Archaon, the Everchosen",
+          "points": 780,
+          "regimentOptions": [
+            "0-1 Ruinous Champion",
+            "Any Slaves to Darkness"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "chaos-lord-on-karkadrak": {
+          "name": "Chaos Lord on Karkadrak",
+          "points": 180,
+          "regimentOptions": [
+            "0-1 Ruinous Champion",
+            "Any Slaves to Darkness"
+          ],
+          "canJoinRegimentAs": [
+            "ruinous-champion"
+          ],
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "chaos-sorcerer-lord": {
+          "name": "Chaos Sorcerer Lord",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Ruinous Champion",
+            "0-1 Monster",
+            "Any Warriors of Chaos"
+          ],
+          "canJoinRegimentAs": [
+            "ruinous-champion"
+          ],
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "darkoath-chieftain": {
+          "name": "Darkoath Chieftain",
+          "points": 80,
+          "regimentOptions": [
+            "0-1 Oathsworn",
+            "0-1 Monster",
+            "Any Darkoath"
+          ],
+          "canJoinRegimentAs": [
+            "oathsworn"
+          ],
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "darkoath-warqueen": {
+          "name": "Darkoath Warqueen",
+          "points": 80,
+          "regimentOptions": [
+            "0-1 Oathsworn",
+            "0-1 Monster",
+            "Any Darkoath"
+          ],
+          "canJoinRegimentAs": [
+            "oathsworn"
+          ],
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "scourge-of-aqshy-chaos-lord-on-karkadrak": {
+          "name": "Scourge of Aqshy: Chaos Lord on Karkadrak",
+          "points": 200,
+          "regimentOptions": [
+            "0-1 Ruinous Champion",
+            "Any Slaves to",
+            "Darkness"
+          ],
+          "canJoinRegimentAs": [
+            "ruinous-champion"
+          ],
+          "canBeReinforced": false,
+          "page": 38
+        },
+        "chaos-furies": {
+          "name": "Chaos Furies",
+          "points": 100,
+          "regimentOptions": [
+            "Daemon",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 39
+        },
+        "chaos-legionnaires": {
+          "name": "Chaos Legionnaires",
+          "points": 80,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 39
+        },
+        "darkoath-savagers": {
+          "name": "Darkoath Savagers",
+          "points": 90,
+          "regimentOptions": [
+            "Darkoath",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 39
+        },
+        "fomoroid-crusher": {
+          "name": "Fomoroid Crusher",
+          "points": 100,
+          "regimentOptions": [
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 39
+        },
+        "legion-of-the-first-prince-screamers-of-tzeentch": {
+          "name": "Legion of the First Prince Screamers of Tzeentch",
+          "points": 70,
+          "regimentOptions": [
+            "Legion of the First Prince",
+            "Daemon",
+            "Beast"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 39
+        },
+        "mutalith-vortex-beast": {
+          "name": "Mutalith Vortex Beast",
+          "points": 150,
+          "regimentOptions": [
+            "Daemon",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 39
+        },
+        "slaughterbrute": {
+          "name": "Slaughterbrute",
+          "points": 170,
+          "regimentOptions": [
+            "Daemon",
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 39
+        },
+        "varanguard": {
+          "name": "Varanguard",
+          "points": 290,
+          "regimentOptions": [
+            "Warriors of Chaos",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 39
+        }
+      },
+      "collections": {
+        "heroicTraits:radiance-of-dark-glory": {
+          "field": "heroicTraits",
+          "id": "radiance-of-dark-glory",
+          "name": "Radiance of Dark Glory",
+          "points": 0,
+          "page": 40
+        }
+      }
+    },
+    "flesheater": {
+      "units": {
+        "abhorrant-archregent": {
+          "name": "Abhorrant Archregent",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Royal Attendant",
+            "Any Flesh‑eater Courts"
+          ],
+          "canJoinRegimentAs": [
+            "royal-attendant"
+          ],
+          "canBeReinforced": false,
+          "page": 41
+        },
+        "abhorrant-cardinal": {
+          "name": "Abhorrant Cardinal",
+          "points": 130,
+          "regimentOptions": [
+            "0-1 Royal Attendant",
+            "0-1 Beast",
+            "0-1 Knights",
+            "Any Serfs"
+          ],
+          "canJoinRegimentAs": [
+            "royal-attendant"
+          ],
+          "canBeReinforced": false,
+          "page": 41
+        },
+        "abhorrant-ghoul-king": {
+          "name": "Abhorrant Ghoul King",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Royal Attendant",
+            "Any Flesh‑eater Courts"
+          ],
+          "canJoinRegimentAs": [
+            "royal-attendant"
+          ],
+          "canBeReinforced": false,
+          "page": 41
+        },
+        "abhorrant-gorewarden": {
+          "name": "Abhorrant Gorewarden",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Royal Attendant",
+            "0-1 Beast",
+            "0-1 Serfs",
+            "Any Knights"
+          ],
+          "canJoinRegimentAs": [
+            "royal-attendant"
+          ],
+          "canBeReinforced": false,
+          "page": 41
+        },
+        "grand-justice-gormayne": {
+          "name": "Grand Justice Gormayne",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Beast",
+            "0-1 Knights",
+            "Any Serfs"
+          ],
+          "canJoinRegimentAs": [
+            "royal-attendant"
+          ],
+          "canBeReinforced": false,
+          "page": 41
+        },
+        "marrowscroll-herald": {
+          "name": "Marrowscroll Herald",
+          "points": 90,
+          "regimentOptions": [
+            "0-1 Beast",
+            "Any Serfs"
+          ],
+          "canJoinRegimentAs": [
+            "royal-attendant"
+          ],
+          "canBeReinforced": false,
+          "page": 41
+        },
+        "crypt-flayers": {
+          "name": "Crypt Flayers",
+          "points": 140,
+          "regimentOptions": [
+            "Knights",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 41
+        },
+        "crypt-horrors": {
+          "name": "Crypt Horrors",
+          "points": 150,
+          "regimentOptions": [
+            "Knights",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 41
+        },
+        "morbheg-knights": {
+          "name": "Morbheg Knights",
+          "points": 150,
+          "regimentOptions": [
+            "Knights",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 41
+        },
+        "royal-beastflayers": {
+          "name": "Royal Beastflayers",
+          "points": 120,
+          "regimentOptions": [
+            "Serfs",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 41
+        }
+      },
+      "collections": {}
+    },
+    "nighthaunt": {
+      "units": {
+        "guardian-of-souls": {
+          "name": "Guardian of Souls",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Black Coach",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "cursed-soul"
+          ],
+          "canBeReinforced": false,
+          "page": 43
+        },
+        "krulghast-cruciator": {
+          "name": "Krulghast Cruciator",
+          "points": 150,
+          "regimentOptions": [
+            "0-1 Black Coach",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "cursed-soul"
+          ],
+          "canBeReinforced": false,
+          "page": 43
+        },
+        "reikenor-the-grimhailer": {
+          "name": "Reikenor the Grimhailer",
+          "points": 180,
+          "regimentOptions": [
+            "0-1 Cursed Soul",
+            "Any Nighthaunt"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 43
+        },
+        "scriptor-mortis": {
+          "name": "Scriptor Mortis",
+          "points": 90,
+          "regimentOptions": [
+            "0-1 Black Coach",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "cursed-soul"
+          ],
+          "canBeReinforced": false,
+          "page": 43
+        },
+        "spirit-torment": {
+          "name": "Spirit Torment",
+          "points": 100,
+          "regimentOptions": [
+            "0-1 Black Coach",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "cursed-soul"
+          ],
+          "canBeReinforced": false,
+          "page": 43
+        },
+        "dreadblade-harrows": {
+          "name": "Dreadblade Harrows",
+          "points": 120,
+          "regimentOptions": [
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 44
+        },
+        "pyregheists": {
+          "name": "Pyregheists",
+          "points": 180,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 44
+        }
+      },
+      "collections": {
+        "battleFormations:quicksilver-gheists": {
+          "field": "battleFormations",
+          "id": "quicksilver-gheists",
+          "name": "Quicksilver Gheists",
+          "points": 20,
+          "page": 44
+        },
+        "heroicTraits:ruler-of-the-spectral-hosts": {
+          "field": "heroicTraits",
+          "id": "ruler-of-the-spectral-hosts",
+          "name": "Ruler of the Spectral Hosts",
+          "points": 0,
+          "page": 44
+        },
+        "artefacts:lightshard-of-the-harvest-moon": {
+          "field": "artefacts",
+          "id": "lightshard-of-the-harvest-moon",
+          "name": "Lightshard of the Harvest Moon",
+          "points": 0,
+          "page": 44
+        }
+      }
+    },
+    "ossiarch": {
+      "units": {
+        "arch-kavalos-zandtos": {
+          "name": "Arch-Kavalos Zandtos",
+          "points": 220,
+          "regimentOptions": [
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": [
+            "legion-subcommander"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "arkhan-the-black-mortarch-of-sacrament": {
+          "name": "Arkhan the Black, Mortarch of Sacrament",
+          "points": 430,
+          "regimentOptions": [
+            "0-1 Legion Subcommander",
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "katakros-mortarch-of-the-necropolis": {
+          "name": "Katakros, Mortarch of the Necropolis",
+          "points": 450,
+          "regimentOptions": [
+            "0-1 Legion Subcommander",
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "liege-kavalos": {
+          "name": "Liege-Kavalos",
+          "points": 180,
+          "regimentOptions": [
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": [
+            "legion-subcommander"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "liege-kavalos-on-war-chariot": {
+          "name": "Liege-Kavalos on War Chariot",
+          "points": 180,
+          "regimentOptions": [
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": [
+            "legion-subcommander"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "liege-mortek": {
+          "name": "Liege-Mortek",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Mortisan Vizier",
+            "0-1 Mortek Crawler",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "legion-subcommander"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "mortisan-boneshaper": {
+          "name": "Mortisan Boneshaper",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Gothizzar Harvester",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "mortisan-vizier"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "mortisan-ossifector": {
+          "name": "Mortisan Ossifector",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Gothizzar Harvester",
+            "0-1 Mortek Crawler",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "mortisan-vizier"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "mortisan-soulmason": {
+          "name": "Mortisan Soulmason",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Gothizzar Harvester",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "mortisan-vizier"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "mortisan-soulreaper": {
+          "name": "Mortisan Soulreaper",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Gothizzar Harvester",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "mortisan-vizier"
+          ],
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "nagash-supreme-lord-of-the-undead": {
+          "name": "Nagash, Supreme Lord of the Undead",
+          "points": 790,
+          "regimentOptions": [
+            "0-1 Legion Subcommander",
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "vokmortian-master-of-the-bone-tithe": {
+          "name": "Vokmortian, Master of the Bone-tithe",
+          "points": 140,
+          "regimentOptions": [
+            "0-1 Legion Subcommander",
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "scourge-of-aqshy-vokmortian-master-of-the-bone-tithe": {
+          "name": "Scourge of Aqshy: Vokmortian, Master of the Bone-tithe",
+          "points": 180,
+          "regimentOptions": [
+            "0-1 Legion Subcommander",
+            "0-1 Mortisan Vizier",
+            "Any Ossiarch Bonereapers"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "gothizzar-harvester": {
+          "name": "Gothizzar Harvester",
+          "points": 180,
+          "regimentOptions": [
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "immortis-guard": {
+          "name": "Immortis Guard",
+          "points": 150,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "kavalos-deathriders": {
+          "name": "Kavalos Deathriders",
+          "points": 160,
+          "regimentOptions": [
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "kavalos-war-chariot": {
+          "name": "Kavalos War Chariot",
+          "points": 140,
+          "regimentOptions": [
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        },
+        "morghast-archai": {
+          "name": "Morghast Archai",
+          "points": 240,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "morghast-harbingers": {
+          "name": "Morghast Harbingers",
+          "points": 230,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "mortek-guard": {
+          "name": "Mortek Guard",
+          "points": 100,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "mortek-triaxes": {
+          "name": "Mortek Triaxes",
+          "points": 130,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "necropolis-stalkers": {
+          "name": "Necropolis Stalkers",
+          "points": 120,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 45
+        },
+        "teratic-cohort": {
+          "name": "Teratic Cohort",
+          "points": 90,
+          "regimentOptions": [
+            "Beast"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 45
+        }
+      },
+      "collections": {}
+    },
+    "soulblight": {
+      "units": {
+        "blades-of-the-hollow-king": {
+          "name": "Blades of the Hollow King",
+          "points": 260,
+          "regimentOptions": [
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "coven-throne": {
+          "name": "Coven Throne",
+          "points": 210,
+          "regimentOptions": [
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "mannfred-von-carstein-mortarch-of-night": {
+          "name": "Mannfred von Carstein, Mortarch of Night",
+          "points": 410,
+          "regimentOptions": [
+            "0-1 Necromancer",
+            "0-1 Deathrattle Overseer",
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "mortis-engine": {
+          "name": "Mortis Engine",
+          "points": 210,
+          "regimentOptions": [
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "nagash-supreme-lord-of-the-undead": {
+          "name": "Nagash, Supreme Lord of the Undead",
+          "points": 750,
+          "regimentOptions": [
+            "0-1 Necromancer",
+            "0-1 Deathrattle Overseer",
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "necromancer": {
+          "name": "Necromancer",
+          "points": 110,
+          "regimentOptions": [
+            "0-1 Deathrattle Overseer",
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "neferata-mortarch-of-blood": {
+          "name": "Neferata, Mortarch of Blood",
+          "points": 450,
+          "regimentOptions": [
+            "0-1 Necromancer",
+            "0-1 Deathrattle Overseer",
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "prince-vhordrai": {
+          "name": "Prince Vhordrai",
+          "points": 450,
+          "regimentOptions": [
+            "0-1 Deathrattle Overseer",
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "vampire-lord-on-nightmare-steed": {
+          "name": "Vampire Lord on Nightmare Steed",
+          "points": 170,
+          "regimentOptions": [
+            "Any Soulblight Gravelords"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 47
+        },
+        "askurgan-trueblades": {
+          "name": "Askurgan Trueblades",
+          "points": 150,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 48
+        },
+        "blood-knights": {
+          "name": "Blood Knights",
+          "points": 210,
+          "regimentOptions": [
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 48
+        },
+        "fell-bats": {
+          "name": "Fell Bats",
+          "points": 90,
+          "regimentOptions": [
+            "Deadwalkers",
+            "Beast"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 48
+        },
+        "revenant-draconith": {
+          "name": "Revenant Draconith",
+          "points": 170,
+          "regimentOptions": [
+            "Monster"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 48
+        }
+      },
+      "collections": {
+        "aqshyEnhancements:the-never-dead": {
+          "field": "aqshyEnhancements",
+          "id": "the-never-dead",
+          "name": "The Never-Dead",
+          "points": 20,
+          "page": 48
+        }
+      }
+    },
+    "gloomspite": {
+      "units": {
+        "frazzlegit-shaman-on-war-wheela": {
+          "name": "Frazzlegit Shaman on War-Wheela",
+          "points": 120,
+          "regimentOptions": [
+            "Any Gitmob"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 49
+        },
+        "snarlboss-on-war-wheela": {
+          "name": "Snarlboss on War-Wheela",
+          "points": 120,
+          "regimentOptions": [
+            "Any Gitmob"
+          ],
+          "canJoinRegimentAs": [
+            "top-dog"
+          ],
+          "canBeReinforced": false,
+          "page": 49
+        },
+        "snarlpack-cavalry": {
+          "name": "Snarlpack Cavalry",
+          "points": 100,
+          "regimentOptions": [
+            "Gitmob",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 50
+        },
+        "sunsteala-wheelas": {
+          "name": "Sunsteala Wheelas",
+          "points": 120,
+          "regimentOptions": [
+            "Gitmob",
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 50
+        },
+        "scourge-of-aqshy-fellwater-troggoths": {
+          "name": "Scourge of Aqshy: Fellwater Troggoths",
+          "points": 160,
+          "regimentOptions": [
+            "Troggoth",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 50
+        },
+        "scourge-of-aqshy-sunsteala-wheelas": {
+          "name": "Scourge of Aqshy: Sunsteala Wheelas",
+          "points": 150,
+          "regimentOptions": [
+            "Gitmob",
+            "War Machine"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 50
+        }
+      },
+      "collections": {}
+    },
+    "ironjawz": {
+      "units": {
+        "gordrakk-the-fist-of-gork": {
+          "name": "Gordrakk, the Fist of Gork",
+          "points": 320,
+          "regimentOptions": [
+            "0-1 Headstompa",
+            "0-1 Tusk Wrangler",
+            "Any Ironjawz"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 51
+        },
+        "megaboss": {
+          "name": "Megaboss",
+          "points": 120,
+          "regimentOptions": [
+            "0-1 Headstompa",
+            "Any Ironjawz"
+          ],
+          "canJoinRegimentAs": [
+            "headstompa"
+          ],
+          "canBeReinforced": false,
+          "page": 51
+        },
+        "megaboss-on-maw-krusha": {
+          "name": "Megaboss on Maw-Krusha",
+          "points": 310,
+          "regimentOptions": [
+            "0-1 Headstompa",
+            "0-1 Tusk Wrangler",
+            "Any Ironjawz"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 51
+        },
+        "warchanter": {
+          "name": "Warchanter",
+          "points": 110,
+          "regimentOptions": [
+            "Any Ironjawz"
+          ],
+          "canJoinRegimentAs": [
+            "headstompa"
+          ],
+          "canBeReinforced": false,
+          "page": 51
+        },
+        "weirdnob-shaman": {
+          "name": "Weirdnob Shaman",
+          "points": 110,
+          "regimentOptions": [
+            "Any Ironjawz"
+          ],
+          "canJoinRegimentAs": [
+            "headstompa"
+          ],
+          "canBeReinforced": false,
+          "page": 51
+        },
+        "scourge-of-aqshy-brutes": {
+          "name": "Scourge of Aqshy: Brutes",
+          "points": 170,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 51
+        }
+      },
+      "collections": {}
+    },
+    "kruleboyz": {
+      "units": {
+        "hobgrot-slittaboss": {
+          "name": "Hobgrot Slittaboss",
+          "points": 60,
+          "regimentOptions": [
+            "Any Infantry",
+            "0-1 Monster",
+            "0-1 War Machine"
+          ],
+          "canJoinRegimentAs": [
+            "mob-wrangler"
+          ],
+          "canBeReinforced": false,
+          "page": 53
+        },
+        "killaboss-with-stab-grot": {
+          "name": "Killaboss with Stab-grot",
+          "points": 70,
+          "regimentOptions": [
+            "Any Kruleboyz"
+          ],
+          "canJoinRegimentAs": [
+            "mob-wrangler"
+          ],
+          "canBeReinforced": false,
+          "page": 53
+        },
+        "swampcalla-shaman-with-pot-grot": {
+          "name": "Swampcalla Shaman with Pot-grot",
+          "points": 120,
+          "regimentOptions": [
+            "Any Kruleboyz"
+          ],
+          "canJoinRegimentAs": [
+            "mob-wrangler"
+          ],
+          "canBeReinforced": false,
+          "page": 53
+        },
+        "kruleboyz-monsta-killaz": {
+          "name": "Kruleboyz Monsta-killaz",
+          "points": 140,
+          "regimentOptions": [
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 54
+        }
+      },
+      "collections": {}
+    },
+    "ogors": {
+      "units": {
+        "butcher": {
+          "name": "Butcher",
+          "points": 170,
+          "regimentOptions": [
+            "0-1 Maw Nomad",
+            "Any Infantry"
+          ],
+          "canJoinRegimentAs": [
+            "maw-nomad"
+          ],
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "firebelly": {
+          "name": "Firebelly",
+          "points": 150,
+          "regimentOptions": [
+            "0-1 Gnoblar Scraplauncher",
+            "Any Gutbusters",
+            "Any Gnoblars"
+          ],
+          "canJoinRegimentAs": [
+            "maw-nomad"
+          ],
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "grell-firefist": {
+          "name": "Grell Firefist",
+          "points": 140,
+          "regimentOptions": [
+            "Any Ogor Mawtribes"
+          ],
+          "canJoinRegimentAs": [
+            "maw-nomad"
+          ],
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "morga-the-mighty-overtyrant": {
+          "name": "Morga The Mighty, Overtyrant",
+          "points": 420,
+          "regimentOptions": [
+            "0-1 Maw Nomad",
+            "Any Ogor Mawtribes"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "redd-the-maw-high-slaughtermaster": {
+          "name": "Redd the Maw, High Slaughtermaster",
+          "points": 420,
+          "regimentOptions": [
+            "0-1 Maw Nomad",
+            "Any Ogor Mawtribes"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "slaughtermaster": {
+          "name": "Slaughtermaster",
+          "points": 160,
+          "regimentOptions": [
+            "Any Mawseekers"
+          ],
+          "canJoinRegimentAs": [
+            "maw-nomad"
+          ],
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "tyrant-on-glutthorn": {
+          "name": "Tyrant on Glutthorn",
+          "points": 390,
+          "regimentOptions": [
+            "0-1 Maw Nomad",
+            "Any Ogor Mawtribes"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": false,
+          "page": 55
+        },
+        "gluttons": {
+          "name": "Gluttons",
+          "points": 210,
+          "regimentOptions": [
+            "Gutbusters",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 56
+        },
+        "hunters-with-sabrefangs": {
+          "name": "Hunters with Sabrefangs",
+          "points": 170,
+          "regimentOptions": [
+            "Beastclaw",
+            "Infantry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 56
+        },
+        "maulbeast-raiders": {
+          "name": "Maulbeast Raiders",
+          "points": 210,
+          "regimentOptions": [
+            "Beastclaw",
+            "Cavalry"
+          ],
+          "canJoinRegimentAs": null,
+          "canBeReinforced": true,
+          "page": 56
+        }
+      },
+      "collections": {
+        "battleFormations:maw-cult-fanatics": {
+          "field": "battleFormations",
+          "id": "maw-cult-fanatics",
+          "name": "Maw-Cult Fanatics",
+          "points": 10,
+          "page": 56
+        }
+      }
+    }
+  }
+}

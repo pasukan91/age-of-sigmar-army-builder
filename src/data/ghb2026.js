@@ -113,7 +113,7 @@ export const ghb2026Battleplans = [
 
   createBattleplan(6, 1, "Ocultos bajo nubes de cenizas", [
     section("GIRO", "Al inicio de cada ronda de batalla, el jugador en desventaja debe decidir si las nubes de ceniza están bajas o no. Si no hay jugador en desventaja, las nubes de ceniza están bajas.\n\nLa siguiente habilidad pasiva se aplica en esta batalla:"),
-    section("HABILIDAD", "Efecto: Mientras las nubes de ceniza estén bajas:\n\n• No se pueden situar, en territorio neutral, ni unidades ni MANIFESTACIONES.\n• Ni unidades ni MANIFESTACIONES pueden terminar un movimiento en territorio neutral salvo si empezaron ese movimiento completamente dentro de terreno neutral.\n• Las MINIATURAS y MANIFESTACIONES solo son visibles para otras miniaturas a más de 3\" si se puede trazar una línea recta entre algún punto de sus peanas sin cruzar territorio neutral.", "NUBES DE CENIZA POR DOQUIER", "Pasiva"),
+    section("HABILIDAD", "Efecto: Mientras las nubes de ceniza estén bajas:\n\n• No se pueden situar, en territorio neutral, unidades, elementos de terreno ni MANIFESTACIONES.\n• Las unidades, los elementos de terreno y las MANIFESTACIONES no pueden terminar un movimiento en territorio neutral salvo si empezaron ese movimiento completamente dentro de terreno neutral.\n• Las MINIATURAS, los elementos de terreno y las MANIFESTACIONES solo son visibles para otras miniaturas a más de 3\" si se puede trazar una línea recta entre algún punto de sus peanas sin cruzar territorio neutral.", "NUBES DE CENIZA POR DOQUIER", "Pasiva"),
   ], [
     "Obtienes 3 puntos de victoria si controlas al menos 1 objetivo.",
     "Obtienes 3 puntos de victoria si controlas 2 o más objetivos.",
@@ -208,7 +208,7 @@ export const ghb2026BattleTacticsCards = [
     "El plan es simple: flanquear y rodear al enemigo, y asegurarse de que ninguno escape con vida.",
     null,
     [
-      { type: "Altercado", name: "Emboscada", flavour: "Envía hostigadores para acechar al enemigo.", condition: "Completas esta táctica de batalla al final de tu turno si 2 o más objetivos o elementos de terreno que controles en cualquier combinación, los disputan, cada uno, unidades amigas diferentes que estén a más de 6\" del territorio amigo y que no se situaron en este turno.", points: 5 },
+      { type: "Altercado", name: "Emboscada", flavour: "Envía hostigadores para acechar al enemigo.", condition: "Completas esta táctica de batalla al final de tu turno si 2 o más objetivos o elementos de terreno que no sean TERRENO DE FACCIÓN que controles en cualquier combinación, los disputan, cada uno, unidades amigas diferentes que estén a más de 6\" del territorio amigo y que no se situaron en este turno.", points: 5 },
       { type: "Golpe", name: "Rodea al enemigo", flavour: "Rodea al enemigo como las llamas de una conflagración rodean a los condenados.", condition: "Completas esta táctica de batalla al final de tu turno si 2 o más unidades amigas que no se situaron en este turno están, cada una, a 9\" o menos de una esquina distinta del campo de batalla y completamente fuera de territorio amigo.", points: 5 },
       { type: "Dominio", name: "Reclama lo que es tuyo", flavour: "Estas tierras son tuyas, expulsa de ellas a tu oponente.", condition: "Completas esta táctica de batalla al final de tu turno si hay más unidades amigas en territorio enemigo que unidades enemigas y hay 1 o más HÉROES amigos completamente en territorio enemigo.", points: 5 },
     ],
