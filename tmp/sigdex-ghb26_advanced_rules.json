@@ -1,0 +1,1210 @@
+{
+  "title": "General's Handbook 2026-27: Advanced Rules",
+  "sections": [
+    {
+      "name": "Advanced Rules 2026-27",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Introduction",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The *General’s Handbook 2026-27* battlepack uses the following Advanced Rules modules:",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Commands 2026-27",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "These rules explain how you can earn **command points** to use powerful **commands** that allow you to react to abilities and interact in your opponent’s turn. If you are not using the **Commands** rules, ignore any abilities that have the command point symbol in the corner.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Terrain 2026-27",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "These rules go into more detail about how your models interact with terrain features, such as how they can take cover or even draw power from arcane nexuses.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Magic 2026-27",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "If you’d like to wield unlimited mystical power by including **^^WIZARDS^^**, **^^PRIESTS^^** and **^^manifestations^^** in your battles, see **Magic**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Army Composition 2026-27",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "If you’re ready to build your own **army roster** and customise your army with **regiments**, **battle formations** and **enhancements**, see **Army Composition**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Command Models 2026-27",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Here you will find rules for special models called **^^champions^^**, **^^standard bearers^^** and **^^musicians^^**, which are found in many Warhammer Age of Sigmar units.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Battle Tactics 2026-27",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Add an additional tactical challenge to your games by including secondary objectives called **Battle Tactics**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Build your Own Battlepack",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "There are many, many ways to play Warhammer Age of Sigmar, from **Path to Glory** battlepacks, which focus on narrative-driven battles linked in an ongoing campaign, to **Spearhead** and **Matched Play** battlepacks, in which the emphasis is on balance and competitive play.\n\nIn addition to using official battlepacks, we’d encourage you to use the rules in this section as a toolbox, mixing and matching the elements within to build your own battleplan or battlepack to play with your friends.\n\nAre you excited to field your entire collection against your friends or to see which monster reigns supreme? Maybe you want to design your own battleplans and special rules, or perhaps you want to keep things simple in order to teach a younger sibling how to play. These rules provide an open framework that makes each of these things possible.\n\nHere are some ideas to get you started:\n\n• Instead of using the Advanced Rules for Army Composition, make an army based on your favourite Black Library story or based on a made‑up scenario that sounds exciting to you. For instance, how would 5 different Stormcast Eternals heroes fare against a pair of massive Chaos monsters?\n\n• Design your own battleplan by dividing portions of the battlefield into a territory for each player, placing objectives and thinking up a fun twist for the battle. Have fun and experiment with different ideas – why not try alternating placing objectives instead of having fixed locations, or try having two smaller battlefields connected by realmgates?\n\n• Learn the Advanced Rules by introducing each module into your battles one at a time – for instance, start by experimenting with Commands, then try adding Magic into your battles, and finally put them all together to outwit your opponent and score Battle Tactics.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1.0 Commands Overview",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Commands Overview",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities, called commands, require that you spend one or more command points to use that ability. Any ability that has a command point cost (indicated in the top right corner of the ability) is a command.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.1 Earning Command Points",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "At the start of each battle round, after determining the underdog, each player gains 4 command points. If there is an underdog, they gain 1 extra command point. At the end of the battle round, the players’ command points are reset to 0 (any that have not been used are lost).",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.2 Using Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Commands are used in a similar manner to any other ability. However, each unit can only use 1 command in each phase, each command can only be used 1 time by each army in each phase, and you must spend a number of command points equal to the command point cost to use a command.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2.0 Hero Phase Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Hero Phase Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Rally",
+                "timing": "Any Hero Phase",
+                "phase": "heroPhase",
+                "icon": "rallying",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **not in combat** to use this ability.",
+                "effect": "Make 6 **rally rolls** of D6. For each 4+, you receive 1 **rally point**. Rally points can be spent in the following ways:\n• For each rally point spent, **Heal (1)** that unit.\n• You can spend a number of rally points equal to the **Health** characteristic of that unit to **return** a slain model to that unit.\nYou can spend the rally points in any combination of the above. Unspent rally points are then lost.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Magical Intervention",
+                "timing": "Enemy Hero Phase",
+                "phase": "heroPhase",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a friendly **^^WIZARD^^** or **^^PRIEST^^** to use this ability.",
+                "effect": "That friendly unit can use a **^^SPELL^^**, **^^PRAYER^^** or **^^BANISH^^** ability (as appropriate) as if it were your hero phase. If you do so, subtract 1 from **casting rolls** or **chanting rolls** made as part of that ability.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3.0 Movement Phase Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Movement Phase Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Redeploy",
+                "timing": "Enemy Movement Phase",
+                "phase": "movementPhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **not in combat** to use this ability.",
+                "effect": "Each model in that unit can move up to D6\". That move **cannot** pass through or end within the combat range of an enemy unit.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": [
+                  "Move",
+                  "Run"
+                ]
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "At the Double",
+                "timing": "Reaction: You declared a **^^RUN^^** ability",
+                "phase": "movementPhase",
+                "icon": "movement",
+                "usedBy": "&#x20;The unit using that **^^RUN^^** ability.",
+                "declare": "",
+                "effect": "Do not make a **run roll** as part of that **^^RUN^^** ability. Instead, add 6\" to that unit’s **^^MOVE^^** characteristic to determine the distance each model in that unit can move as part of that **^^RUN^^** ability.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.0 Shooting Phase Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Shooting Phase Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Covering Fire",
+                "timing": "Enemy Shooting Phase",
+                "phase": "shootingPhase",
+                "icon": "shooting",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that did not use a **^^RUN^^** ability this turn and that is **not in combat** to use this ability, then pick the closest enemy unit (to that unit) that can be picked as the target of shooting attacks to be the target. You cannot pick **^^MANIFESTATIONS^^** or faction terrain features as the target of this ability.",
+                "effect": "Resolve shooting attacks for the unit using this ability against the target. You must subtract 1 from the hit rolls for those attacks.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": [
+                  "Attack",
+                  "Shoot"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5.0 Charge Phase Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Charge Phase Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Counter-Charge",
+                "timing": "Enemy Charge Phase",
+                "phase": "chargePhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **not in combat** to use this ability.",
+                "effect": "That unit can use a **^^CHARGE^^** ability as if it were your charge phase.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 2,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Forward to Victory",
+                "timing": "Reaction: You declared a Charge ability",
+                "phase": "chargePhase",
+                "icon": "movement",
+                "usedBy": "The unit using that **^^CHARGE^^** ability.",
+                "declare": "",
+                "effect": "You can re-roll the **charge roll**.",
+                "reaction": true,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6.0 Attacking (Shooting and Combat) Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Attacking (Shooting and Combat) Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "All-Out Attack",
+                "timing": "Reaction: You declared an **^^ATTACK^^** ability",
+                "phase": "combatPhase",
+                "icon": "offensive",
+                "usedBy": "The unit using that **^^ATTACK^^** ability.",
+                "declare": "",
+                "effect": "Add 1 to **hit rolls** for attacks made as part of that **^^ATTACK^^** ability. This also affects weapons that have the **Companion** weapon ability. For the rest of the turn, subtract 1 from **save rolls** for the unit using this ability.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7.0 Defensive Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Defensive Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "All-Out Defence",
+                "timing": "Reaction: Opponent declared an **^^ATTACK^^** ability",
+                "phase": "defensive",
+                "icon": "defensive",
+                "usedBy": "A unit targeted by that **^^ATTACK^^** ability.",
+                "declare": "",
+                "effect": "Add 1 to **save rolls** for that unit until that **^^ATTACK^^** ability has been resolved.",
+                "reaction": true,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "8.0 End of Turn Commands",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "End of Turn Commands",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Power Through",
+                "timing": "End of Any Turn",
+                "phase": "endOfTurn",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that charged this turn to use this ability, then you must pick an enemy unit **in combat** with it to be the target. The target must have a lower **Health** characteristic than the unit using this ability.",
+                "effect": "Inflict **D3 mortal damage** on the target. Then, the unit using this ability can move a distance up to its **^^Move^^** characteristic. It can pass through and end that move within the combat ranges of enemy units that were in combat with it at the start of the move, but not those of other enemy units. It does not have to end the move in combat.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": [
+                  "Move"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1.0 Terrain Overview",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "1.0 Terrain Overview",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Terrain features add interest and tactical challenges to the battlefield. The battleplan or battlepack you are using will explain how to set up terrain.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "The Citadel Terrain List, available at **warhammer-community.com**, includes a list of Warhammer Age of Sigmar terrain features and tells you which terrain abilities each of them has.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.1 Wholly On Terrain and Behind Terrain",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "A model is **wholly on a terrain feature** if its base is on that terrain feature and no part of its base extends past the edge of that terrain feature. A unit is wholly on a terrain feature if every model in that unit is wholly on that terrain feature.\n\nWhen a unit is targeted by an attack, if it is impossible to draw a straight line from the closest point on the attacking model’s base to the closest point on the base of a model in the target unit that is in range without that line passing over that terrain feature, the target unit is considered to be **behind a terrain feature** for the attack made by that attacking model. Ignore parts of the terrain feature within the attacking unit’s combat range for the purposes of determining if the target is behind that terrain feature.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.2 Universal Terrain Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each terrain feature has one or more of the following passive abilities:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• **Cover:** Subtract 1 from hit rolls for attacks that target a unit that is behind or wholly on this terrain feature, unless that unit charged this turn or has the **^^FLY^^** keyword.\n• **Impassable:** Models cannot move across, be set up on or end moves on any part of this terrain feature.\n• **Obscuring:** While every model in a non-**^^MONSTER^^** non-**^^WAR MACHINE^^** unit that does not have the **^^FLY^^** keyword is within 1\" of this terrain feature, the following apply:\n\n• That unit is only visible to enemy units that are within its combat range.\n• The Range characteristic of that unit’s ranged weapons is halved (rounding down to the nearest inch).\n• **Place of Power: HEROES** within 3\" of this terrain feature can use the ‘Activate Place of Power’ ability.\n• **Unstable:** Models can move across but cannot be set up on or end any type of move on any part of this terrain feature that is more than 1\" tall.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Activate Place of Power",
+                "timing": "Once Per Turn (Army), Start of Any Turn",
+                "phase": "startOfTurn",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a friendly **^^HERO^^** within 3\" of any **Places of Power** to use this ability.",
+                "effect": "Roll a dice. On a 1, inflict D3 mortal damage on that **^^HERO^^**. On a 2+, pick 1 of the following effects:\n• *I**gnite Fury:*** Gain 2 **rage dice**, then increase your **fury level** by 2, to a maximum of 7.\n• ***Channel Wrath:*** If that **^^HERO^^** is a **^^WIZARD^^** or **^^PRIEST^^**, add 1 to casting rolls or chanting rolls for that **^^HERO^^** for the rest of the turn.\n• ***Dizzying Rage:*** For the rest of the turn, if that **^^HERO^^** is not a **^^WIZARD^^** or **^^PRIEST^^**, they can use the ‘Unbind’ or ‘Banish Manifestation’ ability as if they had **WIZARD (1)**.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "1.3 Terrain Sizes",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "•  Terrain that fits into an area no larger than 7\" × 7\" is **small**.\n\n•  Terrain that is not small and fits into an area no larger than 7\" × 12\" is **medium**.\n\n•  Terrain that is too big to fit into an area 7\" × 12\" is **large**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.4 Terrain Types",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each **terrain feature** in Warhammer Age of Sigmar is one of the following types:\n\n**• Obstacle**\n**• Obscuring Terrain**\n**• Area Terrain**\n**• Place of Power**\n**• Faction Terrain**\n\nBefore the battle begins, players must agree on which type applies to each terrain feature.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "accordion",
+              "text": "**Examples:** Ruins, debris, statues, barricades\n**Terrain Abilities:** Cover, Unstable",
+              "title": "1.4.1 Obstacles",
+              "ability": null
+            },
+            {
+              "contentType": "accordion",
+              "text": "**Examples:** Wyldwood, fortress wall\n**Terrain Abilities:** Cover, Obscuring, Unstable",
+              "title": "1.4.2 Obscuring Terrain",
+              "ability": null
+            },
+            {
+              "contentType": "accordion",
+              "text": "**Examples:** Hills, Stormvault Terrain\n**Abilities:** Cover",
+              "title": "1.4.3 Area Terrain",
+              "ability": null
+            },
+            {
+              "contentType": "accordion",
+              "text": "**Examples:** Realmgate, Cleansing Aqualith, Nexus Syphon\n**Abilities:** Cover, Place of Power, Unstable",
+              "title": "1.4.4 Places of Power",
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.5 Faction Terrain",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some factions have special terrain features called **faction terrain features**. Faction terrain features have their own warscrolls. They are not considered to be units, with the following exceptions:\n\n•  In the combat phase, they are treated as if they were units for the purposes of movement, combat range and being in combat.\n•  They are affected by all enemy abilities as if they were units.\n•  They can be damaged in the same manner as units. However, when they are removed from play, they count as being **demolished** instead of slain or destroyed (this means that they do not count as destroyed units for the purposes of abilities, scoring battle tactics etc.).\n•    Enemy units can finish a charge move within ½\" of a terrain feature that is **garrisoned** (see 1.5.1). Faction terrain features cannot contest objectives even while they are garrisoned.\n•  If a terrain feature has any melee or ranged weapons, it can use the ‘Fight’ and ‘Shoot’ **^^CORE^^** abilities as if it were a unit.\n•  Terrain features that have a Move characteristic of 0\" (‘-’) cannot move (note that pile-in moves are a type of move).\n• Faction terrain features with a Move characteristic greater than ‘-’ are treated as if they were units in all phases for the purposes of movement, combat range, being in combat and setting up terrain features, other manifestations and other units.\n\nSome faction terrain features allow you to place a unit on them (this will be clearly specified in that terrain feature’s rules). When doing so, instead of measuring range or visibility to and from the unit that is on that terrain feature, measure to and from the terrain feature instead. Unless otherwise specified, units on a faction terrain feature cannot use **^^FIGHT^^** abilities.\n\nIf a unit placed on a terrain feature is removed from it (e.g. if an ability removes them from the battlefield), that unit counts as having left that terrain feature and loses any special role or benefits it had as a result of being placed on it.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "accordion",
+              "text": "Some faction terrain features allow you to place another unit on them using an ability on the terrain feature’s warscroll. While a faction terrain feature has another unit on it that was placed there in this way, that terrain feature is **garrisoned**.\n\nGarrisoned terrain features can use abilities and be affected by enemy abilities, but they cannot be affected by friendly abilities other than **^^CORE^^** abilities, abilities on their warscroll and abilities that specifically affect terrain features. Any time you would measure range or visibility to or from a unit that is on a garrisoned terrain feature (including if that unit is contesting an objective), measure to and from the terrain feature instead. Unless otherwise specified, units on a faction terrain feature are not eligible to use **^^FIGHT^^** abilities.\n\nUnits cannot move while they are garrisoned on a terrain feature.",
+              "title": "1.5.1 Garrisoning Faction Terrain Features",
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.6 Charging Units on Terrain",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "In some cases, it is not possible to reach an enemy unit using a **^^CHARGE^^** ability when they are wholly on a terrain feature (e.g. a unit on top of a tower) because the charging unit is unable to end their move mid-way up the terrain feature and there is not enough room for the models to be placed at the top. In these cases, the charging unit can end their charge within **½\" of that terrain feature** instead if this would result in the charging unit ending their move **in combat** with any enemy units wholly on a terrain feature.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.7 Scenery Pieces",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some terrain features, such as wyldwoods or collections of smaller timeworn ruins, are made up of multiple **scenery pieces**. Each scenery piece that makes up a part of the same terrain feature must be set up so that all of the scenery pieces fit into the area that corresponds to the terrain feature’s size (see 1.3). The full collection of scenery pieces is considered to be a single terrain feature.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1.0 Wizards and Priests",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "1.0 Wizards and Priests",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "**^^WIZARDS^^** are special units that can cast **^^spells^^**, and **^^PRIESTS^^** are special units that can chant **^^prayers^^**. Spells and prayers are powerful **abilities** that can have a dramatic impact on the battle.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.1 Power Level",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each **^^WIZARD^^** and **^^PRIEST^^** has a power level shown after the keyword, e.g. **WIZARD (2)**. A **^^WIZARD^^**’s casting power level determines how many Spell abilities they can use per phase. A **^^PRIEST^^**’s chanting power level determines how many **^^PRAYER^^** abilities they can use per phase.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "header",
+              "text": "1.1.1 Multiple Power Levels",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "• If an ability references a unit’s power level and that unit has more than one power level, use whichever power level is higher.\n• If an ability modifies a unit’s power level and that unit has more than one power level, it modifies both.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2.0 Spells",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "2.0 Spells",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The declare step of each spell will tell you to make a **casting roll** of **2D6**. If the roll does **not** equal or exceed the spell’s **casting value** (at the top-right corner of the spell), the spell fails and its effect is not resolved. If the unmodified casting roll includes **2 or more rolls of 1**, the spell is **miscast**: the spell fails, its effect is not resolved, **D3 mortal damage** is inflicted on the **^^WIZARD^^** that used it, and that **^^WIZARD^^** cannot use any more spells in that phase.\n\nEnemy reactions can only be used if the **casting roll** equals or exceeds the spell’s **casting value**. So long as the spell is not **unbound** (see 4.0), then it is **successfully cast**: resolve its **effect**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3.0 Prayers",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "3.0 Prayers",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The declare step of each prayer will tell you to make a **chanting roll** of **D6**. On an unmodified chanting roll of **1**, the prayer fails, its effect is not resolved and you must **remove D3 ritual points** from the **^^PRIEST^^** using the prayer. Otherwise, pick one of the following:\n\n•  Give a number of **ritual points** to the **^^PRIEST^^** equal to the chanting roll (ritual points can be accumulated over multiple turns).\n•  You can add the **^^PRIEST^^**’s ritual points to the chanting roll. If the chanting roll equals or exceeds the prayer’s **chanting value** (at the top-right corner of the prayer), it is **answered**: resolve the **effect** of the prayer, then reset the **^^PRIEST^^**’s ritual points total to 0.\n\nAll **^^PRIESTS^^** know the following prayer:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Sacred Rites",
+                "timing": "Your Hero Phase",
+                "phase": "heroPhase",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a friendly **^^PRIEST^^** to use this ability, then make a **chanting roll** of D6. On an unmodified chanting roll of 1, remove 1 ritual point from that **^^PRIEST^^** instead of D3.",
+                "effect": "Give a number of ritual points to the **^^PRIEST^^** equal to the unmodified chanting roll and do not reset the **^^PRIEST^^**'s ritual points total to 0.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": 2,
+                "keywords": [
+                  "Prayer",
+                  "Unlimited"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.0 Unbinding Spells",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "4.0 Unbinding Spells",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each **^^WIZARD^^** can use the ‘Unbind’ reaction a number of times per phase equal to their **power level**. This is an exception to The Rules of One (Core Rules, 5.3).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Unbind",
+                "timing": "Reaction: Opponent declared a **^^SPELL^^** ability",
+                "phase": "heroPhase",
+                "icon": "special",
+                "usedBy": "A friendly **^^WIZARD^^** within 30\" of the enemy **^^WIZARD^^** casting the spell.",
+                "declare": "",
+                "effect": "Make an **unbinding roll** of 2D6. If the roll exceeds the **casting roll** for the spell, then the spell is unbound and its effect is not resolved. This reaction cannot be used more than once per **casting roll**.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Unbind"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5.0 Jealous Mages and Fickle Gods",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "5.0 Jealous Mages and Fickle Gods",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "No more than 1 friendly **^^WIZARD^^** can cast the same spell per turn, unless that spell has the **^^UNLIMITED^^** keyword. Likewise, no more than 1 friendly **^^PRIEST^^** can chant the same prayer per turn, unless that prayer has the **^^UNLIMITED^^** keyword. Keep in mind that each unit can still only use any given spell or prayer ability once per phase (see The Rules of One, Core Rules, 5.3).",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6.0 Known Spells and Prayers",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "6.0 Known Spells and Prayers",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "**^^WIZARDS^^** and **^^PRIESTS^^** can only use spells or prayers that they know. Each **^^WIZARD^^** and **^^PRIEST^^** knows any spells or prayers on its warscroll, plus all of the spells and prayers in the spell lores, manifestation lores and prayer lores you take for your army.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7.0 Manifestations",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "7.0 Manifestations",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "There are two types of **manifestation: endless spells**, which can be summoned by **^^WIZARDS^^**, and **^^invocations^^**, which can be summoned by **^^PRIESTS^^**. Each manifestation has its own **warscroll**, and the **^^spell^^** or **^^prayer^^** that allows that manifestation to be summoned will be found in the appropriate **manifestation lore**. No more than 1 friendly **^^WIZARD^^** or **^^PRIEST^^** can attempt to summon the same manifestation per turn, and a friendly **^^WIZARD^^** or **^^PRIEST^^** cannot attempt to summon a friendly manifestation that was removed from play in the same turn.\n\nManifestations are not units but can be interacted with in similar ways, as explained next:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "header",
+              "text": "All Manifestations",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Models can move through them but cannot end a move on them.\nUnits can finish a charge move within ½\" of an enemy manifestation instead of within ½\" of an enemy unit.\nThey can be damaged and destroyed as if they were units but do not count as destroyed units for the purposes of battle tactics and abilities.\nThey are affected by all enemy abilities as if they were units.\nThey can use **^^CORE^^** abilities as if they were units, and they can use abilities on their warscroll. Unless specified otherwise, they cannot use and are not affected by any other friendly abilities, and they do not count as units for the purposes of battle tactics or friendly abilities.\nThey can only use the ‘Shoot’ or ‘Fight’ abilities if they have weapons of the appropriate type.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "header",
+              "text": "Manifestations With a Move Characteristic of '-'",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "They cannot move.\nThey only count as being in combat in the combat phase, and enemy units only count as being in combat with them in the combat phase.\nThey cannot make shooting attacks with ranged weapons that do not have **Shoot in Combat** while there is a visible enemy unit within 3\" of them.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "header",
+              "text": "Manifestations With a Move Characteristic Greater Than '-'",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "They are treated as if they were units for the purposes of movement, combat range, being in combat and setting up terrain features, other manifestations and other units.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "7.1 Severed Connection",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "If the unit that summoned a manifestation is destroyed, that manifestation is removed from the battlefield.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "7.2 Banishing Manifestations",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Instead of using a **^^SPELL^^** or **^^PRAYER^^** ability (including when using the ‘Magical Intervention’ ability), each **^^WIZARD^^** and **^^PRIEST^^** can use the ‘Banish Manifestation’ ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Banish Manifestation",
+                "timing": "Your Hero Phase",
+                "phase": "heroPhase",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a friendly **^^WIZARD^^** or **^^PRIEST^^** to use this ability, pick a **^^MANIFESTATION^^** within 30\" of them that was not summoned this turn to be the target, then make a banishment roll of 2D6. Add 1 to the **banishment roll** for each additional enemy **^^MANIFESTATION^^** on the battlefield after the first. You cannot pick the same **^^MANIFESTATION^^** to be the target of this ability more than once per turn.",
+                "effect": "If the **banishment roll** equals or exceeds the banishment value listed on the **^^MANIFESTATION^^**’s warscroll, it is banished and removed from play.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Banish"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1.0 Getting Started",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "1.1 Army Roster",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "These rules will explain how to create an **army roster** to prepare for a battle. You can find a blank army roster in the Generals Handbook 2025-26, or go to **warhammer‑community.com** to download a printable copy.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.2 Points Limit",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Before you start filling your roster, you and your opponent must agree on a **points limit** for the battle. You can agree on any points limit, but most players use a limit of 1000 points, 2000 points or somewhere in between. If a unit, Regiment of Renown, faction terrain feature, enhancement or lore has a points value, you must spend that number of points to include it on your army roster. The total points value of the options you have picked in your army must not exceed the agreed points limit of the battle. No more than half of your points can be spent on a single unit.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "accordion",
+              "text": "In many cases, the total points cost of your army will not add up to the exact points limit, but you might not have enough points left to add something else. If the points cost of your army is **50 or more points lower** than the points limit of the battle, you gain **1 extra command point at the start of the first battle round**.",
+              "title": "1.2.1 Underspending",
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "1.3 Battle Profiles",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The information you’ll need when building your army roster is found in each unit’s **battle profile**. The battle profiles for all units are also available online at warhammer-community.com.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2.0 Factions",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "2.0 Factions",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The first thing you need to do when building your army roster is to pick your **faction** (e.g. Stormcast Eternals or Skaven).\n\nEach faction has its own warscrolls, battle profiles and faction rules. These can be found in various publications but most commonly in the faction’s **battletome**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "2.1 Battle Formations",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Many factions contain one or more **battle formations**. Each battle formation grants unique benefits to your army. The **faction rules** for your faction will explain any battle formation options.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "2.2 Armies of Renown",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some factions have access to rules for themed armies called **Armies of Renown**. If you choose to use an Army of Renown, the rules for that Army of Renown replace the normal faction rules for that army.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3.0 Adding Units",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "3.1 Regiments",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Armies are made up of one or more **regiments**, each of which is led by a Hero. You must have **at least 1** regiment in your army, and you can include a **maximum of 5** regiments. To add a regiment, pick **1** **^^HERO^^** from your faction, then pick up to **3** non‑**^^HERO^^** units to accompany them.\n\nEach **HERO’**&#x73; battle profile lists which units can be added to their regiment, and each non-**^^HERO^^** unit’s battle profile lists any relevant keywords it has. The battle profiles of some **^^HEROES^^** may say that they can be added to the regiment of another **^^HERO^^** in place of a non-**^^HERO^^** unit in that regiment.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "header",
+              "text": "3.1.1 Regimented Forces",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "If a player has more regiments than their opponent at the start of the battle, then once per battle, that player can re-roll their priority roll after seeing the result of both players’ rolls but before determining priority for that battle round.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "3.2 The General",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "You must pick 1 **^^HERO^^** in your army that is leading a regiment to be your general. If any units in your army have the **^^WARMASTER^^** keyword, you must pick one of those units to be your general and they must lead a regiment. Your general’s **regiment** can include up to **4** non‑**^^HERO^^** units in addition to your general.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "3.3 Reinforced Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "When you add a unit to your army roster, you can add it as a **reinforced unit**. A reinforced unit has **twice as many models** as its minimum unit size and costs **twice as many points**. If a unit has a minimum unit size of 1, it cannot be reinforced. In addition, some units with a unit size of more than 1 can not be reinforced. This will be noted on their battle profile.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "3.4 Unique Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "You cannot include the same **^^UNIQUE^^** unit more than once in your army. **^^UNIQUE^^** units cannot be reinforced.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "3.5 Regiments of Renown",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "In addition to creating your own regiments, you can also spend points to include 1 **Regiment of Renown**. Regiments of Renown are pre‑built regiments, each with their own special abilities. The rules for each Regiment of Renown will specify which factions can include it. A unit in a Regiment of Renown cannot be your general even if it is a **^^WARMASTER^^**.\n\n• You cannot include more than one Regiment of Renown in your army unless otherwise specified in the notes column of that regiment’s battle profile.\n\n• Units in a Regiment of Renown cannot use (but can be picked as the target of, if otherwise eligible) any faction rules from the faction they are allied into, including enhancements and lores, unless they have a keyword that matches that faction’s name.\n\n• If an ability allows you to set up a replacement unit (see Core Rules 24.2) for a unit from a Regiment of Renown, that unit also counts as being part of the Regiment of Renown.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "3.6 Auxiliary Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "**Auxiliary units** allow you to take any units from your faction without the constraints of regiments, at the cost of potentially giving your opponent an advantage. You can add any number of units to the auxiliary units section of your army roster. However, the player with the fewest auxiliary units on their roster gains **1 extra command point at the start of each battle round** (if the players have the same number of auxiliary units, neither player receives an extra command point). **^^HEROES^^** that have compulsory regiment options cannot be taken as auxiliary units.\n\nEach auxiliary unit after the first that is added to your roster will incur a cumulative surcharge of 20 points. For example, the second auxiliary unit will cost +20 points, the third will cost +40 points, the fourth will cost +60 points and so on.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "3.7 Faction Terrain Features",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "If your faction has a **faction terrain feature**, or a set of faction terrain features, you can pick 1 to include on your army roster.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.0 Finishing Touches",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "4.1 Enhancements",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each set of faction rules include a number of **enhancements** that can be given to units, e.g. **heroic traits** and **artefacts of power**. You can take **1 enhancement** from **each** enhancement table in your **faction rules**. Each enhancement table lists which units are eligible to be given that enhancement. **^^UNIQUE^^** units cannot be given enhancements.\n\nWhile some abilities allow you to take extra enhancements, the same unit can never have more than 1 enhancement of the same type, and you can never include the same enhancement in your army more than once. Enhancements cannot be given to Regiment of Renown units unless they have a keyword that matches that faction’s name.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "4.2 Lores",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "You can pick 1 **spell lore** available to your faction. If you do, **all** **^^WIZARDS^^** in your army with the same faction keyword as your general know **all** spells from that lore.\n\nYou can pick 1 prayer lore available to your faction. If you do, **all** **^^PRIESTS^^** in your army with the same faction keyword as your general know **all** prayers from that lore.\n\nYou can pick 1 **manifestation lore** available to your faction. If you do, **all WIZARDS** in your army know **all** spells from that lore, and **all** **^^PRIESTS^^** in your army know **all** prayers from that lore.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "4.3 Battle Tactics Cards",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "You can pick up to 2 battle tactics cards from the Battle Tactics 2026‑27 module for your army. Make a note of these battle tactics in the appropriate section on your army roster.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1.0 Champions",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Champions",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Units with the **^^CHAMPION^^** keyword have one or more **^^champion^^** models. If there is a number after the **^^CHAMPION^^** keyword, that number indicates the proportion of models in that unit that can be champions. In any other case, 1 model in the unit can be a champion. Units with the **^^CHAMPION^^** keyword have the following passive ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Champion",
+                "timing": "Passive",
+                "phase": "combatPhase",
+                "icon": "offensive",
+                "usedBy": "",
+                "declare": "",
+                "effect": "Add 1 to the **^^Attacks^^** characteristic of weapons used by champions in this unit. If this unit is a **^^BEAST^^**, this ability affects this unit’s **Companion** weapons.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "boxed",
+              "text": "If a unit had **CHAMPION (1/10)** on its keywords bar, then 1 model in that unit could be a champion for every 10 models in the unit.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2.0 Musicians",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Musicians",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Units with the **^^MUSICIAN^^** keyword have one or more **^^musician^^** models. The number after the **^^MUSICIAN^^** keyword indicates the proportion of models in that unit that can be musicians. Units with the **^^MUSICIAN^^** keyword have the following passive ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Musician",
+                "timing": "Passive",
+                "phase": "heroPhase",
+                "icon": "rallying",
+                "usedBy": "",
+                "declare": "",
+                "effect": "While this unit contains any musicians, if it uses the ‘Rally’ command, you can make one additional **rally roll** of D6.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "boxed",
+              "text": "Let your opponent know which models in a unit are champions, musicians and standard bearers if it’s not already clear from the miniatures.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3.0 Standard Bearers",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Standard Bearers",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Units with the **^^STANDARD BEARER^^** keyword have one or more **^^standard bearer^^** models. The number after the **^^STANDARD BEARER^^** keyword indicates the proportion of models in that unit that can be standard bearers. Units with the **^^STANDARD BEARER^^** keyword have the following passive ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Standard Bearer",
+                "timing": "Passive",
+                "phase": "endOfTurn",
+                "icon": "control",
+                "usedBy": "",
+                "declare": "",
+                "effect": "While this unit contains any standard bearers, add 1 to this unit’s **control score**.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

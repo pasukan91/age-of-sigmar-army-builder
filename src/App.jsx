@@ -12,6 +12,7 @@ import UnitConfig from "./pages/unitConfig";
 import RuleWarscroll from "./pages/RuleWarscroll";
 import Settings from "./pages/Settings";
 import PredefinedLists from "./pages/PredefinedLists";
+import RulesReference from "./pages/RulesReference";
 import ReferenceOverlay from "./components/ReferenceOverlay";
 import factions from "./data/factions";
 import alliances from "./data/alliances";
@@ -59,6 +60,7 @@ const PAGE_TITLES = {
   lists: "Mis listas",
   predefined: "Listas predefinidas",
   settings: "Ayuda y datos",
+  rules: "Reglas y FAQ",
   alliance: "Elige alianza",
   faction: "Elige facción",
   config: "Nueva lista",
@@ -2038,6 +2040,10 @@ function App() {
     navigate("settings", { listId: null });
   }
 
+  function openRules() {
+    navigate("rules", { listId: null });
+  }
+
   function openPredefinedLists() {
     navigate("predefined", { listId: null });
   }
@@ -2111,6 +2117,9 @@ function App() {
           onSettings={openSettings}
         />
       );
+
+    case "rules":
+      return <RulesReference onBack={goBack} />;
 
     case "alliance":
       return (
@@ -2394,6 +2403,7 @@ function App() {
           onNewList={startNewList}
           onMyLists={openLists}
           onSettings={openSettings}
+          onRules={openRules}
         />
       );
   }
@@ -2435,6 +2445,7 @@ function getInitialRoute(pathname) {
   if (listId) return { page: "builder", listId };
   if (pathname === "/listas") return { page: "lists", listId: null };
   if (pathname === "/ajustes") return { page: "settings", listId: null };
+  if (pathname === "/reglas") return { page: "rules", listId: null };
   if (pathname === "/predefinidas") return { page: "predefined", listId: null };
   if (pathname === "/nueva/alianza") return { page: "alliance", listId: null };
   if (pathname === "/nueva/faccion") return { page: "faction", listId: null };
@@ -2451,6 +2462,7 @@ function getPagePath(page, listId = null) {
     home: "/",
     lists: "/listas",
     settings: "/ajustes",
+    rules: "/reglas",
     predefined: "/predefinidas",
     alliance: "/nueva/alianza",
     faction: "/nueva/faccion",

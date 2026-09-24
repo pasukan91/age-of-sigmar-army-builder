@@ -5,6 +5,7 @@ function Home({
   onNewList,
   onMyLists,
   onSettings,
+  onRules,
 }) {
   return (
     <main className="aos-home">
@@ -38,6 +39,14 @@ function Home({
           >
             <span aria-hidden="true">★</span>
             Crear lista predefinida
+          </button>
+          <button
+            type="button"
+            onClick={onRules}
+            className="aos-secondary-action"
+          >
+            <span aria-hidden="true">⌕</span>
+            Consultar reglas y FAQ
           </button>
         </div>
 

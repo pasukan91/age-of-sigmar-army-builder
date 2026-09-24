@@ -1,0 +1,111 @@
+{
+  "version": 483,
+  "terrainAbilities": [
+    {
+      "name": "Obscuring",
+      "rules": "This rule varies depending on the battlepack selected for your army:\n\n**General's Handbook 2024-25**\nA unit cannot be targeted by shooting attacks made by enemy units that are not within its combat range if it is behind or wholly on this terrain feature, unless it has the **^^FLY^^** keyword.\n\n**General's Handbook 2025-26**\nWhile every model in a non-**^^MONSTER^^** non‐**^^WAR MACHINE^^** unit that does not have the **^^FLY^^** keyword is within 1\" of this terrain feature, the following apply:\n•That unit is only visible to enemy units that are within its combat range.\n•The Range characteristic of that unit’s ranged weapons is halved (rounding down to the nearest inch).\n\n**General's Handbook 2026-27**\nWhile every model in a non-**^^MONSTER^^** non-**^^WAR MACHINE^^** unit that does not have the **^^FLY^^** keyword is within 1\" of this terrain feature, the following apply:\n• That unit is only visible to enemy units that are within its combat range.\n• The Range characteristic of that unit’s ranged weapons is halved (rounding down to the nearest inch)."
+    },
+    {
+      "name": "Cover",
+      "rules": "This rule varies depending on the battlepack selected for your army:\n\n**General's Handbook 2024-25**\nSubtract 1 from **hit rolls** for attacks that target a unit that is behind or wholly on this terrain feature, unless that unit **charged** this turn or has the **^^FLY^^** keyword.\n\n**General's Handbook 2025-26**\nSubtract 1 from **hit rolls** for attacks that target a unit that is behind or wholly on this terrain feature, unless that unit **charged** this turn or has the **^^FLY^^** keyword.\n\n**General's Handbook 2026-27**\nSubtract 1 from hit rolls for attacks that target a unit that is behind or wholly on this terrain feature, unless that unit charged this turn or has the **^^FLY^^** keyword."
+    },
+    {
+      "name": "Impassable",
+      "rules": "This rule varies depending on the battlepack selected for your army:\n\n**General's Handbook 2024-25**\nModels cannot move across, be set up on or end moves on any part of this terrain feature.\n\n**General's Handbook 2025-26**\nModels cannot move across, be set up on or end moves on any part of this terrain feature.\n\n**General's Handbook 2026-27**\nModels cannot move across, be set up on or end moves on any part of this terrain feature."
+    },
+    {
+      "name": "Unstable",
+      "rules": "This rule varies depending on the battlepack selected for your army:\n\n**General's Handbook 2024-25**\nModels **can** move across but **cannot** be set up on or end any type of move on any part of this terrain feature that is more than 1\" tall.\n\n**General's Handbook 2025-26**\nModels **can** move across but **cannot** be set up on or end any type of move on any part of this terrain feature that is more than 1\" tall.\n\n**General's Handbook 2026-27**\nModels can move across but cannot be set up on or end any type of move on any part of this terrain feature that is more than 1\" tall."
+    },
+    {
+      "name": "Place of Power",
+      "rules": "This rule varies depending on the battlepack selected for your army:\n\n**General's Handbook 2024-25**\n**^^HEROES^^** within 3\" of this terrain feature can use the ‘Activate Place of Power’ ability.\n\n**General's Handbook 2025-26**\n**^^HEROES^^** within 3\" of this terrain feature can use the ‘Activate Place of Power’ ability.\n\n**General's Handbook 2026-27**\n**^^HEROES^^** within 3\" of this terrain feature can use the ‘Activate Place of Power’ ability."
+    }
+  ],
+  "weaponAbilities": [
+    {
+      "name": "Anti-WIZARD (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Crit (2 Hits)",
+      "rules": "If an attack made with this weapon scores a **critical hit**, that attack scores 2 hits on the target unit instead of 1. Make a **wound roll** for each hit."
+    },
+    {
+      "name": "Anti-INFANTRY (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-HERO (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-CAVALRY (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-DAEMON (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-PRIEST (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Crit (Mortal)",
+      "rules": "If an attack made with this weapon scores a **critical hit**, that attack inflicts **mortal damage** on the target unit equal to the **Damage** characteristic of that weapon and the attack sequence ends."
+    },
+    {
+      "name": "Anti-charge (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Charge (+1 Damage)",
+      "rules": "Add 1 to this weapon’s **Damage** characteristic if the attacking unit **charged** this turn."
+    },
+    {
+      "name": "Anti-FACTION TERRAIN (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Shoot in Combat",
+      "rules": "This weapon can be used to make shooting attacks even if the attacking unit is in combat."
+    },
+    {
+      "name": "Anti-MANIFESTATION (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-MONSTER (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Blood-hungry",
+      "rules": "See Battle Traits"
+    },
+    {
+      "name": "Companion",
+      "rules": "Unless otherwise specified, attacks made by this weapon are not affected by friendly abilities that modify hit rolls, wound rolls or weapon characteristics, except for those that apply negative modifiers (e.g. ‘Covering Fire’)."
+    },
+    {
+      "name": "Wyrdflame",
+      "rules": "See Disciples of Tzeentch Battle Traits."
+    },
+    {
+      "name": "Anti-WAR MACHINE (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-BEAST (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Anti-UNIQUE (+1 Rend)",
+      "rules": "Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn."
+    },
+    {
+      "name": "Crit (Auto-wound)",
+      "rules": "If an attack made with this weapon scores a **critical hit**, that attack automatically wounds the target. Make a **save roll** as normal."
+    }
+  ]
+}

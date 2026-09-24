@@ -71,21 +71,20 @@ test("includes the highlighted September rules changes", async () => {
     assert.equal(get("sylvaneth", "treelord").rules.canBeReinforced, false);
     assert.equal(get("khorne", "skull-cannon").rules.canBeReinforced, false);
 
-    assert.equal(get("nighthaunt", "shadowy-aura").phase, "Passive");
+    assert.match(get("nighthaunt", "shadowy-aura").phase, /Redeploy/i);
     assert.match(get("skaven", "lightning-master").description, /set the Attacks characteristic/i);
     assert.equal(get("skaven", "a-reputation-for-cunning").commandPoints, null);
     assert.match(get("fyreslayers", "blazing-impetus").description, /was not set up this turn/i);
 
     const gatebreaker = get("behemat", "scourge-of-aqshy-gatebreaker-mega-gargant");
-    assert.equal(gatebreaker.profile.health, 25);
-    assert.equal(gatebreaker.profile.control, "10");
-    assert.ok(gatebreaker.abilities.some((ability) => ability.id === "fortcrusha-flail"));
-    assert.ok(!gatebreaker.abilities.some((ability) => ability.id === "longshanks"));
+    assert.equal(gatebreaker.profile.health, 35);
+    assert.equal(gatebreaker.profile.control, "20");
+    assert.ok(gatebreaker.weapons.some((weapon) => weapon.name.includes("Fortcrusha Flail")));
+    assert.ok(gatebreaker.abilities.some((ability) => ability.id === "longshanks"));
 
-    const doubleStomp = get("behemat", "double-stomp");
-    assert.ok(doubleStomp.keywords.includes("Destructive Impulse"));
-    assert.doesNotMatch(doubleStomp.description, /Almightier Stomp/);
-    assert.match(get("behemat", "wrath-of-brodd").description, /as if it had \*\*FLY\*\*/);
+    assert.equal(get("behemat", "ma-maegran-chooser-of-the-mighty").points, 370);
+    assert.equal(get("behemat", "boss-stompers").rules.canBeReinforced, false);
+    assert.equal(get("behemat", "rock-hurlers").rules.canBeReinforced, false);
   } finally {
     await server.close();
   }

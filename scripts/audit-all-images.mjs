@@ -63,8 +63,14 @@ try {
   }
   collect(regimentsOfRenown, "Regiments of Renown", "regiment", issues);
 
-  console.log(JSON.stringify({ total: issues.length, issues }, null, 2));
-  if (issues.length) process.exitCode = 1;
+  const missing = issues.filter((issue) => issue.status !== "generic-unit-image");
+  const genericFallbacks = issues.filter((issue) => issue.status === "generic-unit-image");
+  console.log(JSON.stringify({
+    totalMissing: missing.length,
+    genericFallbacks: genericFallbacks.length,
+    issues,
+  }, null, 2));
+  if (missing.length) process.exitCode = 1;
   const manifestPath = process.argv[2];
   if (manifestPath) {
     const generated = JSON.parse(

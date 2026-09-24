@@ -14,7 +14,7 @@ const intentionallyUnavailableRegimentOptions = new Set([
 ]);
 
 function regimentOptionLabel(option) {
-  return String(option)
+  return String(option?.label ?? option)
     .trim()
     .toLowerCase()
     .replace(/^\d+\s*[-–—]\s*\d+(?:\s+|-)\s*/, "");
@@ -78,7 +78,7 @@ try {
           getAvailableUnitsForRegiment(list, optionRegiment).length === 0
         ) {
           failures.push(
-            `${faction.id}: unresolved regiment option on ${leader.id}: ${option}`
+            `${faction.id}: unresolved regiment option on ${leader.id}: ${option?.label ?? option}`
           );
         }
       });

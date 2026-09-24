@@ -1,0 +1,1764 @@
+{
+  "title": "Core Rules",
+  "sections": [
+    {
+      "name": "1.0 Core Concepts",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "The Most Important Rule",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "While you’re playing Warhammer Age of Sigmar, you might encounter a rules situation that you aren’t sure how to resolve. If you’re new to the game, we recommend discussing with your opponent and agreeing on a fair and reasonable solution so you can get on with the game as quickly as possible. Otherwise, the **Special Rules** section includes detailed instructions on how to resolve these situations.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Rules Updates",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "We are committed to supporting Warhammer Age of Sigmar rules via regular free updates based on community feedback. Please check **warhammer-community.com** to download the latest updates and FAQs.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Core Concepts",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Battles in Warhammer Age of Sigmar are fought on a surface that is referred to as the **battlefield**. Each battle uses a scenario called a **battleplan**, which will explain how to set up the battlefield and how to determine the winner.\n\nEach player is the **commander** of an **army**. Each army belongs to a **faction** and is made up of groups of **models** called **units**. Models and units in your army are referred to as **friendly** models and units, and models and units in your opponent’s army are referred to as **enemy** models and units.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2.0 Tools of War",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Tools of War",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "To fight a battle, you will need:\n\n• A tape measure\n• Some dice\n• A surface to play on (the battlefield)\n• 2 armies of Citadel Miniatures",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "2.1 Measuring Distances",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Distances in Warhammer Age of Sigmar are measured in **inches** (\"), between the closest points on the bases of the models you’re measuring to and from. You can measure distances whenever you wish. When measuring the distance between units, always measure the distance between the closest points on the bases of the closest models in each unit. If a model does not have a base, measure to and from the closest point on the model instead.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "2.1.1 Within and Wholly Within",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "A **model** is **within** a certain distance of something (e.g. another unit, a territory or an objective) if any part of its base is within that distance.\n\nA **model** is **wholly within** a certain distance of something if every part of its base is within that distance.\n\nA **unit** is **within** a certain distance of something if any part of the base of any model in the unit is within that distance. A **unit** is **wholly** **within** a certain distance of something if every part of the bases of all of the models in the unit is within that distance.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "2.2 Dice",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Warhammer Age of Sigmar uses six-sided dice, often abbreviated to **D6**.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• Some rules refer to ‘2D6’, ‘3D6’ and so on – in such cases, roll a number of dice equal to the number before ‘D6’ and add the results together.\n• A roll of ‘2+’ means a roll of 2 or more, a roll of ‘3+’ means a roll of 3 or more, and so on.\n• If a rule requires you to roll a **D3**, roll a dice and halve the total, rounding up. For D3 rolls, a roll of ‘2+’ means a result of 2 or more after halving the total and rounding up.\n• Effects that allow you to modify a dice roll are called **modifiers**.\n• Some rules allow you to **re-roll** a dice roll, which means you get to roll some or all of the dice again. You cannot re-roll a dice more than once, and re-rolls happen before modifiers to the roll (if any) are applied.\n• If you are instructed to **roll off**, each player should roll a dice. Whichever player has a higher roll wins the roll-off. If the result is a tie, each player should roll off again until there is a clear winner, unless otherwise specified.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3.0 Factions",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Factions",
+          "containerType": "introduction",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each army belongs to a **faction**, e.g. Stormcast Eternals or Skaven.\n\nEach faction has a set of **faction rules**, which include **battle traits**, **battle formations**, **enhancements** and **lores**. These can be found in various publications but most commonly in the faction’s **battletome**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.0 Warscrolls",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Warscrolls",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The rules for each unit are contained on a **warscroll**:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• 1. The **^^MOVE^^** characteristic determines how quickly the unit can move across the battlefield (see 15.0).\n• 2. The **HEALTH** characteristic determines how many damage points can be allocated to a unit before a model in the unit is slain (see 18.2).\n• 3. The **CONTROL** characteristic determines how well each model in the unit can contest objectives (see 32.2).\n• 4. The **SAVE** Characteristic determines how well armoured the unit is. This characteristic is the roll you need to equal or exceed to save a model from harm, so a lower value is better (see 17.0).\n• 5. The **UNIT TYPE**.\n• 6. The **KEYWORDS** that the unit has (see 5.1).\n• 7. The **WEAPONS** the unit is armed with. Weapons are either **melee weapons**, used to make **combat attacks**, or **ranged weapons**, used to make **shooting attacks**. Each weapon has its own characteristics (see 16.0).\n• 8. Any special **ABILITIES** the unit can use (see 5.0).",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5.0 Abilities",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The vast majority of things that units can do in Warhammer Age of Sigmar are called **abilities**. This is an example of an ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• 1. **Timing**\n• 2. **Name and Description**\n• 3. **Declare Instructions**\n• 4. **Effect**\n• 5. **Keywords**",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "5.1 Keywords",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities have one or more **keywords** listed at the bottom of the ability on their **keywords bar**, e.g. the ‘Shoot’ ability shown above has the **^^CORE^^**, **^^ATTACK^^** and **^^SHOOT^^** keywords. Units also have a keywords bar on their warscroll.\n\nKeywords let you know which abilities can be used or which units can be picked as targets for an ability. For example, the ‘Charge’ ability can only be used by a unit if it did not use an ability with the **^^RUN^^** or **^^RETREAT^^** keyword earlier in the turn. The singular and plural forms of a keyword are synonymous for rules purposes.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "5.2 Using Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The **timing** of an ability tells you when it can be used. When using an ability, follow these steps:\n\n1. Declare the Ability: Tell your opponent which ability is being used. If the ability has **Declare** instructions, resolve them at this step.\n2. Use Reactions: Starting with the player using the ability, the players alternate using any abilities with an appropriate **Reaction** timing. Players can choose to pass instead of using a reaction, but once both players consecutively pass, no further reactions to that ability can be used.\n3. Resolve the Effect: Follow the instructions in the **Effect** part of the ability.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "5.3 The Rules of One",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "boxed",
+              "text": "• A unit cannot use more than 1 **^^CORE^^** ability per phase (see 14.0).\n• A unit cannot use the **same ability** more than once per phase, unless specified otherwise.\n• A unit cannot be affected by the same **passive ability** more than once at the same time. For example, if a unit is within range of two different terrain features that have the ‘Cover’ passive ability, the effect only applies to it once.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "5.4 Passive Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Abilities that have the **Passive** timing are called passive abilities. **Passive abilities** are not declared. The effects of passive abilities always apply if the conditions of the ability are met, and they must be applied if it is possible to do so.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Abilities Example",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "**Ben and Jes are fighting a battle, and Ben’s Rat Ogors have charged into Jes’s Liberators. It is Ben’s turn to pick a unit to fight. The following example shows how abilities are used, but don’t worry too much about the specific abilities, as they will be explained later in the rules.**",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "1. Ben uses the ‘Fight’ ability. The first step is to resolve any Declare instructions for the ability. In this case, Ben picks his unit of Rat Ogors to use the ability, then they make a pile-in move. Finally, Ben picks Jes’s Liberators unit as the target of all the Rat Ogors’ attacks.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Fight",
+                "timing": "Any Combat Phase",
+                "phase": "combatPhase",
+                "icon": "offensive",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **in combat** or that **charged** this turn to use this ability. That unit can make a **pile-in move** (see 15.3). Then, if that unit is **in combat**, you must pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0).",
+                "effect": "Resolve **combat attacks** against the target unit(s).",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Attack",
+                  "Fight"
+                ]
+              }
+            },
+            {
+              "contentType": "text",
+              "text": "2. After declaring the ability, Ben has the first opportunity to use any **reactions**. As ‘Fight’ has the **^^ATTACK^^** keyword, Ben is able to use the ‘All-out Attack’ ability to improve his Rat Ogors’ attacks.\n\nAfter Ben uses ‘All-out Attack’, Jes uses the ‘All-out Defence’ ability to try to protect his Liberators against the upcoming onslaught. Ben then passes on using any further reactions, then Jes does the same.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "All-out Attack",
+                "timing": "Reaction: You declared an ATTACK ability",
+                "phase": "combatPhase",
+                "icon": "offensive",
+                "usedBy": "The unit using that **^^ATTACK^^** ability.",
+                "declare": "",
+                "effect": "Add 1 to **hit rolls** for attacks made as part of that **^^ATTACK^^** ability. This also affects weapons that have the **Companion** weapon ability.",
+                "reaction": true,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "All-out Defence",
+                "timing": "Reaction: Opponent declared an ATTACK ability",
+                "phase": "defensive",
+                "icon": "defensive",
+                "usedBy": "A unit targeted by that **^^ATTACK^^** ability.",
+                "declare": "",
+                "effect": "Add 1 to **save rolls** for that unit in this phase.",
+                "reaction": true,
+                "castingValue": 0,
+                "cpCost": 1,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "text",
+              "text": "‘All-out Attack’ and ‘All-out Defence’ are examples of **Advanced Rules**, which are used in certain battlepacks.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "3. Now that the Declare instructions have been resolved and both players have had a chance to use reactions, Ben can resolve the effect of the ability, resulting in 2 Liberators being slain (see 18.3).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Fight",
+                "timing": "Any Combat Phase",
+                "phase": "combatPhase",
+                "icon": "offensive",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **in combat** or that **charged** this turn to use this ability. That unit can make a **pile-in move** (see 15.3). Then, if that unit is **in combat**, you must pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0).",
+                "effect": "Resolve **combat attacks** against the target unit(s).",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Attack",
+                  "Fight"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6.0 Visibility",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Visibility",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "A target model is visible to another model (which we’ll call the ‘observing model’) if you can draw a straight line through the air (whether horizontal, diagonal or vertical) from any point on the observing model to any point on the target model that does not intersect any objects except for other models in the observing model’s unit. A target unit is visible to an observing unit if at least 1 model in the target unit is visible to at least 1 model in the observing unit. A model is always considered to be visible to itself.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ If any part of another model can be seen by an observing model, both the target model and its unit are **visible** to that observing model.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "In some cases, it might not be immediately clear whether a model is visible. If so, stoop down to get a look from behind the observing model. If any part of the other model is visible, even if it is just the tip of a spear, then that model is visible for rules purposes.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "If a rule or ability requires a target to be both within a given range of and visible to the unit using that ability, or to a model in that unit, both conditions must be met by the same model in the target. You could not, for instance, target a unit where one model is within range but not visible and another model is not in range but is visible.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7.0 Combat Range",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Combat Range",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each model has a **combat range** that extends 3\" horizontally from its base and any distance vertically from that circle to form a cylinder. The combat range of a unit extends 3\" horizontally and any distance vertically from every model in that unit. Units from opposing armies that are within each other’s combat range and that are **visible** to each other are **in combat** with each other. When a unit that is not in combat enters the combat range of a visible enemy unit, it **moves into combat**.\n\nA model is considered to be in combat with an enemy unit if that unit is within the model’s combat range and visible to it.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ A unit’s combat range extends 3\" out from every model in that unit.\n\n◆ If any enemy models are within a unit’s combat range and visible to it, that unit is in combat.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*A model’s combat range extends 3\" horizontally outwards from it in all directions and an infinite distance vertically. Note that this is measured from the edge of its base, not the centre.*",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*Even though both Rat Ogors are within the combat range of the Liberator, the Rat Ogor behind the wall is not visible to the Liberator and is therefore not in combat.*",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*A unit’s combat range extends 3\" horizontally and any distance vertically from all models in the unit. As you can see, this forms a sort of ‘cloud’.*",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*A unit is in combat with a visible enemy unit if any of its models are within the combat range of that enemy unit. Even though 1 Rat Ogor is not within the Liberators’ combat range, its unit is still in combat.*",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "8.0 The Armies",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "The Armies",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Before starting a battle, both players will need an **army**. Some battlepacks use pre-made armies, while others include rules on how to fill your army roster.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "Unless specified otherwise in the battlepack or battleplan:\n\n◆ Set up objectives.\n◆ Set up terrain.\n◆ Determine territories.\n◆ Deploy armies.\n◆ The player who lost the roll-off to choose territories decides who begins deployment",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "9.0 Battleplans",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Battleplans",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Before any battle, you’ll need to pick a **battleplan**. A variety of battleplans are available in each **battlepack**, and additional battleplans are available in other publications. Each battleplan is a scenario to play – it outlines **territories**, **objectives** and **victory conditions**, in addition to any special rules that apply to that battle.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "9.1 Battlefield Map",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each battleplan includes a **battlefield map** that is divided into **quarters**. The map will show the locations of any **objectives** and the players’ **territories**. Each battlepack or battleplan will indicate the recommended battlefield size based on the size of game you are playing.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "9.1.1 Setting up Objectives and Terrain Features",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Many battlefields have key locations called **objectives**, and almost all battlefields have **terrain features** such as buildings, ruins and woods. Unless otherwise specified, players should first set up objective markers at the locations indicated by a gold circles on the deployment map, then set up terrain features in a mutually agreeable manner. Many battlepacks and battleplans include further instructions for setting up terrain.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "9.1.2 Territories",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Unless otherwise specified in the battlepack or battleplan, after terrain has been set up, the players should roll off. The winner decides which territory belongs to which player. Their opponent decides which player begins deployment.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• A unit is **within** a territory if any part of the base of any model in the unit is within that territory.\n• A unit is **wholly within** a territory if every part of the base of every model in the unit is within that territory.\n• The area of the battlefield that is neither player’s territory is **neutral territory**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "10.0 The Deployment Phase",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "The Deployment Phase",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Once the battlefield is ready, the players must **^^deploy^^** their armies. This is done in a special phase called the **deployment phase**. The deployment phase happens once per battle, before the start of the first battle round (see 12.0).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "**Step 1 - Deploy Faction Terrain Features**",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Some factions have **faction terrain features**, which have their own warscrolls and are set up using **^^DEPLOY TERRAIN^^** abilities. The player who begins deployment must use **^^DEPLOY TERRAIN^^** abilities first, followed by their opponent.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "**Step 2 - Deploy Armies**",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Unless otherwise specified in the battleplan, the players alternate using **^^DEPLOY^^** abilities to deploy their units, starting with the player who begins deployment. Once one player has no more **^^DEPLOY^^** abilities to use, their opponent must continue to use **^^DEPLOY^^** abilities until they also have no more to use.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "**Step 3 - Use Deployment Phase Abilities**",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "After both players have finished deploying their units, the player who begins deployment can use any Deployment Phase abilities that are **not DEPLOY** or **^^DEPLOY TERRAIN^^** abilities, in the order of their choosing, then their opponent can do the same.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆Player who begins deployment can use any **^^DEPLOY TERRAIN^^** abilities, followed by their opponent.\n◆ Players alternate using **^^DEPLOY^^** abilities.\n◆ Player who begins deployment must use any other Deployment Phase abilities, then their opponent can do so.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "10.1 Universal Deployment Phase Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Deploy Unit",
+                "timing": "Deployment Phase",
+                "phase": "startOfTurn",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a **unit** from your army roster that has not been **deployed** to be the target.",
+                "effect": "Set up the target unit wholly within friendly territory and more than 9\" from enemy territory. After you have done so, it has been **deployed**.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Deploy"
+                ]
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Deploy Faction Terrain",
+                "timing": "Deployment Phase",
+                "phase": "startOfTurn",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a friendly **faction terrain feature** that has not been **deployed** to be the target.",
+                "effect": "Set up the target faction terrain feature wholly within friendly territory, more than 3\" from all objectives and other terrain features. After you have done so, it has been **deployed**.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Deploy Terrain"
+                ]
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Deploy Regiment",
+                "timing": "Deployment Phase",
+                "phase": "startOfTurn",
+                "icon": "special",
+                "usedBy": "",
+                "declare": "Pick a **regiment** from your army roster to be the target. No units in that regiment can have already been **deployed**.",
+                "effect": "Keep using **^^DEPLOY^^** abilities without alternating until all units in that regiment have been **deployed**. You cannot set up units that are not in that regiment on the battlefield or in reserve as part of any of those **^^DEPLOY^^** abilities.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Deploy"
+                ]
+              }
+            },
+            {
+              "contentType": "boxed",
+              "text": "A **regiment** is a collection of units. It is one of the main building blocks of an army (see ‘Army Composition’ in the Advanced Rules).\n\nSome factions have special **^^DEPLOY^^** abilities, such as the ‘Scions of the Storm’ ability of the Stormcast Eternals.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "11.0 Battle Sequence",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Battle Sequence",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each battle lasts a number of **battle rounds**, specified in the battleplan. During each battle round, each player will take a **turn**. Each turn is broken down into multiple **phases** (see 13.0).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ The battle lasts a fixed number of **battle rounds**.\n◆ Each battle round contains 2 **turns**.\n◆ The player whose turn is taking place is the **active player**.\n◆ Each turn contains 7 **phases**.\n◆ In each phase, the active player uses abilities first, then their opponent does the same.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "12.0 Start of Battle Round",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Start of Battle Round",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "At the start of each battle round, follow these steps:\n\n1. **Determine the Active Player**: If it is the **first** battle round, the player who finished setting up their army first decides who will take the first turn (unless otherwise specified in the battlepack or battleplan).&#x20;\n\nIf it is **not** the first battle round, the players make a roll-off called the **priority roll** and the winner decides who will take the first turn. If the roll-off is a **tie**, the player who took the first turn in the **previous** battle round decides who will take the first turn in the **current** battle round.&#x20;\n\nWhen it is a player’s turn, regardless of whether they take the first or second turn, they are referred to as the **active player**.\n\n2. **Determine the Underdog**: Whichever player has the fewest victory points is the **underdog** for the battle round. If the players are tied (e.g. in the first battle round), then there is no underdog, unless otherwise specified.\n\n3. **Start of Battle Round Abilities**: The active player can use any Start of Battle Round abilities first, then their opponent can do the same.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "13.0 Turn Phases",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Turn Phases",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Each player’s turn is broken down into 7 **phases**, as shown on the left. In each phase, the active player can use any abilities with the ‘**Your (…) Phase**’ or ‘**Any (…) Phase**’ timing in the order of their choosing. For example, in the **Movement Phase**, the active player could use abilities with the Your Movement Phase or Any Movement Phase timing.\n\nOnce the active player has finished using abilities, their opponent can then use any abilities with an ‘**Enemy (…) Phase**’ or ‘**Any (…) Phase**’ timing, in the order of their choosing.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "13.1 Fight Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Abilities with the **^^FIGHT^^** keyword follow a different sequence to other abilities. When the players are using Combat Phase abilities as described in 13.0, they cannot use **^^FIGHT^^** abilities.\n\nAfter the players have finished using Combat Phase abilities that are **not FIGHT** abilities, they must alternate picking 1 eligible unit to use a **^^FIGHT^^** ability, starting with the active player. Each unit in combat **must** use a **^^FIGHT^^** ability if it is able to.\n\nOnce a player has no more units that are eligible to use a **^^FIGHT^^** ability, the other player continues to pick units that are eligible to use a **^^FIGHT^^** ability, one after another, until there are no more units that are eligible to use a **^^FIGHT^^** ability.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ The active player uses Combat Phase abilities that are **not FIGHT** abilities, then the opponent does the same.\n◆ Players alternate picking a unit to use a **^^FIGHT^^** ability, starting with the active player.\n◆ Each unit **must** use a **^^FIGHT^^** ability if it is able to.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "14.0 Universal Core Abilities",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Universal Core Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The following **^^CORE^^** abilities can be used by any unit. Remember that each unit can use a maximum of 1 **^^CORE^^** ability per phase (see 5.3).",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "14.1 Movement Phase",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Normal Move",
+                "timing": "Your Movement Phase",
+                "phase": "movementPhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **not in combat** to use this ability.",
+                "effect": "That unit can move a distance up to its **^^Move^^** characteristic. That unit **cannot** move into combat during any part of that move.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Move"
+                ]
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Run",
+                "timing": "Your Movement Phase",
+                "phase": "movementPhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **not in combat** to use this ability.",
+                "effect": "Make a **run roll** of D6. That unit can move a distance up to its **^^Move^^** characteristic added to the **run roll**. That unit **cannot** move into combat during any part of that move.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Run",
+                  "Move"
+                ]
+              }
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Retreat",
+                "timing": "Your Movement Phase",
+                "phase": "movementPhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **in combat** to use this ability.",
+                "effect": "Inflict **D3 mortal damage** on that unit. That unit can move a distance up to its **^^Move^^** characteristic. That unit **can** move through the combat ranges of any enemy units but **cannot** end that move within an enemy unit’s combat range.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Retreat",
+                  "Move"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14.2 Shooting Phase",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Shoot",
+                "timing": "Your Shooting Phase",
+                "phase": "shootingPhase",
+                "icon": "shooting",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that has not used a **^^RUN^^** or **^^RETREAT^^** ability this turn to use this ability. Then, pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0).",
+                "effect": "Resolve **shooting attacks** against the target unit(s).",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Attack",
+                  "Shoot"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14.3 Charge Phase",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Charge",
+                "timing": "Your Charge Phase",
+                "phase": "chargePhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **not in combat** and has not used a **^^RUN^^** or **^^RETREAT^^** ability this turn to use this ability. Then, make a **charge roll** of 2D6.",
+                "effect": "That unit can move a distance up to the value of the **^^charge^^** **roll**. That unit **can** move through the combat ranges of any enemy units and **must** end that move within ½\" of a visible enemy unit. If it does so, the unit using this ability has **charged**.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Charge",
+                  "Move"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14.4 Combat Phase",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Fight",
+                "timing": "Any Combat Phase",
+                "phase": "combatPhase",
+                "icon": "offensive",
+                "usedBy": "",
+                "declare": "Pick a friendly unit that is **in combat** or that **charged** this turn to use this ability. That unit can make a **pile-in move** (see 15.3). Then, if that unit is **in combat**, you must pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0).",
+                "effect": "Resolve **combat attacks** against the target unit(s).",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": [
+                  "Core",
+                  "Attack",
+                  "Fight"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "15.0 Movement",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Movement",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities allow a unit to move. When a unit moves, each model in that unit can move, one at a time, in the order chosen by that unit’s commander.\n\nWhen a model moves, it can pivot and change direction as often as you like, but no part of that model’s base can move a greater total distance than the maximum allowed by the ability used. Models cannot move beyond the edge of the battlefield or through other models, and they can never end a move standing on top of another model (the base counts as part of the model).\n\nA model’s base is assumed to remain parallel with the battlefield as it moves. If a model ends its move on an uneven surface, it must be able to stand up by itself with its base as close to parallel with the battlefield as possible (in other words, models cannot lie flat on the battlefield or lean against terrain to stop them from falling over).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*This Grey Seer is using the ‘Normal Move’ ability to change its position on the battlefield. No part of that move can be within the combat range of the Liberators, so the Grey Seer has to stay outside the area marked in blue.*",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ When moving a unit, move any number of models in that unit.\n◆ Each model can turn and pivot, but no part of its base can move farther than the maximum distance.\n◆ Units can move any distance up to the maximum specified in the ability.\n◆ Units must end their move in coherency.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.1 Coherency",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Any time a unit is **set up** or **ends a move**, it must be in a single group. A unit is considered to be in a coherent group if each model in that unit is within **coherency range**, measured horizontally, of **at least 1 other model** in that unit (ignore differences in height between the two models).\n\nFor the majority of units, **coherency range is ½\"**, though some units (particularly those with large models with overhanging parts) have a longer coherency range noted on their warscroll for ease of play. While there are **7 or more** models in a unit, that unit is considered to be in a coherent group if each model in that unit is within coherency range of **at least 2 other models** in that unit.\n\nIf it is not possible for a unit to end a move in a single coherent group, that move cannot be made.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ After finishing a move, a unit must be in a single group.\n◆ Coherency range is ½\" horizontally.\n◆ Each model must be within coherency range of a different model from the same unit.\n◆ While a unit has 7+ models, each model must be in coherency with 2 other models in the unit.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.2 Moving Across Terrain",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "When a model moves, it can move over **terrain features** but not through them. A model can be moved over terrain features that are **1\" or less in** **height** as if they were not there. A model can be moved vertically in order to **climb up or down** any terrain features that are taller than 1\", counting the vertical distance as part of its move. Models cannot end a move mid-climb.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.2.1 Jumping Down",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "When a model that is on a terrain feature moves, it can **jump down** from the edge of the terrain feature to land on a lower part of the same or a different terrain feature or to land on the battlefield. To do so, you must trace the path of the model’s move to the edge of the terrain feature. Then, that model can jump down any distance, but doing so immediately ends their move. Models cannot end any kind of move mid-jump – if it is not possible to end the move as a result, that move cannot be made.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*As a model moves across terrain, its base is assumed to stay in contact with the terrain feature and parallel to the battlefield. Models can climb up or down terrain. They can jump down too, but this ends their move.*",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ Models can move freely over terrain features 1\" or less in height.\n◆ Models can climb up and down terrain features, and they can jump down from a higher ledge.\n◆ Models cannot end a move mid-climb or mid-jump.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.3 Pile-in Moves",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities, such as **^^Fight^^** abilities, allow a unit to make a short move called a **pile-in move** to get into a better position for combat. To do so:\n\n**If your unit is in combat**: Pick an enemy unit your unit is **in combat** with to be the **target** of the pile-in move. Each model in your unit can move up to 3\". That move can pass through the combat ranges of any enemy units, but each model must end that move **no further from** the **target** unit. At the end of the move, your unit must still be in combat with all units that it was in combat with at the start of the move.\n\n**If your unit is not in combat**: Each model in your unit can move 3\" in any direction. Th at move can pass through and end within the combat ranges of any enemy units.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ Pile in: move up to 3\".\n◆ If in combat, the unit must end the move closer, or at least as close, to the target enemy unit.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.4 Flying",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Units with the **^^FLY^^** keyword have the following passive ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Fly",
+                "timing": "Passive",
+                "phase": "movementPhase",
+                "icon": "movement",
+                "usedBy": "",
+                "declare": "",
+                "effect": "As this unit moves, it ignores other models, terrain features and the combat ranges of enemy units. It cannot end its move in combat unless specified in the ability that allowed it to move. Ignore any vertical distance moved for this unit.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "text",
+              "text": "When moving flying units, move them horizontally in any direction, ignoring intervening models and terrain, and place them where you wish, so long as they are allowed to end their move on that spot. Note that some units have the **^^FLY^^** keyword even if that unit can’t really fly. This often represents units that bounce, bound or skitter across the battlefield so adeptly that they might as well be flying!",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.5 Overhanging Models",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some models overhang their base. When moving models, overhanging parts should be treated as if they do not exist when determining where a model could be placed. Where possible, a model should be rotated to allow for another model to end a move in proximity to it. When rotating a model this way, the base must occupy the same position – a circular base may be rotated any amount, while an oval base may only be rotated 180°. Otherwise, mark down the location of where the model should end its move (such as with an empty base of the same size) and place the model to the side. Return the model to the table as soon as it is physically possible to do so.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "15.6 Charge Moves",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some rules reference a unit finishing or ending a charge move. This is considered to occur when a **^^CHARGE MOVE^^** ability that unit used resolves and the unit has charged as part of that ability.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "16.0 Picking Targets",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Picking Targets",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "When declaring an **^^ATTACK^^** ability for a unit, you must pick the target unit(s) for its **^^attacks^^**. The number of attacks each model can make is equal to the **^^Attacks^^** characteristic of the **weapons** it is using. In most cases, models attack with every weapon on their warscroll (melee weapons for combat attacks, ranged weapons for shooting attacks), though some warscrolls specify that certain models in the unit are armed with special weapons or that the unit must pick between multiple weapons when it attacks.\n\nIf the unit is **in combat**, it can only target units that are in combat with it. If a model has more than one attack, you can split the attacks between eligible targets as you wish.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• **Combat attacks** are made with **melee weapons**. The target unit(s) must be within the **combat range** of the attacking model and **visible** to it. The model must attack with all of the melee weapons it is armed with.\n• **Shooting attacks** are made with **ranged weapons**. The target unit(s) must be within a distance equal to the **Range** characteristic of the weapon being used and **visible** to the attacking model. Models **cannot** make shooting attacks if their unit is **in combat**, unless otherwise specified (see 20.0 Weapon Abilities).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "◆ Pick targets for **all** attacks when declaring an **^^ATTACK^^** ability.\n◆ If a unit is **in combat**, it can only attack units it is **in combat** with and that are **visible** to it.\n◆ If making a **combat attack**, the target must be within the attacking model’s **combat range**.\n◆ If making a **shooting attack**, the target must be **visible** and within the weapon’s **Range**.\n◆ A unit cannot make **shooting attacks** if it is **in combat**, unless otherwise specified.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "17.0 The Attack Sequence",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "The Attack Sequence",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Resolve steps 1-4 below for each attack made against a target unit, one attack at a time. If you picked more than one target unit for the **^^ATTACK^^** ability, resolve all the attacks made against one unit before moving on to the next, in an order of your choosing. Once you are familiar with the attack sequence, see ‘Fast Dice Rolling’ (see 17.3) if you want to speed up play.\n\n**1. Hit Roll**: Roll a dice. If the roll equals or exceeds the attacking weapon’s **Hit** characteristic, the attack scores a **successful hit**: move on to the next step. If not, the attack **fails** and the attack sequence ends. Unmodified hit rolls of 1 always fail. If an unmodified hit roll for an attack made with a weapon is a **6**, that attack is a **critical hit**.\n\n**2. Wound Roll**: Roll a dice. If the roll equals or exceeds the attacking weapon’s **Wound** characteristic, the attack **successfully wounds**: move on to the next step. If not, the attack **fails** and the attack sequence ends. Unmodified wound rolls of 1 always fail.\n\n**3. Save Roll**: The commander of the **target** unit rolls a dice, subtracting the attacking weapon’s **Rend** characteristic from the roll. Unmodified save rolls of 1 always fail. If the roll equals or exceeds the **Save** characteristic of the target unit, the attack **fails** and the attack sequence ends. If not, it is a **successful attack**: move on to the next step.\n\n**4. Determine Damage**: Th e attack **inflicts** a number of **damage points** on the unit equal to the **Damage** characteristic of the weapon. Inflicted damage points are added to a temporary **damage pool** for the target unit.\n\nAfter completing these steps for all of the attacks made as part of that **^^ATTACK^^** ability, the attacks for that ability are **resolved** and you can move on to the **damage sequence** (see 18.0).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "Critical hits have no effect on their own but often trigger additional effects (see 20.0 Weapon Abilities).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "Keep track of the number of damage points in the damage pools of target units. Placing dice next to those units is a handy way of doing this.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "17.1 Attack Modifiers and Caps",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Modifiers to **hit rolls**, **wound rolls** and **save rolls** are **capped** to prevent overwhelming combinations of abilities. When making a **hit roll** or a **wound roll**, add up all positive and negative modifiers that apply to the roll, then cap the result at a **maximum of +1** (if positive) or a **minimum of -1** (if negative). When making a **save roll**, add up all the positive and negative modifiers that apply to the roll, then cap the result at a **maximum of** **+1**. Note that, unlike **hit rolls** and **wound rolls**, there is **no cap** on the amount that can be **subtracted** from **save rolls**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "17.2 Mortal Damage",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities inflict **mortal damage**. If an ability inflicts mortal damage on a unit, add that number of damage points to the unit’s damage pool for that ability (see 18.2 Allocating Damage).",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "17.3 Fast Dice Rolling",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "In order to speed up play, it is often possible to make several attacks at once. If you choose to do so, all of the attacks must have the same **Hit, Wound, Rend and Damage** characteristics, the same **weapon abilities** (if any – see 20.0), and they must target the same enemy unit. If this is the case, make all of the hit rolls at the same time, then all of the wound rolls and finally all of the save rolls. Then, add up all the damage points inflicted on the target unit and move on to the damage sequence (see 18.0).\n\nIf the attack sequence ends for an attack made while fast dice rolling, it doesn’t stop the attack sequence for all the attacks, just that specific attack.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "18.0 The Damage Sequence",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "The Damage Sequence",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "After resolving the effect of any ability that inflicts damage points on a unit, follow the steps below. If the ability inflicted damage points on more than one unit, follow the steps below for each of those units, one at a time. Each commander allocates damage points to their own units, in the order of their choosing, starting with the active player.\n\n**1. Resolve ward saves** for all damage points in the target unit’s damage pool, if applicable (see 17.0).\n\n**2. Allocate the damage points** in the unit’s damage pool and remove slain models (see 18.3).",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "18.1 Ward Saves",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Units with the **WARD** keyword have the ‘Ward Save’ passive ability. The number after the **WARD** keyword indicates the **ward value** for the ward save. If a unit had **WARD** **(5+)**, for example, its ward value would be 5. If a unit has more than one ward save, only the ward save with the lowest value applies to it; the other has no effect.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Ward Save",
+                "timing": "Passive",
+                "phase": "defensive",
+                "icon": "defensive",
+                "usedBy": "",
+                "declare": "",
+                "effect": "In step 1 of the damage sequence (see 18.0), make a **ward roll** of D6 for each **damage point** in this unit’s **damage pool**. If the roll equals or exceeds this unit’s **ward value**, remove that damage point from the damage pool.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "18.2 Allocating Damage",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "After resolving the effect of any ability that inflicts damage points (whether via attacks, mortal damage or both), you must **allocate** the damage points.\n\nWhen **allocating** damage points to a unit, the damage points in its damage pool are allocated to it one at a time. Each time the number of damage points allocated to the unit equals the **Health** characteristic of that unit, 1 model in that unit is **slain** (and removed from play) and the number of damage points allocated to that unit is reset to 0. Keep allocating damage points until there are none left in the damage pool.\n\nIf the number of damage points allocated to a unit is not enough to slay a model, keep track of the number of damage points currently allocated to the unit (most players place a dice or markers next to the unit). While a unit has any damage points allocated to it, it is **damaged**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "18.3 Slain Models",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The commander of a unit must pick which model(s) in the unit are slain. However, after each slain model is removed, the unit must be in a single coherent group (see 15.1). If this is not possible, continue to remove models, one at a time, until the unit is in a single coherent group.\n\nYou must remove the fewest models possible to make the unit a single coherent group.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "18.4 Destroyed Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "When the last model in a unit is slain, the unit is **destroyed** and all remaining damage points inflicted on that unit have no effect. Similarly, if something causes a unit to be destroyed, all models in the unit are slain and removed from play.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Attacking Diagram",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Attacking Diagram",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "boxed",
+              "text": "◆ Attacker makes a **hit roll** of D6. If the roll equals or beats the weapon’s **Hit** characteristic, it is a **successful hit**.\n◆ Attacker makes a **wound roll** of D6. If the roll equals or beats the weapon’s **Wound** characteristic, it is a **successful wound**.\n◆ Defender makes a **save roll** of D6. Subtract the attacking weapon’s **Rend** characteristic from the roll. If the result is less than the defending unit’s **Save** characteristic, it is a **successful attack**.\n◆ **Inflict** an amount of **damage** on the target equal to the attacking weapon’s **Damage** characteristic.\n◆ Resolve ward saves.\n◆ Allocate damage points.\n◆ Unmodified **hit rolls**, **wound rolls** and **save rolls** of 1 always fail.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Attacking Example",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Attacking Example",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "**Erik’s Stormcast Eternals are facing off against Emma’s Skaven in a close game of Spearhead. Erik’s Liberators have charged (see 14.3), and in the declare step of the ‘Fight’ ability, they have piled in towards Emma’s Clawlord (see 15.3) and targeted that unit with all of their attacks (see 16.0). In this example we’ll be using fast dice rolling to speed up play.**",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Erik’s 4 Liberators armed with Warhammers attack first. They can each make 2 attacks (as a Warhammer has an **^^Attacks^^** characteristic of 2), and Erik needs to make **hit rolls** equal to or higher than their **Hit** characteristic of 3+. The Liberators score 5 successful hits out of 8 attacks.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Erik then makes a **wound roll** for each of the 5 hits. The Warhammers have a **Wound** characteristic of 3+. The Liberators successfully wound with 3 of their attacks.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Emma makes a **save roll** for each of the 3 successful wounds. Her Clawlord has a **Save** characteristic of 4+, but the Warhammers have a **Rend** characteristic of 1, so Emma must subtract 1 from each roll, meaning she now needs to roll a 5 or more.\n\nThe Clawlord successfully saves 1 of the 3 attacks, resulting in 2 damage points being added to his **damage pool** (1 for each Warhammer, as they have a **Damage** characteristic of 1).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Erik repeats this process with the remaining Liberator in the unit, who wields a mighty Grandhammer. He scores 2 hits, one of which is a **critical hit** of 6. Th is result triggers the Grandhammer’s **Crit (Mortal)** weapon ability, which inflicts 2 mortal damage (see 17.2), directly adding 2 damage points to the damage pool.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Erik then makes a wound roll for the other hit, which **successfully wounds**.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "Emma makes a **save roll** for the successful wound, and again must subtract 1 from the roll due to the Grandhammer’s **Rend** characteristic of 1. Unfortunately, her **save roll** is unsuccessful, resulting in another 2 **damage points** being added to the **damage** pool, as the Grandhammer has a Damage characteristic of 2.\n\nThe Liberators’ attacks are **resolved**, so Emma must move on to the damage sequence.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "The Clawlord is in grave peril, with 6 damage points in the damage pool (and only 7 **Health**!). Fortunately, he has **^^Ward (6+)^^**, which gives him one last chance to avoid the damage. Emma makes a **ward roll** for each of the 6 damage points in the damage pool, and 2 of those rolls are sixes, meaning 2 damage points are removed from the damage pool.\n\nThe remaining 4 damage points are **allocated** to the Clawlord. Emma places a dice next to the Clawlord to keep track of the number of damage points that are currently allocated to that unit.\n\nThe Clawlord is now **damaged** – luckily for Emma, this allows her Clawlord to use his ‘Cornered Rat’ ability to exact revenge on the dastardly Liberators…",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "19.0 STRIKE-FIRST and STRIKE-LAST",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "STRIKE-FIRST and STRIKE-LAST",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "If there are any **STRIKE-FIRST** units **in combat** after any non-**^^FIGHT^^** Combat Phase abilities have been used, other units cannot be picked to use a **^^FIGHT^^** ability until those units have been picked to use a **^^FIGHT^^** ability. After all those **STRIKE-FIRST** units have fought, the active player picks the next unit to fight.\n\nIf there are any **STRIKE-LAST** units **in combat**, they cannot be picked to use a **^^FIGHT^^** ability if there are any units **in combat** that do not have **STRIKE-LAST** and have not yet used a **^^FIGHT^^** ability.\n\nIf a unit has **STRIKE-FIRST** and **STRIKE-LAST**, treat it as if it had neither.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "There may be situations when a unit that has **STRIKE-FIRST** is not in combat at the start of the phase, but because of moves such as pile-in moves, it is ‘pulled into combat’ later in the phase. In such cases, **STRIKE-FIRST** has no effect on that unit because it was not in combat at the start of the phase.\n\nAbilities that allow a unit to use a **^^FIGHT^^** ability immediately after another unit do not override the **STRIKE-FIRST** or **STRIKE-LAST** constraints, so you could not pick a unit with **STRIKE-LAST** to fight immediately after a unit with **STRIKE-FIRST**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "20.0 Weapon Abilities",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Weapon Abilities",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some weapons have one or more of the passive **weapon abilities** below. If a weapon has multiple weapon abilities that apply on a critical hit, before the attack sequence starts, the commander of the attacking model must pick 1 of those abilities to use.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "header",
+              "text": "Universal Weapon Abilities",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• **Anti-X (+1 Rend):** Add 1 to this weapon’s **Rend** characteristic if the target has the keyword after ‘**Anti**-’ or fulfils the condition after ‘**Anti-’**. Multiples of this ability are cumulative. For example, if a weapon has both **Anti-charge (+1 Rend)** and **Anti-HERO (+1 Rend)**, then add 2 to the **Rend** characteristic of the weapon for attacks that target a **^^HERO^^** that **charged** in the same turn.\n• **Charge (+1 Damage):** Add 1 to this weapon’s **Damage** characteristic if the attacking unit **charged** this turn.\n• **Companion:** Unless otherwise specified, attacks made by this weapon are not affected by friendly abilities that modify hit rolls, wound rolls or weapon characteristics, except for those that apply negative modifiers (e.g. ‘Covering Fire’).\n• **Crit (2 Hits):** If an attack made with this weapon scores a **critical hit**, that attack scores 2 hits on the target unit instead of 1. Make a **wound roll** for each hit.\n• **Crit (Auto-wound)**: If an attack made with this weapon scores a **critical hit**, that attack automatically wounds the target. Make a **save roll** as normal.\n• **Crit (Mortal):** If an attack made with this weapon scores a **critical hit**, that attack inflicts **mortal damage** on the target unit equal to the **Damage** characteristic of that weapon and the attack sequence ends.\n• **Shoot in Combat:** This weapon can be used to make shooting attacks even if the attacking unit is in combat.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "The **Companion** weapon ability restricts things like mounts from benefiting from most effects that augment a unit’s capabilities.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "21.0 Healing",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Healing",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities allow you to **heal** a unit. To heal a unit, remove a number of damage points from the unit equal to the number in brackets after ‘**Heal**’, e.g. **Heal (2)**.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "22.0 Returning and Adding Models",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Returning and Adding Models",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities allow you to **return** slain models to a unit or **add** new models to a unit. In either case, set up those models, one at a time within coherency range (see 15.1) of the model(s) in that unit that were not returned or added this phase. If that unit has 7 or more models (including the model being set up), it must be set up within coherency range of at least 2 other models in that unit that were not returned or added this phase. The new models can only be set up in combat with an enemy unit if their unit is already in combat with that enemy unit.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ Returned models must be set up in **coherency** with the models in their unit that were not returned as part of that ability.\n◆ Returned models can only be set up **in combat** with an enemy unit if their unit is already in combat with it.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "23.0 Tokens",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Tokens",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Tokens are not considered to be models for rules purposes and can be ignored or moved out of the way for purposes of visibility, coherency or abilities. They cannot be picked as the target of abilities. Their purpose is to indicate persisting effects on units they are placed next to. Each time a unit with a token finishes a move or is set up, place the token next to the unit.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "*This Gryph-crow is a token.*",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "24.0 Setting up Units",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Setting up Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities allow you to set up a unit on the battlefield. When doing so, you must set up all models in that unit. If this is impossible, you cannot use that ability. A unit set up on the battlefield in a phase other than the deployment phase cannot use **^^MOVE^^** abilities in the movement phase of the same turn.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "24.1 Reserve Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities allow you to set up units **in reserve**. These units are placed to one side instead of being set up on the battlefield. At the start of the fourth battle round, units that were set up in reserve using a **^^DEPLOY^^** ability and that are still in reserve are destroyed.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "24.2 Replacement Units",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities allow you to set up a **replacement unit**. When setting up that unit, it should have the same warscroll type, weapon options and number of models as the original unit, unless otherwise specified in the ability. Many of these abilities specify the proportion of models in the replacement unit (e.g. half the number of models from the original unit). In these cases, you can pick which models from the original unit are set up.\n\nThe replacement unit is otherwise treated as a new unit; any keywords or abilities the original unit gained during the battle, and any persisting effects that applied to it, do not apply to the replacement unit. Each unit can only be replaced once, and you cannot replace replacement units.\n\nIf the original unit was reinforced and the replacement unit has more than half the number of models from the original unit, the replacement unit is considered to be reinforced.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "Because a replacement unit is treated as a completely new unit, it could, for instance, use a **Once Per Battle** ability on its warscroll even if the unit it replaced used that ability earlier in the battle.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "25.0 Guarded Heroes",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Guarded Heroes",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "All **^^HEROES^^** that are not **^^MONSTERS^^** or **^^WAR MACHINES^^** have the ‘Guarded Hero’ passive ability:",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "ability",
+              "text": null,
+              "title": null,
+              "ability": {
+                "name": "Guarded Hero",
+                "timing": "Passive",
+                "phase": "shootingPhase",
+                "icon": "defensive",
+                "usedBy": "",
+                "declare": "",
+                "effect": "If this **^^HERO^^** is within the combat range of a friendly unit that is **not** a **^^HERO^^**:\n• Subtract 1 from **hit rolls** for **shooting attacks** that target this **^^HERO^^**.\n• If this **^^HERO^^** is **^^INFANTRY^^**, they cannot be picked as the target of **shooting attacks** made by models more than 12\" from them.",
+                "reaction": false,
+                "castingValue": 0,
+                "cpCost": null,
+                "keywords": []
+              }
+            },
+            {
+              "contentType": "boxed",
+              "text": "Understandably, **^^MONSTERS^^** and **^^WAR MACHINES^^** don’t benefit from the ‘Guarded Hero’ ability. These units are very conspicuous targets even if they are surrounded by their fellows!",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "26.0 Random Characteristics",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Random Characteristics",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some warscrolls show a **random characteristic roll** instead of a fixed value. When this is the case, the value of the characteristic is generated by the commander of the unit in question each time an ability requires that characteristic.\n\nIn the case of random weapon characteristics, generate a **random Attacks** characteristic for each model in the attacking unit each time you declare an **^^ATTACK^^** ability, and generate a **random Damage** characteristic each time you inflict damage with that weapon (roll once for each attack).",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "◆ When using a **random characteristic**, generate it each time it is needed for an ability.\n◆ When using **random Damage**, generate it for each attack made.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "27.0 Modifier Order",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Modifier Order",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The effects of some abilities modify a characteristic or roll. Unless stated otherwise, a characteristic or roll cannot be modified to less than 1. The exception to this is Rend, which can be modified to a minimum of 0 (‘-’).\n\nIf a characteristic uses a **random characteristic roll** (see 26.0 Random Characteristics), apply characteristic modifiers **after** that characteristic has been generated.\n\nIf a characteristic or roll is halved or would be modified to a value that is not a whole number, **round it down** to the nearest whole number.\n\nApply characteristic modifiers in the following order:\n\n**1.** Modifiers that **set** a characteristic to a fixed value.\n**2.** Modifiers that **multiply** or **divide** a characteristic.\n**3.** Modifiers that **add to** or **subtract from** a characteristic. If there are multiple modifiers of the same type (e.g. that set a characteristic), apply them in the Order of Effects (see 30.0).\n\nThe effects of some abilities (e.g. ‘An Excess of Depravity’) allow you to replace a roll with a fixed value. When doing so, you must replace the roll before rolling the dice for it.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "28.0 Advanced Ability Rules",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Advanced Ability Rules",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "boxed",
+              "text": "• Unless stated otherwise, units using or picked as part of an ability must be on the battlefield.\n• If an effect states that a unit **can** do something, its commander can choose whether to resolve that part of the effect or not.\n• If an effect states that a unit **must** do something, its commander has no choice and must resolve that part of the effect. If this is impossible, no part of the effect is applied but the ability is still considered to have been used.\n• When ‘this unit’ appears in ability text (most often on warscrolls), it means the unit that is using the ability.\n• If an ability affects more than one unit, the player who used the ability can choose the order in which units are affected by it.\n• When resolving an effect, if you need to roll a dice for multiple affected units, roll and resolve the effect for one unit before moving on to the next.\n• If an ability instructs you to pick more than 1 unit, each unit you pick must be a different unit unless stated otherwise.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "28.1 Persisting Effects",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some abilities have effects that aren’t immediately resolved (e.g. ‘add 1 to save rolls for this unit for the rest of the turn’ or ‘this unit has **^^Ward (5+)^^** for the rest of the turn’). These effects count as the effects of passive abilities (see 5.4) for their duration.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "28.2 'Once per' Timings",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The timing part of some abilities says **Once Per Phase, Once Per Turn** or **Once Per Battle**. If the ability is used by a unit, it can be used a maximum of one time in that phase, turn or battle by each unit that can use the ability. If the ability is used by a player, it can be used a maximum of one time in that timing window by that player.\n\nSome abilities that are used by units say **Once Per Phase (Army),** **Once Per Turn (Army)** or **Once Per Battle (Army)**. These abilities can be used a maximum of one time in that phase, turn or battle regardless of the number of units in the army that can use the ability.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "Who is Using the Ability?",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Most abilities are found on warscrolls, but many appear elsewhere – the best examples being the Universal Core Abilities (see 14.0).\n\nWhile abilities on warscrolls are always used by the unit whose warscroll it is, some abilities that do not appear on warscrolls will tell you explicitly to pick a unit to use the ability. In both cases, it should be clear which unit is using the ability.\n\nSome abilities that do not appear on warscrolls, most commonly enhancements (see Army Composition, 4.1), are given to certain units in your army. In such cases, the unit to which the enhancement was given is the one using the ability.\n\nAbilities that neither appear on a warscroll nor tell you to pick a unit to use the ability are used by you, the player. Finally, for the purposes of the rules in this section, when a rule refers to a player using an ability, this includes abilities used by units in that player’s army.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "29.0 Contradictory Rules",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Contradictory Rules",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "If two or more rules contradict, if one of those rules states that something **cannot** do something, this takes precedence over rules that state it **can** or **must** do that thing, unless the second rule specifically overrides the restriction of the first. For example, while the ‘Normal Move’ ability states you cannot move into combat during that move, the ‘Fly’ ability specifies to ignore the combat ranges of enemy models during a move.\n\nExcepting the above, the effect of the most recently used ability takes precedence.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "30.0 Order of Effects",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Order of Effects",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "The effects of passive abilities are considered to be applied more recently than the effects of other abilities and rules. The effects of the active player’s passive abilities are considered to be applied more recently than the effects of their opponent’s passive abilities, whose passive abilities are considered to be applied more recently than the effects of neutral passive abilities (e.g. passive abilities on a terrain feature that is in neither player’s army). The active player chooses the order in which neutral passive effects are applied.\n\nSome abilities have a delayed effect (e.g. ‘each time a friendly unit uses a **^^FIGHT^^** ability, after that ability has been resolved, **Heal (D3)** that unit’). If more than one of these effects would be resolved at the same time, the active player resolves the delayed effects of their abilities first, in an order of their choosing, then their opponent does the same.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "31.0 End of Turn Overview",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "End of Turn Overview",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "At the end of each turn, follow these steps:\n\n**1.** The active player can use any abilities with the End of Your Turn or End of Any Turn timing, in the order of their choosing, then their opponent can use any abilities with the End of Enemy Turn or End of Any Turn timing, in the order of their choosing.\n\n**2.** Determine which player **controls** each objective (if any).\n\n**3.** The active player scores **victory points** as described in the battleplan.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "32.0 Objectives",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "Objectives",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Many battleplans award victory points for controlling **objectives**, which are represented by **objective markers**. Unless otherwise specified, objective markers are round and 40mm wide. Models can move over and end their moves on objective markers. If an objective marker is on the border between territories, it is within all those territories but wholly within none of them. Objective markers don’t block visibility.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "• An objective marker is a 40mm round marker.\n• A model **contests** an objective if the objective marker is within its combat range.\n• A player **gains control** of an objective if the sum of the **Control** characteristics of friendly models contesting that objective is higher than that of enemy models.\n• Check if you gain control of objectives at the start of the first battle round and at the end of each turn.\n• An objective remains in your control until your opponent gains control of it.\n• Terrain features are controlled in the same way as objective markers but do not remain in your control if no friendly models are contesting them.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "boxed",
+              "text": "Sometimes objective markers get accidentally nudged while you are moving models around. This is perfectly fine – just remember to put them back in their proper positions when determining objective control.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "32.1 Contesting Objectives",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Unless otherwise specified, if an objective is within a model’s combat range, that model is **contesting** that objective. If any models in a unit are contesting an objective, that unit is contesting that objective.\n\nEach unit can only count as contesting a single objective for the purposes of determining objective control (see 32.2). Before determining objective control, for each of their units contesting two or more objectives, the active player must pick one of those objectives for it to contest. Then, their opponent does the same.",
+              "title": null,
+              "ability": null
+            },
+            {
+              "contentType": "text",
+              "text": "**Designer’s Note:** *For purposes other than determining objective control, a unit can contest more than one objective.*",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "32.2 Objective Control",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "In the **deployment phase** after all Deployment Phase abilities have been used and at the **end of each turn**, follow this sequence for **each objective** in an order chosen by the active player:\n\n1. Starting with the active player, each player determines the control score of each of their units that is contesting that objective. A unit’s **control score** is the combined **Control** characteristics of all the models in that unit that are contesting the objective. Some abilities modify a unit’s control score, but it cannot be reduced to less than 1.\n\n2. Each player adds up the control scores of all of their units contesting that objective. This is their **army control score** for that objective.\n\n3. The players compare their army control scores for that objective. If one player’s score is higher, that player **gains control** of that objective. Once a player gains control of an objective, it **remains under their control** until their opponent gains control of it.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        },
+        {
+          "name": "32.3 Terrain Control",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "Some battleplans require you to gain control of terrain features. Terrain features are contested and controlled in the same way as objectives, but terrain features **do not remain in your control** if your units are no longer contesting them. For the purposes of determining objective control and terrain feature control, each unit can contest 1 objective and 1 terrain feature at the same time.\n\n**Designer’s Note:** *For purposes other than determining terrain feature control, a unit can contest more than one terrain feature.*",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "33.0 End of Battle Round",
+      "subSections": [],
+      "containers": [
+        {
+          "name": "End of Battle Round",
+          "containerType": "standard",
+          "components": [
+            {
+              "contentType": "text",
+              "text": "At the end of each battle round, the active player can use any End of Battle Round abilities, then their opponent can do the same. Each battleplan will specify the number of battle rounds that should be fought. If you have completed the number of battle rounds specified in your battleplan, the battle has ended, and you should follow the rules included in that battleplan to determine the winner.",
+              "title": null,
+              "ability": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

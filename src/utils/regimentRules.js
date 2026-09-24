@@ -118,6 +118,22 @@ function normalizeOption(value) {
 }
 
 function parseRegimentOption(value) {
+  if (value && typeof value === "object") {
+    const label = value.label ?? ([
+      ...(value.unit_names ?? []),
+      ...(value.keywords ?? []),
+      ...(value.subhero_categories ?? []),
+    ].join(" or ") || "Unidad elegible");
+    return {
+      key: `sigdex-${normalizeOption(label)}`,
+      label,
+      min: Number.isFinite(Number(value.min)) ? Number(value.min) : null,
+      max: Number(value.max) < 0
+        ? null
+        : Number.isFinite(Number(value.max)) ? Number(value.max) : null,
+      rules: value,
+    };
+  }
   const rawOption = normalize(value);
   const limitMatch = rawOption.match(
     /^(\d+)\s*[-–—]\s*(\d+)(?:\s+|-)(.+)$/
@@ -558,6 +574,23 @@ function isHeroUnit(unit) {
 }
 
 function unitMatchesRegimentOption(unit, option) {
+  if (option.rules) {
+    const rules = option.rules;
+    const names = (rules.unit_names ?? []).map(normalize);
+    const required = (rules.keywords ?? []).map(normalize);
+    const excluded = (rules.nonKeywords ?? []).map(normalize);
+    const roles = (rules.subhero_categories ?? []).map(normalize);
+    const unitRoles = (unit?.details?.canJoinRegimentAs ?? []).map(normalize);
+    const namedMatch = names.includes(normalize(unit?.name));
+    const keywordsMatch = required.every((keyword) => hasKeyword(unit, keyword));
+    const exclusionsMatch = excluded.every((keyword) => !hasKeyword(unit, keyword));
+    const roleMatch = roles.some((role) => unitRoles.includes(role));
+    const specificMatch = names.length === 0 && roles.length === 0
+      ? true
+      : namedMatch || roleMatch;
+    return specificMatch && keywordsMatch && exclusionsMatch;
+  }
+
   if (isHeroUnit(unit)) {
     const joinRoles = (unit?.details?.canJoinRegimentAs ?? []).map(
       normalizeOption
@@ -574,6 +607,10 @@ function unitMatchesRegimentOption(unit, option) {
 
   return option.key === normalizeOption(unit?.id) ||
     optionMatchesNonHero(unit, option.key);
+}
+
+export function doesUnitMatchRegimentOption(unit, value) {
+  return unitMatchesRegimentOption(unit, parseRegimentOption(value));
 }
 
 function countUnitsForOption(regiment, option) {

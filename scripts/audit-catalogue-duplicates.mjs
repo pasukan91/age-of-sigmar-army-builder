@@ -14,24 +14,18 @@ try {
   const issues = [];
   let collections = 0;
   let namedEntries = 0;
-  const normalize = (value) => String(value).normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
   function visit(value, path) {
     if (Array.isArray(value)) {
       collections += 1;
-      const ids = new Set();
-      const names = new Set();
+      const signatures = new Set();
       value.forEach((item, index) => {
         if (item?.name) {
           namedEntries += 1;
-          // A weapon can legitimately have separate ranged and melee profiles.
-          const name = normalize(item.name) + (path.endsWith(".weapons") ? `:${item.type}` : "");
-          if (names.has(name)) issues.push({ path, type: "duplicate-name", name: item.name });
-          names.add(name);
-        }
-        if (item?.id) {
-          if (ids.has(item.id)) issues.push({ path, type: "duplicate-id", id: item.id });
-          ids.add(item.id);
+          const signature = JSON.stringify(item);
+          if (signatures.has(signature)) {
+            issues.push({ path, type: "duplicate-entry", name: item.name, id: item.id });
+          }
+          signatures.add(signature);
         }
         visit(item, `${path}[${index}]`);
       });

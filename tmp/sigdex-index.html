@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/assets/sigdex-KqKgyde8.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" id="viewport-meta" />
+    <meta
+      name="description"
+      content="Sigdex is a fast, user-friendly and modern Age of Sigmar list builder and rules browser for 4th edition. Build, manage, and share your lists with ease."
+    />
+    <link rel="canonical" href="https://sigdex.io/" />
+    <meta property="og:title" content="Sigdex - Age of Sigmar List Builder" />
+    <meta
+      property="og:description"
+      content="Sigdex is a fast, user-friendly and modern Age of Sigmar list builder and rules browser for 4th edition. Build, manage, and share your lists with ease."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sigdex.io/" />
+    <meta property="og:image" content="https://sigdex.io/assets/icon192.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sigdex - Age of Sigmar List Builder" />
+    <meta
+      name="twitter:description"
+      content="Sigdex is a fast, user-friendly and modern Age of Sigmar list builder and rules browser for 4th edition. Build, manage, and share your lists with ease."
+    />
+    <meta name="twitter:image" content="https://sigdex.io/assets/icon192.png" />
+    <!-- add to home screen -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@3.4/dist/add-to-homescreen.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@3.4/dist/add-to-homescreen.min.js"></script>
+    <title>Sigdex</title>
+    <script type="module" crossorigin src="/assets/index-Di1ZcJGN.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CcKH52uh.js">
+    <link rel="modulepreload" crossorigin href="/assets/fontawesome-DaAEFtH_.js">
+    <link rel="modulepreload" crossorigin href="/assets/html2canvas-5Cw11iw4.js">
+    <link rel="stylesheet" crossorigin href="/assets/vendor-BCw0uU-l.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-Dm4b-6rF.css">
+  <link rel="manifest" href="/manifest.webmanifest"></head>
+
+  <body>
+    <div id="app"></div>
+    <script>
+      window.SCROLLDEX_CONFIG = {
+        API_URL: 'https://api.sigdex.io',
+        UI_URL: 'https://sigdex.io',
+      };
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+      if (window.location.hostname !== 'localhost') {
+        // Global site tag (gtag.js) - Google Analytics
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-DNJN1PF3CS';
+        document.head.appendChild(gtagScript);
+
+        gtagScript.onload = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+
+          let appVersion = '';
+          try {
+            appVersion = window.__APP_VERSION__ || '';
+          } catch {}
+          if (!appVersion) {
+            const meta = document.querySelector('meta[name="app-version"]');
+            if (meta) appVersion = meta.getAttribute('content') || '';
+          }
+          const isStandalone =
+            window.matchMedia('(display-mode: standalone)').matches ||
+            window.navigator.standalone === true;
+          if (isStandalone) {
+            const viewport = document.getElementById('viewport-meta');
+            if (viewport) {
+              viewport.setAttribute(
+                'content',
+                'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
+              );
+            }
+          }
+          gtag('config', 'G-27GJB8V39N', {
+            app_version: appVersion,
+            pwa_mode: isStandalone ? 'standalone' : 'browser',
+          });
+        };
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        window.AddToHomeScreenInstance = window.AddToHomeScreen({
+          appName: 'Sigdex',
+          appNameDisplay: 'standalone',
+          appIconUrl: '/assets/icon192.png',
+          assetUrl: 'https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@3.4/dist/assets/img/',
+          maxModalDisplayCount: 3,
+          displayOptions: { showMobile: true, showDesktop: false },
+          allowClose: true,
+          showArrow: true,
+        });
+      });
+    </script>
+  </body>
+</html>

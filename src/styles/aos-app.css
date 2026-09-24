@@ -6361,3 +6361,92 @@ body {
   border-bottom-color: #d5cbb8;
   background: linear-gradient(90deg, rgba(180, 154, 97, 0.07), transparent 54%);
 }
+.aos-rules-browser__controls {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 12px 16px;
+  background: var(--aos-paper, #f2efe7);
+  border-bottom: 1px solid rgba(68, 52, 34, 0.22);
+}
+
+.aos-rules-browser__tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.aos-rules-browser__tabs button {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #9a7b44;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 800;
+}
+
+.aos-rules-browser__tabs button.is-active {
+  background: #2b2016;
+  color: #fff;
+}
+
+.aos-rules-browser__controls input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #9c9488;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.aos-rules-browser__content {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.aos-rules-browser__section {
+  border: 1px solid rgba(68, 52, 34, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.aos-rules-browser__section > summary {
+  cursor: pointer;
+  padding: 14px 16px;
+}
+
+.aos-rules-browser__section > summary h2,
+.aos-rules-browser__section > summary h3,
+.aos-rules-browser__section > summary h4 {
+  display: inline;
+  margin: 0;
+}
+
+.aos-rules-browser__section > div {
+  display: grid;
+  gap: 10px;
+  padding: 0 12px 12px;
+}
+
+.aos-rules-browser__card {
+  padding: 14px;
+  border-left: 4px solid #8a6429;
+  background: #fff;
+  white-space: pre-wrap;
+}
+
+.aos-rules-browser__card h4 {
+  margin: 0 0 8px;
+}
+
+.aos-rules-browser__ability {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 4px;
+  background: #eee5d2;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,2531 @@
+
+===== Gloomspite Gitz =====
+{
+  "id": "9baf-c109-f621-e60",
+  "name": "Gloomspite Gitz",
+  "type": 2,
+  "superType": "Other",
+  "revision": 48,
+  "keyword": "GLOOMSPITE GITZ",
+  "alliance": "DESTRUCTION",
+  "isArmyOfRenown": false,
+  "units": {
+    "length": 56,
+    "sample": [
+      {
+        "name": "Malevolent Moon",
+        "id": "5ee7-6987-61a1-78fb",
+        "faction": "Gloomspite Gitz",
+        "type": 6,
+        "superType": "Unit",
+        "points": 0,
+        "publication": {
+          "id": "a395-7bc4-71eb-46df",
+          "name": "Battletome: Gloomspite Gitz",
+          "type": 0,
+          "title": "Gloomspite Gitz"
+        },
+        "legends": false,
+        "health": "6",
+        "save": "6+",
+        "move": "12\"",
+        "control": null,
+        "ward": "6+",
+        "banishment": "7+",
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "baseSize": "string",
+              "weapons": "object",
+              "optionSets": "[0]"
+            }
+          ]
+        },
+        "enhancements": {},
+        "abilities": {
+          "length": 2,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "string",
+              "unlockCondition": "object",
+              "keywords": "[2]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 6,
+          "sample": [
+            "WARD (6+)",
+            "MANIFESTATION"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": null,
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 0,
+          "sample": []
+        }
+      },
+      {
+        "name": "Mork's Mighty Mushroom",
+        "id": "9705-ad78-53c4-1ef6",
+        "faction": "Gloomspite Gitz",
+        "type": 6,
+        "superType": "Unit",
+        "points": 0,
+        "publication": {
+          "id": "a395-7bc4-71eb-46df",
+          "name": "Battletome: Gloomspite Gitz",
+          "type": 0,
+          "title": "Gloomspite Gitz"
+        },
+        "legends": false,
+        "health": "6",
+        "save": "6+",
+        "move": "-",
+        "control": null,
+        "ward": "6+",
+        "banishment": "7+",
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "baseSize": "string",
+              "weapons": "object",
+              "optionSets": "[0]"
+            }
+          ]
+        },
+        "enhancements": {},
+        "abilities": {
+          "length": 2,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "string",
+              "unlockCondition": "object",
+              "keywords": "[2]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 5,
+          "sample": [
+            "WARD (6+)",
+            "MANIFESTATION"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": null,
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 0,
+          "sample": []
+        }
+      }
+    ]
+  },
+  "upgrades": {
+    "battleFormations": {
+      "length": 6,
+      "sample": [
+        {
+          "name": "Squigalanche",
+          "id": "2d24-d257-a91f-df11",
+          "type": 0,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        },
+        {
+          "name": "Troggherd",
+          "id": "4a89-e3d3-88cf-855b",
+          "type": 0,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "battleTraits": {
+      "length": 1,
+      "sample": [
+        {
+          "name": "Battle Traits: Gloomspite Gitz",
+          "id": "bf7-1e40-758b-f869",
+          "type": 3,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 3,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "lores": {
+      "manifestation": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[4]",
+            "units": "[4]",
+            "abilities": "[4]",
+            "rules": "[0]",
+            "legends": "boolean"
+          }
+        ]
+      },
+      "spell": {
+        "length": 3,
+        "sample": [
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          },
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          }
+        ]
+      },
+      "prayer": {
+        "length": 0,
+        "sample": []
+      }
+    },
+    "enhancements": {
+      "Artefacts of Power": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Heroic Traits": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Special Knick-knacks": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      }
+    }
+  },
+  "regimentsOfRenown": {
+    "length": 17,
+    "sample": [
+      {
+        "selectableIn": {
+          "length": 8,
+          "sample": [
+            "Ossiarch Bonereapers",
+            "Soulblight Gravelords"
+          ]
+        },
+        "id": "10b2-4a3a-8629-90ef",
+        "name": "Big Drogg Fort-kicker",
+        "type": 0,
+        "superType": "Other",
+        "sourceArmies": {
+          "length": 1,
+          "sample": [
+            "Sons of Behemat"
+          ]
+        },
+        "units": {
+          "length": 1,
+          "sample": [
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            }
+          ]
+        },
+        "upgrades": {
+          "length": 1,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "abilities": "[2]",
+              "rules": "[0]",
+              "sog": "boolean",
+              "scourge": "string",
+              "points": "number",
+              "legends": "boolean"
+            }
+          ]
+        },
+        "points": 440,
+        "legends": false,
+        "modeOfPlay": 1,
+        "publication": {
+          "id": "b765-4747-cddc-385e",
+          "name": "Battletome: Sons of Behemat",
+          "type": 0,
+          "title": "Sons of Behemat"
+        }
+      },
+      {
+        "selectableIn": {
+          "length": 13,
+          "sample": [
+            "Kruleboyz",
+            "Gloomspite Gitz"
+          ]
+        },
+        "id": "fb09-ac57-e70e-716d",
+        "name": "Bundo Whalebiter",
+        "type": 0,
+        "superType": "Other",
+        "sourceArmies": {
+          "length": 1,
+          "sample": [
+            "Sons of Behemat"
+          ]
+        },
+        "units": {
+          "length": 1,
+          "sample": [
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            }
+          ]
+        },
+        "upgrades": {
+          "length": 1,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "abilities": "[1]",
+              "rules": "[0]",
+              "sog": "boolean",
+              "scourge": "string",
+              "points": "number",
+              "legends": "boolean"
+            }
+          ]
+        },
+        "points": 360,
+        "legends": false,
+        "modeOfPlay": 1,
+        "publication": {
+          "id": "b765-4747-cddc-385e",
+          "name": "Battletome: Sons of Behemat",
+          "type": 0,
+          "title": "Sons of Behemat"
+        }
+      }
+    ]
+  },
+  "options": {
+    "length": 0,
+    "sample": []
+  },
+  "legends": false,
+  "anvilOfApotheosis": {
+    "length": 2,
+    "sample": [
+      {
+        "type": 0,
+        "superType": "Anvil of Apotheosis",
+        "name": "Anvil of Apotheosis: Grot Hero",
+        "id": "3ffe-7c86-f14a-985e",
+        "unit": {
+          "name": "Anvil of Apotheosis: Grot Hero",
+          "id": "3ffe-7c86-f14a-985e",
+          "type": 0,
+          "superType": "Unit",
+          "points": 0,
+          "publication": {
+            "id": "string",
+            "name": "string",
+            "type": "number",
+            "title": "string"
+          },
+          "legends": false,
+          "health": "4",
+          "save": "5+",
+          "move": "5\"",
+          "control": "2",
+          "ward": null,
+          "banishment": null,
+          "isUndersize": false,
+          "isWarmaster": false,
+          "isGeneral": false,
+          "canBeReinforced": false,
+          "isReinforced": false,
+          "models": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "enhancements": {},
+          "abilities": {
+            "length": 0,
+            "sample": []
+          },
+          "keywords": {
+            "length": 4,
+            "sample": [
+              "string",
+              "string"
+            ]
+          },
+          "optionSets": {
+            "length": 0,
+            "sample": []
+          },
+          "battleProfile": {
+            "name": "string",
+            "unit_size": "string",
+            "points": "number",
+            "keywords": "[0]",
+            "notes": "[0]",
+            "base_size": "string",
+            "reinforceable": "boolean",
+            "subhero_categories": "[0]",
+            "regiment_options": "[4]",
+            "requiredLeader": "string",
+            "undersizeCondition": "string",
+            "retiringOn": "string",
+            "exclusiveWith": "string",
+            "legends": "boolean",
+            "hero": "boolean"
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "_tags": {
+            "length": 0,
+            "sample": []
+          }
+        },
+        "steps": {
+          "length": 7,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "step": "number",
+              "min": "number",
+              "max": "number",
+              "substeps": "[1]"
+            },
+            {
+              "id": "string",
+              "name": "string",
+              "step": "number",
+              "min": "number",
+              "max": "number",
+              "substeps": "[1]"
+            }
+          ]
+        }
+      },
+      {
+        "type": 0,
+        "superType": "Anvil of Apotheosis",
+        "name": "Anvil of Apotheosis: Troggoth Hero",
+        "id": "1d2f-efe8-1248-f74c",
+        "unit": {
+          "name": "Anvil of Apotheosis: Troggoth Hero",
+          "id": "1d2f-efe8-1248-f74c",
+          "type": 0,
+          "superType": "Unit",
+          "points": 0,
+          "publication": {
+            "id": "string",
+            "name": "string",
+            "type": "number",
+            "title": "string"
+          },
+          "legends": false,
+          "health": "8",
+          "save": "4+",
+          "move": "6\"",
+          "control": "2",
+          "ward": null,
+          "banishment": null,
+          "isUndersize": false,
+          "isWarmaster": false,
+          "isGeneral": false,
+          "canBeReinforced": false,
+          "isReinforced": false,
+          "models": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "enhancements": {},
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "keywords": {
+            "length": 5,
+            "sample": [
+              "string",
+              "string"
+            ]
+          },
+          "optionSets": {
+            "length": 0,
+            "sample": []
+          },
+          "battleProfile": {
+            "name": "string",
+            "unit_size": "string",
+            "points": "number",
+            "keywords": "[0]",
+            "notes": "[0]",
+            "base_size": "string",
+            "reinforceable": "boolean",
+            "subhero_categories": "[0]",
+            "regiment_options": "[1]",
+            "requiredLeader": "string",
+            "undersizeCondition": "string",
+            "retiringOn": "string",
+            "exclusiveWith": "string",
+            "legends": "boolean",
+            "hero": "boolean"
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "_tags": {
+            "length": 0,
+            "sample": []
+          }
+        },
+        "steps": {
+          "length": 4,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "step": "number",
+              "min": "number",
+              "max": "number",
+              "substeps": "[1]"
+            },
+            {
+              "id": "string",
+              "name": "string",
+              "step": "number",
+              "min": "number",
+              "max": "number",
+              "substeps": "[1]"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "length": 2,
+    "sample": [
+      {
+        "type": 0,
+        "superType": "Path",
+        "name": "Path of the Gitboss",
+        "id": "dc23-4efd-3b92-65ad",
+        "requirements": {
+          "keywords": {
+            "length": 2,
+            "sample": [
+              "string",
+              "string"
+            ]
+          },
+          "nonKeywords": {
+            "length": 0,
+            "sample": []
+          }
+        },
+        "aspiring": {
+          "name": "Aspiring",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        },
+        "elite": {
+          "name": "Elite",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        },
+        "mighty": {
+          "name": "Mighty",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        },
+        "legendary": {
+          "name": "Legendary",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        }
+      },
+      {
+        "type": 0,
+        "superType": "Path",
+        "name": "Path of the Dank Hordes",
+        "id": "1320-5922-45fe-872a",
+        "requirements": {
+          "keywords": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          },
+          "nonKeywords": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          }
+        },
+        "aspiring": {
+          "name": "Aspiring",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        },
+        "elite": {
+          "name": "Elite",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        },
+        "mighty": {
+          "name": "Mighty",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        },
+        "legendary": {
+          "name": "Legendary",
+          "options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "selection": null
+        }
+      }
+    ]
+  },
+  "publication": {
+    "id": "a395-7bc4-71eb-46df",
+    "name": "Battletome: Gloomspite Gitz",
+    "type": 0,
+    "title": "Gloomspite Gitz"
+  }
+}
+
+===== Seraphon =====
+{
+  "id": "4e3-e1a7-a8d4-8719",
+  "name": "Seraphon",
+  "type": 2,
+  "superType": "Other",
+  "revision": 41,
+  "keyword": "SERAPHON",
+  "alliance": "ORDER",
+  "isArmyOfRenown": false,
+  "units": {
+    "length": 40,
+    "sample": [
+      {
+        "name": "Lord Kroak",
+        "id": "df01-5aa1-a502-7a0c",
+        "faction": "Seraphon",
+        "type": 0,
+        "superType": "Unit",
+        "points": 410,
+        "publication": {
+          "id": "e9d0-a23-6a15-1fcb",
+          "name": "Faction Pack: Seraphon",
+          "type": 2,
+          "title": "Seraphon"
+        },
+        "legends": false,
+        "health": "18",
+        "save": "4+",
+        "move": "5\"",
+        "control": "5",
+        "ward": "4+",
+        "banishment": null,
+        "isUndersize": false,
+        "isWarmaster": true,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "weapons": "object",
+              "optionSets": "[0]",
+              "baseSize": "string",
+              "rules": "[0]"
+            }
+          ]
+        },
+        "enhancements": {},
+        "abilities": {
+          "length": 4,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 9,
+          "sample": [
+            "UNIQUE",
+            "HERO"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": {
+          "name": "Lord Kroak",
+          "unit_size": "1",
+          "points": 410,
+          "keywords": {
+            "length": 0,
+            "sample": []
+          },
+          "notes": {
+            "length": 0,
+            "sample": []
+          },
+          "base_size": "80mm",
+          "reinforceable": false,
+          "subhero_categories": {
+            "length": 0,
+            "sample": []
+          },
+          "regiment_options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "requiredLeader": "",
+          "undersizeCondition": "",
+          "retiringOn": "",
+          "exclusiveWith": "",
+          "armyOfRenown": "",
+          "legends": false,
+          "hero": true,
+          "prices": {
+            "slug": "string",
+            "model_count": "number",
+            "us": "number",
+            "gb": "number",
+            "eu": "number",
+            "au": "number",
+            "ca": "number"
+          }
+        },
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 0,
+          "sample": []
+        }
+      },
+      {
+        "name": "Ripperdactyl Chief",
+        "id": "d8da-70c-5bcc-cf9e",
+        "faction": "Seraphon",
+        "type": 0,
+        "superType": "Unit",
+        "points": 110,
+        "publication": {
+          "id": "e9d0-a23-6a15-1fcb",
+          "name": "Faction Pack: Seraphon",
+          "type": 2,
+          "title": "Seraphon"
+        },
+        "legends": false,
+        "health": "5",
+        "save": "5+",
+        "move": "14\"",
+        "control": "2",
+        "ward": null,
+        "banishment": null,
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "weapons": "object",
+              "optionSets": "[0]",
+              "baseSize": "string",
+              "rules": "[0]"
+            }
+          ]
+        },
+        "enhancements": {
+          "Heroic Traits": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Artefacts of Power": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Ghyranite Concoctions": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          }
+        },
+        "abilities": {
+          "length": 3,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 6,
+          "sample": [
+            "HERO",
+            "ORDER"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": {
+          "name": "Ripperdactyl Chief",
+          "unit_size": "1",
+          "points": 110,
+          "keywords": {
+            "length": 0,
+            "sample": []
+          },
+          "notes": {
+            "length": 0,
+            "sample": []
+          },
+          "base_size": "50mm",
+          "reinforceable": false,
+          "subhero_categories": {
+            "length": 0,
+            "sample": []
+          },
+          "regiment_options": {
+            "length": 3,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "requiredLeader": "",
+          "undersizeCondition": "",
+          "retiringOn": "",
+          "exclusiveWith": "",
+          "armyOfRenown": "",
+          "legends": false,
+          "hero": true,
+          "prices": null
+        },
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 0,
+          "sample": []
+        }
+      }
+    ]
+  },
+  "upgrades": {
+    "battleFormations": {
+      "length": 4,
+      "sample": [
+        {
+          "name": "Thunderquake Starhost",
+          "id": "b97a-6930-afde-a025",
+          "type": 0,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        },
+        {
+          "name": "Eternal Starhost",
+          "id": "5cc-6d3e-8b37-912f",
+          "type": 0,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "battleTraits": {
+      "length": 1,
+      "sample": [
+        {
+          "name": "Battle Traits: Seraphon",
+          "id": "3ac6-526e-bb2b-edd8",
+          "type": 3,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 6,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "lores": {
+      "manifestation": {
+        "length": 0,
+        "sample": []
+      },
+      "spell": {
+        "length": 2,
+        "sample": [
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          },
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          }
+        ]
+      },
+      "prayer": {
+        "length": 0,
+        "sample": []
+      }
+    },
+    "enhancements": {
+      "Artefacts of Power": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Heroic Traits": {
+        "length": 3,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          },
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Monstrous Traits": {
+        "length": 2,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          },
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      }
+    }
+  },
+  "regimentsOfRenown": {
+    "length": 28,
+    "sample": [
+      {
+        "selectableIn": {
+          "length": 13,
+          "sample": [
+            "Kruleboyz",
+            "Gloomspite Gitz"
+          ]
+        },
+        "id": "fb09-ac57-e70e-716d",
+        "name": "Bundo Whalebiter",
+        "type": 0,
+        "superType": "Other",
+        "sourceArmies": {
+          "length": 1,
+          "sample": [
+            "Sons of Behemat"
+          ]
+        },
+        "units": {
+          "length": 1,
+          "sample": [
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            }
+          ]
+        },
+        "upgrades": {
+          "length": 1,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "abilities": "[1]",
+              "rules": "[0]",
+              "sog": "boolean",
+              "scourge": "string",
+              "points": "number",
+              "legends": "boolean"
+            }
+          ]
+        },
+        "points": 360,
+        "legends": false,
+        "modeOfPlay": 1,
+        "publication": {
+          "id": "b765-4747-cddc-385e",
+          "name": "Battletome: Sons of Behemat",
+          "type": 0,
+          "title": "Sons of Behemat"
+        }
+      },
+      {
+        "selectableIn": {
+          "length": 8,
+          "sample": [
+            "Cities of Sigmar",
+            "Daughters of Khaine"
+          ]
+        },
+        "id": "e484-c06-d856-2921",
+        "name": "Elthwin's Thorns",
+        "type": 0,
+        "superType": "Other",
+        "sourceArmies": {
+          "length": 1,
+          "sample": [
+            "Sylvaneth"
+          ]
+        },
+        "units": {
+          "length": 2,
+          "sample": [
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            },
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            }
+          ]
+        },
+        "upgrades": {
+          "length": 1,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "abilities": "[2]",
+              "rules": "[0]",
+              "sog": "boolean",
+              "scourge": "string",
+              "points": "number",
+              "legends": "boolean"
+            }
+          ]
+        },
+        "points": 200,
+        "legends": false,
+        "modeOfPlay": 1,
+        "publication": {
+          "id": "27d9-b0c5-1ecc-ba2f",
+          "name": "Regiments of Renown",
+          "type": 3,
+          "title": "Regiments of Renown"
+        }
+      }
+    ]
+  },
+  "options": {
+    "length": 0,
+    "sample": []
+  },
+  "legends": false,
+  "paths": {
+    "length": 0,
+    "sample": []
+  },
+  "publication": {
+    "id": "e9d0-a23-6a15-1fcb",
+    "name": "Faction Pack: Seraphon",
+    "type": 2,
+    "title": "Seraphon"
+  }
+}
+
+===== Sons of Behemat =====
+{
+  "id": "de5f-588b-ea57-d6b5",
+  "name": "Sons of Behemat",
+  "type": 2,
+  "superType": "Other",
+  "revision": 29,
+  "keyword": "SONS OF BEHEMAT",
+  "alliance": "DESTRUCTION",
+  "isArmyOfRenown": false,
+  "units": {
+    "length": 14,
+    "sample": [
+      {
+        "name": "Warstomper Mega-Gargant",
+        "id": "5201-4045-7632-5a40",
+        "faction": "Sons of Behemat",
+        "type": 0,
+        "superType": "Unit",
+        "points": 390,
+        "publication": {
+          "id": "b765-4747-cddc-385e",
+          "name": "Battletome: Sons of Behemat",
+          "type": 0,
+          "title": "Sons of Behemat"
+        },
+        "legends": false,
+        "health": "25",
+        "save": "4+",
+        "move": "10\"",
+        "control": "10",
+        "ward": null,
+        "banishment": null,
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "weapons": "object",
+              "optionSets": "[0]",
+              "baseSize": "string",
+              "rules": "[0]"
+            }
+          ]
+        },
+        "enhancements": {
+          "Heroic Traits": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Artefacts of Power": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Realm-shaking Rampages": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Ghyranite Concoctions": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          }
+        },
+        "abilities": {
+          "length": 4,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 5,
+          "sample": [
+            "HERO",
+            "MONSTER"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": {
+          "name": "Warstomper Mega-Gargant",
+          "unit_size": "1",
+          "points": 390,
+          "keywords": {
+            "length": 0,
+            "sample": []
+          },
+          "notes": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          },
+          "base_size": "130mm",
+          "reinforceable": false,
+          "subhero_categories": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          },
+          "regiment_options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "requiredLeader": "",
+          "undersizeCondition": "",
+          "retiringOn": "",
+          "exclusiveWith": "",
+          "armyOfRenown": "",
+          "legends": false,
+          "hero": true,
+          "prices": {
+            "slug": "string",
+            "model_count": "number",
+            "us": "number",
+            "gb": "number",
+            "eu": "number",
+            "au": "number",
+            "ca": "number",
+            "dual_kit": "boolean",
+            "alternates": "[4]"
+          }
+        },
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 1,
+          "sample": [
+            "Eager Lout"
+          ]
+        }
+      },
+      {
+        "name": "Beast-smasher Mega-Gargant",
+        "id": "4a1b-3873-aa68-6d28",
+        "faction": "Sons of Behemat",
+        "type": 0,
+        "superType": "Unit",
+        "points": 380,
+        "publication": {
+          "id": "b765-4747-cddc-385e",
+          "name": "Battletome: Sons of Behemat",
+          "type": 0,
+          "title": "Sons of Behemat"
+        },
+        "legends": false,
+        "health": "25",
+        "save": "4+",
+        "move": "10\"",
+        "control": "10",
+        "ward": null,
+        "banishment": null,
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "weapons": "object",
+              "optionSets": "[0]",
+              "baseSize": "string",
+              "rules": "[0]"
+            }
+          ]
+        },
+        "enhancements": {
+          "Heroic Traits": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Artefacts of Power": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Realm-shaking Rampages": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          },
+          "Ghyranite Concoctions": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          }
+        },
+        "abilities": {
+          "length": 4,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[1]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 5,
+          "sample": [
+            "HERO",
+            "MONSTER"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": {
+          "name": "Beast-smasher Mega-Gargant",
+          "unit_size": "1",
+          "points": 380,
+          "keywords": {
+            "length": 0,
+            "sample": []
+          },
+          "notes": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          },
+          "base_size": "130mm",
+          "reinforceable": false,
+          "subhero_categories": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          },
+          "regiment_options": {
+            "length": 2,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "requiredLeader": "",
+          "undersizeCondition": "",
+          "retiringOn": "",
+          "exclusiveWith": "",
+          "armyOfRenown": "",
+          "legends": false,
+          "hero": true,
+          "prices": {
+            "slug": "string",
+            "model_count": "number",
+            "us": "number",
+            "gb": "number",
+            "eu": "number",
+            "au": "number",
+            "ca": "number",
+            "dual_kit": "boolean",
+            "alternates": "[4]"
+          }
+        },
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 1,
+          "sample": [
+            "Eager Lout"
+          ]
+        }
+      }
+    ]
+  },
+  "upgrades": {
+    "battleFormations": {
+      "length": 6,
+      "sample": [
+        {
+          "name": "Looting Leviathans",
+          "id": "bd2d-ab85-0882-2b6c",
+          "type": 0,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        },
+        {
+          "name": "Conquering Stomp",
+          "id": "c2c7-4909-81d3-f2ed",
+          "type": 0,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 1,
+            "sample": [
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "battleTraits": {
+      "length": 1,
+      "sample": [
+        {
+          "name": "Battle Traits: Sons of Behemat",
+          "id": "590e-e726-f603-60eb",
+          "type": 3,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 5,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "lores": {
+      "manifestation": {
+        "length": 0,
+        "sample": []
+      },
+      "spell": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          }
+        ]
+      },
+      "prayer": {
+        "length": 2,
+        "sample": [
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          },
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          }
+        ]
+      }
+    },
+    "enhancements": {
+      "Heroic Traits": {
+        "length": 2,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[6]",
+            "scourge": "string",
+            "restrictionText": "string"
+          },
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Artefacts of Power": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[6]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Realm-shaking Rampages": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[6]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      },
+      "Cracked Heels": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[3]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      }
+    }
+  },
+  "regimentsOfRenown": {
+    "length": 14,
+    "sample": [
+      {
+        "selectableIn": {
+          "length": 4,
+          "sample": [
+            "Gloomspite Gitz",
+            "Ironjawz"
+          ]
+        },
+        "id": "7199-3205-3f4e-5567",
+        "name": "Okar's Torrbad",
+        "type": 0,
+        "superType": "Other",
+        "sourceArmies": {
+          "length": 1,
+          "sample": [
+            "Ogor Mawtribes"
+          ]
+        },
+        "units": {
+          "length": 2,
+          "sample": [
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            },
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            }
+          ]
+        },
+        "upgrades": {
+          "length": 1,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "abilities": "[2]",
+              "rules": "[0]",
+              "sog": "boolean",
+              "scourge": "string",
+              "points": "number",
+              "legends": "boolean"
+            }
+          ]
+        },
+        "points": 490,
+        "legends": false,
+        "modeOfPlay": 1,
+        "publication": {
+          "id": "1ac6-e227-a186-12",
+          "name": "Battletome: Ogor Mawtribes",
+          "type": 0,
+          "title": "Ogor Mawtribes"
+        }
+      },
+      {
+        "selectableIn": {
+          "length": 5,
+          "sample": [
+            "Sons of Behemat",
+            "Bonesplitterz"
+          ]
+        },
+        "id": "a11c-1f80-1875-4639",
+        "name": "Big Grikk's Kruleshots",
+        "type": 0,
+        "superType": "Other",
+        "sourceArmies": {
+          "length": 1,
+          "sample": [
+            "Kruleboyz"
+          ]
+        },
+        "units": {
+          "length": 2,
+          "sample": [
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            },
+            {
+              "unit": "object",
+              "count": "number",
+              "max": "number",
+              "points": "number"
+            }
+          ]
+        },
+        "upgrades": {
+          "length": 2,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "abilities": "[1]",
+              "rules": "[0]",
+              "sog": "boolean",
+              "scourge": "string",
+              "points": "number",
+              "legends": "boolean"
+            },
+            {
+              "id": "string",
+              "name": "string",
+              "superType": "string",
+              "type": "number",
+              "abilities": "[0]",
+              "points": "number",
+              "scourge": "string",
+              "rules": "[1]",
+              "legends": "boolean"
+            }
+          ]
+        },
+        "points": 320,
+        "legends": false,
+        "modeOfPlay": 1,
+        "publication": {
+          "id": "27d9-b0c5-1ecc-ba2f",
+          "name": "Regiments of Renown",
+          "type": 3,
+          "title": "Regiments of Renown"
+        }
+      }
+    ]
+  },
+  "options": {
+    "length": 0,
+    "sample": []
+  },
+  "legends": false,
+  "paths": {
+    "length": 0,
+    "sample": []
+  },
+  "publication": {
+    "id": "b765-4747-cddc-385e",
+    "name": "Battletome: Sons of Behemat",
+    "type": 0,
+    "title": "Sons of Behemat"
+  }
+}
+
+===== Sons of Behemat - Matriarch's Mob =====
+{
+  "id": "371c-6bc9-8b82-21cd",
+  "name": "Sons of Behemat - Matriarch's Mob",
+  "type": 2,
+  "superType": "Other",
+  "revision": 1,
+  "keyword": "MATRIARCH'S MOB",
+  "alliance": "DESTRUCTION",
+  "isArmyOfRenown": true,
+  "units": {
+    "length": 6,
+    "sample": [
+      {
+        "name": "Mancrusher Gargant",
+        "id": "2e41-3174-d7a3-cded",
+        "faction": "Sons of Behemat - Matriarch's Mob",
+        "type": 4,
+        "superType": "Unit",
+        "points": 140,
+        "publication": {
+          "id": "b765-4747-cddc-385e",
+          "name": "Battletome: Sons of Behemat",
+          "type": 0,
+          "title": "Sons of Behemat"
+        },
+        "legends": false,
+        "health": "12",
+        "save": "5+",
+        "move": "8\"",
+        "control": "5",
+        "ward": null,
+        "banishment": null,
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "weapons": "object",
+              "optionSets": "[0]",
+              "baseSize": "string",
+              "rules": "[0]"
+            }
+          ]
+        },
+        "enhancements": {
+          "Marks of the Chooser's Chosen": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          }
+        },
+        "abilities": {
+          "length": 2,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "string",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            },
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "string",
+              "unlockCondition": "object",
+              "keywords": "[1]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 5,
+          "sample": [
+            "MONSTER",
+            "DESTRUCTION"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": {
+          "name": "Mancrusher Gargant",
+          "unit_size": "1",
+          "points": 140,
+          "keywords": {
+            "length": 3,
+            "sample": [
+              "string",
+              "string"
+            ]
+          },
+          "notes": {
+            "length": 0,
+            "sample": []
+          },
+          "base_size": "90 x 52mm",
+          "reinforceable": false,
+          "subhero_categories": {
+            "length": 0,
+            "sample": []
+          },
+          "regiment_options": {
+            "length": 0,
+            "sample": []
+          },
+          "requiredLeader": "",
+          "undersizeCondition": "",
+          "retiringOn": "",
+          "exclusiveWith": "",
+          "armyOfRenown": "",
+          "legends": false,
+          "hero": false,
+          "prices": {
+            "slug": "string",
+            "model_count": "number",
+            "us": "number",
+            "gb": "number",
+            "eu": "number",
+            "au": "number",
+            "ca": "number"
+          }
+        },
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 0,
+          "sample": []
+        }
+      },
+      {
+        "name": "Mancrusher Gargant (Scourge of Aqshy)",
+        "id": "101d-650a-0429-db5c",
+        "faction": "Sons of Behemat - Matriarch's Mob",
+        "type": 4,
+        "superType": "Unit",
+        "points": 150,
+        "publication": {
+          "id": "9e18-bb03-7b60-d4ff",
+          "name": "Scourge of Aqshy",
+          "type": 99,
+          "title": "Scourge of Aqshy"
+        },
+        "legends": false,
+        "health": "12",
+        "save": "5+",
+        "move": "8\"",
+        "control": "10",
+        "ward": null,
+        "banishment": null,
+        "isUndersize": false,
+        "isWarmaster": false,
+        "isGeneral": false,
+        "canBeReinforced": false,
+        "isReinforced": false,
+        "models": {
+          "length": 1,
+          "sample": [
+            {
+              "id": "string",
+              "name": "string",
+              "min": "number",
+              "max": "number",
+              "weapons": "object",
+              "optionSets": "[0]",
+              "baseSize": "string",
+              "rules": "[0]"
+            }
+          ]
+        },
+        "enhancements": {
+          "Marks of the Chooser's Chosen": {
+            "name": "string",
+            "id": "string",
+            "slot": "object"
+          }
+        },
+        "abilities": {
+          "length": 1,
+          "sample": [
+            {
+              "name": "string",
+              "id": "string",
+              "type": "number",
+              "superType": "string",
+              "timing": "string",
+              "color": "string",
+              "typeAttribute": "string",
+              "effect": "string",
+              "declare": "object",
+              "usedBy": "object",
+              "cost": "object",
+              "unlockCondition": "object",
+              "keywords": "[0]"
+            }
+          ]
+        },
+        "keywords": {
+          "length": 5,
+          "sample": [
+            "MONSTER",
+            "DESTRUCTION"
+          ]
+        },
+        "optionSets": {
+          "length": 0,
+          "sample": []
+        },
+        "battleProfile": {
+          "name": "Mancrusher Gargant (Scourge of Aqshy)",
+          "unit_size": "1",
+          "points": 150,
+          "keywords": {
+            "length": 3,
+            "sample": [
+              "string",
+              "string"
+            ]
+          },
+          "notes": {
+            "length": 1,
+            "sample": [
+              "string"
+            ]
+          },
+          "base_size": "90 x 52mm",
+          "reinforceable": false,
+          "subhero_categories": {
+            "length": 0,
+            "sample": []
+          },
+          "regiment_options": {
+            "length": 0,
+            "sample": []
+          },
+          "requiredLeader": "",
+          "undersizeCondition": "",
+          "retiringOn": "",
+          "exclusiveWith": "",
+          "armyOfRenown": "",
+          "legends": false,
+          "hero": false,
+          "prices": {
+            "slug": "string",
+            "model_count": "number",
+            "us": "number",
+            "gb": "number",
+            "eu": "number",
+            "au": "number",
+            "ca": "number"
+          }
+        },
+        "rules": {
+          "length": 0,
+          "sample": []
+        },
+        "_tags": {
+          "length": 0,
+          "sample": []
+        }
+      }
+    ]
+  },
+  "upgrades": {
+    "battleFormations": {
+      "length": 0,
+      "sample": []
+    },
+    "battleTraits": {
+      "length": 1,
+      "sample": [
+        {
+          "name": "Battle Traits: Matriarch's Mob",
+          "id": "9b6e-e98d-b14e-5993",
+          "type": 3,
+          "superType": "Upgrade",
+          "abilities": {
+            "length": 4,
+            "sample": [
+              "object",
+              "object"
+            ]
+          },
+          "rules": {
+            "length": 0,
+            "sample": []
+          },
+          "sog": false,
+          "scourge": "None",
+          "points": 0,
+          "legends": false
+        }
+      ]
+    },
+    "lores": {
+      "manifestation": {
+        "length": 0,
+        "sample": []
+      },
+      "spell": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "id": "string",
+            "type": "number",
+            "superType": "string",
+            "points": "number",
+            "scourge": "string",
+            "sog": "boolean",
+            "unitIds": "[0]",
+            "units": "[0]",
+            "abilities": "[3]",
+            "rules": "[0]",
+            "legends": "boolean"
+          }
+        ]
+      },
+      "prayer": {
+        "length": 0,
+        "sample": []
+      }
+    },
+    "enhancements": {
+      "Marks of the Chooser's Chosen": {
+        "length": 1,
+        "sample": [
+          {
+            "name": "string",
+            "upgrades": "[2]",
+            "scourge": "string",
+            "restrictionText": "string"
+          }
+        ]
+      }
+    }
+  },
+  "regimentsOfRenown": {
+    "length": 0,
+    "sample": []
+  },
+  "options": {
+    "length": 1,
+    "sample": [
+      {
+        "min": 1,
+        "max": 1,
+        "units": {
+          "length": 1,
+          "sample": [
+            "Ma Maegran, Chooser of the Mighty"
+          ]
+        },
+        "type": 0,
+        "note": "",
+        "enablingUnit": null,
+        "onePerUnit": null
+      }
+    ]
+  },
+  "legends": false,
+  "paths": {
+    "length": 0,
+    "sample": []
+  },
+  "publication": {
+    "id": "b765-4747-cddc-385e",
+    "name": "Battletome: Sons of Behemat",
+    "type": 0,
+    "title": "Sons of Behemat"
+  }
+}

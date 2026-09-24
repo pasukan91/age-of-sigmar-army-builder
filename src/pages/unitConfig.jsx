@@ -270,11 +270,19 @@ function UnitConfig({
       const excluded = (option.excludedKeywords ?? []).map((keyword) =>
         String(keyword).trim().toLowerCase()
       );
+      const matchesToken = (token) => {
+        const normalizedUnitName = String(unit.name ?? "").trim().toLowerCase();
+        const singularToken = token.endsWith("s") ? token.slice(0, -1) : token;
+        const singularName = normalizedUnitName.endsWith("s")
+          ? normalizedUnitName.slice(0, -1)
+          : normalizedUnitName;
+        return keywords.includes(token) || singularName === singularToken;
+      };
       const hasRequired = required.length === 0 ||
         (option.requireAnyKeyword
-          ? required.some((keyword) => keywords.includes(keyword))
-          : required.every((keyword) => keywords.includes(keyword)));
-      return hasRequired && !excluded.some((keyword) => keywords.includes(keyword));
+          ? required.some(matchesToken)
+          : required.every(matchesToken));
+      return hasRequired && !excluded.some(matchesToken);
     }
   );
   const canSelectAqshyEnhancement = aqshyEnhancementOptions.length > 0;
@@ -284,8 +292,10 @@ function UnitConfig({
     ...(faction?.aqshyArtefacts ?? []),
   ];
 
-  const heroicTraitOptions =
-    faction?.heroicTraits ?? [];
+  const heroicTraitOptions = [
+    ...(faction?.heroicTraits ?? []),
+    ...(faction?.aqshyHeroicTraits ?? []),
+  ];
 
   const aqshyHeroicTraitOptions =
     heroicTraitOptions.filter(
@@ -961,9 +971,9 @@ function UnitConfig({
 
       {canSelectAqshyEnhancement && (
         <SelectionSection
-          title={aqshyEnhancementOptions[0]?.groupName ?? "Mejora de Aqshy"}
+          title={aqshyEnhancementOptions[0]?.groupName ?? "Mejora"}
           intro={aqshyEnhancementOptions[0]?.restrictionText}
-          source="Aqshy"
+          source={aqshyEnhancementOptions[0]?.source}
           options={aqshyEnhancementOptions}
           selected={aqshyEnhancement}
           disabled={Boolean(aqshyEnhancementOwner)}

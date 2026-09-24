@@ -338,6 +338,10 @@ function normalizeManifestationLores({ faction, lores, manifestations }) {
     };
   });
 
+  if (faction.catalogueDataVersion) {
+    return resolvedLores;
+  }
+
   return ensureManifestationLoreCoverage({
     faction,
     lores: resolvedLores,
@@ -519,11 +523,18 @@ export function getFactionValidationErrors(faction) {
 
   const manifestationsInLores = new Set(
     faction?.manifestationLores?.flatMap((lore) =>
-      lore.manifestations?.map((manifestation) => manifestation?.id) ?? []
+      lore.manifestations?.flatMap((manifestation) => [
+        manifestation?.id,
+        slugify(manifestation?.name),
+      ]) ?? []
     ) ?? []
   );
   faction?.manifestations?.forEach((manifestation) => {
-    if (!manifestationsInLores.has(manifestation.id)) {
+    if (
+      !manifestationsInLores.has(manifestation.id) &&
+      !manifestationsInLores.has(slugify(manifestation.name)) &&
+      !manifestation?.details?.standaloneManifestation
+    ) {
       errors.push(`manifestation not available in a lore: ${manifestation.id}`);
     }
   });

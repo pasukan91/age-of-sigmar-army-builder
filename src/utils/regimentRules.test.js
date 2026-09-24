@@ -7,6 +7,7 @@ import {
   getAvailableUnitsForRegiment,
   getRegimentCompositionErrors,
   hasIllegalRegimentComposition,
+  doesUnitMatchRegimentOption,
 } from "./regimentRules.js";
 
 function hero(id, role = null) {
@@ -398,4 +399,32 @@ test("combines a non-keyword exclusion with a required keyword", () => {
     getAvailableUnitsForRegiment(list, list.regiments[0]).map((unit) => unit.id),
     ["skinks"]
   );
+});
+
+test("matches structured SigDex regiment options exactly", () => {
+  const nonUniqueGargant = {
+    id: "mancrusher-gargant",
+    name: "Mancrusher Gargant",
+    keywords: ["Sons of Behemat", "Monster"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const uniqueGargant = {
+    ...nonUniqueGargant,
+    id: "king-brodd",
+    name: "King Brodd",
+    keywords: ["Sons of Behemat", "Monster", "Unique"],
+  };
+  const option = {
+    label: "Any non-Unique Sons of Behemat unit",
+    min: 0,
+    max: 3,
+    unit_names: [],
+    keywords: ["Sons of Behemat"],
+    nonKeywords: ["Unique"],
+    subhero_categories: [],
+  };
+
+  assert.equal(doesUnitMatchRegimentOption(nonUniqueGargant, option), true);
+  assert.equal(doesUnitMatchRegimentOption(uniqueGargant, option), false);
 });
