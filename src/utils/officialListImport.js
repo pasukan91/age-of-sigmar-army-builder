@@ -24,7 +24,6 @@ const ENHANCEMENT_FIELDS = [
   ["brandsOfTheDarkGods", "brandOfDarkGod"],
   ["ensorcelledBanners", "ensorcelledBanner"],
   ["boonsOfShadow", "boonOfShadow"],
-  ["aqshyEnhancements", "aqshyEnhancement"],
 ];
 
 export class OfficialListImportError extends Error {
@@ -211,6 +210,16 @@ function applyBullet(rawLine, unit, rules, warnings) {
     unit.reinforced = true;
     const models = Number(unit.details?.models);
     if (Number.isFinite(models)) unit.configuredModels = models * 2;
+    return;
+  }
+
+  const specialEnhancement = findByName(value, rules?.aqshyEnhancements);
+  if (specialEnhancement) {
+    const category = specialEnhancement.enhancementCategory ?? specialEnhancement.groupName;
+    unit.specialEnhancements = {
+      ...(unit.specialEnhancements ?? {}),
+      [category]: specialEnhancement,
+    };
     return;
   }
 

@@ -12,7 +12,7 @@ test("SigDex is authoritative for every active faction and builder restriction",
   try {
     const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
     assert.equal(catalogue.metadata.source, "https://sigdex.io/");
-    assert.equal(catalogue.metadata.serverVersion, "3.1.10");
+    assert.equal(catalogue.metadata.serverVersion, "3.1.11");
     assert.equal(catalogue.factions.length, 25);
     assert.equal(catalogue.factions.reduce((sum, faction) => sum + faction.units.length, 0), 761);
 

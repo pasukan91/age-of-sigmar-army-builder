@@ -412,6 +412,16 @@ function UnitWarscroll({
           />
         )}
 
+        {Object.entries(unit.specialEnhancements ?? {}).map(([category, enhancement]) =>
+          enhancement ? (
+            <EnhancementAccordion
+              key={category}
+              title={category}
+              enhancement={enhancement}
+            />
+          ) : null
+        )}
+
         {typeof onConfigure ===
           "function" &&
           !isUniqueUnit(unit) && (
@@ -656,6 +666,7 @@ function getDisplayedPoints(unit) {
     unit?.originOfTerrifyingFolkTale,
     unit?.visionOfFate,
     unit?.specialKnickKnack,
+    unit?.flawlessManoeuvre,
     unit?.plaguefathersPox,
     unit?.decorationForValour,
     unit?.ironweldInnovation,
@@ -665,6 +676,7 @@ function getDisplayedPoints(unit) {
     unit?.ensorcelledBanner,
     unit?.boonOfShadow,
     unit?.aqshyEnhancement,
+    ...Object.values(unit?.specialEnhancements ?? {}),
   ].reduce(
     (total, enhancement) =>
       total + (Number(enhancement?.points) || 0),

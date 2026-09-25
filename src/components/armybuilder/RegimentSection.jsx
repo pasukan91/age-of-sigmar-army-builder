@@ -13,6 +13,7 @@ import UnitArtwork from "../UnitArtwork";
 import TrashIcon from "../TrashIcon";
 import { getEnhancementTiming } from "../../utils/enhancementTiming";
 import { isUniqueUnit } from "../../utils/unitIdentity";
+import { getUnitPoints } from "../../utils/armyPoints";
 
 function RegimentSection({
   list,
@@ -34,41 +35,6 @@ function RegimentSection({
     getAvailableRegimentLeaders(list);
   const compositionErrors =
     getRegimentCompositionErrors(list);
-
-  function getUnitPoints(unit) {
-    const basePoints =
-      Number(unit?.points) || 0;
-
-    const enhancementPoints = [
-      unit?.heroicTrait,
-      unit?.monstrousTrait,
-      unit?.artefact,
-      unit?.allConsumingObsession,
-      unit?.moulderMutation,
-      unit?.mortisanRefinement,
-      unit?.accursedDevice,
-      unit?.brazenMutation,
-      unit?.originOfTerrifyingFolkTale,
-      unit?.visionOfFate,
-      unit?.specialKnickKnack,
-      unit?.flawlessManoeuvre,
-      unit?.plaguefathersPox,
-      unit?.decorationForValour,
-      unit?.ironweldInnovation,
-      unit?.brandOfDarkGod,
-      unit?.ensorcelledBanner,
-      unit?.boonOfShadow,
-    ].reduce(
-      (total, enhancement) =>
-        total + (Number(enhancement?.points) || 0),
-      0
-    );
-
-    return (
-      (unit?.reinforced ? basePoints * 2 : basePoints) +
-      enhancementPoints
-    );
-  }
 
   function getUnitModels(unit) {
     const baseModels =

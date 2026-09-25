@@ -1054,6 +1054,15 @@ function App() {
     );
   }
 
+  function findSpecialEnhancementOwner(category, enhancementId = null) {
+    return getArmyUnits().find(({ unit, regimentId, isLeader }) => {
+      if (isCurrentlyEditedUnit({ unit, regimentId, isLeader })) return false;
+      const enhancement = unit?.specialEnhancements?.[category];
+      return Boolean(enhancement) &&
+        (!enhancementId || enhancement.id === enhancementId);
+    });
+  }
+
   function validateArmyEnhancements(
     configuredUnit
   ) {
@@ -1379,6 +1388,20 @@ function App() {
         });
       }
     }
+
+    Object.entries(configuredUnit.specialEnhancements ?? {}).forEach(
+      ([category, enhancement]) => {
+        if (!enhancement?.id) return;
+        const owner = findSpecialEnhancementOwner(category, enhancement.id);
+        if (!owner) return;
+        conflicts.push({
+          type: category,
+          selected: enhancement.name,
+          owner: owner.unit.name,
+          existing: owner.unit.specialEnhancements?.[category]?.name,
+        });
+      }
+    );
 
     if (
       conflicts.length === 0
@@ -1927,6 +1950,7 @@ function App() {
       ensorcelledBanner: null,
       boonOfShadow: null,
       aqshyEnhancement: null,
+      specialEnhancements: {},
     };
 
     saveUpdatedList({
@@ -2375,6 +2399,7 @@ function App() {
             boonOfShadow: findEnhancementOwner("boonOfShadow"),
             aqshyEnhancement: findEnhancementOwner("aqshyEnhancement"),
           }}
+          findSpecialEnhancementOwner={findSpecialEnhancementOwner}
           faction={
             {
               ...currentList?.faction,

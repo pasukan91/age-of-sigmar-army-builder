@@ -128,6 +128,7 @@ function unit(item, factionId, imageIndex = new Map(), fallbackImage = `/images/
       })),
       regimentOptionRules: regimentRules,
       canJoinRegimentAs: profile.subhero_categories ?? [], notes: profile.notes ?? [],
+      enhancementCategories: Object.keys(item.enhancements ?? {}),
       requiredLeader: profile.requiredLeader || null, undersizeCondition: profile.undersizeCondition || null,
       retiringOn: profile.retiringOn || null, exclusiveWith: profile.exclusiveWith || null,
       armyOfRenown: profile.armyOfRenown || null, optionSets: item.optionSets ?? [], prices: profile.prices ?? null,
@@ -150,7 +151,7 @@ function keywordLevel(keywords, name) {
   return Number(match?.[1] ?? 0);
 }
 
-function upgrade(item, group, scourge, restrictionText) {
+function upgrade(item, category, group, scourge, restrictionText) {
   const abilities = (item.abilities ?? []).map(ability);
   const restriction = String(restrictionText ?? "");
   const eligibility = restriction.match(/given to\s+(.+?)[.!]/i)?.[1]
@@ -162,18 +163,21 @@ function upgrade(item, group, scourge, restrictionText) {
   return {
     id: slug(item.name), sourceId: item.id, name: item.name, points: Number(item.points ?? 0),
     description: abilities.map((entry) => entry.description).filter(Boolean).join("\n\n"), abilities,
-    groupName: group, restrictionText: restriction, source: isAqshy(scourge) ? "Aqshy" : "Battletome",
+    enhancementCategory: category, groupName: group || category, restrictionText: restriction,
+    source: isAqshy(scourge) ? "Aqshy" : "Battletome",
     requiredKeywords: tokens.filter((token) => !token.excluded).map((token) => token.value),
     excludedKeywords: tokens.filter((token) => token.excluded).map((token) => token.value),
   };
 }
 
-function upgradesFor(army, category) {
-  return Object.entries(army.upgrades?.enhancements ?? {}).flatMap(([group, collections]) => {
-    if (category === "heroic" && group !== "Heroic Traits") return [];
-    if (category === "artefact" && group !== "Artefacts of Power") return [];
-    if (category === "other" && ["Heroic Traits", "Artefacts of Power"].includes(group)) return [];
-    return collections.filter(isCurrent).flatMap((collection) => collection.upgrades.map((item) => upgrade(item, collection.name || group, collection.scourge, collection.restrictionText)));
+function upgradesFor(army, kind) {
+  return Object.entries(army.upgrades?.enhancements ?? {}).flatMap(([category, collections]) => {
+    if (kind === "heroic" && category !== "Heroic Traits") return [];
+    if (kind === "artefact" && category !== "Artefacts of Power") return [];
+    if (kind === "other" && ["Heroic Traits", "Artefacts of Power"].includes(category)) return [];
+    return collections.filter(isCurrent).flatMap((collection) => collection.upgrades.map((item) =>
+      upgrade(item, category, collection.name || category, collection.scourge, collection.restrictionText)
+    ));
   });
 }
 

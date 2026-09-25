@@ -61,3 +61,45 @@ test("isolates a malformed list and preserves the original payload", async () =>
     await server.close();
   }
 });
+
+test("keeps SigDex enhancement categories after saving and reloading", async () => {
+  const server = await createServer({
+    appType: "custom",
+    logLevel: "silent",
+    server: { middlewareMode: true },
+  });
+
+  try {
+    const storageModule = await server.ssrLoadModule("/src/storage/armyListStorage.js");
+    const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
+    const faction = factions.find((item) => item.id === "gloomspite");
+    const leader = faction.units.find((unit) => unit.id === "loonboss");
+    const unit = faction.units.find((candidate) => candidate.id === "moonclan-stabbas");
+    const enhancement = faction.aqshyEnhancements.find((item) => item.id === "fizzcap");
+    const localStorage = createMemoryStorage();
+    globalThis.window = { localStorage };
+
+    assert.equal(storageModule.saveArmyLists([{
+      id: "enhancement-list",
+      name: "Enhancements",
+      allianceId: "destruction",
+      faction,
+      regiments: [{
+        id: "regiment-1",
+        hero: { ...leader, instanceId: "leader-1" },
+        units: [{
+          ...unit,
+          instanceId: "unit-1",
+          specialEnhancements: { "Special Knick-knacks": enhancement },
+        }],
+      }],
+    }]), true);
+
+    const [restored] = storageModule.loadArmyLists();
+    const restoredUnit = restored.regiments[0].units[0];
+    assert.equal(restoredUnit.specialEnhancements["Special Knick-knacks"].id, "fizzcap");
+  } finally {
+    delete globalThis.window;
+    await server.close();
+  }
+});

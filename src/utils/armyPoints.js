@@ -9,6 +9,9 @@ function getEnhancementPoints(unit) {
     return 0;
   }
 
+  const specialEnhancementPoints = Object.values(unit.specialEnhancements ?? {})
+    .reduce((total, enhancement) => total + getNumericPoints(enhancement), 0);
+
   return (
     getNumericPoints(unit.heroicTrait) +
     getNumericPoints(unit.monstrousTrait) +
@@ -28,11 +31,12 @@ function getEnhancementPoints(unit) {
     getNumericPoints(unit.brandOfDarkGod) +
     getNumericPoints(unit.ensorcelledBanner) +
     getNumericPoints(unit.boonOfShadow) +
-    getNumericPoints(unit.aqshyEnhancement)
+    getNumericPoints(unit.aqshyEnhancement) +
+    specialEnhancementPoints
   );
 }
 
-function getUnitPoints(unit) {
+export function getUnitPoints(unit) {
   if (!unit) {
     return 0;
   }

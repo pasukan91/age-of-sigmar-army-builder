@@ -119,6 +119,8 @@ function serializeUnit(unit) {
       unit.boonOfShadow ?? null,
     aqshyEnhancement:
       unit.aqshyEnhancement ?? null,
+    specialEnhancements:
+      unit.specialEnhancements ?? {},
   };
 }
 
@@ -218,6 +220,19 @@ function restoreUnit(savedUnit, faction) {
     aqshyEnhancement: restoreOption(
       savedUnit.aqshyEnhancement,
       faction?.aqshyEnhancements
+    ),
+    specialEnhancements: Object.fromEntries(
+      Object.entries(savedUnit.specialEnhancements ?? {}).flatMap(
+        ([category, savedEnhancement]) => {
+          const enhancement = restoreOption(
+            savedEnhancement,
+            (faction?.aqshyEnhancements ?? []).filter((option) =>
+              (option.enhancementCategory ?? option.groupName) === category
+            )
+          );
+          return enhancement ? [[category, enhancement]] : [];
+        }
+      )
     ),
   };
 }

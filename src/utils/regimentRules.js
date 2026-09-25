@@ -173,6 +173,13 @@ function isAllowedByArmyOfRenown(list, unit) {
     return true;
   }
 
+  const authoritativeUnits = list?.armyOfRenown?.rules?.units;
+  if (Array.isArray(authoritativeUnits) && authoritativeUnits.length > 0) {
+    return authoritativeUnits.some((candidate) =>
+      candidate.id === unit.id || candidate.sourceId === unit.sourceId
+    );
+  }
+
   if (armyId === "taars-grand-forgehost") {
     return unit.id === "urak-taar" ||
       unit.id === "daemonsmith" ||
@@ -573,25 +580,41 @@ function isHeroUnit(unit) {
   return unit?.rules?.hero === true || hasKeyword(unit, "Hero");
 }
 
+function baseRuleName(value) {
+  return String(value ?? "")
+    .replace(/^Scourge of [^:]+:\s*/i, "")
+    .replace(/\s*\(Scourge of [^)]+\)\s*$/i, "")
+    .trim();
+}
+
+function namesMatch(left, right) {
+  const normalizedLeft = normalize(baseRuleName(left));
+  const normalizedRight = normalize(baseRuleName(right));
+  if (normalizedLeft === normalizedRight) return true;
+  const leftPrefix = normalizedLeft.split(",")[0].trim();
+  const rightPrefix = normalizedRight.split(",")[0].trim();
+  return leftPrefix === normalizedRight || rightPrefix === normalizedLeft;
+}
+
 function unitMatchesRegimentOption(unit, option) {
   if (option.rules) {
     const rules = option.rules;
-    const names = (rules.unit_names ?? []).map(normalize);
+    const names = rules.unit_names ?? [];
     const required = (rules.keywords ?? []).map(normalize);
     const excluded = (rules.nonKeywords ?? []).map(normalize);
     const roles = (rules.subhero_categories ?? []).map(normalize);
     const unitRoles = (unit?.details?.canJoinRegimentAs ?? []).map(normalize);
-    const namedMatch = names.includes(normalize(unit?.name));
-    const keywordsMatch = required.every((keyword) => hasKeyword(unit, keyword));
-    const exclusionsMatch = excluded.every((keyword) => !hasKeyword(unit, keyword));
-    const roleMatch = roles.some((role) => unitRoles.includes(role));
-    const specificMatch = names.length === 0 && roles.length === 0
-      ? true
-      : namedMatch || roleMatch;
+    const excludedMatch = excluded.some((keyword) => hasKeyword(unit, keyword));
     if (isHeroUnit(unit) && names.length === 0 && roles.length === 0) {
       return false;
     }
-    return specificMatch && keywordsMatch && exclusionsMatch;
+    if (excluded.length > 0 && required.length === 0 && roles.length === 0 && names.length === 0) {
+      return !excludedMatch;
+    }
+    const namedMatch = names.some((name) => namesMatch(unit?.name, name));
+    const keywordsMatch = required.length > 0 && required.every((keyword) => hasKeyword(unit, keyword));
+    const roleMatch = roles.some((role) => unitRoles.includes(role));
+    return (keywordsMatch || roleMatch || namedMatch) && !excludedMatch;
   }
 
   if (isHeroUnit(unit)) {
@@ -783,6 +806,25 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   }
 
   if (
+    unit.details?.requiredLeader &&
+    !namesMatch(regiment.hero?.name, unit.details.requiredLeader)
+  ) {
+    return false;
+  }
+
+  if (unit.details?.exclusiveWith) {
+    const excludedName = unit.details.exclusiveWith;
+    if (getAllArmyUnits(list).some((armyUnit) => namesMatch(armyUnit.name, excludedName))) {
+      return false;
+    }
+  }
+  if (getAllArmyUnits(list).some((armyUnit) =>
+    armyUnit.details?.exclusiveWith && namesMatch(unit.name, armyUnit.details.exclusiveWith)
+  )) {
+    return false;
+  }
+
+  if (
     FREE_COMMAND_CORPS_UNITS.has(unit.id) &&
     !(regiment.units ?? []).some(
       (regimentUnit) => regimentUnit.id === "freeguild-command-adjutants"
@@ -807,6 +849,11 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   if (isHero) {
     return options.some(
       (option) =>
+        (!option.rules ||
+          (option.rules?.unit_names ?? []).some((name) => namesMatch(unit.name, name)) ||
+          (option.rules?.subhero_categories ?? []).some((role) =>
+            (unit.details?.canJoinRegimentAs ?? []).some((unitRole) => normalize(unitRole) === normalize(role))
+          )) &&
         unitMatchesRegimentOption(unit, option) &&
         optionHasCapacity(regiment, option)
     );
@@ -823,16 +870,19 @@ export function getRegimentCompositionErrors(list) {
   return (list?.regiments ?? []).flatMap((regiment, regimentIndex) => {
     const options = (regiment?.hero?.details?.regimentOptions ?? [])
       .map(parseRegimentOption)
-      .filter((option) => option.max !== null);
+      .filter((option) => option.min !== null || option.max !== null);
 
     const optionErrors = options.flatMap((option) => {
       const count = countUnitsForOption(regiment, option);
 
-      if (count >= option.min && count <= option.max) {
+      const belowMinimum = option.min !== null && count < option.min;
+      const aboveMaximum = option.max !== null && count > option.max;
+
+      if (!belowMinimum && !aboveMaximum) {
         return [];
       }
 
-      if (count < option.min) {
+      if (belowMinimum) {
         return [{
           regimentId: regiment.id,
           regimentIndex,
@@ -862,6 +912,30 @@ export function getRegimentCompositionErrors(list) {
 
     return [
       ...optionErrors,
+      ...(regiment.units ?? []).flatMap((unit) => {
+        const errors = [];
+        if (unit.details?.requiredLeader && !namesMatch(regiment.hero?.name, unit.details.requiredLeader)) {
+          errors.push({
+            regimentId: regiment.id,
+            regimentIndex,
+            role: `required-leader-${unit.id}`,
+            count: 1,
+            message: `${unit.name} debe estar en el regimiento de ${unit.details.requiredLeader}.`,
+          });
+        }
+        if (unit.details?.exclusiveWith && getAllArmyUnits(list).some((armyUnit) =>
+          armyUnit.instanceId !== unit.instanceId && namesMatch(armyUnit.name, unit.details.exclusiveWith)
+        )) {
+          errors.push({
+            regimentId: regiment.id,
+            regimentIndex,
+            role: `exclusive-${unit.id}`,
+            count: 1,
+            message: `${unit.name} no puede incluirse junto a ${unit.details.exclusiveWith}.`,
+          });
+        }
+        return errors;
+      }),
       ...getDependentUnitCompositionErrors(regiment, regimentIndex),
     ];
   });

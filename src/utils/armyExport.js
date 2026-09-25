@@ -29,13 +29,18 @@ function unitPoints(unit) {
     (total, [field]) => total + (Number(unit?.[field]?.points) || 0),
     0
   );
-  return base * (unit?.reinforced ? 2 : 1) + enhancementPoints;
+  const specialEnhancementPoints = Object.values(unit?.specialEnhancements ?? {})
+    .reduce((total, enhancement) => total + (Number(enhancement?.points) || 0), 0);
+  return base * (unit?.reinforced ? 2 : 1) + enhancementPoints + specialEnhancementPoints;
 }
 
 function formatUnit(unit, prefix = "- ") {
   const lines = [`${prefix}${unit.name} (${unitPoints(unit)})${unit.reinforced ? " [Reforzada]" : ""}`];
   ENHANCEMENTS.forEach(([field, label]) => {
     if (unit?.[field]?.name) lines.push(`  · ${label}: ${unit[field].name}`);
+  });
+  Object.entries(unit?.specialEnhancements ?? {}).forEach(([category, enhancement]) => {
+    if (enhancement?.name) lines.push(`  · ${category}: ${enhancement.name}`);
   });
   return lines;
 }

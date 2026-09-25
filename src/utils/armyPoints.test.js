@@ -15,3 +15,21 @@ test("applies the September 2026 cumulative auxiliary surcharge", () => {
 
   assert.equal(calculateArmyPoints(list), 620);
 });
+
+test("adds every selected SigDex enhancement category", () => {
+  const list = {
+    regiments: [{
+      hero: {
+        points: 200,
+        specialEnhancements: {
+          "Big Names": { id: "big-name", points: 10 },
+          "Monstrous Traits": { id: "monster-trait", points: 20 },
+        },
+      },
+      units: [],
+    }],
+    auxiliaries: [],
+  };
+
+  assert.equal(calculateArmyPoints(list), 230);
+});

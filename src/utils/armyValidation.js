@@ -8,6 +8,12 @@ import {
   MAX_REGIMENTS_OF_RENOWN,
   MAX_REGIMENTS_PER_ARMY,
 } from "./armyComposition.js";
+import {
+  ARTEFACTS_OF_POWER,
+  HEROIC_TRAITS,
+  canUnitTakeEnhancementCategory,
+  hasAuthoritativeEnhancementEligibility,
+} from "./enhancementRules.js";
 
 const ENHANCEMENT_FIELDS = [
   "artefact",
@@ -216,6 +222,13 @@ export function validateArmyList(list) {
       entries.push({ unit, regiment, enhancement });
       enhancements.set(key, entries);
     });
+    Object.entries(unit.specialEnhancements ?? {}).forEach(([category, enhancement]) => {
+      if (!enhancement?.id) return;
+      const key = `special:${category}:${enhancement.id}`;
+      const entries = enhancements.get(key) ?? [];
+      entries.push({ unit, regiment, enhancement });
+      enhancements.set(key, entries);
+    });
   });
   enhancements.forEach((entries, key) => {
     if (entries.length < 2) return;
@@ -227,6 +240,26 @@ export function validateArmyList(list) {
       "regiments",
       `regiment-${entries[0].regiment.id}`
     ));
+  });
+
+  getArmyUnits(list).forEach(({ unit, regiment }) => {
+    if (!hasAuthoritativeEnhancementEligibility(unit)) return;
+    const selections = [
+      [HEROIC_TRAITS, unit.heroicTrait],
+      [ARTEFACTS_OF_POWER, unit.artefact],
+      ...Object.entries(unit.specialEnhancements ?? {}),
+    ];
+    selections.forEach(([category, enhancement]) => {
+      if (!enhancement || canUnitTakeEnhancementCategory(unit, category)) return;
+      issues.push(issue(
+        `ineligible-enhancement-${unit.instanceId ?? unit.id}-${category}`,
+        "error",
+        "Mejora no permitida",
+        `${unit.name} no puede recibir una mejora de ${category} según SigDex.`,
+        "regiments",
+        `regiment-${regiment.id}`
+      ));
+    });
   });
 
   (list.armyOfRenown?.requiredUnits ?? []).forEach((unitId) => {

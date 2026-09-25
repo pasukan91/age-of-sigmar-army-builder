@@ -2,7 +2,15 @@ import { useState } from "react";
 
 import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
+import FormattedRulesText from "../components/FormattedRulesText";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
+import {
+  ARTEFACTS_OF_POWER,
+  HEROIC_TRAITS,
+  canUnitTakeEnhancementCategory,
+  getSpecialEnhancementGroups,
+  hasAuthoritativeEnhancementEligibility,
+} from "../utils/enhancementRules";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { isUniqueUnit } from "../utils/unitIdentity";
 
@@ -10,6 +18,7 @@ function UnitConfig({
   unit,
   faction,
   enhancementOwners = {},
+  findSpecialEnhancementOwner = () => null,
   mode,
   goBack,
   onConfirm,
@@ -73,6 +82,13 @@ function UnitConfig({
     useState(unit?.boonOfShadow ?? null);
   const [aqshyEnhancement, setAqshyEnhancement] =
     useState(unit?.aqshyEnhancement ?? null);
+  const [specialEnhancements, setSpecialEnhancements] = useState(() => {
+    if (unit?.specialEnhancements) return unit.specialEnhancements;
+    const legacy = unit?.aqshyEnhancement;
+    return legacy?.enhancementCategory
+      ? { [legacy.enhancementCategory]: legacy }
+      : {};
+  });
 
   if (!unit) {
     return (
@@ -139,6 +155,9 @@ function UnitConfig({
       "linebreaker-cogfort",
     ].includes(unit.id);
 
+  const hasExactEnhancementEligibility =
+    hasAuthoritativeEnhancementEligibility(unit);
+
   const isHedonitesFaction =
     faction?.id === "hedonites" ||
     faction?.name === "Hedonites of Slaanesh" ||
@@ -150,14 +169,16 @@ function UnitConfig({
     unit.rules?.canBeReinforced !== false;
 
   const canSelectArtefact =
-    isHero &&
-    !isUnique &&
-    (!isCogfort || faction?.allowCogfortHeroEnhancements === true);
+    hasExactEnhancementEligibility
+      ? canUnitTakeEnhancementCategory(unit, ARTEFACTS_OF_POWER)
+      : isHero && !isUnique &&
+        (!isCogfort || faction?.allowCogfortHeroEnhancements === true);
 
   const canSelectHeroicTrait =
-    isHero &&
-    !isUnique &&
-    (!isCogfort || faction?.allowCogfortHeroEnhancements === true);
+    hasExactEnhancementEligibility
+      ? canUnitTakeEnhancementCategory(unit, HEROIC_TRAITS)
+      : isHero && !isUnique &&
+        (!isCogfort || faction?.allowCogfortHeroEnhancements === true);
 
   const rawMonstrousTraitOptions =
     faction?.monsterTraits ?? [];
@@ -286,6 +307,7 @@ function UnitConfig({
     }
   );
   const canSelectAqshyEnhancement = aqshyEnhancementOptions.length > 0;
+  const specialEnhancementGroups = getSpecialEnhancementGroups(unit, faction);
 
   const artefactOptions = [
     ...(faction?.artefacts ?? []),
@@ -381,7 +403,11 @@ function UnitConfig({
     Number(brandOfDarkGod?.points ?? 0) +
     Number(ensorcelledBanner?.points ?? 0) +
     Number(boonOfShadow?.points ?? 0) +
-    Number(aqshyEnhancement?.points ?? 0);
+    Number(hasExactEnhancementEligibility ? 0 : aqshyEnhancement?.points ?? 0) +
+    Object.values(specialEnhancements).reduce(
+      (total, enhancement) => total + Number(enhancement?.points ?? 0),
+      0
+    );
 
   function handleConfirm() {
     if (
@@ -491,9 +517,14 @@ function UnitConfig({
           : null,
 
       aqshyEnhancement:
-        canSelectAqshyEnhancement
+        !hasExactEnhancementEligibility && canSelectAqshyEnhancement
           ? aqshyEnhancement
           : null,
+
+      specialEnhancements:
+        hasExactEnhancementEligibility
+          ? specialEnhancements
+          : unit?.specialEnhancements ?? {},
     });
   }
 
@@ -969,7 +1000,7 @@ function UnitConfig({
         />
       )}
 
-      {canSelectAqshyEnhancement && (
+      {!hasExactEnhancementEligibility && canSelectAqshyEnhancement && (
         <SelectionSection
           title={aqshyEnhancementOptions[0]?.groupName ?? "Mejora"}
           intro={aqshyEnhancementOptions[0]?.restrictionText}
@@ -987,6 +1018,24 @@ function UnitConfig({
           }
         />
       )}
+
+      {specialEnhancementGroups.map(({ category, options }) => (
+        <SelectionSection
+          key={category}
+          title={category}
+          intro={options[0]?.restrictionText}
+          source={options[0]?.source}
+          options={options}
+          selected={specialEnhancements[category] ?? null}
+          isOptionDisabled={(option) => Boolean(
+            findSpecialEnhancementOwner(category, option.id)
+          )}
+          onToggle={(option) => setSpecialEnhancements((previous) => ({
+            ...previous,
+            [category]: previous[category]?.id === option.id ? null : option,
+          }))}
+        />
+      ))}
 
       {canSelectPlaguefathersPox && (
         <SelectionSection
@@ -1171,6 +1220,7 @@ function SelectionSection({
   options = [],
   selected,
   disabled = false,
+  isOptionDisabled = () => false,
   lockedMessage,
   onToggle,
 }) {
@@ -1196,7 +1246,7 @@ function SelectionSection({
 
       {intro && (
         <p style={styles.sectionIntro}>
-          {intro}
+          <FormattedRulesText text={intro} />
         </p>
       )}
 
@@ -1226,7 +1276,7 @@ function SelectionSection({
           lore={option.lore}
           phase={getEnhancementTiming(option)}
           source={option.source}
-          disabled={disabled}
+          disabled={disabled || isOptionDisabled(option)}
           checked={
             selected?.id === option.id
           }
