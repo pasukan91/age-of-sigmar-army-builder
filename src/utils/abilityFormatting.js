@@ -150,11 +150,17 @@ export function inspectInlineFormatting(text = "") {
 }
 
 function tokenizeInlineFormatting(text) {
-  const source = decodeNumericEntities(String(text));
+  const source = normalizeKeywordMarkers(decodeNumericEntities(String(text)));
   const parsed = tokenizeInlineSource(source);
   return parsed.balanced
     ? parsed
     : tokenizeInlineSource(repairInlineFormatting(source));
+}
+
+function normalizeKeywordMarkers(text) {
+  return text
+    .replace(/\*\*\^\^([^\n]*?)\^\^\*\*/g, "**$1**")
+    .replace(/\^\^([^\n]*?)\^\^/g, "**$1**");
 }
 
 function tokenizeInlineSource(source) {

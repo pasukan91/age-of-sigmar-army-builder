@@ -66,7 +66,7 @@ function RuleComponent({ component }) {
   if (ability) return (
     <div className="aos-rules-browser__ability">
       <strong>{ability.name ?? component.title}</strong>
-      {ability.timing && <small>{ability.timing}</small>}
+      {ability.timing && <small><FormattedRulesText text={ability.timing} /></small>}
       <FormattedRulesText text={[ability.declare && `Declare: ${ability.declare}`, ability.effect && `Effect: ${ability.effect}`].filter(Boolean).join("\n\n")} />
     </div>
   );

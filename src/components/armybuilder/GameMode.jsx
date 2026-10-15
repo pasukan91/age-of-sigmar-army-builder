@@ -23,6 +23,7 @@ import {
   getBattleStatisticsFilename,
 } from "../../utils/battleStatisticsExport";
 import UnitArtwork from "../UnitArtwork";
+import FormattedRulesText from "../FormattedRulesText";
 import RuleCopyBlocks from "../RuleCopyBlocks";
 
 function GameMode({
@@ -801,7 +802,7 @@ function BattleplanCard({ battleplan, onGoToArmy }) {
           <section className="aos-game-rule-panel" key={`${item.label}-${item.title ?? index}`}>
             <div className="aos-game-rule-panel__label">
               <span>{item.label}</span>
-              {item.timing && <em>{item.timing}</em>}
+              {item.timing && <em><FormattedRulesText text={item.timing} /></em>}
             </div>
             {item.title && <h5>{item.title}</h5>}
             <p>{item.text}</p>

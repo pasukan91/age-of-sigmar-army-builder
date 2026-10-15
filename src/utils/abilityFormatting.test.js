@@ -78,6 +78,21 @@ test("parses catalogue bold and italic markers without exposing asterisks", () =
   );
 });
 
+test("renders SigDex keyword markers as bold without exposing carets", () => {
+  assert.deepEqual(
+    parseInlineFormatting(
+      "Pick a **^^HERO^^** or ^^INFANTRY^^ unit."
+    ),
+    [
+      { text: "Pick a ", strong: false, emphasis: false },
+      { text: "HERO", strong: true, emphasis: false },
+      { text: " or ", strong: false, emphasis: false },
+      { text: "INFANTRY", strong: true, emphasis: false },
+      { text: " unit.", strong: false, emphasis: false },
+    ]
+  );
+});
+
 test("cleans malformed trailing emphasis markers from catalogue text", () => {
   const tokens = parseInlineFormatting(
     "The target has **STRIKE-LAST***; roll D3 damage."
