@@ -29,6 +29,7 @@ function FormattedText({ text }) {
 function AbilityCard({ ability, defaultOpen = false, context = null }) {
   const timing = getAbilityTiming(ability);
   const tone = getAbilityPhaseTone(ability);
+  const name = String(ability.name ?? "").trim();
   const { introduction, sections } = parseAbilityDescription(ability.description);
   const keywords = ability.keywords ?? [];
 
@@ -38,8 +39,18 @@ function AbilityCard({ ability, defaultOpen = false, context = null }) {
         <span className="aos-ability-card__icon" aria-hidden="true">
           {getAbilityPhaseIcon(ability)}
         </span>
-        <span className="aos-ability-card__timing-label">
-          <FormattedRulesText text={timing} />
+        <span className="aos-ability-card__heading">
+          <span className="aos-ability-card__timing-label">
+            <FormattedRulesText text={timing} />
+          </span>
+          {name && (
+            <span className="aos-ability-card__name-group">
+              <span className="aos-ability-card__heading-separator" aria-hidden="true">·</span>
+              <span className="aos-ability-card__name">
+                <FormattedRulesText text={name} />
+              </span>
+            </span>
+          )}
         </span>
         {Number(ability.commandPoints) > 0 && (
           <span className="aos-ability-card__cost">{ability.commandPoints} PC</span>
@@ -50,8 +61,6 @@ function AbilityCard({ ability, defaultOpen = false, context = null }) {
       </summary>
 
       <div className="aos-ability-card__body">
-        <h3>{ability.name}</h3>
-
         {(ability.castingValue != null || ability.chantingValue != null) && (
           <p className="aos-ability-card__roll">
             {ability.chantingValue != null ? "Valor de canto" : "Valor de lanzamiento"}: {ability.chantingValue ?? ability.castingValue}+

@@ -2293,14 +2293,46 @@ body {
   display: none;
 }
 
-.aos-ability-card__timing-label {
+.aos-ability-card__heading {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 3px;
+}
+
+.aos-ability-card__timing-label,
+.aos-ability-card__name {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(17px, 3.8vw, 22px);
   font-weight: 700;
   line-height: 1.15;
 }
 
+.aos-ability-card__timing-label {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(13px, 3vw, 16px);
+}
+
+.aos-ability-card__name-group {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.aos-ability-card__heading-separator {
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 900;
+}
+
+.aos-ability-card__name {
+  color: #fff;
+}
+
 .aos-ability-card__timing-label strong,
+.aos-ability-card__name strong,
 .aos-ability-card__text strong,
 .aos-ability-card__step strong,
 .aos-rule-step strong,
