@@ -44,11 +44,8 @@ function AbilityCard({ ability, defaultOpen = false, context = null }) {
             <FormattedRulesText text={timing} />
           </span>
           {name && (
-            <span className="aos-ability-card__name-group">
-              <span className="aos-ability-card__heading-separator" aria-hidden="true">·</span>
-              <span className="aos-ability-card__name">
-                <FormattedRulesText text={name} />
-              </span>
+            <span className="aos-ability-card__name">
+              <FormattedRulesText text={name} />
             </span>
           )}
         </span>
