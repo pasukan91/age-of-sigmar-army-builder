@@ -5,6 +5,7 @@ import { normalizeRuleItem } from "../../utils/ruleReferences";
 import { getListUnitInstances } from "../../utils/listWarscrolls";
 import {
   getBattleUnitState,
+  getUnitForBattleReference,
   getUnitStartingModels,
   MAX_CUSTOM_MODIFIER_LENGTH,
   MAX_CUSTOM_MODIFIERS,
@@ -103,7 +104,12 @@ function GameMode({
               key={instance.key}
               instance={instance}
               value={list?.battleUnitStates?.[instance.key]}
-              onView={() => onViewUnit?.(instance.unit)}
+              onView={() => onViewUnit?.(
+                getUnitForBattleReference(
+                  instance.unit,
+                  list?.battleUnitStates?.[instance.key]
+                )
+              )}
               onChange={(nextState) => onUnitStateChange?.(instance.key, nextState)}
             />
           ))}

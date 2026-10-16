@@ -37,6 +37,15 @@ export function getBattleUnitState(value, unit) {
   };
 }
 
+export function getUnitForBattleReference(unit, value) {
+  if (!unit) return unit;
+
+  return {
+    ...unit,
+    calculatorModels: getBattleUnitState(value, unit).remainingModels,
+  };
+}
+
 export function normalizeBattleUnitStates(value) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
 

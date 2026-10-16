@@ -58,6 +58,9 @@ function UnitWarscroll({
   const displayedModels =
     getDisplayedModels(unit);
 
+  const calculatorModels =
+    getCalculatorModels(unit, displayedModels);
+
   const potentialSynergies =
     getPotentialSynergies(list, unit);
   const accordionPrefix = `storm-forge:warscroll:${unit.id ?? unit.name}`;
@@ -188,7 +191,7 @@ function UnitWarscroll({
             <DamageCalculator
               key={unit.id ?? unit.name}
               unit={unit}
-              models={displayedModels}
+              models={calculatorModels}
               onClose={() => setCalculatorOpen(false)}
             />
           </div>
@@ -781,6 +784,16 @@ function getDisplayedModels(unit) {
   return unit?.reinforced
     ? baseModels * 2
     : baseModels;
+}
+
+function getCalculatorModels(unit, displayedModels) {
+  const remainingModels = Number(unit?.calculatorModels);
+  if (!Number.isFinite(remainingModels)) return displayedModels;
+
+  return Math.min(
+    displayedModels,
+    Math.max(0, Math.floor(remainingModels))
+  );
 }
 
 const styles = {

@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   clearBattleUnitModifiers,
   getBattleUnitState,
+  getUnitForBattleReference,
   getUnitStartingModels,
   normalizeBattleUnitStates,
 } from "./battleUnitState.js";
@@ -17,6 +18,23 @@ test("uses configured models and clamps remaining models", () => {
     customModifiers: [],
     inCombat: false,
   });
+});
+
+test("passes the remaining models to battle damage calculations", () => {
+  const unit = {
+    id: "moonclan-stabbas",
+    configuredModels: 20,
+    details: { models: 20 },
+  };
+
+  assert.deepEqual(
+    getUnitForBattleReference(unit, { remainingModels: 7 }),
+    { ...unit, calculatorModels: 7 }
+  );
+  assert.equal(
+    getUnitForBattleReference(unit, { remainingModels: 0 }).calculatorModels,
+    0
+  );
 });
 
 test("keeps only supported positive modifiers in stored state", () => {
