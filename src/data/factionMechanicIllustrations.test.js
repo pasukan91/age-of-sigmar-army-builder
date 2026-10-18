@@ -11,7 +11,7 @@ import {
 test("includes every illustrated matched-play faction mechanic from the catalogue", () => {
   assert.deepEqual(
     Object.keys(FACTION_MECHANIC_ILLUSTRATIONS).sort(),
-    ["blood-for-the-blood-god", "dirty-tricks", "the-faces-of-the-bad-moon"],
+    ["blood-for-the-blood-god", "depict-rune", "dirty-tricks", "the-faces-of-the-bad-moon"],
   );
 });
 

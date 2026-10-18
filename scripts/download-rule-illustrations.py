@@ -11,6 +11,7 @@ SOURCES = {
     "gloomspite-bad-moon.webp": "https://dhss9aar8ocw.cloudfront.net/e20e20bf-face-4469-b362-42de737c0857",
     "khorne-blood-tithe.webp": "https://dhss9aar8ocw.cloudfront.net/a13d1d74-0c0e-4b37-a444-fbb33153023e",
     "kruleboyz-dirty-tricks.webp": "https://dhss9aar8ocw.cloudfront.net/3d883924-20ce-42b5-82e0-181ad43b7920",
+    "lumineth-battle-scripture.webp": "https://dhss9aar8ocw.cloudfront.net/66e88246-caa2-4fc5-904f-6124b36f8b38",
 }
 
 

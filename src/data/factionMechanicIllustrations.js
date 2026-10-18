@@ -17,6 +17,12 @@ export const FACTION_MECHANIC_ILLUSTRATIONS = Object.freeze({
     alt: "Tabla de tiradas de Dirty Trick: la primera necesita 2+, la segunda 3+, la tercera 4+ y la cuarta o posteriores 5+.",
     sourceName: "Dirty Tricks",
   },
+  "depict-rune": {
+    src: "/images/rule-illustrations/lumineth-battle-scripture.webp",
+    caption: "Runas de la Battle Scripture",
+    alt: "Cuatro glifos de runa Lumineth dispuestos en una cuadrícula de dos por dos.",
+    sourceName: "Depict Rune",
+  },
 });
 
 export function getFactionMechanicIllustration(ability) {
