@@ -2396,6 +2396,45 @@ body {
   font-size: inherit;
 }
 
+.aos-rule-illustration {
+  margin: 18px 20px 4px;
+  overflow: hidden;
+  border: 1px solid rgba(91, 72, 43, 0.38);
+  border-radius: 8px;
+  background: #e8e3d6;
+  box-shadow: 0 3px 10px rgba(49, 39, 25, 0.16);
+}
+
+.aos-rule-illustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 780px;
+  object-fit: contain;
+  background: #f0ede5;
+}
+
+.aos-rule-illustration figcaption {
+  padding: 9px 12px 10px;
+  border-top: 1px solid rgba(91, 72, 43, 0.24);
+  color: #51483b;
+  background: rgba(255, 253, 248, 0.92);
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 520px) {
+  .aos-rule-illustration {
+    margin-right: 14px;
+    margin-left: 14px;
+  }
+}
+
 .aos-ability-card__step h4::after {
   content: ": ";
 }

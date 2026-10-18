@@ -6,6 +6,7 @@ import {
   parseFormattedText,
 } from "../utils/abilityFormatting";
 import ChevronIcon from "./ChevronIcon";
+import FactionMechanicIllustration from "./FactionMechanicIllustration";
 import FormattedRulesText from "./FormattedRulesText";
 import RuleCopyBlocks from "./RuleCopyBlocks";
 
@@ -83,6 +84,8 @@ function AbilityCard({ ability, defaultOpen = false, context = null }) {
             <FormattedText text={section.text} />
           </section>
         ))}
+
+        <FactionMechanicIllustration ability={ability} />
 
         {sections.length === 0 && !introduction && (
           <p className="aos-ability-card__empty">Sin descripción.</p>
