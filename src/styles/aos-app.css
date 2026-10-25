@@ -3118,6 +3118,26 @@ body {
   line-height: 1.45;
 }
 
+.aos-option-card__contents {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-left: 3px solid #a7833f;
+  background: rgba(167, 131, 63, 0.09);
+}
+
+.aos-option-card__contents > strong {
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+}
+
+.aos-option-card__contents ul {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--aos-muted);
+}
+
 .aos-option-card__actions {
   display: flex;
   flex-direction: column;
@@ -3471,6 +3491,15 @@ body {
 .aos-renown-card p {
   margin-top: 6px;
   color: #625a50;
+}
+
+.aos-renown-card__contents p:last-child {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.aos-renown-card__contents strong {
+  color: #332a20;
 }
 
 .aos-renown-card__actions {

@@ -6,6 +6,9 @@ import { createServer } from "vite";
 const catalogue = JSON.parse(
   readFileSync("src/data/sigdexAllFactions.generated.json", "utf8")
 );
+const additionalCatalogue = JSON.parse(
+  readFileSync("src/data/additionalBattletomeFactions.generated.json", "utf8")
+);
 
 test("SigDex is authoritative for every active faction and builder restriction", async () => {
   const server = await createServer({ logLevel: "silent", server: { middlewareMode: true }, appType: "custom" });
@@ -23,10 +26,17 @@ test("SigDex is authoritative for every active faction and builder restriction",
       for (const field of [
         "battleTraits", "battleFormations", "heroicTraits", "artefacts",
         "aqshyArtefacts", "aqshyHeroicTraits", "aqshyEnhancements",
-        "spellLores", "prayerLores", "manifestations", "manifestationLores",
-        "terrain", "units", "armiesOfRenown",
+        "spellLores", "prayerLores", "terrain", "units", "armiesOfRenown",
       ]) {
         assert.deepEqual(faction[field].map((item) => item.name), source[field].map((item) => item.name), `${source.name}: ${field}`);
+      }
+      for (const field of ["manifestations", "manifestationLores"]) {
+        const sourceNames = source[field].map((item) => item.name);
+        assert.deepEqual(
+          faction[field].slice(0, sourceNames.length).map((item) => item.name),
+          sourceNames,
+          `${source.name}: ${field}`,
+        );
       }
       for (const expected of source.units) {
         const actual = faction.units.find((item) => item.name === expected.name);
@@ -37,6 +47,29 @@ test("SigDex is authoritative for every active faction and builder restriction",
         assert.deepEqual(actual.details.regimentOptions, expected.details.regimentOptions, `${expected.name}: regiment options`);
         assert.deepEqual(actual.details.canJoinRegimentAs, expected.details.canJoinRegimentAs, `${expected.name}: regiment roles`);
         assert.equal(actual.rules.canBeReinforced, expected.rules.canBeReinforced, `${expected.name}: reinforcement`);
+      }
+    }
+  } finally {
+    await server.close();
+  }
+});
+
+test("every faction offers the complete universal manifestation lores", async () => {
+  const server = await createServer({ logLevel: "silent", server: { middlewareMode: true }, appType: "custom" });
+  try {
+    const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
+    const universalLoreNames = additionalCatalogue.universalManifestationLores.map((lore) => lore.name);
+
+    for (const faction of factions) {
+      const loreNames = faction.manifestationLores.map((lore) => lore.name);
+      for (const loreName of universalLoreNames) {
+        assert.ok(loreNames.includes(loreName), `${faction.name}: ${loreName}`);
+        const lore = faction.manifestationLores.find((item) => item.name === loreName);
+        assert.ok(lore.manifestations.length > 0, `${faction.name}: ${loreName} is empty`);
+        assert.ok(
+          lore.manifestations.every((manifestation) => !manifestation.dataPending),
+          `${faction.name}: ${loreName} has incomplete manifestations`,
+        );
       }
     }
   } finally {

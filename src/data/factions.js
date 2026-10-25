@@ -117,9 +117,7 @@ const factions = [
   });
 
   return normalizeFaction({
-    ...(faction.catalogueDataVersion
-      ? faction
-      : withUniversalManifestations(faction)),
+    ...withUniversalManifestations(faction),
     armiesOfRenown: [...armiesByName.values()],
   });
 });

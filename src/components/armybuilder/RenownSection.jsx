@@ -1,5 +1,6 @@
 import { MAX_REGIMENTS_OF_RENOWN } from "../../utils/armyComposition";
 import { getRegimentOrganisation } from "../../utils/regimentOfRenownReferences";
+import { getRegimentAbilityNames } from "../../utils/optionSummaries";
 import TrashIcon from "../TrashIcon";
 
 function formatOrganisation(regiment) {
@@ -8,6 +9,24 @@ function formatOrganisation(regiment) {
   return organisation.length > 0
     ? organisation.join(" · ")
     : "Composición no especificada";
+}
+
+function RegimentContents({ regiment }) {
+  const abilityNames = getRegimentAbilityNames(regiment);
+
+  return (
+    <div className="aos-renown-card__contents">
+      <p>{formatOrganisation(regiment)}</p>
+      {abilityNames.length > 0 ? (
+        <p>
+          <strong>{abilityNames.length === 1 ? "Regla" : "Reglas"}:</strong>{" "}
+          {abilityNames.join(" · ")}
+        </p>
+      ) : (
+        <p>Sin reglas adicionales; usa el warscroll de la unidad incluida.</p>
+      )}
+    </div>
+  );
 }
 
 function RenownSection({ available, selected, onAdd, onRemove, onView }) {
@@ -31,7 +50,7 @@ function RenownSection({ available, selected, onAdd, onRemove, onView }) {
           <div>
             <span className="aos-kicker">Incluido</span>
             <h3>{regiment.name}</h3>
-            <p>{formatOrganisation(regiment)}</p>
+            <RegimentContents regiment={regiment} />
           </div>
           <div className="aos-renown-card__actions">
             <strong>{regiment.points} pts</strong>
@@ -66,7 +85,7 @@ function RenownSection({ available, selected, onAdd, onRemove, onView }) {
               <article className="aos-renown-card" key={regiment.id}>
                 <div>
                   <h3>{regiment.name}</h3>
-                  <p>{formatOrganisation(regiment)}</p>
+                  <RegimentContents regiment={regiment} />
                 </div>
                 <div className="aos-renown-card__actions">
                   <strong>{regiment.points} pts</strong>

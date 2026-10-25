@@ -3,6 +3,7 @@ import Accordion from "../components/Accordion";
 import BackButton from "../components/BackButton";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
+import { getManifestationLoreContents } from "../utils/optionSummaries";
 
 function OptionSelector({
   title,
@@ -163,6 +164,7 @@ function OptionSelector({
           {group.options.map((option) => {
             const description =
               getDescription(option);
+            const manifestationNames = getManifestationLoreContents(option);
             const isSelected = selectedIds.has(option.id);
             const selectionLimitReached =
               isMultiSelect &&
@@ -264,6 +266,17 @@ function OptionSelector({
                     <Accordion title="Descripción">
                       <RuleCopyBlocks lore={option.lore} rule={description} />
                     </Accordion>
+                  </div>
+                )}
+
+                {manifestationNames.length > 0 && (
+                  <div className="aos-option-card__contents">
+                    <strong>
+                      Incluye {manifestationNames.length} {manifestationNames.length === 1 ? "manifestación" : "manifestaciones"}
+                    </strong>
+                    <ul>
+                      {manifestationNames.map((name) => <li key={name}>{name}</li>)}
+                    </ul>
                   </div>
                 )}
               </article>

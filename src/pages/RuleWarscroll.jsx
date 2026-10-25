@@ -120,6 +120,12 @@ function RuleWarscroll({ reference, onBack }) {
               </Accordion>
             )}
 
+            {isRegimentOfRenown && item.abilities?.length === 0 && (
+              <section className="aos-reference-description">
+                <p>Este regimiento no añade una regla propia. Consulta el warscroll de la unidad incluida para ver su perfil y sus habilidades.</p>
+              </section>
+            )}
+
             {(kind === "spell" || kind === "prayer" || isManifestation) && (
               <section className="aos-casting-card">
                 <div className="aos-casting-card__value">
@@ -167,7 +173,7 @@ function RuleWarscroll({ reference, onBack }) {
             )}
 
             {item.abilities?.length > 0 && (
-              <Accordion title="Habilidades" subtitle={`${item.abilities.length}`} defaultOpen>
+              <Accordion title={isRegimentOfRenown ? "Reglas del regimiento" : "Habilidades"} subtitle={`${item.abilities.length}`} defaultOpen>
                 <AbilityList abilities={item.abilities} />
               </Accordion>
             )}
