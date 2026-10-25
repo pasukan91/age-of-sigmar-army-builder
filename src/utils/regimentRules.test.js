@@ -136,6 +136,21 @@ test("marks an already saved regiment as illegal when it exceeds a role limit", 
   assert.equal(errors[0].max, 1);
 });
 
+test("marks a saved unit as illegal when updated leader options no longer allow it", () => {
+  const noLongerAllowed = {
+    id: "moonclan-stabbas",
+    name: "Moonclan Stabbas",
+    keywords: ["Gloomspite Gitz", "Moonclan", "Infantry"],
+    rules: {},
+    details: { canJoinRegimentAs: [] },
+  };
+  const list = makeList(["Any Troggoth"], [noLongerAllowed]);
+
+  const errors = getRegimentCompositionErrors(list);
+
+  assert.ok(errors.some((error) => error.role === "ineligible-unit-moonclan-stabbas"));
+});
+
 test("applies the Lumineth Paragon limit while still allowing Vanari units", () => {
   const leader = {
     ...hero("archmage-teclis"),

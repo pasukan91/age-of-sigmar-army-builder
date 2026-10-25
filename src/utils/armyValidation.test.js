@@ -136,6 +136,75 @@ test("rejects armies with more than one Regiment of Renown", () => {
   assert.ok(result.errors.some((item) => item.id === "regiment-of-renown-limit"));
 });
 
+test("rejects a Regiment of Renown that is no longer eligible for the faction", () => {
+  const result = validateArmyList(list({
+    faction: {
+      id: "ogors",
+      name: "Ogor Mawtribes",
+      units: [],
+      battleFormations: [],
+    },
+    battleFormation: null,
+    regimentsOfRenown: [{
+      id: "da-kountin-krew",
+      name: "Da Kountin' Krew",
+      eligibleFactionIds: ["behemat", "ironjawz", "gloomspite"],
+    }],
+  }));
+
+  assert.ok(result.errors.some(
+    (item) => item.id === "ineligible-regiment-of-renown-da-kountin-krew"
+  ));
+});
+
+test("rejects Regiments of Renown forbidden by an Army of Renown", () => {
+  const result = validateArmyList(list({
+    armyOfRenown: {
+      name: "Ejército cerrado",
+      excludesRegimentsOfRenown: true,
+    },
+    regimentsOfRenown: [{
+      id: "renown",
+      name: "Regimiento externo",
+      eligibleFactionIds: ["test"],
+    }],
+  }));
+
+  assert.ok(result.errors.some((item) => item.id === "regiment-of-renown-forbidden"));
+});
+
+test("rejects a saved regiment whose leader can no longer lead", () => {
+  const invalidLeader = unit({
+    id: "former-leader",
+    name: "Antiguo líder",
+    keywords: ["Hero"],
+    rules: { hero: true, canLeadRegiment: false },
+  });
+  const result = validateArmyList(list({
+    regiments: [{ id: "invalid-regiment", hero: invalidLeader, units: [] }],
+  }));
+
+  assert.ok(result.errors.some((item) => item.id === "invalid-leader-invalid-regiment"));
+});
+
+test("counts auxiliaries as army units and validates their reinforcement state", () => {
+  const auxiliary = unit({
+    id: "auxiliary",
+    name: "Auxiliar",
+    reinforced: true,
+    rules: { canBeReinforced: false },
+  });
+  const result = validateArmyList(list({
+    faction: { id: "test", name: "Facción de prueba", units: [], battleFormations: [] },
+    battleFormation: null,
+    regiments: [],
+    auxiliaries: [auxiliary],
+  }));
+
+  assert.ok(!result.errors.some((item) => item.id === "empty-army"));
+  assert.ok(result.errors.some((item) => item.id === "reinforced-auxiliary"));
+});
+
 test("uses four unit slots for the general and three for other regiments", () => {
   const regimentUnit = (id) => unit({ id, instanceId: id });
   const result = validateArmyList(list({

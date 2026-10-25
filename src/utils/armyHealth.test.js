@@ -31,3 +31,13 @@ test("adds leaders, regiment units and every Regiment of Renown unit", () => {
 
   assert.equal(calculateArmyHealth(list, catalogue), 7 + 40 + 6 + 15 + 15);
 });
+
+test("includes auxiliary units in total army health", () => {
+  const list = {
+    regiments: [],
+    regimentsOfRenown: [],
+    auxiliaries: [{ profile: { health: 3 }, details: { models: 5 } }],
+  };
+
+  assert.equal(calculateArmyHealth(list), 15);
+});

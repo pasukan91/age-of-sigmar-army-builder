@@ -844,26 +844,37 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   const options = (regiment.hero?.details?.regimentOptions ?? []).map(
     parseRegimentOption
   );
-  const isHero = isHeroUnit(unit);
-
-  if (isHero) {
-    return options.some(
-      (option) =>
-        (!option.rules ||
-          (option.rules?.unit_names ?? []).some((name) => namesMatch(unit.name, name)) ||
-          (option.rules?.subhero_categories ?? []).some((role) =>
-            (unit.details?.canJoinRegimentAs ?? []).some((unitRole) => normalize(unitRole) === normalize(role))
-          )) &&
-        unitMatchesRegimentOption(unit, option) &&
-        optionHasCapacity(regiment, option)
-    );
-  }
-
   return options.some(
     (option) =>
-      unitMatchesRegimentOption(unit, option) &&
+      optionAllowsUnit(unit, option) &&
       optionHasCapacity(regiment, option)
   );
+}
+
+function optionAllowsUnit(unit, option) {
+  if (!isHeroUnit(unit)) {
+    return unitMatchesRegimentOption(unit, option);
+  }
+
+  return (
+    !option.rules ||
+    (option.rules?.unit_names ?? []).some((name) => namesMatch(unit.name, name)) ||
+    (option.rules?.subhero_categories ?? []).some((role) =>
+      (unit.details?.canJoinRegimentAs ?? []).some(
+        (unitRole) => normalize(unitRole) === normalize(role)
+      )
+    )
+  ) && unitMatchesRegimentOption(unit, option);
+}
+
+function isUnitEligibleForSavedRegiment(list, regiment, unit) {
+  if (!unit || !regiment?.hero || unit.id === regiment.hero.id) return false;
+  if (!isAllowedByArmyOfRenown(list, unit) || !isMatchedPlayUnit(unit)) return false;
+
+  const options = (regiment.hero?.details?.regimentOptions ?? []).map(
+    parseRegimentOption
+  );
+  return options.some((option) => optionAllowsUnit(unit, option));
 }
 
 export function getRegimentCompositionErrors(list) {
@@ -914,6 +925,15 @@ export function getRegimentCompositionErrors(list) {
       ...optionErrors,
       ...(regiment.units ?? []).flatMap((unit) => {
         const errors = [];
+        if (!isUnitEligibleForSavedRegiment(list, regiment, unit)) {
+          errors.push({
+            regimentId: regiment.id,
+            regimentIndex,
+            role: `ineligible-unit-${unit.instanceId ?? unit.id}`,
+            count: 1,
+            message: `${unit.name} ya no es una opción válida para el regimiento de ${regiment.hero?.name ?? "este líder"}.`,
+          });
+        }
         if (unit.details?.requiredLeader && !namesMatch(regiment.hero?.name, unit.details.requiredLeader)) {
           errors.push({
             regimentId: regiment.id,
@@ -966,12 +986,13 @@ export function getAvailableRegimentLeaders(list) {
     ? armyUnits
     : list?.faction?.units ?? [];
 
-  return units.filter(
-    (unit) =>
-      unit.rules?.hero === true &&
-      unit.rules?.canLeadRegiment !== false &&
-      isMatchedPlayUnit(unit) &&
-      !isUnitUniqueInArmy(list, unit) &&
-      isAllowedByArmyOfRenown(list, unit)
-  );
+  return units.filter((unit) => canUnitLeadRegiment(list, unit));
+}
+
+export function canUnitLeadRegiment(list, unit, ignoredInstanceId = null) {
+  return unit?.rules?.hero === true &&
+    unit.rules?.canLeadRegiment !== false &&
+    isMatchedPlayUnit(unit) &&
+    !isUnitUniqueInArmy(list, unit, ignoredInstanceId) &&
+    isAllowedByArmyOfRenown(list, unit);
 }

@@ -2,9 +2,9 @@
   "metadata": {
     "source": "https://sigdex.io/",
     "api": "https://api.sigdex.io/blob?name=main",
-    "generatedAt": "2026-09-25T15:41:34.141Z",
-    "serverVersion": "3.1.11",
-    "bsdataVersion": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+    "generatedAt": "2026-10-25T11:24:13.145Z",
+    "serverVersion": "3.1.15",
+    "bsdataVersion": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
     "battleProfilesVersion": "2025-08-27"
   },
   "factions": [
@@ -19,11 +19,11 @@
           "id": "blood-drenched",
           "sourceId": "eb7f-4967-8702-afca",
           "name": "Blood-drenched",
-          "phase": "Reaction: You declared the 'Skulls for the Skull Throne' ability",
+          "phase": "Once Per Turn, Reaction: You declared the 'Skulls for the Skull Throne' ability",
           "type": "Ability",
-          "description": "Effect: After that ability has been resolved, if you unlocked a **^^Blood Tithe^^** ability this turn, pick a friendly **^^Blades of Khorne^^** unit to be the target. The following effects apply to the target for the rest of the battle:\n***Wild-eyed Brutality:*** Ignore positive modifiers to save rolls for friendly **^^Blades of Khorne^^** units.\n***Blood Haze:*** **Blood-hungry** weapons used by friendly **^^Bloodbound^^** units have **Crit (Mortal)**.\n***Weapons of Murder:*** Add 1 to the Rend characteristic of **Blood-hungry** weapons used by friendly **^^Blades of Khorne^^** non-**^^Monster Daemon^^** units, including **Blood-hungry Companion** weapons.\n***Bloodlords Supreme:*** Add 1 to the Damage characteristic of **Blood-hungry** weapons used by friendly **^^Blades of Khorne Monster^^** units.",
+          "description": "Effect: After that ability has been resolved, if you unlocked a **^^Blood Tithe^^** ability this turn, pick a friendly **^^Blades of Khorne^^** unit to be the target. The following effects apply to the target for the rest of the battle:\n***Wild-eyed Brutality:*** Ignore positive modifiers to save rolls for the target.\n***Blood Haze:*** If the target is **^^Bloodbound^^**, its **Blood-hungry** weapons have **Crit (Mortal)**.\n***Weapons of Murder:*** If the target is a non-**^^Monster^^** **^^Daemon^^** unit, add 1 to the Rend characteristic of its **Blood-hungry** weapons, including **Blood-hungry Companion** weapons.\n***Bloodlords Supreme:*** If the target is a **^^Monster^^**, add 1 to the Damage characteristic of its **Blood-hungry** weapons.",
           "declare": null,
-          "effect": "After that ability has been resolved, if you unlocked a **^^Blood Tithe^^** ability this turn, pick a friendly **^^Blades of Khorne^^** unit to be the target. The following effects apply to the target for the rest of the battle:\n***Wild-eyed Brutality:*** Ignore positive modifiers to save rolls for friendly **^^Blades of Khorne^^** units.\n***Blood Haze:*** **Blood-hungry** weapons used by friendly **^^Bloodbound^^** units have **Crit (Mortal)**.\n***Weapons of Murder:*** Add 1 to the Rend characteristic of **Blood-hungry** weapons used by friendly **^^Blades of Khorne^^** non-**^^Monster Daemon^^** units, including **Blood-hungry Companion** weapons.\n***Bloodlords Supreme:*** Add 1 to the Damage characteristic of **Blood-hungry** weapons used by friendly **^^Blades of Khorne Monster^^** units.",
+          "effect": "After that ability has been resolved, if you unlocked a **^^Blood Tithe^^** ability this turn, pick a friendly **^^Blades of Khorne^^** unit to be the target. The following effects apply to the target for the rest of the battle:\n***Wild-eyed Brutality:*** Ignore positive modifiers to save rolls for the target.\n***Blood Haze:*** If the target is **^^Bloodbound^^**, its **Blood-hungry** weapons have **Crit (Mortal)**.\n***Weapons of Murder:*** If the target is a non-**^^Monster^^** **^^Daemon^^** unit, add 1 to the Rend characteristic of its **Blood-hungry** weapons, including **Blood-hungry Companion** weapons.\n***Bloodlords Supreme:*** If the target is a **^^Monster^^**, add 1 to the Damage characteristic of its **Blood-hungry** weapons.",
           "usedBy": null,
           "keywords": [],
           "castingValue": null,
@@ -748,11 +748,11 @@
               "id": "sigil-of-doom",
               "sourceId": "ad16-c968-9563-c280",
               "name": "Sigil of Doom",
-              "phase": "Once Per Turn, Your Hero Phase",
+              "phase": "Your Hero Phase",
               "type": "Ability",
-              "description": "Declare: Pick a visible friendly **^^Blades of Khorne^^** unit wholly within 8\" of this **^^Manifestation^^** to be the target. Then, pick a passive **^^Blood Tithe^^** ability that you have not unlocked this battle.\n\nEffect: Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, , until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
+              "description": "Declare: Pick a visible friendly **^^Blades of Khorne^^** unit wholly within 8\" of this **^^Manifestation^^** to be the target. Then, pick a passive **^^Blood Tithe^^** ability that you have not unlocked this battle.\n\nEffect: Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
               "declare": "Pick a visible friendly **^^Blades of Khorne^^** unit wholly within 8\" of this **^^Manifestation^^** to be the target. Then, pick a passive **^^Blood Tithe^^** ability that you have not unlocked this battle.",
-              "effect": "Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, , until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
+              "effect": "Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
               "usedBy": null,
               "keywords": [],
               "castingValue": null,
@@ -1126,11 +1126,11 @@
                   "id": "sigil-of-doom",
                   "sourceId": "ad16-c968-9563-c280",
                   "name": "Sigil of Doom",
-                  "phase": "Once Per Turn, Your Hero Phase",
+                  "phase": "Your Hero Phase",
                   "type": "Ability",
-                  "description": "Declare: Pick a visible friendly **^^Blades of Khorne^^** unit wholly within 8\" of this **^^Manifestation^^** to be the target. Then, pick a passive **^^Blood Tithe^^** ability that you have not unlocked this battle.\n\nEffect: Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, , until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
+                  "description": "Declare: Pick a visible friendly **^^Blades of Khorne^^** unit wholly within 8\" of this **^^Manifestation^^** to be the target. Then, pick a passive **^^Blood Tithe^^** ability that you have not unlocked this battle.\n\nEffect: Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
                   "declare": "Pick a visible friendly **^^Blades of Khorne^^** unit wholly within 8\" of this **^^Manifestation^^** to be the target. Then, pick a passive **^^Blood Tithe^^** ability that you have not unlocked this battle.",
-                  "effect": "Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, , until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
+                  "effect": "Roll a dice. If the roll equals or exceeds the **blood tithe points** cost of the chosen ability, until the start of your next turn, the effects of that ability apply to the target as if it had been unlocked.",
                   "usedBy": null,
                   "keywords": [],
                   "castingValue": null,
@@ -3841,7 +3841,7 @@
               "us": 36,
               "gb": 24,
               "eu": 30.5,
-              "au": 62,
+              "au": null,
               "ca": 46
             }
           },
@@ -3939,7 +3939,7 @@
               "us": 72,
               "gb": 44,
               "eu": 56.5,
-              "au": 122.5,
+              "au": null,
               "ca": 87
             }
           },
@@ -4039,7 +4039,7 @@
               "us": 72,
               "gb": 44,
               "eu": 56.5,
-              "au": 122.5,
+              "au": null,
               "ca": 87
             }
           },
@@ -5582,7 +5582,7 @@
                 "sourceId": "98e5-4428-7612-fbd7",
                 "name": "The Scarring Blade",
                 "points": 0,
-                "description": "Effect: Allocate D3 damage points to this unit (ward rolls cannot be made for those damage points). For the rest of the turn, add **X** to the Attacks characteristic of melee weapons used by friendly **^^Gorechosen Champions^^** units, where **X** is equal to the amount of mortal damage allocated to this unit this turn by this ability.\nFor the rest of the battle, this unit cannot use the 'Hate-fuelled Killers' ability and cannot be healed.",
+                "description": "Effect: Allocate D3 damage points to this unit (ward rolls cannot be made for those damage points). For the rest of the turn, add **X** to the Attacks characteristic of melee weapons used by friendly **^^Gorechosen Champions^^** units, where **X** is equal to the number of damage points allocated to this unit this turn by this ability.\nFor the rest of the battle, this unit cannot use the 'Hate-fuelled Killers' ability and cannot be healed.",
                 "abilities": [
                   {
                     "id": "the-scarring-blade",
@@ -5590,9 +5590,9 @@
                     "name": "The Scarring Blade",
                     "phase": "Any Combat Phase",
                     "type": "Ability",
-                    "description": "Effect: Allocate D3 damage points to this unit (ward rolls cannot be made for those damage points). For the rest of the turn, add **X** to the Attacks characteristic of melee weapons used by friendly **^^Gorechosen Champions^^** units, where **X** is equal to the amount of mortal damage allocated to this unit this turn by this ability.\nFor the rest of the battle, this unit cannot use the 'Hate-fuelled Killers' ability and cannot be healed.",
+                    "description": "Effect: Allocate D3 damage points to this unit (ward rolls cannot be made for those damage points). For the rest of the turn, add **X** to the Attacks characteristic of melee weapons used by friendly **^^Gorechosen Champions^^** units, where **X** is equal to the number of damage points allocated to this unit this turn by this ability.\nFor the rest of the battle, this unit cannot use the 'Hate-fuelled Killers' ability and cannot be healed.",
                     "declare": null,
-                    "effect": "Allocate D3 damage points to this unit (ward rolls cannot be made for those damage points). For the rest of the turn, add **X** to the Attacks characteristic of melee weapons used by friendly **^^Gorechosen Champions^^** units, where **X** is equal to the amount of mortal damage allocated to this unit this turn by this ability.\nFor the rest of the battle, this unit cannot use the 'Hate-fuelled Killers' ability and cannot be healed.",
+                    "effect": "Allocate D3 damage points to this unit (ward rolls cannot be made for those damage points). For the rest of the turn, add **X** to the Attacks characteristic of melee weapons used by friendly **^^Gorechosen Champions^^** units, where **X** is equal to the number of damage points allocated to this unit this turn by this ability.\nFor the rest of the battle, this unit cannot use the 'Hate-fuelled Killers' ability and cannot be healed.",
                     "usedBy": null,
                     "keywords": [],
                     "castingValue": null,
@@ -6385,7 +6385,7 @@
                     "us": 36,
                     "gb": 24,
                     "eu": 30.5,
-                    "au": 62,
+                    "au": null,
                     "ca": 46
                   }
                 },
@@ -7156,8 +7156,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "142f-2b79-8c00-7c5d",
-              "revision": 15,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 16,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -8286,7 +8286,7 @@
             "sigdexSource": {
               "armyId": "1a14-ef58-23a1-e471",
               "revision": 18,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -8295,8 +8295,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "d545-cdca-9e60-ad27",
-        "revision": 50,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 51,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -18633,142 +18633,7 @@
               }
             ],
             "manifestations": [],
-            "manifestationLores": [
-              {
-                "id": "manifestation-lore-draconith-skywing",
-                "sourceId": "b5c9-1023-a88b-fa0d",
-                "name": "Manifestation Lore: Draconith Skywing",
-                "points": 0,
-                "source": "Battletome",
-                "manifestations": [
-                  {
-                    "id": "everblaze-comet",
-                    "sourceId": "9b21-f285-2558-14ca",
-                    "name": "Everblaze Comet",
-                    "image": "/images/factions/citiesofsigmar.webp",
-                    "points": 0,
-                    "profile": {
-                      "move": "-",
-                      "health": 5,
-                      "control": null,
-                      "save": "4+",
-                      "ward": "6+",
-                      "banishment": "6+"
-                    },
-                    "weapons": [],
-                    "abilities": [
-                      {
-                        "id": "burning-vengeance",
-                        "sourceId": "ff57-5fdd-4e96-f070",
-                        "name": "Burning Vengeance",
-                        "phase": "Any Hero Phase",
-                        "type": "Ability",
-                        "description": "Declare: If this **^^Manifestation^^** was summoned this phase, pick any number of enemy units within 6\" of it to be the targets.\n\nEffect: Roll a D3 for each target. On a 2+, inflict an amount of mortal damage on the target equal to the roll.",
-                        "declare": "If this **^^Manifestation^^** was summoned this phase, pick any number of enemy units within 6\" of it to be the targets.",
-                        "effect": "Roll a D3 for each target. On a 2+, inflict an amount of mortal damage on the target equal to the roll.",
-                        "usedBy": null,
-                        "keywords": [],
-                        "castingValue": null,
-                        "chantingValue": null,
-                        "commandPoints": null
-                      },
-                      {
-                        "id": "arcane-disruption",
-                        "sourceId": "8b18-df-62e8-1f38",
-                        "name": "Arcane Disruption",
-                        "phase": "Passive",
-                        "type": "Ability",
-                        "description": "Effect: Subtract 1 from casting rolls for enemy **^^Wizards^^** while they are within 12\" of this **^^Manifestation^^**.",
-                        "declare": null,
-                        "effect": "Subtract 1 from casting rolls for enemy **^^Wizards^^** while they are within 12\" of this **^^Manifestation^^**.",
-                        "usedBy": null,
-                        "keywords": [],
-                        "castingValue": null,
-                        "chantingValue": null,
-                        "commandPoints": null
-                      },
-                      {
-                        "id": "summon-everblaze-comet",
-                        "sourceId": "5209-0e28-52bf-2cb1",
-                        "name": "Summon Everblaze Comet",
-                        "phase": "Your Hero Phase",
-                        "type": "Spell",
-                        "description": "Declare: If there is not a friendly **Everblaze Comet** on the battlefield, pick a friendly **^^Stormcast Eternals Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up an **Everblaze Comet** wholly within 18\" of the caster.",
-                        "declare": "If there is not a friendly **Everblaze Comet** on the battlefield, pick a friendly **^^Stormcast Eternals Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                        "effect": "Set up an **Everblaze Comet** wholly within 18\" of the caster.",
-                        "usedBy": null,
-                        "keywords": [
-                          "Spell",
-                          "Summon"
-                        ],
-                        "castingValue": 8,
-                        "chantingValue": null,
-                        "commandPoints": 8
-                      }
-                    ],
-                    "keywords": [
-                      "WARD (6+)",
-                      "MANIFESTATION",
-                      "ENDLESS SPELL",
-                      "FLY",
-                      "ORDER",
-                      "STORMCAST ETERNALS"
-                    ],
-                    "details": {
-                      "models": 1,
-                      "baseSize": "60mm",
-                      "regimentOptions": [],
-                      "regimentOptionRules": [],
-                      "canJoinRegimentAs": [],
-                      "notes": [],
-                      "enhancementCategories": [],
-                      "requiredLeader": null,
-                      "undersizeCondition": null,
-                      "retiringOn": null,
-                      "exclusiveWith": null,
-                      "armyOfRenown": null,
-                      "optionSets": [],
-                      "prices": null
-                    },
-                    "rules": {
-                      "hero": false,
-                      "unique": false,
-                      "monster": false,
-                      "wizard": 0,
-                      "priest": 0,
-                      "ward": "6+",
-                      "warmaster": false,
-                      "canBeReinforced": false,
-                      "canLeadRegiment": false
-                    },
-                    "lore": null,
-                    "catalogueSource": {
-                      "id": "9b21-f285-2558-14ca",
-                      "dataVersion": "2025-08-27"
-                    },
-                    "castingValue": 8,
-                    "summonSpell": {
-                      "id": "summon-everblaze-comet",
-                      "sourceId": "5209-0e28-52bf-2cb1",
-                      "name": "Summon Everblaze Comet",
-                      "phase": "Your Hero Phase",
-                      "type": "Spell",
-                      "description": "Declare: If there is not a friendly **Everblaze Comet** on the battlefield, pick a friendly **^^Stormcast Eternals Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up an **Everblaze Comet** wholly within 18\" of the caster.",
-                      "declare": "If there is not a friendly **Everblaze Comet** on the battlefield, pick a friendly **^^Stormcast Eternals Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                      "effect": "Set up an **Everblaze Comet** wholly within 18\" of the caster.",
-                      "usedBy": null,
-                      "keywords": [
-                        "Spell",
-                        "Summon"
-                      ],
-                      "castingValue": 8,
-                      "chantingValue": null,
-                      "commandPoints": 8
-                    }
-                  }
-                ]
-              }
-            ],
+            "manifestationLores": [],
             "terrain": [
               {
                 "id": "dawner-s-triumph",
@@ -27103,8 +26968,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "5201-f4ef-5e24-cbd1",
-              "revision": 5,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 7,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -28675,8 +28540,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "6f76-e1bd-5241-3f4e",
-              "revision": 4,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 5,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -28685,8 +28550,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "42ad-8ca7-4b48-7df1",
-        "revision": 49,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 50,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -30286,7 +30151,7 @@
           ],
           "details": {
             "models": 1,
-            "baseSize": "100mm",
+            "baseSize": "130mm",
             "regimentOptions": [],
             "regimentOptionRules": [],
             "canJoinRegimentAs": [],
@@ -32398,7 +32263,7 @@
           "sourceId": "ab64-d97a-ac5e-a8b4",
           "name": "Khainite Shadowstalkers",
           "image": "/images/catalogue/5cb484a8-97d1-4a02-aafb-cbcc18ed3d68.webp",
-          "points": 100,
+          "points": 130,
           "profile": {
             "move": "6\"",
             "health": 1,
@@ -34122,7 +33987,7 @@
                 ],
                 "details": {
                   "models": 1,
-                  "baseSize": "100mm",
+                  "baseSize": "130mm",
                   "regimentOptions": [],
                   "regimentOptionRules": [],
                   "canJoinRegimentAs": [],
@@ -34896,8 +34761,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "7dbe-5372-591a-6c7e",
-              "revision": 4,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 5,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -35183,7 +35048,7 @@
                 ],
                 "details": {
                   "models": 1,
-                  "baseSize": "100mm",
+                  "baseSize": "130mm",
                   "regimentOptions": [],
                   "regimentOptionRules": [],
                   "canJoinRegimentAs": [],
@@ -35673,7 +35538,7 @@
                 "sourceId": "ab64-d97a-ac5e-a8b4",
                 "name": "Khainite Shadowstalkers",
                 "image": "/images/catalogue/5cb484a8-97d1-4a02-aafb-cbcc18ed3d68.webp",
-                "points": 100,
+                "points": 130,
                 "profile": {
                   "move": "6\"",
                   "health": 1,
@@ -36701,8 +36566,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "205-60d5-d221-d158",
-              "revision": 32,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 33,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -37539,7 +37404,7 @@
                 ],
                 "details": {
                   "models": 1,
-                  "baseSize": "100mm",
+                  "baseSize": "130mm",
                   "regimentOptions": [],
                   "regimentOptionRules": [],
                   "canJoinRegimentAs": [],
@@ -38956,8 +38821,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "b104-3deb-fd22-9998",
-              "revision": 5,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 6,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -38966,8 +38831,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "5232-3bab-5562-3172",
-        "revision": 39,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 40,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -42836,11 +42701,11 @@
             "prices": {
               "slug": "Tzaangor-Shaman",
               "model_count": 1,
-              "us": 41,
-              "gb": 26,
-              "eu": 34,
-              "au": 69,
-              "ca": 53
+              "us": 35,
+              "gb": null,
+              "eu": null,
+              "au": null,
+              "ca": 45
             }
           },
           "rules": {
@@ -46715,8 +46580,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "0d4b-abe6-7f64-3cc6",
-              "revision": 6,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 7,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -49638,8 +49503,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "5746-6f3c-f738-ea5b",
-              "revision": 6,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 7,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -49648,8 +49513,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "d731-9058-b0e5-6ff5",
-        "revision": 39,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 40,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -59623,8 +59488,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "6750-ccad-1640-666f",
-              "revision": 20,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 21,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -62261,8 +62126,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "eb68-ccf6-0b38-bdf6",
-              "revision": 15,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 16,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -62271,8 +62136,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "b53b-1217-df2e-66d2",
-        "revision": 43,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 44,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -62307,8 +62172,8 @@
           "name": "Rune of Farsight",
           "phase": "Once Per Battle (Army), Any Shooting Phase",
           "type": "Ability",
-          "description": "Declare: You can only use this ability if you have not used any **^^Ur-gold Rune^^** abilities this battle round.\nPick any number of enemy units within 10\" of any visible friendly **^^Fyreslayers^^** units to be targets.\n\nEffect: Roll a D3 for each target. On a 2+, inflict an amount of mortal damage on the target equal to the roll. In addition,\nfor the rest of the battle round, ranged weapons, including Companion weapons, used by friendly **^^Fyreslayers^^** units have **Crit (2 Hits)**.",
-          "declare": "You can only use this ability if you have not used any **^^Ur-gold Rune^^** abilities this battle round.\nPick any number of enemy units within 10\" of any visible friendly **^^Fyreslayers^^** units to be targets.",
+          "description": "Declare: You can only use this ability if you have not used any **^^Ur-gold Rune^^** abilities this battle round.\nPick any number of enemy units that are within 10\" of and visible to any friendly **^^Fyreslayers^^** units to be the targets.\n\nEffect: Roll a D3 for each target. On a 2+, inflict an amount of mortal damage on the target equal to the roll. In addition,\nfor the rest of the battle round, ranged weapons, including Companion weapons, used by friendly **^^Fyreslayers^^** units have **Crit (2 Hits)**.",
+          "declare": "You can only use this ability if you have not used any **^^Ur-gold Rune^^** abilities this battle round.\nPick any number of enemy units that are within 10\" of and visible to any friendly **^^Fyreslayers^^** units to be the targets.",
           "effect": "Roll a D3 for each target. On a 2+, inflict an amount of mortal damage on the target equal to the roll. In addition,\nfor the rest of the battle round, ranged weapons, including Companion weapons, used by friendly **^^Fyreslayers^^** units have **Crit (2 Hits)**.",
           "usedBy": null,
           "keywords": [
@@ -66161,7 +66026,7 @@
               "us": 67.5,
               "gb": 41.5,
               "eu": 53,
-              "au": 115,
+              "au": null,
               "ca": 81
             }
           },
@@ -66255,7 +66120,7 @@
               "us": 67.5,
               "gb": 41.5,
               "eu": 53,
-              "au": 115,
+              "au": null,
               "ca": 81
             }
           },
@@ -68622,8 +68487,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "edc3-d297-701c-6643",
-              "revision": 25,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 26,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -68632,8 +68497,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "b3f9-6c96-b99a-1e71",
-        "revision": 29,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 30,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -79840,8 +79705,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "b155-f3bd-2dfc-d638",
-              "revision": 30,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 31,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -81686,8 +81551,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "d215-65e4-50b1-c64c",
-              "revision": 27,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 28,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -82701,8 +82566,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "d048-1146-2bdf-cf78",
-              "revision": 26,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 27,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -82711,8 +82576,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "9baf-c109-f621-e60",
-        "revision": 48,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 49,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -85712,9 +85577,9 @@
               "slug": "hedonites-of-slaanesh-lord-of-hubris-2023",
               "model_count": 1,
               "us": 41,
-              "gb": 26,
-              "eu": 34,
-              "au": null,
+              "gb": null,
+              "eu": null,
+              "au": 70,
               "ca": 53
             }
           },
@@ -85850,9 +85715,9 @@
               "slug": "Hedonites-Of-Slaanesh-Lord-Of-Pain-2020",
               "model_count": 1,
               "us": 36.5,
-              "gb": 23,
-              "eu": 28.5,
-              "au": null,
+              "gb": null,
+              "eu": null,
+              "au": 59,
               "ca": 44
             }
           },
@@ -91525,8 +91390,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "10aa-e8d1-dacd-e22e",
-              "revision": 3,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 4,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -92649,9 +92514,9 @@
                     "slug": "hedonites-of-slaanesh-lord-of-hubris-2023",
                     "model_count": 1,
                     "us": 41,
-                    "gb": 26,
-                    "eu": 34,
-                    "au": null,
+                    "gb": null,
+                    "eu": null,
+                    "au": 70,
                     "ca": 53
                   }
                 },
@@ -92788,9 +92653,9 @@
                     "slug": "Hedonites-Of-Slaanesh-Lord-Of-Pain-2020",
                     "model_count": 1,
                     "us": 36.5,
-                    "gb": 23,
-                    "eu": 28.5,
-                    "au": null,
+                    "gb": null,
+                    "eu": null,
+                    "au": 59,
                     "ca": 44
                   }
                 },
@@ -94345,8 +94210,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "7156-35e7-686b-f032",
-              "revision": 4,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 5,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -94355,8 +94220,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "afdb-68a1-283e-3bf2",
-        "revision": 34,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 35,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -94897,8 +94762,8 @@
               "name": "Ashen Smog",
               "phase": "Your Hero Phase",
               "type": "Spell",
-              "description": "Declare: Pick a friendly **^^Helsmiths of Hashut Wizard^^** to cast this spell, pick a terrain feature within 18\" of them that has a friendly **desolation token** to be the target, then, make a casting roll of 2D6.\n\nEffect: That terrain feature has the 'Obscuring' ability until the start of your next turn. Then, roll a D3 for each enemy unit contesting the target terrain feature. On a 2+, inflict an amount of damage equal to the roll on that unit.",
-              "declare": "Pick a friendly **^^Helsmiths of Hashut Wizard^^** to cast this spell, pick a terrain feature within 18\" of them that has a friendly **desolation token** to be the target, then, make a casting roll of 2D6.",
+              "description": "Declare: Pick a friendly **^^Helsmiths of Hashut Wizard^^** to cast this spell, pick a visible terrain feature within 18\" of them that has a friendly **desolation token** to be the target, then make a casting roll of 2D6.\n\nEffect: That terrain feature has the 'Obscuring' ability until the start of your next turn. Then, roll a D3 for each enemy unit contesting the target terrain feature. On a 2+, inflict an amount of damage equal to the roll on that unit.",
+              "declare": "Pick a friendly **^^Helsmiths of Hashut Wizard^^** to cast this spell, pick a visible terrain feature within 18\" of them that has a friendly **desolation token** to be the target, then make a casting roll of 2D6.",
               "effect": "That terrain feature has the 'Obscuring' ability until the start of your next turn. Then, roll a D3 for each enemy unit contesting the target terrain feature. On a 2+, inflict an amount of damage equal to the roll on that unit.",
               "usedBy": null,
               "keywords": [
@@ -99414,8 +99279,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "5a77-1371-c897-5db1",
-              "revision": 10,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 11,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -100597,8 +100462,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "01c9-f58e-60df-9ade",
-              "revision": 10,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 11,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -100607,8 +100472,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "b7b7-cf58-4189-56ec",
-        "revision": 14,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 15,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -102062,7 +101927,7 @@
               "us": 62,
               "gb": 39.5,
               "eu": 51,
-              "au": 109,
+              "au": null,
               "ca": 78,
               "dual_kit": true,
               "alternates": [
@@ -103408,7 +103273,7 @@
               "us": 62,
               "gb": 39.5,
               "eu": 51,
-              "au": 109,
+              "au": null,
               "ca": 78,
               "dual_kit": true,
               "alternates": [
@@ -105684,7 +105549,7 @@
                     "us": 62,
                     "gb": 39.5,
                     "eu": 51,
-                    "au": 109,
+                    "au": null,
                     "ca": 78,
                     "dual_kit": true,
                     "alternates": [
@@ -106292,7 +106157,7 @@
                     "us": 62,
                     "gb": 39.5,
                     "eu": 51,
-                    "au": 109,
+                    "au": null,
                     "ca": 78,
                     "dual_kit": true,
                     "alternates": [
@@ -106604,8 +106469,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "e821-9778-03c4-66c6",
-              "revision": 19,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 20,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -109512,8 +109377,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "0473-cd8f-7161-ac72",
-              "revision": 19,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 20,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -109522,8 +109387,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "40a4-1c1c-8a00-bb65",
-        "revision": 41,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 42,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -120017,8 +119882,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "1517-f7af-14f7-64de",
-              "revision": 48,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 49,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -120946,7 +120811,7 @@
             "sigdexSource": {
               "armyId": "72df-3dd1-89c1-ce14",
               "revision": 25,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -122910,8 +122775,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "2123-49d1-fd7e-c8c1",
-              "revision": 30,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 31,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -122920,8 +122785,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "832c-fd6-a535-ffae",
-        "revision": 45,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 46,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -124097,7 +123962,7 @@
               "us": 35,
               "gb": 22.5,
               "eu": 27,
-              "au": 50,
+              "au": null,
               "ca": 42
             }
           },
@@ -125176,7 +125041,7 @@
               "us": 35,
               "gb": 22.5,
               "eu": 27,
-              "au": 50,
+              "au": null,
               "ca": 42
             }
           },
@@ -127759,7 +127624,7 @@
                     "us": 35,
                     "gb": 22.5,
                     "eu": 27,
-                    "au": 50,
+                    "au": null,
                     "ca": 42
                   }
                 },
@@ -127920,7 +127785,7 @@
                     "us": 35,
                     "gb": 22.5,
                     "eu": 27,
-                    "au": 50,
+                    "au": null,
                     "ca": 42
                   }
                 },
@@ -128870,7 +128735,7 @@
             "sigdexSource": {
               "armyId": "b4bd-d94d-281f-afef",
               "revision": 30,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -129382,7 +129247,7 @@
                     "us": 35,
                     "gb": 22.5,
                     "eu": 27,
-                    "au": 50,
+                    "au": null,
                     "ca": 42
                   }
                 },
@@ -129847,7 +129712,7 @@
                     "us": 35,
                     "gb": 22.5,
                     "eu": 27,
-                    "au": 50,
+                    "au": null,
                     "ca": 42
                   }
                 },
@@ -130990,8 +130855,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "28bf-c667-bb7e-770e",
-              "revision": 15,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 16,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -133223,8 +133088,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "e441-1f62-6bdb-7dc1",
-              "revision": 20,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 21,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -133233,8 +133098,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "1100-a22f-15c6-bdea",
-        "revision": 39,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 40,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -144184,8 +144049,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "ee11-1e0f-9354-8acf",
-              "revision": 48,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 49,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -146200,8 +146065,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "0d43-6f63-b305-42ae",
-              "revision": 28,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 29,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -146210,8 +146075,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "8aef-b85d-b63a-ef05",
-        "revision": 42,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 43,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -147151,9 +147016,9 @@
               "name": "Summon Sanctum of Amyntok",
               "phase": "Your Hero Phase",
               "type": "Spell",
-              "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+              "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
               "declare": "If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-              "effect": "Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+              "effect": "Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
               "usedBy": null,
               "keywords": [
                 "Spell",
@@ -147210,9 +147075,9 @@
             "name": "Summon Sanctum of Amyntok",
             "phase": "Your Hero Phase",
             "type": "Spell",
-            "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+            "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
             "declare": "If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-            "effect": "Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+            "effect": "Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
             "usedBy": null,
             "keywords": [
               "Spell",
@@ -147529,9 +147394,9 @@
                   "name": "Summon Sanctum of Amyntok",
                   "phase": "Your Hero Phase",
                   "type": "Spell",
-                  "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+                  "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
                   "declare": "If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                  "effect": "Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+                  "effect": "Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
                   "usedBy": null,
                   "keywords": [
                     "Spell",
@@ -147588,9 +147453,9 @@
                 "name": "Summon Sanctum of Amyntok",
                 "phase": "Your Hero Phase",
                 "type": "Spell",
-                "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+                "description": "Declare: If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
                 "declare": "If there is not a friendly **Sanctum of Amyntok** on the battlefield, pick a friendly **^^Lumineth Realm‑lords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                "effect": "Set up a **Sanctum of Amyntok** within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
+                "effect": "Set up a **Sanctum of Amyntok** wholly within 12\" of the caster and more than 3\" from all enemy units. A **Sanctum of Amyntok** has 3 parts that must be set up touching each other so that they form a ring.",
                 "usedBy": null,
                 "keywords": [
                   "Spell",
@@ -154744,8 +154609,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "a0dd-008d-3908-dbe2",
-              "revision": 4,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 5,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -156327,8 +156192,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "cd36-4c06-7576-9025",
-              "revision": 4,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 5,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -156337,8 +156202,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "efc5-b8d-894c-67c6",
-        "revision": 31,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 32,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -162631,9 +162496,9 @@
                     "name": "Rank and Vile",
                     "phase": "Your Hero Phase",
                     "type": "Spell",
-                    "description": "Declare: Pick a friendly **^^Cycle of Corruption Wizard^^** to cast this spell, pick a visible enemy **^^Infantry^^** unit within 18\" of them to be the target, then make a casting roll of 2D6.\n\nEffect: Until the start of your next turn, each time a model in the target unit is slain, after removing it from the battlefield, roll a dice. On a 4+, return 1 slain model to a friendly non-**Hero Cycle of Corruption^^** unit within 6\" of the target.",
+                    "description": "Declare: Pick a friendly **^^Cycle of Corruption Wizard^^** to cast this spell, pick a visible enemy **^^Infantry^^** unit within 18\" of them to be the target, then make a casting roll of 2D6.\n\nEffect: Until the start of your next turn, each time a model in the target unit is slain, after removing it from the battlefield, roll a dice. On a 4+, return 1 slain model to a friendly non-**^^Hero Cycle of Corruption Infantry^^** unit within 6\" of the target.",
                     "declare": "Pick a friendly **^^Cycle of Corruption Wizard^^** to cast this spell, pick a visible enemy **^^Infantry^^** unit within 18\" of them to be the target, then make a casting roll of 2D6.",
-                    "effect": "Until the start of your next turn, each time a model in the target unit is slain, after removing it from the battlefield, roll a dice. On a 4+, return 1 slain model to a friendly non-**Hero Cycle of Corruption^^** unit within 6\" of the target.",
+                    "effect": "Until the start of your next turn, each time a model in the target unit is slain, after removing it from the battlefield, roll a dice. On a 4+, return 1 slain model to a friendly non-**^^Hero Cycle of Corruption Infantry^^** unit within 6\" of the target.",
                     "usedBy": null,
                     "keywords": [
                       "Spell"
@@ -166110,8 +165975,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "1be3-6bdd-1bb2-d2e0",
-              "revision": 6,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 7,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -168456,8 +168321,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "4cb4-298b-bb1b-58d1",
-              "revision": 9,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 10,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -168466,8 +168331,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "5079-92b5-4879-69f8",
-        "revision": 48,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 49,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -172374,7 +172239,6 @@
           "keywords": [
             "INFANTRY",
             "DEATH",
-            "CHAMPION",
             "FLY",
             "NIGHTHAUNT",
             "WARD (5+)"
@@ -172604,7 +172468,7 @@
               "us": 55,
               "gb": 33.5,
               "eu": 43,
-              "au": null,
+              "au": 93,
               "ca": 66
             }
           },
@@ -174984,8 +174848,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "cb57-0a54-334f-17be",
-              "revision": 12,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 13,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -176175,7 +176039,6 @@
                 "keywords": [
                   "INFANTRY",
                   "DEATH",
-                  "CHAMPION",
                   "FLY",
                   "NIGHTHAUNT",
                   "WARD (5+)",
@@ -176402,7 +176265,7 @@
                     "us": 55,
                     "gb": 33.5,
                     "eu": 43,
-                    "au": null,
+                    "au": 93,
                     "ca": 66
                   }
                 },
@@ -178334,8 +178197,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "d7dc-8d46-d743-55c3",
-              "revision": 11,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 12,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -178344,8 +178207,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "640e-6bc1-c83d-13c",
-        "revision": 43,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 44,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -182617,7 +182480,14 @@
               "gb": 74,
               "eu": 97,
               "au": 207,
-              "ca": 146
+              "ca": 146,
+              "dual_kit": true,
+              "alternates": [
+                {
+                  "name": "Tyrant on Glutthorn",
+                  "slug": "ogor-mawtribes-tyrant-on-glutthorn-2026"
+                }
+              ]
             }
           },
           "rules": {
@@ -183166,13 +183036,20 @@
             "armyOfRenown": null,
             "optionSets": [],
             "prices": {
-              "slug": "ogor-mawtribes-morga-the-mighty-2026",
+              "slug": "ogor-mawtribes-tyrant-on-glutthorn-2026",
               "model_count": 1,
               "us": 122,
               "gb": 74,
               "eu": 97,
               "au": 207,
-              "ca": 146
+              "ca": 146,
+              "dual_kit": true,
+              "alternates": [
+                {
+                  "name": "Morga the Mighty – Overtyrant",
+                  "slug": "ogor-mawtribes-morga-the-mighty-2026"
+                }
+              ]
             }
           },
           "rules": {
@@ -183288,13 +183165,20 @@
             "armyOfRenown": null,
             "optionSets": [],
             "prices": {
-              "slug": "ogor-mawtribes-maulbeast-raiders-2026",
+              "slug": "ogor-mawtribes-maulbeast-cavalry-2026",
               "model_count": 2,
               "us": 82,
               "gb": 49.5,
               "eu": 64,
               "au": 139,
-              "ca": 98
+              "ca": 98,
+              "dual_kit": true,
+              "alternates": [
+                {
+                  "name": "Maulbeast Raiders",
+                  "slug": "ogor-mawtribes-maulbeast-raiders-2026"
+                }
+              ]
             }
           },
           "rules": {
@@ -183415,7 +183299,14 @@
               "gb": 49.5,
               "eu": 64,
               "au": 139,
-              "ca": 98
+              "ca": 98,
+              "dual_kit": true,
+              "alternates": [
+                {
+                  "name": "Maulbeast Cavalry",
+                  "slug": "ogor-mawtribes-maulbeast-cavalry-2026"
+                }
+              ]
             }
           },
           "rules": {
@@ -183647,7 +183538,14 @@
               "gb": 37.5,
               "eu": 50,
               "au": 105,
-              "ca": 75
+              "ca": 75,
+              "dual_kit": true,
+              "alternates": [
+                {
+                  "name": "Gutseers",
+                  "slug": "ogor-mawtribes-gutseers-2026"
+                }
+              ]
             }
           },
           "rules": {
@@ -183750,13 +183648,20 @@
             "armyOfRenown": null,
             "optionSets": [],
             "prices": {
-              "slug": "ogor-mawtribes-cleavers-2026",
+              "slug": "ogor-mawtribes-gutseers-2026",
               "model_count": 3,
               "us": 60,
               "gb": 37.5,
               "eu": 50,
               "au": 105,
-              "ca": 75
+              "ca": 75,
+              "dual_kit": true,
+              "alternates": [
+                {
+                  "name": "Cleavers",
+                  "slug": "ogor-mawtribes-cleavers-2026"
+                }
+              ]
             }
           },
           "rules": {
@@ -186847,7 +186752,14 @@
                     "gb": 49.5,
                     "eu": 64,
                     "au": 139,
-                    "ca": 98
+                    "ca": 98,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Maulbeast Cavalry",
+                        "slug": "ogor-mawtribes-maulbeast-cavalry-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -187907,8 +187819,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "3dca-a9a3-7f3e-6a69",
-              "revision": 3,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 4,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -188743,7 +188655,14 @@
                     "gb": 37.5,
                     "eu": 50,
                     "au": 105,
-                    "ca": 75
+                    "ca": 75,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Gutseers",
+                        "slug": "ogor-mawtribes-gutseers-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -188847,13 +188766,20 @@
                   "armyOfRenown": null,
                   "optionSets": [],
                   "prices": {
-                    "slug": "ogor-mawtribes-cleavers-2026",
+                    "slug": "ogor-mawtribes-gutseers-2026",
                     "model_count": 3,
                     "us": 60,
                     "gb": 37.5,
                     "eu": 50,
                     "au": 105,
-                    "ca": 75
+                    "ca": 75,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Cleavers",
+                        "slug": "ogor-mawtribes-cleavers-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -189012,8 +188938,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "5dbd-f273-4a31-505e",
-              "revision": 3,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 4,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -190008,7 +189934,14 @@
                     "gb": 74,
                     "eu": 97,
                     "au": 207,
-                    "ca": 146
+                    "ca": 146,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Tyrant on Glutthorn",
+                        "slug": "ogor-mawtribes-tyrant-on-glutthorn-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -190358,13 +190291,20 @@
                   "armyOfRenown": null,
                   "optionSets": [],
                   "prices": {
-                    "slug": "ogor-mawtribes-morga-the-mighty-2026",
+                    "slug": "ogor-mawtribes-tyrant-on-glutthorn-2026",
                     "model_count": 1,
                     "us": 122,
                     "gb": 74,
                     "eu": 97,
                     "au": 207,
-                    "ca": 146
+                    "ca": 146,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Morga the Mighty – Overtyrant",
+                        "slug": "ogor-mawtribes-morga-the-mighty-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -190481,13 +190421,20 @@
                   "armyOfRenown": null,
                   "optionSets": [],
                   "prices": {
-                    "slug": "ogor-mawtribes-maulbeast-raiders-2026",
+                    "slug": "ogor-mawtribes-maulbeast-cavalry-2026",
                     "model_count": 2,
                     "us": 82,
                     "gb": 49.5,
                     "eu": 64,
                     "au": 139,
-                    "ca": 98
+                    "ca": 98,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Maulbeast Raiders",
+                        "slug": "ogor-mawtribes-maulbeast-raiders-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -190902,8 +190849,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "d7cb-df20-b24b-fcf3",
-              "revision": 3,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 4,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -192333,13 +192280,20 @@
                   "armyOfRenown": null,
                   "optionSets": [],
                   "prices": {
-                    "slug": "ogor-mawtribes-maulbeast-raiders-2026",
+                    "slug": "ogor-mawtribes-maulbeast-cavalry-2026",
                     "model_count": 2,
                     "us": 82,
                     "gb": 49.5,
                     "eu": 64,
                     "au": 139,
-                    "ca": 98
+                    "ca": 98,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Maulbeast Raiders",
+                        "slug": "ogor-mawtribes-maulbeast-raiders-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -192523,13 +192477,20 @@
                   "armyOfRenown": null,
                   "optionSets": [],
                   "prices": {
-                    "slug": "ogor-mawtribes-morga-the-mighty-2026",
+                    "slug": "ogor-mawtribes-tyrant-on-glutthorn-2026",
                     "model_count": 1,
                     "us": 122,
                     "gb": 74,
                     "eu": 97,
                     "au": 207,
-                    "ca": 146
+                    "ca": 146,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Morga the Mighty – Overtyrant",
+                        "slug": "ogor-mawtribes-morga-the-mighty-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -192633,13 +192594,20 @@
                   "armyOfRenown": null,
                   "optionSets": [],
                   "prices": {
-                    "slug": "ogor-mawtribes-cleavers-2026",
+                    "slug": "ogor-mawtribes-gutseers-2026",
                     "model_count": 3,
                     "us": 60,
                     "gb": 37.5,
                     "eu": 50,
                     "au": 105,
-                    "ca": 75
+                    "ca": 75,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Cleavers",
+                        "slug": "ogor-mawtribes-cleavers-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -192734,7 +192702,14 @@
                     "gb": 37.5,
                     "eu": 50,
                     "au": 105,
-                    "ca": 75
+                    "ca": 75,
+                    "dual_kit": true,
+                    "alternates": [
+                      {
+                        "name": "Gutseers",
+                        "slug": "ogor-mawtribes-gutseers-2026"
+                      }
+                    ]
                   }
                 },
                 "rules": {
@@ -192758,8 +192733,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "92db-6ef9-6809-9a65",
-              "revision": 28,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 29,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -192768,8 +192743,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "6353-cb84-ac7f-9a15",
-        "revision": 36,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 37,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -199121,8 +199096,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "03cd-f698-5b7c-4f1b",
-              "revision": 4,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 5,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -201728,8 +201703,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "b654-466d-3232-e5f9",
-              "revision": 7,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 8,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -201738,8 +201713,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "8e0e-5e8c-5824-89c9",
-        "revision": 37,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 38,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -208296,8 +208271,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "4e3-e1a7-a8d4-8719",
-        "revision": 41,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 42,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -215828,9 +215803,9 @@
               "slug": "skaven-warlock-galvaneer-2024",
               "model_count": 1,
               "us": 36,
-              "gb": 24,
-              "eu": 30.5,
-              "au": null,
+              "gb": null,
+              "eu": null,
+              "au": 62,
               "ca": 46
             }
           },
@@ -217718,8 +217693,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "7dd9-f3c9-349a-1f6a",
-              "revision": 30,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 31,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -221514,9 +221489,9 @@
                     "slug": "skaven-warlock-galvaneer-2024",
                     "model_count": 1,
                     "us": 36,
-                    "gb": 24,
-                    "eu": 30.5,
-                    "au": null,
+                    "gb": null,
+                    "eu": null,
+                    "au": 62,
                     "ca": 46
                   }
                 },
@@ -222308,8 +222283,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "5be9-f24d-b606-6c24",
-              "revision": 29,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 30,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -222318,8 +222293,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "231a-2a83-26f0-a718",
-        "revision": 51,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 52,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -225545,9 +225520,9 @@
               "name": "Oracular Visions",
               "phase": "Once Per Turn (Army), Your Hero Phase",
               "type": "Ability",
-              "description": "Declare: Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target and roll a dice.\n\nEffect: On a 3+, the target has **^^Ward (5+)^^** until the start of your next turn.",
-              "declare": "Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target and roll a dice.",
-              "effect": "On a 3+, the target has **^^Ward (5+)^^** until the start of your next turn.",
+              "description": "Declare: Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target.\n\nEffect: If this unit successfully cast a spell this phase, the target has **^^Ward (5+)^^** until the start of your next turn. Otherwise, the target has **^^Ward (6+)^^** until the start of your next turn.",
+              "declare": "Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target.",
+              "effect": "If this unit successfully cast a spell this phase, the target has **^^Ward (5+)^^** until the start of your next turn. Otherwise, the target has **^^Ward (6+)^^** until the start of your next turn.",
               "usedBy": null,
               "keywords": [],
               "castingValue": null,
@@ -228634,9 +228609,9 @@
               "name": "Glorious Death",
               "phase": "Passive",
               "type": "Ability",
-              "description": "Effect: Each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
+              "description": "Effect: While this unit is wholly within 12\" of any friendly **^^Darkoath Heroes^^**, each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
               "declare": null,
-              "effect": "Each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
+              "effect": "While this unit is wholly within 12\" of any friendly **^^Darkoath Heroes^^**, each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
               "usedBy": null,
               "keywords": [],
               "castingValue": null,
@@ -231283,9 +231258,9 @@
                     "name": "Oracular Visions",
                     "phase": "Once Per Turn (Army), Your Hero Phase",
                     "type": "Ability",
-                    "description": "Declare: Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target and roll a dice.\n\nEffect: On a 3+, the target has **^^Ward (5+)^^** until the start of your next turn.",
-                    "declare": "Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target and roll a dice.",
-                    "effect": "On a 3+, the target has **^^Ward (5+)^^** until the start of your next turn.",
+                    "description": "Declare: Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target.\n\nEffect: If this unit successfully cast a spell this phase, the target has **^^Ward (5+)^^** until the start of your next turn. Otherwise, the target has **^^Ward (6+)^^** until the start of your next turn.",
+                    "declare": "Pick a friendly **^^Warriors of Chaos^^** unit wholly within 12\" of this unit to be the target.",
+                    "effect": "If this unit successfully cast a spell this phase, the target has **^^Ward (5+)^^** until the start of your next turn. Otherwise, the target has **^^Ward (6+)^^** until the start of your next turn.",
                     "usedBy": null,
                     "keywords": [],
                     "castingValue": null,
@@ -232672,8 +232647,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "747c-104a-4d8d-c9a5",
-              "revision": 31,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 32,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -233552,8 +233527,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "7bb8-8a68-368a-d066",
-              "revision": 24,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 25,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -235051,9 +235026,9 @@
                     "name": "Glorious Death",
                     "phase": "Passive",
                     "type": "Ability",
-                    "description": "Effect: Each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
+                    "description": "Effect: While this unit is wholly within 12\" of any friendly **^^Darkoath Heroes^^**, each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
                     "declare": null,
-                    "effect": "Each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
+                    "effect": "While this unit is wholly within 12\" of any friendly **^^Darkoath Heroes^^**, each time a model in this unit is slain by a combat attack and that model was in combat with the attacking model, roll a dice. On a 5+, inflict 1 mortal damage on the attacking unit after the **^^Fight^^** ability has been resolved.",
                     "usedBy": null,
                     "keywords": [],
                     "castingValue": null,
@@ -235341,8 +235316,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "7bb3-81d1-72cc-ea89",
-              "revision": 29,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 30,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -235351,8 +235326,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "2c23-a678-196b-ad69",
-        "revision": 50,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 51,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -237152,8 +237127,8 @@
           "points": 400,
           "profile": {
             "move": "10\"",
-            "health": 35,
-            "control": "20",
+            "health": 25,
+            "control": "10",
             "save": "4+",
             "ward": null,
             "banishment": null
@@ -237167,48 +237142,44 @@
               "attacks": "1",
               "hit": "3+",
               "wound": "2+",
-              "rend": "-3",
+              "rend": "-2",
               "damage": "4",
               "abilities": []
             },
             {
-              "id": "f925-ea41-2cb8-0307",
-              "name": "Death Grip",
+              "id": "39b0-4550-7fb9-c97c",
+              "name": "Fortcrusha Flail: Calamitous Sweep",
               "type": "Melee",
-              "attacks": "1",
-              "hit": "4+",
-              "wound": "2+",
-              "rend": "-2",
-              "damage": "D6",
+              "attacks": "16",
+              "hit": "3+",
+              "wound": "3+",
+              "rend": "-1",
+              "damage": "1",
               "abilities": [
-                "Anti-**^^Hero^^** (+1 Rend)"
+                "Crit (Auto-wound)"
               ]
             },
             {
-              "id": "b8a1-490d-6777-97d0",
-              "name": "Almighty Stomp",
-              "type": "Melee",
-              "attacks": "4",
-              "hit": "4+",
-              "wound": "2+",
-              "rend": "-2",
-              "damage": "D3",
-              "abilities": [
-                "Anti-**^^Infantry^^** (+1 Rend)"
-              ]
-            },
-            {
-              "id": "9673-c3fd-9be0-b84b",
-              "name": "Fortcrusha Flail",
+              "id": "6c32-1003-bbd3-f9af",
+              "name": "Fortcrusha Flail: Crushing Blow",
               "type": "Melee",
               "attacks": "6",
               "hit": "4+",
               "wound": "2+",
               "rend": "-2",
               "damage": "4",
-              "abilities": [
-                "Anti-**^^Faction Terrain^^** (+1 Rend)"
-              ]
+              "abilities": []
+            },
+            {
+              "id": "b8a1-490d-6777-97d0",
+              "name": "Almighty Stomp",
+              "type": "Melee",
+              "attacks": "3",
+              "hit": "4+",
+              "wound": "2+",
+              "rend": "-2",
+              "damage": "D3",
+              "abilities": []
             }
           ],
           "abilities": [
@@ -237218,9 +237189,24 @@
               "name": "Battle Damaged",
               "phase": "Passive",
               "type": "Ability",
-              "description": "Effect: While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 4 and this unit has a Control characteristic of 10.",
+              "description": "Effect: While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 11 for **Calamitous Sweep** and 4 for **Crushing Blow**.",
               "declare": null,
-              "effect": "While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 4 and this unit has a Control characteristic of 10.",
+              "effect": "While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 11 for **Calamitous Sweep** and 4 for **Crushing Blow**.",
+              "usedBy": null,
+              "keywords": [],
+              "castingValue": null,
+              "chantingValue": null,
+              "commandPoints": null
+            },
+            {
+              "id": "fortcrusha-flail",
+              "sourceId": "b2b4-d8d7-2f56-439a",
+              "name": "Fortcrusha Flail",
+              "phase": "Passive",
+              "type": "Ability",
+              "description": "Effect: Each time this unit uses a **^^Fight^^** ability, pick either the **Calamitous Sweep** or **Crushing Blow** weapon characteristics for all the attacks it makes with its **Fortcrusha Flail**.",
+              "declare": null,
+              "effect": "Each time this unit uses a **^^Fight^^** ability, pick either the **Calamitous Sweep** or **Crushing Blow** weapon characteristics for all the attacks it makes with its **Fortcrusha Flail**.",
               "usedBy": null,
               "keywords": [],
               "castingValue": null,
@@ -237231,7 +237217,7 @@
               "id": "it-s-goin-down",
               "sourceId": "cc15-3916-c7f2-cb9a",
               "name": "It's Goin' Down",
-              "phase": "Once Per Battle, Your Hero Phase",
+              "phase": "Once Per Battle (Army), Your Hero Phase",
               "type": "Ability",
               "description": "Effect: Until the start of your next turn:\n• This unit has a Move characteristic of 4D6\".\n• While this unit is within 1\" of a terrain feature, the Attacks characteristic of its **Hurled Boulder** is D6 instead of 1.",
               "declare": null,
@@ -237259,36 +237245,6 @@
               "castingValue": null,
               "chantingValue": null,
               "commandPoints": null
-            },
-            {
-              "id": "son-of-behemat",
-              "sourceId": "ff24-51d-54d2-c80b",
-              "name": "Son of Behemat",
-              "phase": "Passive",
-              "type": "Ability",
-              "description": "Effect: If this unit would be automatically destroyed, it is not automatically destroyed. Instead, allocate 6 damage points to it (ward rolls cannot be made for those damage points).",
-              "declare": null,
-              "effect": "If this unit would be automatically destroyed, it is not automatically destroyed. Instead, allocate 6 damage points to it (ward rolls cannot be made for those damage points).",
-              "usedBy": null,
-              "keywords": [],
-              "castingValue": null,
-              "chantingValue": null,
-              "commandPoints": null
-            },
-            {
-              "id": "longshanks",
-              "sourceId": "c219-8bc2-6da1-f74f",
-              "name": "Longshanks",
-              "phase": "Passive",
-              "type": "Ability",
-              "description": "Effect: This unit can pass through models in non-**^^Monster^^** units and parts of terrain features that are less than 4\" tall.",
-              "declare": null,
-              "effect": "This unit can pass through models in non-**^^Monster^^** units and parts of terrain features that are less than 4\" tall.",
-              "usedBy": null,
-              "keywords": [],
-              "castingValue": null,
-              "chantingValue": null,
-              "commandPoints": null
             }
           ],
           "keywords": [
@@ -237296,7 +237252,7 @@
             "MONSTER",
             "DESTRUCTION",
             "SONS OF BEHEMAT",
-            "MEGA-GARGANT"
+            "BIG"
           ],
           "details": {
             "models": 1,
@@ -238311,7 +238267,7 @@
             "MONSTER",
             "DESTRUCTION",
             "SONS OF BEHEMAT",
-            "GARGANT"
+            "LITTLE"
           ],
           "details": {
             "models": 1,
@@ -239636,8 +239592,8 @@
                 "points": 400,
                 "profile": {
                   "move": "10\"",
-                  "health": 35,
-                  "control": "20",
+                  "health": 25,
+                  "control": "10",
                   "save": "4+",
                   "ward": null,
                   "banishment": null
@@ -239651,48 +239607,44 @@
                     "attacks": "1",
                     "hit": "3+",
                     "wound": "2+",
-                    "rend": "-3",
+                    "rend": "-2",
                     "damage": "4",
                     "abilities": []
                   },
                   {
-                    "id": "0718-faa3-a927-5dc7",
-                    "name": "Death Grip",
+                    "id": "ca9e-78d8-1f46-a1d9",
+                    "name": "Fortcrusha Flail: Calamitous Sweep",
                     "type": "Melee",
-                    "attacks": "1",
-                    "hit": "4+",
-                    "wound": "2+",
-                    "rend": "-2",
-                    "damage": "D6",
+                    "attacks": "16",
+                    "hit": "3+",
+                    "wound": "3+",
+                    "rend": "-1",
+                    "damage": "1",
                     "abilities": [
-                      "Anti-**^^Hero^^** (+1 Rend)"
+                      "Crit (Auto-wound)"
                     ]
                   },
                   {
-                    "id": "7ce2-8c69-9dea-2080",
-                    "name": "Almighty Stomp",
-                    "type": "Melee",
-                    "attacks": "4",
-                    "hit": "4+",
-                    "wound": "2+",
-                    "rend": "-2",
-                    "damage": "D3",
-                    "abilities": [
-                      "Anti-**^^Infantry^^** (+1 Rend)"
-                    ]
-                  },
-                  {
-                    "id": "e8ee-b442-7c4c-71ac",
-                    "name": "Fortcrusha Flail",
+                    "id": "a779-0ead-1b6f-b77e",
+                    "name": "Fortcrusha Flail: Crushing Blow",
                     "type": "Melee",
                     "attacks": "6",
                     "hit": "4+",
                     "wound": "2+",
                     "rend": "-2",
                     "damage": "4",
-                    "abilities": [
-                      "Anti-**^^Faction Terrain^^** (+1 Rend)"
-                    ]
+                    "abilities": []
+                  },
+                  {
+                    "id": "7ce2-8c69-9dea-2080",
+                    "name": "Almighty Stomp",
+                    "type": "Melee",
+                    "attacks": "3",
+                    "hit": "4+",
+                    "wound": "2+",
+                    "rend": "-2",
+                    "damage": "D3",
+                    "abilities": []
                   }
                 ],
                 "abilities": [
@@ -239702,9 +239654,24 @@
                     "name": "Battle Damaged",
                     "phase": "Passive",
                     "type": "Ability",
-                    "description": "Effect: While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 4 and this unit has a Control characteristic of 10.",
+                    "description": "Effect: While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 11 for **Calamitous Sweep** and 4 for **Crushing Blow**.",
                     "declare": null,
-                    "effect": "While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 4 and this unit has a Control characteristic of 10.",
+                    "effect": "While this unit has 15 or more damage points, the Attacks characteristic of its **Fortcrusha Flail** is 11 for **Calamitous Sweep** and 4 for **Crushing Blow**.",
+                    "usedBy": null,
+                    "keywords": [],
+                    "castingValue": null,
+                    "chantingValue": null,
+                    "commandPoints": null
+                  },
+                  {
+                    "id": "fortcrusha-flail",
+                    "sourceId": "9f60-7c73-1760-b134",
+                    "name": "Fortcrusha Flail",
+                    "phase": "Passive",
+                    "type": "Ability",
+                    "description": "Effect: Each time this unit uses a **^^Fight^^** ability, pick either the **Calamitous Sweep** or **Crushing Blow** weapon characteristics for all the attacks it makes with its **Fortcrusha Flail**.",
+                    "declare": null,
+                    "effect": "Each time this unit uses a **^^Fight^^** ability, pick either the **Calamitous Sweep** or **Crushing Blow** weapon characteristics for all the attacks it makes with its **Fortcrusha Flail**.",
                     "usedBy": null,
                     "keywords": [],
                     "castingValue": null,
@@ -239715,7 +239682,7 @@
                     "id": "it-s-goin-down",
                     "sourceId": "1417-e560-4fa9-7afa",
                     "name": "It's Goin' Down",
-                    "phase": "Once Per Battle, Your Hero Phase",
+                    "phase": "Once Per Battle (Army), Your Hero Phase",
                     "type": "Ability",
                     "description": "Effect: Until the start of your next turn:\n• This unit has a Move characteristic of 4D6\".\n• While this unit is within 1\" of a terrain feature, the Attacks characteristic of its **Hurled Boulder** is D6 instead of 1.",
                     "declare": null,
@@ -239743,36 +239710,6 @@
                     "castingValue": null,
                     "chantingValue": null,
                     "commandPoints": null
-                  },
-                  {
-                    "id": "son-of-behemat",
-                    "sourceId": "ff24-51d-54d2-c80b",
-                    "name": "Son of Behemat",
-                    "phase": "Passive",
-                    "type": "Ability",
-                    "description": "Effect: If this unit would be automatically destroyed, it is not automatically destroyed. Instead, allocate 6 damage points to it (ward rolls cannot be made for those damage points).",
-                    "declare": null,
-                    "effect": "If this unit would be automatically destroyed, it is not automatically destroyed. Instead, allocate 6 damage points to it (ward rolls cannot be made for those damage points).",
-                    "usedBy": null,
-                    "keywords": [],
-                    "castingValue": null,
-                    "chantingValue": null,
-                    "commandPoints": null
-                  },
-                  {
-                    "id": "longshanks",
-                    "sourceId": "c219-8bc2-6da1-f74f",
-                    "name": "Longshanks",
-                    "phase": "Passive",
-                    "type": "Ability",
-                    "description": "Effect: This unit can pass through models in non-**^^Monster^^** units and parts of terrain features that are less than 4\" tall.",
-                    "declare": null,
-                    "effect": "This unit can pass through models in non-**^^Monster^^** units and parts of terrain features that are less than 4\" tall.",
-                    "usedBy": null,
-                    "keywords": [],
-                    "castingValue": null,
-                    "chantingValue": null,
-                    "commandPoints": null
                   }
                 ],
                 "keywords": [
@@ -239780,7 +239717,7 @@
                   "MONSTER",
                   "DESTRUCTION",
                   "SONS OF BEHEMAT",
-                  "MEGA-GARGANT",
+                  "BIG",
                   "BRODD'S STOMP"
                 ],
                 "details": {
@@ -240592,7 +240529,7 @@
                   "MONSTER",
                   "DESTRUCTION",
                   "SONS OF BEHEMAT",
-                  "GARGANT",
+                  "LITTLE",
                   "BRODD'S STOMP"
                 ],
                 "details": {
@@ -241098,7 +241035,7 @@
             "sigdexSource": {
               "armyId": "6600-d1d2-9b0d-a3b9",
               "revision": 30,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -241528,7 +241465,7 @@
                   "MONSTER",
                   "DESTRUCTION",
                   "SONS OF BEHEMAT",
-                  "GARGANT",
+                  "LITTLE",
                   "MATRIARCH'S MOB"
                 ],
                 "details": {
@@ -242130,7 +242067,7 @@
             "sigdexSource": {
               "armyId": "371c-6bc9-8b82-21cd",
               "revision": 1,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -242700,7 +242637,7 @@
                   "MONSTER",
                   "DESTRUCTION",
                   "SONS OF BEHEMAT",
-                  "GARGANT",
+                  "LITTLE",
                   "STOMPER TRIBE"
                 ],
                 "details": {
@@ -243208,7 +243145,7 @@
             "sigdexSource": {
               "armyId": "070e-cf17-2c3a-6691",
               "revision": 1,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -243217,8 +243154,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "de5f-588b-ea57-d6b5",
-        "revision": 29,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 31,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -248128,9 +248065,7 @@
               "declare": "You can pick another visible friendly non-**^^Hero^^** **^^Soulblight Gravelords^^** **^^Infantry^^** or **^^Monster^^** unit wholly within 12\" of this unit to be the target.",
               "effect": "This unit can move up to **X**\", where **X** is your **fury level**. It must end that move in combat.\nThen, the target can move up to **X**\", where **X** is your **fury level**. It can move through enemy models and the combat ranges of enemy units during that move but must end that move in combat with an enemy unit that this unit is in combat with.",
               "usedBy": null,
-              "keywords": [
-                "Rampage"
-              ],
+              "keywords": [],
               "castingValue": null,
               "chantingValue": null,
               "commandPoints": null
@@ -249989,9 +249924,9 @@
               "name": "Red Ruin",
               "phase": "Once Per Turn (Army), End of Any Turn",
               "type": "Ability",
-              "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\nThis unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
+              "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\n• This unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
               "declare": "Pick an enemy unit in combat with this unit to be the target.",
-              "effect": "Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\nThis unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
+              "effect": "Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\n• This unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
               "usedBy": null,
               "keywords": [
                 "Rampage"
@@ -251615,7 +251550,7 @@
             "sigdexSource": {
               "armyId": "3097-36cb-412f-8b60",
               "revision": 20,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -251869,9 +251804,9 @@
                     "name": "Summon Unholy Reliquary",
                     "phase": "Your Hero Phase",
                     "type": "Spell",
-                    "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                    "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                     "declare": "If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                    "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                    "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                     "usedBy": null,
                     "keywords": [
                       "Spell",
@@ -251929,9 +251864,9 @@
                   "name": "Summon Unholy Reliquary",
                   "phase": "Your Hero Phase",
                   "type": "Spell",
-                  "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                  "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                   "declare": "If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                  "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                  "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                   "usedBy": null,
                   "keywords": [
                     "Spell",
@@ -251988,9 +251923,9 @@
                         "name": "Summon Unholy Reliquary",
                         "phase": "Your Hero Phase",
                         "type": "Spell",
-                        "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                        "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                         "declare": "If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                        "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                        "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                         "usedBy": null,
                         "keywords": [
                           "Spell",
@@ -252048,9 +251983,9 @@
                       "name": "Summon Unholy Reliquary",
                       "phase": "Your Hero Phase",
                       "type": "Spell",
-                      "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                      "description": "Declare: If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.\n\nEffect: Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                       "declare": "If there is not a friendly **Unholy Reliquary** on the battlefield, pick a friendly **^^Soulblight Gravelords Wizard^^** to cast this spell, then make a casting roll of 2D6.",
-                      "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster.",
+                      "effect": "Set up a **Unholy Reliquary** endless spell wholly within 18\" of the caster, visible to them, and more than 3\" from all enemy units.",
                       "usedBy": null,
                       "keywords": [
                         "Spell",
@@ -252562,9 +252497,9 @@
                     "name": "Red Ruin",
                     "phase": "Once Per Turn (Army), End of Any Turn",
                     "type": "Ability",
-                    "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\nThis unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
+                    "description": "Declare: Pick an enemy unit in combat with this unit to be the target.\n\nEffect: Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\n• This unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
                     "declare": "Pick an enemy unit in combat with this unit to be the target.",
-                    "effect": "Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\nThis unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
+                    "effect": "Roll a D3. On a 2+, resolve the following effects:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• **Heal (X)** this unit where **X** is an amount equal to the roll.\n• This unit can be removed from the battlefield and set up in reserve **high above the battlefield**.",
                     "usedBy": null,
                     "keywords": [
                       "Rampage"
@@ -253013,8 +252948,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "a00b-ece9-a93d-7ca4",
-              "revision": 22,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 23,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -254177,8 +254112,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "b19a-fc9-a980-29b5",
-              "revision": 31,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 32,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -254187,8 +254122,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "405e-c5f4-8579-b05c",
-        "revision": 44,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 45,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -267535,8 +267470,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "874b-f2c3-6829-7c1c",
-              "revision": 27,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 28,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -271132,8 +271067,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "4631-7997-6da0-7a32",
-              "revision": 29,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 30,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -275040,8 +274975,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "c9d1-f1c0-84d1-a75d",
-              "revision": 42,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 43,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -275050,8 +274985,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "1bd9-ad7d-68ee-3b53",
-        "revision": 44,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 45,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     },
@@ -279225,7 +279160,7 @@
           ],
           "keywords": [
             "INFANTRY",
-            "CHAMPION (1/8)",
+            "CHAMPION",
             "ORDER",
             "SYLVANETH",
             "REVENANT"
@@ -282618,8 +282553,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "7c15-bf52-be12-a4db",
-              "revision": 3,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 4,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -284443,7 +284378,7 @@
                 ],
                 "keywords": [
                   "INFANTRY",
-                  "CHAMPION (1/8)",
+                  "CHAMPION",
                   "ORDER",
                   "SYLVANETH",
                   "REVENANT",
@@ -284874,8 +284809,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "b0b9-ece2-dec7-9e78",
-              "revision": 7,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 8,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -286245,8 +286180,8 @@
             "catalogueDataVersion": "2025-08-27",
             "sigdexSource": {
               "armyId": "b3cb-53fb-b710-87f5",
-              "revision": 26,
-              "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+              "revision": 27,
+              "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
               "battleProfiles": "2025-08-27"
             }
           }
@@ -286255,8 +286190,8 @@
       "catalogueDataVersion": "2025-08-27",
       "sigdexSource": {
         "armyId": "bb7e-b0da-5c2-a980",
-        "revision": 37,
-        "bsdata": "d1f97bc9a3c4d65a13add36ed48082866c4e7942",
+        "revision": 38,
+        "bsdata": "6909c1401ee52c63b5187a7c2d00fb34190479bd",
         "battleProfiles": "2025-08-27"
       }
     }

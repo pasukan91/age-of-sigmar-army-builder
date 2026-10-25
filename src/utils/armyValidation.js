@@ -1,5 +1,6 @@
 import { calculateArmyPoints } from "./armyPoints.js";
 import {
+  canUnitLeadRegiment,
   countsTowardRegimentLimit,
   getRegimentCompositionErrors,
 } from "./regimentRules.js";
@@ -48,10 +49,18 @@ function isUnique(unit) {
 }
 
 function getArmyUnits(list) {
-  return (list?.regiments ?? []).flatMap((regiment) => [
+  const regimentUnits = (list?.regiments ?? []).flatMap((regiment) => [
     { unit: regiment.hero, regiment },
     ...(regiment.units ?? []).map((unit) => ({ unit, regiment })),
   ]).filter(({ unit }) => Boolean(unit));
+
+  const auxiliaryRegiment = { id: "auxiliaries" };
+  const auxiliaryUnits = (list?.auxiliaries ?? []).map((unit) => ({
+    unit,
+    regiment: auxiliaryRegiment,
+  }));
+
+  return [...regimentUnits, ...auxiliaryUnits];
 }
 
 export function validateArmyList(list) {
@@ -79,7 +88,11 @@ export function validateArmyList(list) {
     ));
   }
 
-  if (regiments.length === 0 && (list.regimentsOfRenown ?? []).length === 0) {
+  if (
+    regiments.length === 0 &&
+    (list.regimentsOfRenown ?? []).length === 0 &&
+    (list.auxiliaries ?? []).length === 0
+  ) {
     issues.push(issue(
       "empty-army",
       "error",
@@ -110,6 +123,35 @@ export function validateArmyList(list) {
       "list"
     ));
   }
+
+  if (list.armyOfRenown?.excludesRegimentsOfRenown && (list.regimentsOfRenown ?? []).length > 0) {
+    issues.push(issue(
+      "regiment-of-renown-forbidden",
+      "error",
+      "Regimiento de Renombre no permitido",
+      `${list.armyOfRenown.name} no puede incluir Regimientos de Renombre.`,
+      "regiments",
+      "regiments-section"
+    ));
+  }
+
+  (list.regimentsOfRenown ?? []).forEach((regiment) => {
+    if (
+      !Array.isArray(regiment.eligibleFactionIds) ||
+      regiment.eligibleFactionIds.includes(list.faction?.id)
+    ) {
+      return;
+    }
+
+    issues.push(issue(
+      `ineligible-regiment-of-renown-${regiment.id}`,
+      "error",
+      "Regimiento de Renombre no disponible",
+      `${regiment.name} ya no puede incluirse en ${list.faction?.name ?? "esta facción"}.`,
+      "regiments",
+      "regiments-section"
+    ));
+  });
 
   if ((effectiveFaction.battleFormations ?? []).length > 0 && !list.battleFormation) {
     issues.push(issue(
@@ -154,6 +196,15 @@ export function validateArmyList(list) {
         "regiments",
         targetId
       ));
+    } else if (!canUnitLeadRegiment(list, regiment.hero, regiment.hero.instanceId)) {
+      issues.push(issue(
+        `invalid-leader-${regiment.id}`,
+        "error",
+        "Líder de regimiento no válido",
+        `${regiment.hero.name} ya no puede liderar este regimiento.`,
+        "regiments",
+        targetId
+      ));
     }
 
     if (slotCount > limit) {
@@ -179,6 +230,19 @@ export function validateArmyList(list) {
         ));
       }
     });
+  });
+
+  (list.auxiliaries ?? []).forEach((unit) => {
+    if (unit.reinforced && unit.rules?.canBeReinforced === false) {
+      issues.push(issue(
+        `reinforced-${unit.instanceId ?? unit.id}`,
+        "error",
+        "Refuerzo no permitido",
+        `${unit.name} no se puede reforzar.`,
+        "regiments",
+        "auxiliaries-section"
+      ));
+    }
   });
 
   getRegimentCompositionErrors(list).forEach((error) => {

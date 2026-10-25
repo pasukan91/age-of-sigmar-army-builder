@@ -20,6 +20,11 @@ export function calculateArmyHealth(list, factionCatalogue = []) {
     return armyTotal + units.reduce((total, unit) => total + getUnitHealth(unit), 0);
   }, 0);
 
+  const auxiliaryHealth = (list.auxiliaries ?? []).reduce(
+    (total, unit) => total + getUnitHealth(unit),
+    0
+  );
+
   const unitsById = getUnitIndex(factionCatalogue);
   const renownHealth = (list.regimentsOfRenown ?? []).reduce(
     (armyTotal, regiment) => armyTotal + getRenownUnits(regiment, unitsById)
@@ -27,7 +32,7 @@ export function calculateArmyHealth(list, factionCatalogue = []) {
     0
   );
 
-  return regimentHealth + renownHealth;
+  return regimentHealth + auxiliaryHealth + renownHealth;
 }
 
 function createUnitIndex(factionCatalogue) {

@@ -77,10 +77,10 @@ test("includes the highlighted September rules changes", async () => {
     assert.match(get("fyreslayers", "blazing-impetus").description, /was not set up this turn/i);
 
     const gatebreaker = get("behemat", "scourge-of-aqshy-gatebreaker-mega-gargant");
-    assert.equal(gatebreaker.profile.health, 35);
-    assert.equal(gatebreaker.profile.control, "20");
+    assert.equal(gatebreaker.profile.health, 25);
+    assert.equal(gatebreaker.profile.control, "10");
     assert.ok(gatebreaker.weapons.some((weapon) => weapon.name.includes("Fortcrusha Flail")));
-    assert.ok(gatebreaker.abilities.some((ability) => ability.id === "longshanks"));
+    assert.ok(gatebreaker.abilities.some((ability) => ability.id === "off-in-a-huff"));
 
     assert.equal(get("behemat", "ma-maegran-chooser-of-the-mighty").points, 370);
     assert.equal(get("behemat", "boss-stompers").rules.canBeReinforced, false);
