@@ -6,6 +6,10 @@ La rama `main` está conectada al Worker de Cloudflare `almogavers-aos`. Cada
 `push` a GitHub ejecuta `npm run deploy` y actualiza la misma URL donde está
 instalada la PWA. La configuración se conserva en `wrangler.jsonc`.
 
+El acceso privado se gestiona externamente mediante Cloudflare Access. La
+aplicación `almogavers-aos - Cloudflare Workers` usa una duración de sesión de
+una semana; este valor debe conservarse al modificar su política o destino.
+
 El despliegue manual en Apache descrito a continuación queda disponible solo
 como alternativa local.
 
