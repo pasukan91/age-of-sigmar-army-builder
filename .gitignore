@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Reference files attached to local Codex tasks
+.codex-remote-attachments/
+
 # Generated 3D assets are kept locally; the packs are too large for GitHub.
 /outputs/ogor_camp_stl/
 /outputs/stl_procesado_20260809/
