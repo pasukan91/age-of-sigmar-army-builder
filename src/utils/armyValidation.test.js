@@ -236,6 +236,23 @@ test("exports points, deployments and regiment structure", () => {
   assert.match(text, /100\/2000 pts · 1 despliegue/);
 });
 
+test("counts a complete Regiment of Renown as one drop", () => {
+  const army = list({
+    regimentsOfRenown: [{
+      id: "renown-drop",
+      name: "Drop de prueba",
+      points: 300,
+      resolvedUnits: [
+        { id: "renown-leader", name: "Líder" },
+        { id: "renown-unit-a", name: "Unidad A" },
+        { id: "renown-unit-b", name: "Unidad B" },
+      ],
+    }],
+  });
+
+  assert.equal(getArmyDrops(army), 2);
+});
+
 test("exports both selected battle tactics cards", () => {
   const text = formatArmyListText(list({
     battleTactics: [

@@ -777,6 +777,62 @@ body .aos-builder-tabs button { min-height: 60px; }
   font-weight: 800;
 }
 
+.aos-renown-drop {
+  margin-bottom: 20px;
+  padding: 16px;
+}
+
+.aos-renown-drop__title,
+.aos-renown-drop__subtitle {
+  margin: 0;
+}
+
+.aos-renown-drop__title {
+  color: #2f2922;
+  font-size: 20px;
+}
+
+.aos-renown-drop__subtitle {
+  margin-top: 4px;
+  color: #665f55;
+  font-size: 13px;
+}
+
+.aos-renown-drop__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aos-renown-drop__actions button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #8f6c2e;
+  border-radius: 3px;
+  color: #5a421b;
+  background: #f4ead5;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.aos-renown-drop__actions .aos-icon-delete {
+  width: 40px;
+  min-width: 40px;
+  padding: 0;
+  border-color: #5f120e;
+  color: #fff;
+  background: #891f18;
+}
+
+.aos-renown-drop__section-label {
+  margin: 18px 0 8px;
+  color: #665f55;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* Effective overrides for rules declared later in the legacy stylesheet. */
 :root {
   --aos-focus: #5f120e;

@@ -485,11 +485,13 @@ function RegimentSection({
   );
 }
 
-function UnitCard({
+export function UnitCard({
   unit,
   isLeader = false,
   points,
   models,
+  pointsLabel,
+  locked = false,
   onView,
   onConfigure,
   onRemove,
@@ -573,7 +575,7 @@ function UnitCard({
           {models === 1
             ? "miniatura"
             : "miniaturas"}{" "}
-          · {points} puntos
+          · {pointsLabel ?? `${points} puntos`}
           {baseSize ? ` · Peana ${baseSize}` : ""}
         </p>
 
@@ -600,7 +602,7 @@ function UnitCard({
         )}
       </div>
 
-      <div style={styles.actions}>
+      {!locked && <div style={styles.actions}>
         {!isUnique && (
           <button
             type="button"
@@ -636,7 +638,7 @@ function UnitCard({
             </button>
           </>
         )}
-      </div>
+      </div>}
     </article>
   );
 }

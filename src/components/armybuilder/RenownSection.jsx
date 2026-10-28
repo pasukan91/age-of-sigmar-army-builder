@@ -1,6 +1,7 @@
 import { MAX_REGIMENTS_OF_RENOWN } from "../../utils/armyComposition";
 import { getRegimentOrganisation } from "../../utils/regimentOfRenownReferences";
 import { getRegimentAbilityNames } from "../../utils/optionSummaries";
+import { UnitCard } from "./RegimentSection";
 import TrashIcon from "../TrashIcon";
 
 function formatOrganisation(regiment) {
@@ -29,7 +30,20 @@ function RegimentContents({ regiment }) {
   );
 }
 
-function RenownSection({ available, selected, onAdd, onRemove, onView }) {
+function getUnitModels(unit) {
+  const baseModels = Number(unit?.details?.models) || 1;
+  return unit?.reinforced ? baseModels * 2 : baseModels;
+}
+
+function RenownSection({
+  available,
+  selected,
+  regularRegimentCount = 0,
+  onAdd,
+  onRemove,
+  onView,
+  onViewUnit,
+}) {
   if (available.length === 0 && selected.length === 0) {
     return null;
   }
@@ -45,34 +59,71 @@ function RenownSection({ available, selected, onAdd, onRemove, onView }) {
         <p>Solo puedes incluir 1 Regimiento de Renombre en el ejército.</p>
       )}
 
-      {selected.map((regiment) => (
-        <article className="aos-renown-card aos-renown-card--selected" key={regiment.instanceId}>
-          <div>
-            <span className="aos-kicker">Incluido</span>
-            <h3>{regiment.name}</h3>
-            <RegimentContents regiment={regiment} />
-          </div>
-          <div className="aos-renown-card__actions">
-            <strong>{regiment.points} pts</strong>
-            <button
-              type="button"
-              className="aos-renown-card__view"
-              onClick={() => onView?.(regiment)}
-            >
-              Consultar
-            </button>
-            <button
-              type="button"
-              className="aos-icon-delete"
-              onClick={() => onRemove(regiment.instanceId)}
-              aria-label={`Eliminar ${regiment.name}`}
-              title="Eliminar regimiento de renombre"
-            >
-              <TrashIcon size={17} />
-            </button>
-          </div>
-        </article>
-      ))}
+      {selected.map((regiment, regimentIndex) => {
+        const units = Array.isArray(regiment.resolvedUnits)
+          ? regiment.resolvedUnits
+          : [];
+        const dropNumber = regularRegimentCount + regimentIndex + 1;
+
+        return (
+          <details
+            className="aos-regiment-card aos-renown-drop"
+            key={regiment.instanceId ?? regiment.id}
+            open
+          >
+            <summary className="aos-regiment-card__summary">
+              <div>
+                <h3 className="aos-renown-drop__title">Drop {dropNumber}</h3>
+                <p className="aos-renown-drop__subtitle">
+                  {regiment.name} · Regimiento de renombre
+                </p>
+              </div>
+              <span className="aos-regiment-card__overview">
+                {units.length} {units.length === 1 ? "unidad" : "unidades"} · {regiment.points} pts
+              </span>
+            </summary>
+
+            <div className="aos-regiment-card__body">
+              <header className="aos-regiment-card__actions">
+                <span>Composición cerrada · 1 drop</span>
+                <div className="aos-renown-drop__actions">
+                  <button
+                    type="button"
+                    className="aos-renown-card__view"
+                    onClick={() => onView?.(regiment)}
+                  >
+                    Reglas
+                  </button>
+                  <button
+                    type="button"
+                    className="aos-icon-delete"
+                    onClick={() => onRemove(regiment.instanceId)}
+                    aria-label={`Eliminar ${regiment.name}`}
+                    title="Eliminar regimiento de renombre"
+                  >
+                    <TrashIcon size={17} />
+                  </button>
+                </div>
+              </header>
+
+              <RegimentContents regiment={regiment} />
+
+              <p className="aos-renown-drop__section-label">Unidades del drop</p>
+              {units.map((unit) => (
+                <UnitCard
+                  key={unit.instanceId ?? unit.id}
+                  unit={unit}
+                  points={0}
+                  pointsLabel="incluida en el coste del drop"
+                  models={getUnitModels(unit)}
+                  locked
+                  onView={() => onViewUnit?.(unit)}
+                />
+              ))}
+            </div>
+          </details>
+        );
+      })}
 
       {available.length > 0 && (
         <details className="aos-renown-catalogue">

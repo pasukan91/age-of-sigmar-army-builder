@@ -490,8 +490,10 @@ function ArmyBuilder({
       <RenownSection
         available={eligibleRegimentsOfRenown}
         selected={getArray(list.regimentsOfRenown)}
+        regularRegimentCount={getArray(list.regiments).length}
         onAdd={onAddRegimentOfRenown}
         onRemove={onRemoveRegimentOfRenown}
+        onViewUnit={onViewWarscroll}
         onView={(regiment) => onViewRule?.(
           createRegimentOfRenownReference(regiment)
         )}
