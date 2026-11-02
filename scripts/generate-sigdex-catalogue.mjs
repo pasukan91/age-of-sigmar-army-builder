@@ -162,6 +162,7 @@ function upgrade(item, category, group, scourge, restrictionText) {
     .filter((token) => token.value);
   return {
     id: slug(item.name), sourceId: item.id, name: item.name, points: Number(item.points ?? 0),
+    ...(item.abilities?.[0]?.timing ? { phase: item.abilities[0].timing } : {}),
     description: abilities.map((entry) => entry.description).filter(Boolean).join("\n\n"), abilities,
     enhancementCategory: category, groupName: group || category, restrictionText: restriction,
     source: isAqshy(scourge) ? "Aqshy" : "Battletome",

@@ -8,6 +8,16 @@ export function getEnhancementTiming(enhancement) {
     return phase;
   }
 
+  const abilityTimings = [...new Set(
+    (Array.isArray(enhancement?.abilities) ? enhancement.abilities : [])
+      .map((ability) => String(ability?.phase ?? ability?.type ?? "").trim())
+      .filter((timing) => timing && !/^(?:passive|pasiva)$/i.test(timing))
+  )];
+
+  if (abilityTimings.length > 0) {
+    return abilityTimings.join(" · ");
+  }
+
   const type = String(enhancement?.type ?? "").trim();
 
   if (type && TIMING_PATTERN.test(type)) {
@@ -15,6 +25,12 @@ export function getEnhancementTiming(enhancement) {
   }
 
   const description = String(enhancement?.description ?? "").trim();
+
+  const reaction = description.match(/^reaction:\s*([^\n]+)/i);
+
+  if (reaction) {
+    return `Reaction: ${reaction[1].trim()}`;
+  }
 
   if (/^any hero phase:/i.test(description)) {
     return "Any Hero Phase";

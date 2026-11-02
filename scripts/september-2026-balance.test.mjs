@@ -71,7 +71,7 @@ test("includes the highlighted September rules changes", async () => {
     assert.equal(get("sylvaneth", "treelord").rules.canBeReinforced, false);
     assert.equal(get("khorne", "skull-cannon").rules.canBeReinforced, false);
 
-    assert.match(get("nighthaunt", "shadowy-aura").phase, /Redeploy/i);
+    assert.equal(get("nighthaunt", "shadowy-aura").phase, "Passive");
     assert.match(get("skaven", "lightning-master").description, /set the Attacks characteristic/i);
     assert.equal(get("skaven", "a-reputation-for-cunning").commandPoints, null);
     assert.match(get("fyreslayers", "blazing-impetus").description, /was not set up this turn/i);
