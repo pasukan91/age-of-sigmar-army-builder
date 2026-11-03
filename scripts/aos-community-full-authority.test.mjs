@@ -41,7 +41,10 @@ test("SigDex is authoritative for every active faction and builder restriction",
       for (const expected of source.units) {
         const actual = faction.units.find((item) => item.name === expected.name);
         assert.ok(actual, `${source.name}: ${expected.name}`);
-        assert.equal(actual.points, expected.points, `${expected.name}: points`);
+        const officialOctoberPoints = source.id === "skaven" && expected.id === "verminlord-corruptor"
+          ? 260
+          : expected.points;
+        assert.equal(actual.points, officialOctoberPoints, `${expected.name}: points`);
         assert.deepEqual(actual.profile, expected.profile, `${expected.name}: profile`);
         assert.equal(actual.details.models, expected.details.models, `${expected.name}: models`);
         assert.deepEqual(actual.details.regimentOptions, expected.details.regimentOptions, `${expected.name}: regiment options`);

@@ -990,7 +990,7 @@ export function getAvailableRegimentLeaders(list) {
 }
 
 export function canUnitLeadRegiment(list, unit, ignoredInstanceId = null) {
-  return unit?.rules?.hero === true &&
+  return (unit?.rules?.hero === true || unit?.rules?.canLeadRegimentAsHero === true) &&
     unit.rules?.canLeadRegiment !== false &&
     isMatchedPlayUnit(unit) &&
     !isUnitUniqueInArmy(list, unit, ignoredInstanceId) &&

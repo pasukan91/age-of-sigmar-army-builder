@@ -17,6 +17,7 @@ import daughters from "./daughters";
 import armiesOfRenownByFaction from "./rulesOfRenownArmies";
 import { normalizeFaction } from "./normalizeFaction";
 import { applyAosCommunityFactionData } from "./applyAosCommunityFactionData";
+import { applyOctober2026Balance } from "./applyOctober2026Balance";
 import {
   flesheater,
   idoneth,
@@ -75,7 +76,7 @@ const factions = [
     name: "Sons of Behemat",
   },
 ].map((localFaction) => {
-  const faction = applyAosCommunityFactionData(localFaction);
+  const faction = applyOctober2026Balance(applyAosCommunityFactionData(localFaction));
   const mergeUnique = (items) => [
     ...new Map(items.map((item) => [item?.sourceId ?? item?.id ?? item?.name, item])).values(),
   ];
