@@ -53,7 +53,67 @@ function patchOfficialItem(factionId, item) {
       : { ...item, phase: `Reaction: ${phase}`, balanceSource: PUBLICATION_DATE };
   }
 
+  if (factionId === "fyreslayers" && item.id === "scourge-of-aqshy-auric-runeson-on-magmadroth") {
+    return {
+      ...item,
+      keywords: replaceKeywords(item.keywords, {
+        FYRESLAYERS: "KHAZALITE HOLDS",
+        MAGMADROTH: "GRIMMDRON",
+      }),
+      balanceSource: PUBLICATION_DATE,
+    };
+  }
+
+  if (factionId === "fyreslayers" && item.id === "scourge-of-aqshy-vulkyn-flameseekers") {
+    return {
+      ...item,
+      keywords: replaceKeywords(item.keywords, { FYRESLAYERS: "KHAZALITE HOLDS" }),
+      balanceSource: PUBLICATION_DATE,
+    };
+  }
+
+  if (factionId === "fyreslayers" && [
+    "blazing-impetus",
+    "fury-of-vulcatrix",
+    "ichor-of-the-ur-salamander",
+  ].includes(item.id)) {
+    return patchRuleText(item, [
+      [/Fyreslayers/gi, "Grimmdron"],
+      [/Magmadroths?/gi, "Monsters"],
+    ]);
+  }
+
+  if (factionId === "fyreslayers" && [
+    "aureate-hide",
+    "intense-fyrestream",
+    "thickened-scales",
+  ].includes(item.id)) {
+    return {
+      ...patchRuleText(item, item.id === "aureate-hide"
+        ? [[/Fyreslayers/gi, "Khazalite Holds"]]
+        : []),
+      restrictionText: "Marks of Vulcatrix are unique enhancements that can be given to **GRIMMDRON MONSTERS**.",
+      balanceSource: PUBLICATION_DATE,
+    };
+  }
+
   return item;
+}
+
+function replaceKeywords(keywords = [], replacements) {
+  return keywords.map((keyword) => replacements[String(keyword).toUpperCase()] ?? keyword);
+}
+
+function patchRuleText(item, replacements) {
+  const patch = { ...item, balanceSource: PUBLICATION_DATE };
+  for (const field of ["description", "declare", "effect"]) {
+    if (typeof patch[field] !== "string") continue;
+    patch[field] = replacements.reduce(
+      (text, [pattern, replacement]) => text.replace(pattern, replacement),
+      patch[field],
+    );
+  }
+  return patch;
 }
 
 function patchChampionKeyword(item, championKeyword) {

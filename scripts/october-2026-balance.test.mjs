@@ -41,6 +41,17 @@ test("applies the official 28 October 2026 matched-play changes over SigDex", as
     assert.equal(twistweald.rules.canBeReinforced, true);
 
     assert.match(get("ogors", "eat-em-alive").description, /Faction Terrain.*Manifestations/i);
+
+    const aqshyRuneson = get("fyreslayers", "scourge-of-aqshy-auric-runeson-on-magmadroth");
+    assert.ok(aqshyRuneson.keywords.includes("KHAZALITE HOLDS"));
+    assert.ok(aqshyRuneson.keywords.includes("GRIMMDRON"));
+    assert.ok(!aqshyRuneson.keywords.includes("FYRESLAYERS"));
+    assert.ok(!aqshyRuneson.keywords.includes("MAGMADROTH"));
+
+    const aqshyFlameseekers = get("fyreslayers", "scourge-of-aqshy-vulkyn-flameseekers");
+    assert.ok(aqshyFlameseekers.keywords.includes("KHAZALITE HOLDS"));
+    assert.match(get("fyreslayers", "blazing-impetus").description, /GRIMMDRON/i);
+    assert.match(get("fyreslayers", "aureate-hide").restrictionText, /GRIMMDRON MONSTERS/i);
   } finally {
     await server.close();
   }
