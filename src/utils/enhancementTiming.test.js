@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { getEnhancementTiming, withEnhancementTiming } from "./enhancementTiming.js";
+import {
+  getEnhancementAbilities,
+  getEnhancementTiming,
+  withEnhancementTiming,
+} from "./enhancementTiming.js";
 
 test("uses the timing of the SigDex ability nested inside an enhancement", () => {
   const abyssalDweller = {
@@ -41,4 +45,22 @@ test("does not let a generic nested Passive hide a specific textual reaction", (
     }),
     /Redeploy/i
   );
+});
+
+test("gives every nested enhancement ability its own timing", () => {
+  const abilities = getEnhancementAbilities({
+    id: "many-faces",
+    name: "Many Faces",
+    abilities: [
+      { id: "hidden-blade", name: "Hidden Blade", phase: "Any Combat Phase" },
+      { name: "Sudden Escape", description: "Reaction: Opponent declared a Fight ability." },
+      { name: "Uncanny Resilience", description: "Effect: This unit has Ward (6+)." },
+    ],
+  });
+
+  assert.deepEqual(
+    abilities.map((ability) => ability.phase),
+    ["Any Combat Phase", "Reaction: Opponent declared a Fight ability.", "Passive"],
+  );
+  assert.equal(abilities[1].id, "many-faces-ability-2");
 });

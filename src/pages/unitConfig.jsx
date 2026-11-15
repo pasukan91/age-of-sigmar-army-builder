@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import BackButton from "../components/BackButton";
+import AbilityCard from "../components/AbilityCard";
 import ChevronIcon from "../components/ChevronIcon";
 import FormattedRulesText from "../components/FormattedRulesText";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
@@ -11,7 +12,10 @@ import {
   getSpecialEnhancementGroups,
   hasAuthoritativeEnhancementEligibility,
 } from "../utils/enhancementRules";
-import { getEnhancementTiming } from "../utils/enhancementTiming";
+import {
+  getEnhancementAbilities,
+  getEnhancementTiming,
+} from "../utils/enhancementTiming";
 import { isUniqueUnit } from "../utils/unitIdentity";
 
 function UnitConfig({
@@ -692,6 +696,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -735,6 +740,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -777,6 +783,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -810,6 +817,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -848,6 +856,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -889,6 +898,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -930,6 +940,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -962,6 +973,7 @@ function UnitConfig({
                 <CheckboxOption
                   key={option.id}
                   title={`${option.name} · ${option.points} pts`}
+                  enhancement={option}
                   description={option.description}
                   lore={option.lore}
                   source={option.source}
@@ -1265,6 +1277,7 @@ function SelectionSection({
       {options.map((option) => (
         <CheckboxOption
           key={option.id}
+          enhancement={option}
           title={
             Number(option.points) > 0
               ? `${option.name} · ${option.points} pts`
@@ -1291,6 +1304,7 @@ function SelectionSection({
 
 function CheckboxOption({
   title,
+  enhancement,
   description,
   lore,
   phase,
@@ -1300,6 +1314,8 @@ function CheckboxOption({
   onChange,
 }) {
   const [open, setOpen] = useState(false);
+  const timing = phase ?? (enhancement ? getEnhancementTiming(enhancement) : null);
+  const abilities = getEnhancementAbilities(enhancement);
 
   return (
     <article
@@ -1328,9 +1344,9 @@ function CheckboxOption({
               {title}
             </strong>
 
-            {phase && (
+            {timing && (
               <span className="aos-config-option-phase">
-                {phase}
+                {timing}
               </span>
             )}
 
@@ -1371,9 +1387,16 @@ function CheckboxOption({
         </label>
       </div>
 
-      {open && (description || lore) && (
+      {open && (description || lore || abilities.length > 0) && (
         <div className="aos-config-option-description">
-          <RuleCopyBlocks lore={lore} rule={description} />
+          <RuleCopyBlocks lore={lore} rule={abilities.length > 0 ? null : description} />
+          {abilities.length > 0 && (
+            <div className="aos-config-option-abilities" aria-label={`Habilidades de ${enhancement.name}`}>
+              {abilities.map((ability) => (
+                <AbilityCard ability={ability} key={ability.id} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </article>

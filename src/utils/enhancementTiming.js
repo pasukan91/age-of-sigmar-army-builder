@@ -69,3 +69,14 @@ export function withEnhancementTiming(enhancement) {
     phase: getEnhancementTiming(enhancement),
   };
 }
+
+export function getEnhancementAbilities(enhancement) {
+  if (!Array.isArray(enhancement?.abilities)) return [];
+
+  return enhancement.abilities.map((ability, index) => ({
+    ...ability,
+    id: ability?.id ?? `${enhancement?.id ?? "enhancement"}-ability-${index + 1}`,
+    name: String(ability?.name ?? enhancement?.name ?? "Habilidad").trim() || "Habilidad",
+    phase: getEnhancementTiming({ ...ability, abilities: [] }),
+  }));
+}

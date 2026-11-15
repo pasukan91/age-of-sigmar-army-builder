@@ -3921,6 +3921,19 @@ body {
   margin: 0 !important;
 }
 
+.aos-config-option-abilities {
+  display: grid;
+  gap: 10px;
+}
+
+.aos-config-option-description .aos-rule-copy-group + .aos-config-option-abilities {
+  margin-top: 12px;
+}
+
+.aos-config-option-abilities .aos-ability-card {
+  margin: 0;
+}
+
 .aos-visually-hidden {
   position: absolute;
   width: 1px;
