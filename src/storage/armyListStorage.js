@@ -6,11 +6,6 @@ import {
   ghb2026BattleTactics,
   ghb2026BattleTacticsCards,
 } from "../data/ghb2026";
-import {
-  limitBattleLogEntries,
-  truncateBattleLogText,
-} from "../utils/battleLogLimits";
-import { normalizeBattleUnitStates } from "../utils/battleUnitState";
 
 const STORAGE_KEY = "storm-forge.army-lists.v1";
 const RECOVERY_STORAGE_KEY = "storm-forge.army-lists.recovery";
@@ -245,8 +240,6 @@ function serializeList(list) {
     factionId: list.faction?.id ?? list.factionId ?? null,
     armyOfRenown: list.armyOfRenown ?? null,
     pointsLimit: list.pointsLimit,
-    commandPoints: Math.max(0, Number(list.commandPoints) || 0),
-    furyPoints: Math.min(7, Math.max(0, Number(list.furyPoints) || 0)),
     battleFormation: list.battleFormation ?? null,
     battleplan: list.battleplan ?? null,
     spellLore: list.spellLore ?? null,
@@ -257,13 +250,6 @@ function serializeList(list) {
       : list.battleTactics
         ? [list.battleTactics]
         : []).slice(0, 2),
-    completedBattleMissions: (Array.isArray(list.completedBattleMissions)
-      ? list.completedBattleMissions
-      : []).filter((missionId) => typeof missionId === "string"),
-    battleRound: Math.min(5, Math.max(1, Number(list.battleRound) || 1)),
-    battleTurnActor: list.battleTurnActor === "opponent" ? "opponent" : "self",
-    battleLog: serializeBattleLog(list.battleLog),
-    battleUnitStates: normalizeBattleUnitStates(list.battleUnitStates),
     terrain: list.terrain ?? null,
     regiments: (list.regiments ?? []).map((regiment) => ({
       id: regiment.id,
@@ -345,12 +331,6 @@ function restoreList(savedList) {
     faction,
     armyOfRenown,
     pointsLimit: Number(savedList.pointsLimit) || 2000,
-    commandPoints: Number.isFinite(Number(savedList.commandPoints))
-      ? Math.max(0, Number(savedList.commandPoints))
-      : 4,
-    furyPoints: Number.isFinite(Number(savedList.furyPoints))
-      ? Math.min(7, Math.max(0, Number(savedList.furyPoints)))
-      : 0,
     battleFormation: restoreOption(
       savedList.battleFormation,
       effectiveFaction.battleFormations
@@ -372,13 +352,6 @@ function restoreList(savedList) {
       effectiveFaction.manifestationLores
     ),
     battleTactics: restoreBattleTacticsCards(savedList.battleTactics),
-    completedBattleMissions: (Array.isArray(savedList.completedBattleMissions)
-      ? savedList.completedBattleMissions
-      : []).filter((missionId) => typeof missionId === "string"),
-    battleRound: Math.min(5, Math.max(1, Number(savedList.battleRound) || 1)),
-    battleTurnActor: savedList.battleTurnActor === "opponent" ? "opponent" : "self",
-    battleLog: restoreBattleLog(savedList.battleLog),
-    battleUnitStates: normalizeBattleUnitStates(savedList.battleUnitStates),
     terrain: restoreOption(
       savedList.terrain,
       effectiveFaction.terrain
@@ -406,45 +379,6 @@ function restoreList(savedList) {
     updatedAt: savedList.updatedAt ?? savedList.createdAt ?? Date.now(),
     preset: savedList.preset ?? null,
   };
-}
-
-function serializeBattleLog(value) {
-  return limitBattleLogEntries(value)
-    .map(normalizeBattleLogEntry)
-    .filter(Boolean);
-}
-
-function restoreBattleLog(value) {
-  return serializeBattleLog(value);
-}
-
-function normalizeBattleLogEntry(entry) {
-  if (!entry || typeof entry !== "object" || !entry.id || !entry.label) {
-    return null;
-  }
-
-  return {
-    id: String(entry.id),
-    actionId: entry.actionId ? truncateBattleLogText(entry.actionId) : "",
-    actor: entry.actor === "opponent" ? "opponent" : "self",
-    label: truncateBattleLogText(entry.label),
-    result: truncateBattleLogText(entry.result),
-    note: truncateBattleLogText(entry.note),
-    values: normalizeBattleLogValues(entry.values),
-    round: Math.min(5, Math.max(1, Number(entry.round) || 1)),
-    createdAt: Number(entry.createdAt) || Date.now(),
-  };
-}
-
-function normalizeBattleLogValues(value) {
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
-    return {};
-  }
-
-  return Object.fromEntries(
-    Object.entries(value)
-      .filter(([, item]) => typeof item === "string" || typeof item === "number")
-  );
 }
 
 function enforceSingleArmyTraits(regiments) {
@@ -495,8 +429,6 @@ function hasInvalidListShape(savedList) {
     "regiments",
     "regimentsOfRenown",
     "auxiliaries",
-    "battleLog",
-    "completedBattleMissions",
   ];
 
   if (arrayFields.some(

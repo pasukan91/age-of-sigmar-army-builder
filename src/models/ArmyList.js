@@ -33,10 +33,6 @@ export function createArmyList({
 
     pointsLimit,
 
-    commandPoints: 4,
-
-    furyPoints: 0,
-
     armyOfRenown,
 
     battleFormation: null,
@@ -50,14 +46,6 @@ export function createArmyList({
     manifestationLore: null,
 
     battleTactics: [],
-
-    battleRound: 1,
-
-    battleTurnActor: "self",
-
-    battleLog: [],
-
-    battleUnitStates: {},
 
     terrain: null,
 
