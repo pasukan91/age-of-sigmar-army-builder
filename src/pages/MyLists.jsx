@@ -1,8 +1,7 @@
 import { useState } from "react";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
-import TrashIcon from "../components/TrashIcon";
-import { calculateArmyPoints } from "../utils/armyPoints";
+import OfficialIcon from "../components/OfficialIcon";
 import { validateArmyList } from "../utils/armyValidation";
 import {
   getFactionArtwork,
@@ -16,7 +15,6 @@ function MyLists({
   storageStatus = "saved",
   onLists,
   onCreate,
-  onCreatePredefined,
   onImportList,
   onSettings,
   onRules,
@@ -27,6 +25,7 @@ function MyLists({
   const [importText, setImportText] = useState("");
   const [importResult, setImportResult] = useState(null);
   const [importError, setImportError] = useState("");
+  const shellArtwork = getFactionArtwork(lists[0]?.faction);
 
   function handleImport() {
     setImportError("");
@@ -42,8 +41,11 @@ function MyLists({
   }
 
   return (
-    <main className="aos-shell aos-official-page aos-storm-forge-home">
-      <header className="aos-screen-header aos-official-header">
+    <main
+      className="aos-shell aos-official-page aos-storm-forge-home"
+      style={shellArtwork ? { "--official-storm-art": `url("${shellArtwork}")` } : undefined}
+    >
+      <header className="aos-screen-header aos-official-header aos-official-header--root">
         <span aria-hidden="true" />
         <h1 className="aos-screen-header__title">STORM FORGE</h1>
         <span aria-hidden="true" />
@@ -135,11 +137,8 @@ function MyLists({
         {lists.length === 0 ? (
           <div className="aos-empty-message aos-empty-message--actionable">
             <strong>Empieza tu primer ejército</strong>
-            <button type="button" className="aos-primary-action" onClick={onCreatePredefined}>
-              Crear lista predefinida
-            </button>
             <button type="button" className="aos-secondary-action" onClick={onCreate}>
-              Empezar desde cero
+              Create Army
             </button>
           </div>
         ) : (
@@ -204,8 +203,14 @@ function MyLists({
                       </span>
 
                       <span className="aos-list-card__points">
-                        {calculateArmyPoints(list)} / {list.pointsLimit} pts
+                        {Number(list.pointsLimit ?? 2000).toLocaleString("es-ES")} Points
                       </span>
+
+                      {validation.errors.length > 0 && (
+                        <span className="aos-list-card__warning" aria-label="List has errors">
+                          <OfficialIcon name="warning" size={22} strokeWidth={2.6} />
+                        </span>
+                      )}
 
                       <span
                         className="aos-list-card__arrow"
@@ -222,7 +227,7 @@ function MyLists({
                       aria-label={`Eliminar la lista ${list.name}`}
                       title="Eliminar lista"
                     >
-                      <TrashIcon />
+                      <OfficialIcon name="menu" size={28} strokeWidth={3} />
                     </button>
                   </article>
                 );
@@ -243,7 +248,7 @@ function MyLists({
         className="aos-official-fab"
         onClick={onCreate}
         aria-label="Create army"
-      >+</button>
+      ><OfficialIcon name="plus" size={39} strokeWidth={3} /></button>
 
       <MainNav
         active="storm-forge"

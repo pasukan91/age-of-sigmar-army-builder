@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import MainNav from "../components/MainNav";
+import OfficialIcon from "../components/OfficialIcon";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
@@ -78,9 +79,12 @@ function ArmyBuilder({
   return (
     <main className="aos-official-page aos-official-builder">
       <header className="aos-official-header">
-        <button type="button" onClick={onBack} aria-label="Back">‹</button>
+        <button type="button" onClick={onBack} aria-label="Back"><OfficialIcon name="back" size={25} strokeWidth={2.5} /></button>
         <h1>{list?.name ?? "STORM FORGE"}</h1>
-        <span aria-hidden="true">⋮</span>
+        <div className="aos-official-header__actions">
+          <OfficialIcon name="profile" size={28} strokeWidth={1.8} />
+          <OfficialIcon name="menu" size={28} strokeWidth={2.4} />
+        </div>
       </header>
 
       {artwork && (
@@ -90,14 +94,11 @@ function ArmyBuilder({
             "--official-faction-art": `url("${artwork}")`,
             "--official-faction-position": getFactionArtworkPosition(baseFaction, "builder") ?? "center",
           }}
-        >
-          <span>{baseFaction.name}</span>
-          <strong>{list.armyOfRenown?.name ?? list.battleFormation?.name ?? "No Battle Formation"}</strong>
-        </div>
+        />
       )}
 
       <div className="aos-official-builder-content">
-        <OfficialSection title="Regiments" open action="+">
+        <OfficialSection title="Regiments" open action="plus">
           <RegimentSection
             list={list}
             setSelector={setSelector}
@@ -110,7 +111,7 @@ function ArmyBuilder({
           />
         </OfficialSection>
 
-        <OfficialSection title="Regiments of Renown" action="+">
+        <OfficialSection title="Regiments of Renown" action="plus">
           <RenownSection
             available={eligibleRegimentsOfRenown}
             selected={list.regimentsOfRenown ?? []}
@@ -124,7 +125,7 @@ function ArmyBuilder({
 
         <OfficialSection
           title="Auxiliary Units"
-          action="+"
+          action="plus"
           onAction={() => openSelector({
             title: "Add Auxiliary Unit",
             property: "newAuxiliary",
@@ -142,7 +143,7 @@ function ArmyBuilder({
           </div>
         </OfficialSection>
 
-        <OfficialSection title="Lores" action="⚙">
+        <OfficialSection title="Lores" action="settings">
           <div className="aos-official-selection-list">
             {selectionGroups.map((group) => (
               <button
@@ -156,7 +157,7 @@ function ArmyBuilder({
           </div>
         </OfficialSection>
 
-        <OfficialSection title="Battle Tactics" action="⚙">
+        <OfficialSection title="Battle Tactics" action="settings">
           <button
             type="button"
             className="aos-official-current-selection"
@@ -172,7 +173,7 @@ function ArmyBuilder({
         </OfficialSection>
 
         {(faction.terrain ?? []).length > 0 && (
-          <OfficialSection title="Faction Terrain" action="⚙">
+          <OfficialSection title="Faction Terrain" action="settings">
             <button
               type="button"
               className="aos-official-current-selection"
@@ -199,7 +200,7 @@ function ArmyBuilder({
         className={`aos-official-points${validation.errors.length ? " is-invalid" : ""}`}
         onClick={() => setValidationExpanded((open) => !open)}
       >
-        <span>{validation.errors.length ? "!" : "✓"}</span>
+        <span>{validation.errors.length ? <OfficialIcon name="warning" size={24} strokeWidth={2.4} /> : "✓"}</span>
         <strong>{points}/{pointsLimit}</strong>
         <small>POINTS</small>
       </button>
@@ -218,14 +219,14 @@ function OfficialSection({ title, action, onAction, open = false, children }) {
   return (
     <details className="aos-official-builder-section" open={open}>
       <summary>
-        <span className="aos-official-builder-section__chevron" aria-hidden="true">⌄</span>
+        <span className="aos-official-builder-section__chevron" aria-hidden="true"><OfficialIcon name="chevronDown" size={19} strokeWidth={3} /></span>
         <strong>{title}</strong>
         {action && (
           <button
             type="button"
             onClick={(event) => { event.preventDefault(); onAction?.(); }}
             aria-label={`${title} options`}
-          >{action}</button>
+          ><OfficialIcon name={action} size={action === "plus" ? 32 : 24} strokeWidth={2.8} /></button>
         )}
       </summary>
       <div>{children}</div>

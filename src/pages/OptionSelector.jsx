@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Accordion from "../components/Accordion";
-import BackButton from "../components/BackButton";
+import MainNav from "../components/MainNav";
+import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import { getManifestationLoreContents } from "../utils/optionSummaries";
@@ -15,8 +16,12 @@ function OptionSelector({
   maxSelections = 1,
   variant,
   onToggle,
+  onRules,
+  onLists,
+  onSettings,
 }) {
   const [query, setQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const [unitGroup, setUnitGroup] = useState("all");
   const isMultiSelect = maxSelections > 1;
   const selectedIds = new Set(selectedOptions.map((option) => option.id));
@@ -71,20 +76,37 @@ function OptionSelector({
   }
 
   return (
-    <main className="aos-shell">
-      <header className="aos-screen-header">
-        <BackButton
-          onClick={goBack}
-          light
-          compact
-        />
+    <main className="aos-shell aos-official-page aos-official-selector">
+      <header className="aos-screen-header aos-official-header">
+        <button type="button" onClick={goBack} aria-label="Back">
+          <OfficialIcon name="back" size={25} strokeWidth={2.5} />
+        </button>
 
         <h1 className="aos-screen-header__title">
           {title}
         </h1>
 
-        <span aria-hidden="true" />
+        <button
+          type="button"
+          className="aos-official-search-button"
+          onClick={() => setSearchOpen((open) => !open)}
+          aria-label="Search"
+        >
+          <OfficialIcon name="search" size={25} strokeWidth={2.5} />
+        </button>
       </header>
+
+      {searchOpen && (
+        <div className="aos-official-search">
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search…"
+            autoFocus
+          />
+        </div>
+      )}
 
       <div className="aos-screen-content">
         <div className="aos-form-intro">
@@ -206,11 +228,8 @@ function OptionSelector({
                       {option.name}
                     </h3>
 
-                    {typeof option.points ===
-                      "number" && (
-                      <span className="aos-option-card__points">
-                        {option.points} puntos
-                      </span>
+                    {typeof option.points === "number" && (
+                      <span className="aos-option-card__points">{option.points}pts</span>
                     )}
 
                     {canReceiveAqshyObsession(option) && (
@@ -255,13 +274,13 @@ function OptionSelector({
                         aria-pressed={isMultiSelect ? isSelected : undefined}
                         aria-label={`${isSelected ? "Quitar" : "Seleccionar"} ${option.name}`}
                       >
-                        {isSelected ? "Seleccionada" : "Seleccionar"}
+                        {isSelected ? "✓" : <OfficialIcon name="plus" size={31} strokeWidth={3} />}
                       </button>
                     )}
                   </div>
                 </div>
 
-                {(description || option.lore) && (
+                {variant !== "units" && (description || option.lore) && (
                   <div style={{ marginTop: 14 }}>
                     <Accordion title="Descripción">
                       <RuleCopyBlocks lore={option.lore} rule={description} />
@@ -269,7 +288,7 @@ function OptionSelector({
                   </div>
                 )}
 
-                {manifestationNames.length > 0 && (
+                {variant !== "units" && manifestationNames.length > 0 && (
                   <div className="aos-option-card__contents">
                     <strong>
                       Incluye {manifestationNames.length} {manifestationNames.length === 1 ? "manifestación" : "manifestaciones"}
@@ -297,6 +316,13 @@ function OptionSelector({
           </div>
         )}
       </div>
+
+      <MainNav
+        active="storm-forge"
+        onReference={onRules}
+        onStormForge={onLists}
+        onProfile={onSettings}
+      />
     </main>
   );
 }

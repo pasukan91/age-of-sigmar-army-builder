@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import MainNav from "../components/MainNav";
+import OfficialIcon from "../components/OfficialIcon";
 import UnitArtwork from "../components/UnitArtwork";
 import factions from "../data/factions";
 import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
@@ -55,9 +56,9 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
 
   return (
     <main className="aos-official-page aos-reference-home">
-      <header className="aos-official-header">
+      <header className={`aos-official-header${view === "root" ? " aos-official-header--root" : ""}`}>
         {view === "root" ? <span aria-hidden="true" /> : (
-          <button type="button" onClick={goBack} aria-label="Back">‹</button>
+          <button type="button" onClick={goBack} aria-label="Back"><OfficialIcon name="back" size={25} strokeWidth={2.5} /></button>
         )}
         <h1>{title}</h1>
         <button
@@ -66,7 +67,7 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
           onClick={() => setSearchOpen((open) => !open)}
           aria-label="Search"
           aria-expanded={searchOpen}
-        >⌕</button>
+        ><OfficialIcon name="search" size={25} strokeWidth={2.6} /></button>
       </header>
 
       {searchOpen && (
@@ -102,7 +103,7 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
                   type="button"
                   onClick={document === "Core Documents" ? onRules : undefined}
                 >
-                  <strong>{document}</strong><span aria-hidden="true">›</span>
+                  <strong>{document}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
                 </button>
               ))}
             </section>
@@ -110,7 +111,7 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
             <section className="aos-official-link-list">
               {visibleFactions.map((item) => (
                 <button key={item.id} type="button" onClick={() => openFaction(item)}>
-                  <strong>{item.name}</strong><span aria-hidden="true">›</span>
+                  <strong>{item.name}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
                 </button>
               ))}
             </section>
@@ -120,21 +121,21 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
         {view === "faction" && (
           <section className="aos-official-link-list">
             <button type="button" onClick={() => setView("book")}>
-              <strong>Battletome: {faction.name}</strong><span aria-hidden="true">›</span>
+              <strong>Battletome: {faction.name}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
             <button type="button" onClick={() => setView("book")}>
-              <strong>Scourge of Aqshy: {faction.name}</strong><span aria-hidden="true">›</span>
+              <strong>Scourge of Aqshy: {faction.name}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
             <button type="button" onClick={() => setView("book")}>
-              <strong>Scourge of Ghyran: {faction.name}</strong><span aria-hidden="true">›</span>
+              <strong>Scourge of Ghyran: {faction.name}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
             {(faction.armiesOfRenown ?? []).length > 0 && (
               <button type="button" onClick={() => setView("book")}>
-                <strong>{faction.name} Rules of Renown</strong><span aria-hidden="true">›</span>
+                <strong>{faction.name} Rules of Renown</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
               </button>
             )}
             <button type="button" onClick={() => setView("book")}>
-              <strong>Spearhead Armies</strong><span aria-hidden="true">›</span>
+              <strong>Spearhead Armies</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
           </section>
         )}
@@ -142,13 +143,13 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
         {view === "book" && (
           <section className="aos-official-link-list">
             <button type="button" onClick={() => setView("warscrolls")}>
-              <strong>Warscrolls</strong><span aria-hidden="true">›</span>
+              <strong>Warscrolls</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
             <button type="button" onClick={() => setView("warscrolls")}>
-              <strong>Battle Profiles</strong><span aria-hidden="true">›</span>
+              <strong>Battle Profiles</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
             <button type="button" onClick={onRules}>
-              <strong>Army Rules</strong><span aria-hidden="true">›</span>
+              <strong>Army Rules</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
             </button>
           </section>
         )}

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import BackButton from "../components/BackButton";
 import FormattedRulesText from "../components/FormattedRulesText";
 import MainNav from "../components/MainNav";
+import OfficialIcon from "../components/OfficialIcon";
 import rules from "../data/sigdexRules.generated.json";
 
 function RulesReference({ onBack, onReference, onLists, onSettings }) {
@@ -17,7 +17,9 @@ function RulesReference({ onBack, onReference, onLists, onSettings }) {
   return (
     <main className="aos-page aos-rules-browser aos-official-page">
       <header className="aos-topbar aos-official-header">
-        <BackButton onClick={onBack} />
+        <button type="button" onClick={onBack} aria-label="Back">
+          <OfficialIcon name="back" size={25} strokeWidth={2.5} />
+        </button>
         <h1 className="aos-topbar__title">CORE DOCUMENTS</h1>
         <span aria-hidden="true" />
       </header>

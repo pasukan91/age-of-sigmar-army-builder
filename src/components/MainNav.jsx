@@ -1,3 +1,5 @@
+import OfficialIcon from "./OfficialIcon";
+
 function MainNav({
   active,
   onReference,
@@ -11,19 +13,19 @@ function MainNav({
     {
       id: "reference",
       label: "Reference",
-      icon: "▤",
+      icon: "reference",
       onClick: onReference ?? onRules,
     },
     {
       id: "storm-forge",
       label: "Storm Forge",
-      icon: "✺",
+      icon: "forge",
       onClick: onStormForge ?? onLists,
     },
     {
       id: "profile",
       label: "Profile",
-      icon: "◎",
+      icon: "profile",
       onClick: onProfile ?? onSettings,
     },
   ];
@@ -39,8 +41,8 @@ function MainNav({
           disabled={!item.onClick}
           aria-current={active === item.id ? "page" : undefined}
         >
-          <span aria-hidden="true">{item.icon}</span>
-          {item.label}
+          <OfficialIcon name={item.icon} size={25} strokeWidth={1.7} />
+          <strong>{item.label}</strong>
         </button>
       ))}
     </nav>

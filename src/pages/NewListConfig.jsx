@@ -1,9 +1,5 @@
-import BackButton from "../components/BackButton";
-import StepProgress from "../components/StepProgress";
-
-import {
-  createArmyList,
-} from "../models/ArmyList";
+import OfficialIcon from "../components/OfficialIcon";
+import { createArmyList } from "../models/ArmyList";
 
 function NewListConfig({
   army,
@@ -14,147 +10,69 @@ function NewListConfig({
   onListCreated,
   onBack,
 }) {
-  const suggestedName = `${army.faction?.name ?? "Age of Sigmar"} · ${army.points} pts`;
+  const suggestedName = army.faction?.name ?? "New Army";
 
   function handleCreateList() {
-    if (!army.faction) {
-      window.alert(
-        "Debes seleccionar una facción."
-      );
-
-      return;
-    }
-
+    if (!army.faction) return;
     const newList = createArmyList({
-      name:
-        army.name.trim() ||
-        suggestedName,
-
+      name: army.name.trim() || suggestedName,
       faction: army.faction,
       alliance: army.alliance,
       pointsLimit: army.points,
       armyOfRenown: army.armyOfRenown,
     });
-
-    setLists((previousLists) => [
-      ...previousLists,
-      newList,
-    ]);
-
+    setLists((previousLists) => [...previousLists, newList]);
     setCurrentList(newList);
     onListCreated?.();
     setPage("builder", { listId: newList.id, resetToLists: true });
   }
 
   return (
-    <main className="aos-shell">
-      <header className="aos-screen-header">
-        <BackButton
-          onClick={onBack}
-          light
-          compact
-        />
-
-        <h1 className="aos-screen-header__title">
-          Nueva lista
-        </h1>
-
+    <main className="aos-official-page aos-create-config-page">
+      <header className="aos-official-header">
+        <button type="button" onClick={onBack} aria-label="Back">
+          <OfficialIcon name="back" size={25} strokeWidth={2.5} />
+        </button>
+        <h1>CREATE ARMY</h1>
         <span aria-hidden="true" />
       </header>
 
-      <div className="aos-screen-content">
-        <header className="aos-form-intro">
-          <StepProgress
-            steps={["Alianza", "Facción", "Tipo", "Detalles"]}
-            current={4}
+      <section className="aos-create-config-content">
+        <h2>ARMY DETAILS</h2>
+
+        <div className="aos-create-summary">
+          <span>Faction</span>
+          <strong>{army.faction?.name}</strong>
+        </div>
+
+        <label className="aos-create-field">
+          <span>Army Name</span>
+          <input
+            autoFocus
+            type="text"
+            maxLength={80}
+            value={army.name}
+            placeholder={suggestedName}
+            onChange={(event) => setArmy((previous) => ({ ...previous, name: event.target.value }))}
           />
-          <p className="aos-kicker">
-            Storm Forge
-          </p>
+        </label>
 
-          <h2 className="aos-heading">
-            {army.faction?.name ??
-              "Selecciona una facción"}
-          </h2>
-        </header>
+        <label className="aos-create-field">
+          <span>Points Limit</span>
+          <select
+            value={army.points}
+            onChange={(event) => setArmy((previous) => ({ ...previous, points: Number(event.target.value) }))}
+          >
+            {[1000, 1500, 2000, 2500, 3000].map((points) => (
+              <option key={points} value={points}>{points.toLocaleString("en-GB")} Points</option>
+            ))}
+          </select>
+        </label>
 
-        <section className="aos-panel aos-form-panel">
-          <div className="aos-new-list-summary" aria-label="Tipo de ejército elegido">
-            <span>Tipo de ejército</span>
-            <strong>{army.armyOfRenown?.name ?? `Ejército estándar — ${army.faction?.name}`}</strong>
-          </div>
-
-          <label className="aos-field">
-            <span className="aos-field__label">
-              Nombre de la lista
-            </span>
-
-            <input
-              autoFocus
-              type="text"
-              maxLength={80}
-              value={army.name}
-              placeholder={suggestedName}
-              onChange={(event) =>
-                setArmy((previousArmy) => ({
-                  ...previousArmy,
-                  name: event.target.value,
-                }))
-              }
-              className="aos-field__control"
-            />
-          </label>
-
-          <label className="aos-field">
-            <span className="aos-field__label">
-              Límite de puntos
-            </span>
-
-            <select
-              value={army.points}
-              onChange={(event) =>
-                setArmy((previousArmy) => ({
-                  ...previousArmy,
-
-                  points: Number(
-                    event.target.value
-                  ),
-                }))
-              }
-              className="aos-field__control"
-            >
-              <option value={1000}>
-                1000 puntos
-              </option>
-
-              <option value={1500}>
-                1500 puntos
-              </option>
-
-              <option value={2000}>
-                2000 puntos
-              </option>
-
-              <option value={2500}>
-                2500 puntos
-              </option>
-
-              <option value={3000}>
-                3000 puntos
-              </option>
-            </select>
-          </label>
-        </section>
-
-        <button
-          type="button"
-          onClick={handleCreateList}
-          className="aos-primary-action"
-          style={{ marginTop: 16 }}
-        >
-          Crear lista
+        <button type="button" className="aos-create-submit" onClick={handleCreateList}>
+          CREATE ARMY
         </button>
-      </div>
+      </section>
     </main>
   );
 }

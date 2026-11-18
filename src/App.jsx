@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 import Home from "./pages/Home";
 import MyLists from "./pages/MyLists";
-import SelectAlliance from "./pages/SelectAlliance";
 import SelectFaction from "./pages/SelectFaction";
 import NewListConfig from "./pages/NewListConfig";
 import ArmyBuilder from "./pages/Armybuilder";
@@ -11,7 +10,6 @@ import UnitWarscroll from "./pages/unitWarscroll";
 import UnitConfig from "./pages/unitConfig";
 import RuleWarscroll from "./pages/RuleWarscroll";
 import Settings from "./pages/Settings";
-import PredefinedLists from "./pages/PredefinedLists";
 import RulesReference from "./pages/RulesReference";
 import ReferenceOverlay from "./components/ReferenceOverlay";
 import factions from "./data/factions";
@@ -53,10 +51,8 @@ const INITIAL_ARMY = {
 const PAGE_TITLES = {
   home: "Inicio",
   lists: "Mis listas",
-  predefined: "Listas predefinidas",
   settings: "Ayuda y datos",
   rules: "Reglas y FAQ",
-  alliance: "Elige alianza",
   faction: "Elige facción",
   config: "Nueva lista",
   builder: "Constructor",
@@ -495,24 +491,6 @@ function App() {
    * =====================================================
    */
 
-  function handleSelectAlliance(
-    selectedAlliance
-  ) {
-    if (!selectedAlliance) {
-      return;
-    }
-
-    setArmy((previousArmy) => ({
-      ...previousArmy,
-      alliance:
-        selectedAlliance,
-      faction: null,
-      armyOfRenown: null,
-    }));
-
-    navigate("faction");
-  }
-
   function handleSelectFaction(
     selectedFaction,
     armyOfRenown = null
@@ -523,6 +501,7 @@ function App() {
 
     setArmy((previousArmy) => ({
       ...previousArmy,
+      alliance: alliances.find((item) => item.id === selectedFaction.alliance) ?? null,
       faction:
         selectedFaction,
       armyOfRenown,
@@ -1840,7 +1819,7 @@ function App() {
 
   function startNewList() {
     resetNewArmy();
-    navigate("alliance", { listId: null });
+    navigate("faction", { listId: null });
   }
 
   function openLists() {
@@ -1853,22 +1832,6 @@ function App() {
 
   function openRules() {
     navigate("rules", { listId: null });
-  }
-
-  function openPredefinedLists() {
-    navigate("predefined", { listId: null });
-  }
-
-  function handleCreatePredefinedList(newList) {
-    if (!newList) return;
-
-    setLists((previousLists) => [...previousLists, newList]);
-    setCurrentList(newList);
-    setSelectedUnit(null);
-    setUnitEditor(null);
-    resetSelector();
-    setBuilderSection("units");
-    navigate("builder", { listId: newList.id, resetToLists: true });
   }
 
   function handleImportOfficialList(text) {
@@ -1885,14 +1848,6 @@ function App() {
    */
 
   switch (page) {
-    case "predefined":
-      return (
-        <PredefinedLists
-          onBack={goBack}
-          onCreate={handleCreatePredefinedList}
-        />
-      );
-
     case "lists":
       return (
         <MyLists
@@ -1913,7 +1868,6 @@ function App() {
           goBack={goBack}
           onLists={openLists}
           onCreate={startNewList}
-          onCreatePredefined={openPredefinedLists}
           onImportList={handleImportOfficialList}
           onSettings={openSettings}
           onRules={() => navigate("home", { listId: null })}
@@ -1936,16 +1890,6 @@ function App() {
           onReference={() => navigate("home", { listId: null })}
           onLists={openLists}
           onSettings={openSettings}
-        />
-      );
-
-    case "alliance":
-      return (
-        <SelectAlliance
-          onSelect={
-            handleSelectAlliance
-          }
-          onBack={goBack}
         />
       );
 
@@ -1991,8 +1935,8 @@ function App() {
             description="Puede haberse eliminado o no estar disponible en este dispositivo."
             primaryLabel="Ir a Mis listas"
             onPrimary={openLists}
-            secondaryLabel="Crear lista predefinida"
-            onSecondary={openPredefinedLists}
+            secondaryLabel="Crear ejército"
+            onSecondary={startNewList}
           />
         );
       }
@@ -2087,6 +2031,9 @@ function App() {
           }
           maxSelections={selector?.ui?.maxSelections ?? 1}
           variant={selector?.ui?.variant}
+          onRules={() => navigate("home", { listId: null })}
+          onLists={openLists}
+          onSettings={openSettings}
           onToggle={toggleArmyOption}
           goBack={
             handleSelectorBack
@@ -2261,8 +2208,7 @@ function getInitialRoute(pathname) {
   if (pathname === "/listas") return { page: "lists", listId: null };
   if (pathname === "/ajustes") return { page: "settings", listId: null };
   if (pathname === "/reglas") return { page: "rules", listId: null };
-  if (pathname === "/predefinidas") return { page: "predefined", listId: null };
-  if (pathname === "/nueva/alianza") return { page: "alliance", listId: null };
+  if (pathname === "/nueva/alianza") return { page: "faction", listId: null };
   if (pathname === "/nueva/faccion") return { page: "faction", listId: null };
   if (pathname === "/nueva/configuracion") return { page: "config", listId: null };
 
@@ -2278,8 +2224,6 @@ function getPagePath(page, listId = null) {
     lists: "/listas",
     settings: "/ajustes",
     rules: "/reglas",
-    predefined: "/predefinidas",
-    alliance: "/nueva/alianza",
     faction: "/nueva/faccion",
     config: "/nueva/configuracion",
     builder: listBase,

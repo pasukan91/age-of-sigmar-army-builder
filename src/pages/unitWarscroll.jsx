@@ -2,6 +2,7 @@ import { getDisplayKeywords } from "../utils/displayKeywords";
 
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
+import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
@@ -23,7 +24,7 @@ function UnitWarscroll({
             onClick={onBack}
             aria-label="Volver"
           >
-            ‹
+            <OfficialIcon name="back" size={25} strokeWidth={2.5} />
           </button>
 
           <h1 className="aos-topbar__title">
@@ -67,7 +68,7 @@ function UnitWarscroll({
           onClick={onBack}
           aria-label="Volver"
         >
-          ‹
+          <OfficialIcon name="back" size={25} strokeWidth={2.5} />
         </button>
 
         <h1 className="aos-topbar__title">
