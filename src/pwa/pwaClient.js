@@ -1,5 +1,7 @@
 let deferredInstallPrompt = null;
 let refreshing = false;
+const CACHE_RESET_KEY = "storm-forge.cache-reset";
+const CACHE_RESET_VERSION = "official-ui-v1";
 
 export function initializePwa() {
   window.addEventListener("beforeinstallprompt", (event) => {
@@ -36,6 +38,10 @@ export function initializePwa() {
 
       watchRegistration(registration);
       await registration.update();
+      if (window.localStorage.getItem(CACHE_RESET_KEY) !== CACHE_RESET_VERSION) {
+        registration.active?.postMessage({ type: "PURGE_CACHES" });
+        window.localStorage.setItem(CACHE_RESET_KEY, CACHE_RESET_VERSION);
+      }
       let lastCheck = Date.now();
       const checkForUpdate = () => {
         if (document.visibilityState === "hidden" || Date.now() - lastCheck < 60_000) return;
