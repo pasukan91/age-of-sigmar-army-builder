@@ -1,27 +1,18 @@
-import { useRef, useState } from "react";
 import { getDisplayKeywords } from "../utils/displayKeywords";
 
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
-import DamageCalculator from "../components/DamageCalculator";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
-import { isUniqueUnit } from "../utils/unitIdentity";
-import { getPotentialSynergies } from "../utils/unitSynergies";
 
 import "../styles/aos-app.css";
 
 function UnitWarscroll({
   unit,
-  list,
   onBack,
-  onConfigure,
 }) {
-  const [calculatorOpen, setCalculatorOpen] = useState(false);
-  const calculatorRef = useRef(null);
-
   if (!unit) {
     return (
       <main className="aos-page aos-warscroll-page">
@@ -58,11 +49,6 @@ function UnitWarscroll({
   const displayedModels =
     getDisplayedModels(unit);
 
-  const calculatorModels =
-    getCalculatorModels(unit, displayedModels);
-
-  const potentialSynergies =
-    getPotentialSynergies(list, unit);
   const accordionPrefix = `storm-forge:warscroll:${unit.id ?? unit.name}`;
 
   const isHedonitesUnit =
@@ -71,13 +57,6 @@ function UnitWarscroll({
         String(keyword).trim().toLowerCase() ===
         "hedonites of slaanesh"
     );
-
-  function openCalculator() {
-    setCalculatorOpen(true);
-    window.requestAnimationFrame(() => {
-      calculatorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
 
   return (
     <main className="aos-page aos-warscroll-page">
@@ -173,50 +152,9 @@ function UnitWarscroll({
           </strong>
         </section>
 
-        {(unit.weapons ?? []).length > 0 && (
-          <button
-            type="button"
-            className="aos-damage-calculator-launch"
-            onClick={openCalculator}
-          >
-            <span aria-hidden="true">∑</span>
-            <span>
-              <strong>Calculadora de daño</strong>
-            </span>
-          </button>
-        )}
-
-        {calculatorOpen && (
-          <div ref={calculatorRef} className="aos-damage-calculator-anchor">
-            <DamageCalculator
-              key={unit.id ?? unit.name}
-              unit={unit}
-              models={calculatorModels}
-              onClose={() => setCalculatorOpen(false)}
-            />
-          </div>
-        )}
-
-        <Accordion
-          title="Armas de combate"
-          storageKey={`${accordionPrefix}:melee-weapons`}
-          subtitle={
-            getWeaponCount(
-              unit,
-              "Melee"
-            )
-          }
-        >
-          <WeaponList
-            weapons={unit.weapons}
-            type="Melee"
-            onCalculate={openCalculator}
-          />
-        </Accordion>
-
         {hasWeaponProfile(unit, "Ranged") && (
           <Accordion
-            title="Armas a distancia"
+            title="Ranged Weapons"
             storageKey={`${accordionPrefix}:ranged-weapons`}
             subtitle={
               getWeaponCount(
@@ -228,13 +166,20 @@ function UnitWarscroll({
             <WeaponList
               weapons={unit.weapons}
               type="Ranged"
-              onCalculate={openCalculator}
             />
           </Accordion>
         )}
 
         <Accordion
-          title="Habilidades"
+          title="Melee Weapons"
+          storageKey={`${accordionPrefix}:melee-weapons`}
+          subtitle={getWeaponCount(unit, "Melee")}
+        >
+          <WeaponList weapons={unit.weapons} type="Melee" />
+        </Accordion>
+
+        <Accordion
+          title="Abilities"
           storageKey={`${accordionPrefix}:abilities`}
           subtitle={
             `${unit.abilities?.length ?? 0}`
@@ -245,20 +190,20 @@ function UnitWarscroll({
           />
         </Accordion>
 
-        <Accordion
-          title="Sinergias potenciales"
-          subtitle={`${potentialSynergies.length} ${
-            potentialSynergies.length === 1
-              ? "detectada"
-              : "detectadas"
-          }`}
-          defaultOpen={potentialSynergies.length > 0}
-          storageKey={`${accordionPrefix}:synergies`}
-        >
-          <SynergyList synergies={potentialSynergies} />
+        <Accordion title="Unit Details" storageKey={`${accordionPrefix}:details`}>
+          <div className="aos-official-unit-details">
+            <p>• {displayedModels} {displayedModels === 1 ? "model" : "models"}</p>
+            <p><strong>{displayedPoints} Points</strong></p>
+            {(unit.details?.regimentOptions ?? []).length > 0 && (
+              <>
+                <strong>Regiment Options:</strong>
+                {(unit.details.regimentOptions ?? []).map((option) => <p key={option}>• {option}</p>)}
+              </>
+            )}
+          </div>
         </Accordion>
 
-        <Accordion title="Palabras clave" storageKey={`${accordionPrefix}:keywords`}>
+        <Accordion title="Keywords" storageKey={`${accordionPrefix}:keywords`}>
           <div style={styles.keywordList}>
             {getDisplayKeywords(unit.keywords).map(
               (keyword) => (
@@ -425,16 +370,10 @@ function UnitWarscroll({
           ) : null
         )}
 
-        {typeof onConfigure ===
-          "function" &&
-          !isUniqueUnit(unit) && (
-          <button
-            type="button"
-            className="aos-configure-button"
-            onClick={onConfigure}
-          >
-            Asignar mejoras
-          </button>
+        {(unit.lore || unit.details?.lore) && (
+          <Accordion title="Lore" storageKey={`${accordionPrefix}:lore`}>
+            <RuleCopyBlocks lore={unit.lore ?? unit.details?.lore} />
+          </Accordion>
         )}
       </div>
     </main>
@@ -468,7 +407,6 @@ function Stat({
 function WeaponList({
   weapons = [],
   type,
-  onCalculate,
 }) {
   const filteredWeapons =
     weapons.filter((weapon) => {
@@ -493,18 +431,7 @@ function WeaponList({
         style={styles.weapon}
       >
         <div className="aos-weapon-profile__heading">
-          <h3 style={styles.weaponName}>
-            {weapon.name}
-          </h3>
-          <button
-            type="button"
-            className="aos-weapon-profile__calculator"
-            onClick={onCalculate}
-            aria-label={`Calcular daño de ${weapon.name}`}
-            title="Abrir calculadora de daño"
-          >
-            ∑
-          </button>
+          <h3 style={styles.weaponName}>{weapon.name}</h3>
         </div>
 
         <div
@@ -692,83 +619,6 @@ function getDisplayedPoints(unit) {
   );
 }
 
-function SynergyList({ synergies }) {
-  if (synergies.length === 0) {
-    return (
-      <section className="aos-synergy-empty">
-        <span className="aos-synergy-empty__icon" aria-hidden="true">◇</span>
-        <h2>Sin sinergias detectadas</h2>
-      </section>
-    );
-  }
-
-  const groups = groupAbilitiesByPhase(
-    synergies,
-    (synergy) => synergy.ability
-  );
-
-  return (
-    <section className="aos-synergy-list" aria-label="Sinergias potenciales">
-      <div className="aos-ability-groups">
-        {groups.map((group) => (
-          <section className="aos-ability-group" key={group.id}>
-            <div className="aos-ability-group__cards">
-              {group.items.map((synergy, index) => (
-                <AbilityCard
-                  key={`${synergy.sourceType}-${synergy.sourceName}-${synergy.ability?.name}-${index}`}
-                  ability={synergy.ability}
-                  context={(
-                    <div className="aos-ability-card__context">
-                      <div className="aos-synergy-card__topline">
-                        <span className="aos-synergy-card__source-type">
-                          {synergy.sourceType}
-                        </span>
-                        {isSpellAbility(synergy.ability) &&
-                          synergy.ability?.castingValue != null && (
-                            <span className="aos-synergy-card__casting">
-                              Dificultad {synergy.ability.castingValue}+
-                            </span>
-                          )}
-                      </div>
-                      <p className="aos-synergy-card__source">
-                        Aportada por <strong>{synergy.sourceName}</strong>
-                      </p>
-                      <div className="aos-synergy-card__matches">
-                        {synergy.matchedOn.map((match) => (
-                          <span key={match}>{match}</span>
-                        ))}
-                      </div>
-                      {synergy.conditions?.length > 0 && (
-                        <div className="aos-synergy-card__conditions">
-                          <strong>Condiciones que debes comprobar</strong>
-                          <ul>
-                            {synergy.conditions.map((condition) => (
-                              <li key={condition}>{condition}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function isSpellAbility(ability) {
-  const type = String(ability?.type ?? "").trim().toLowerCase();
-  const keywords = (ability?.keywords ?? []).map((keyword) =>
-    String(keyword).trim().toLowerCase()
-  );
-
-  return type === "spell" || keywords.includes("spell");
-}
-
 function hasWeaponProfile(unit, type) {
   return (unit?.weapons ?? []).some(
     (weapon) =>
@@ -784,16 +634,6 @@ function getDisplayedModels(unit) {
   return unit?.reinforced
     ? baseModels * 2
     : baseModels;
-}
-
-function getCalculatorModels(unit, displayedModels) {
-  const remainingModels = Number(unit?.calculatorModels);
-  if (!Number.isFinite(remainingModels)) return displayedModels;
-
-  return Math.min(
-    displayedModels,
-    Math.max(0, Math.floor(remainingModels))
-  );
 }
 
 const styles = {

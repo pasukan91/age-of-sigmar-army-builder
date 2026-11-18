@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 import BackButton from "../components/BackButton";
 import FormattedRulesText from "../components/FormattedRulesText";
+import MainNav from "../components/MainNav";
 import rules from "../data/sigdexRules.generated.json";
 
-function RulesReference({ onBack }) {
+function RulesReference({ onBack, onReference, onLists, onSettings }) {
   const [documentId, setDocumentId] = useState(rules.documents[0]?.id);
   const [query, setQuery] = useState("");
   const document = rules.documents.find((item) => item.id === documentId) ?? rules.documents[0];
@@ -14,10 +15,10 @@ function RulesReference({ onBack }) {
   }, [document, query]);
 
   return (
-    <main className="aos-page aos-rules-browser">
-      <header className="aos-topbar">
+    <main className="aos-page aos-rules-browser aos-official-page">
+      <header className="aos-topbar aos-official-header">
         <BackButton onClick={onBack} />
-        <h1 className="aos-topbar__title">Reglas y FAQ</h1>
+        <h1 className="aos-topbar__title">CORE DOCUMENTS</h1>
         <span aria-hidden="true" />
       </header>
       <section className="aos-rules-browser__controls">
@@ -37,6 +38,12 @@ function RulesReference({ onBack }) {
           {sections.length === 0 && <p className="aos-empty-message">No hay resultados.</p>}
         </section>
       )}
+      <MainNav
+        active="reference"
+        onReference={onReference}
+        onStormForge={onLists}
+        onProfile={onSettings}
+      />
     </main>
   );
 }

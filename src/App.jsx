@@ -1483,6 +1483,11 @@ function App() {
       return;
     }
 
+    if (selector?.property === "newAuxiliary") {
+      handleAddAuxiliary(configuredUnit);
+      return;
+    }
+
     console.error(
       "No se ha podido determinar la acción de configuración.",
       {
@@ -2051,6 +2056,31 @@ function App() {
     });
   }
 
+  function handleAddAuxiliary(configuredUnit) {
+    if (!currentList || !configuredUnit) return;
+
+    const auxiliary = {
+      ...configuredUnit,
+      instanceId: configuredUnit.instanceId ?? createInstanceId("auxiliary"),
+    };
+
+    saveUpdatedList({
+      ...currentList,
+      auxiliaries: [...(currentList.auxiliaries ?? []), auxiliary],
+    });
+    returnToBuilder();
+  }
+
+  function handleRemoveAuxiliary(instanceId) {
+    if (!currentList || !instanceId) return;
+    saveUpdatedList({
+      ...currentList,
+      auxiliaries: (currentList.auxiliaries ?? []).filter(
+        (unit) => unit.instanceId !== instanceId
+      ),
+    });
+  }
+
   function startNewList() {
     resetNewArmy();
     navigate("alliance", { listId: null });
@@ -2080,7 +2110,7 @@ function App() {
     setSelectedUnit(null);
     setUnitEditor(null);
     resetSelector();
-    setBuilderSection("army");
+    setBuilderSection("units");
     navigate("builder", { listId: newList.id, resetToLists: true });
   }
 
@@ -2113,7 +2143,7 @@ function App() {
           storageStatus={storageStatus}
           onOpenList={(list) => {
             setCurrentList(list);
-            setBuilderSection("army");
+            setBuilderSection("units");
             setSelectedUnit(null);
             setUnitEditor(null);
             resetSelector();
@@ -2129,21 +2159,28 @@ function App() {
           onCreatePredefined={openPredefinedLists}
           onImportList={handleImportOfficialList}
           onSettings={openSettings}
+          onRules={() => navigate("home", { listId: null })}
         />
       );
 
     case "settings":
       return (
         <Settings
-          onBack={goBack}
           onLists={openLists}
-          onCreate={startNewList}
           onSettings={openSettings}
+          onRules={() => navigate("home", { listId: null })}
         />
       );
 
     case "rules":
-      return <RulesReference onBack={goBack} />;
+      return (
+        <RulesReference
+          onBack={goBack}
+          onReference={() => navigate("home", { listId: null })}
+          onLists={openLists}
+          onSettings={openSettings}
+        />
+      );
 
     case "alliance":
       return (
@@ -2228,6 +2265,7 @@ function App() {
           }
           onAddRegimentOfRenown={handleAddRegimentOfRenown}
           onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
+          onRemoveAuxiliary={handleRemoveAuxiliary}
           onCommandPointsChange={handleCommandPointsChange}
           onFuryPointsChange={handleFuryPointsChange}
           onBattleMissionToggle={handleBattleMissionToggle}
@@ -2240,6 +2278,9 @@ function App() {
           onBattleUnitStatesReset={handleBattleUnitStatesReset}
           onViewRule={openBuilderRuleReference}
           onBrowseUnit={openBuilderUnitReference}
+          onRules={() => navigate("home", { listId: null })}
+          onLists={openLists}
+          onSettings={openSettings}
           section={builderSection}
           onSectionChange={setBuilderSection}
         />
@@ -2309,6 +2350,7 @@ function App() {
                 "newRegiment" ||
               selector?.property ===
                 "newUnit"
+                || selector?.property === "newAuxiliary"
             ) {
               openNewUnitWarscroll(
                 option
@@ -2327,6 +2369,7 @@ function App() {
                 "newRegiment" ||
               selector?.property ===
                 "newUnit"
+                || selector?.property === "newAuxiliary"
             ) {
               openNewUnitConfiguration(
                 option
@@ -2364,7 +2407,8 @@ function App() {
           onConfigure={
             unitEditor ||
             selector?.property === "newRegiment" ||
-            selector?.property === "newUnit"
+            selector?.property === "newUnit" ||
+            selector?.property === "newAuxiliary"
               ? handleConfigureSelectedUnit
               : undefined
           }
@@ -2424,11 +2468,10 @@ function App() {
     default:
       return (
         <Home
-          onPredefinedLists={openPredefinedLists}
-          onNewList={startNewList}
           onMyLists={openLists}
           onSettings={openSettings}
           onRules={openRules}
+          onViewWarscroll={openNewUnitWarscroll}
         />
       );
   }

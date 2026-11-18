@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BackButton from "../components/BackButton";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
 import TrashIcon from "../components/TrashIcon";
@@ -15,12 +14,12 @@ function MyLists({
   onOpenList,
   onDeleteList,
   storageStatus = "saved",
-  goBack,
   onLists,
   onCreate,
   onCreatePredefined,
   onImportList,
   onSettings,
+  onRules,
   deletedList,
   onUndoDelete,
 }) {
@@ -43,31 +42,16 @@ function MyLists({
   }
 
   return (
-    <main className="aos-shell">
-      <header className="aos-screen-header">
-        <BackButton
-          onClick={goBack}
-          light
-          compact
-        />
-
-        <h1 className="aos-screen-header__title">
-          Mis listas
-        </h1>
-
+    <main className="aos-shell aos-official-page aos-storm-forge-home">
+      <header className="aos-screen-header aos-official-header">
+        <span aria-hidden="true" />
+        <h1 className="aos-screen-header__title">STORM FORGE</h1>
         <span aria-hidden="true" />
       </header>
 
       <div className="aos-screen-content">
-        <header className="aos-form-intro">
-          <p className="aos-kicker">
-            Storm Forge
-          </p>
-
-          <h2 className="aos-heading">
-            Tus ejércitos
-          </h2>
-
+        <header className="aos-form-intro aos-visually-hidden">
+          <h2>Tus ejércitos</h2>
           {(storageStatus === "error" || storageStatus === "recovered") && (
             <p className="aos-storage-note" role="alert">
               {storageStatus === "error"
@@ -254,11 +238,18 @@ function MyLists({
         </div>
       )}
 
+      <button
+        type="button"
+        className="aos-official-fab"
+        onClick={onCreate}
+        aria-label="Create army"
+      >+</button>
+
       <MainNav
-        active="lists"
-        onLists={onLists}
-        onCreate={onCreate}
-        onSettings={onSettings}
+        active="storm-forge"
+        onReference={onRules}
+        onStormForge={onLists}
+        onProfile={onSettings}
       />
     </main>
   );

@@ -1,64 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-import BuilderHeader from "../components/armybuilder/BuilderHeader";
-import BuilderOption from "../components/armybuilder/BuilderOption";
+import MainNav from "../components/MainNav";
+import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
-import ArmySharePanel from "../components/armybuilder/ArmySharePanel";
-import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
-import GameMode, { BattleMission } from "../components/armybuilder/GameMode";
-import ArmyRulesReference from "../components/armybuilder/ArmyRulesReference";
-import SelectedRulesLibrary from "../components/armybuilder/SelectedRulesLibrary";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
-import {
-  ghb2026Battleplans,
-  ghb2026BattleTacticsCards,
-} from "../data/ghb2026";
+import { ghb2026BattleTacticsCards } from "../data/ghb2026";
+import { calculateArmyPoints } from "../utils/armyPoints";
 import { validateArmyList } from "../utils/armyValidation";
+import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
 import { createRegimentOfRenownReference } from "../utils/regimentOfRenownReferences";
 
-import {
-  calculateArmyPoints,
-} from "../utils/armyPoints";
 import "../styles/aos-app.css";
-import "../styles/builder-navigation.css";
-
-const BUILDER_TABS = [
-  {
-    id: "army",
-    label: "Ejército",
-    icon: "♜",
-    title: "Configuración del ejército",
-  },
-  {
-    id: "units",
-    label: "Unidades",
-    icon: "⚔",
-    title: "Regimientos y unidades",
-  },
-  {
-    id: "rules",
-    label: "Reglas",
-    icon: "▤",
-    title: "Biblioteca de reglas",
-  },
-  {
-    id: "game",
-    label: "Partida",
-    icon: "◉",
-    title: "Herramientas de partida",
-  },
-  {
-    id: "mission",
-    label: "Misión",
-    icon: "⌖",
-    title: "Objetivos y tácticas",
-  },
-];
+import "../styles/official-app.css";
 
 function ArmyBuilder({
   list,
-  storageStatus,
   setSelector,
   navigate,
   onBack,
@@ -69,624 +26,216 @@ function ArmyBuilder({
   onRemoveRegiment,
   onAddRegimentOfRenown,
   onRemoveRegimentOfRenown,
-  onCommandPointsChange,
-  onFuryPointsChange,
-  onBattleMissionToggle,
-  onBattleRoundChange,
-  onBattleTurnChange,
-  onBattleInitiativeResolve,
-  onBattleLogAdd,
-  onBattleLogRemove,
-  onBattleUnitStateChange,
-  onBattleUnitStatesReset,
+  onRemoveAuxiliary,
   onViewRule,
-  onBrowseUnit,
-  section = "units",
-  onSectionChange,
+  onRules,
+  onLists,
+  onSettings,
 }) {
-  const baseFaction =
-    list?.faction ?? {};
-
-  const faction = {
-    ...baseFaction,
-    ...(list?.armyOfRenown?.rules ?? {}),
-  };
-
-  const battleFormations =
-    getArray(
-      faction.battleFormations
-    );
-
-  const battleTraits =
-    getArray(faction.battleTraits);
-
-  const spellLores =
-    getArray(faction.spellLores);
-
-  const prayerLores =
-    getArray(faction.prayerLores);
-
-  const terrain =
-    getArray(faction.terrain);
-
-  const manifestationLores =
-    getArray(
-      faction.manifestationLores
-    );
-
-  const currentPoints =
-    calculateArmyPoints(list);
+  const [validationExpanded, setValidationExpanded] = useState(false);
+  const baseFaction = list?.faction ?? {};
+  const faction = { ...baseFaction, ...(list?.armyOfRenown?.rules ?? {}) };
   const validation = validateArmyList(list);
-  const [validationExpanded, setValidationExpanded] = useState(
-    () => validation.errors.length > 0
-  );
-  const resetScrollOnSectionChange = useRef(false);
-  const sectionSwipeStart = useRef(null);
-  const activeTab = BUILDER_TABS.find((tab) => tab.id === section) ?? BUILDER_TABS[0];
-  const isBattleSection = section === "game" || section === "mission";
-
-  useEffect(() => {
-    if (!resetScrollOnSectionChange.current) return;
-
-    resetScrollOnSectionChange.current = false;
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [section]);
-
+  const points = calculateArmyPoints(list);
+  const pointsLimit = Number(list?.pointsLimit ?? list?.points) || 0;
+  const artwork = getFactionArtwork(baseFaction);
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown
     ? []
     : getEligibleRegimentsOfRenown(baseFaction.id);
 
-  const pointsLimit =
-    Number(
-      list?.pointsLimit ??
-        list?.points
-    ) || 0;
-
-  const commandPoints = Math.max(
-    0,
-    Number(list?.commandPoints ?? 4) || 0
-  );
-
-  const furyPoints = Math.min(
-    7,
-    Math.max(0, Number(list?.furyPoints ?? 0) || 0)
-  );
-  const pointsDifference = pointsLimit - currentPoints;
-
-  function openSelector({
-    title,
-    property,
-    options,
-    ui,
-  }) {
-    setSelector({
-      title,
-      property,
-      regimentId: null,
-      options,
-      ui,
-    });
-
+  function openSelector({ title, property, options, ui, regimentId = null }) {
+    setSelector({ title, property, regimentId, options, ui });
     navigate("selector");
   }
 
-  function navigateToIssue(issue) {
-    setValidationExpanded(true);
-    onSectionChange?.(normalizeBuilderSection(issue.section));
-    window.requestAnimationFrame(() => {
-      const target = issue.targetId
-        ? document.getElementById(issue.targetId)
-        : document.getElementById("army-validation-panel");
-      target?.scrollIntoView({
-        behavior: prefersReducedMotion() ? "auto" : "smooth",
-        block: "center",
-      });
-      target?.focus?.({ preventScroll: true });
-    });
-  }
-
-  function showValidation() {
-    setValidationExpanded(true);
-    onSectionChange?.("army");
-    window.requestAnimationFrame(() => {
-      document.getElementById("army-validation-panel")?.scrollIntoView({
-        behavior: prefersReducedMotion() ? "auto" : "smooth",
-        block: "start",
-      });
-    });
-  }
-
-  function changeSection(nextSection) {
-    if (!nextSection || nextSection === section) return;
-
-    resetScrollOnSectionChange.current = true;
-    onSectionChange?.(nextSection);
-    window.requestAnimationFrame(() => {
-      document.getElementById("builder-section-title")?.focus({ preventScroll: true });
-    });
-  }
-
-  function handleSectionSwipeStart(event) {
-    if (
-      event.touches.length !== 1 ||
-      event.target.closest?.("input, textarea, select, [contenteditable='true'], [data-section-swipe='off']")
-    ) {
-      sectionSwipeStart.current = null;
-      return;
-    }
-
-    const touch = event.touches[0];
-    sectionSwipeStart.current = {
-      x: touch.clientX,
-      y: touch.clientY,
-    };
-  }
-
-  function handleSectionSwipeEnd(event) {
-    const start = sectionSwipeStart.current;
-    sectionSwipeStart.current = null;
-    if (!start || !window.matchMedia("(max-width: 760px)").matches) return;
-
-    const touch = event.changedTouches[0];
-    if (!touch) return;
-
-    const deltaX = touch.clientX - start.x;
-    const deltaY = touch.clientY - start.y;
-    const isHorizontalSwipe =
-      Math.abs(deltaX) >= 56 &&
-      Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
-
-    if (!isHorizontalSwipe) return;
-
-    const currentIndex = BUILDER_TABS.findIndex((tab) => tab.id === section);
-    const nextIndex = currentIndex + (deltaX < 0 ? 1 : -1);
-    const nextTab = BUILDER_TABS[nextIndex];
-    if (nextTab) changeSection(nextTab.id);
-  }
+  const selectionGroups = [
+    {
+      title: "Battle Formation",
+      property: "battleFormation",
+      options: faction.battleFormations,
+      value: list.battleFormation?.name,
+    },
+    {
+      title: "Spell Lore",
+      property: "spellLore",
+      options: faction.spellLores,
+      value: list.spellLore?.name,
+    },
+    {
+      title: "Prayer Lore",
+      property: "prayerLore",
+      options: faction.prayerLores,
+      value: list.prayerLore?.name,
+    },
+    {
+      title: "Manifestation Lore",
+      property: "manifestationLore",
+      options: faction.manifestationLores,
+      value: list.manifestationLore?.name,
+    },
+  ].filter((group) => (group.options ?? []).length > 0);
 
   return (
-    <main
-      className="aos-page aos-builder-page"
-      onTouchStart={handleSectionSwipeStart}
-      onTouchEnd={handleSectionSwipeEnd}
-      onTouchCancel={() => { sectionSwipeStart.current = null; }}
-    >
-      <header className="aos-topbar">
-        <button
-          type="button"
-          className="aos-icon-button"
-          onClick={onBack}
-          aria-label="Volver"
-        >
-          ‹
-        </button>
-
-        <h1 className="aos-topbar__title">
-          {list?.name ?? "Army Builder"}
-        </h1>
-
-        <span aria-hidden="true" />
+    <main className="aos-official-page aos-official-builder">
+      <header className="aos-official-header">
+        <button type="button" onClick={onBack} aria-label="Back">‹</button>
+        <h1>{list?.name ?? "STORM FORGE"}</h1>
+        <span aria-hidden="true">⋮</span>
       </header>
 
-      <nav className="aos-builder-tabs" aria-label="Secciones de la lista">
-        {BUILDER_TABS.map(({ id, label, icon }) => (
-          <button
-            key={id}
-            type="button"
-            className={section === id ? "is-active" : ""}
-            onClick={() => changeSection(id)}
-            aria-current={section === id ? "page" : undefined}
-            aria-label={label}
-          >
-            <span aria-hidden="true">{icon}</span>
-            <small>{label}</small>
-          </button>
-        ))}
-      </nav>
-
-      <section className="aos-builder-section-guide" aria-labelledby="builder-section-title">
-        <div>
-          <h2 id="builder-section-title" tabIndex="-1">{activeTab.title}</h2>
+      {artwork && (
+        <div
+          className="aos-official-builder-hero"
+          style={{
+            "--official-faction-art": `url("${artwork}")`,
+            "--official-faction-position": getFactionArtworkPosition(baseFaction, "builder") ?? "center",
+          }}
+        >
+          <span>{baseFaction.name}</span>
+          <strong>{list.armyOfRenown?.name ?? list.battleFormation?.name ?? "No Battle Formation"}</strong>
         </div>
-        <span className={`aos-builder-section-guide__status is-${section}`}>
-          {getSectionStatus({ section, list, validation, currentPoints })}
-        </span>
-      </section>
+      )}
 
-      {section === "army" && (
-        <>
+      <div className="aos-official-builder-content">
+        <OfficialSection title="Regiments" open action="+">
+          <RegimentSection
+            list={list}
+            setSelector={setSelector}
+            setPage={navigate}
+            onViewWarscroll={onViewWarscroll}
+            onConfigureUnit={onConfigureUnit}
+            onRemoveUnit={onRemoveUnit}
+            onDuplicateUnit={onDuplicateUnit}
+            onRemoveRegiment={onRemoveRegiment}
+          />
+        </OfficialSection>
 
-      <BuilderHeader
-        list={list}
-        storageStatus={storageStatus}
-        onShowValidation={showValidation}
-      />
+        <OfficialSection title="Regiments of Renown" action="+">
+          <RenownSection
+            available={eligibleRegimentsOfRenown}
+            selected={list.regimentsOfRenown ?? []}
+            regularRegimentCount={list.regiments?.length ?? 0}
+            onAdd={onAddRegimentOfRenown}
+            onRemove={onRemoveRegimentOfRenown}
+            onViewUnit={onViewWarscroll}
+            onView={(regiment) => onViewRule?.(createRegimentOfRenownReference(regiment))}
+          />
+        </OfficialSection>
 
-      <ArmyValidationPanel
-        validation={validation}
-        onNavigateIssue={navigateToIssue}
-        expanded={validationExpanded}
-        onExpandedChange={setValidationExpanded}
-      />
+        <OfficialSection
+          title="Auxiliary Units"
+          action="+"
+          onAction={() => openSelector({
+            title: "Add Auxiliary Unit",
+            property: "newAuxiliary",
+            options: faction.units ?? [],
+          })}
+        >
+          <div className="aos-official-auxiliaries">
+            {(list.auxiliaries ?? []).map((unit) => (
+              <article key={unit.instanceId ?? unit.id}>
+                <button type="button" onClick={() => onViewWarscroll(unit)}>{unit.name}</button>
+                <strong>{unit.points} pts</strong>
+                <button type="button" onClick={() => onRemoveAuxiliary?.(unit.instanceId)} aria-label={`Remove ${unit.name}`}>⋮</button>
+              </article>
+            ))}
+          </div>
+        </OfficialSection>
 
-      <section className="aos-builder-options">
-        <BuilderOption
-          id="battleplan-option"
-          title="Plan de batalla"
-          value={list.battleplan?.name ?? "No seleccionado"}
-          image={list.battleplan?.image}
-          onClick={() =>
-            openSelector({
-              title: "Plan de batalla",
-              property: "battleplan",
-              options: ghb2026Battleplans,
-            })
-          }
-        />
+        <OfficialSection title="Lores" action="⚙">
+          <div className="aos-official-selection-list">
+            {selectionGroups.map((group) => (
+              <button
+                key={group.property}
+                type="button"
+                onClick={() => openSelector(group)}
+              >
+                <span>{group.title}</span><strong>{group.value ?? "Not selected"}</strong>
+              </button>
+            ))}
+          </div>
+        </OfficialSection>
 
-        <BuilderOption
-          id="battle-tactics-option"
-          title="Tácticas de batalla"
-          value={formatBattleTactics(list.battleTactics)}
-          recommended
-          onClick={() =>
-            openSelector({
-              title: "Tácticas de batalla",
+        <OfficialSection title="Battle Tactics" action="⚙">
+          <button
+            type="button"
+            className="aos-official-current-selection"
+            onClick={() => openSelector({
+              title: "Battle Tactics",
               property: "battleTactics",
               options: ghb2026BattleTacticsCards,
               ui: { maxSelections: 2, variant: "battleTactics" },
-            })
-          }
-        />
+            })}
+          >
+            {formatSelection(list.battleTactics)}
+          </button>
+        </OfficialSection>
 
-        {battleFormations.length > 0 && (
-        <BuilderOption
-          id="battle-formation-option"
-          title="Formación de batalla"
-          value={
-            list.battleFormation?.name ??
-            "No seleccionada"
-          }
-          required
-          onClick={() =>
-            openSelector({
-              title:
-                "Formación de batalla",
-              property:
-                "battleFormation",
-              options:
-                battleFormations,
-            })
-          }
-        />
-        )}
-
-        {spellLores.length > 0 && (
-        <BuilderOption
-          id="spellLore-option"
-          title="Saber de hechizos"
-          value={
-            list.spellLore?.name ??
-            "No seleccionada"
-          }
-          recommended
-          onClick={() =>
-            openSelector({
-              title: "Saber de hechizos",
-              property: "spellLore",
-              options: spellLores,
-            })
-          }
-        />
-        )}
-
-        {prayerLores.length > 0 && (
-          <BuilderOption
-            id="prayerLore-option"
-            title="Saber de plegarias"
-            value={
-              list.prayerLore?.name ??
-              "No seleccionada"
-            }
-            recommended
-            onClick={() =>
-              openSelector({
-                title:
-                  "Saber de plegarias",
-                property:
-                  "prayerLore",
-                options:
-                  prayerLores,
-              })
-            }
-          />
-        )}
-
-        {manifestationLores.length > 0 && (
-        <BuilderOption
-          id="manifestationLore-option"
-          title="Saber de manifestaciones"
-          value={
-            list.manifestationLore
-              ?.name ??
-            "No seleccionada"
-          }
-          recommended
-          onClick={() =>
-            openSelector({
-              title:
-                "Saber de manifestaciones",
-              property:
-                "manifestationLore",
-              options:
-                manifestationLores,
-            })
-          }
-        />
-        )}
-
-        {terrain.length > 0 && (
-          <BuilderOption
-            title="Terreno de facción"
-            value={
-              list.terrain?.name ??
-              "No seleccionado"
-            }
-            recommended
-            onClick={() =>
-              openSelector({
-                title:
-                  "Terreno de facción",
+        {(faction.terrain ?? []).length > 0 && (
+          <OfficialSection title="Faction Terrain" action="⚙">
+            <button
+              type="button"
+              className="aos-official-current-selection"
+              onClick={() => openSelector({
+                title: "Faction Terrain",
                 property: "terrain",
-                options: terrain,
-              })
-            }
-          />
-        )}
-      </section>
-
-      <ArmySharePanel list={list} />
-
-        </>
-      )}
-
-      {section === "units" && (
-        <>
-
-      {list.preset && (
-        <aside className="aos-builder-preset-note">
-          <span aria-hidden="true">★</span>
-          <div>
-            <strong>{list.preset.name}</strong>
-          </div>
-        </aside>
-      )}
-
-      <h2 id="regiments-section" className="aos-builder-section-title">
-        Regimientos
-      </h2>
-
-      <RegimentSection
-        list={list}
-        setSelector={setSelector}
-        setPage={navigate}
-        onViewWarscroll={
-          onViewWarscroll
-        }
-        onConfigureUnit={
-          onConfigureUnit
-        }
-        onRemoveUnit={
-          onRemoveUnit
-        }
-        onDuplicateUnit={
-          onDuplicateUnit
-        }
-        onRemoveRegiment={
-          onRemoveRegiment
-        }
-      />
-
-      <RenownSection
-        available={eligibleRegimentsOfRenown}
-        selected={getArray(list.regimentsOfRenown)}
-        regularRegimentCount={getArray(list.regiments).length}
-        onAdd={onAddRegimentOfRenown}
-        onRemove={onRemoveRegimentOfRenown}
-        onViewUnit={onViewWarscroll}
-        onView={(regiment) => onViewRule?.(
-          createRegimentOfRenownReference(regiment)
-        )}
-      />
-
-        </>
-      )}
-
-      {section === "game" && (
-        <GameMode
-          list={list}
-          onViewUnit={onBrowseUnit}
-          onViewRule={onViewRule}
-          onGoToUnits={() => changeSection("units")}
-          onGoToArmy={() => changeSection("army")}
-          onRoundChange={onBattleRoundChange}
-          onTurnChange={onBattleTurnChange}
-          onInitiativeResolve={onBattleInitiativeResolve}
-          onLogAdd={onBattleLogAdd}
-          onLogRemove={onBattleLogRemove}
-          onUnitStateChange={onBattleUnitStateChange}
-          onUnitStatesReset={onBattleUnitStatesReset}
-        />
-      )}
-
-      {section === "rules" && (
-        <section className="aos-builder-reference-section">
-          <ArmyRulesReference
-            battleTraits={battleTraits}
-            battleFormation={list.battleFormation}
-          />
-          <SelectedRulesLibrary list={list} onViewRule={onViewRule} />
-        </section>
-      )}
-
-      {section === "mission" && (
-        <BattleMission
-          list={list}
-          onToggleMission={onBattleMissionToggle}
-          onGoToArmy={() => changeSection("army")}
-        />
-      )}
-
-      <footer className={`aos-builder-footer ${isBattleSection ? "is-battle-tools" : "is-build-tools"}`}>
-        {!isBattleSection && (
-        <div className="aos-builder-footer__meters aos-builder-footer__meters--points">
-          <div className="aos-points-summary">
-            <div className={`aos-points-summary__icon${validation.errors.length > 0 ? " is-error" : ""}`}>
-              {validation.errors.length > 0 ? "!" : validation.warnings.length > 0 ? "·" : "✓"}
-            </div>
-
-            <div>
-              <div className="aos-points-summary__value">
-                {currentPoints}
-
-                <span className="aos-points-summary__limit">
-                  /{pointsLimit}
-                </span>
-              </div>
-
-              <span className="aos-points-summary__label">
-                {validation.errors.length > 0
-                  ? currentPoints > pointsLimit
-                    ? `+${Math.abs(pointsDifference)} sobre el límite`
-                    : `${validation.errors.length} ${validation.errors.length === 1 ? "error" : "errores"}`
-                  : validation.warnings.length > 0
-                    ? `${validation.warnings.length} ${validation.warnings.length === 1 ? "pendiente" : "pendientes"} · faltan ${Math.max(0, pointsDifference)} pts`
-                    : "Puntos · Lista legal"}
-              </span>
-            </div>
-          </div>
-        </div>
-        )}
-
-        {isBattleSection && (
-        <div className="aos-builder-footer__meters aos-builder-footer__meters--battle">
-          <div className="aos-command-counter" aria-label="Puntos de mando">
-            <button
-              type="button"
-              onClick={() => onCommandPointsChange(commandPoints - 1)}
-              disabled={commandPoints === 0}
-              aria-label="Gastar un punto de mando"
+                options: faction.terrain,
+              })}
             >
-              −
+              {list.terrain?.name ?? "Not selected"}
             </button>
-
-            <div aria-live="polite">
-              <strong>{commandPoints}</strong>
-              <span>PC</span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onCommandPointsChange(commandPoints + 1)}
-              aria-label="Añadir un punto de mando"
-            >
-              +
-            </button>
-          </div>
-        </div>
+          </OfficialSection>
         )}
 
-        {isBattleSection && (
-        <div className="aos-fury-counter" aria-label="Puntos de furia">
-          <button
-            type="button"
-            onClick={() => onFuryPointsChange(furyPoints - 1)}
-            disabled={furyPoints === 0}
-            aria-label="Gastar un punto de furia"
-          >
-            −
-          </button>
+        <ArmyValidationPanel
+          validation={validation}
+          expanded={validationExpanded}
+          onExpandedChange={setValidationExpanded}
+        />
+      </div>
 
-          <div aria-live="polite">
-            <strong>{furyPoints}</strong>
-            <span>Furia</span>
-          </div>
+      <button
+        type="button"
+        className={`aos-official-points${validation.errors.length ? " is-invalid" : ""}`}
+        onClick={() => setValidationExpanded((open) => !open)}
+      >
+        <span>{validation.errors.length ? "!" : "✓"}</span>
+        <strong>{points}/{pointsLimit}</strong>
+        <small>POINTS</small>
+      </button>
 
-          <button
-            type="button"
-            onClick={() => onFuryPointsChange(furyPoints + 1)}
-            disabled={furyPoints === 7}
-            aria-label="Añadir un punto de furia"
-          >
-            +
-          </button>
-        </div>
-        )}
-      </footer>
+      <MainNav
+        active="storm-forge"
+        onReference={onRules}
+        onStormForge={onLists}
+        onProfile={onSettings}
+      />
     </main>
   );
 }
 
-function getArray(value) {
-  return Array.isArray(value)
-    ? value
-    : [];
+function OfficialSection({ title, action, onAction, open = false, children }) {
+  return (
+    <details className="aos-official-builder-section" open={open}>
+      <summary>
+        <span className="aos-official-builder-section__chevron" aria-hidden="true">⌄</span>
+        <strong>{title}</strong>
+        {action && (
+          <button
+            type="button"
+            onClick={(event) => { event.preventDefault(); onAction?.(); }}
+            aria-label={`${title} options`}
+          >{action}</button>
+        )}
+      </summary>
+      <div>{children}</div>
+    </details>
+  );
 }
 
-function normalizeBuilderSection(section) {
-  return {
-    list: "army",
-    regiments: "units",
-  }[section] ?? section ?? "army";
-}
-
-function formatBattleTactics(value) {
-  const selected = Array.isArray(value)
-    ? value
-    : value
-      ? [value]
-      : [];
-
-  return selected.length > 0
-    ? selected.map((card) => card.name).join(" + ")
-    : "Ninguna seleccionada";
-}
-
-function getSectionStatus({ section, list, validation, currentPoints }) {
-  if (section === "army") {
-    if (validation.errors.length > 0) {
-      return `${validation.errors.length} ${validation.errors.length === 1 ? "error" : "errores"}`;
-    }
-    if (validation.warnings.length > 0) {
-      return `${validation.warnings.length} ${validation.warnings.length === 1 ? "pendiente" : "pendientes"}`;
-    }
-    return "Lista legal";
-  }
-
-  if (section === "units") {
-    const regimentCount = list?.regiments?.length ?? 0;
-    return `${regimentCount} ${regimentCount === 1 ? "regimiento" : "regimientos"} · ${currentPoints} pts`;
-  }
-
-  if (section === "rules") {
-    const selectedRules = [
-      list?.battleFormation,
-      list?.spellLore,
-      list?.prayerLore,
-      list?.manifestationLore,
-      list?.terrain,
-    ].filter(Boolean).length;
-    return `${selectedRules} ${selectedRules === 1 ? "selección" : "selecciones"}`;
-  }
-
-  if (section === "game") return `Ronda ${list?.battleRound ?? 1}`;
-
-  const completed = list?.completedBattleMissions?.length ?? 0;
-  return `${completed} completadas`;
-}
-
-function prefersReducedMotion() {
-  return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+function formatSelection(value) {
+  const selected = Array.isArray(value) ? value : value ? [value] : [];
+  return selected.length ? selected.map((item) => item.name).join(" + ") : "Not selected";
 }
 
 export default ArmyBuilder;
