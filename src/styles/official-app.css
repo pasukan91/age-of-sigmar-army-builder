@@ -736,6 +736,14 @@ body {
   text-shadow: none;
 }
 
+/* Route changes focus the page title for screen readers. It is not an
+   interactive control, so the global keyboard focus ring must not frame it. */
+.aos-official-page h1[tabindex="-1"]:focus,
+.aos-official-page h1[tabindex="-1"]:focus-visible {
+  outline: 0;
+  box-shadow: none;
+}
+
 .aos-official-page button,
 .aos-official-page summary,
 .aos-main-nav.aos-official-nav button {
