@@ -700,3 +700,179 @@ body {
   .aos-warscroll-page,
   .aos-rules-browser { border-inline: 1px solid #444; }
 }
+
+/*
+ * Official-shell isolation.
+ *
+ * The application still contains the reusable legacy component styles used by
+ * warscrolls and regiment cards.  Keep those components, but prevent their
+ * old page chrome from leaking into the official shell through selectors such
+ * as `.aos-screen-header::after` and `.aos-main-nav button`.
+ */
+.aos-official-page {
+  position: relative;
+  max-width: var(--official-width);
+  overflow-x: clip;
+  font-family: var(--official-serif);
+  isolation: isolate;
+}
+
+.aos-official-page .aos-official-header {
+  border-bottom: 0;
+  background: var(--official-red);
+  box-shadow: none;
+}
+
+.aos-official-page .aos-official-header::before,
+.aos-official-page .aos-official-header::after {
+  display: none;
+  content: none;
+}
+
+.aos-official-page .aos-official-header > h1,
+.aos-official-page .aos-official-header .aos-screen-header__title,
+.aos-official-page .aos-official-header .aos-topbar__title {
+  min-width: 0;
+  text-shadow: none;
+}
+
+.aos-official-page button,
+.aos-official-page summary,
+.aos-main-nav.aos-official-nav button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.aos-main-nav.aos-official-nav button {
+  min-width: 0;
+  overflow: visible;
+  box-shadow: none;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.aos-main-nav.aos-official-nav button > svg,
+.aos-main-nav.aos-official-nav button > strong {
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.aos-main-nav.aos-official-nav button > strong {
+  max-width: 100%;
+  overflow: hidden;
+  line-height: 1.15;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aos-official-builder-section > summary > strong,
+.aos-official-current-selection,
+.aos-official-selection-list > button,
+.aos-official-link-list > button,
+.aos-create-faction-list > button {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.aos-official-builder-section > summary > strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aos-official-builder-content,
+.aos-official-content,
+.aos-create-army-content,
+.aos-create-config-content,
+.aos-official-selector .aos-screen-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Fixed controls must not cover the final row when the page is fully scrolled. */
+.aos-official-builder-content {
+  padding-bottom: calc(var(--official-nav-height) + 92px + env(safe-area-inset-bottom));
+}
+
+.aos-storm-forge-home .aos-screen-content,
+.aos-official-selector .aos-screen-content,
+.aos-official-content {
+  padding-bottom: calc(var(--official-nav-height) + 34px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 359px) {
+  :root {
+    --official-nav-height: 88px;
+  }
+
+  .aos-official-header,
+  .aos-official-page .aos-topbar,
+  .aos-official-page .aos-screen-header {
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    min-height: 104px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aos-official-header--root {
+    grid-template-columns: 0 minmax(0, 1fr) 32px;
+  }
+
+  .aos-official-header__actions {
+    gap: 8px;
+    min-width: 64px;
+  }
+
+  .aos-official-content,
+  .aos-create-army-content,
+  .aos-create-config-content,
+  .aos-official-selector .aos-screen-content,
+  .aos-storm-forge-home .aos-screen-content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aos-main-nav.aos-official-nav {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .aos-main-nav.aos-official-nav button strong {
+    font-size: 10px;
+  }
+
+  .aos-official-builder-section > summary {
+    grid-template-columns: 20px minmax(0, 1fr) 34px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aos-official-builder-section > summary > strong {
+    font-size: 19px;
+  }
+
+  .aos-official-points {
+    left: max(16px, calc((100vw - var(--official-width)) / 2 + 16px));
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  :root {
+    --official-nav-height: 76px;
+  }
+
+  .aos-main-nav.aos-official-nav {
+    min-height: var(--official-nav-height);
+    padding-top: 5px;
+    padding-bottom: max(5px, env(safe-area-inset-bottom));
+  }
+
+  .aos-main-nav.aos-official-nav button {
+    min-height: 58px;
+    gap: 2px;
+  }
+
+  .aos-main-nav.aos-official-nav button strong {
+    font-size: 10px;
+  }
+}
