@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import OfficialIcon from "../components/OfficialIcon";
 import MainNav from "../components/MainNav";
+import AbilityCard from "../components/AbilityCard";
+import UnitArtwork from "../components/UnitArtwork";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
@@ -36,6 +38,7 @@ function ArmyBuilder({
   onSettings,
 }) {
   const [validationExpanded, setValidationExpanded] = useState(false);
+  const [loreSettingsOpen, setLoreSettingsOpen] = useState(false);
   const baseFaction = list?.faction ?? {};
   const faction = { ...baseFaction, ...(list?.armyOfRenown?.rules ?? {}) };
   const validation = validateArmyList(list);
@@ -52,12 +55,6 @@ function ArmyBuilder({
   }
 
   const selectionGroups = [
-    {
-      title: "Battle Formation",
-      property: "battleFormation",
-      options: faction.battleFormations,
-      value: list.battleFormation?.name,
-    },
     {
       title: "Spell Lore",
       property: "spellLore",
@@ -77,6 +74,10 @@ function ArmyBuilder({
       value: list.manifestationLore?.name,
     },
   ].filter((group) => (group.options ?? []).length > 0);
+
+  const formationSelector = { title: "Battle Formation", property: "battleFormation", options: faction.battleFormations ?? [] };
+  const tacticsSelector = { title: "Battle Tactics", property: "battleTactics", options: ghb2026BattleTacticsCards, ui: { maxSelections: 2, variant: "battleTactics" } };
+  const terrainSelector = { title: "Faction Terrain", property: "terrain", options: faction.terrain ?? [] };
 
   return (
     <main className="aos-official-page aos-official-builder">
@@ -100,10 +101,18 @@ function ArmyBuilder({
       )}
 
       <div className="aos-official-builder-content">
+        {formationSelector.options.length > 0 && (
+          <OfficialSection title="Battle Formation" action="settings" onAction={() => openSelector(formationSelector)}>
+            <button type="button" className="aos-official-current-selection" onClick={() => openSelector(formationSelector)}>
+              {list.battleFormation?.name ?? "Choose Battle Formation"}
+            </button>
+          </OfficialSection>
+        )}
         <OfficialSection
           title="Regiments"
           open
           action="plus"
+          disabled={!canAddRegiment(list)}
           onAction={() => {
             if (!canAddRegiment(list)) return;
             openSelector({
@@ -126,7 +135,7 @@ function ArmyBuilder({
           />
         </OfficialSection>
 
-        <OfficialSection title="Regiments of Renown" action="plus">
+        <OfficialSection title="Regiments of Renown" action="plus" disabled={eligibleRegimentsOfRenown.length === 0}>
           <RenownSection
             available={eligibleRegimentsOfRenown}
             selected={list.regimentsOfRenown ?? []}
@@ -145,6 +154,7 @@ function ArmyBuilder({
             title: "Add Auxiliary Unit",
             property: "newAuxiliary",
             options: faction.units ?? [],
+            ui: { variant: "units" },
           })}
         >
           <div className="aos-official-auxiliaries">
@@ -158,48 +168,43 @@ function ArmyBuilder({
           </div>
         </OfficialSection>
 
-        <OfficialSection title="Lores" action="settings">
-          <div className="aos-official-selection-list">
+        <OfficialSection title="Lores" action="settings" open onAction={() => setLoreSettingsOpen(true)} disabled={selectionGroups.length === 0}>
+          <div className="aos-official-lore-list">
             {selectionGroups.map((group) => (
-              <button
-                key={group.property}
-                type="button"
-                onClick={() => openSelector(group)}
-              >
-                <span>{group.title}</span><strong>{group.value ?? "Not selected"}</strong>
-              </button>
+              <LoreGroup key={group.property} group={group} selected={list[group.property]} onChoose={() => openSelector(group)} onViewRule={onViewRule} />
             ))}
           </div>
         </OfficialSection>
 
-        <OfficialSection title="Battle Tactics" action="settings">
+        <OfficialSection title="Battle Tactics" action="settings" onAction={() => openSelector(tacticsSelector)}>
           <button
             type="button"
             className="aos-official-current-selection"
-            onClick={() => openSelector({
-              title: "Battle Tactics",
-              property: "battleTactics",
-              options: ghb2026BattleTacticsCards,
-              ui: { maxSelections: 2, variant: "battleTactics" },
-            })}
+            onClick={() => openSelector(tacticsSelector)}
           >
             {formatSelection(list.battleTactics)}
           </button>
         </OfficialSection>
 
         {(faction.terrain ?? []).length > 0 && (
-          <OfficialSection title="Faction Terrain" action="settings">
-            <button
-              type="button"
-              className="aos-official-current-selection"
-              onClick={() => openSelector({
-                title: "Faction Terrain",
-                property: "terrain",
-                options: faction.terrain,
-              })}
-            >
-              {list.terrain?.name ?? "Not selected"}
-            </button>
+          <OfficialSection title="Faction Terrain" action="settings" open onAction={() => openSelector(terrainSelector)}>
+            {list.terrain ? (
+              <article className="aos-official-terrain-row">
+                <button type="button" className="aos-official-terrain-row__view" onClick={() => onViewWarscroll(list.terrain)} aria-label={`View ${list.terrain.name} warscroll`}>
+                  <UnitArtwork unit={list.terrain} />
+                  <strong>{list.terrain.name}</strong>
+                </button>
+                <details className="aos-official-action-menu">
+                  <summary aria-label={`${list.terrain.name} options`}><OfficialIcon name="menu" /></summary>
+                  <div>
+                    <button type="button" onClick={() => onViewWarscroll(list.terrain)}>View Warscroll</button>
+                    <button type="button" onClick={() => openSelector(terrainSelector)}>Change Terrain</button>
+                  </div>
+                </details>
+              </article>
+            ) : (
+              <button type="button" className="aos-official-current-selection" onClick={() => openSelector(terrainSelector)}>Choose Faction Terrain</button>
+            )}
           </OfficialSection>
         )}
 
@@ -229,11 +234,13 @@ function ArmyBuilder({
         onProfile={onSettings}
       />
 
+      {loreSettingsOpen && <LoreSettings groups={selectionGroups} onClose={() => setLoreSettingsOpen(false)} onChoose={(group) => { setLoreSettingsOpen(false); openSelector(group); }} />}
+
     </main>
   );
 }
 
-function OfficialSection({ title, action, onAction, open = false, children }) {
+function OfficialSection({ title, action, onAction, open = false, disabled = false, children }) {
   return (
     <details className="aos-official-builder-section" open={open}>
       <summary>
@@ -242,13 +249,45 @@ function OfficialSection({ title, action, onAction, open = false, children }) {
         {action && (
           <button
             type="button"
-            onClick={(event) => { event.preventDefault(); onAction?.(); }}
+            disabled={disabled}
+            onClick={(event) => {
+              event.preventDefault();
+              if (onAction) onAction();
+              else event.currentTarget.closest("details").open = !event.currentTarget.closest("details").open;
+            }}
             aria-label={`${title} options`}
           ><OfficialIcon name={action} size={action === "plus" ? 32 : 24} strokeWidth={2.8} /></button>
         )}
       </summary>
       <div>{children}</div>
     </details>
+  );
+}
+
+function LoreGroup({ group, selected, onChoose, onViewRule }) {
+  const items = selected?.spells ?? selected?.prayers ?? selected?.manifestations ?? [];
+  return (
+    <details className="aos-official-lore-group">
+      <summary><strong>{group.title}</strong><OfficialIcon name="chevronDown" size={20} /></summary>
+      <div className="aos-official-lore-group__content">
+        {selected && <strong>{selected.name}</strong>}
+        {items.map((item) => group.property === "manifestationLore" ? (
+          <button key={item.id ?? item.name} type="button" className="aos-official-current-selection" onClick={() => onViewRule?.({ item, kind: "manifestation", sourceName: selected.name })}>{item.name}<OfficialIcon name="chevronRight" size={18} /></button>
+        ) : <AbilityCard key={item.id ?? item.name} ability={item} />)}
+        <button type="button" className="aos-official-lore-choose" onClick={onChoose}>{selected ? "Change" : "Choose"} {group.title}</button>
+      </div>
+    </details>
+  );
+}
+
+function LoreSettings({ groups, onClose, onChoose }) {
+  const dialogRef = useRef(null);
+  useEffect(() => { dialogRef.current?.showModal(); }, []);
+  return (
+    <dialog ref={dialogRef} className="aos-official-lore-settings" aria-labelledby="lore-settings-title" onCancel={onClose} onClose={onClose}>
+      <header><h2 id="lore-settings-title">Lores</h2><button type="button" onClick={onClose} aria-label="Close lore settings">×</button></header>
+      {groups.map((group) => <button type="button" key={group.property} onClick={() => onChoose(group)}><strong>{group.title}</strong><OfficialIcon name="chevronRight" size={20} /></button>)}
+    </dialog>
   );
 }
 

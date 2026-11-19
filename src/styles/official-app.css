@@ -532,6 +532,49 @@ body {
   background: transparent;
 }
 
+.aos-official-builder-section > summary > button:disabled { color: #888; cursor: default; }
+
+.aos-official-lore-list {
+  display: grid;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--official-paper);
+}
+
+.aos-official-lore-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 51px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  color: #111;
+  background: #e0e0e0;
+  font: 700 15px/1.2 var(--official-serif);
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+
+.aos-official-lore-group > summary::-webkit-details-marker { display: none; }
+.aos-official-lore-group[open] > summary svg { transform: rotate(180deg); }
+.aos-official-lore-group__content { display: grid; gap: 12px; padding: 16px 0 0; }
+.aos-official-lore-group__content > strong { padding-inline: 12px; font: 700 15px var(--official-serif); }
+.aos-official-lore-group__content > button.aos-official-current-selection { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+.aos-official-lore-choose { justify-self: center; min-height: 44px; padding: 10px 20px; border: 0; border-radius: 999px; color: #111; background: var(--official-yellow); font: 700 13px var(--official-serif); }
+
+.aos-official-lore-settings { width: min(90vw, 382px); max-height: 80dvh; padding: 0; border: 0; border-radius: 12px; color: #111; background: #fff; font-family: var(--official-serif); }
+.aos-official-lore-settings::backdrop { background: #0008; }
+.aos-official-lore-settings header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; color: #fff; background: var(--official-red); }
+.aos-official-lore-settings h2 { margin: 0; font: 700 22px var(--official-display); text-transform: uppercase; }
+.aos-official-lore-settings header button { width: 44px; height: 44px; border: 0; color: #fff; background: transparent; font-size: 28px; }
+.aos-official-lore-settings > button { display: flex; width: 100%; min-height: 60px; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; border: 0; border-bottom: 1px solid var(--official-line); color: #111; background: #fff; text-align: left; }
+
+.aos-official-terrain-row { display: flex; min-height: 104px; align-items: center; gap: 12px; padding: 16px 18px 16px 12px; }
+.aos-official-terrain-row__view { display: flex; flex: 1; min-width: 0; align-items: center; gap: 14px; padding: 0; border: 0; color: #111; background: transparent; text-align: left; font: 700 15px var(--official-serif); }
+.aos-official-terrain-row__view .aos-unit-artwork { flex: 0 0 72px; width: 72px; height: 78px; }
+
 .aos-official-builder-section__chevron {
   display: grid;
   place-items: center;
