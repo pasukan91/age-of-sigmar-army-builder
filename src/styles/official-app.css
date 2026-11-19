@@ -455,7 +455,7 @@ body {
 .aos-official-builder-section__chevron {
   display: grid;
   place-items: center;
-  transform: rotate(-90deg);
+  transform: none;
 }
 
 .aos-official-builder-section[open] .aos-official-builder-section__chevron { transform: rotate(180deg); }

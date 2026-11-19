@@ -184,11 +184,13 @@ function ArmyBuilder({
           </OfficialSection>
         )}
 
-        <ArmyValidationPanel
-          validation={validation}
-          expanded={validationExpanded}
-          onExpandedChange={setValidationExpanded}
-        />
+        {validationExpanded && (
+          <ArmyValidationPanel
+            validation={validation}
+            expanded
+            onExpandedChange={setValidationExpanded}
+          />
+        )}
       </div>
 
       <button
