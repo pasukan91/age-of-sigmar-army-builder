@@ -370,12 +370,24 @@ body {
   background: transparent;
 }
 
+/* Keep long lists and rule documents from laying out off-screen cards. */
+.aos-official-selector .aos-option-card,
+.aos-rules-browser__card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+.aos-realmgate .aos-ability-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 96px;
+}
+
 /* Storm Forge list. */
 .aos-storm-forge-home {
   --official-red: #751b12;
   background:
     linear-gradient(#06111366, #030708b3),
-    var(--official-storm-art, url("/images/alliances/death.webp")) center / cover fixed;
+    var(--official-storm-art, url("/images/alliances/death.webp")) center top / auto 100dvh repeat-y;
 }
 
 .aos-storm-forge-home .aos-screen-content {

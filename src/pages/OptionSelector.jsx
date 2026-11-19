@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import Accordion from "../components/Accordion";
 import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
@@ -28,12 +28,13 @@ function OptionSelector({
   onUndoNotice,
 }) {
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
   const [searchOpen, setSearchOpen] = useState(false);
   const [unitGroup, setUnitGroup] = useState("all");
   const isMultiSelect = maxSelections > 1;
   const selectedIds = new Set(selectedOptions.map((option) => option.id));
   const filteredOptions = useMemo(() => {
-    const normalizedQuery = normalizeSearch(query);
+    const normalizedQuery = normalizeSearch(deferredQuery);
     return options.filter((option) => {
       if (unitGroup !== "all" && getUnitGroup(option) !== unitGroup) return false;
       if (!normalizedQuery) return true;
@@ -44,13 +45,25 @@ function OptionSelector({
         option.description,
       ].flat().filter(Boolean).join(" ")).includes(normalizedQuery);
     });
-  }, [options, query, unitGroup]);
+  }, [options, deferredQuery, unitGroup]);
   const optionGroups = variant === "units"
     ? groupUnitOptions(filteredOptions)
     : [{ id: "options", label: null, options: filteredOptions }];
-  const points = list ? calculateArmyPoints(list) : 0;
+  const points = useMemo(() => list ? calculateArmyPoints(list) : 0, [list]);
   const pointsLimit = Number(list?.pointsLimit ?? list?.points) || 0;
-  const listHasErrors = list ? validateArmyList(list).errors.length > 0 : false;
+  const listHasErrors = useMemo(() => list ? validateArmyList(list).errors.length > 0 : false, [list]);
+  const armyUnitCounts = useMemo(() => {
+    const counts = new Map();
+    const units = [
+      ...(list?.regiments ?? []).flatMap((regiment) => [regiment.hero, ...(regiment.units ?? [])]),
+      ...(list?.auxiliaries ?? []),
+    ].filter(Boolean);
+    for (const unit of units) {
+      const key = unit.sourceId ?? unit.id ?? unit.name;
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    return counts;
+  }, [list]);
 
   function hasWarscroll(option) {
     return Boolean(
@@ -70,12 +83,7 @@ function OptionSelector({
 
   function getArmyUnitCount(option) {
     if (!list || variant !== "units") return 0;
-    const optionKey = option.sourceId ?? option.id ?? option.name;
-    const units = [
-      ...(list.regiments ?? []).flatMap((regiment) => [regiment.hero, ...(regiment.units ?? [])]),
-      ...(list.auxiliaries ?? []),
-    ].filter(Boolean);
-    return units.filter((unit) => (unit.sourceId ?? unit.id ?? unit.name) === optionKey).length;
+    return armyUnitCounts.get(option.sourceId ?? option.id ?? option.name) ?? 0;
   }
 
   function canReceiveAqshyObsession(option) {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import OfficialIcon from "../components/OfficialIcon";
 import MainNav from "../components/MainNav";
@@ -44,8 +44,8 @@ function ArmyBuilder({
   const [loreSettingsOpen, setLoreSettingsOpen] = useState(false);
   const baseFaction = list?.faction ?? {};
   const faction = { ...baseFaction, ...(list?.armyOfRenown?.rules ?? {}) };
-  const validation = validateArmyList(list);
-  const points = calculateArmyPoints(list);
+  const validation = useMemo(() => validateArmyList(list), [list]);
+  const points = useMemo(() => calculateArmyPoints(list), [list]);
   const pointsLimit = Number(list?.pointsLimit ?? list?.points) || 0;
   const artwork = getFactionArtwork(baseFaction);
   const eligibleRegimentsOfRenown = list?.armyOfRenown?.excludesRegimentsOfRenown

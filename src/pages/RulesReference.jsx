@@ -1,18 +1,27 @@
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
+import DeferredDetails from "../components/DeferredDetails";
 import FormattedRulesText from "../components/FormattedRulesText";
 import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
 import rules from "../data/sigdexRules.generated.json";
 
+const searchText = new WeakMap();
+function matchesQuery(item, needle) {
+  if (!needle) return true;
+  if (!searchText.has(item)) searchText.set(item, JSON.stringify(item).toLowerCase());
+  return searchText.get(item).includes(needle);
+}
+
 function RulesReference({ onBack, onReference, onLists, onSettings }) {
   const [documentId, setDocumentId] = useState(rules.documents[0]?.id);
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
   const document = rules.documents.find((item) => item.id === documentId) ?? rules.documents[0];
   const sections = useMemo(() => {
-    const needle = query.trim().toLowerCase();
+    const needle = deferredQuery.trim().toLowerCase();
     if (!needle) return document?.sections ?? [];
-    return (document?.sections ?? []).filter((section) => JSON.stringify(section).toLowerCase().includes(needle));
-  }, [document, query]);
+    return (document?.sections ?? []).filter((section) => matchesQuery(section, needle));
+  }, [document, deferredQuery]);
 
   return (
     <main className="aos-page aos-rules-browser aos-official-page">
@@ -34,9 +43,9 @@ function RulesReference({ onBack, onReference, onLists, onSettings }) {
         </div>
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar una regla…" aria-label="Buscar reglas" />
       </section>
-      {documentId === "faq" ? <FaqContent query={query} /> : (
+      {documentId === "faq" ? <FaqContent query={deferredQuery} /> : (
         <section className="aos-rules-browser__content">
-          {sections.map((section) => <RuleSection key={section.name} section={section} />)}
+          {sections.map((section) => <RuleSection key={`${documentId}-${section.name}`} section={section} searching={Boolean(deferredQuery.trim())} />)}
           {sections.length === 0 && <p className="aos-empty-message">No hay resultados.</p>}
         </section>
       )}
@@ -50,11 +59,10 @@ function RulesReference({ onBack, onReference, onLists, onSettings }) {
   );
 }
 
-function RuleSection({ section, level = 2 }) {
+function RuleSection({ section, level = 2, searching = false }) {
   const Heading = `h${Math.min(6, level)}`;
   return (
-    <details className="aos-rules-browser__section" open={level === 2}>
-      <summary><Heading>{section.name}</Heading></summary>
+    <DeferredDetails className="aos-rules-browser__section" defaultOpen={level === 2 || searching} summary={<Heading>{section.name}</Heading>}>
       <div>
         {(section.containers ?? []).map((container, index) => (
           <article key={`${container.name}-${index}`} className="aos-rules-browser__card">
@@ -64,9 +72,9 @@ function RuleSection({ section, level = 2 }) {
             ))}
           </article>
         ))}
-        {(section.subSections ?? []).map((child) => <RuleSection key={child.name} section={child} level={level + 1} />)}
+        {(section.subSections ?? []).map((child) => <RuleSection key={`${child.name}-${searching}`} section={child} level={level + 1} searching={searching} />)}
       </div>
-    </details>
+    </DeferredDetails>
   );
 }
 
@@ -84,7 +92,7 @@ function RuleComponent({ component }) {
 
 function FaqContent({ query }) {
   const needle = query.trim().toLowerCase();
-  const groups = rules.faq.filter((group) => !needle || JSON.stringify(group).toLowerCase().includes(needle));
+  const groups = rules.faq.filter((group) => matchesQuery(group, needle));
   return <section className="aos-rules-browser__content">{groups.map((group) => (
     <details className="aos-rules-browser__section" key={group.title} open={!needle}>
       <summary><h2>{group.title}</h2></summary>
