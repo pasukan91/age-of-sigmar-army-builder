@@ -428,8 +428,7 @@ function RegimentSection({
                 onClick={() => {
                   setSelector({
                     title:
-                      `Añadir unidad a ` +
-                      regiment.hero.name,
+                      "Add Unit",
 
                     property:
                       "newUnit",
@@ -459,8 +458,8 @@ function RegimentSection({
                 }}
               >
                 {full && !canAddFreeCommandCorpsUnit
-                  ? "Regimiento completo"
-                  : "+ Añadir unidad"}
+                  ? "Regiment Full"
+                  : "Add Unit"}
               </button>
               </div>
             </details>
@@ -831,13 +830,20 @@ const styles = {
   },
 
   addUnitButton: {
-    width: "100%",
-    padding: 13,
-    border: "1px solid #8f6c2e",
-    borderRadius: 3,
-    color: "#5f120e",
-    backgroundColor: "#f5eee1",
+    display: "block",
+    width: "auto",
+    minWidth: 132,
+    minHeight: 50,
+    padding: "10px 26px",
+    margin: "18px auto 4px",
+    border: "1px solid #ffffff",
+    borderRadius: 999,
+    color: "#ffffff",
+    backgroundColor: "#050505",
+    boxShadow: "0 0 0 1px #050505",
+    fontFamily: '"Roboto Slab", Georgia, serif',
     fontWeight: 700,
+    textTransform: "uppercase",
   },
 
   addRegimentButton: {

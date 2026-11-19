@@ -636,19 +636,6 @@ function App() {
     setBuilderReference(null);
   }
 
-  function openNewUnitConfiguration(
-    option
-  ) {
-    if (!option) {
-      return;
-    }
-
-    setSelectedUnit(option);
-    setUnitEditor(null);
-
-    navigate("unitConfig");
-  }
-
   function handleConfigureAddedUnit({
     unit,
     regimentId,
@@ -690,6 +677,27 @@ function App() {
     }
 
     navigate("unitConfig");
+  }
+
+  function handleAddSelectedOption(option) {
+    if (!option) return;
+
+    if (selector?.property === "newRegiment") {
+      handleCreateRegiment(option);
+      return;
+    }
+
+    if (selector?.property === "newUnit") {
+      handleAddUnitToRegiment(option);
+      return;
+    }
+
+    if (selector?.property === "newAuxiliary") {
+      handleAddAuxiliary(option);
+      return;
+    }
+
+    saveArmyOption(option);
   }
 
   /*
@@ -2056,25 +2064,7 @@ function App() {
 
             saveArmyOption(option);
           }}
-          onConfigure={(
-            option
-          ) => {
-            if (
-              selector?.property ===
-                "newRegiment" ||
-              selector?.property ===
-                "newUnit"
-                || selector?.property === "newAuxiliary"
-            ) {
-              openNewUnitConfiguration(
-                option
-              );
-
-              return;
-            }
-
-            saveArmyOption(option);
-          }}
+          onConfigure={handleAddSelectedOption}
         />
       );
 
