@@ -110,6 +110,14 @@ test("renders nested bold and italic catalogue wording", () => {
   ]);
 });
 
+test("renders keyword markers inside longer bold phrases without adding nested delimiters", () => {
+  assert.deepEqual(parseInlineFormatting("This unit has **^^Priest^^ (1)**."), [
+    { text: "This unit has ", strong: false, emphasis: false },
+    { text: "Priest (1)", strong: true, emphasis: false },
+    { text: ".", strong: false, emphasis: false },
+  ]);
+});
+
 test("decodes numeric HTML entities before rendering", () => {
   assert.deepEqual(parseInlineFormatting("**MANIFESTATION’**&#x73; rule"), [
     { text: "MANIFESTATION’", strong: true, emphasis: false },

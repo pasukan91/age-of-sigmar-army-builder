@@ -126,7 +126,9 @@ function restoreUnit(savedUnit, faction) {
 
   const canonicalUnit = findById(
     faction?.units,
-    savedUnit.id
+    faction?.id === "fyreslayers" && ["hearthguard-berzerkers-with-berzerker-broadaxes", "hearthguard-berzerkers-with-flamestrike-poleaxes"].includes(savedUnit.id)
+      ? "hearthguard-berzerkers"
+      : savedUnit.id
   );
 
   if (!canonicalUnit) {

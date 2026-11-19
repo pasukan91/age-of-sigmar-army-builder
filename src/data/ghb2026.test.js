@@ -33,12 +33,12 @@ test("contains three tactics for each unique battle tactics card", () => {
     card.tactics.forEach((tactic) => {
       assert.equal(tactic.points, 5);
       assert.ok(tactic.flavour);
-      assert.match(tactic.condition, /Completas esta táctica de batalla/);
+      assert.match(tactic.condition, /You complete this battle tactic/);
     });
   });
   assert.equal(
     ghb2026BattleTacticsCards.find((card) => card.number === 3)
       .tactics.find((tactic) => tactic.type === "Dominio").name,
-    "Reclama lo que es tuyo",
+    "Claim What's Yours",
   );
 });

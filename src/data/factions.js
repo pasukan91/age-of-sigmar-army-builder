@@ -18,6 +18,7 @@ import armiesOfRenownByFaction from "./rulesOfRenownArmies";
 import { normalizeFaction } from "./normalizeFaction";
 import { applyAosCommunityFactionData } from "./applyAosCommunityFactionData";
 import { applyOctober2026Balance } from "./applyOctober2026Balance";
+import sigdexCatalogue from "./sigdexAllFactions.generated.json";
 import {
   flesheater,
   idoneth,
@@ -30,7 +31,7 @@ import {
 
 const [kruleboyz, ironjawz] = orrukWarclans.armyTypes;
 
-const factions = [
+const localFactions = [
   kruleboyz,
   ironjawz,
   hedonites,
@@ -75,8 +76,17 @@ const factions = [
     alliance: "destruction",
     name: "Sons of Behemat",
   },
-].map((localFaction) => {
-  const faction = applyOctober2026Balance(applyAosCommunityFactionData(localFaction));
+];
+for (const source of sigdexCatalogue.factions) {
+  if (!localFactions.some((faction) => faction.id === source.id)) localFactions.push(source);
+}
+const currentUniversalLores = sigdexCatalogue.universalManifestationLores ?? universalManifestationLores;
+const currentUniversalManifestations = sigdexCatalogue.universalManifestationLores
+  ? currentUniversalLores.flatMap((lore) => lore.manifestations)
+  : universalManifestations;
+const factions = localFactions.map((localFaction) => {
+  const current = applyAosCommunityFactionData(localFaction);
+  const faction = applyOctober2026Balance(current);
   const mergeUnique = (items) => [
     ...new Map(items.map((item) => [item?.sourceId ?? item?.id ?? item?.name, item])).values(),
   ];
@@ -84,11 +94,11 @@ const factions = [
     ...rules,
     manifestations: mergeUnique([
       ...(rules.manifestations ?? []),
-      ...universalManifestations,
+      ...currentUniversalManifestations,
     ]),
     manifestationLores: mergeUnique([
       ...(rules.manifestationLores ?? []),
-      ...universalManifestationLores,
+      ...currentUniversalLores,
     ]),
   });
   const addedArmies = (

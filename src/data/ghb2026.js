@@ -1,8 +1,28 @@
+import sigdex from "./sigdexAllFactions.generated.json" with { type: "json" };
+import sigdexRules from "./sigdexRules.generated.json" with { type: "json" };
+
 function section(label, text, title = null, timing = null) {
   return { label, title, timing, text };
 }
 
 function createBattleplan(number, table, name, sections, scoring) {
+  const source = sigdexRules.documents.find((document) => document.id === "ghb26-battleplans")?.sections[number - 1];
+  if (source) {
+    name = source.name;
+    const components = source.containers.flatMap((container) => container.components);
+    scoring = components.filter((item) => item.contentType === "scoring").map((item) => item.text);
+    sections = components.filter((item) => item.contentType !== "scoring").map((item) => {
+      const ability = item.ability;
+      return ability ? section("HABILIDAD", [
+        ability.usedBy && `Used By: ${ability.usedBy}`,
+        ability.declare && `Declare: ${ability.declare}`,
+        ability.effect && `Effect: ${ability.effect}`,
+        ability.cpCost != null && `${ability.cpCost} CP`,
+        ...(ability.keywords ?? []),
+      ].filter(Boolean).join("\n\n"), ability.name, ability.timing)
+        : section(item.contentType === "twist" ? "GIRO" : "REGLAS", item.text, item.title);
+    });
+  }
   const sectionText = sections.map((item) => [
     item.label,
     item.timing,
@@ -29,6 +49,16 @@ function createBattleplan(number, table, name, sections, scoring) {
 }
 
 function createBattleTacticsCard(number, name, introduction, setup, tactics) {
+  const sourceName = ["Blazing Onslaught", "Siege of Ashes", "Flanking Firestorm", "Smokescreen", "Burning for Vengeance", "Legend of the Parch"][number - 1];
+  const source = sigdex.battleTacticsCards?.find((card) => card.name === sourceName);
+  if (source) {
+    name = source.name;
+    setup = source.text || null;
+    tactics = tactics.map((tactic, index) => {
+      const current = source[["affray", "strike", "domination"][index]];
+      return { ...tactic, name: current.name, condition: current.description };
+    });
+  }
   const identifiedTactics = tactics.map((tactic, index) => ({
     ...tactic,
     id: `ghb-2026-battle-tactics-card-${number}-tactic-${index + 1}`,

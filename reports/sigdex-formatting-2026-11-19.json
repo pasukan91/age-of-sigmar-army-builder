@@ -1,0 +1,83 @@
+{
+  "textFields": 25102,
+  "boldTexts": 20407,
+  "italicTexts": 257,
+  "issues": 15,
+  "details": [
+    {
+      "path": "factions[2].units[12].abilities[2].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Effect: If this unit charged this turn and the unmodified charge roll was 6+ for the rest of the turn:\n\n\n• This unit has **^^Strike-first^^**.\n• The Attacks characteristic of this "
+    },
+    {
+      "path": "factions[2].units[12].abilities[2].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "If this unit charged this turn and the unmodified charge roll was 6+ for the rest of the turn:\n\n\n• This unit has **^^Strike-first^^**.\n• The Attacks characteristic of this unit's *"
+    },
+    {
+      "path": "factions[2].armiesOfRenown[1].rules.units[4].abilities[2].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Effect: If this unit charged this turn and the unmodified charge roll was 6+ for the rest of the turn:\n\n\n• This unit has **^^Strike-first^^**.\n• The Attacks characteristic of this "
+    },
+    {
+      "path": "factions[2].armiesOfRenown[1].rules.units[4].abilities[2].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "If this unit charged this turn and the unmodified charge roll was 6+ for the rest of the turn:\n\n\n• This unit has **^^Strike-first^^**.\n• The Attacks characteristic of this unit's *"
+    },
+    {
+      "path": "factions[5].armiesOfRenown[0].rules.battleTraits[2].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Effect: The **creeping overgrowth** (referenced by other abilities** extends 6\" from each terrain feature that has a friendly **overgrown token**.\nIncrease this range by 1\" for eac"
+    },
+    {
+      "path": "factions[5].armiesOfRenown[0].rules.battleTraits[2].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "The **creeping overgrowth** (referenced by other abilities** extends 6\" from each terrain feature that has a friendly **overgrown token**.\nIncrease this range by 1\" for each friend"
+    },
+    {
+      "path": "factions[8].armiesOfRenown[0].rules.heroicTraits[0].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Declare: Pick a terrain feature within 18\" of this unit, then pick a friendly non-**^^Hero Change-cult^^** unit that is **masked by illusion** or that has been destroyed to be the "
+    },
+    {
+      "path": "factions[8].armiesOfRenown[0].rules.heroicTraits[0].abilities[0].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Declare: Pick a terrain feature within 18\" of this unit, then pick a friendly non-**^^Hero Change-cult^^** unit that is **masked by illusion** or that has been destroyed to be the "
+    },
+    {
+      "path": "factions[8].armiesOfRenown[0].rules.heroicTraits[0].abilities[0].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "If you picked a unit that is **masked by illusion**, set it up wholly within 3\" of that terrain feature and more than 6\" from all enemy units.\nIf you picked a unit that has been de"
+    },
+    {
+      "path": "factions[14].units[8].abilities[3].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Effect: While any friendly **Nurglings** units are wholly within 12\" of this unit:\n• Ignore the first damage point that would be allocated to that **Nurglings* unit each phase.\n• T"
+    },
+    {
+      "path": "factions[14].units[8].abilities[3].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "While any friendly **Nurglings** units are wholly within 12\" of this unit:\n• Ignore the first damage point that would be allocated to that **Nurglings* unit each phase.\n• That **Nu"
+    },
+    {
+      "path": "factions[14].armiesOfRenown[0].rules.units[15].abilities[3].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Effect: While any friendly **Nurglings** units are wholly within 12\" of this unit:\n• Ignore the first damage point that would be allocated to that **Nurglings* unit each phase.\n• T"
+    },
+    {
+      "path": "factions[14].armiesOfRenown[0].rules.units[15].abilities[3].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "While any friendly **Nurglings** units are wholly within 12\" of this unit:\n• Ignore the first damage point that would be allocated to that **Nurglings* unit each phase.\n• That **Nu"
+    },
+    {
+      "path": "factions[23].armiesOfRenown[1].rules.battleTraits[3].description",
+      "type": "unbalanced-emphasis",
+      "sample": "Effect: In the fourth battle round, each time a friendly **^^Equinox Feast^^** unit uses a **^^fight^^** ability, after that ability has been resolved:\n• If that unit is damaged, *"
+    },
+    {
+      "path": "factions[23].armiesOfRenown[1].rules.battleTraits[3].effect",
+      "type": "unbalanced-emphasis",
+      "sample": "In the fourth battle round, each time a friendly **^^Equinox Feast^^** unit uses a **^^fight^^** ability, after that ability has been resolved:\n• If that unit is damaged, **Heal (D"
+    }
+  ]
+}

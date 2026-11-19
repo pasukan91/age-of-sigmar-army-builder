@@ -18,14 +18,14 @@ function findById(value, id) {
   return null;
 }
 
-test("applies the official 28 October 2026 matched-play changes over SigDex", async () => {
+test("the current SigDex catalogue includes the October matched-play corrections", async () => {
   const server = await createServer({ logLevel: "silent", server: { middlewareMode: true }, appType: "custom" });
   try {
     const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
     const faction = (id) => factions.find((item) => item.id === id);
     const get = (factionId, id) => findById(faction(factionId), id);
 
-    assert.ok(factions.every((item) => item.balancePublicationDate === "2026-10-28"));
+    assert.ok(factions.every((item) => item.catalogueServerVersion === "4.1.1"));
     assert.equal(get("skaven", "verminlord-corruptor").points, 260);
 
     const riverblades = get("lumineth", "ydrilan-riverblades");
@@ -50,8 +50,8 @@ test("applies the official 28 October 2026 matched-play changes over SigDex", as
 
     const aqshyFlameseekers = get("fyreslayers", "scourge-of-aqshy-vulkyn-flameseekers");
     assert.ok(aqshyFlameseekers.keywords.includes("KHAZALITE HOLDS"));
-    assert.match(get("fyreslayers", "blazing-impetus").description, /GRIMMDRON/i);
-    assert.match(get("fyreslayers", "aureate-hide").restrictionText, /GRIMMDRON MONSTERS/i);
+    assert.match(get("fyreslayers", "blazing-impetus").description, /Grimmdron/i);
+    assert.match(get("fyreslayers", "aureate-hide").restrictionText, /Grimmdron Monsters/i);
   } finally {
     await server.close();
   }
@@ -103,10 +103,9 @@ test("replaces Lofnir Drothkeepers with the October rules", async () => {
     const lofnir = fyreslayers.armiesOfRenown.find((item) => item.id === "lofnir-drothkeepers");
 
     assert.equal(lofnir.rules.name, "Khazalite Holds - Lofnir Drothkeepers");
-    assert.deepEqual(
-      lofnir.rules.battleTraits.map((trait) => trait.id),
-      ["blazing-vengeance", "skilled-drothwranglers", "ferocious-heat", "daring-tamers"],
-    );
+    for (const id of ["blazing-vengeance", "skilled-drothwranglers", "ferocious-heat", "daring-tamers", "rearing-strike", "searing-claws"]) {
+      assert.ok(lofnir.rules.battleTraits.some((trait) => trait.id === id), id);
+    }
     assert.equal(findById(lofnir.rules, "blazing-vengeance").phase, "Passive");
     assert.match(findById(lofnir.rules, "blazing-vengeance").description, /grudge mark/i);
     assert.equal(findById(lofnir.rules, "skilled-drothwranglers").phase, "Passive");

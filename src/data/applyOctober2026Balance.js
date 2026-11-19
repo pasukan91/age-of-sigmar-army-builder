@@ -9,6 +9,14 @@ const PUBLICATION_DATE = october2026BalanceMetadata.publicationDate;
 export function applyOctober2026Balance(faction) {
   if (!faction) return faction;
 
+  if (Number(faction.catalogueServerVersion?.split(".")[0]) >= 4) {
+    // SigDex 4.x supersedes the old Khazalite/Lofnir replacements. Its plain
+    // CHAMPION on The Twistweald still omits the published October ratio.
+    return mapObjects(faction, (item) => faction.id === "sylvaneth" && item.id === "the-twistweald"
+      ? patchChampionKeyword(item, "CHAMPION (1/8)")
+      : item);
+  }
+
   let result = mapObjects(faction, (item) => patchOfficialItem(faction.id, item));
   if (faction.id === "behemat") result = patchSonsArmiesOfRenown(result);
   if (faction.id === "fyreslayers") result = patchLofnirDrothkeepers(result);

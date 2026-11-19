@@ -4,7 +4,7 @@ const [sourcePath = "tmp/sigdex-api-main.json", outputPath = "src/data/sigdexAll
 const source = JSON.parse(readFileSync(sourcePath, "utf8"));
 const previous = JSON.parse(readFileSync("src/data/aosCommunityAllFactions.generated.json", "utf8"));
 
-const TARGETS = [
+const KNOWN_IDS = [
   ["Blades of Khorne", "khorne"], ["Cities of Sigmar", "cities"], ["Daughters of Khaine", "daughters"],
   ["Disciples of Tzeentch", "tzeentch"], ["Flesh-eater Courts", "flesheater"], ["Fyreslayers", "fyreslayers"],
   ["Gloomspite Gitz", "gloomspite"], ["Hedonites of Slaanesh", "hedonites"], ["Helsmiths of Hashut", "hashut"],
@@ -15,7 +15,9 @@ const TARGETS = [
   ["Sons of Behemat", "behemat"], ["Soulblight Gravelords", "soulblight"], ["Stormcast Eternals", "stormcast"],
   ["Sylvaneth", "sylvaneth"],
 ];
-const idByName = new Map(TARGETS);
+// Preserve the saved-list faction key through the Fyreslayers replacement.
+KNOWN_IDS.push(["Khazalite Holds", "fyreslayers"]);
+const knownIdByName = new Map(KNOWN_IDS);
 const previousByName = new Map(previous.factions.map((faction) => [faction.name, faction]));
 const FACTION_FALLBACKS = {
   kruleboyz: "/images/factions/kruleboyz.webp", ironjawz: "/images/factions/ironjawz.webp",
@@ -35,6 +37,17 @@ const FACTION_FALLBACKS = {
 
 const slug = (value = "") => String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   .replace(/[‘’‛`´]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const TARGETS = Object.values(source.armies)
+  .filter((army) => !army.isArmyOfRenown && !army.legends)
+  .map((army) => [army.name, knownIdByName.get(army.name) ?? slug(army.name)])
+  .sort((left, right) => {
+    const order = (id) => {
+      const index = KNOWN_IDS.findIndex((entry) => entry[1] === id);
+      return index < 0 ? KNOWN_IDS.length : index;
+    };
+    return order(left[1]) - order(right[1]) || left[0].localeCompare(right[0]);
+  });
+const idByName = new Map(TARGETS);
 const cleanKeyword = (value) => String(value ?? "").replace(/\*\*\^\^|\^\^\*\*/g, "").trim();
 const uniqueBy = (items, key) => [...new Map(items.map((item) => [key(item), item])).values()];
 const isAqshy = (value) => /aqshy/i.test(String(value ?? ""));
@@ -43,12 +56,16 @@ const displayUnitName = (value = "") => String(value).replace(
   /^(.*) \(Scourge of Aqshy\)$/i,
   "Scourge of Aqshy: $1",
 );
-const globalImageByUnitName = new Map(previous.factions.flatMap((faction) =>
-  (faction.units ?? []).flatMap((item) => {
+const previousUniversal = JSON.parse(readFileSync("src/data/additionalBattletomeFactions.generated.json", "utf8"));
+const globalImageByUnitName = new Map([
+  ...previous.factions.flatMap((faction) => [
+    ...(faction.units ?? []), ...(faction.manifestations ?? []), ...(faction.terrain ?? []),
+  ]),
+  ...(previousUniversal.universalManifestations ?? []),
+].flatMap((item) => {
     const image = localImage(item.image);
     return image ? [[slug(item.name), image]] : [];
-  })
-));
+  }));
 const IMAGE_NAME_ALIASES = {
   "legion-of-the-first-prince-beasts-of-nurgle": "beast-of-nurgle",
   "legion-of-the-first-prince-hellflayer": "hellflayer",
@@ -62,14 +79,19 @@ function description(item) {
 
 function ability(item) {
   const keywords = (item.keywords ?? []).map(cleanKeyword).filter(Boolean);
-  const spell = keywords.some((keyword) => keyword.toLowerCase() === "spell");
-  const prayer = keywords.some((keyword) => keyword.toLowerCase() === "prayer");
+  const spell = Number(item.type) === 2 || keywords.some((keyword) => keyword.toLowerCase() === "spell");
+  const prayer = Number(item.type) === 4 || keywords.some((keyword) => keyword.toLowerCase() === "prayer");
   return {
     id: slug(item.name), sourceId: item.id, name: item.name, phase: item.timing || "Passive",
     type: spell ? "Spell" : prayer ? "Prayer" : "Ability", description: description(item),
     declare: item.declare ?? null, effect: item.effect ?? null, usedBy: item.usedBy ?? null,
+    lore: item.lore ?? null, unlockCondition: item.unlockCondition ?? null,
     keywords, castingValue: spell ? numberOrNull(item.cost) : null,
-    chantingValue: prayer ? numberOrNull(item.cost) : null, commandPoints: numberOrNull(item.cost),
+    chantingValue: prayer ? numberOrNull(item.cost) : null,
+    commandPoints: Number(item.type) === 3 ? numberOrNull(item.cost) : null,
+    resourceCost: [5, 6].includes(Number(item.type)) && item.cost != null
+      ? { value: item.cost, label: Number(item.type) === 5 ? "Blood Tithe" : "Fate Points" }
+      : null,
   };
 }
 
@@ -140,6 +162,7 @@ function unit(item, factionId, imageIndex = new Map(), fallbackImage = `/images/
       wizard: keywordLevel(keywords, "wizard"), priest: keywordLevel(keywords, "priest"), ward: item.ward,
       warmaster: item.isWarmaster === true, canBeReinforced: item.canBeReinforced === true && profile.reinforceable !== false,
       canLeadRegiment: regimentRules.length > 0,
+      canLeadRegimentAsHero: regimentRules.length > 0 && profile.hero !== true && !keywords.some((keyword) => keyword.toLowerCase() === "hero"),
     },
     lore: item.lore ?? null,
     catalogueSource: { id: item.id, dataVersion: source.version?.battleProfiles ?? source.version?.bsdata ?? null },
@@ -217,7 +240,7 @@ function factionFromArmy(army, id, { nested = false } = {}) {
     const image = localImage(item.image);
     if (image) imageIndex.set(slug(item.name), image);
   });
-  const fallbackImage = localImage(old?.image) ?? FACTION_FALLBACKS[id];
+  const fallbackImage = localImage(old?.image) ?? FACTION_FALLBACKS[id] ?? `/images/alliances/${String(army.alliance).toLowerCase()}.webp`;
   const convertedUnits = uniqueBy(
     (army.units ?? []).filter((item) => !item.legends && isCurrentUnit(item)),
     (item) => item.id ?? `${item.name}:${JSON.stringify(item.battleProfile ?? {})}`,
@@ -298,6 +321,8 @@ const output = {
     serverVersion: source.version?.server, bsdataVersion: source.version?.bsdata, battleProfilesVersion: source.version?.battleProfiles,
   },
   factions,
+  universalManifestationLores: lores({ upgrades: { lores: { manifestation: source.universal } } }, "manifestation", "universal", globalImageByUnitName, "/images/alliances/order.webp"),
+  battleTacticsCards: source.generalsHandbook?.find((book) => book.name === "General's Handbook 2026-27")?.battleTacticCards ?? [],
 };
 writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`Wrote ${outputPath}: ${factions.length} factions, ${factions.reduce((sum, faction) => sum + faction.units.length, 0)} units`);

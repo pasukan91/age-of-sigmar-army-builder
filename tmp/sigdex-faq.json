@@ -1,9 +1,9 @@
 {
   "title": "rules_update.pdf",
   "filename": "rules_update.pdf",
-  "hash": "aa473cbdad54e068d8e6ae18d153e564",
-  "publishedDate": "2026-09-09",
-  "extractedDate": "2026-09-23",
+  "hash": "fb4f5c136d2e74d69bd9c66744c3ad20",
+  "publishedDate": "2026-11-13",
+  "extractedDate": "2026-11-18",
   "type": "faq",
   "data": [
     {
@@ -313,7 +313,7 @@
           ]
         },
         {
-          "title": "28.2 \u2018ONCE PER\u2019 TIMINGS",
+          "title": "28.2 ‘ONCE PER’ TIMINGS",
           "questions": [
             {
               "question": "If an ability that is not on a unit's warscroll has the 'Once Per Turn', 'Once Per Battle' or 'Once Per Battle Round' timing (without '(Army)' afterwards), can multiple friendly units use that ability in that time period?",
@@ -434,7 +434,7 @@
           "title": "MAGIC, 2.0 SPELLS",
           "questions": [
             {
-              "question": "Is mortal damage inflicted by a miscast considered to be 'mortal damage inflicted by a Spell ability' for the purposes of abilities like the Tzeentch effect of the 'Marks of Chaos' ability?",
+              "question": "Is mortal damage inflicted by a miscast considered to be 'mortal damage inflicted by a Spell ability' for the purposes of abilities like a Morghast Archai unit's 'Ebon-wrought Armour' ability?",
               "answer": "No."
             }
           ]
@@ -509,7 +509,7 @@
           "title": "ARMY COMPOSITION, 3.1 REGIMENTS",
           "questions": [
             {
-              "question": "If a Hero is able to join another Hero's regiment (e.g. The Shadow Queen joining Morathi-Khaine or an Assassin joining a Dreadlord on Black Dragon), do they take the place of a non-Hero unit in that regiment?",
+              "question": "If a Hero is able to join another Hero's regiment (e.g. The Shadow Queen joining Morathi-Khaine, do they take the place of a non-Hero unit in that regiment?",
               "answer": "Yes."
             },
             {
@@ -547,7 +547,7 @@
           "title": "ARMY COMPOSITION, 4.1 ENHANCEMENTS",
           "questions": [
             {
-              "question": "If an ability allows a unit to gain an enhancement during a battle (for example, the Sons of Behemat 'More Stuff for me Collection' ability) and I pick an enhancement that costs points, do I need to have sufficient spare points in my army roster in order to pay for that enhancement?",
+              "question": "If an ability allows a unit to gain an enhancement during a battle (for example, the Kharadron Overlords 'Special Procurement' ability) and I pick an enhancement that costs points, do I need to have sufficient spare points in my army roster in order to pay for that enhancement?",
               "answer": "No. Enhancements added to your army during a battle do not cost any points."
             }
           ]
@@ -575,7 +575,7 @@
       "rules": []
     },
     {
-      "title": "GENERAL\u2019S HANDBOOK 2025-26",
+      "title": "GENERAL’S HANDBOOK 2025-26",
       "questions": [
         {
           "question": "Can I complete the same battle tactic multiple times in a battle?",
@@ -666,7 +666,7 @@
       ]
     },
     {
-      "title": "GENERAL\u2019S HANDBOOK 2026-27",
+      "title": "GENERAL’S HANDBOOK 2026-27",
       "questions": [
         {
           "question": "When using 'Eruption of Fury', can I use a reaction to pick another unit to use a Fight ability immediately after?",
@@ -714,6 +714,10 @@
             {
               "question": "In the Seize the Embers battleplan, can a unit bring an emberstone nugget into reserve?",
               "answer": "Yes."
+            },
+            {
+              "question": "Can 'Fight Through the Pain' allow a replacement unit that is set up with damage points allocated to it (e.g. through Alarielle's 'The Goddess of Life' ability) to ignore those damage points?",
+              "answer": "No."
             }
           ]
         }
@@ -722,10 +726,6 @@
     {
       "title": "OTHER DIGITAL DOWNLOADS",
       "questions": [
-        {
-          "question": "Is the Pyrofane Cult Army of Renown in White Dwarf issue 514 legal for Matched Play?",
-          "answer": "No, it is a Legends Army of Renown."
-        },
         {
           "question": "Can I include Scourge of Aqshy units in an Army of Renown instead of their standard version?",
           "answer": "Yes."
@@ -737,7 +737,7 @@
       ],
       "rules": [
         {
-          "title": "FYRESLAYERS, AURIC RUNESON ON MAGMADROTH",
+          "title": "KHAZALITE HOLDS, AURIC RUNESON ON MAGMADROTH",
           "questions": [
             {
               "question": "Can more than one Scourge of Aqshy Auric Runeson on Magmadroth pick the same Auric Runefather on Magmadroth as the target of their 'Fire, Blood and Vengeance'?",
@@ -771,6 +771,19 @@
               "answer": "No, it applies only in your opponent's next turn."
             }
           ]
+        },
+        {
+          "title": "LUMINETH REALM-LORDS, FLAWLESS MANOEUVRES",
+          "questions": [
+            {
+              "question": "Can a unit using the 'Perfect Footwork' ability change which objective it is contesting as long as all the models in the unit can end that move contesting that objective?",
+              "answer": "Yes."
+            },
+            {
+              "question": "When Night Runners use their 'Smoke Bomb' ability, are slain enemy models removed before or after they move?",
+              "answer": "After. They will still be in combat with all models they were in combat with before making attacks."
+            }
+          ]
         }
       ]
     },
@@ -794,6 +807,10 @@
         {
           "question": "Does the 'Overheating' ability remove one heat token or one heat token for each 5+?",
           "answer": "One heat token for each 5+. 39"
+        },
+        {
+          "question": "If a unit is set up both by 'Sphere Celestial' and another ability, can it still move in the following movement phase?",
+          "answer": "Yes."
         }
       ],
       "rules": []
@@ -894,6 +911,16 @@
         {
           "question": "If I use the 'Blazebeard and Sons Bamboozling Flakgun' artefact of power to remove a dice from my opponent's charge roll, and then my opponent uses the 'Forward to Victory' command, how many dice does my opponent re-roll for that charge roll?",
           "answer": "They would roll the number of dice left in the charge roll after 1 dice has been removed. For example, if the original charge roll was made with 2 dice and 1 of those dice was removed by the Blazebeard and Sons Bamboozling Flakgun, your opponent would re-roll that 1 remaining dice to determine their re-rolled charge roll."
+        }
+      ],
+      "rules": []
+    },
+    {
+      "title": "BATTLETOME: KHAZALITE HOLDS",
+      "questions": [
+        {
+          "question": "In the Throngankor Alliance Army of Renown, can an Arkanaut Frigate use its 'Assault Boat' ability to transport friendly Khazalite Holds units?",
+          "answer": "No. 55"
         }
       ],
       "rules": []
@@ -1149,7 +1176,7 @@
       "questions": [
         {
           "question": "When creating your initial 1000-point roster, do you have to pay for individual Spell, Prayer or Summon abilities if the associated lore has a points cost?",
-          "answer": "No. 77"
+          "answer": "No. 80"
         },
         {
           "question": "During deployment, can you deploy both a regular faction terrain feature and a Landmark of Ghyran or just one of them?",

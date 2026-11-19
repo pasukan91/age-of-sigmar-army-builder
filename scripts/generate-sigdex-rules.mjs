@@ -4,6 +4,7 @@ const documents = [
   ["core", "tmp/sigdex-core_rules.json"],
   ["ghb26-advanced", "tmp/sigdex-ghb26_advanced_rules.json"],
   ["ghb26-battlepack", "tmp/sigdex-ghb26_battle_pack.json"],
+  ["ghb26-battleplans", "tmp/sigdex-ghb26_battleplans.json"],
 ].map(([id, path]) => ({ id, ...JSON.parse(readFileSync(path, "utf8")) }));
 const faq = JSON.parse(readFileSync("tmp/sigdex-faq.json", "utf8"));
 

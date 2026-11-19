@@ -46,7 +46,7 @@ const factionsByName = new Map(
 
 export function applyAosCommunityFactionData(faction) {
   const sourceName = faction?.catalogueFactionName ?? faction?.name;
-  const source = factionsByName.get(normalizedName(sourceName));
+  const source = factionsByName.get(normalizedName(sourceName)) ?? catalogue.factions.find((item) => item.id === faction?.id);
   if (!source) return faction;
 
   const result = {
@@ -73,6 +73,7 @@ export function applyAosCommunityFactionData(faction) {
     image: localImage(faction.image) ?? localizeImage(source.image),
     catalogueDataVersion:
       catalogue.metadata.battleProfilesVersion ?? catalogue.metadata.bsdataVersion,
+    catalogueServerVersion: catalogue.metadata.serverVersion,
   };
 }
 

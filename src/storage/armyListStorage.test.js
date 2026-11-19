@@ -12,6 +12,32 @@ function createMemoryStorage(initialValue) {
   };
 }
 
+test("restores Fyreslayers lists as Khazalite Holds and migrates both Hearthguard weapon variants", async () => {
+  const server = await createServer({ appType: "custom", logLevel: "silent", server: { middlewareMode: true, hmr: false } });
+  try {
+    const storageModule = await server.ssrLoadModule("/src/storage/armyListStorage.js");
+    const payload = JSON.stringify({ version: 1, lists: [{
+      id: "legacy-fyreslayers", factionId: "fyreslayers", allianceId: "order", name: "Saved army",
+      regiments: [{ id: "regiment-1", hero: { id: "auric-runefather", instanceId: "hero-1" }, units: [
+        { id: "hearthguard-berzerkers-with-berzerker-broadaxes", instanceId: "unit-1", reinforced: true },
+        { id: "hearthguard-berzerkers-with-flamestrike-poleaxes", instanceId: "unit-2" },
+      ] }],
+    }] });
+    globalThis.window = { localStorage: createMemoryStorage(payload) };
+    const result = storageModule.loadArmyListsResult();
+    assert.equal(result.status, "loaded");
+    const list = result.lists[0];
+    assert.equal(list.faction.name, "Khazalite Holds");
+    assert.equal(list.regiments[0].hero.instanceId, "hero-1");
+    assert.deepEqual(list.regiments[0].units.map((unit) => unit.id), ["hearthguard-berzerkers", "hearthguard-berzerkers"]);
+    assert.equal(list.regiments[0].units[0].reinforced, true);
+    assert.equal(list.regiments[0].units[1].instanceId, "unit-2");
+  } finally {
+    delete globalThis.window;
+    await server.close();
+  }
+});
+
 test("isolates a malformed list and preserves the original payload", async () => {
   const server = await createServer({
     appType: "custom",

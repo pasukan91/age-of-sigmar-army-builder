@@ -31,17 +31,20 @@ const IDS = new Map([
   ["Seraphon", "seraphon"], ["Skaven", "skaven"], ["Slaves to Darkness", "std"], ["Sons of Behemat", "behemat"],
   ["Soulblight Gravelords", "soulblight"], ["Stormcast Eternals", "stormcast"], ["Sylvaneth", "sylvaneth"],
 ]);
+for (const faction of factionCatalogue.factions) IDS.set(faction.name, faction.id);
 const slug = (value = "") => String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[‘’‛`´]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const clean = (value) => String(value ?? "").replace(/\*\*\^\^|\^\^\*\*/g, "").trim();
 const describe = (item) => [item.usedBy && `Used By: ${item.usedBy}`, item.declare && `Declare: ${item.declare}`, item.effect && `Effect: ${item.effect}`].filter(Boolean).join("\n\n") || item.lore || "";
 const makeAbility = (item) => {
   const keywords = (item.keywords ?? []).map(clean);
-  const spell = keywords.some((keyword) => keyword.toLowerCase() === "spell");
-  const prayer = keywords.some((keyword) => keyword.toLowerCase() === "prayer");
+  const spell = Number(item.type) === 2 || keywords.some((keyword) => keyword.toLowerCase() === "spell");
+  const prayer = Number(item.type) === 4 || keywords.some((keyword) => keyword.toLowerCase() === "prayer");
   return {
     id: slug(item.name), sourceId: item.id, name: item.name, phase: item.timing || "Passive",
     type: spell ? "Spell" : prayer ? "Prayer" : "Ability", description: describe(item),
     declare: item.declare ?? null, effect: item.effect ?? null, lore: item.lore ?? null, keywords,
+    usedBy: item.usedBy ?? null, unlockCondition: item.unlockCondition ?? null,
+    commandPoints: Number(item.type) === 3 ? Number(item.cost) || null : null,
     castingValue: spell && Number.isFinite(Number(item.cost)) ? Number(item.cost) : null,
     chantingValue: prayer && Number.isFinite(Number(item.cost)) ? Number(item.cost) : null,
   };

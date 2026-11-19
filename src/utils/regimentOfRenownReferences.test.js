@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import regimentsOfRenown from "../data/regimentsOfRenown.js";
+import source from "../../tmp/sigdex-api-main.json" with { type: "json" };
 import { calculateArmyHealth } from "./armyHealth.js";
 import {
   createRegimentOfRenownReference,
@@ -9,7 +10,7 @@ import {
 } from "./regimentOfRenownReferences.js";
 
 test("every Regiment of Renown has enough information for its reference sheet", () => {
-  assert.equal(regimentsOfRenown.length, 76);
+  assert.equal(regimentsOfRenown.length, source.regimentsOfRenown.filter((item) => !item.legends).length);
 
   regimentsOfRenown.forEach((regiment) => {
     const reference = createRegimentOfRenownReference(regiment);

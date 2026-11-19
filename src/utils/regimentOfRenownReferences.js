@@ -3,7 +3,7 @@ const FACTION_NAMES = {
   cities: "Cities of Sigmar",
   daughters: "Daughters of Khaine",
   flesheater: "Flesh-eater Courts",
-  fyreslayers: "Fyreslayers",
+  fyreslayers: "Khazalite Holds",
   gloomspite: "Gloomspite Gitz",
   hashut: "Helsmiths of Hashut",
   hedonites: "Hedonites of Slaanesh",

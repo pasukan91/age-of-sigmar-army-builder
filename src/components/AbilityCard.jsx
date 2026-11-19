@@ -83,6 +83,9 @@ function AbilityCard({ ability, defaultOpen = false, context = null, variant }) 
           className="aos-ability-card__lore"
         />
 
+        {ability.resourceCost && <p className="aos-ability-card__roll">{ability.resourceCost.value} {ability.resourceCost.label}</p>}
+        {ability.unlockCondition && <div className="aos-ability-card__text"><FormattedText text={ability.unlockCondition} /></div>}
+
         {introduction && (
           <div className="aos-ability-card__text">
             <FormattedText text={introduction} />

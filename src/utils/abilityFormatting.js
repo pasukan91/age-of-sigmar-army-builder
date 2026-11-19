@@ -159,7 +159,10 @@ function tokenizeInlineFormatting(text) {
 
 function normalizeKeywordMarkers(text) {
   return text
-    .replace(/\*\*\^\^([^\n]*?)\^\^\*\*/g, "**$1**")
+    // SigDex also nests keyword markers within a longer bold phrase, such as
+    // **^^Priest^^ (1)**. Converting those carets into another bold pair
+    // creates four adjacent stars and loses the intended formatting.
+    .replace(/\*\*[^*\n]+\*\*/g, (bold) => bold.replace(/\^\^/g, ""))
     .replace(/\^\^([^\n]*?)\^\^/g, "**$1**");
 }
 

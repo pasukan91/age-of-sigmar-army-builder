@@ -9,15 +9,16 @@ const catalogue = JSON.parse(
 const additionalCatalogue = JSON.parse(
   readFileSync("src/data/additionalBattletomeFactions.generated.json", "utf8")
 );
+const rawSource = JSON.parse(readFileSync("tmp/sigdex-api-main.json", "utf8"));
 
 test("SigDex is authoritative for every active faction and builder restriction", async () => {
   const server = await createServer({ logLevel: "silent", server: { middlewareMode: true }, appType: "custom" });
   try {
     const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
     assert.equal(catalogue.metadata.source, "https://sigdex.io/");
-    assert.equal(catalogue.metadata.serverVersion, "3.1.15");
-    assert.equal(catalogue.factions.length, 25);
-    assert.equal(catalogue.factions.reduce((sum, faction) => sum + faction.units.length, 0), 761);
+    assert.equal(catalogue.metadata.serverVersion, rawSource.version.server);
+    assert.equal(catalogue.metadata.bsdataVersion, rawSource.version.bsdata);
+    assert.deepEqual(catalogue.factions.map((f) => f.name).sort(), Object.values(rawSource.armies).filter((army) => !army.isArmyOfRenown && !army.legends).map((army) => army.name).sort());
 
     for (const source of catalogue.factions) {
       const faction = factions.find((item) => item.id === source.id);
@@ -41,10 +42,7 @@ test("SigDex is authoritative for every active faction and builder restriction",
       for (const expected of source.units) {
         const actual = faction.units.find((item) => item.name === expected.name);
         assert.ok(actual, `${source.name}: ${expected.name}`);
-        const officialOctoberPoints = source.id === "skaven" && expected.id === "verminlord-corruptor"
-          ? 260
-          : expected.points;
-        assert.equal(actual.points, officialOctoberPoints, `${expected.name}: points`);
+        assert.equal(actual.points, expected.points, `${expected.name}: points`);
         assert.deepEqual(actual.profile, expected.profile, `${expected.name}: profile`);
         assert.equal(actual.details.models, expected.details.models, `${expected.name}: models`);
         assert.deepEqual(actual.details.regimentOptions, expected.details.regimentOptions, `${expected.name}: regiment options`);
@@ -61,7 +59,7 @@ test("every faction offers the complete universal manifestation lores", async ()
   const server = await createServer({ logLevel: "silent", server: { middlewareMode: true }, appType: "custom" });
   try {
     const { default: factions } = await server.ssrLoadModule("/src/data/factions.js");
-    const universalLoreNames = additionalCatalogue.universalManifestationLores.map((lore) => lore.name);
+    const universalLoreNames = catalogue.universalManifestationLores.map((lore) => lore.name);
 
     for (const faction of factions) {
       const loreNames = faction.manifestationLores.map((lore) => lore.name);

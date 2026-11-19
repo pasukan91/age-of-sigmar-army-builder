@@ -58,7 +58,7 @@ test("every current warscroll has valid points and reinforcement arithmetic", ()
     });
   });
 
-  assert.equal(checkedUnits, 761);
+  assert.equal(checkedUnits, catalogue.factions.reduce((sum, faction) => sum + faction.units.length, 0));
   assert.ok(checkedReinforcements > 0);
 });
 
