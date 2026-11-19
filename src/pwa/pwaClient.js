@@ -1,7 +1,7 @@
 let deferredInstallPrompt = null;
 let refreshing = false;
 const CACHE_RESET_KEY = "storm-forge.cache-reset";
-const CACHE_RESET_VERSION = "official-ui-v2";
+const CACHE_RESET_VERSION = "official-ui-v3";
 
 export function initializePwa() {
   window.addEventListener("beforeinstallprompt", (event) => {

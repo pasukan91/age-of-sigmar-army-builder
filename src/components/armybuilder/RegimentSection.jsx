@@ -9,7 +9,6 @@ import {
   getRegimentUnitLimit,
 } from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
-import { getEnhancementTiming } from "../../utils/enhancementTiming";
 import { isUniqueUnit } from "../../utils/unitIdentity";
 import { getUnitPoints } from "../../utils/armyPoints";
 
@@ -382,27 +381,35 @@ export function UnitCard({
   const isUnique = isUniqueUnit(unit);
 
   const assignedEnhancements = [
-    ["Artefacto", unit.artefact],
-    ["Rasgo heroico", unit.heroicTrait],
+    unit.artefact,
+    unit.heroicTrait,
     ...(!isHedonitesUnit
-      ? [["Rasgo monstruoso", unit.monstrousTrait]]
+      ? [unit.monstrousTrait]
       : []),
-    ["Obsesión", unit.allConsumingObsession],
-    ["Mutación Moulder", unit.moulderMutation],
-    ["Refinamiento Mortisan", unit.mortisanRefinement],
-    ["Dispositivo maldito", unit.accursedDevice],
-    ["Mutación de bronce", unit.brazenMutation],
-    ["Origen de relato terrorífico", unit.originOfTerrifyingFolkTale],
-    ["Visión de destino", unit.visionOfFate],
-    ["Special Knick-Knack", unit.specialKnickKnack],
-    ["Flawless Manoeuvre", unit.flawlessManoeuvre],
-    ["Plaguefather’s Pox", unit.plaguefathersPox],
-    ["Decoration for Valour", unit.decorationForValour],
-    ["Ironweld Innovation", unit.ironweldInnovation],
-    ["Brand of the Dark Gods", unit.brandOfDarkGod],
-    ["Ensorcelled Banner", unit.ensorcelledBanner],
-    ["Boon of Shadow", unit.boonOfShadow],
-  ].filter(([, enhancement]) => Boolean(enhancement));
+    unit.allConsumingObsession,
+    unit.moulderMutation,
+    unit.mortisanRefinement,
+    unit.accursedDevice,
+    unit.brazenMutation,
+    unit.originOfTerrifyingFolkTale,
+    unit.visionOfFate,
+    unit.specialKnickKnack,
+    unit.flawlessManoeuvre,
+    unit.plaguefathersPox,
+    unit.decorationForValour,
+    unit.ironweldInnovation,
+    unit.brandOfDarkGod,
+    unit.ensorcelledBanner,
+    unit.boonOfShadow,
+    unit.aqshyEnhancement,
+    ...Object.values(unit.specialEnhancements ?? {}),
+  ]
+    .filter(Boolean)
+    .filter((enhancement, index, enhancements) =>
+      enhancements.findIndex((candidate) =>
+        (candidate.id ?? candidate.name) === (enhancement.id ?? enhancement.name)
+      ) === index
+    );
 
   return (
     <article className="aos-official-roster-unit">
@@ -425,22 +432,11 @@ export function UnitCard({
 
         {assignedEnhancements.length > 0 && (
           <div className="aos-unit-enhancements" aria-label="Mejoras asignadas">
-            {assignedEnhancements.map(([label, enhancement]) => (
-              <div className="aos-unit-enhancement" key={`${label}-${enhancement.id}`}>
-                <span className="aos-unit-enhancement__type">{label}</span>
-                <strong>{enhancement.name}</strong>
-                <div className="aos-unit-enhancement__meta">
-                  <span>{getEnhancementTiming(enhancement)}</span>
-                  {enhancement.source && (
-                    <span className={enhancement.source === "Aqshy" ? "is-aqshy" : ""}>
-                      {enhancement.source}
-                    </span>
-                  )}
-                  {Number(enhancement.points) > 0 && (
-                    <span>{enhancement.points} pts</span>
-                  )}
-                </div>
-              </div>
+            {assignedEnhancements.map((enhancement) => (
+              <span className="aos-unit-enhancement" key={enhancement.id ?? enhancement.name}>
+                {enhancement.name}
+                {Number(enhancement.points) > 0 && ` - ${enhancement.points} Points`}
+              </span>
             ))}
           </div>
         )}

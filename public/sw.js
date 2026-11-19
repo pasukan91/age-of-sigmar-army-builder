@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v16-official-creation-flow";
+const CACHE_VERSION = "v17-official-enhancement-lines";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media-${CACHE_VERSION}`;
