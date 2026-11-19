@@ -7,10 +7,8 @@ import {
 import {
   canAddRegiment,
   getRegimentUnitLimit,
-  MAX_REGIMENTS_PER_ARMY,
 } from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
-import TrashIcon from "../TrashIcon";
 import { getEnhancementTiming } from "../../utils/enhancementTiming";
 import { isUniqueUnit } from "../../utils/unitIdentity";
 import { getUnitPoints } from "../../utils/armyPoints";
@@ -35,17 +33,6 @@ function RegimentSection({
     getAvailableRegimentLeaders(list);
   const compositionErrors =
     getRegimentCompositionErrors(list);
-
-  function getUnitModels(unit) {
-    const baseModels =
-      Number(
-        unit?.details?.models
-      ) || 1;
-
-    return unit?.reinforced
-      ? baseModels * 2
-      : baseModels;
-  }
 
   function requestRemoveUnit(
     regiment,
@@ -168,12 +155,6 @@ function RegimentSection({
               regimentIndex
             );
 
-          const availableSlots =
-            Math.max(
-              limit - units.filter(countsTowardRegimentLimit).length,
-              0
-            );
-
           const full =
             units.filter(countsTowardRegimentLimit).length >= limit;
 
@@ -206,84 +187,26 @@ function RegimentSection({
             + units.reduce((total, unit) => total + getUnitPoints(unit), 0);
 
           return (
-            <details
+            <article
               id={`regiment-${regiment.id}`}
               key={regiment.id}
-              className="aos-regiment-card"
-              open
-              style={
-                styles.regimentCard
-              }
+              className="aos-official-regiment"
             >
-              <summary className="aos-regiment-card__summary">
-                <div>
-                  <h3
-                    style={
-                      styles.regimentTitle
-                    }
-                  >
-                    Regimiento{" "}
-                    {regimentIndex + 1}
-                  </h3>
-
-                  <p
-                    style={
-                      styles.regimentSubtitle
-                    }
-                  >
-                    {regimentIndex === 0
-                      ? "Regimiento del general"
-                      : `Liderado por ${regiment.hero.name}`}
-                    {regiment.requiredByArmyOfRenown
-                      ? " · Obligatorio"
-                      : ""}
-                  </p>
-                </div>
-
-                <span className="aos-regiment-card__overview">
-                  {units.filter(countsTowardRegimentLimit).length}/{limit} unidades · {regimentPoints} pts
-                </span>
-              </summary>
-
-              <div className="aos-regiment-card__body">
-              <header
-                className="aos-regiment-card__actions"
-              >
-                <span>
-                  {availableSlots} {availableSlots === 1 ? "plaza disponible" : "plazas disponibles"}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    requestRemoveRegiment(
-                      regiment,
-                      regimentIndex
-                    )
-                  }
-                  style={
-                    styles.deleteRegimentButton
-                  }
-                  aria-label={`Eliminar el regimiento de ${regiment.hero.name}`}
-                  title="Eliminar regimiento"
-                >
-                  <TrashIcon size={17} />
-                </button>
+              <header className="aos-official-regiment__header">
+                <strong>Regiment {regimentIndex + 1}</strong>
+                <span>{regimentPoints} Points</span>
+                <details className="aos-official-action-menu">
+                  <summary aria-label={`Regiment ${regimentIndex + 1} options`}>⋮</summary>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => requestRemoveRegiment(regiment, regimentIndex)}
+                    >
+                      Remove Regiment
+                    </button>
+                  </div>
+                </details>
               </header>
-
-              <div style={styles.slotsRow}>
-                <span>
-                  Unidades:{" "}
-                  {units.filter(countsTowardRegimentLimit).length}/{limit}
-                </span>
-
-                <span>
-                  {availableSlots}{" "}
-                  {availableSlots === 1
-                    ? "plaza disponible"
-                    : "plazas disponibles"}
-                </span>
-              </div>
 
               {regimentErrors.map((error) => (
                 <p
@@ -295,21 +218,10 @@ function RegimentSection({
                 </p>
               ))}
 
-              <p
-                style={
-                  styles.sectionLabel
-                }
-              >
-                Líder
-              </p>
-
               <UnitCard
                 unit={regiment.hero}
                 isLeader
                 points={getUnitPoints(
-                  regiment.hero
-                )}
-                models={getUnitModels(
                   regiment.hero
                 )}
                 onView={() => {
@@ -342,32 +254,11 @@ function RegimentSection({
                 }}
               />
 
-              <p
-                style={
-                  styles.sectionLabel
-                }
-              >
-                Unidades
-              </p>
-
-              {units.length === 0 && (
-                <div
-                  style={
-                    styles.emptyUnitCard
-                  }
-                >
-                  <strong>Este regimiento necesita unidades</strong>
-                </div>
-              )}
-
               {units.map((unit) => (
                 <UnitCard
                   key={unit.instanceId}
                   unit={unit}
                   points={getUnitPoints(
-                    unit
-                  )}
-                  models={getUnitModels(
                     unit
                   )}
                   onView={() => {
@@ -461,31 +352,11 @@ function RegimentSection({
                   ? "Regiment Full"
                   : "Add Unit"}
               </button>
-              </div>
-            </details>
+            </article>
           );
         }
       )}
 
-      {regiments.length > 0 && <button
-        type="button"
-        disabled={
-          availableHeroes.length === 0 || !canAddRegiment(list)
-        }
-        title={
-          !canAddRegiment(list)
-            ? `El máximo es de ${MAX_REGIMENTS_PER_ARMY} regimientos por ejército.`
-            : undefined
-        }
-        onClick={openNewRegimentSelector}
-        style={
-          styles.addRegimentButton
-        }
-      >
-        {canAddRegiment(list)
-          ? "+ Añadir regimiento"
-          : `Máximo de ${MAX_REGIMENTS_PER_ARMY} regimientos alcanzado`}
-      </button>}
     </section>
   );
 }
@@ -494,7 +365,6 @@ export function UnitCard({
   unit,
   isLeader = false,
   points,
-  models,
   pointsLabel,
   locked = false,
   onView,
@@ -503,11 +373,6 @@ export function UnitCard({
   onDuplicate,
   canDuplicate = false,
 }) {
-  const baseSize =
-    unit?.details?.baseSize ??
-    unit?.profile?.baseSize ??
-    unit?.baseSize;
-
   const isHedonitesUnit =
     (unit?.keywords ?? []).some(
       (keyword) =>
@@ -540,7 +405,7 @@ export function UnitCard({
   ].filter(([, enhancement]) => Boolean(enhancement));
 
   return (
-    <article className="aos-regiment-unit-card" style={styles.unitCard}>
+    <article className="aos-official-roster-unit">
       <button
         type="button"
         onClick={onView}
@@ -550,39 +415,13 @@ export function UnitCard({
         <UnitArtwork unit={unit} variant="thumbnail" />
       </button>
 
-      <div style={styles.unitInfo}>
-        <strong style={styles.unitName}>
+      <div className="aos-official-roster-unit__info">
+        <strong>
           {unit.name}
         </strong>
-
-        <div style={styles.badges}>
-          {isLeader && (
-            <span style={styles.badge}>
-              Líder
-            </span>
-          )}
-
-          {unit.rules?.hero && (
-            <span style={styles.badge}>
-              Héroe
-            </span>
-          )}
-
-          {unit.reinforced && (
-            <span style={styles.badge}>
-              Reforzada
-            </span>
-          )}
-        </div>
-
-        <p style={styles.summary}>
-          {models}{" "}
-          {models === 1
-            ? "miniatura"
-            : "miniaturas"}{" "}
-          · {pointsLabel ?? `${points} puntos`}
-          {baseSize ? ` · Peana ${baseSize}` : ""}
-        </p>
+        <span className="aos-official-roster-unit__points">
+          {pointsLabel ?? `${points}pts`}
+        </span>
 
         {assignedEnhancements.length > 0 && (
           <div className="aos-unit-enhancements" aria-label="Mejoras asignadas">
@@ -607,116 +446,23 @@ export function UnitCard({
         )}
       </div>
 
-      {!locked && <div style={styles.actions}>
-        {!isUnique && (
-          <button
-            type="button"
-            onClick={onConfigure}
-            style={styles.primaryButton}
-          >
-            Asignar mejoras
-          </button>
-        )}
-
-        {!isLeader && (
-          <>
-            {canDuplicate && (
-              <button
-                type="button"
-                onClick={onDuplicate}
-                style={styles.secondaryButton}
-              >
-                Duplicar
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={onRemove}
-              style={
-                styles.deleteUnitButton
-              }
-              aria-label={`Eliminar ${unit.name}`}
-              title="Eliminar unidad"
-            >
-              <TrashIcon size={17} />
-            </button>
-          </>
-        )}
-      </div>}
+      {!locked && (
+        <details className="aos-official-action-menu aos-official-action-menu--unit">
+          <summary aria-label={`${unit.name} options`}>⋮</summary>
+          <div>
+            {!isUnique && <button type="button" onClick={onConfigure}>Configure</button>}
+            {!isLeader && canDuplicate && <button type="button" onClick={onDuplicate}>Duplicate</button>}
+            {!isLeader && <button type="button" onClick={onRemove}>Remove</button>}
+          </div>
+        </details>
+      )}
     </article>
   );
 }
 
 const styles = {
   section: {
-    padding: "0 16px 24px",
-  },
-
-  emptyCard: {
-    display: "grid",
-    gap: 7,
-    padding: 18,
-    marginBottom: 20,
-    border: "1px dashed #aaa092",
-    borderRadius: 3,
-    color: "#716a61",
-    backgroundColor: "rgba(255,255,255,0.55)",
-    textAlign: "center",
-  },
-
-  regimentCard: {
-    padding: 16,
-    marginBottom: 20,
-    border: "1px solid #d4cec1",
-    borderTop: "4px solid #8f6c2e",
-    borderRadius: 3,
-    backgroundColor: "#faf8f3",
-    boxShadow:
-      "0 5px 16px rgba(47,38,28,0.13)",
-  },
-
-  regimentHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: 14,
-    marginBottom: 12,
-  },
-
-  regimentTitle: {
-    margin: 0,
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    fontSize: 23,
-    textTransform: "uppercase",
-  },
-
-  regimentSubtitle: {
-    margin: "4px 0 0",
-    color: "#666666",
-  },
-
-  slotsRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 10,
-    padding: 10,
-    marginBottom: 16,
-    borderRadius: 2,
-    color: "#5f574e",
-    backgroundColor: "#e9e3d7",
-    fontSize: 12,
-    fontWeight: 800,
-    textTransform: "uppercase",
-  },
-
-  sectionLabel: {
-    margin: "15px 0 8px",
-    color: "#666666",
-    fontSize: 13,
-    fontWeight: 700,
-    textTransform: "uppercase",
+    padding: "0 0 24px",
   },
 
   compositionError: {
@@ -728,105 +474,6 @@ const styles = {
     backgroundColor: "#fff0ee",
     fontSize: 13,
     fontWeight: 700,
-  },
-
-  unitCard: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: 14,
-    padding: 14,
-    marginBottom: 10,
-    border: "1px solid #d0d0d0",
-    borderLeft: "4px solid #891f18",
-    borderRadius: 3,
-    backgroundColor: "#fffefa",
-  },
-
-  unitInfo: {
-    flex: "1 1 260px",
-  },
-
-  unitName: {
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    fontSize: 19,
-    textTransform: "uppercase",
-  },
-
-  badges: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 5,
-    marginTop: 7,
-  },
-
-  badge: {
-    padding: "3px 7px",
-    borderRadius: 999,
-    color: "#ffffff",
-    backgroundColor: "#62605c",
-    fontSize: 11,
-    fontWeight: 700,
-  },
-
-  summary: {
-    margin: "8px 0 0",
-    color: "#555555",
-  },
-
-  actions: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-
-  secondaryButton: {
-    padding: "9px 12px",
-    border: "1px solid #111111",
-    borderRadius: 3,
-    backgroundColor: "#faf8f3",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-
-  primaryButton: {
-    padding: "9px 12px",
-    border: "1px solid #5f120e",
-    borderRadius: 3,
-    backgroundColor: "#891f18",
-    color: "#ffffff",
-    cursor: "pointer",
-  },
-
-  deleteUnitButton: {
-    display: "grid",
-    width: 44,
-    height: 44,
-    minHeight: 44,
-    placeItems: "center",
-    padding: 0,
-    border: "1px solid #a40000",
-    borderRadius: 3,
-    backgroundColor: "#ffffff",
-    color: "#a40000",
-    cursor: "pointer",
-  },
-
-  deleteRegimentButton: {
-    display: "grid",
-    width: 44,
-    height: 44,
-    minHeight: 44,
-    flex: "0 0 44px",
-    placeItems: "center",
-    padding: 0,
-    border: "1px solid #a40000",
-    borderRadius: 3,
-    backgroundColor: "#ffffff",
-    color: "#a40000",
-    cursor: "pointer",
   },
 
   addUnitButton: {
@@ -846,32 +493,6 @@ const styles = {
     textTransform: "uppercase",
   },
 
-  addRegimentButton: {
-    width: "100%",
-    padding: 15,
-    border: "1px solid #5f120e",
-    borderRadius: 3,
-    background:
-      "linear-gradient(180deg, #a22b22, #5f120e)",
-    color: "#ffffff",
-    fontWeight: 700,
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    fontSize: 17,
-    letterSpacing: "0.04em",
-    textTransform: "uppercase",
-    cursor: "pointer",
-  },
-
-  emptyUnitCard: {
-    display: "grid",
-    gap: 5,
-    padding: 14,
-    marginBottom: 10,
-    border: "1px dashed #cccccc",
-    borderRadius: 3,
-    color: "#666666",
-  },
 };
 
 export default RegimentSection;

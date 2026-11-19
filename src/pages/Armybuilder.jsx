@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import OfficialIcon from "../components/OfficialIcon";
+import MainNav from "../components/MainNav";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
@@ -10,6 +11,8 @@ import { calculateArmyPoints } from "../utils/armyPoints";
 import { validateArmyList } from "../utils/armyValidation";
 import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
 import { createRegimentOfRenownReference } from "../utils/regimentOfRenownReferences";
+import { getAvailableRegimentLeaders } from "../utils/regimentRules";
+import { canAddRegiment } from "../utils/armyComposition";
 
 import "../styles/aos-app.css";
 import "../styles/official-app.css";
@@ -28,6 +31,9 @@ function ArmyBuilder({
   onRemoveRegimentOfRenown,
   onRemoveAuxiliary,
   onViewRule,
+  onRules,
+  onLists,
+  onSettings,
 }) {
   const [validationExpanded, setValidationExpanded] = useState(false);
   const baseFaction = list?.faction ?? {};
@@ -94,7 +100,20 @@ function ArmyBuilder({
       )}
 
       <div className="aos-official-builder-content">
-        <OfficialSection title="Regiments" open action="plus">
+        <OfficialSection
+          title="Regiments"
+          open
+          action="plus"
+          onAction={() => {
+            if (!canAddRegiment(list)) return;
+            openSelector({
+              title: "Add Hero",
+              property: "newRegiment",
+              options: getAvailableRegimentLeaders(list),
+              ui: { variant: "units" },
+            });
+          }}
+        >
           <RegimentSection
             list={list}
             setSelector={setSelector}
@@ -202,6 +221,13 @@ function ArmyBuilder({
         <strong>{points}/{pointsLimit}</strong>
         <small>POINTS</small>
       </button>
+
+      <MainNav
+        active="storm-forge"
+        onReference={onRules}
+        onStormForge={onLists}
+        onProfile={onSettings}
+      />
 
     </main>
   );
