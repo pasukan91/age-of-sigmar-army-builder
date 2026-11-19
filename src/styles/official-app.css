@@ -1055,10 +1055,19 @@ body {
 /* Warscrolls. */
 .aos-warscroll-page {
   width: min(100%, var(--official-width));
+  overflow: visible;
   padding-bottom: 24px;
   background: var(--official-paper);
 }
-.aos-warscroll-page .aos-topbar { min-height: var(--official-header-height); color: #fff; background: var(--official-red); }
+.aos-warscroll-page > .aos-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  min-height: var(--official-header-height);
+  padding-top: max(12px, env(safe-area-inset-top));
+  color: #fff;
+  background: var(--official-red);
+}
 .aos-warscroll-page .aos-warscroll-hero {
   height: clamp(260px, 70vw, 300px);
   min-height: 260px;
