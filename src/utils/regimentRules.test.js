@@ -43,6 +43,19 @@ function makeList(options, units = []) {
   };
 }
 
+test("builder mode keeps units selectable beyond role capacity while validation reports the excess", () => {
+  const first = { ...hero("first-wrangler", "mob-wrangler"), instanceId: "first" };
+  const second = hero("second-wrangler", "mob-wrangler");
+  const list = makeList(["0-1 Mob Wrangler"], [first]);
+  list.faction.units = [second];
+  const regiment = list.regiments[0];
+  assert.equal(canUnitJoinRegiment({ list, regiment, unit: second }), false);
+  assert.equal(canUnitJoinRegiment({ list, regiment, unit: second, ignoreCapacity: true }), true);
+  assert.deepEqual(getAvailableUnitsForRegiment(list, regiment, { ignoreCapacity: true }), [second]);
+  regiment.units.push({ ...second, instanceId: "second" });
+  assert.ok(getRegimentCompositionErrors(list).some((error) => error.count === 2 && error.max === 1));
+});
+
 test("limits a faction-specific hero role to the composition maximum", () => {
   const firstMobWrangler = {
     ...hero("killaboss", "mob-wrangler"),

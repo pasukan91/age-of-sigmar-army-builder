@@ -793,7 +793,7 @@ export function isUnitUniqueInArmy(list, unit, ignoredInstanceId = null) {
   );
 }
 
-export function canUnitJoinRegiment({ list, regiment, unit }) {
+export function canUnitJoinRegiment({ list, regiment, unit, ignoreCapacity = false }) {
   if (!unit || !regiment?.hero || unit.id === regiment.hero.id) {
     return false;
   }
@@ -856,7 +856,7 @@ export function canUnitJoinRegiment({ list, regiment, unit }) {
   return options.some(
     (option) =>
       optionAllowsUnit(unit, option) &&
-      optionHasCapacity(regiment, option)
+      (ignoreCapacity || optionHasCapacity(regiment, option))
   );
 }
 
@@ -974,7 +974,7 @@ export function hasIllegalRegimentComposition(list) {
   return getRegimentCompositionErrors(list).length > 0;
 }
 
-export function getAvailableUnitsForRegiment(list, regiment) {
+export function getAvailableUnitsForRegiment(list, regiment, { ignoreCapacity = false } = {}) {
   const armyUnits = list?.armyOfRenown?.rules?.units;
   const units = Array.isArray(armyUnits) && armyUnits.length > 0
     ? armyUnits
@@ -985,7 +985,7 @@ export function getAvailableUnitsForRegiment(list, regiment) {
 
   return units.filter((unit) =>
     isMatchedPlayUnit(unit) &&
-    canUnitJoinRegiment({ list, regiment, unit })
+    canUnitJoinRegiment({ list, regiment, unit, ignoreCapacity })
   );
 }
 

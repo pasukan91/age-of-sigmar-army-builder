@@ -16,12 +16,7 @@ import factions from "./data/factions";
 import alliances from "./data/alliances";
 
 import {
-  calculateArmyPoints,
-  hasExceededPointsLimit,
-} from "./utils/armyPoints";
-import {
   canUnitJoinRegiment,
-  countsTowardRegimentLimit,
   isUnitUniqueInArmy,
 } from "./utils/regimentRules";
 import {
@@ -412,11 +407,6 @@ function App() {
       updatedAt: Date.now(),
     };
 
-    const totalPoints =
-      calculateArmyPoints(
-        listWithUpdateDate
-      );
-
     setCurrentList(
       listWithUpdateDate
     );
@@ -445,24 +435,6 @@ function App() {
       );
     });
 
-    if (
-      hasExceededPointsLimit(
-        listWithUpdateDate
-      )
-    ) {
-      const pointsLimit =
-        Number(
-          listWithUpdateDate
-            .pointsLimit ??
-            listWithUpdateDate.points
-        ) || 0;
-
-      window.alert(
-        "Has superado el límite de puntos.\n\n" +
-          `Puntos actuales: ${totalPoints}\n` +
-          `Límite: ${pointsLimit}`
-      );
-    }
   }
 
   function handleDeleteList(listId) {
@@ -1382,36 +1354,12 @@ function App() {
         regimentIndex
       ];
 
-    const unitsInRegiment =
-      selectedRegiment.units ??
-      [];
-
-    /*
-     * Regimiento 1: cuatro unidades.
-     * Resto: tres unidades.
-     */
-    const regimentLimit =
-      regimentIndex === 0
-        ? 4
-        : 3;
-
-    if (
-      unitsInRegiment.filter(countsTowardRegimentLimit).length >=
-      regimentLimit &&
-      countsTowardRegimentLimit(configuredUnit)
-    ) {
-      window.alert(
-        `Este regimiento ya contiene el máximo de ${regimentLimit} unidades.`
-      );
-
-      return;
-    }
-
     if (
       !canUnitJoinRegiment({
         list: currentList,
         regiment: selectedRegiment,
         unit: configuredUnit,
+        ignoreCapacity: true,
       })
     ) {
       window.alert(
@@ -1681,24 +1629,12 @@ function App() {
       return;
     }
 
-    const regimentLimit = regimentIndex === 0 ? 4 : 3;
-
-    if (
-      (regiment.units ?? []).filter(countsTowardRegimentLimit).length >=
-      regimentLimit &&
-      countsTowardRegimentLimit(sourceUnit)
-    ) {
-      window.alert(
-        `Este regimiento ya contiene el máximo de ${regimentLimit} unidades.`
-      );
-      return;
-    }
-
     if (
       !canUnitJoinRegiment({
         list: currentList,
         regiment,
         unit: sourceUnit,
+        ignoreCapacity: true,
       })
     ) {
       window.alert(

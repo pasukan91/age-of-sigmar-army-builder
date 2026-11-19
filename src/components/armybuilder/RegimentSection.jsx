@@ -1,12 +1,9 @@
 import {
-  countsTowardRegimentLimit,
   getAvailableRegimentLeaders,
   getAvailableUnitsForRegiment,
-  getRegimentCompositionErrors,
 } from "../../utils/regimentRules";
 import {
   canAddRegiment,
-  getRegimentUnitLimit,
 } from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
 import { getUnitPoints } from "../../utils/armyPoints";
@@ -29,8 +26,6 @@ function RegimentSection({
 
   const availableHeroes =
     getAvailableRegimentLeaders(list);
-  const compositionErrors =
-    getRegimentCompositionErrors(list);
 
   function requestRemoveUnit(
     regiment,
@@ -148,39 +143,13 @@ function RegimentSection({
               ? regiment.units
               : [];
 
-          const limit =
-            getRegimentUnitLimit(
-              regimentIndex
-            );
-
-          const full =
-            units.filter(countsTowardRegimentLimit).length >= limit;
-
-          const selectableUnits =
+          const offeredUnits =
             getAvailableUnitsForRegiment(
               list,
-              regiment
+              regiment,
+              { ignoreCapacity: true }
             );
-
-          const canAddFreeCommandCorpsUnit =
-            selectableUnits.some(
-              (unit) => !countsTowardRegimentLimit(unit)
-            );
-
-          const offeredUnits = full
-            ? selectableUnits.filter(
-                (unit) => !countsTowardRegimentLimit(unit)
-              )
-            : selectableUnits;
-
-          const addUnitsDisabled =
-            (full && !canAddFreeCommandCorpsUnit) ||
-            offeredUnits.length === 0;
-          const regimentErrors =
-            compositionErrors.filter(
-              (error) =>
-                error.regimentId === regiment.id
-            );
+          const addUnitsDisabled = offeredUnits.length === 0;
           const regimentPoints = getUnitPoints(regiment.hero)
             + units.reduce((total, unit) => total + getUnitPoints(unit), 0);
 
@@ -205,16 +174,6 @@ function RegimentSection({
                   </div>
                 </details>
               </header>
-
-              {regimentErrors.map((error) => (
-                <p
-                  key={`${error.role}-${error.max}`}
-                  role="alert"
-                  style={styles.compositionError}
-                >
-                  Composición ilegal: {error.message}
-                </p>
-              ))}
 
               <UnitCard
                 unit={regiment.hero}
@@ -346,9 +305,7 @@ function RegimentSection({
                       : "pointer",
                 }}
               >
-                {full && !canAddFreeCommandCorpsUnit
-                  ? "Regiment Full"
-                  : "Add Unit"}
+                Add Unit
               </button>
             </article>
           );
@@ -463,17 +420,6 @@ export function UnitCard({
 const styles = {
   section: {
     padding: "0 0 24px",
-  },
-
-  compositionError: {
-    padding: 10,
-    margin: "0 0 14px",
-    border: "1px solid #a40000",
-    borderRadius: 3,
-    color: "#7b110c",
-    backgroundColor: "#fff0ee",
-    fontSize: 13,
-    fontWeight: 700,
   },
 
   addUnitButton: {
