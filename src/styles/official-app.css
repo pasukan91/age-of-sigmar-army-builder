@@ -13,6 +13,7 @@
   --official-serif: "Roboto Slab", Georgia, serif;
   --official-display: "Oswald", "Arial Narrow", sans-serif;
   --official-width: 430px;
+  --official-header-height: 76px;
   --official-nav-height: 98px;
 }
 
@@ -44,8 +45,8 @@ body {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr) auto;
   align-items: end;
-  min-height: 116px;
-  padding: calc(28px + env(safe-area-inset-top)) 24px 21px;
+  min-height: var(--official-header-height);
+  padding: calc(14px + env(safe-area-inset-top)) 24px 16px;
   border: 0;
   color: #fff;
   background: var(--official-red);
@@ -102,7 +103,7 @@ body {
 .aos-official-search {
   position: sticky;
   z-index: 24;
-  top: 116px;
+  top: var(--official-header-height);
   padding: 8px 24px;
   border-bottom: 1px solid var(--official-line);
   background: var(--official-paper);
@@ -168,11 +169,11 @@ body {
 
 .aos-official-unit-list > button {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) auto;
-  gap: 12px;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
-  min-height: 82px;
-  padding: 7px 12px;
+  min-height: 116px;
+  padding: 13px 14px;
   border: 1px solid var(--official-line);
   border-radius: 10px;
   color: var(--official-ink);
@@ -189,14 +190,24 @@ body {
 }
 
 .aos-official-unit-list strong { font-size: 15px; }
-.aos-official-unit-list > button > span:last-child {
-  padding: 4px 7px;
-  border-radius: 3px;
-  color: #fff;
-  background: var(--official-red);
-  font-size: 12px;
-  font-weight: 800;
+.aos-official-warscroll-groups { display: grid; gap: 14px; }
+.aos-official-warscroll-groups > details { min-width: 0; }
+.aos-official-warscroll-groups > details > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 24px;
+  border: 1px solid #c9c9c5;
+  border-radius: 10px;
+  background: #d5d5d5;
+  cursor: pointer;
+  list-style: none;
 }
+.aos-official-warscroll-groups > details > summary::-webkit-details-marker { display: none; }
+.aos-official-warscroll-groups > details > summary strong { font-size: 16px; }
+.aos-official-warscroll-groups > details[open] > summary svg { transform: rotate(180deg); }
+.aos-official-warscroll-groups .aos-official-unit-list { margin-top: 14px; }
 
 /* Fixed navigation used throughout the official app. */
 .aos-main-nav.aos-official-nav {
@@ -250,7 +261,7 @@ body {
 }
 
 .aos-storm-forge-home .aos-screen-content {
-  min-height: calc(100dvh - 116px);
+  min-height: calc(100dvh - var(--official-header-height));
   padding: 38px 24px 125px;
   background: transparent;
 }
@@ -267,7 +278,7 @@ body {
 
 .aos-storm-forge-home .aos-list-card {
   position: relative;
-  min-height: 138px;
+  min-height: 154px;
   overflow: hidden;
   border: 0;
   border-radius: 0;
@@ -280,8 +291,8 @@ body {
   z-index: 1;
   display: block;
   width: 100%;
-  min-height: 138px;
-  padding: 26px 44% 22px 22px;
+  min-height: 154px;
+  padding: 25px 44% 22px 25px;
   overflow: hidden;
   color: #fff;
   background:
@@ -310,6 +321,15 @@ body {
   font: 14px var(--official-serif);
 }
 
+.aos-storm-forge-home .aos-list-card__formation {
+  order: 3;
+  overflow: hidden;
+  color: #8f908d;
+  font: 14px/1.2 var(--official-serif);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .aos-storm-forge-home .aos-list-card__open strong {
   order: 1;
   color: #fff;
@@ -327,7 +347,7 @@ body {
   position: absolute;
   z-index: 3;
   bottom: 23px;
-  left: 22px;
+  left: 25px;
   padding: 5px 9px;
   border-radius: 4px;
   color: #111;
@@ -383,7 +403,7 @@ body {
 }
 
 .aos-official-builder-hero {
-  min-height: 96px;
+  min-height: 176px;
   background: var(--official-faction-art) var(--official-faction-position, center) / cover no-repeat;
 }
 
@@ -439,6 +459,48 @@ body {
 .aos-official-builder-section .aos-renown-section > h2 { display: none; }
 .aos-official-builder-section .aos-regiment-card,
 .aos-official-builder-section .aos-renown-drop { margin: 0; border-radius: 0; box-shadow: none; }
+
+.aos-official-empty-regiment {
+  margin: 0 -16px;
+  background: #fff;
+}
+
+.aos-official-empty-regiment > header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 28px;
+  gap: 12px;
+  align-items: center;
+  min-height: 64px;
+  padding: 12px 24px;
+  background: #d3d3d3;
+}
+
+.aos-official-empty-regiment > header strong,
+.aos-official-empty-regiment > header span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.aos-official-empty-regiment > header span:last-child {
+  font-size: 28px;
+  line-height: 1;
+  text-align: center;
+}
+
+.aos-official-empty-regiment > button {
+  display: block;
+  min-width: 124px;
+  min-height: 50px;
+  padding: 10px 24px;
+  margin: 18px auto;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  background: #050505;
+  box-shadow: 0 0 0 1px #050505;
+  font: 700 15px var(--official-serif);
+  text-transform: uppercase;
+}
 
 .aos-official-selection-list { display: grid; }
 .aos-official-selection-list > button,
@@ -585,14 +647,18 @@ body {
   padding-bottom: 24px;
   background: var(--official-paper);
 }
-.aos-warscroll-page .aos-topbar { min-height: 116px; color: #fff; background: var(--official-red); }
-.aos-warscroll-page .aos-warscroll-hero { min-height: 190px; background: #fff; }
+.aos-warscroll-page .aos-topbar { min-height: var(--official-header-height); color: #fff; background: var(--official-red); }
+.aos-warscroll-page .aos-warscroll-hero {
+  height: clamp(260px, 70vw, 300px);
+  min-height: 260px;
+  background: #fff;
+}
 .aos-warscroll-page .aos-profile-strip { padding: 23px 14px 20px; background: #968126; }
 .aos-warscroll-page .aos-stat__circle { border: 3px solid #57523d; background: #111; }
 .aos-warscroll-page .aos-stat--save .aos-stat__circle { background: #35823d; }
 .aos-warscroll-page .aos-stat__label { color: #fff; font-family: var(--official-serif); }
 .aos-warscroll-page .aos-warscroll-content { padding: 0; }
-.aos-warscroll-page .aos-warscroll-meta { position: absolute; top: 280px; right: max(12px, calc((100vw - var(--official-width)) / 2 + 12px)); padding: 0; background: transparent; }
+.aos-warscroll-page .aos-warscroll-meta { position: absolute; top: calc(var(--official-header-height) + clamp(260px, 70vw, 300px) - 48px); right: max(12px, calc((100vw - var(--official-width)) / 2 + 12px)); padding: 0; background: transparent; }
 .aos-warscroll-page .aos-warscroll-meta__identity { display: none; }
 .aos-warscroll-page .aos-warscroll-meta__points { padding: 5px 7px; border-radius: 3px; color: #fff; background: #333; }
 .aos-warscroll-page .aos-accordion { margin: 0; border: 0; border-bottom: 1px solid #fff; border-radius: 0; }
@@ -692,7 +758,7 @@ body {
 
 /* Core documents retain the official shell. */
 .aos-rules-browser { width: min(100%, var(--official-width)); }
-.aos-rules-browser__controls { top: 116px; }
+.aos-rules-browser__controls { top: var(--official-header-height); }
 
 @media (min-width: 431px) {
   .aos-official-page,
@@ -810,6 +876,7 @@ body {
 
 @media (max-width: 359px) {
   :root {
+    --official-header-height: 72px;
     --official-nav-height: 88px;
   }
 
@@ -817,7 +884,9 @@ body {
   .aos-official-page .aos-topbar,
   .aos-official-page .aos-screen-header {
     grid-template-columns: 30px minmax(0, 1fr) auto;
-    min-height: 104px;
+    min-height: var(--official-header-height);
+    padding-top: calc(12px + env(safe-area-inset-top));
+    padding-bottom: 13px;
     padding-right: 16px;
     padding-left: 16px;
   }

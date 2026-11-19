@@ -186,6 +186,9 @@ function MyLists({
                         </small>
 
                         <strong>{list.name}</strong>
+                        <span className="aos-list-card__formation">
+                          {list.battleFormation?.name ?? "No Battle Formation"}
+                        </span>
                         <span className="aos-list-card__meta">
                           <span className={`aos-list-status${validation.errors.length > 0 ? " is-error" : validation.warnings.length > 0 ? " is-warning" : " is-valid"}`}>
                             {validation.errors.length > 0

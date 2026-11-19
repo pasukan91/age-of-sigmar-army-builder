@@ -5,6 +5,8 @@ import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import { getManifestationLoreContents } from "../utils/optionSummaries";
+import { calculateArmyPoints } from "../utils/armyPoints";
+import { validateArmyList } from "../utils/armyValidation";
 
 function OptionSelector({
   title,
@@ -19,6 +21,7 @@ function OptionSelector({
   onRules,
   onLists,
   onSettings,
+  list,
 }) {
   const [query, setQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -41,6 +44,9 @@ function OptionSelector({
   const optionGroups = variant === "units"
     ? groupUnitOptions(filteredOptions)
     : [{ id: "options", label: null, options: filteredOptions }];
+  const points = list ? calculateArmyPoints(list) : 0;
+  const pointsLimit = Number(list?.pointsLimit ?? list?.points) || 0;
+  const listHasErrors = list ? validateArmyList(list).errors.length > 0 : false;
 
   function hasWarscroll(option) {
     return Boolean(
@@ -316,6 +322,14 @@ function OptionSelector({
           </div>
         )}
       </div>
+
+      {list && (
+        <div className={`aos-official-points${listHasErrors ? " is-invalid" : ""}`}>
+          <span>{listHasErrors ? <OfficialIcon name="warning" size={24} strokeWidth={2.4} /> : "✓"}</span>
+          <strong>{points}/{pointsLimit}</strong>
+          <small>POINTS</small>
+        </div>
+      )}
 
       <MainNav
         active="storm-forge"

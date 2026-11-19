@@ -121,12 +121,34 @@ function RegimentSection({
     );
   }
 
+  function openNewRegimentSelector() {
+    setSelector({
+      title: "Add Hero",
+      property: "newRegiment",
+      regimentId: null,
+      options: availableHeroes,
+      ui: { variant: "units" },
+    });
+    setPage("selector");
+  }
+
   return (
     <section style={styles.section}>
       {regiments.length === 0 && (
-        <div style={styles.emptyCard}>
-          <strong>Tu ejército todavía está vacío</strong>
-        </div>
+        <article className="aos-official-empty-regiment">
+          <header>
+            <strong>Regiment 1</strong>
+            <span>0 Points</span>
+            <span aria-hidden="true">⋮</span>
+          </header>
+          <button
+            type="button"
+            onClick={openNewRegimentSelector}
+            disabled={availableHeroes.length === 0 || !canAddRegiment(list)}
+          >
+            Add Hero
+          </button>
+        </article>
       )}
 
       {regiments.map(
@@ -446,7 +468,7 @@ function RegimentSection({
         }
       )}
 
-      <button
+      {regiments.length > 0 && <button
         type="button"
         disabled={
           availableHeroes.length === 0 || !canAddRegiment(list)
@@ -456,23 +478,7 @@ function RegimentSection({
             ? `El máximo es de ${MAX_REGIMENTS_PER_ARMY} regimientos por ejército.`
             : undefined
         }
-        onClick={() => {
-          setSelector({
-            title:
-              "Selecciona el líder del regimiento",
-
-            property:
-              "newRegiment",
-
-            regimentId: null,
-
-            options:
-              availableHeroes,
-            ui: { variant: "units" },
-          });
-
-          setPage("selector");
-        }}
+        onClick={openNewRegimentSelector}
         style={
           styles.addRegimentButton
         }
@@ -480,7 +486,7 @@ function RegimentSection({
         {canAddRegiment(list)
           ? "+ Añadir regimiento"
           : `Máximo de ${MAX_REGIMENTS_PER_ARMY} regimientos alcanzado`}
-      </button>
+      </button>}
     </section>
   );
 }

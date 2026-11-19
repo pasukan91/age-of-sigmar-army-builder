@@ -32,8 +32,8 @@ function Settings({ onLists, onSettings, onRules }) {
         </section>
 
         <div className="aos-profile-version">
-          <p>App Version: v1.39.0 (89)</p>
-          <p>Data Version: v488</p>
+          <p>App Version: v1.40.0 (91)</p>
+          <p>Data Version: v499</p>
         </div>
       </div>
 

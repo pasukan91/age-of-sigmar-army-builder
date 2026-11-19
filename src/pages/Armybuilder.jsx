@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import RegimentSection from "../components/armybuilder/RegimentSection";
@@ -29,9 +28,6 @@ function ArmyBuilder({
   onRemoveRegimentOfRenown,
   onRemoveAuxiliary,
   onViewRule,
-  onRules,
-  onLists,
-  onSettings,
 }) {
   const [validationExpanded, setValidationExpanded] = useState(false);
   const baseFaction = list?.faction ?? {};
@@ -205,12 +201,6 @@ function ArmyBuilder({
         <small>POINTS</small>
       </button>
 
-      <MainNav
-        active="storm-forge"
-        onReference={onRules}
-        onStormForge={onLists}
-        onProfile={onSettings}
-      />
     </main>
   );
 }

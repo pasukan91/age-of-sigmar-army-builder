@@ -51,8 +51,9 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
     setView("root");
   }
 
-  const title = view === "root" ? "REFERENCE" : faction?.name?.toUpperCase();
+  const title = getReferenceTitle(view, faction);
   const artwork = faction ? getFactionArtwork(faction) : null;
+  const bookSections = faction ? getBookSections(faction) : [];
 
   return (
     <main className="aos-official-page aos-reference-home">
@@ -141,27 +142,44 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
         )}
 
         {view === "book" && (
-          <section className="aos-official-link-list">
-            <button type="button" onClick={() => setView("warscrolls")}>
-              <strong>Warscrolls</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
-            </button>
-            <button type="button" onClick={() => setView("warscrolls")}>
-              <strong>Battle Profiles</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
-            </button>
-            <button type="button" onClick={onRules}>
-              <strong>Army Rules</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
-            </button>
-          </section>
+          <>
+            <section className="aos-official-link-list">
+              <button type="button" onClick={onRules}>
+                <strong>Addenda, Errata and FAQs</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
+              </button>
+            </section>
+            <div className="aos-official-divider" />
+            <section className="aos-official-link-list">
+              {bookSections.map((section) => (
+                <button
+                  key={section.label}
+                  type="button"
+                  onClick={section.view === "warscrolls" ? () => setView("warscrolls") : onRules}
+                >
+                  <strong>{section.label}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
+                </button>
+              ))}
+            </section>
+          </>
         )}
 
         {view === "warscrolls" && (
-          <section className="aos-official-unit-list">
-            {factionUnits.map((unit) => (
-              <button key={unit.id ?? unit.name} type="button" onClick={() => onViewWarscroll(unit)}>
-                <UnitArtwork unit={unit} variant="thumbnail" />
-                <strong>{unit.name}</strong>
-                <span>{unit.points} pts</span>
-              </button>
+          <section className="aos-official-warscroll-groups">
+            {groupWarscrolls(factionUnits).map((group) => (
+              <details key={group.label} open>
+                <summary>
+                  <strong>{group.label}</strong>
+                  <OfficialIcon name="chevronDown" size={22} strokeWidth={3} />
+                </summary>
+                <div className="aos-official-unit-list">
+                  {group.units.map((unit) => (
+                    <button key={unit.id ?? unit.name} type="button" onClick={() => onViewWarscroll(unit)}>
+                      <UnitArtwork unit={unit} variant="thumbnail" />
+                      <strong>{unit.name}</strong>
+                    </button>
+                  ))}
+                </div>
+              </details>
             ))}
           </section>
         )}
@@ -178,3 +196,51 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
 }
 
 export default Home;
+
+function getBookSections(faction) {
+  const sections = [
+    { label: "Warscrolls", view: "warscrolls" },
+    { label: "Battle Traits" },
+    { label: "Battle Formations" },
+    { label: "Artefacts Of Power" },
+    { label: "Heroic Traits" },
+  ];
+
+  if ((faction.spellLores ?? []).length) sections.push({ label: "Spell Lores" });
+  if ((faction.prayerLores ?? []).length) sections.push({ label: "Prayer Lores" });
+  if ((faction.manifestationLores ?? []).length) sections.push({ label: "Manifestation Lores" });
+  sections.push({ label: "Battle Profiles" });
+  return sections;
+}
+
+function getReferenceTitle(view, faction) {
+  if (view === "root") return "REFERENCE";
+  if (view === "warscrolls") return "WARSCROLLS";
+  if (view === "book") {
+    const alliance = String(faction?.alliance ?? "").toUpperCase();
+    return `${alliance} BATTLETOME: ${faction?.name ?? ""}`.trim();
+  }
+  return faction?.name?.toUpperCase() ?? "REFERENCE";
+}
+
+function groupWarscrolls(units) {
+  const definitions = [
+    ["Hero", "hero"],
+    ["Infantry", "infantry"],
+    ["Cavalry", "cavalry"],
+    ["Monster", "monster"],
+    ["War Machine", "war machine"],
+    ["Beast", "beast"],
+    ["Faction Terrain", "faction terrain"],
+  ];
+  const remaining = [...units];
+  const groups = definitions.map(([label, keyword]) => {
+    const matches = remaining.filter((unit) => (unit.keywords ?? [])
+      .some((value) => String(value).trim().toLowerCase() === keyword));
+    matches.forEach((unit) => remaining.splice(remaining.indexOf(unit), 1));
+    return { label, units: matches };
+  }).filter((group) => group.units.length);
+
+  if (remaining.length) groups.push({ label: "Other", units: remaining });
+  return groups;
+}

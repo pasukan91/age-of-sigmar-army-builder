@@ -2034,6 +2034,7 @@ function App() {
           onRules={() => navigate("home", { listId: null })}
           onLists={openLists}
           onSettings={openSettings}
+          list={currentList}
           onToggle={toggleArmyOption}
           goBack={
             handleSelectorBack
