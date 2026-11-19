@@ -1,5 +1,6 @@
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
+import WardSave from "../components/WardSave";
 import FormattedRulesText from "../components/FormattedRulesText";
 import { getRuleArtwork } from "../utils/ruleReferences";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
@@ -72,6 +73,8 @@ function RuleWarscroll({ reference, onBack }) {
           <Stat label="Salvación" value={profile.save} variant="save" />
         </section>
       )}
+
+      {(isManifestation || isTerrain) && <WardSave ward={profile.ward} />}
 
       <div className="aos-warscroll-content">
         {item.dataPending ? (

@@ -6,6 +6,7 @@ import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import UnitDetails from "../components/UnitDetails";
+import WardSave from "../components/WardSave";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
 
 import "../styles/aos-app.css";
@@ -94,6 +95,8 @@ function UnitWarscroll({
         />
       </section>
 
+      <WardSave ward={unit.profile?.ward} />
+
       <div className="aos-warscroll-content">
         <section className="aos-warscroll-meta">
           <div className="aos-warscroll-meta__identity">
@@ -112,10 +115,6 @@ function UnitWarscroll({
               <span>
                 Peana {unit.details?.baseSize ?? "—"}
               </span>
-
-              {unit.profile?.ward && (
-                <span>Ward {unit.profile.ward}</span>
-              )}
 
             </div>
 
