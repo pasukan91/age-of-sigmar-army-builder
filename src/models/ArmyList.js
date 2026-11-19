@@ -7,6 +7,8 @@ export function createArmyList({
   alliance,
   pointsLimit,
   armyOfRenown = null,
+  battlepack = null,
+  battleFormation = null,
 }) {
   const now = Date.now();
   const requiredRegiments = (armyOfRenown?.requiredUnits ?? [])
@@ -35,7 +37,9 @@ export function createArmyList({
 
     armyOfRenown,
 
-    battleFormation: null,
+    battlepack,
+
+    battleFormation,
 
     battleplan: null,
 

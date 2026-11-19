@@ -22,6 +22,8 @@ function OptionSelector({
   onLists,
   onSettings,
   list,
+  notice,
+  onUndoNotice,
 }) {
   const [query, setQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -64,6 +66,16 @@ function OptionSelector({
     );
   }
 
+  function getArmyUnitCount(option) {
+    if (!list || variant !== "units") return 0;
+    const optionKey = option.sourceId ?? option.id ?? option.name;
+    const units = [
+      ...(list.regiments ?? []).flatMap((regiment) => [regiment.hero, ...(regiment.units ?? [])]),
+      ...(list.auxiliaries ?? []),
+    ].filter(Boolean);
+    return units.filter((unit) => (unit.sourceId ?? unit.id ?? unit.name) === optionKey).length;
+  }
+
   function canReceiveAqshyObsession(option) {
     const keywords = (option?.keywords ?? []).map(
       (keyword) => String(keyword).trim().toLowerCase()
@@ -98,7 +110,7 @@ function OptionSelector({
           onClick={() => setSearchOpen((open) => !open)}
           aria-label="Search"
         >
-          <OfficialIcon name="search" size={25} strokeWidth={2.5} />
+          {variant !== "units" && <OfficialIcon name="search" size={25} strokeWidth={2.5} />}
         </button>
       </header>
 
@@ -198,6 +210,7 @@ function OptionSelector({
               isMultiSelect &&
               selectedOptions.length >= maxSelections &&
               !isSelected;
+            const armyUnitCount = getArmyUnitCount(option);
 
             return (
               <article
@@ -233,6 +246,10 @@ function OptionSelector({
                     <h3 className="aos-option-card__title">
                       {option.name}
                     </h3>
+
+                    {armyUnitCount > 0 && (
+                      <span className="aos-option-card__count">{armyUnitCount}x Unit In Army</span>
+                    )}
 
                     {typeof option.points === "number" && (
                       <span className="aos-option-card__points">{option.points}pts</span>
@@ -331,6 +348,13 @@ function OptionSelector({
         </div>
       )}
 
+      {notice && (
+        <div className="aos-selector-toast" role="status">
+          <span>{notice.name} added to army</span>
+          <button type="button" onClick={onUndoNotice}>Undo</button>
+        </div>
+      )}
+
       <MainNav
         active="storm-forge"
         onReference={onRules}
@@ -342,13 +366,13 @@ function OptionSelector({
 }
 
 const UNIT_GROUPS = [
-  ["hero", "Héroes"],
-  ["infantry", "Infantería"],
-  ["cavalry", "Caballería"],
-  ["monster", "Monstruos"],
-  ["war machine", "Máquinas de guerra"],
-  ["beast", "Bestias"],
-  ["terrain", "Terreno"],
+  ["hero", "Hero"],
+  ["infantry", "Infantry"],
+  ["cavalry", "Cavalry"],
+  ["monster", "Monster"],
+  ["war machine", "War Machine"],
+  ["beast", "Beast"],
+  ["terrain", "Terrain"],
 ];
 
 function groupUnitOptions(options) {
@@ -360,7 +384,13 @@ function groupUnitOptions(options) {
     (groupId ? groups.get(groupId) : other).options.push(option);
   });
 
-  return [...groups.values(), other].filter((group) => group.options.length > 0);
+  return [...groups.values(), other]
+    .filter((group) => group.options.length > 0)
+    .map((group) => ({
+      ...group,
+      label: group.id === "other" ? "Other Units" : group.label,
+      options: [...group.options].sort((left, right) => left.name.localeCompare(right.name)),
+    }));
 }
 
 function getUnitGroup(option) {

@@ -46,6 +46,8 @@ const INITIAL_ARMY = {
   armyOfRenown: null,
   points: 2000,
   name: "",
+  battlepack: null,
+  battleFormation: null,
 };
 
 const PAGE_TITLES = {
@@ -206,6 +208,7 @@ function App() {
 
   const [selector, setSelector] =
     useState(EMPTY_SELECTOR);
+  const [selectorNotice, setSelectorNotice] = useState(null);
 
   /*
    * =====================================================
@@ -386,6 +389,7 @@ function App() {
 
   function resetSelector() {
     setSelector(EMPTY_SELECTOR);
+    setSelectorNotice(null);
   }
 
   function resetNewArmy() {
@@ -1223,6 +1227,7 @@ function App() {
       handleAddUnitToRegiment(
         configuredUnit
       );
+      returnToBuilder();
 
       return;
     }
@@ -1453,7 +1458,31 @@ function App() {
     };
 
     saveUpdatedList(updatedList);
-    returnToBuilder();
+    setSelectorNotice({
+      name: configuredUnit.name,
+      regimentId,
+      unitInstanceId: unitInstance.instanceId,
+    });
+    /* The official app keeps the unit catalogue open so several units can be
+       added in one pass. Back returns to the updated regiment. */
+  }
+
+  function undoLastSelectorAddition() {
+    if (!currentList || !selectorNotice) return;
+    saveUpdatedList({
+      ...currentList,
+      regiments: (currentList.regiments ?? []).map((regiment) =>
+        regiment.id === selectorNotice.regimentId
+          ? {
+              ...regiment,
+              units: (regiment.units ?? []).filter(
+                (unit) => unit.instanceId !== selectorNotice.unitInstanceId
+              ),
+            }
+          : regiment
+      ),
+    });
+    setSelectorNotice(null);
   }
 
   /*
@@ -1924,6 +1953,7 @@ function App() {
           }
           onListCreated={() => setBuilderSection("units")}
           onBack={goBack}
+          onCancel={openLists}
 
           /*
            * NewListConfig ya espera una
@@ -1953,6 +1983,8 @@ function App() {
         <>
         <ArmyBuilder
           list={currentList}
+          notice={selectorNotice}
+          onUndoNotice={undoLastSelectorAddition}
           storageStatus={storageStatus}
           setSelector={setSelector}
           navigate={navigate}

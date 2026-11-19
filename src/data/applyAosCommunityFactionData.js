@@ -49,12 +49,19 @@ export function applyAosCommunityFactionData(faction) {
   const source = factionsByName.get(normalizedName(sourceName));
   if (!source) return faction;
 
-  const result = { ...faction };
+  const result = {
+    ...faction,
+    /* Seasonal Ghyran monster traits are a separate official publication.
+       Preserve them without exposing the legacy field in the main tome. */
+    ghyranEnhancements: faction.ghyranEnhancements ?? faction.monsterTraits ?? [],
+  };
   for (const field of AUTHORITATIVE_FIELDS) {
-    result[field] = mergeCollection(
-      faction[field],
-      localizeCatalogueImages(source[field])
-    );
+    const authoritative = localizeCatalogueImages(source[field]);
+    result[field] = field === "armiesOfRenown" &&
+      (authoritative ?? []).length === 0 &&
+      (faction[field] ?? []).length > 0
+      ? faction[field]
+      : mergeCollection(faction[field], authoritative);
   }
   for (const field of LEGACY_ENHANCEMENT_FIELDS) result[field] = [];
 

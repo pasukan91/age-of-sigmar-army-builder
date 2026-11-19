@@ -9,6 +9,7 @@ const ARRAY_FIELDS = [
   "battleFormations",
   "heroicTraits",
   "monsterTraits",
+  "ghyranEnhancements",
   "artefacts",
   "accursedDevices",
   "brazenMutations",
@@ -42,6 +43,7 @@ const ARRAY_FIELDS = [
 const ENHANCEMENT_FIELDS = [
   "heroicTraits",
   "monsterTraits",
+  "ghyranEnhancements",
   "artefacts",
   "aqshyArtefacts",
   "aqshyHeroicTraits",

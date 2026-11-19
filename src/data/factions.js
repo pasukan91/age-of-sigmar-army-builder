@@ -123,11 +123,13 @@ const factions = [
   });
 });
 
+/* The Hobgrot Slittaboss has the shared "Any Monster" Orruk option. Keep the
+   Ironjawz pool available to Kruleboyz regiment rules only; the inverse made
+   ordinary Ironjawz leaders incorrectly offer every Kruleboyz Infantry unit. */
 const kruleboyzFaction = factions.find((faction) => faction.id === "kruleboyz");
 const ironjawzFaction = factions.find((faction) => faction.id === "ironjawz");
 if (kruleboyzFaction && ironjawzFaction) {
   kruleboyzFaction.regimentAllies = ironjawzFaction.units;
-  ironjawzFaction.regimentAllies = kruleboyzFaction.units;
 }
 
 export default factions;

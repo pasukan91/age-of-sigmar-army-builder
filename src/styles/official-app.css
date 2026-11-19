@@ -209,6 +209,87 @@ body {
 .aos-official-warscroll-groups > details[open] > summary svg { transform: rotate(180deg); }
 .aos-official-warscroll-groups .aos-official-unit-list { margin-top: 14px; }
 
+.aos-official-faction-rules {
+  display: grid;
+  gap: 18px;
+}
+
+.aos-official-faction-rule-group {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.aos-official-faction-rule-group > h2 {
+  margin: 0;
+  color: #111;
+  font: 700 21px/1.15 var(--official-display);
+  text-transform: uppercase;
+}
+
+.aos-official-faction-rule-group > p {
+  margin: 0 0 2px;
+  color: #555;
+  font: 13px/1.45 var(--official-serif);
+}
+
+.aos-official-faction-rules .aos-ability-card {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.aos-official-rule-restriction {
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--official-gold);
+  background: #f2eee2;
+  font-size: 12px;
+}
+
+.aos-official-profile-list {
+  display: grid;
+  gap: 6px;
+}
+
+.aos-official-profile-list > button {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto 20px;
+  gap: 13px;
+  align-items: center;
+  width: 100%;
+  min-height: 96px;
+  padding: 12px 14px;
+  border: 1px solid var(--official-line);
+  border-radius: 10px;
+  color: #111;
+  background: #fff;
+  text-align: left;
+}
+
+.aos-official-profile-list .aos-unit-artwork {
+  width: 58px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.aos-official-profile-list > button > span {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.aos-official-profile-list strong { font: 700 14px/1.3 var(--official-serif); }
+.aos-official-profile-list small { color: #666; font: 11px var(--official-serif); }
+.aos-official-profile-list b {
+  padding: 5px 7px;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--official-red);
+  font: 700 12px var(--official-serif);
+  white-space: nowrap;
+}
+
 /* Fixed navigation used throughout the official app. */
 .aos-main-nav.aos-official-nav {
   position: fixed;
@@ -408,7 +489,7 @@ body {
 }
 
 .aos-official-builder-hero {
-  min-height: 176px;
+  min-height: 105px;
   background: var(--official-faction-art) var(--official-faction-position, center) / cover no-repeat;
 }
 
@@ -500,9 +581,9 @@ body {
   margin: 18px auto;
   border: 1px solid #fff;
   border-radius: 999px;
-  color: #111;
-  background: var(--official-yellow);
-  box-shadow: none;
+  color: #fff;
+  background: #050505;
+  box-shadow: 0 0 0 1px #050505;
   font: 700 15px var(--official-serif);
   text-transform: uppercase;
 }
@@ -537,11 +618,11 @@ body {
 .aos-official-roster-unit {
   position: relative;
   display: grid;
-  grid-template-columns: 74px minmax(0, 1fr) 34px;
+  grid-template-columns: 58px minmax(0, 1fr) 34px;
   gap: 17px;
   align-items: center;
-  min-height: 200px;
-  padding: 28px 18px;
+  min-height: 152px;
+  padding: 20px 18px;
   border: 0;
   border-bottom: 1px solid #d5d5d5;
   background: #fff;
@@ -549,8 +630,8 @@ body {
 
 .aos-official-roster-unit .aos-unit-artwork-link {
   display: block;
-  width: 74px;
-  height: 124px;
+  width: 58px;
+  height: 94px;
   padding: 0;
   overflow: hidden;
   border: 1px solid #bdbdbd;
@@ -644,9 +725,9 @@ body {
 
 .aos-official-regiment > button:last-child {
   display: block !important;
-  min-width: 164px !important;
-  min-height: 68px !important;
-  margin: 22px auto !important;
+  min-width: 124px !important;
+  min-height: 50px !important;
+  margin: 18px auto !important;
   border: 0 !important;
   border-radius: 999px !important;
   color: #111 !important;
@@ -779,7 +860,6 @@ body {
 
 .aos-official-selector .aos-form-intro,
 .aos-official-selector .aos-selector-tools,
-.aos-official-selector .aos-option-group__header,
 .aos-official-selector .aos-option-card__profile,
 .aos-official-selector .aos-aqshy-pill {
   display: none;
@@ -788,32 +868,49 @@ body {
 .aos-official-selector .aos-option-list,
 .aos-official-selector .aos-option-group__items {
   display: grid;
-  gap: 6px;
+  gap: 0;
 }
 
-.aos-official-selector .aos-option-group + .aos-option-group { margin-top: 6px; }
+.aos-official-selector .aos-option-group + .aos-option-group { margin-top: 0; }
+
+.aos-official-selector .aos-official-search-button { visibility: hidden; }
+.aos-official-selector .aos-option-group__header {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  padding: 16px 25px;
+  border: 0;
+  border-bottom: 1px solid #d4d4d1;
+  border-radius: 0;
+  color: #111;
+  background: #fff;
+  box-shadow: none;
+}
+.aos-official-selector .aos-option-group__header h3 { margin: 0; font: 700 15px var(--official-serif); }
+.aos-official-selector .aos-option-group__header span { display: none; }
 
 .aos-official-selector .aos-option-card {
-  min-height: 108px;
-  padding: 10px 12px;
-  border: 1px solid var(--official-line);
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 1px 2px #00000008;
+  min-height: 124px;
+  padding: 14px 12px;
+  border: 0;
+  border-bottom: 1px solid #d5d5d5;
+  border-radius: 0;
+  background: #fff !important;
+  box-shadow: none;
 }
 
 .aos-official-selector .aos-option-card__head {
   display: grid;
-  grid-template-columns: 55px minmax(0, 1fr) 48px;
-  gap: 9px;
+  grid-template-columns: 58px minmax(0, 1fr) 42px;
+  gap: 10px;
   align-items: center;
-  min-height: 87px;
+  min-height: 96px;
 }
 
 .aos-official-selector .aos-unit-artwork-link,
 .aos-official-selector .aos-unit-artwork {
-  width: 55px;
-  height: 87px;
+  width: 58px;
+  height: 94px;
   padding: 0;
   overflow: hidden;
   border: 0;
@@ -822,9 +919,17 @@ body {
 }
 
 .aos-official-selector .aos-unit-artwork img { width: 100%; height: 100%; object-fit: cover; }
-.aos-official-selector .aos-option-card__title { margin: 0; font: 400 15px/1.3 var(--official-serif); }
+.aos-official-selector .aos-option-card__title { margin: 0; font: 400 16px/1.3 var(--official-serif); text-transform: none; }
 .aos-official-selector .aos-option-card__head > div:nth-child(2) { display: contents; }
-.aos-official-selector .aos-option-card__title { grid-column: 2; }
+.aos-official-selector .aos-option-card__title { grid-column: 2; grid-row: 1; align-self: center; }
+.aos-official-selector .aos-option-card__count {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  margin-bottom: 7px;
+  color: #555;
+  font: 12px var(--official-serif);
+}
 .aos-official-selector .aos-option-card__points {
   grid-column: 3;
   grid-row: 1;
@@ -840,8 +945,8 @@ body {
 .aos-official-selector .aos-option-card__actions { grid-column: 3; grid-row: 1; align-self: start; justify-self: center; }
 .aos-official-selector .aos-option-card__button--select {
   display: grid;
-  width: 39px;
-  height: 39px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   place-items: center;
   border: 1.5px solid #111;
@@ -849,6 +954,36 @@ body {
   color: #111;
   background: #f7f7f7;
   font-size: 0;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 2px;
+  box-shadow: none;
+}
+.aos-official-selector .aos-option-card__button--select svg { width: 23px; height: 23px; }
+.aos-selector-toast {
+  position: fixed;
+  z-index: 70;
+  right: max(24px, calc((100vw - var(--official-width)) / 2 + 24px));
+  bottom: calc(var(--official-nav-height) + 88px + env(safe-area-inset-bottom));
+  left: max(24px, calc((100vw - var(--official-width)) / 2 + 24px));
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  color: #fff;
+  background: #272727;
+  box-shadow: 0 3px 12px #0005;
+  font: 13px var(--official-serif);
+}
+.aos-selector-toast button {
+  border: 0;
+  color: #fff;
+  background: transparent;
+  font: 700 13px var(--official-serif);
+  text-transform: none;
 }
 
 /* Warscrolls. */
@@ -886,84 +1021,125 @@ body {
 .aos-profile-links > button strong { font-size: 15px; }
 .aos-profile-version p { margin: 0 0 7px; font: 14px var(--official-serif); }
 
-/* Army creation follows the same compact official flow. */
-.aos-create-army-content,
-.aos-create-config-content {
-  padding: 31px 24px 45px;
-}
+/* Official multi-screen army creation wizard. */
+.aos-creation-flow { padding-bottom: 0; background: #fff; }
+.aos-creation-flow .aos-official-header { position: relative; }
+.aos-create-close { font: 300 43px/1 Arial, sans-serif !important; }
 
-.aos-create-army-content > h2,
-.aos-create-config-content > h2 {
-  margin: 0 0 22px;
-  font: 700 22px var(--official-display);
-}
-
-.aos-create-faction-list {
+.aos-create-faction-list { display: block; padding: 0; }
+.aos-create-alliance { border-bottom: 1px solid #fff; }
+.aos-create-alliance__toggle,
+.aos-create-faction-row {
   display: grid;
-  gap: 6px;
-}
-
-.aos-create-faction-list > button {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 22px;
+  grid-template-columns: minmax(0, 1fr) 48px;
   align-items: center;
-  min-height: 76px;
-  padding: 14px 18px;
-  overflow: hidden;
-  border: 1px solid var(--official-line);
-  border-radius: 9px;
+  width: 100%;
+  min-height: 74px;
+  padding: 12px 16px 12px 17px;
+  border: 0;
   color: #111;
-  background:
-    linear-gradient(90deg, #fff 0 58%, transparent 80%),
-    var(--official-faction-art) var(--official-faction-position, center) / 52% 100% no-repeat,
-    #fff;
-  font: 700 15px var(--official-serif);
+  background: var(--official-gold);
+  font: 700 16px var(--official-display);
+  letter-spacing: .01em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.aos-create-alliance__toggle svg,
+.aos-create-faction-row svg { justify-self: center; }
+.aos-create-alliance__children { background: #fff; }
+.aos-create-faction-row {
+  min-height: 76px;
+  padding-left: 42px;
+  border-bottom: 1px solid #dededb;
+  background: #fff;
+  font-family: var(--official-serif);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.aos-create-faction-row span { display: grid; gap: 5px; }
+.aos-create-faction-row small { font: 700 10px var(--official-serif); }
+.aos-create-faction-row--nested { padding-left: 67px; }
+.aos-create-orruk-group__children .aos-create-faction-row { padding-left: 67px; }
+.aos-create-orruk-group__children .aos-create-faction-row--nested { padding-left: 67px; }
+
+.aos-create-choice-page { padding: 32px 25px 60px; }
+.aos-create-help {
+  margin: 0 0 30px;
+  font: 15px/1.55 var(--official-serif);
+}
+.aos-create-choice-list { display: grid; gap: 0; }
+.aos-create-choice-list > button {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  min-height: 154px;
+  padding: 25px;
+  border: 0;
+  border-bottom: 1px solid #b8b8b5;
+  color: #111;
+  background: #fff;
+  font-family: var(--official-serif);
   text-align: left;
 }
+.aos-create-choice-list > button strong { font-size: 16px; }
+.aos-create-choice-list > button span { color: #444; font-size: 14px; line-height: 1.55; }
+.aos-create-choice-list--compact > button { min-height: 72px; padding: 23px 25px; }
 
-.aos-create-faction-list > button > * { position: relative; z-index: 1; }
-
-.aos-create-config-content {
-  display: grid;
-  gap: 19px;
+.aos-create-step--summary {
+  min-height: 100dvh;
+  background:
+    linear-gradient(#0008, #0005),
+    var(--official-faction-art) var(--official-faction-position, center) / cover fixed no-repeat,
+    #222;
 }
-
-.aos-create-summary,
-.aos-create-field {
-  display: grid;
-  gap: 6px;
+.aos-create-summary-page { display: grid; gap: 36px; padding: 55px 25px 70px; }
+.aos-create-summary-name { display: grid; gap: 20px; }
+.aos-create-summary-name > span,
+.aos-create-summary-army > h2 {
+  margin: 0;
+  color: #fff;
+  font: 700 25px var(--official-display);
 }
-
-.aos-create-summary,
-.aos-create-field input,
-.aos-create-field select {
-  padding: 13px 15px;
-  border: 1px solid #bdbdb8;
+.aos-create-summary-name input {
+  width: 100%;
+  min-height: 59px;
+  padding: 14px 17px;
+  border: 0;
   border-radius: 5px;
   color: #111;
   background: #fff;
-  font: 14px var(--official-serif);
+  font: 17px var(--official-serif);
 }
-
-.aos-create-summary span,
-.aos-create-field > span {
-  font: 700 11px var(--official-serif);
+.aos-create-summary-army { display: grid; gap: 14px; }
+.aos-create-summary-faction {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  padding: 16px 17px;
+  color: #fff;
+  background: linear-gradient(90deg, #15232ae8 0 55%, transparent), var(--official-faction-art) right 32% / 55% auto no-repeat;
+  font: 700 20px var(--official-display);
   text-transform: uppercase;
 }
-
-.aos-create-summary strong { font: 700 15px var(--official-serif); }
-.aos-create-field input,
-.aos-create-field select { width: 100%; min-height: 46px; }
-
-.aos-create-submit {
-  min-height: 50px;
-  margin-top: 8px;
-  border: 0;
-  border-radius: 28px;
+.aos-create-summary-army > button {
+  min-height: 65px;
+  padding: 15px 24px;
+  border: 1px solid #555;
+  border-radius: 5px;
   color: #111;
-  background: var(--official-yellow);
+  background: #f5f5f5;
   font: 700 15px var(--official-serif);
+  text-align: left;
+}
+.aos-create-submit {
+  min-height: 54px;
+  width: 82%;
+  margin: 24px auto 0;
+  border: 0;
+  border-radius: 999px;
+  color: #111;
+  background: #fff0b2;
+  font: 700 16px var(--official-serif);
 }
 
 /* Core documents retain the official shell. */
