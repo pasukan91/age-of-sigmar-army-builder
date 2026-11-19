@@ -169,6 +169,9 @@ export function validateArmyList(list) {
     ["prayerLore", "prayerLores", "Saber de plegarias"],
     ["manifestationLore", "manifestationLores", "Saber de manifestaciones"],
   ].forEach(([property, collection, label]) => {
+    if (list[property] && !(effectiveFaction[collection] ?? []).some((lore) => lore.id === list[property].id)) {
+      issues.push(issue(`ineligible-${property}`, "error", `${label} no disponible`, `El saber seleccionado no pertenece a este ejército. Elige una opción de su lista actual.`, "list", `${property}-option`));
+    }
     if ((effectiveFaction[collection] ?? []).length > 0 && !list[property]) {
       issues.push(issue(
         `missing-${property}`,

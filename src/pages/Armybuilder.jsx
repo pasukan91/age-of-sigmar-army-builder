@@ -73,7 +73,8 @@ function ArmyBuilder({
       options: faction.manifestationLores,
       value: list.manifestationLore?.name,
     },
-  ].filter((group) => (group.options ?? []).length > 0);
+  ].filter((group) => (group.options ?? []).length > 0)
+    .map((group) => ({ ...group, ui: { variant: "lores" } }));
 
   const formationSelector = { title: "Battle Formation", property: "battleFormation", options: faction.battleFormations ?? [] };
   const tacticsSelector = { title: "Battle Tactics", property: "battleTactics", options: ghb2026BattleTacticsCards, ui: { maxSelections: 2, variant: "battleTactics" } };
@@ -271,6 +272,7 @@ function LoreGroup({ group, selected, onChoose, onViewRule }) {
       <summary><strong>{group.title}</strong><OfficialIcon name="chevronDown" size={20} /></summary>
       <div className="aos-official-lore-group__content">
         {selected && <strong>{selected.name}</strong>}
+        {group.property === "manifestationLore" && (selected?.abilities ?? []).map((ability) => <AbilityCard key={ability.id ?? ability.name} ability={ability} />)}
         {items.map((item) => group.property === "manifestationLore" ? (
           <button key={item.id ?? item.name} type="button" className="aos-official-current-selection" onClick={() => onViewRule?.({ item, kind: "manifestation", sourceName: selected.name })}>{item.name}<OfficialIcon name="chevronRight" size={18} /></button>
         ) : <AbilityCard key={item.id ?? item.name} ability={item} />)}

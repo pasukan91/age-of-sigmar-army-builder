@@ -252,10 +252,10 @@ function normalizeManifestation(manifestation) {
     return createPendingManifestation(manifestation);
   }
 
-  const castingValue =
+  const invocation = String(manifestation.summonSpell?.type ?? "").toLowerCase() === "prayer";
+  const castingValue = invocation ? null :
     manifestation.castingValue ??
     manifestation.summonSpell?.castingValue ??
-    manifestation.summonSpell?.chantingValue ??
     null;
   const fallbackSummonSpell = {
     name: `Summon ${manifestation.name}`,
@@ -264,7 +264,7 @@ function normalizeManifestation(manifestation) {
     keywords: ["Spell", "Summon"],
     description: manifestation.description ?? "",
   };
-  const summonSpell = normalizeSummonSpell(
+  const summonSpell = Object.hasOwn(manifestation, "summonSpell") && manifestation.summonSpell === null ? null : normalizeSummonSpell(
     manifestation,
     manifestation.summonSpell ?? fallbackSummonSpell
   );
@@ -274,6 +274,7 @@ function normalizeManifestation(manifestation) {
     abilities: [],
     ...manifestation,
     castingValue,
+    chantingValue: manifestation.chantingValue ?? manifestation.summonSpell?.chantingValue ?? (invocation ? manifestation.castingValue : null),
     profile: {
       move: "-",
       health: null,
@@ -287,6 +288,7 @@ function normalizeManifestation(manifestation) {
 }
 
 function normalizeSummonSpell(manifestation, summonSpell) {
+  if (summonSpell?.sourceId) return summonSpell;
   const description = String(summonSpell?.description ?? "").trim();
   if (/Declare:/i.test(description) && /Effect:/i.test(description)) {
     return summonSpell;
@@ -301,7 +303,7 @@ function normalizeSummonSpell(manifestation, summonSpell) {
   const roll = invocation ? "chanting" : "casting";
   const declare =
     `Declare: If there is not a friendly ${manifestation.name} on the battlefield, ` +
-    `pick an eligible friendly ${summoner} to ${action}, then make a ${roll} roll of 2D6.`;
+    `pick an eligible friendly ${summoner} to ${action}, then make a ${roll} roll of ${invocation ? "D6" : "2D6"}.`;
   const effect = description
     ? `\n\nEffect: ${description.replace(/^Effect:\s*/i, "")}`
     : "";

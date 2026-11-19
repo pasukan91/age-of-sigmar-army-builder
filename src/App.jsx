@@ -530,7 +530,7 @@ function App() {
 
     const updatedList = {
       ...currentList,
-      [selector.property]: option,
+      [selector.property]: ["spellLore", "prayerLore", "manifestationLore"].includes(selector.property) && currentList[selector.property]?.id === option?.id ? null : option,
     };
 
     saveUpdatedList(updatedList);
@@ -2059,6 +2059,7 @@ function App() {
 
     case "selector":
       return (
+        <>
         <OptionSelector
           title={
             selector?.title ??
@@ -2069,7 +2070,7 @@ function App() {
             []
           }
           selectedOptions={
-            selector?.ui?.maxSelections > 1
+            selector?.ui?.maxSelections > 1 || ["spellLore", "prayerLore", "manifestationLore"].includes(selector?.property)
               ? (Array.isArray(currentList?.[selector.property])
                   ? currentList[selector.property]
                   : currentList?.[selector.property]
@@ -2079,6 +2080,7 @@ function App() {
           }
           maxSelections={selector?.ui?.maxSelections ?? 1}
           variant={selector?.ui?.variant}
+          onViewRule={openBuilderRuleReference}
           onRules={() => navigate("home", { listId: null })}
           onLists={openLists}
           onSettings={openSettings}
@@ -2106,6 +2108,12 @@ function App() {
           }}
           onConfigure={handleAddSelectedOption}
         />
+        {builderReference?.type === "rule" && (
+          <ReferenceOverlay title="Referencia de reglas" onClose={closeBuilderReference}>
+            <RuleWarscroll reference={builderReference.reference} onBack={closeBuilderReference} />
+          </ReferenceOverlay>
+        )}
+        </>
       );
 
     case "warscroll":

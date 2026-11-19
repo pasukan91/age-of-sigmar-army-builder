@@ -126,7 +126,7 @@ function RuleWarscroll({ reference, onBack }) {
               </section>
             )}
 
-            {(kind === "spell" || kind === "prayer" || isManifestation) && (
+            {(kind === "spell" || kind === "prayer" || (isManifestation && primaryRule)) && (
               <section className="aos-casting-card">
                 <div className="aos-casting-card__value">
                   <span>{kind === "prayer" || isInvocation ? "Canto" : isManifestation ? "Manifestar" : "Lanzamiento"}</span>
@@ -262,13 +262,13 @@ function isPrayer(rule) {
 }
 
 function getManifestationDeclare(item, rule, invocation) {
-  if (!rule) return "";
+  if (!rule || rule.sourceId) return "";
 
   const summoner = invocation ? "PRIEST" : "WIZARD";
   const action = invocation ? "chant this prayer" : "cast this spell";
   const roll = invocation ? "chanting" : "casting";
 
-  return `If there is not a friendly ${item.name} on the battlefield, pick an eligible friendly ${summoner} to ${action}, then make a ${roll} roll of 2D6.`;
+  return `If there is not a friendly ${item.name} on the battlefield, pick an eligible friendly ${summoner} to ${action}, then make a ${roll} roll of ${invocation ? "D6" : "2D6"}.`;
 }
 
 function getKindLabel(kind) {

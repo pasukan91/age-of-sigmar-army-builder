@@ -1,7 +1,7 @@
 {
   "metadata": {
     "source": "https://sigdex.io/",
-    "generatedAt": "2026-11-19T16:45:09.236Z",
+    "generatedAt": "2026-11-19T16:59:04.751Z",
     "serverVersion": "4.1.1",
     "bsdataVersion": "bce805b3a31df9f5df1a7304aefaf023aec1b52d"
   },
@@ -6564,6 +6564,7 @@
             "dataVersion": "latest"
           },
           "castingValue": 6,
+          "chantingValue": null,
           "summonSpell": {
             "id": "shifting-manifestations",
             "sourceId": "3c43-7206-922d-4f8a",
@@ -6679,6 +6680,29 @@
             "id": "18b7-6de-cb9-ddfb",
             "dataVersion": "latest"
           },
+          "castingValue": 6,
+          "chantingValue": null,
+          "summonSpell": {
+            "id": "shifting-manifestations",
+            "sourceId": "3c43-7206-922d-4f8a",
+            "name": "Shifting Manifestations",
+            "phase": "Your Hero Phase",
+            "type": "Spell",
+            "description": "Declare: Pick a friendly **^^Oracles of Fate Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Burning Sigil of Tzeentch**\n• **Daemonic Simulacrum**\n• **Tome of Eyes**\n\nEffect: If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them.",
+            "declare": "Pick a friendly **^^Oracles of Fate Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Burning Sigil of Tzeentch**\n• **Daemonic Simulacrum**\n• **Tome of Eyes**",
+            "effect": "If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them.",
+            "usedBy": null,
+            "lore": null,
+            "unlockCondition": null,
+            "keywords": [
+              "Spell",
+              "Summon"
+            ],
+            "castingValue": 6,
+            "chantingValue": null,
+            "commandPoints": null,
+            "resourceCost": null
+          },
           "instanceId": "renown-the-coven-of-thryx-daemonic-simulacrum-4-1",
           "reinforced": false
         },
@@ -6768,6 +6792,29 @@
           "catalogueSource": {
             "id": "19fa-7d20-3f5f-28d",
             "dataVersion": "latest"
+          },
+          "castingValue": 6,
+          "chantingValue": null,
+          "summonSpell": {
+            "id": "shifting-manifestations",
+            "sourceId": "3c43-7206-922d-4f8a",
+            "name": "Shifting Manifestations",
+            "phase": "Your Hero Phase",
+            "type": "Spell",
+            "description": "Declare: Pick a friendly **^^Oracles of Fate Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Burning Sigil of Tzeentch**\n• **Daemonic Simulacrum**\n• **Tome of Eyes**\n\nEffect: If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them.",
+            "declare": "Pick a friendly **^^Oracles of Fate Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Burning Sigil of Tzeentch**\n• **Daemonic Simulacrum**\n• **Tome of Eyes**",
+            "effect": "If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them.",
+            "usedBy": null,
+            "lore": null,
+            "unlockCondition": null,
+            "keywords": [
+              "Spell",
+              "Summon"
+            ],
+            "castingValue": 6,
+            "chantingValue": null,
+            "commandPoints": null,
+            "resourceCost": null
           },
           "instanceId": "renown-the-coven-of-thryx-tome-of-eyes-5-1",
           "reinforced": false
@@ -29415,6 +29462,29 @@
             "id": "9e4d-5fdc-593b-95d5",
             "dataVersion": "latest"
           },
+          "castingValue": 6,
+          "chantingValue": null,
+          "summonSpell": {
+            "id": "cycle-manifestation",
+            "sourceId": "c473-75b0-0c7a-6fed",
+            "name": "Cycle Manifestation",
+            "phase": "Your Hero Phase",
+            "type": "Spell",
+            "description": "Declare: Pick a friendly **^^Aelementiri Conclave Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Sanctum of Amyntok**\n• **Hyshian Twinstones**\n• **Rune of Petrification**\n\nEffect: If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them. If that **^^Manifestation^^** is a **Sanctum of Amyntok**, it must instead be set up wholly within 12\" of the caster, more than 3\" from all enemy units, and with its 3 parts touching each other so that they form a ring.",
+            "declare": "Pick a friendly **^^Aelementiri Conclave Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Sanctum of Amyntok**\n• **Hyshian Twinstones**\n• **Rune of Petrification**",
+            "effect": "If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them. If that **^^Manifestation^^** is a **Sanctum of Amyntok**, it must instead be set up wholly within 12\" of the caster, more than 3\" from all enemy units, and with its 3 parts touching each other so that they form a ring.",
+            "usedBy": null,
+            "lore": null,
+            "unlockCondition": null,
+            "keywords": [
+              "Spell",
+              "Summon"
+            ],
+            "castingValue": 6,
+            "chantingValue": null,
+            "commandPoints": null,
+            "resourceCost": null
+          },
           "instanceId": "renown-sigil-convocation-rune-of-petrification-1-1",
           "reinforced": false
         },
@@ -29512,6 +29582,7 @@
             "dataVersion": "latest"
           },
           "castingValue": 6,
+          "chantingValue": null,
           "summonSpell": {
             "id": "cycle-manifestation",
             "sourceId": "c473-75b0-0c7a-6fed",
@@ -29640,6 +29711,29 @@
           "catalogueSource": {
             "id": "a184-fc56-cfb6-b37b",
             "dataVersion": "latest"
+          },
+          "castingValue": 6,
+          "chantingValue": null,
+          "summonSpell": {
+            "id": "cycle-manifestation",
+            "sourceId": "c473-75b0-0c7a-6fed",
+            "name": "Cycle Manifestation",
+            "phase": "Your Hero Phase",
+            "type": "Spell",
+            "description": "Declare: Pick a friendly **^^Aelementiri Conclave Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Sanctum of Amyntok**\n• **Hyshian Twinstones**\n• **Rune of Petrification**\n\nEffect: If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them. If that **^^Manifestation^^** is a **Sanctum of Amyntok**, it must instead be set up wholly within 12\" of the caster, more than 3\" from all enemy units, and with its 3 parts touching each other so that they form a ring.",
+            "declare": "Pick a friendly **^^Aelementiri Conclave Wizard^^** to cast this spell, pick 1 of the friendly **^^Manifestations^^** below that is not on the battlefield, then make a casting roll of 2D6.\n• **Sanctum of Amyntok**\n• **Hyshian Twinstones**\n• **Rune of Petrification**",
+            "effect": "If there is already a friendly **^^Manifestation^^** from the list above on the battlefield, it is immediately banished and removed from play. Then, set up the **^^Manifestation^^** you picked within 1\" of the caster and visible to them. If that **^^Manifestation^^** is a **Sanctum of Amyntok**, it must instead be set up wholly within 12\" of the caster, more than 3\" from all enemy units, and with its 3 parts touching each other so that they form a ring.",
+            "usedBy": null,
+            "lore": null,
+            "unlockCondition": null,
+            "keywords": [
+              "Spell",
+              "Summon"
+            ],
+            "castingValue": 6,
+            "chantingValue": null,
+            "commandPoints": null,
+            "resourceCost": null
           },
           "instanceId": "renown-sigil-convocation-hyshian-twinstones-3-1",
           "reinforced": false
@@ -34542,6 +34636,29 @@
             "id": "61ca-47bf-34ed-c847",
             "dataVersion": "latest"
           },
+          "castingValue": 6,
+          "chantingValue": null,
+          "summonSpell": {
+            "id": "summon-manifestations-of-depravity",
+            "sourceId": "4c46-c0de-d2b0-2d6a",
+            "name": "Summon Manifestations of Depravity",
+            "phase": "Your Hero Phase",
+            "type": "Spell",
+            "description": "Declare: Pick a friendly **^^Decadent Host Wizard^^** to cast this spell.\n\nEffect: Pick a friendly **^^Hedonites of Slaanesh Manifestation^^** that is not on the battlefield and that was not removed from play earlier in the same turn.\nIf you picked a **Dreadful Visage** or **Wheels of Excruciation**, set it up wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. If you picked a **Mesmerising Mirror**, set it up wholly within 12\" of the caster and visible to them.",
+            "declare": "Pick a friendly **^^Decadent Host Wizard^^** to cast this spell.",
+            "effect": "Pick a friendly **^^Hedonites of Slaanesh Manifestation^^** that is not on the battlefield and that was not removed from play earlier in the same turn.\nIf you picked a **Dreadful Visage** or **Wheels of Excruciation**, set it up wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. If you picked a **Mesmerising Mirror**, set it up wholly within 12\" of the caster and visible to them.",
+            "usedBy": null,
+            "lore": null,
+            "unlockCondition": null,
+            "keywords": [
+              "Spell",
+              "Summon"
+            ],
+            "castingValue": 6,
+            "chantingValue": null,
+            "commandPoints": null,
+            "resourceCost": null
+          },
           "instanceId": "renown-the-accursed-reflection-mesmerising-mirror-1-1",
           "reinforced": false
         },
@@ -34636,6 +34753,7 @@
             "dataVersion": "latest"
           },
           "castingValue": 6,
+          "chantingValue": null,
           "summonSpell": {
             "id": "summon-manifestations-of-depravity",
             "sourceId": "4c46-c0de-d2b0-2d6a",
@@ -34749,6 +34867,29 @@
           "catalogueSource": {
             "id": "14ec-16c5-a9d2-7252",
             "dataVersion": "latest"
+          },
+          "castingValue": 6,
+          "chantingValue": null,
+          "summonSpell": {
+            "id": "summon-manifestations-of-depravity",
+            "sourceId": "4c46-c0de-d2b0-2d6a",
+            "name": "Summon Manifestations of Depravity",
+            "phase": "Your Hero Phase",
+            "type": "Spell",
+            "description": "Declare: Pick a friendly **^^Decadent Host Wizard^^** to cast this spell.\n\nEffect: Pick a friendly **^^Hedonites of Slaanesh Manifestation^^** that is not on the battlefield and that was not removed from play earlier in the same turn.\nIf you picked a **Dreadful Visage** or **Wheels of Excruciation**, set it up wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. If you picked a **Mesmerising Mirror**, set it up wholly within 12\" of the caster and visible to them.",
+            "declare": "Pick a friendly **^^Decadent Host Wizard^^** to cast this spell.",
+            "effect": "Pick a friendly **^^Hedonites of Slaanesh Manifestation^^** that is not on the battlefield and that was not removed from play earlier in the same turn.\nIf you picked a **Dreadful Visage** or **Wheels of Excruciation**, set it up wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. If you picked a **Mesmerising Mirror**, set it up wholly within 12\" of the caster and visible to them.",
+            "usedBy": null,
+            "lore": null,
+            "unlockCondition": null,
+            "keywords": [
+              "Spell",
+              "Summon"
+            ],
+            "castingValue": 6,
+            "chantingValue": null,
+            "commandPoints": null,
+            "resourceCost": null
           },
           "instanceId": "renown-the-accursed-reflection-wheels-of-excruciation-3-1",
           "reinforced": false

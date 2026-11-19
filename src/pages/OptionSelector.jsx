@@ -4,6 +4,7 @@ import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
+import AbilityCard from "../components/AbilityCard";
 import { getManifestationLoreContents } from "../utils/optionSummaries";
 import { calculateArmyPoints } from "../utils/armyPoints";
 import { validateArmyList } from "../utils/armyValidation";
@@ -12,6 +13,7 @@ function OptionSelector({
   title,
   options = [],
   onView,
+  onViewRule,
   onConfigure,
   goBack,
   selectedOptions = [],
@@ -94,7 +96,7 @@ function OptionSelector({
   }
 
   return (
-    <main className="aos-shell aos-official-page aos-official-selector">
+    <main className={`aos-shell aos-official-page aos-official-selector${variant === "lores" ? " aos-official-selector--lores" : ""}`}>
       <header className="aos-screen-header aos-official-header">
         <button type="button" onClick={goBack} aria-label="Back">
           <OfficialIcon name="back" size={25} strokeWidth={2.5} />
@@ -294,7 +296,7 @@ function OptionSelector({
                         }
                         className="aos-option-card__button aos-option-card__button--select"
                         disabled={selectionLimitReached}
-                        aria-pressed={isMultiSelect ? isSelected : undefined}
+                        aria-pressed={isMultiSelect || variant === "lores" ? isSelected : undefined}
                         aria-label={`${isSelected ? "Quitar" : "Seleccionar"} ${option.name}`}
                       >
                         {isSelected ? "✓" : <OfficialIcon name="plus" size={31} strokeWidth={3} />}
@@ -317,8 +319,15 @@ function OptionSelector({
                       Incluye {manifestationNames.length} {manifestationNames.length === 1 ? "manifestación" : "manifestaciones"}
                     </strong>
                     <ul>
-                      {manifestationNames.map((name) => <li key={name}>{name}</li>)}
+                      {(option.manifestations ?? []).map((manifestation) => <li key={manifestation.id ?? manifestation.name}>
+                        {onViewRule ? <button type="button" className="aos-official-current-selection" onClick={() => onViewRule({ kind: "manifestation", item: manifestation, sourceName: option.name })}>{manifestation.name}</button> : manifestation.name}
+                      </li>)}
                     </ul>
+                  </div>
+                )}
+                {variant === "lores" && (
+                  <div className="aos-official-lore-group__content">
+                    {(option.spells ?? option.prayers ?? option.abilities ?? []).map((ability) => <AbilityCard key={ability.id ?? ability.name} ability={ability} />)}
                   </div>
                 )}
               </article>

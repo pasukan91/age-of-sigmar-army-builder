@@ -1019,6 +1019,15 @@ body {
   box-shadow: none;
 }
 .aos-official-selector .aos-option-card__button--select svg { width: 23px; height: 23px; }
+.aos-official-selector .aos-option-card__button--select[aria-pressed="true"] { color: #fff; background: #2d5000; font-size: 20px; }
+.aos-official-selector--lores .aos-option-card__head { grid-template-columns: minmax(0, 1fr) 44px; min-height: 72px; }
+.aos-official-selector--lores .aos-option-card__head > div:first-child { display: grid; gap: 8px; grid-column: 1; }
+.aos-official-selector--lores .aos-option-card__head > .aos-option-card__actions { display: grid; grid-column: 2; align-self: center; }
+.aos-official-selector--lores .aos-option-card__title,
+.aos-official-selector--lores .aos-option-card__points { grid-column: auto; grid-row: auto; justify-self: start; align-self: auto; }
+.aos-official-selector--lores .aos-option-card__contents { padding-top: 14px; }
+.aos-official-selector--lores .aos-option-card__contents ul { padding-left: 0; list-style: none; }
+.aos-official-selector--lores .aos-option-card__contents button { padding-inline: 8px; font: 700 14px var(--official-serif); }
 .aos-selector-toast {
   position: fixed;
   z-index: 70;

@@ -221,14 +221,19 @@ function lores(army, kind, factionId, imageIndex, fallbackImage) {
     id: slug(lore.name), sourceId: lore.id, name: lore.name, points: Number(lore.points ?? 0), source: isAqshy(lore.scourge) ? "Aqshy" : "Battletome",
     ...(kind === "spell" ? { spells: (lore.abilities ?? []).map(ability) } : {}),
     ...(kind === "prayer" ? { prayers: (lore.abilities ?? []).map(ability) } : {}),
-    ...(kind === "manifestation" ? { manifestations: (lore.units ?? []).map((item, index) => {
+    ...(kind === "manifestation" ? { abilities: (lore.abilities ?? []).map(ability), manifestations: (lore.units ?? []).map((item) => {
       const manifestation = unit(item, factionId, imageIndex, fallbackImage);
-      const summonSpell = lore.abilities?.[index] ? ability(lore.abilities[index]) : null;
+      const summonSource = (lore.abilities ?? []).find((entry) => {
+        const text = [entry.name, entry.declare, entry.effect].filter(Boolean).join(" ").replace(/[*^]/g, "").toLowerCase();
+        return text.includes(item.name.toLowerCase());
+      });
+      const summonSpell = summonSource ? ability(summonSource) : null;
       return summonSpell ? {
         ...manifestation,
-        castingValue: summonSpell.castingValue ?? summonSpell.chantingValue,
+        castingValue: summonSpell.castingValue,
+        chantingValue: summonSpell.chantingValue,
         summonSpell: { ...summonSpell, keywords: [...new Set([...summonSpell.keywords, "Summon"])] },
-      } : manifestation;
+      } : { ...manifestation, summonSpell: null };
     }) } : {}),
   }));
 }
@@ -254,6 +259,7 @@ function factionFromArmy(army, id, { nested = false } = {}) {
       ? { ...converted, ...loreManifestation }
       : {
           ...converted,
+          summonSpell: null,
           details: {
             ...converted.details,
             standaloneManifestation: true,
