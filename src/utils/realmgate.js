@@ -7,11 +7,12 @@ const key = (item) => item.sourceId ?? item.id ?? item.name;
 const unique = (items) => [...new Map(items.filter(Boolean).map((item) => [key(item), item])).values()];
 
 export function getRealmgateWarscrolls(list) {
+  const kindOrder = { unit: 0, manifestation: 1, terrain: 2 };
   return [
     ...unique(getListUnitInstances(list).map(({ unit }) => unit)).map((unit) => ({ id: `unit-${key(unit)}`, item: unit, kind: "unit" })),
     ...(list?.terrain ? [{ id: `terrain-${key(list.terrain)}`, item: list.terrain, kind: "terrain" }] : []),
     ...unique(list?.manifestationLore?.manifestations ?? []).map((unit) => ({ id: `manifestation-${key(unit)}`, item: unit, kind: "manifestation" })),
-  ].sort((left, right) => left.item.name.localeCompare(right.item.name));
+  ].sort((left, right) => kindOrder[left.kind] - kindOrder[right.kind] || left.item.name.localeCompare(right.item.name));
 }
 
 export function getRealmgateEnhancements(list) {

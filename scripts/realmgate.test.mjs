@@ -12,6 +12,8 @@ test("Realmgate lists unique selected warscrolls including auxiliaries, renown, 
   const entries = getRealmgateWarscrolls(list);
   assert.equal(entries.length, 6);
   assert.equal(entries.filter((entry) => entry.item.id === "unit").length, 1);
+  assert.ok(entries.slice(0, 4).every((entry) => entry.kind === "unit"));
+  assert.deepEqual(entries.slice(-2).map((entry) => entry.kind), ["manifestation", "terrain"]);
   assert.deepEqual(new Set(entries.map((entry) => entry.kind)), new Set(["unit", "terrain", "manifestation"]));
   assert.equal(JSON.stringify(list), before);
 });
