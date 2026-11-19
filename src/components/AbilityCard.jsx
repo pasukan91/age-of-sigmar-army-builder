@@ -29,7 +29,8 @@ function FormattedText({ text }) {
 }
 
 function AbilityCard({ ability, defaultOpen = false, context = null, variant }) {
-  const isEnhancement = variant === "enhancement";
+  const isReference = variant === "reference";
+  const isEnhancement = variant === "enhancement" || isReference;
   const timing = isEnhancement ? ability.phase : getAbilityTiming(ability);
   const tone = isEnhancement && /reaction/i.test(timing)
     ? "reaction"
@@ -37,9 +38,10 @@ function AbilityCard({ ability, defaultOpen = false, context = null, variant }) 
   const name = String(ability.name ?? "").trim();
   const { introduction, sections } = parseAbilityDescription(ability.description);
   const keywords = ability.keywords ?? [];
+  const phaseColors = { black: "#101110", green: "#2d5000", yellow: "#9b8928", red: "#781b1c", orange: "#a85e2c", blue: "#256079", gray: "#828282", grey: "#828282", purple: "#53336b" };
 
   return (
-    <details className={`aos-ability-card aos-ability-card--${tone}${isEnhancement ? " aos-ability-card--enhancement" : ""}`} open={defaultOpen}>
+    <details className={`aos-ability-card aos-ability-card--${tone}${isEnhancement ? " aos-ability-card--enhancement" : ""}`} open={defaultOpen} style={isReference && phaseColors[ability.phaseColor] ? { "--ability-phase": phaseColors[ability.phaseColor] } : undefined}>
       <summary className="aos-ability-card__timing">
         <span className="aos-ability-card__icon" aria-hidden="true">
           {isEnhancement && tone === "passive"
@@ -59,13 +61,14 @@ function AbilityCard({ ability, defaultOpen = false, context = null, variant }) 
           )}
         </span>
         {Number(ability.commandPoints) > 0 && (
-          <span className="aos-ability-card__cost">{ability.commandPoints} PC</span>
+          <span className="aos-ability-card__cost">{ability.commandPoints} {isReference ? "CP" : "PC"}</span>
         )}
+        {isReference && (ability.castingValue != null || ability.chantingValue != null) && <span className="aos-ability-card__cost">{ability.chantingValue ?? ability.castingValue}</span>}
         <span className="aos-ability-card__chevron" aria-hidden="true">
           <ChevronIcon direction="down" size={9} thickness={2} />
         </span>
         {isEnhancement && name && (
-          <span className="aos-ability-card__name"><FormattedRulesText text={name} /></span>
+          <span className="aos-ability-card__name"><FormattedRulesText text={name} />{isReference && Number(ability.points) > 0 && <small>{ability.points} Points</small>}</span>
         )}
       </summary>
 

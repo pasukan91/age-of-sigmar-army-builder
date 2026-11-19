@@ -7,6 +7,7 @@ import UnitArtwork from "../components/UnitArtwork";
 import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
 import RegimentSection from "../components/armybuilder/RegimentSection";
 import RenownSection from "../components/armybuilder/RenownSection";
+import Realmgate from "../components/armybuilder/Realmgate";
 import { getEligibleRegimentsOfRenown } from "../data/regimentsOfRenown";
 import { ghb2026BattleTacticsCards } from "../data/ghb2026";
 import { calculateArmyPoints } from "../utils/armyPoints";
@@ -36,6 +37,8 @@ function ArmyBuilder({
   onRules,
   onLists,
   onSettings,
+  section = "units",
+  onSectionChange,
 }) {
   const [validationExpanded, setValidationExpanded] = useState(false);
   const [loreSettingsOpen, setLoreSettingsOpen] = useState(false);
@@ -79,19 +82,25 @@ function ArmyBuilder({
   const formationSelector = { title: "Battle Formation", property: "battleFormation", options: faction.battleFormations ?? [] };
   const tacticsSelector = { title: "Battle Tactics", property: "battleTactics", options: ghb2026BattleTacticsCards, ui: { maxSelections: 2, variant: "battleTactics" } };
   const terrainSelector = { title: "Faction Terrain", property: "terrain", options: faction.terrain ?? [] };
+  const playing = section === "game";
+
+  function changeMode(nextSection) {
+    onSectionChange?.(nextSection);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
 
   return (
     <main className="aos-official-page aos-official-builder">
       <header className="aos-official-header">
-        <button type="button" onClick={onBack} aria-label="Back"><OfficialIcon name="back" size={25} strokeWidth={2.5} /></button>
-        <h1>{list?.name ?? "STORM FORGE"}</h1>
+        <button type="button" onClick={playing ? () => changeMode("units") : onBack} aria-label="Back"><OfficialIcon name="back" size={25} strokeWidth={2.5} /></button>
+        <h1>{playing ? "REALMGATE" : list?.name ?? "STORM FORGE"}</h1>
         <div className="aos-official-header__actions">
-          <OfficialIcon name="profile" size={28} strokeWidth={1.8} />
+          <button type="button" className={playing ? "is-active" : ""} onClick={() => changeMode(playing ? "units" : "game")} aria-label={playing ? "Volver al constructor" : "Abrir modo partida"} aria-pressed={playing}><OfficialIcon name="battleMode" size={28} strokeWidth={1.8} /></button>
           <OfficialIcon name="menu" size={28} strokeWidth={2.4} />
         </div>
       </header>
 
-      {artwork && (
+      {!playing && artwork && (
         <div
           className="aos-official-builder-hero"
           style={{
@@ -101,7 +110,7 @@ function ArmyBuilder({
         />
       )}
 
-      <div className="aos-official-builder-content">
+      {playing ? <Realmgate list={list} onViewUnit={onViewWarscroll} onViewRule={onViewRule} /> : <div className="aos-official-builder-content">
         {formationSelector.options.length > 0 && (
           <OfficialSection title="Battle Formation" action="settings" onAction={() => openSelector(formationSelector)}>
             <button type="button" className="aos-official-current-selection" onClick={() => openSelector(formationSelector)}>
@@ -216,9 +225,9 @@ function ArmyBuilder({
             onExpandedChange={setValidationExpanded}
           />
         )}
-      </div>
+      </div>}
 
-      <button
+      {!playing && <button
         type="button"
         className={`aos-official-points${validation.errors.length ? " is-invalid" : ""}`}
         onClick={() => setValidationExpanded((open) => !open)}
@@ -226,7 +235,7 @@ function ArmyBuilder({
         <span>{validation.errors.length ? <OfficialIcon name="warning" size={24} strokeWidth={2.4} /> : "✓"}</span>
         <strong>{points}/{pointsLimit}</strong>
         <small>POINTS</small>
-      </button>
+      </button>}
 
       <MainNav
         active="storm-forge"

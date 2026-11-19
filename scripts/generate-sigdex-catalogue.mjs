@@ -83,6 +83,7 @@ function ability(item) {
   const prayer = Number(item.type) === 4 || keywords.some((keyword) => keyword.toLowerCase() === "prayer");
   return {
     id: slug(item.name), sourceId: item.id, name: item.name, phase: item.timing || "Passive",
+    phaseColor: item.color ?? null,
     type: spell ? "Spell" : prayer ? "Prayer" : "Ability", description: description(item),
     declare: item.declare ?? null, effect: item.effect ?? null, usedBy: item.usedBy ?? null,
     lore: item.lore ?? null, unlockCondition: item.unlockCondition ?? null,

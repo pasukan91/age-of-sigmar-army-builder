@@ -20,6 +20,7 @@ function OfficialIcon({ name, size = 24, strokeWidth = 2, className = "" }) {
     plus: <path d="M12 5v14M5 12h14"/>,
     menu: <><circle cx="12" cy="5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></>,
     profile: <><circle cx="12" cy="12" r="9"/><circle cx="12" cy="9" r="3"/><path d="M6.7 18c1.2-2.3 3-3.5 5.3-3.5s4.1 1.2 5.3 3.5"/></>,
+    battleMode: <><circle cx="12" cy="12" r="9"/><path d="M8 20V10a4 4 0 0 1 8 0v10M10 6l4 3v5h-4V6Z"/></>,
     reference: <><path d="M6 3h10a2 2 0 0 1 2 2v14H8a2 2 0 0 1-2-2V3Z"/><path d="M6 17a2 2 0 0 1 2-2h10M9 7h6M9 10h6"/><path d="M4 5h2M4 9h2M4 13h2"/></>,
     forge: <><path d="m12 2 1.7 5.1L19 5l-2.1 5.3L22 12l-5.1 1.7L19 19l-5.3-2.1L12 22l-1.7-5.1L5 19l2.1-5.3L2 12l5.1-1.7L5 5l5.3 2.1L12 2Z"/><circle cx="12" cy="12" r="3"/></>,
     combatPhase: <><path d="m5 3 2 5-1 5c0 4 3 7 6 8 3-1 6-4 6-8l-1-5 2-5-5 2-2-3-2 3-5-2Z" fill="currentColor" stroke="none"/><path d="m10 7 2 2-2 3 3 2-1 3M14 7l-2 2" stroke="var(--ability-phase)"/></>,
