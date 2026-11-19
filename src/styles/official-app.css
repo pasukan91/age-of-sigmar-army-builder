@@ -107,29 +107,29 @@ body {
 .aos-realmgate-lore[open] > summary svg,
 .aos-realmgate-manifestation[open] > summary svg { transform: rotate(180deg); }
 .aos-realmgate-section__content { padding: 12px 24px; }
-.aos-realmgate-warscrolls { display: grid; gap: 8px; }
+.aos-realmgate-warscrolls { display: grid; gap: 10px; }
 .aos-realmgate-warscrolls > button,
-.aos-realmgate-manifestation > summary { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 14px; align-items: center; width: 100%; min-height: 84px; padding: 8px 12px; border: 0; border-radius: 7px; color: #111; background: #fff; text-align: left; font: 700 13px/1.3 var(--official-serif); cursor: pointer; }
-.aos-realmgate .aos-unit-artwork { width: 58px; height: 68px; object-fit: contain; }
+.aos-realmgate-manifestation > summary { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 17px; align-items: center; width: 100%; min-height: 102px; padding: 10px 14px; border: 0; border-radius: 8px; color: #111; background: #fff; text-align: left; font: 700 16px/1.3 var(--official-serif); cursor: pointer; }
+.aos-realmgate .aos-unit-artwork { width: 70px; height: 82px; object-fit: contain; }
 .aos-realmgate-lore { margin-bottom: 10px; }
-.aos-realmgate-lore > summary { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 14px; border-radius: 6px; background: #fff; font: 700 13px var(--official-serif); cursor: pointer; list-style: none; }
+.aos-realmgate-lore > summary { display: flex; align-items: center; gap: 14px; min-height: 58px; padding: 12px 17px; border-radius: 7px; background: #fff; font: 700 16px var(--official-serif); cursor: pointer; list-style: none; }
 .aos-realmgate-manifestation { margin-top: 8px; }
-.aos-realmgate-manifestation > summary { grid-template-columns: 58px minmax(0, 1fr) 18px; list-style: none; }
-.aos-realmgate-abilities { display: grid; gap: 8px; }
+.aos-realmgate-manifestation > summary { grid-template-columns: 70px minmax(0, 1fr) 18px; list-style: none; }
+.aos-realmgate-abilities { display: grid; gap: 10px; }
 .aos-realmgate-lore > .aos-realmgate-abilities { margin-top: 8px; }
 .aos-realmgate .aos-ability-card { margin: 0; border-radius: 9px; box-shadow: none; }
 .aos-realmgate .aos-ability-card--hero { --ability-phase: #9b8928; }
 .aos-realmgate .aos-ability-card--combat { --ability-phase: #781b1c; }
 .aos-realmgate .aos-ability-card--charge { --ability-phase: #a85e2c; }
 .aos-realmgate .aos-ability-card--movement { --ability-phase: #828282; }
-.aos-realmgate .aos-ability-card__timing { grid-template-columns: 26px minmax(0, 1fr) auto 26px; gap: 0 8px; min-height: 0; padding: 0; }
-.aos-realmgate .aos-ability-card__icon { display: grid; place-items: center; margin-left: 8px; font-size: 18px; }
-.aos-realmgate .aos-ability-card__heading { min-height: 48px; justify-content: center; padding: 10px 0; }
-.aos-realmgate .aos-ability-card__timing-label { font: 700 12px/1.25 var(--official-serif); }
-.aos-realmgate .aos-ability-card__cost { padding: 3px 5px; font-size: 11px; }
-.aos-realmgate .aos-ability-card__chevron { width: 22px; height: 22px; margin-right: 4px; border: 0; background: transparent; box-shadow: none; }
-.aos-realmgate .aos-ability-card__name { display: flex; grid-column: 1 / -1; align-items: center; justify-content: space-between; gap: 8px; min-height: 32px; padding: 8px 12px; color: #111; background: #fff; font: 700 12px/1.25 var(--official-serif); letter-spacing: 0; }
-.aos-realmgate .aos-ability-card__name small { flex-shrink: 0; font-size: 10px; }
+.aos-realmgate .aos-ability-card__timing { grid-template-columns: 32px minmax(0, 1fr) auto 32px; gap: 0 10px; min-height: 0; padding: 0; }
+.aos-realmgate .aos-ability-card__icon { display: grid; place-items: center; margin-left: 10px; font-size: 22px; }
+.aos-realmgate .aos-ability-card__heading { min-height: 58px; justify-content: center; padding: 12px 0; }
+.aos-realmgate .aos-ability-card__timing-label { font: 700 14px/1.25 var(--official-serif); }
+.aos-realmgate .aos-ability-card__cost { padding: 4px 6px; font-size: 13px; }
+.aos-realmgate .aos-ability-card__chevron { width: 26px; height: 26px; margin-right: 5px; border: 0; background: transparent; box-shadow: none; }
+.aos-realmgate .aos-ability-card__name { display: flex; grid-column: 1 / -1; align-items: center; justify-content: space-between; gap: 10px; min-height: 38px; padding: 10px 14px; color: #111; background: #fff; font: 700 14px/1.25 var(--official-serif); letter-spacing: 0; }
+.aos-realmgate .aos-ability-card__name small { flex-shrink: 0; font-size: 12px; }
 .aos-realmgate-empty { font: 14px/1.5 var(--official-serif); }
 
 .aos-official-content {
