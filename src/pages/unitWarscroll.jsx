@@ -6,7 +6,6 @@ import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import UnitDetails from "../components/UnitDetails";
-import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
 
 import "../styles/aos-app.css";
@@ -45,20 +44,9 @@ function UnitWarscroll({
     );
   }
 
-  const displayedPoints =
-    getDisplayedPoints(unit);
-
-  const displayedModels =
-    getDisplayedModels(unit);
-
+  const displayedPoints = Number(unit.points) || 0;
+  const displayedModels = Number(unit.details?.models) || 1;
   const accordionPrefix = `storm-forge:warscroll:${unit.id ?? unit.name}`;
-
-  const isHedonitesUnit =
-    (unit.keywords ?? []).some(
-      (keyword) =>
-        String(keyword).trim().toLowerCase() ===
-        "hedonites of slaanesh"
-    );
 
   return (
     <main className="aos-page aos-warscroll-page">
@@ -129,11 +117,6 @@ function UnitWarscroll({
                 <span>Ward {unit.profile.ward}</span>
               )}
 
-              {unit.reinforced && (
-                <span className="aos-warscroll-meta__reinforced">
-                  Reforzada
-                </span>
-              )}
             </div>
 
             {unit.details?.notes && (
@@ -217,151 +200,6 @@ function UnitWarscroll({
             )}
           </div>
         </Accordion>
-
-        {unit.artefact && (
-          <EnhancementAccordion
-            title="Artefacto"
-            storageKey={`${accordionPrefix}:artefact`}
-            enhancement={
-              unit.artefact
-            }
-          />
-        )}
-
-        {unit.heroicTrait && (
-          <EnhancementAccordion
-            title="Rasgo heroico"
-            storageKey={`${accordionPrefix}:heroic-trait`}
-            enhancement={
-              unit.heroicTrait
-            }
-          />
-        )}
-
-        {unit.monstrousTrait && !isHedonitesUnit && (
-          <EnhancementAccordion
-            title="Rasgo monstruoso"
-            storageKey={`${accordionPrefix}:monstrous-trait`}
-            enhancement={
-              unit.monstrousTrait
-            }
-          />
-        )}
-
-        {unit.allConsumingObsession && (
-          <EnhancementAccordion
-            title="Obsesión devoradora"
-            enhancement={unit.allConsumingObsession}
-          />
-        )}
-
-        {unit.moulderMutation && (
-          <EnhancementAccordion
-            title="Mutación Moulder"
-            enhancement={unit.moulderMutation}
-          />
-        )}
-
-        {unit.mortisanRefinement && (
-          <EnhancementAccordion
-            title="Refinamiento Mortisan"
-            enhancement={unit.mortisanRefinement}
-          />
-        )}
-
-        {unit.originOfTerrifyingFolkTale && (
-          <EnhancementAccordion
-            title="Origen de relato terrorífico"
-            enhancement={unit.originOfTerrifyingFolkTale}
-          />
-        )}
-
-        {unit.visionOfFate && (
-          <EnhancementAccordion
-            title="Visión de destino"
-            enhancement={unit.visionOfFate}
-          />
-        )}
-
-        {unit.specialKnickKnack && (
-          <EnhancementAccordion
-            title="Special Knick-Knack"
-            enhancement={unit.specialKnickKnack}
-          />
-        )}
-
-        {unit.plaguefathersPox && (
-          <EnhancementAccordion
-            title="Plaguefather’s Pox"
-            enhancement={unit.plaguefathersPox}
-          />
-        )}
-
-        {unit.decorationForValour && (
-          <EnhancementAccordion
-            title="Decoration for Valour"
-            enhancement={unit.decorationForValour}
-          />
-        )}
-
-        {unit.ironweldInnovation && (
-          <EnhancementAccordion
-            title="Ironweld Innovation"
-            enhancement={unit.ironweldInnovation}
-          />
-        )}
-
-        {unit.accursedDevice && (
-          <EnhancementAccordion
-            title="Dispositivo maldito"
-            enhancement={unit.accursedDevice}
-          />
-        )}
-
-        {unit.brazenMutation && (
-          <EnhancementAccordion
-            title="Mutación de bronce"
-            enhancement={unit.brazenMutation}
-          />
-        )}
-
-        {unit.brandOfDarkGod && (
-          <EnhancementAccordion
-            title="Brand of the Dark Gods"
-            enhancement={unit.brandOfDarkGod}
-          />
-        )}
-
-        {unit.ensorcelledBanner && (
-          <EnhancementAccordion
-            title="Ensorcelled Banner"
-            enhancement={unit.ensorcelledBanner}
-          />
-        )}
-
-        {unit.boonOfShadow && (
-          <EnhancementAccordion
-            title="Boon of Shadow"
-            enhancement={unit.boonOfShadow}
-          />
-        )}
-
-        {unit.aqshyEnhancement && (
-          <EnhancementAccordion
-            title={unit.aqshyEnhancement.groupName ?? "Mejora de Aqshy"}
-            enhancement={unit.aqshyEnhancement}
-          />
-        )}
-
-        {Object.entries(unit.specialEnhancements ?? {}).map(([category, enhancement]) =>
-          enhancement ? (
-            <EnhancementAccordion
-              key={category}
-              title={category}
-              enhancement={enhancement}
-            />
-          ) : null
-        )}
 
         {(unit.lore || unit.details?.lore) && (
           <Accordion title="Lore" storageKey={`${accordionPrefix}:lore`}>
@@ -528,35 +366,6 @@ function AbilityList({
   );
 }
 
-function EnhancementAccordion({
-  title,
-  enhancement,
-  storageKey,
-}) {
-  return (
-    <Accordion
-      title={title}
-      storageKey={storageKey ?? `storm-forge:warscroll-enhancement:${enhancement.id ?? enhancement.name}`}
-    >
-      <h3 style={styles.enhancementName}>
-        {enhancement.name}
-      </h3>
-
-      <span className="aos-rule-card__phase">
-        {getEnhancementTiming(enhancement)}
-      </span>
-
-      {enhancement.source && (
-        <span style={styles.enhancementSource}>
-          {enhancement.source}
-        </span>
-      )}
-
-      <RuleCopyBlocks lore={enhancement.lore} rule={enhancement.description} />
-    </Accordion>
-  );
-}
-
 function getWeaponCount(
   unit,
   type
@@ -575,58 +384,11 @@ function getWeaponCount(
   }`;
 }
 
-function getDisplayedPoints(unit) {
-  const basePoints =
-    Number(unit?.points) || 0;
-
-  const enhancementPoints = [
-    unit?.heroicTrait,
-    unit?.monstrousTrait,
-    unit?.artefact,
-    unit?.allConsumingObsession,
-    unit?.moulderMutation,
-    unit?.mortisanRefinement,
-    unit?.originOfTerrifyingFolkTale,
-    unit?.visionOfFate,
-    unit?.specialKnickKnack,
-    unit?.flawlessManoeuvre,
-    unit?.plaguefathersPox,
-    unit?.decorationForValour,
-    unit?.ironweldInnovation,
-    unit?.accursedDevice,
-    unit?.brazenMutation,
-    unit?.brandOfDarkGod,
-    unit?.ensorcelledBanner,
-    unit?.boonOfShadow,
-    unit?.aqshyEnhancement,
-    ...Object.values(unit?.specialEnhancements ?? {}),
-  ].reduce(
-    (total, enhancement) =>
-      total + (Number(enhancement?.points) || 0),
-    0
-  );
-
-  return (
-    (unit?.reinforced ? basePoints * 2 : basePoints) +
-    enhancementPoints
-  );
-}
-
 function hasWeaponProfile(unit, type) {
   return (unit?.weapons ?? []).some(
     (weapon) =>
       (weapon.type ?? "Melee") === type
   );
-}
-
-function getDisplayedModels(unit) {
-  const baseModels =
-    Number(unit?.details?.models) ||
-    1;
-
-  return unit?.reinforced
-    ? baseModels * 2
-    : baseModels;
 }
 
 const styles = {
@@ -688,27 +450,6 @@ const styles = {
     color: "#ffffff",
     fontSize: 11,
     fontWeight: 700,
-    textTransform: "uppercase",
-  },
-
-  enhancementName: {
-    marginBottom: 8,
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    textTransform: "uppercase",
-  },
-
-  enhancementSource: {
-    display: "inline-block",
-    padding: "4px 9px",
-    marginBottom: 10,
-    border: "1px solid #9a6820",
-    borderRadius: 999,
-    backgroundColor: "#f2dfb3",
-    color: "#5f3b0d",
-    fontSize: 11,
-    fontWeight: 800,
-    letterSpacing: "0.08em",
     textTransform: "uppercase",
   },
 
