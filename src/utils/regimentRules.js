@@ -147,6 +147,15 @@ function parseRegimentOption(value) {
   };
 }
 
+export function formatRegimentOption(value) {
+  if (typeof value === "string") return value.trim();
+  const { label, min, max } = parseRegimentOption(value);
+  if (!label) return "";
+  if (max !== null) return `${min ?? 0}-${max} ${label}`;
+  if (min > 0) return `${min}+ ${label}`;
+  return label;
+}
+
 function getKeywords(unit) {
   return (unit?.keywords ?? []).map(normalize);
 }

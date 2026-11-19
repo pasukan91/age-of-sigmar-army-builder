@@ -1021,7 +1021,7 @@ body {
 .aos-warscroll-page .aos-warscroll-meta__identity { display: none; }
 .aos-warscroll-page .aos-warscroll-meta__points { padding: 5px 7px; border-radius: 3px; color: #fff; background: #333; }
 .aos-warscroll-page .aos-accordion { margin: 0; border: 0; border-bottom: 1px solid #fff; border-radius: 0; }
-.aos-warscroll-page .aos-accordion > summary { min-height: 54px; padding: 12px 24px; color: #fff; background: var(--official-gold); font: 700 18px var(--official-display); text-transform: uppercase; }
+.aos-warscroll-page .aos-accordion__trigger { min-height: 54px; padding: 12px 24px; color: #fff; background: var(--official-gold); font: 700 18px var(--official-display); text-transform: uppercase; }
 .aos-warscroll-page .aos-accordion__content { padding: 23px 24px; background: #fff; }
 .aos-official-unit-details { font: 14px/1.55 var(--official-serif); }
 
@@ -1492,7 +1492,7 @@ body {
 
 .aos-official-config-panel > summary::-webkit-details-marker,
 .aos-official-config-subgroup > summary::-webkit-details-marker,
-.aos-official-config-option summary::-webkit-details-marker {
+.aos-official-config-option > details > summary::-webkit-details-marker {
   display: none;
 }
 
@@ -1503,13 +1503,13 @@ body {
 
 .aos-official-config-panel > summary svg,
 .aos-official-config-subgroup > summary svg,
-.aos-official-config-option summary svg {
+.aos-official-config-option > details > summary svg {
   transition: transform 140ms ease;
 }
 
 .aos-official-config-panel[open] > summary > svg,
 .aos-official-config-subgroup[open] > summary > svg,
-.aos-official-config-option details[open] > summary > svg {
+.aos-official-config-option > details[open] > summary > svg {
   transform: rotate(180deg);
 }
 
@@ -1543,6 +1543,7 @@ body {
 
 .aos-official-config-subgroup {
   overflow: hidden;
+  border: 1px solid var(--official-line);
   border-radius: 7px;
   background: #fff;
 }
@@ -1589,34 +1590,37 @@ body {
 .aos-official-config-option {
   position: relative;
   display: block;
-  min-height: 49px;
-  background: #fff;
+  min-height: 51px;
+  background: #f3f3f3;
 }
 
 .aos-official-config-option > details {
   width: 100%;
 }
 
-.aos-official-config-option summary {
+.aos-official-config-option > details > summary {
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 8px;
   align-items: center;
-  min-height: 49px;
-  padding: 9px 58px 9px 18px;
+  min-height: 51px;
+  padding: 9px 52px 9px 16px;
+  border-radius: 5px;
+  background: #fff;
   cursor: pointer;
   list-style: none;
 }
 
-.aos-official-config-option summary span {
+.aos-official-config-option > details > summary span {
   display: grid;
   gap: 3px;
 }
 
-.aos-official-config-option summary strong {
+.aos-official-config-option > details > summary strong {
   font: 700 16px/1.2 var(--official-serif);
 }
 
-.aos-official-config-option summary small {
+.aos-official-config-option > details > summary small {
   font: 13px/1.2 var(--official-serif);
 }
 
@@ -1626,8 +1630,9 @@ body {
   right: 0;
   display: grid;
   width: 54px;
-  min-height: 49px;
+  min-height: 51px;
   place-items: center;
+  cursor: pointer;
 }
 
 .aos-official-config-option > label > span:last-child {
@@ -1649,9 +1654,15 @@ body {
   background: #ddd;
 }
 
+.aos-official-config-option > label input:focus-visible + span:last-child,
+.aos-official-config-toggle input:focus-visible + span {
+  outline: 3px solid #36768e;
+  outline-offset: 3px;
+}
+
 .aos-official-config-option__rules {
   width: 100%;
-  padding: 2px 18px 16px;
+  padding: 5px 0 0;
 }
 
 .aos-official-config-option__rules > .aos-rule-copy-group,
@@ -1664,32 +1675,61 @@ body {
 }
 
 .aos-official-config-option__rules .aos-ability-card {
-  border-radius: 7px;
+  margin: 0;
+  border-radius: 12px;
   box-shadow: none;
 }
 
+.aos-official-config-option__rules .aos-ability-card--passive { --ability-phase: #9b8928; }
+.aos-official-config-option__rules .aos-ability-card--combat { --ability-phase: #781b1c; }
+.aos-official-config-option__rules .aos-ability-card--reaction { --ability-phase: #2d5000; }
+
 .aos-official-config-option__rules .aos-ability-card__timing {
-  grid-template-columns: 26px minmax(0, 1fr) auto 30px;
-  gap: 8px;
-  min-height: 58px;
-  padding: 10px 12px;
+  grid-template-columns: 28px minmax(0, 1fr) auto 24px;
+  column-gap: 8px;
+  row-gap: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+.aos-official-config-option__rules .aos-ability-card__heading {
+  padding: 16px 0;
+  min-height: 54px;
+  justify-content: center;
 }
 
 .aos-official-config-option__rules .aos-ability-card__icon {
+  display: grid;
+  margin-left: 20px;
+  width: 24px;
+  place-items: center;
   font-size: 20px;
 }
 
 .aos-official-config-option__rules .aos-ability-card__timing-label {
-  font-size: 16px;
+  padding-left: 20px;
+  font: 700 16px/1.2 var(--official-serif);
 }
 
 .aos-official-config-option__rules .aos-ability-card__name {
-  font-size: 13px;
+  grid-column: 1 / -1;
+  display: block;
+  min-height: 35px;
+  padding: 10px 22px;
+  color: #111;
+  background: #fff;
+  font: 700 13px/1.2 var(--official-serif);
+  letter-spacing: 0;
 }
 
 .aos-official-config-option__rules .aos-ability-card__chevron {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .aos-official-config-option__rules .aos-ability-card__body > h3 {

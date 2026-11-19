@@ -9,6 +9,7 @@ import ChevronIcon from "./ChevronIcon";
 import FactionMechanicIllustration from "./FactionMechanicIllustration";
 import FormattedRulesText from "./FormattedRulesText";
 import RuleCopyBlocks from "./RuleCopyBlocks";
+import OfficialIcon from "./OfficialIcon";
 
 function FormattedText({ text }) {
   const { lead, bullets } = parseFormattedText(text);
@@ -27,24 +28,31 @@ function FormattedText({ text }) {
   );
 }
 
-function AbilityCard({ ability, defaultOpen = false, context = null }) {
-  const timing = getAbilityTiming(ability);
-  const tone = getAbilityPhaseTone(ability);
+function AbilityCard({ ability, defaultOpen = false, context = null, variant }) {
+  const isEnhancement = variant === "enhancement";
+  const timing = isEnhancement ? ability.phase : getAbilityTiming(ability);
+  const tone = isEnhancement && /reaction/i.test(timing)
+    ? "reaction"
+    : getAbilityPhaseTone(ability);
   const name = String(ability.name ?? "").trim();
   const { introduction, sections } = parseAbilityDescription(ability.description);
   const keywords = ability.keywords ?? [];
 
   return (
-    <details className={`aos-ability-card aos-ability-card--${tone}`} open={defaultOpen}>
+    <details className={`aos-ability-card aos-ability-card--${tone}${isEnhancement ? " aos-ability-card--enhancement" : ""}`} open={defaultOpen}>
       <summary className="aos-ability-card__timing">
         <span className="aos-ability-card__icon" aria-hidden="true">
-          {getAbilityPhaseIcon(ability)}
+          {isEnhancement && tone === "passive"
+            ? <OfficialIcon name="forge" size={24} strokeWidth={1.8} />
+            : isEnhancement && (tone === "combat" || tone === "reaction")
+              ? <OfficialIcon name="combatPhase" size={24} strokeWidth={1.8} />
+              : getAbilityPhaseIcon(ability)}
         </span>
         <span className="aos-ability-card__heading">
           <span className="aos-ability-card__timing-label">
             <FormattedRulesText text={timing} />
           </span>
-          {name && (
+          {name && !isEnhancement && (
             <span className="aos-ability-card__name">
               <FormattedRulesText text={name} />
             </span>
@@ -56,6 +64,9 @@ function AbilityCard({ ability, defaultOpen = false, context = null }) {
         <span className="aos-ability-card__chevron" aria-hidden="true">
           <ChevronIcon direction="down" size={9} thickness={2} />
         </span>
+        {isEnhancement && name && (
+          <span className="aos-ability-card__name"><FormattedRulesText text={name} /></span>
+        )}
       </summary>
 
       <div className="aos-ability-card__body">

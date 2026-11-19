@@ -5,7 +5,6 @@ import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
 import AbilityCard from "../components/AbilityCard";
 import FormattedRulesText from "../components/FormattedRulesText";
-import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import {
   ARTEFACTS_OF_POWER,
   HEROIC_TRAITS,
@@ -724,7 +723,7 @@ function UnitConfig({
 
       <button
         type="button"
-        className="aos-official-points aos-official-config-points"
+        className={`aos-official-points aos-official-config-points${pointsLimit > 0 && listPoints > pointsLimit ? " is-invalid" : ""}`}
         aria-label={`${listPoints} of ${pointsLimit} points`}
       >
         <span><OfficialIcon name="warning" size={24} strokeWidth={2.4} /></span>
@@ -806,12 +805,15 @@ function OfficialSelectionPanel({
 }
 
 function OfficialEnhancementOption({ option, checked, disabled, onChange }) {
-  const abilities = getEnhancementAbilities(option);
-  const timing = getEnhancementTiming(option);
+  const nestedAbilities = getEnhancementAbilities(option);
+  const abilities = nestedAbilities.length > 0 ? nestedAbilities : [{
+    ...option,
+    phase: getEnhancementTiming(option),
+  }];
 
   return (
     <article className="aos-official-config-option">
-      <details>
+      <details open={checked}>
         <summary>
           <OfficialIcon name="chevronDown" size={20} strokeWidth={3} />
           <span>
@@ -820,13 +822,8 @@ function OfficialEnhancementOption({ option, checked, disabled, onChange }) {
           </span>
         </summary>
         <div className="aos-official-config-option__rules">
-          {timing && <span className="aos-config-option-phase">{timing}</span>}
-          <RuleCopyBlocks
-            lore={option.lore}
-            rule={abilities.length > 0 ? null : option.description}
-          />
           {abilities.map((ability) => (
-            <AbilityCard ability={ability} key={ability.id ?? ability.name} />
+            <AbilityCard ability={ability} variant="enhancement" key={ability.id ?? ability.name} />
           ))}
         </div>
       </details>

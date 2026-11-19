@@ -5,6 +5,7 @@ import AbilityCard from "../components/AbilityCard";
 import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
+import UnitDetails from "../components/UnitDetails";
 import { getEnhancementTiming } from "../utils/enhancementTiming";
 import { groupAbilitiesByPhase } from "../utils/abilityFormatting";
 
@@ -192,16 +193,7 @@ function UnitWarscroll({
         </Accordion>
 
         <Accordion title="Unit Details" storageKey={`${accordionPrefix}:details`}>
-          <div className="aos-official-unit-details">
-            <p>• {displayedModels} {displayedModels === 1 ? "model" : "models"}</p>
-            <p><strong>{displayedPoints} Points</strong></p>
-            {(unit.details?.regimentOptions ?? []).length > 0 && (
-              <>
-                <strong>Regiment Options:</strong>
-                {(unit.details.regimentOptions ?? []).map((option) => <p key={option}>• {option}</p>)}
-              </>
-            )}
-          </div>
+          <UnitDetails unit={unit} models={displayedModels} points={displayedPoints} />
         </Accordion>
 
         <Accordion title="Keywords" storageKey={`${accordionPrefix}:keywords`}>
