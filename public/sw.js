@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v11-official-mobile-audit";
+const CACHE_VERSION = "v12-official-mobile-final";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media-${CACHE_VERSION}`;

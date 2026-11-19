@@ -25,7 +25,6 @@ function MyLists({
   const [importText, setImportText] = useState("");
   const [importResult, setImportResult] = useState(null);
   const [importError, setImportError] = useState("");
-  const shellArtwork = getFactionArtwork(lists[0]?.faction);
 
   function handleImport() {
     setImportError("");
@@ -43,7 +42,6 @@ function MyLists({
   return (
     <main
       className="aos-shell aos-official-page aos-storm-forge-home"
-      style={shellArtwork ? { "--official-storm-art": `url("${shellArtwork}")` } : undefined}
     >
       <header className="aos-screen-header aos-official-header aos-official-header--root">
         <span aria-hidden="true" />

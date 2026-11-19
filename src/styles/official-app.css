@@ -53,7 +53,7 @@ body {
   box-shadow: none;
 }
 
-.aos-official-header--root {
+.aos-official-page .aos-official-header--root {
   grid-template-columns: 0 minmax(0, 1fr) 36px;
 }
 
@@ -257,7 +257,7 @@ body {
 .aos-storm-forge-home {
   background:
     linear-gradient(#0b1719c7, #0b1719c7),
-    var(--official-storm-art, url("/images/alliances/destruction.webp")) center / cover fixed;
+    var(--official-storm-art, url("/images/alliances/death.webp")) center / cover fixed;
 }
 
 .aos-storm-forge-home .aos-screen-content {
@@ -311,6 +311,11 @@ body {
 }
 
 .aos-storm-forge-home .aos-list-card__open > span:first-child {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  left: 25px;
+  width: calc(56% - 25px);
   display: grid;
   gap: 5px;
 }
@@ -891,7 +896,7 @@ body {
     padding-left: 16px;
   }
 
-  .aos-official-header--root {
+  .aos-official-page .aos-official-header--root {
     grid-template-columns: 0 minmax(0, 1fr) 32px;
   }
 
