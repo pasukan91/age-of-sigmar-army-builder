@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "storm-forge";
-const CACHE_VERSION = "v18-official-unit-config";
+const CACHE_VERSION = "v19-official-config-sizing";
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media-${CACHE_VERSION}`;
