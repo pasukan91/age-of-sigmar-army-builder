@@ -9,7 +9,6 @@ import {
   getRegimentUnitLimit,
 } from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
-import { isUniqueUnit } from "../../utils/unitIdentity";
 import { getUnitPoints } from "../../utils/armyPoints";
 
 function RegimentSection({
@@ -378,8 +377,6 @@ export function UnitCard({
         String(keyword).trim().toLowerCase() ===
         "hedonites of slaanesh"
     );
-  const isUnique = isUniqueUnit(unit);
-
   const assignedEnhancements = [
     unit.artefact,
     unit.heroicTrait,
@@ -413,6 +410,14 @@ export function UnitCard({
 
   return (
     <article className="aos-official-roster-unit">
+      {onConfigure && (
+        <button
+          type="button"
+          className="aos-official-roster-unit__configure"
+          onClick={onConfigure}
+          aria-label={`Configure ${unit.name}`}
+        />
+      )}
       <button
         type="button"
         onClick={onView}
@@ -446,7 +451,6 @@ export function UnitCard({
         <details className="aos-official-action-menu aos-official-action-menu--unit">
           <summary aria-label={`${unit.name} options`}>⋮</summary>
           <div>
-            {!isUnique && <button type="button" onClick={onConfigure}>Configure</button>}
             {!isLeader && canDuplicate && <button type="button" onClick={onDuplicate}>Duplicate</button>}
             {!isLeader && <button type="button" onClick={onRemove}>Remove</button>}
           </div>

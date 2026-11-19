@@ -1354,3 +1354,339 @@ body {
     font-size: 10px;
   }
 }
+
+/* Official unit-card interaction: the row edits the unit, while the artwork
+   remains a separate warscroll shortcut and the overflow menu stays on top. */
+.aos-official-roster-unit__configure {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.aos-official-roster-unit__configure:focus-visible {
+  outline: 3px solid #f2c719;
+  outline-offset: -3px;
+}
+
+.aos-official-roster-unit .aos-unit-artwork-link,
+.aos-official-roster-unit .aos-official-action-menu {
+  position: relative;
+  z-index: 2;
+}
+
+.aos-official-unit-config {
+  min-height: 100dvh;
+  padding-bottom: calc(var(--official-nav-height) + 30px);
+  color: #111;
+  background: #f3f3f3;
+}
+
+.aos-official-config-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 42px;
+  gap: 14px;
+  align-items: center;
+  min-height: 86px;
+  padding: 18px 24px;
+  background: #fff;
+}
+
+.aos-official-config-summary > strong {
+  font: 700 20px/1.2 var(--official-serif);
+}
+
+.aos-official-config-summary > span {
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: #fff;
+  background: var(--official-red);
+  font: 700 18px/1 var(--official-serif);
+}
+
+.aos-official-config-summary > button {
+  display: grid;
+  width: 42px;
+  height: 48px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  color: #36768e;
+  background: transparent;
+}
+
+.aos-official-config-content {
+  display: grid;
+  gap: 16px;
+  padding: 32px 24px 170px;
+}
+
+.aos-official-config-toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 70px;
+  align-items: center;
+  min-height: 86px;
+  padding: 18px 30px;
+  border: 2px solid #c9c9c9;
+  border-radius: 7px;
+  background: #fff;
+  font: 700 18px/1.2 var(--official-serif);
+}
+
+.aos-official-config-toggle input,
+.aos-official-config-option > label input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.aos-official-config-toggle > span {
+  position: relative;
+  width: 68px;
+  height: 42px;
+  border: 4px solid #ccc;
+  border-radius: 999px;
+  background: #dedede;
+}
+
+.aos-official-config-toggle > span::after {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+  transition: transform 140ms ease;
+}
+
+.aos-official-config-toggle input:checked + span {
+  border-color: #247d39;
+  background: #309448;
+}
+
+.aos-official-config-toggle input:checked + span::after {
+  transform: translateX(26px);
+}
+
+.aos-official-config-panel {
+  margin: 0;
+}
+
+.aos-official-config-panel > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px;
+  align-items: center;
+  min-height: 68px;
+  padding: 15px 30px;
+  border-radius: 8px;
+  background: #d0d0d0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.aos-official-config-panel > summary::-webkit-details-marker,
+.aos-official-config-subgroup > summary::-webkit-details-marker,
+.aos-official-config-option summary::-webkit-details-marker {
+  display: none;
+}
+
+.aos-official-config-panel > summary > strong {
+  font: 700 19px/1.15 var(--official-serif);
+  text-transform: uppercase;
+}
+
+.aos-official-config-panel > summary svg,
+.aos-official-config-subgroup > summary svg,
+.aos-official-config-option summary svg {
+  transition: transform 140ms ease;
+}
+
+.aos-official-config-panel[open] > summary > svg,
+.aos-official-config-subgroup[open] > summary > svg,
+.aos-official-config-option details[open] > summary > svg {
+  transform: rotate(180deg);
+}
+
+.aos-official-config-panel__body {
+  padding-top: 14px;
+}
+
+.aos-official-config-box {
+  overflow: hidden;
+  border: 2px solid #ccc;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.aos-official-config-box > strong {
+  display: block;
+  padding: 28px 30px;
+  font: 700 18px/1.2 var(--official-serif);
+}
+
+.aos-official-config-toggle--nested {
+  border: 0;
+  border-top: 2px solid #ccc;
+  border-radius: 0;
+}
+
+.aos-official-config-subgroups {
+  display: grid;
+  gap: 8px;
+}
+
+.aos-official-config-subgroup {
+  overflow: hidden;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.aos-official-config-subgroup > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px;
+  align-items: center;
+  min-height: 62px;
+  padding: 14px 28px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.aos-official-config-subgroup > summary > svg:first-child {
+  order: -1;
+}
+
+.aos-official-config-subgroup > summary:has(svg:first-child + strong) {
+  grid-template-columns: 30px minmax(0, 1fr);
+}
+
+.aos-official-config-subgroup > summary strong {
+  font: 700 18px/1.2 var(--official-serif);
+}
+
+.aos-official-config-restriction {
+  margin: 0;
+  padding: 20px 26px;
+  background: #d0d0d0;
+  font: 16px/1.35 var(--official-serif);
+}
+
+.aos-official-config-options {
+  display: grid;
+  gap: 6px;
+  padding-top: 8px;
+  background: #f3f3f3;
+}
+
+.aos-official-config-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  align-items: start;
+  min-height: 64px;
+  background: #fff;
+}
+
+.aos-official-config-option summary {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  min-height: 64px;
+  padding: 12px 10px 12px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.aos-official-config-option summary span {
+  display: grid;
+  gap: 3px;
+}
+
+.aos-official-config-option summary strong {
+  font: 700 17px/1.2 var(--official-serif);
+}
+
+.aos-official-config-option summary small {
+  font: 14px/1.2 var(--official-serif);
+}
+
+.aos-official-config-option > label {
+  position: relative;
+  display: grid;
+  min-height: 64px;
+  place-items: center;
+}
+
+.aos-official-config-option > label > span:last-child {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 2px solid #111;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.aos-official-config-option > label input:checked + span:last-child {
+  background: #23813b;
+  box-shadow: inset 0 0 0 8px #fff;
+}
+
+.aos-official-config-option > label input:disabled + span:last-child {
+  border-color: #aaa;
+  background: #ddd;
+}
+
+.aos-official-config-option__rules {
+  padding: 0 20px 18px 58px;
+}
+
+.aos-official-weapon-profile {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  padding: 0 16px 16px;
+}
+
+.aos-official-weapon-profile > span {
+  display: grid;
+  gap: 3px;
+  padding: 8px 4px;
+  text-align: center;
+  font: 10px/1.1 sans-serif;
+  text-transform: uppercase;
+}
+
+.aos-official-weapon-profile strong {
+  font-size: 15px;
+}
+
+.aos-official-config-empty,
+.aos-enhancement-lock {
+  margin: 0;
+  padding: 18px 24px;
+  background: #fff;
+}
+
+.aos-official-config-points {
+  position: fixed;
+  z-index: 50;
+  bottom: calc(var(--official-nav-height) + 18px);
+}
+
+@media (max-width: 420px) {
+  .aos-official-config-content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aos-official-config-panel > summary,
+  .aos-official-config-subgroup > summary {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}

@@ -845,7 +845,6 @@ body .aos-builder-tabs button { min-height: 60px; }
 
 .aos-quick-search__field:focus-within,
 .aos-synergy-card__summary:focus-visible,
-.aos-config-option-trigger:focus-visible,
 .aos-field__control:focus-visible,
 .aos-option-card__button:focus-visible,
 .aos-preset-card summary:focus-visible {
@@ -1911,7 +1910,6 @@ button > em {
 @media (max-width: 760px) {
   .aos-primary-action,
   .aos-secondary-action,
-  .aos-configure-button,
   .aos-builder-option-card,
   .aos-option-card__button,
   .aos-army-type-card__choose,

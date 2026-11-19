@@ -645,7 +645,7 @@ function App() {
     regimentId,
     isLeader = false,
   }) {
-    if (!unit || !regimentId || isUniqueUnit(unit)) {
+    if (!unit || !regimentId) {
       return;
     }
 
@@ -676,7 +676,7 @@ function App() {
   }
 
   function handleConfigureSelectedUnit() {
-    if (!selectedUnit || isUniqueUnit(selectedUnit)) {
+    if (!selectedUnit) {
       return;
     }
 
@@ -1578,10 +1578,18 @@ function App() {
       return;
     }
 
+    const orderedRegiments =
+      configuredUnit.isGeneral && unitEditor.isLeader
+        ? [
+            updatedRegiments.find((regiment) => regiment.id === unitEditor.regimentId),
+            ...updatedRegiments.filter((regiment) => regiment.id !== unitEditor.regimentId),
+          ].filter(Boolean)
+        : updatedRegiments;
+
     const updatedList = {
       ...currentList,
       regiments:
-        updatedRegiments,
+        orderedRegiments,
     };
 
     saveUpdatedList(updatedList);
@@ -2149,6 +2157,11 @@ function App() {
       return (
         <UnitConfig
           unit={selectedUnit}
+          list={currentList}
+          isGeneral={Boolean(
+            unitEditor?.isLeader &&
+            currentList?.regiments?.[0]?.id === unitEditor?.regimentId
+          )}
           enhancementOwners={{
             artefact: findEnhancementOwner("artefact"),
             heroicTrait: findEnhancementOwner("heroicTrait"),
@@ -2178,6 +2191,10 @@ function App() {
           onConfirm={
             handleConfirmUnitConfiguration
           }
+          onView={() => navigate("warscroll")}
+          onRules={openRules}
+          onLists={openLists}
+          onSettings={openSettings}
         />
       );
 

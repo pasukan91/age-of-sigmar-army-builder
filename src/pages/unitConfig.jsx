@@ -1,8 +1,9 @@
 import { useState } from "react";
 
 import BackButton from "../components/BackButton";
+import MainNav from "../components/MainNav";
+import OfficialIcon from "../components/OfficialIcon";
 import AbilityCard from "../components/AbilityCard";
-import ChevronIcon from "../components/ChevronIcon";
 import FormattedRulesText from "../components/FormattedRulesText";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import {
@@ -17,6 +18,7 @@ import {
   getEnhancementTiming,
 } from "../utils/enhancementTiming";
 import { isUniqueUnit } from "../utils/unitIdentity";
+import { calculateArmyPoints, getUnitPoints } from "../utils/armyPoints";
 
 function UnitConfig({
   unit,
@@ -24,9 +26,17 @@ function UnitConfig({
   enhancementOwners = {},
   findSpecialEnhancementOwner = () => null,
   mode,
+  list,
+  isGeneral = false,
   goBack,
   onConfirm,
+  onView,
+  onRules,
+  onLists,
+  onSettings,
 }) {
+  const [general, setGeneral] = useState(Boolean(isGeneral));
+
   const [reinforced, setReinforced] =
     useState(
       Boolean(unit?.reinforced)
@@ -323,16 +333,6 @@ function UnitConfig({
     ...(faction?.aqshyHeroicTraits ?? []),
   ];
 
-  const aqshyHeroicTraitOptions =
-    heroicTraitOptions.filter(
-      (option) => option.source === "Aqshy"
-    );
-
-  const standardHeroicTraitOptions =
-    heroicTraitOptions.filter(
-      (option) => option.source !== "Aqshy"
-    );
-
   const allConsumingObsessionOptions =
     faction?.allConsumingObsessions ?? [];
 
@@ -377,7 +377,6 @@ function UnitConfig({
   const artefactOwner = enhancementOwners.artefact?.unit ?? null;
   const heroicTraitOwner = enhancementOwners.heroicTrait?.unit ?? null;
   const monstrousTraitOwner = enhancementOwners.monstrousTrait?.unit ?? null;
-  const accursedDeviceOwner = enhancementOwners.accursedDevice?.unit ?? null;
   const aqshyEnhancementOwner = enhancementOwners.aqshyEnhancement?.unit ?? null;
 
   const totalModels =
@@ -422,6 +421,8 @@ function UnitConfig({
 
     onConfirm({
       ...unit,
+
+      isGeneral: general,
 
       reinforced:
         canBeReinforced &&
@@ -543,1075 +544,299 @@ function UnitConfig({
     );
   }
 
-  function getConfirmText() {
-    if (mode === "editUnit") {
-      return "Guardar configuración";
-    }
+  const selectionGroups = [];
 
-    if (mode === "newRegiment") {
-      return "Crear regimiento";
+  function addSelectionGroup(condition, config) {
+    if (condition && (config.options ?? []).length > 0) {
+      selectionGroups.push(config);
     }
+  }
 
-    return "Añadir unidad";
+  addSelectionGroup(canSelectArtefact, {
+    id: "artefacts",
+    title: faction?.artefactLabel ?? "ARTEFACTS OF POWER",
+    options: artefactOptions,
+    selected: artefact,
+    disabled: Boolean(artefactOwner),
+    lockedMessage: artefactOwner
+      ? `${artefactOwner.name} already has ${artefactOwner.artefact?.name}.`
+      : null,
+    onToggle: (option) => toggleExclusiveOption(setArtefact, option),
+  });
+
+  addSelectionGroup(canSelectHeroicTrait, {
+    id: "heroic-traits",
+    title: faction?.heroicTraitLabel ?? "HEROIC TRAITS",
+    options: heroicTraitOptions,
+    selected: heroicTrait,
+    disabled: Boolean(heroicTraitOwner),
+    lockedMessage: heroicTraitOwner
+      ? `${heroicTraitOwner.name} already has ${heroicTraitOwner.heroicTrait?.name}.`
+      : null,
+    onToggle: (option) => toggleExclusiveOption(setHeroicTrait, option),
+  });
+
+  addSelectionGroup(canSelectMonstrousTrait, {
+    id: "monstrous-traits",
+    title: "MONSTROUS TRAITS",
+    options: monstrousTraitOptions,
+    selected: monstrousTrait,
+    disabled: Boolean(monstrousTraitOwner),
+    onToggle: (option) => toggleExclusiveOption(setMonstrousTrait, option),
+  });
+
+  [
+    [canSelectAllConsumingObsession, "ALL-CONSUMING OBSESSIONS", allConsumingObsessionOptions, allConsumingObsession, setAllConsumingObsession],
+    [canSelectMoulderMutation, "MOULDER MUTATIONS", moulderMutationOptions, moulderMutation, setMoulderMutation],
+    [canSelectMortisanRefinement, "MORTISAN REFINEMENTS", mortisanRefinementOptions, mortisanRefinement, setMortisanRefinement],
+    [canSelectOriginOfTerrifyingFolkTale, "ORIGINS OF TERRIFYING FOLK TALES", originOfTerrifyingFolkTaleOptions, originOfTerrifyingFolkTale, setOriginOfTerrifyingFolkTale],
+    [canSelectVisionOfFate, "VISIONS OF FATE", visionOfFateOptions, visionOfFate, setVisionOfFate],
+    [canSelectSpecialKnickKnack, "SPECIAL KNICK-KNACKS", specialKnickKnackOptions, specialKnickKnack, setSpecialKnickKnack],
+    [canSelectFlawlessManoeuvre, faction?.flawlessManoeuvreLabel ?? "FLAWLESS MANOEUVRES", flawlessManoeuvreOptions, flawlessManoeuvre, setFlawlessManoeuvre],
+    [canSelectPlaguefathersPox, "PLAGUEFATHER'S POX", plaguefathersPoxOptions, plaguefathersPox, setPlaguefathersPox],
+    [canSelectDecorationForValour, "DECORATIONS FOR VALOUR", decorationForValourOptions, decorationForValour, setDecorationForValour],
+    [canSelectIronweldInnovation, faction?.ironweldInnovationLabel ?? "IRONWELD INNOVATIONS", ironweldInnovationOptions, ironweldInnovation, setIronweldInnovation],
+    [canSelectAccursedDevice, "ACCURSED DEVICES", accursedDeviceOptions, accursedDevice, setAccursedDevice],
+    [canSelectBrazenMutation, "BRAZEN MUTATIONS", brazenMutationOptions, brazenMutation, setBrazenMutation],
+    [canSelectBrandOfDarkGod, "BRANDS OF THE DARK GODS", brandOfDarkGodOptions, brandOfDarkGod, setBrandOfDarkGod],
+    [canSelectEnsorcelledBanner, "ENSORCELLED BANNERS", ensorcelledBannerOptions, ensorcelledBanner, setEnsorcelledBanner],
+    [canSelectBoonOfShadow, "BOONS OF SHADOW", boonOfShadowOptions, boonOfShadow, setBoonOfShadow],
+  ].forEach(([condition, title, options, selected, setter]) => {
+    addSelectionGroup(condition, {
+      id: String(title).toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      title,
+      options,
+      selected,
+      onToggle: (option) => toggleExclusiveOption(setter, option),
+    });
+  });
+
+  addSelectionGroup(!hasExactEnhancementEligibility && canSelectAqshyEnhancement, {
+    id: "aqshy-enhancement",
+    title: aqshyEnhancementOptions[0]?.groupName ?? "AQSHY ENHANCEMENTS",
+    options: aqshyEnhancementOptions,
+    selected: aqshyEnhancement,
+    disabled: Boolean(aqshyEnhancementOwner),
+    onToggle: (option) => toggleExclusiveOption(setAqshyEnhancement, option),
+  });
+
+  specialEnhancementGroups.forEach(({ category, options }) => {
+    addSelectionGroup(true, {
+      id: category,
+      title: category,
+      options,
+      selected: specialEnhancements[category] ?? null,
+      isOptionDisabled: (option) => Boolean(findSpecialEnhancementOwner(category, option.id)),
+      onToggle: (option) => setSpecialEnhancements((previous) => ({
+        ...previous,
+        [category]: previous[category]?.id === option.id ? null : option,
+      })),
+    });
+  });
+
+  const listPoints = list
+    ? calculateArmyPoints(list) +
+      (mode === "editUnit" ? totalPoints - getUnitPoints(unit) : totalPoints)
+    : totalPoints;
+  const pointsLimit = Number(list?.pointsLimit ?? list?.points) || 0;
+  const weapons = Array.isArray(unit.weapons) ? unit.weapons : [];
+
+  function saveAndGoBack() {
+    handleConfirm();
   }
 
   return (
-    <main className="aos-shell">
-      <header className="aos-screen-header">
-        <BackButton
-          onClick={goBack}
-          light
-          compact
-        />
-
-        <h1 className="aos-screen-header__title">
-          Configuración
-        </h1>
-
+    <main className="aos-official-page aos-official-unit-config">
+      <header className="aos-official-header">
+        <button type="button" onClick={saveAndGoBack} aria-label="Back">
+          <OfficialIcon name="back" size={25} strokeWidth={2.5} />
+        </button>
+        <h1>{unit.name}</h1>
         <span aria-hidden="true" />
       </header>
 
-      <div className="aos-screen-content">
-
-      <header className="aos-unit-config-header" style={styles.header}>
-        <div>
-          <p style={styles.eyebrow}>
-            Configuración
-          </p>
-
-          <h1 style={styles.title}>
-            {unit.name}
-          </h1>
-        </div>
-
-        <div style={styles.pointsBox}>
-          <strong>{totalPoints}</strong>
-
-          <span>
-            {totalPoints === 1
-              ? " punto"
-              : " puntos"}
-          </span>
-        </div>
-      </header>
-
-      <section style={styles.section}>
-        <h2 style={styles.sectionTitle}>
-          Resumen
-        </h2>
-
-        <div style={styles.summaryGrid}>
-          <SummaryItem
-            label="Modelos"
-            value={totalModels}
-          />
-
-          <SummaryItem
-            label="Movimiento"
-            value={
-              unit.profile?.move ?? "-"
-            }
-          />
-
-          <SummaryItem
-            label="Salud"
-            value={
-              unit.profile?.health ?? "-"
-            }
-          />
-
-          <SummaryItem
-            label="Salvación"
-            value={
-              unit.profile?.save ?? "-"
-            }
-          />
-
-          <SummaryItem
-            label="Peana"
-            value={
-              unit.details?.baseSize ??
-              unit.profile?.baseSize ??
-              unit.baseSize ??
-              "-"
-            }
-          />
-        </div>
+      <section className="aos-official-config-summary">
+        <strong>{unit.name}</strong>
+        <span>{totalPoints}pts</span>
+        <button type="button" onClick={onView} aria-label={`View ${unit.name} warscroll`}>
+          <OfficialIcon name="reference" size={34} strokeWidth={1.8} />
+        </button>
       </section>
 
-      {(canBeReinforced ||
-        canSelectAllConsumingObsession ||
-        canSelectMoulderMutation ||
-        canSelectMortisanRefinement ||
-        canSelectVisionOfFate ||
-        canSelectSpecialKnickKnack ||
-        canSelectDecorationForValour ||
-        canSelectAqshyEnhancement) && (
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>
-            Tamaño y mejoras de unidad
-          </h2>
-
-          {canBeReinforced && (
-            <CheckboxOption
-              title="Unidad reforzada"
-              description={
-                `Duplica el tamaño de ` +
-                `${baseModels} a ` +
-                `${baseModels * 2} modelos.`
-              }
-              checked={reinforced}
-              onChange={() =>
-                setReinforced(
-                  (previous) => !previous
-                )
-              }
+      <div className="aos-official-config-content">
+        {isHero && (
+          <label className="aos-official-config-toggle">
+            <strong>GENERAL</strong>
+            <input
+              type="checkbox"
+              checked={general}
+              onChange={(event) => setGeneral(event.target.checked)}
             />
-          )}
+            <span aria-hidden="true" />
+          </label>
+        )}
 
-          {canSelectAllConsumingObsession && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Obsesiones devoradoras
-                </h3>
-
-                <span
-                  style={{
-                    ...styles.sourceBadge,
-                    ...styles.aqshySourceBadge,
-                    marginTop: 0,
-                  }}
-                >
-                  Aqshy
-                </span>
-              </div>
-
-              <p style={styles.sectionIntro}>
-                Asigna una Obsesión de Aqshy a esta unidad.
-                Cada una solo puede elegirse una vez por ejército.
-              </p>
-
-              {allConsumingObsessionOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={
-                    allConsumingObsession?.id === option.id
-                  }
-                  onChange={() =>
-                    toggleExclusiveOption(
-                      setAllConsumingObsession,
-                      option
-                    )
-                  }
+        <OfficialConfigPanel title="UNIT SIZE">
+          <div className="aos-official-config-box">
+            <strong>TOTAL MODELS: {totalModels}</strong>
+            {canBeReinforced && (
+              <label className="aos-official-config-toggle aos-official-config-toggle--nested">
+                <strong>REINFORCED</strong>
+                <input
+                  type="checkbox"
+                  checked={reinforced}
+                  onChange={() => setReinforced((value) => !value)}
                 />
+                <span aria-hidden="true" />
+              </label>
+            )}
+          </div>
+        </OfficialConfigPanel>
+
+        <OfficialConfigPanel title="WEAPONS">
+          {weapons.length > 0 ? (
+            <div className="aos-official-config-subgroups">
+              {weapons.map((weapon) => (
+                <details className="aos-official-config-subgroup" key={weapon.id ?? weapon.name}>
+                  <summary>
+                    <OfficialIcon name="chevronDown" size={22} strokeWidth={3} />
+                    <strong>{weapon.name}</strong>
+                  </summary>
+                  <div className="aos-official-weapon-profile">
+                    <span>Attacks <strong>{weapon.attacks ?? "-"}</strong></span>
+                    <span>Hit <strong>{weapon.hit ?? "-"}</strong></span>
+                    <span>Wound <strong>{weapon.wound ?? "-"}</strong></span>
+                    <span>Rend <strong>{weapon.rend ?? "-"}</strong></span>
+                    <span>Damage <strong>{weapon.damage ?? "-"}</strong></span>
+                  </div>
+                </details>
               ))}
             </div>
+          ) : (
+            <p className="aos-official-config-empty">No weapon options</p>
           )}
+        </OfficialConfigPanel>
 
-          {canSelectMoulderMutation && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Mutaciones Moulder
-                </h3>
-
-                <span
-                  style={{
-                    ...styles.sourceBadge,
-                    ...styles.aqshySourceBadge,
-                    marginTop: 0,
-                  }}
-                >
-                  Aqshy
-                </span>
-              </div>
-
-              <p style={styles.sectionIntro}>
-                Asigna una mutación a esta unidad Skaven no Hero y no Máquina de Guerra. Cada mutación solo puede elegirse una vez por ejército.
-              </p>
-
-              {moulderMutationOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={moulderMutation?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(
-                      setMoulderMutation,
-                      option
-                    )
-                  }
-                />
-              ))}
-            </div>
-          )}
-
-          {canSelectMortisanRefinement && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Refinamientos Mortisan
-                </h3>
-
-                <span
-                  style={{
-                    ...styles.sourceBadge,
-                    ...styles.aqshySourceBadge,
-                    marginTop: 0,
-                  }}
-                >
-                  Aqshy
-                </span>
-              </div>
-
-              <p style={styles.sectionIntro}>
-                Asigna un refinamiento Mortisan a esta unidad no Hero.
-                Cada refinamiento solo puede elegirse una vez por ejército.
-              </p>
-
-              {mortisanRefinementOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={mortisanRefinement?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(
-                      setMortisanRefinement,
-                      option
-                    )
-                  }
-                />
-              ))}
-            </div>
-          )}
-
-          {canSelectOriginOfTerrifyingFolkTale && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Orígenes de relatos populares terroríficos
-                </h3>
-                <span style={{ ...styles.sourceBadge, ...styles.aqshySourceBadge, marginTop: 0 }}>
-                  Aqshy
-                </span>
-              </div>
-              <p style={styles.sectionIntro}>
-                Asigna un origen a esta unidad Soulblight Infantry no Hero.
-                Cada origen solo puede elegirse una vez por ejército.
-              </p>
-              {originOfTerrifyingFolkTaleOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={originOfTerrifyingFolkTale?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(setOriginOfTerrifyingFolkTale, option)
-                  }
-                />
-              ))}
-            </div>
-          )}
-
-          {canSelectVisionOfFate && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Visiones de destino
-                </h3>
-                <span
-                  style={{
-                    ...styles.sourceBadge,
-                    ...styles.aqshySourceBadge,
-                    marginTop: 0,
-                  }}
-                >
-                  Aqshy
-                </span>
-              </div>
-
-              <p style={styles.sectionIntro}>
-                Asigna una visión a esta unidad no Hero y no Beast.
-                Cada visión solo puede elegirse una vez por ejército.
-              </p>
-
-              {visionOfFateOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={visionOfFate?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(
-                      setVisionOfFate,
-                      option
-                    )
-                  }
-                />
-              ))}
-            </div>
-          )}
-
-          {canSelectSpecialKnickKnack && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Special Knick-Knacks
-                </h3>
-
-                <span
-                  style={{
-                    ...styles.sourceBadge,
-                    ...styles.aqshySourceBadge,
-                    marginTop: 0,
-                  }}
-                >
-                  Aqshy
-                </span>
-              </div>
-
-              <p style={styles.sectionIntro}>
-                Asigna una mejora de Aqshy a esta unidad Gloomspite Gitz no Hero. Cada una solo puede elegirse una vez por ejército.
-              </p>
-
-              {specialKnickKnackOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={specialKnickKnack?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(
-                      setSpecialKnickKnack,
-                      option
-                    )
-                  }
-                />
-              ))}
-            </div>
-          )}
-
-          {canSelectFlawlessManoeuvre && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  {faction?.flawlessManoeuvreLabel ?? "Flawless Manoeuvres"}
-                </h3>
-
-                <span
-                  style={{
-                    ...styles.sourceBadge,
-                    ...styles.aqshySourceBadge,
-                    marginTop: 0,
-                  }}
-                >
-                  Aqshy
-                </span>
-              </div>
-
-              <p style={styles.sectionIntro}>
-                Asigna una maniobra a esta unidad Lumineth no Hero y no Monster. Cada una solo puede elegirse una vez por ejército.
-              </p>
-
-              {flawlessManoeuvreOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={flawlessManoeuvre?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(
-                      setFlawlessManoeuvre,
-                      option
-                    )
-                  }
-                />
-              ))}
-            </div>
-          )}
-
-          {canSelectDecorationForValour && (
-            <div style={styles.embeddedEnhancement}>
-              <div style={styles.sectionHeadingRow}>
-                <h3 style={styles.embeddedTitle}>
-                  Decorations for Valour
-                </h3>
-                <span style={{ ...styles.sourceBadge, ...styles.aqshySourceBadge, marginTop: 0 }}>
-                  Aqshy
-                </span>
-              </div>
-              <p style={styles.sectionIntro}>
-                Asigna una condecoración al campeón de esta unidad. Cada condecoración solo puede elegirse una vez por ejército.
-              </p>
-              {decorationForValourOptions.map((option) => (
-                <CheckboxOption
-                  key={option.id}
-                  title={`${option.name} · ${option.points} pts`}
-                  enhancement={option}
-                  description={option.description}
-                  lore={option.lore}
-                  source={option.source}
-                  checked={decorationForValour?.id === option.id}
-                  onChange={() =>
-                    toggleExclusiveOption(setDecorationForValour, option)
-                  }
-                />
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-
-      {canSelectIronweldInnovation && (
-        <SelectionSection
-          title={faction?.ironweldInnovationLabel ?? "Ironweld Innovation"}
-          options={ironweldInnovationOptions}
-          selected={ironweldInnovation}
-          onToggle={(option) =>
-            toggleExclusiveOption(setIronweldInnovation, option)
-          }
-        />
-      )}
-
-      {canSelectBoonOfShadow && (
-        <SelectionSection
-          title="Boons of Shadow"
-          intro="Asigna un Boon of Shadow a esta unidad Daughters of Khaine no Hero. Cada unidad solo puede tener uno y cada opción solo puede elegirse una vez por ejército."
-          source="Aqshy"
-          options={boonOfShadowOptions}
-          selected={boonOfShadow}
-          onToggle={(option) =>
-            toggleExclusiveOption(setBoonOfShadow, option)
-          }
-        />
-      )}
-
-      {!hasExactEnhancementEligibility && canSelectAqshyEnhancement && (
-        <SelectionSection
-          title={aqshyEnhancementOptions[0]?.groupName ?? "Mejora"}
-          intro={aqshyEnhancementOptions[0]?.restrictionText}
-          source={aqshyEnhancementOptions[0]?.source}
-          options={aqshyEnhancementOptions}
-          selected={aqshyEnhancement}
-          disabled={Boolean(aqshyEnhancementOwner)}
-          lockedMessage={
-            aqshyEnhancementOwner
-              ? `${aqshyEnhancementOwner.name} ya tiene ${aqshyEnhancementOwner.aqshyEnhancement?.name}. Cada mejora solo puede elegirse una vez por ejército.`
-              : null
-          }
-          onToggle={(option) =>
-            toggleExclusiveOption(setAqshyEnhancement, option)
-          }
-        />
-      )}
-
-      {specialEnhancementGroups.map(({ category, options }) => (
-        <SelectionSection
-          key={category}
-          title={category}
-          intro={options[0]?.restrictionText}
-          source={options[0]?.source}
-          options={options}
-          selected={specialEnhancements[category] ?? null}
-          isOptionDisabled={(option) => Boolean(
-            findSpecialEnhancementOwner(category, option.id)
-          )}
-          onToggle={(option) => setSpecialEnhancements((previous) => ({
-            ...previous,
-            [category]: previous[category]?.id === option.id ? null : option,
-          }))}
-        />
-      ))}
-
-      {canSelectPlaguefathersPox && (
-        <SelectionSection
-          title="Plaguefather’s Pox"
-          options={plaguefathersPoxOptions}
-          selected={plaguefathersPox}
-          onToggle={(option) =>
-            toggleExclusiveOption(setPlaguefathersPox, option)
-          }
-        />
-      )}
-
-      {canSelectAccursedDevice && (
-        <SelectionSection
-          title="Dispositivo maldito"
-          options={accursedDeviceOptions}
-          selected={accursedDevice}
-          disabled={Boolean(accursedDeviceOwner)}
-          lockedMessage={
-            accursedDeviceOwner
-              ? `${accursedDeviceOwner.name} ya tiene ${accursedDeviceOwner.accursedDevice?.name}. Cada dispositivo solo puede elegirse una vez.`
-              : null
-          }
-          onToggle={(option) =>
-            toggleExclusiveOption(setAccursedDevice, option)
-          }
-        />
-      )}
-
-      {canSelectBrazenMutation && (
-        <SelectionSection
-          title="Mutación de bronce"
-          options={brazenMutationOptions}
-          selected={brazenMutation}
-          onToggle={(option) =>
-            toggleExclusiveOption(setBrazenMutation, option)
-          }
-        />
-      )}
-
-      {canSelectBrandOfDarkGod && (
-        <SelectionSection
-          title="Brand of the Dark Gods"
-          options={brandOfDarkGodOptions}
-          selected={brandOfDarkGod}
-          onToggle={(option) =>
-            toggleExclusiveOption(setBrandOfDarkGod, option)
-          }
-        />
-      )}
-
-      {canSelectEnsorcelledBanner && (
-        <SelectionSection
-          title="Ensorcelled Banner"
-          options={ensorcelledBannerOptions}
-          selected={ensorcelledBanner}
-          onToggle={(option) =>
-            toggleExclusiveOption(setEnsorcelledBanner, option)
-          }
-        />
-      )}
-
-      {canSelectArtefact && (
-        <SelectionSection
-          title={faction?.artefactLabel ?? "Artefacto de poder"}
-          options={artefactOptions}
-          selected={artefact}
-          disabled={Boolean(artefactOwner)}
-          lockedMessage={
-            artefactOwner
-              ? `El ejército ya tiene ${artefactOwner.artefact?.name}, asignado a ${artefactOwner.name}.`
-              : null
-          }
-          onToggle={(option) =>
-            toggleExclusiveOption(
-              setArtefact,
-              option
-            )
-          }
-        />
-      )}
-
-      {canSelectHeroicTrait &&
-        standardHeroicTraitOptions.length > 0 && (
-        <SelectionSection
-          title={faction?.heroicTraitLabel ?? "Rasgo heroico"}
-          options={standardHeroicTraitOptions}
-          selected={heroicTrait}
-          disabled={Boolean(heroicTraitOwner)}
-          lockedMessage={
-            heroicTraitOwner
-              ? `Solo puede haber 1 rasgo heroico por ejército. ${heroicTraitOwner.name} ya tiene ${heroicTraitOwner.heroicTrait?.name}.`
-              : null
-          }
-          onToggle={(option) =>
-            toggleExclusiveOption(
-              setHeroicTrait,
-              option
-            )
-          }
-        />
-      )}
-
-      {canSelectHeroicTrait &&
-        aqshyHeroicTraitOptions.length > 0 && (
-        <SelectionSection
-          title="Rasgos heroicos de Aqshy"
-          source="Aqshy"
-          intro="Contenido adicional de Scourge of Aqshy. Elige uno de estos rasgos o uno del Battletome."
-          options={aqshyHeroicTraitOptions}
-          selected={heroicTrait}
-          disabled={Boolean(heroicTraitOwner)}
-          lockedMessage={
-            heroicTraitOwner
-              ? `El único rasgo heroico del ejército ya está asignado a ${heroicTraitOwner.name}: ${heroicTraitOwner.heroicTrait?.name}.`
-              : null
-          }
-          onToggle={(option) =>
-            toggleExclusiveOption(
-              setHeroicTrait,
-              option
-            )
-          }
-        />
-      )}
-
-      {canSelectMonstrousTrait && (
-        <SelectionSection
-          title="Rasgo monstruoso"
-          options={
-            monstrousTraitOptions
-          }
-          selected={monstrousTrait}
-          disabled={Boolean(monstrousTraitOwner)}
-          lockedMessage={
-            monstrousTraitOwner
-              ? `El ejército ya tiene ${monstrousTraitOwner.monstrousTrait?.name}, asignado a ${monstrousTraitOwner.name}.`
-              : null
-          }
-          onToggle={(option) =>
-            toggleExclusiveOption(
-              setMonstrousTrait,
-              option
-            )
-          }
-        />
-      )}
+        {selectionGroups.map((group) => (
+          <OfficialSelectionPanel key={group.id} {...group} />
+        ))}
+      </div>
 
       <button
         type="button"
-        onClick={handleConfirm}
-        style={styles.confirmButton}
+        className="aos-official-points aos-official-config-points"
+        aria-label={`${listPoints} of ${pointsLimit} points`}
       >
-        {getConfirmText()}
+        <span><OfficialIcon name="warning" size={24} strokeWidth={2.4} /></span>
+        <strong>{listPoints}/{pointsLimit || "—"}</strong>
+        <small>POINTS</small>
       </button>
-      </div>
+
+      <MainNav
+        active="storm-forge"
+        onReference={onRules}
+        onStormForge={saveAndGoBack}
+        onProfile={onSettings}
+        onLists={onLists}
+      />
     </main>
   );
 }
 
-function SummaryItem({
-  label,
-  value,
-}) {
+function OfficialConfigPanel({ title, children }) {
   return (
-    <div style={styles.summaryItem}>
-      <span style={styles.summaryLabel}>
-        {label}
-      </span>
-
-      <strong style={styles.summaryValue}>
-        {value}
-      </strong>
-    </div>
+    <details className="aos-official-config-panel">
+      <summary>
+        <strong>{title}</strong>
+        <OfficialIcon name="chevronDown" size={22} strokeWidth={3} />
+      </summary>
+      <div className="aos-official-config-panel__body">{children}</div>
+    </details>
   );
 }
 
-function SelectionSection({
+function OfficialSelectionPanel({
   title,
-  source,
-  intro,
   options = [],
   selected,
   disabled = false,
-  isOptionDisabled = () => false,
   lockedMessage,
+  isOptionDisabled = () => false,
   onToggle,
 }) {
+  const groups = options.reduce((result, option) => {
+    const label = option.groupName ?? option.source ?? title;
+    const existing = result.find((group) => group.label === label);
+    if (existing) existing.options.push(option);
+    else result.push({ label, options: [option] });
+    return result;
+  }, []);
+
   return (
-    <section className="aos-unit-config-section" style={styles.section}>
-      <div className="aos-unit-config-heading-row" style={styles.sectionHeadingRow}>
-        <h2 style={styles.sectionTitle}>
-          {title}
-        </h2>
-
-        {source && (
-          <span
-            style={{
-              ...styles.sourceBadge,
-              ...styles.aqshySourceBadge,
-              marginTop: 0,
-            }}
-          >
-            {source}
-          </span>
-        )}
+    <OfficialConfigPanel title={String(title).toUpperCase()}>
+      {lockedMessage && <p className="aos-enhancement-lock" role="status">{lockedMessage}</p>}
+      <div className="aos-official-config-subgroups">
+        {groups.map((group) => (
+          <details className="aos-official-config-subgroup" key={group.label}>
+            <summary>
+              <strong>{group.label}</strong>
+              <OfficialIcon name="chevronDown" size={20} strokeWidth={3} />
+            </summary>
+            {group.options[0]?.restrictionText && (
+              <p className="aos-official-config-restriction">
+                <FormattedRulesText text={group.options[0].restrictionText} />
+              </p>
+            )}
+            <div className="aos-official-config-options">
+              {group.options.map((option) => (
+                <OfficialEnhancementOption
+                  key={option.id ?? option.name}
+                  option={option}
+                  checked={selected?.id === option.id}
+                  disabled={disabled || isOptionDisabled(option)}
+                  onChange={() => onToggle(option)}
+                />
+              ))}
+            </div>
+          </details>
+        ))}
       </div>
-
-      {intro && (
-        <p style={styles.sectionIntro}>
-          <FormattedRulesText text={intro} />
-        </p>
-      )}
-
-      {lockedMessage && (
-        <p className="aos-enhancement-lock" role="status">
-          {lockedMessage}
-        </p>
-      )}
-
-      {options.length === 0 && (
-        <p style={styles.emptyText}>
-          No hay opciones disponibles.
-        </p>
-      )}
-
-      {options.map((option) => (
-        <CheckboxOption
-          key={option.id}
-          enhancement={option}
-          title={
-            Number(option.points) > 0
-              ? `${option.name} · ${option.points} pts`
-              : option.name
-          }
-          description={
-            option.description
-          }
-          lore={option.lore}
-          phase={getEnhancementTiming(option)}
-          source={option.source}
-          disabled={disabled || isOptionDisabled(option)}
-          checked={
-            selected?.id === option.id
-          }
-          onChange={() =>
-            onToggle(option)
-          }
-        />
-      ))}
-    </section>
+    </OfficialConfigPanel>
   );
 }
 
-function CheckboxOption({
-  title,
-  enhancement,
-  description,
-  lore,
-  phase,
-  source,
-  disabled = false,
-  checked,
-  onChange,
-}) {
-  const [open, setOpen] = useState(false);
-  const timing = phase ?? (enhancement ? getEnhancementTiming(enhancement) : null);
-  const abilities = getEnhancementAbilities(enhancement);
+function OfficialEnhancementOption({ option, checked, disabled, onChange }) {
+  const abilities = getEnhancementAbilities(option);
+  const timing = getEnhancementTiming(option);
 
   return (
-    <article
-      className="aos-config-option-card"
-      style={{
-        ...styles.optionCard,
-
-        ...(checked
-          ? styles.selectedOptionCard
-          : {}),
-
-        ...(disabled
-          ? styles.disabledOptionCard
-          : {}),
-      }}
-    >
-      <div className="aos-config-option-header">
-        <button
-          className="aos-config-option-trigger"
-          type="button"
-          aria-expanded={open}
-          onClick={() => setOpen((previous) => !previous)}
-        >
-          <span className="aos-config-option-content" style={styles.optionContent}>
-            <strong style={styles.optionTitle}>
-              {title}
-            </strong>
-
-            {timing && (
-              <span className="aos-config-option-phase">
-                {timing}
-              </span>
-            )}
-
-            {source && (
-              <span
-                style={{
-                  ...styles.sourceBadge,
-                  ...(source === "Aqshy"
-                    ? styles.aqshySourceBadge
-                    : styles.standardSourceBadge),
-                }}
-              >
-                {source}
-              </span>
-            )}
+    <article className="aos-official-config-option">
+      <details>
+        <summary>
+          <OfficialIcon name="chevronDown" size={20} strokeWidth={3} />
+          <span>
+            <strong>{option.name}</strong>
+            {Number(option.points) > 0 && <small>{option.points} Points</small>}
           </span>
-
-          <span
-            className="aos-config-option-chevron"
-            aria-hidden="true"
-          >
-            <ChevronIcon direction="right" size={9} thickness={2} />
-          </span>
-        </button>
-
-        <label className="aos-config-option-selector">
-          <span className="aos-visually-hidden">
-            Seleccionar {title}
-          </span>
-          <input
-            className="aos-config-option-checkbox"
-            type="checkbox"
-            checked={checked}
-            disabled={disabled}
-            onChange={onChange}
-            style={styles.checkbox}
+        </summary>
+        <div className="aos-official-config-option__rules">
+          {timing && <span className="aos-config-option-phase">{timing}</span>}
+          <RuleCopyBlocks
+            lore={option.lore}
+            rule={abilities.length > 0 ? null : option.description}
           />
-        </label>
-      </div>
-
-      {open && (description || lore || abilities.length > 0) && (
-        <div className="aos-config-option-description">
-          <RuleCopyBlocks lore={lore} rule={abilities.length > 0 ? null : description} />
-          {abilities.length > 0 && (
-            <div className="aos-config-option-abilities" aria-label={`Habilidades de ${enhancement.name}`}>
-              {abilities.map((ability) => (
-                <AbilityCard ability={ability} key={ability.id} />
-              ))}
-            </div>
-          )}
+          {abilities.map((ability) => (
+            <AbilityCard ability={ability} key={ability.id ?? ability.name} />
+          ))}
         </div>
-      )}
+      </details>
+      <label>
+        <span className="aos-visually-hidden">Select {option.name}</span>
+        <input type="checkbox" checked={checked} disabled={disabled} onChange={onChange} />
+        <span aria-hidden="true" />
+      </label>
     </article>
   );
 }
-
-const styles = {
-  header: {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    gap: 20,
-    marginBottom: 22,
-  },
-
-  eyebrow: {
-    margin: "0 0 4px",
-    color: "#891f18",
-    fontSize: 13,
-    fontWeight: 700,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-
-  title: {
-    margin: 0,
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    fontSize: "clamp(30px, 6vw, 42px)",
-    lineHeight: 1.05,
-    textTransform: "uppercase",
-  },
-
-  pointsBox: {
-    minWidth: 90,
-    padding: 12,
-    border: "1px solid #8f6c2e",
-    borderRadius: 3,
-    color: "#ffffff",
-    backgroundColor: "#891f18",
-    textAlign: "center",
-  },
-
-  section: {
-    padding: 18,
-    marginBottom: 18,
-    border: "1px solid #d4cec1",
-    borderTop: "4px solid #8f6c2e",
-    borderRadius: 3,
-    backgroundColor: "#faf8f3",
-    boxShadow:
-      "0 4px 14px rgba(47,38,28,0.11)",
-  },
-
-  sectionTitle: {
-    margin: "0 0 14px",
-    color: "#39322c",
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    textAlign: "left",
-    fontSize: 22,
-    textTransform: "uppercase",
-  },
-
-  summaryGrid: {
-    display: "grid",
-    gridTemplateColumns:
-      "repeat(auto-fit, minmax(100px, 1fr))",
-    gap: 10,
-  },
-
-  summaryItem: {
-    padding: 12,
-    border: "1px solid #dddddd",
-    borderRadius: 999,
-    backgroundColor: "#eee8dc",
-    textAlign: "center",
-  },
-
-  summaryLabel: {
-    display: "block",
-    marginBottom: 4,
-    color: "#666666",
-    fontSize: 12,
-    fontWeight: 700,
-    textTransform: "uppercase",
-  },
-
-  summaryValue: {
-    fontSize: 18,
-  },
-
-  optionCard: {
-    width: "100%",
-    boxSizing: "border-box",
-    display: "block",
-    overflow: "hidden",
-    padding: 0,
-    marginBottom: 10,
-    border: "1px solid #cccccc",
-    borderRadius: 3,
-    backgroundColor: "#fffefa",
-    color: "#111111",
-  },
-
-  selectedOptionCard: {
-    border: "2px solid #891f18",
-    backgroundColor: "#f4e9e3",
-  },
-
-  optionContent: {
-    flex: 1,
-    minWidth: 0,
-    textAlign: "left",
-  },
-
-  optionTitle: {
-    display: "block",
-    fontSize: 17,
-  },
-
-  optionDescription: {
-    margin: "8px 0 0",
-    whiteSpace: "pre-line",
-    lineHeight: 1.5,
-    fontSize: 16,
-  },
-
-  checkbox: {
-    width: 26,
-    height: 26,
-    flexShrink: 0,
-    accentColor: "#891f18",
-    cursor: "pointer",
-  },
-
-  emptyText: {
-    margin: 0,
-    textAlign: "center",
-    color: "#555555",
-  },
-
-  confirmButton: {
-    width: "100%",
-    padding: 16,
-    marginTop: 4,
-    border: "1px solid #5f120e",
-    borderRadius: 3,
-    background:
-      "linear-gradient(180deg, #a22b22, #5f120e)",
-    color: "#ffffff",
-    fontSize: 18,
-    fontWeight: 700,
-    cursor: "pointer",
-    boxShadow:
-      "0 4px 10px rgba(95,18,14,0.28)",
-  },
-
-  disabledOptionCard: {
-    opacity: 0.58,
-    cursor: "not-allowed",
-  },
-
-  sectionHeadingRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 12,
-  },
-
-  sectionIntro: {
-    margin: "-3px 0 14px",
-    color: "#625b51",
-    fontSize: 14,
-    lineHeight: 1.45,
-    textAlign: "left",
-  },
-
-  embeddedEnhancement: {
-    paddingTop: 16,
-    marginTop: 16,
-    borderTop: "1px solid #d4c7ad",
-  },
-
-  embeddedTitle: {
-    margin: 0,
-    color: "#39322c",
-    fontFamily:
-      '"Oswald", "Arial Narrow", sans-serif',
-    fontSize: 20,
-    textTransform: "uppercase",
-  },
-
-  sourceBadge: {
-    display: "inline-block",
-    padding: "3px 8px",
-    marginTop: 8,
-    borderRadius: 999,
-    fontSize: 11,
-    fontWeight: 800,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-
-  aqshySourceBadge: {
-    border: "1px solid #9a6820",
-    backgroundColor: "#f2dfb3",
-    color: "#5f3b0d",
-  },
-
-  standardSourceBadge: {
-    border: "1px solid #8b8983",
-    backgroundColor: "#e8e5de",
-    color: "#4f4b43",
-  },
-};
 
 export default UnitConfig;
