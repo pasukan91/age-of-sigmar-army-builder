@@ -180,12 +180,12 @@ function MyLists({
                     >
                       <span>
                         <small>
-                          {list.faction?.name ?? "Age of Sigmar"}
+                          {list.armyOfRenown?.name ?? list.faction?.name ?? "Age of Sigmar"}
                         </small>
 
                         <strong>{list.name}</strong>
                         <span className="aos-list-card__formation">
-                          {list.battleFormation?.name ?? "No Battle Formation"}
+                          {list.armyOfRenown ? "Army of Renown" : list.battleFormation?.name ?? "No Battle Formation"}
                         </span>
                         <span className="aos-list-card__meta">
                           <span className={`aos-list-status${validation.errors.length > 0 ? " is-error" : validation.warnings.length > 0 ? " is-warning" : " is-valid"}`}>
@@ -201,10 +201,9 @@ function MyLists({
                         <span className="aos-list-card__updated">
                           Actualizada {formatSavedDate(list.updatedAt)}
                         </span>
-                      </span>
-
-                      <span className="aos-list-card__points">
-                        {Number(list.pointsLimit ?? 2000).toLocaleString("es-ES")} Points
+                        <span className="aos-list-card__points">
+                          <b>{Number(list.pointsLimit ?? 2000).toLocaleString("es-ES", { useGrouping: "always" })}</b> Points
+                        </span>
                       </span>
 
                       {validation.errors.length > 0 && (

@@ -372,14 +372,15 @@ body {
 
 /* Storm Forge list. */
 .aos-storm-forge-home {
+  --official-red: #751b12;
   background:
-    linear-gradient(#0b1719c7, #0b1719c7),
+    linear-gradient(#06111366, #030708b3),
     var(--official-storm-art, url("/images/alliances/death.webp")) center / cover fixed;
 }
 
 .aos-storm-forge-home .aos-screen-content {
   min-height: calc(100dvh - var(--official-header-height));
-  padding: 38px 24px 125px;
+  padding: 9px 24px 125px;
   background: transparent;
 }
 
@@ -390,12 +391,12 @@ body {
 
 .aos-storm-forge-home .aos-option-list {
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .aos-storm-forge-home .aos-list-card {
   position: relative;
-  min-height: 154px;
+  min-height: 150px;
   overflow: hidden;
   border: 0;
   border-radius: 0;
@@ -408,46 +409,57 @@ body {
   z-index: 1;
   display: block;
   width: 100%;
-  min-height: 154px;
-  padding: 25px 44% 22px 25px;
+  min-height: 150px;
+  padding: 26px 26px 24px 25px;
   overflow: hidden;
   color: #fff;
-  background:
-    linear-gradient(110deg, #0e1919 0 53%, transparent 54%),
-    repeating-linear-gradient(35deg, #172323 0 1px, #111b1b 1px 13px);
+  background: #111a1c;
   text-align: left;
+}
+
+.aos-storm-forge-home .aos-list-card__open::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0 31% 0 0;
+  content: "";
+  background: url("/images/ui/storm-forge-texture.svg") left center / 320px 213px;
+  clip-path: polygon(0 0, 93% 0, 90% 5%, 94% 10%, 91% 16%, 98% 26%, 94% 33%, 100% 38%, 91% 46%, 87% 48%, 86% 54%, 77% 59%, 80% 64%, 76% 68%, 81% 74%, 80% 80%, 88% 88%, 85% 93%, 90% 100%, 0 100%);
+  pointer-events: none;
 }
 
 .aos-storm-forge-home .aos-list-card__open::after {
   position: absolute;
-  z-index: -1;
-  inset: 0 0 0 51%;
+  z-index: 0;
+  inset: 0 0 0 48%;
   content: "";
-  background: var(--aos-list-card-image) var(--aos-list-card-position, center) / cover no-repeat;
-  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(#0002, #0003), var(--aos-list-card-image, none) var(--aos-list-card-position, center) / cover no-repeat;
+  pointer-events: none;
 }
 
 .aos-storm-forge-home .aos-list-card__open > span:first-child {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 25px;
-  left: 25px;
-  width: calc(56% - 25px);
+  width: 72%;
   display: grid;
   gap: 5px;
+  justify-items: start;
 }
 
 .aos-storm-forge-home .aos-list-card__open small {
   order: 2;
-  color: #9b9d9a;
-  font: 14px var(--official-serif);
+  margin-bottom: 0;
+  color: #b1b3ae;
+  font: 13px/1.25 var(--official-serif);
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .aos-storm-forge-home .aos-list-card__formation {
   order: 3;
   overflow: hidden;
-  color: #8f908d;
-  font: 14px/1.2 var(--official-serif);
+  max-width: 100%;
+  color: #b1b3ae;
+  font: 13px/1.25 var(--official-serif);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -455,7 +467,8 @@ body {
 .aos-storm-forge-home .aos-list-card__open strong {
   order: 1;
   color: #fff;
-  font: 700 20px/1 var(--official-display);
+  font: 700 20px/1.2 var(--official-display);
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
@@ -466,15 +479,15 @@ body {
 }
 
 .aos-storm-forge-home .aos-list-card__points {
-  position: absolute;
-  z-index: 3;
-  bottom: 23px;
-  left: 25px;
-  padding: 5px 9px;
-  border-radius: 4px;
+  position: static;
+  order: 4;
+  grid-area: auto;
+  margin-top: 3px;
+  padding: 4px 9px;
+  border-radius: 6px;
   color: #111;
-  background: #f1eee5;
-  font: 700 13px var(--official-serif);
+  background: #e7e8de;
+  font: 400 13px/1.25 var(--official-serif);
 }
 
 .aos-list-card__warning {
@@ -486,6 +499,7 @@ body {
   width: 32px;
   height: 32px;
   place-items: center;
+  border: 1px solid #fff;
   border-radius: 50%;
   color: #111;
   background: var(--official-yellow);
@@ -498,8 +512,14 @@ body {
   width: 30px;
   height: 30px;
   padding: 0;
+  border: 0;
   color: #fff;
   background: transparent;
+}
+
+.aos-storm-forge-home .aos-official-fab {
+  width: 58px;
+  height: 58px;
 }
 
 .aos-official-fab {
