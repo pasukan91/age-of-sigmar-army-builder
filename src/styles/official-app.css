@@ -1222,6 +1222,113 @@ body {
 .aos-create-orruk-group__children .aos-create-faction-row { padding-left: 67px; }
 .aos-create-orruk-group__children .aos-create-faction-row--nested { padding-left: 67px; }
 
+/* Illustrated faction selector, including its nested Army of Renown cards. */
+.aos-create-army-page {
+  --official-red: #751b12;
+  background: linear-gradient(#07101288, #050909aa), url("/images/alliances/death.webp") center top / cover no-repeat #101718;
+}
+.aos-create-army-page .aos-official-header {
+  position: sticky;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  align-items: center;
+}
+.aos-create-army-page .aos-official-header > span:first-child { display: none; }
+.aos-create-army-page .aos-create-alliance { border: 0; }
+.aos-create-army-page .aos-create-alliance__toggle,
+.aos-create-army-page .aos-create-faction-row {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  gap: 12px;
+  min-height: 72px;
+  padding: 12px 15px;
+  color: #fff;
+  background: #111a1c;
+  font: 700 20px/1.25 var(--official-display);
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px #0008;
+}
+.aos-create-army-page .aos-create-alliance__toggle {
+  min-height: 74px;
+  border-block: 1px solid #71828280;
+}
+.aos-create-army-page .aos-create-faction-row {
+  border: 1px solid #71828280;
+  border-radius: 4px;
+}
+.aos-create-army-page .aos-create-alliance__toggle::before,
+.aos-create-army-page .aos-create-faction-row::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0 29% 0 0;
+  content: "";
+  background: url("/images/ui/storm-forge-texture.svg") left center / 320px 213px;
+  clip-path: polygon(0 0, 92% 0, 90% 10%, 95% 20%, 92% 28%, 97% 39%, 91% 48%, 89% 56%, 80% 65%, 84% 74%, 81% 84%, 88% 100%, 0 100%);
+  pointer-events: none;
+}
+.aos-create-army-page .aos-create-alliance__toggle::after,
+.aos-create-army-page .aos-create-faction-row::after {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 0 51%;
+  content: "";
+  background: linear-gradient(#0001, #0002), var(--creation-art-image, none) var(--creation-art-position, center) / cover no-repeat;
+  pointer-events: none;
+}
+.aos-create-army-page .aos-create-alliance__children {
+  display: grid;
+  gap: 4px;
+  padding: 5px 0 4px 24px;
+  background: transparent;
+}
+.aos-create-army-page .aos-create-faction-group,
+.aos-create-army-page .aos-create-orruk-group { display: grid; gap: 4px; }
+.aos-create-army-page .aos-create-faction-group__children,
+.aos-create-army-page .aos-create-orruk-group__children {
+  display: grid;
+  gap: 4px;
+  padding-left: 24px;
+}
+.aos-create-army-page .aos-create-faction-row > span:not(.aos-create-card-control) {
+  min-width: 0;
+  justify-items: start;
+  gap: 6px;
+}
+.aos-create-army-page .aos-create-faction-row strong,
+.aos-create-army-page .aos-create-alliance__toggle strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.aos-create-army-page .aos-create-faction-row small {
+  padding: 3px 4px;
+  color: #fff;
+  background: var(--official-red);
+  font: 700 10px/1.2 var(--official-display);
+  letter-spacing: .12em;
+}
+.aos-create-army-page .aos-create-card-control {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  justify-self: end;
+  gap: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--official-red);
+  text-shadow: none;
+}
+.aos-create-card-control .is-expanded { transform: rotate(180deg); }
+.aos-create-card-info { font: 700 26px/1 Georgia, serif; text-transform: none; }
+.aos-create-army-page .aos-create-faction-row:focus-visible,
+.aos-create-army-page .aos-create-alliance__toggle:focus-visible {
+  outline: 2px solid var(--official-yellow);
+  outline-offset: -3px;
+}
+
 .aos-create-choice-page { padding: 32px 25px 60px; }
 .aos-create-help {
   margin: 0 0 30px;

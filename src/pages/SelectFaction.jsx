@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import factions from "../data/factions";
 import OfficialIcon from "../components/OfficialIcon";
+import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
 
 const ALLIANCE_ORDER = ["order", "chaos", "death", "destruction"];
 const ALLIANCE_LABELS = {
@@ -8,6 +9,11 @@ const ALLIANCE_LABELS = {
   chaos: "Grand Alliance Chaos",
   death: "Grand Alliance Death",
   destruction: "Grand Alliance Destruction",
+};
+const SELECTOR_ARTWORK = {
+  stormcast: "/images/factions/stormcast.webp",
+  nighthaunt: "/images/factions/nighthaunt.webp",
+  flesheater: "/images/factions/flesheater.webp",
 };
 
 function SelectFaction({ onSelect, onBack }) {
@@ -44,6 +50,7 @@ function SelectFaction({ onSelect, onBack }) {
               <button
                 type="button"
                 className="aos-create-alliance__toggle"
+                style={{ "--creation-art-image": `url("/images/alliances/${allianceId}.webp")` }}
                 aria-expanded={open}
                 onClick={() => {
                   setExpandedAlliance(open ? null : allianceId);
@@ -51,7 +58,7 @@ function SelectFaction({ onSelect, onBack }) {
                 }}
               >
                 <strong>{ALLIANCE_LABELS[allianceId]}</strong>
-                <OfficialIcon name={open ? "chevronDown" : "plus"} size={27} strokeWidth={2.8} />
+                <ChoiceControl expanded={open} />
               </button>
 
               {open && (
@@ -67,11 +74,12 @@ function SelectFaction({ onSelect, onBack }) {
                       <button
                         type="button"
                         className="aos-create-faction-row"
+                        style={choiceArtwork(orrukFactions[0])}
                         aria-expanded={orrukOpen}
                         onClick={() => setOrrukOpen((value) => !value)}
                       >
                         <strong>Orruk Warclans</strong>
-                        <OfficialIcon name={orrukOpen ? "chevronDown" : "plus"} size={25} strokeWidth={2.8} />
+                        <ChoiceControl expanded={orrukOpen} />
                       </button>
                       {orrukOpen && (
                         <div className="aos-create-orruk-group__children">
@@ -79,6 +87,7 @@ function SelectFaction({ onSelect, onBack }) {
                             <button
                               type="button"
                               className="aos-create-faction-row aos-create-faction-row--nested"
+                              style={choiceArtwork(choice.armyOfRenown, choice.faction)}
                               key={choice.key}
                               onClick={() => onSelect(choice.faction, choice.armyOfRenown)}
                             >
@@ -86,7 +95,7 @@ function SelectFaction({ onSelect, onBack }) {
                                 <strong>{choice.name}</strong>
                                 {choice.armyOfRenown && <small>Army of Renown</small>}
                               </span>
-                              <OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
+                              <ChoiceControl />
                             </button>
                           ))}
                         </div>
@@ -114,40 +123,57 @@ function FactionChoice({ faction, onSelect }) {
 
   if (armies.length === 0) {
     return (
-      <button type="button" className="aos-create-faction-row" onClick={() => onSelect(faction, null)}>
+      <button type="button" className="aos-create-faction-row" style={choiceArtwork(faction)} onClick={() => onSelect(faction, null)}>
         <strong>{faction.name}</strong>
-        <OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
+        <ChoiceControl />
       </button>
     );
   }
 
   return (
     <section className="aos-create-faction-group">
-      <button type="button" className="aos-create-faction-row" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+      <button type="button" className="aos-create-faction-row" style={choiceArtwork(faction)} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
         <strong>{faction.name}</strong>
-        <OfficialIcon name={open ? "chevronDown" : "plus"} size={24} strokeWidth={3} />
+        <ChoiceControl expanded={open} />
       </button>
       {open && (
         <div className="aos-create-faction-group__children">
-          <button type="button" className="aos-create-faction-row aos-create-faction-row--nested" onClick={() => onSelect(faction, null)}>
+          <button type="button" className="aos-create-faction-row aos-create-faction-row--nested" style={choiceArtwork(faction)} onClick={() => onSelect(faction, null)}>
             <strong>{faction.name}</strong>
-            <OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
+            <ChoiceControl />
           </button>
           {armies.map((army) => (
             <button
               type="button"
               className="aos-create-faction-row aos-create-faction-row--nested"
+              style={choiceArtwork(army, faction)}
               key={`${faction.id}-${army.id}`}
               onClick={() => onSelect(faction, army)}
             >
               <span><strong>{army.name}</strong><small>Army of Renown</small></span>
-              <OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
+              <ChoiceControl />
             </button>
           ))}
         </div>
       )}
     </section>
   );
+}
+
+function choiceArtwork(choice, fallback) {
+  const artwork = SELECTOR_ARTWORK[choice?.id] ?? getFactionArtwork(choice) ?? SELECTOR_ARTWORK[fallback?.id] ?? getFactionArtwork(fallback);
+  return {
+    "--creation-art-image": artwork ? `url("${artwork}")` : "none",
+    "--creation-art-position": getFactionArtworkPosition(choice, "card") ?? getFactionArtworkPosition(fallback, "card") ?? "center",
+  };
+}
+
+function ChoiceControl({ expanded }) {
+  return <span className="aos-create-card-control" aria-hidden="true">
+    {expanded === undefined
+      ? <span className="aos-create-card-info">i</span>
+      : <OfficialIcon name="chevronDown" size={19} strokeWidth={2.8} className={expanded ? "is-expanded" : ""} />}
+  </span>;
 }
 
 function getOrrukChoices(orrukFactions) {
