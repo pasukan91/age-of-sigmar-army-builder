@@ -1,0 +1,16 @@
+{
+  "images": [
+    {
+      "file": "public/images/factions/khazalite-holds.webp",
+      "purpose": "Faction background, army list cards and builder header",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc-05-10/aos_khazlore-oct08-openerwide-j9gleftqme.jpg?format=webp&width=1600",
+      "page": "https://www.warhammer-community.com/en-gb/articles/dceko7zl/peaks-and-deeps-take-a-tour-of-a-khazalite-hold/"
+    },
+    {
+      "file": "public/images/factions/khazalite-holds-cover.jpg",
+      "purpose": "Faction selection card, framed with CSS to show the duardin cover illustration",
+      "source": "https://assets.warhammer-community.com/articles/0-2026/september/wc14-09/big-autumn-preview/book-08-xmlspfjsi3.jpg",
+      "page": "https://www.warhammer-community.com/en-gb/articles/evmkzloa/the-big-autumn-preview-a-new-duardin-faction-revealed/"
+    }
+  ]
+}

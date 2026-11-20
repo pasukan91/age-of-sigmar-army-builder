@@ -1,6 +1,7 @@
 const FACTION_ARTWORK_VERSION = "20260801";
 
 const factionArtwork = {
+  fyreslayers: "/images/factions/khazalite-holds.webp",
   cities: "/images/factions/citiesofsigmar.webp",
   daughters: "/images/factions/dok.webp",
   gloomspite: "/images/factions/gloomspite.webp",
@@ -21,6 +22,7 @@ const factionArtwork = {
 // focal points prevents the main character from being lost behind the crop.
 // Hedonites is intentionally omitted so it keeps its existing framing.
 const factionArtworkPositions = {
+  fyreslayers: { card: "76% 62%", page: "65% 50%", list: "76% 62%", builder: "65% 54%" },
   cities: { card: "78% 50%", page: "70% 50%", list: "78% 50%" },
   daughters: { card: "65% 36%", page: "62% 40%", list: "65% 38%" },
   flesheater: { card: "52% 50%", page: "52% 50%", list: "52% 50%" },

@@ -11,6 +11,7 @@ const ALLIANCE_LABELS = {
   destruction: "Grand Alliance Destruction",
 };
 const SELECTOR_ARTWORK = {
+  fyreslayers: "/images/factions/khazalite-holds-cover.jpg",
   stormcast: "/images/factions/stormcast.webp",
   nighthaunt: "/images/factions/nighthaunt.webp",
   flesheater: "/images/factions/flesheater.webp",
@@ -164,7 +165,8 @@ function choiceArtwork(choice, fallback) {
   const artwork = SELECTOR_ARTWORK[choice?.id] ?? getFactionArtwork(choice) ?? SELECTOR_ARTWORK[fallback?.id] ?? getFactionArtwork(fallback);
   return {
     "--creation-art-image": artwork ? `url("${artwork}")` : "none",
-    "--creation-art-position": getFactionArtworkPosition(choice, "card") ?? getFactionArtworkPosition(fallback, "card") ?? "center",
+    "--creation-art-position": choice?.id === "fyreslayers" ? "50% 42%" : getFactionArtworkPosition(choice, "card") ?? getFactionArtworkPosition(fallback, "card") ?? "center",
+    "--creation-art-size": choice?.id === "fyreslayers" ? "145% auto" : "cover",
   };
 }
 
