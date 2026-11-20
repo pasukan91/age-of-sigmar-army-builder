@@ -758,6 +758,11 @@ body {
   object-fit: cover;
 }
 
+.aos-official-roster-unit .aos-unit-artwork--khazalite {
+  object-fit: contain;
+  background: #fff;
+}
+
 .aos-official-roster-unit__info {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

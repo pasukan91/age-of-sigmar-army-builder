@@ -1,3 +1,5 @@
+import khazaliteUnitImages from "../data/khazaliteUnitImages.generated.json";
+
 const HEDONITES_UNIT_IDS = new Set([
   "shalaxi-helbane",
   "keeper-of-secrets",
@@ -35,11 +37,13 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
   const keywords = (unit?.keywords ?? []).map((keyword) =>
     String(keyword).trim().toLowerCase()
   );
-  const explicitSource = String(unit?.image ?? "").startsWith("/")
+  const explicitSource = khazaliteUnitImages[artworkId] ?? (String(unit?.image ?? "").startsWith("/")
     ? unit.image
-    : null;
+    : null);
   const hasOfficialImage = Boolean(explicitSource) || HEDONITES_UNIT_IDS.has(artworkId);
-  const fallbackSource = keywords.includes("ironjawz")
+  const fallbackSource = keywords.includes("khazalite holds")
+    ? "/images/factions/khazalite-holds.webp"
+    : keywords.includes("ironjawz")
     ? "/images/factions/ironjawz-army.webp"
     : keywords.includes("hedonites of slaanesh")
       ? "/images/factions/hedonites.webp"
@@ -63,6 +67,7 @@ function UnitArtwork({ unit, className = "", variant = "card" }) {
   const classes = [
     "aos-unit-artwork",
     `aos-unit-artwork--${variant}`,
+    khazaliteUnitImages[artworkId] ? "aos-unit-artwork--khazalite" : "",
     !hasOfficialImage ? "aos-unit-artwork--fallback" : "",
     className,
   ].filter(Boolean).join(" ");

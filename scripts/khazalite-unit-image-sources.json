@@ -1,0 +1,94 @@
+{
+  "images": [
+    {
+      "id": "high-kyng-valankrom",
+      "file": "/images/units/fyreslayers/high-kyng-valankrom.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_01-valenkrom-xiavyc8vvm.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "thrynn",
+      "file": "/images/units/fyreslayers/thrynn.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_02-thrynn-5mhb8i7j0d.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "runewright",
+      "file": "/images/units/fyreslayers/runewright.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_03-runewright-ejqdlvldhu.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "valayan-guardians-with-rune-axes-and-shields",
+      "file": "/images/units/fyreslayers/valayan-guardians-with-rune-axes-and-shields.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_04-valayanguardians-vxde1ooeuo.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "valayan-guardians-with-runic-halberds",
+      "file": "/images/units/fyreslayers/valayan-guardians-with-runic-halberds.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_05-valayanguardiansalt-bmnvuwbapx.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "clangunners-with-thrundok-rifles",
+      "file": "/images/units/fyreslayers/clangunners-with-thrundok-rifles.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_06-clangunners-olosrheabh.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "clangunners-with-thrundrin-shotcannons",
+      "file": "/images/units/fyreslayers/clangunners-with-thrundrin-shotcannons.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_07-clangunnersalt-jxchiydrdb.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "ormyr-and-ashtongue",
+      "file": "/images/units/fyreslayers/ormyr-and-ashtongue.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_08-ormyr-rnszhphrjm.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "hjulda-drakkblud",
+      "file": "/images/units/fyreslayers/hjulda-drakkblud.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_09-hjulda-x9vh0rbijy.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "clanshields",
+      "file": "/images/units/fyreslayers/clanshields.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_10-clanshields-qtstmnsi4z.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "gholems-of-gazul",
+      "file": "/images/units/fyreslayers/gholems-of-gazul.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_12-gholems-g4mbd2z2cy.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "gholems-of-valaya",
+      "file": "/images/units/fyreslayers/gholems-of-valaya.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/october/wc26-10/sundaypreview-nov01-aos_13-gholemsalt-u2gzoh6oao.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/pqgrrqqt/sunday-preview-the-khazalite-holds-prepare-to-march-out/"
+    },
+    {
+      "id": "oathkeeper-cannon",
+      "file": "/images/units/fyreslayers/oathkeeper-cannon.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/september/wc14-09/big-autumn-preview/image2-08-oml964mfpj.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/evmkzloa/the-big-autumn-preview-a-new-duardin-faction-revealed/"
+    },
+    {
+      "id": "stonebreaker-mortar",
+      "file": "/images/units/fyreslayers/stonebreaker-mortar.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/september/wc14-09/big-autumn-preview/image8-08-wuxzrj4s4l.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/evmkzloa/the-big-autumn-preview-a-new-duardin-faction-revealed/"
+    },
+    {
+      "id": "thrynn-on-war-throne",
+      "file": "/images/units/fyreslayers/thrynn-on-war-throne.webp",
+      "source": "https://assets.warhammer-community.com/img/articles/0-2026/september/wc14-09/big-autumn-preview/image6-08-q4wdrfhmny.jpg?format=webp&width=640",
+      "page": "https://www.warhammer-community.com/en-gb/articles/evmkzloa/the-big-autumn-preview-a-new-duardin-faction-revealed/"
+    }
+  ]
+}
