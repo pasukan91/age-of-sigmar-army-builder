@@ -6,6 +6,7 @@ import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import AbilityCard from "../components/AbilityCard";
 import FormattedRulesText from "../components/FormattedRulesText";
+import RenownOptions from "../components/RenownOptions";
 import { getManifestationLoreContents } from "../utils/optionSummaries";
 import { calculateArmyPoints } from "../utils/armyPoints";
 import { validateArmyList } from "../utils/armyValidation";
@@ -193,7 +194,7 @@ function OptionSelector({
           </div>
         )}
 
-        {variant === "battleTactics" ? (
+        {variant === "renown" ? <RenownOptions options={filteredOptions} list={list} onView={onViewRule} onAdd={onConfigure} /> : variant === "battleTactics" ? (
           <BattleTacticsOptions
             cards={options}
             selectedIds={selectedIds}

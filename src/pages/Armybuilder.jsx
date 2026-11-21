@@ -16,7 +16,7 @@ import { validateArmyList } from "../utils/armyValidation";
 import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
 import { createRegimentOfRenownReference } from "../utils/regimentOfRenownReferences";
 import { getAvailableRegimentLeaders } from "../utils/regimentRules";
-import { canAddRegiment } from "../utils/armyComposition";
+import { canAddRegiment, canAddRegimentOfRenown } from "../utils/armyComposition";
 
 import "../styles/aos-app.css";
 import "../styles/official-app.css";
@@ -32,7 +32,6 @@ function ArmyBuilder({
   onRemoveUnit,
   onDuplicateUnit,
   onRemoveRegiment,
-  onAddRegimentOfRenown,
   onRemoveRegimentOfRenown,
   onRemoveAuxiliary,
   onViewRule,
@@ -85,6 +84,10 @@ function ArmyBuilder({
   const tacticsSelector = { title: "Battle Tactics", property: "battleTactics", options: ghb2026BattleTacticsCards, ui: { maxSelections: 2, variant: "battleTactics" } };
   const terrainSelector = { title: "Faction Terrain", property: "terrain", options: faction.terrain ?? [] };
   const playing = section === "game";
+  const canBrowseRenown = eligibleRegimentsOfRenown.length > 0 && canAddRegimentOfRenown(list);
+  function browseRenown() {
+    openSelector({ title: "Add Regiment of Renown", property: "newRegimentOfRenown", options: eligibleRegimentsOfRenown, ui: { variant: "renown" } });
+  }
 
   function changeMode(nextSection) {
     onSectionChange?.(nextSection);
@@ -141,12 +144,11 @@ function ArmyBuilder({
           />
         </OfficialSection>
 
-        <OfficialSection title="Regiments of Renown" action="plus" disabled={eligibleRegimentsOfRenown.length === 0}>
+        <OfficialSection title="Regiments of Renown" action="plus" open={Boolean(list.regimentsOfRenown?.length)} disabled={!canBrowseRenown} onAction={browseRenown}>
           <RenownSection
-            available={eligibleRegimentsOfRenown}
             selected={list.regimentsOfRenown ?? []}
-            regularRegimentCount={list.regiments?.length ?? 0}
-            onAdd={onAddRegimentOfRenown}
+            onBrowse={browseRenown}
+            canBrowse={canBrowseRenown}
             onRemove={onRemoveRegimentOfRenown}
             onViewUnit={onViewWarscroll}
             onView={(regiment) => onViewRule?.(createRegimentOfRenownReference(regiment))}

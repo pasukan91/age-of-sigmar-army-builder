@@ -24,3 +24,16 @@ export function canAddRegiment(list) {
 export function canAddRegimentOfRenown(list) {
   return (list?.regimentsOfRenown ?? []).length < MAX_REGIMENTS_OF_RENOWN;
 }
+
+export function getRegimentOfRenownAddError(list, regiment) {
+  if (!list || !regiment) return "Selecciona un ejército y un regimiento.";
+  if (list.armyOfRenown?.excludesRegimentsOfRenown) return "Este Army of Renown no permite regimientos de renombre.";
+  const factionId = list.faction?.id;
+  const eligible = Array.isArray(regiment.eligibleFactionIds)
+    ? regiment.eligibleFactionIds.includes(factionId)
+    : regiment.sourceFaction === factionId;
+  if (!eligible) return "Este regimiento no está disponible para tu facción.";
+  if ((list.regimentsOfRenown ?? []).some((item) => item.id === regiment.id)) return "Este regimiento ya está incluido.";
+  if (!canAddRegimentOfRenown(list)) return "Solo puedes incluir un regimiento de renombre.";
+  return null;
+}

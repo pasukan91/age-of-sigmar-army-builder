@@ -13,7 +13,7 @@ import Settings from "./pages/Settings";
 import RulesReference from "./pages/RulesReference";
 import ReferenceOverlay from "./components/ReferenceOverlay";
 import factions from "./data/factions";
-import { getGeneralRegimentId } from "./utils/armyComposition";
+import { getGeneralRegimentId, getRegimentOfRenownAddError } from "./utils/armyComposition";
 import alliances from "./data/alliances";
 
 import {
@@ -183,7 +183,7 @@ function App() {
   useEffect(() => {
     if (!builderReference) return undefined;
 
-    const closeOverlayOnBack = () => setBuilderReference(null);
+    const closeOverlayOnBack = (event) => { if (!event.state?.builderOverlay) setBuilderReference(null); };
     window.addEventListener("popstate", closeOverlayOnBack);
     return () => window.removeEventListener("popstate", closeOverlayOnBack);
   }, [builderReference]);
@@ -288,7 +288,7 @@ function App() {
    * pantallas intermedias de selector,
    * warscroll y configuración.
    */
-  function returnToBuilder() {
+  function returnToBuilder(extraSteps = 0) {
     setSelectedUnit(null);
     setUnitEditor(null);
     resetSelector();
@@ -301,7 +301,7 @@ function App() {
     }
 
     const stepsBack = history.length - builderIndex;
-    window.history.go(-stepsBack);
+    window.history.go(-(stepsBack + extraSteps));
   }
 
   function handleSelectorBack() {
@@ -609,6 +609,7 @@ function App() {
     if (window.history.state?.builderOverlay) {
       const nextState = { ...(window.history.state ?? {}) };
       delete nextState.builderOverlay;
+      delete nextState.renownUnit;
       window.history.replaceState(nextState, "", window.location.href);
     }
 
@@ -660,6 +661,7 @@ function App() {
 
   function handleAddSelectedOption(option) {
     if (!option) return;
+    if (selector?.property === "newRegimentOfRenown") { handleAddRegimentOfRenown(option); return; }
 
     if (selector?.property === "newRegiment") {
       handleCreateRegiment(option);
@@ -1749,14 +1751,7 @@ function App() {
       return;
     }
 
-    const selectedRegiments = currentList.regimentsOfRenown ?? [];
-    const alreadyIncluded = selectedRegiments.some(
-      (item) => item.id === regiment.id
-    );
-
-    if (alreadyIncluded || selectedRegiments.length >= 1) {
-      return;
-    }
+    if (getRegimentOfRenownAddError(currentList, regiment)) return;
 
     saveUpdatedList({
       ...currentList,
@@ -1765,6 +1760,11 @@ function App() {
         { ...regiment, instanceId: createInstanceId("renown") },
       ],
     });
+    if (selector?.property === "newRegimentOfRenown") {
+      const overlaySteps = window.history.state?.builderOverlay ? 1 : 0;
+      clearBuilderReferenceHistory();
+      returnToBuilder(overlaySteps);
+    }
   }
 
   function handleRemoveRegimentOfRenown(instanceId) {
@@ -1958,7 +1958,6 @@ function App() {
           onRemoveRegiment={
             handleRemoveRegiment
           }
-          onAddRegimentOfRenown={handleAddRegimentOfRenown}
           onRemoveRegimentOfRenown={handleRemoveRegimentOfRenown}
           onRemoveAuxiliary={handleRemoveAuxiliary}
           onViewRule={openBuilderRuleReference}
@@ -2000,6 +1999,10 @@ function App() {
               <RuleWarscroll
                 reference={builderReference.reference}
                 onBack={closeBuilderReference}
+                list={currentList}
+                onRules={() => { clearBuilderReferenceHistory(); navigate("home", { listId: null }); }}
+                onLists={() => { clearBuilderReferenceHistory(); openLists(); }}
+                onSettings={() => { clearBuilderReferenceHistory(); openSettings(); }}
               />
             )}
           </ReferenceOverlay>
@@ -2020,7 +2023,7 @@ function App() {
             []
           }
           selectedOptions={
-            selector?.ui?.maxSelections > 1 || ["spellLore", "prayerLore", "manifestationLore"].includes(selector?.property)
+            selector?.property === "newRegimentOfRenown" ? currentList?.regimentsOfRenown ?? [] : selector?.ui?.maxSelections > 1 || ["spellLore", "prayerLore", "manifestationLore"].includes(selector?.property)
               ? (Array.isArray(currentList?.[selector.property])
                   ? currentList[selector.property]
                   : currentList?.[selector.property]
@@ -2060,7 +2063,11 @@ function App() {
         />
         {builderReference?.type === "rule" && (
           <ReferenceOverlay title="Referencia de reglas" onClose={closeBuilderReference}>
-            <RuleWarscroll reference={builderReference.reference} onBack={closeBuilderReference} />
+            <RuleWarscroll reference={builderReference.reference} onBack={closeBuilderReference}
+              list={currentList} onAddRegimentOfRenown={selector?.property === "newRegimentOfRenown" ? handleAddRegimentOfRenown : undefined}
+              onRules={() => { clearBuilderReferenceHistory(); navigate("home", { listId: null }); }}
+              onLists={() => { clearBuilderReferenceHistory(); openLists(); }}
+              onSettings={() => { clearBuilderReferenceHistory(); openSettings(); }} />
           </ReferenceOverlay>
         )}
         </>

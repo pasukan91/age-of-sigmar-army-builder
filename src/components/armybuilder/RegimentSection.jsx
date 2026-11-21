@@ -369,12 +369,12 @@ export function UnitCard({
 
   return (
     <article className="aos-official-roster-unit">
-      {onConfigure && (
+      {(onConfigure || (locked && onView)) && (
         <button
           type="button"
           className="aos-official-roster-unit__configure"
-          onClick={onConfigure}
-          aria-label={`Configure ${unit.name}`}
+          onClick={onConfigure ?? onView}
+          aria-label={onConfigure ? `Configure ${unit.name}` : `Ver warscroll de ${unit.name}`}
         />
       )}
       <button

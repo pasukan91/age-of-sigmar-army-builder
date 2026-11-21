@@ -9,13 +9,15 @@ import {
   getRegimentOrganisation,
 } from "../utils/regimentOfRenownReferences";
 import "../styles/aos-app.css";
+import RegimentOfRenownWarscroll from "./RegimentOfRenownWarscroll";
 
-function RuleWarscroll({ reference, onBack }) {
+function RuleWarscroll({ reference, onBack, onAddRegimentOfRenown, list, onRules, onLists, onSettings }) {
   const { item, kind, sourceName } = reference ?? {};
 
   if (!item) {
     return <EmptyReference onBack={onBack} />;
   }
+  if (kind === "regimentOfRenown") return <RegimentOfRenownWarscroll key={item.id} regiment={item} onBack={onBack} onAdd={onAddRegimentOfRenown} list={list} onRules={onRules} onLists={onLists} onSettings={onSettings} />;
 
   const isManifestation = kind === "manifestation";
   const isTerrain = kind === "terrain";
