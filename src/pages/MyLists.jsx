@@ -95,9 +95,8 @@ function MyLists({
                 value={importText}
                 onChange={(event) => setImportText(event.target.value)}
                 placeholder="Pega aquí el texto completo de la app oficial…"
-                rows={10}
+                rows={7}
                 maxLength={60000}
-                autoFocus
               />
 
               {importError && (
