@@ -5,6 +5,7 @@ import {
   parseAbilityDescription,
   parseFormattedText,
 } from "../utils/abilityFormatting";
+import { getUserPreferences } from "../utils/userPreferences";
 import ChevronIcon from "./ChevronIcon";
 import FactionMechanicIllustration from "./FactionMechanicIllustration";
 import FormattedRulesText from "./FormattedRulesText";
@@ -28,7 +29,7 @@ function FormattedText({ text }) {
   );
 }
 
-function AbilityCard({ ability, defaultOpen = false, context = null, variant }) {
+function AbilityCard({ ability, defaultOpen = getUserPreferences().expandAbilities ?? false, context = null, variant }) {
   const isReference = variant === "reference";
   const isEnhancement = variant === "enhancement" || isReference;
   const timing = isEnhancement ? ability.phase : getAbilityTiming(ability);

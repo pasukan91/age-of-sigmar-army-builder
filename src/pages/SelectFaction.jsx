@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import factions from "../data/factions";
 import OfficialIcon from "../components/OfficialIcon";
+import AbilityCard from "../components/AbilityCard";
 import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
 
 const ALLIANCE_ORDER = ["order", "chaos", "death", "destruction"];
@@ -85,19 +86,7 @@ function SelectFaction({ onSelect, onBack }) {
                       {orrukOpen && (
                         <div className="aos-create-orruk-group__children">
                           {getOrrukChoices(orrukFactions).map((choice) => (
-                            <button
-                              type="button"
-                              className="aos-create-faction-row aos-create-faction-row--nested"
-                              style={choiceArtwork(choice.armyOfRenown, choice.faction)}
-                              key={choice.key}
-                              onClick={() => onSelect(choice.faction, choice.armyOfRenown)}
-                            >
-                              <span>
-                                <strong>{choice.name}</strong>
-                                {choice.armyOfRenown && <small>Army of Renown</small>}
-                              </span>
-                              <ChoiceControl />
-                            </button>
+                            <FactionLeaf key={choice.key} faction={choice.faction} army={choice.armyOfRenown} nested onSelect={onSelect} />
                           ))}
                         </div>
                       )}
@@ -124,10 +113,7 @@ function FactionChoice({ faction, onSelect }) {
 
   if (armies.length === 0) {
     return (
-      <button type="button" className="aos-create-faction-row" style={choiceArtwork(faction)} onClick={() => onSelect(faction, null)}>
-        <strong>{faction.name}</strong>
-        <ChoiceControl />
-      </button>
+      <FactionLeaf faction={faction} onSelect={onSelect} />
     );
   }
 
@@ -139,26 +125,33 @@ function FactionChoice({ faction, onSelect }) {
       </button>
       {open && (
         <div className="aos-create-faction-group__children">
-          <button type="button" className="aos-create-faction-row aos-create-faction-row--nested" style={choiceArtwork(faction)} onClick={() => onSelect(faction, null)}>
-            <strong>{faction.name}</strong>
-            <ChoiceControl />
-          </button>
+          <FactionLeaf faction={faction} nested onSelect={onSelect} />
           {armies.map((army) => (
-            <button
-              type="button"
-              className="aos-create-faction-row aos-create-faction-row--nested"
-              style={choiceArtwork(army, faction)}
-              key={`${faction.id}-${army.id}`}
-              onClick={() => onSelect(faction, army)}
-            >
-              <span><strong>{army.name}</strong><small>Army of Renown</small></span>
-              <ChoiceControl />
-            </button>
+            <FactionLeaf key={`${faction.id}-${army.id}`} faction={faction} army={army} nested onSelect={onSelect} />
           ))}
         </div>
       )}
     </section>
   );
+}
+
+function FactionLeaf({ faction, army = null, nested = false, onSelect }) {
+  const [infoOpen, setInfoOpen] = useState(false);
+  const choice = army ?? faction;
+  const rules = army?.rules ?? faction;
+  return <>
+    <div className={`aos-create-faction-row aos-create-faction-leaf${nested ? " aos-create-faction-row--nested" : ""}`} style={choiceArtwork(choice, faction)}>
+      <button type="button" className="aos-create-faction-select" onClick={() => onSelect(faction, army)}><span><strong>{choice.name}</strong>{army && <small>Army of Renown</small>}</span></button>
+      <button type="button" className="aos-create-card-control" aria-label={`Información de ${choice.name}`} onClick={() => setInfoOpen(true)}><span className="aos-create-card-info">i</span></button>
+    </div>
+    {infoOpen && <div className="aos-dialog-backdrop" onClick={() => setInfoOpen(false)}><section className="aos-action-dialog aos-faction-info" role="dialog" aria-modal="true" aria-label={choice.name} onClick={(event) => event.stopPropagation()}>
+      <header><h2>{choice.name}</h2><button type="button" aria-label="Cerrar" onClick={() => setInfoOpen(false)}>×</button></header>
+      {choice.description && <p>{choice.description}</p>}
+      <p>{army ? "Army of Renown" : "Ejército"} · {faction.name}</p>
+      {(rules.battleTraits ?? []).map((ability, index) => <AbilityCard key={ability.id ?? index} ability={ability} variant="reference" />)}
+      <button type="button" onClick={() => onSelect(faction, army)}>Elegir {choice.name}</button>
+    </section></div>}
+  </>;
 }
 
 function choiceArtwork(choice, fallback) {

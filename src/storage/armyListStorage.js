@@ -1,5 +1,6 @@
 import alliances from "../data/alliances";
 import factions from "../data/factions";
+import { getGeneralRegimentId } from "../utils/armyComposition";
 import regimentsOfRenown from "../data/regimentsOfRenown";
 import {
   ghb2026Battleplans,
@@ -242,6 +243,8 @@ function serializeList(list) {
     factionId: list.faction?.id ?? list.factionId ?? null,
     armyOfRenown: list.armyOfRenown ?? null,
     pointsLimit: list.pointsLimit,
+    battlepack: list.battlepack ?? null,
+    generalRegimentId: getGeneralRegimentId(list),
     battleFormation: list.battleFormation ?? null,
     battleplan: list.battleplan ?? null,
     spellLore: list.spellLore ?? null,
@@ -333,6 +336,8 @@ function restoreList(savedList) {
     faction,
     armyOfRenown,
     pointsLimit: Number(savedList.pointsLimit) || 2000,
+    battlepack: savedList.battlepack ?? null,
+    generalRegimentId: getGeneralRegimentId({ ...savedList, regiments }),
     battleFormation: restoreOption(
       savedList.battleFormation,
       effectiveFaction.battleFormations

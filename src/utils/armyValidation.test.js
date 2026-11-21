@@ -39,6 +39,7 @@ function list(overrides = {}) {
       manifestationLores: [],
     },
     battleFormation: { id: "formation", name: "Formación", points: 0 },
+    battleTactics: [{ id: "tactics", name: "Tácticas" }],
     regiments: [{ id: "regiment", hero: leader, units: [] }],
     regimentsOfRenown: [],
     ...overrides,
@@ -54,6 +55,18 @@ test("reports required formation and point limit errors", () => {
   assert.equal(result.isValid, false);
   assert.ok(result.errors.some((item) => item.id === "points-limit"));
   assert.ok(result.errors.some((item) => item.id === "missing-formation"));
+});
+
+test("explicitly clearing the general stays invalid instead of selecting the first hero", () => {
+  const army = list({ generalRegimentId: null });
+  assert.ok(validateArmyList(army).errors.some((item) => item.id === "missing-general"));
+  assert.doesNotMatch(formatArmyListText(army), /\[GENERAL\]/);
+  const restoredGeneral = { ...army, generalRegimentId: "regiment" };
+  assert.ok(!validateArmyList(restoredGeneral).errors.some((item) => item.id === "missing-general"));
+});
+
+test("requires battle tactics even below the points limit", () => {
+  assert.ok(validateArmyList(list({ battleTactics: [] })).errors.some((item) => item.id === "missing-battle-tactics"));
 });
 
 test("reports duplicate unique units", () => {

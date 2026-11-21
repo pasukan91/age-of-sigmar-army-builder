@@ -4,6 +4,7 @@ import {
 } from "../../utils/regimentRules";
 import {
   canAddRegiment,
+  getGeneralRegimentId,
 } from "../../utils/armyComposition";
 import UnitArtwork from "../UnitArtwork";
 import { getUnitPoints } from "../../utils/armyPoints";
@@ -68,8 +69,7 @@ function RegimentSection({
   }
 
   function requestRemoveRegiment(
-    regiment,
-    regimentIndex
+    regiment
   ) {
     if (
       typeof onRemoveRegiment !==
@@ -83,7 +83,7 @@ function RegimentSection({
     }
 
     const description =
-      regimentIndex === 0
+      getGeneralRegimentId(list) === regiment.id
         ? "el regimiento del general"
         : `el regimiento de ${regiment.hero.name}`;
 
@@ -160,7 +160,7 @@ function RegimentSection({
               className="aos-official-regiment"
             >
               <header className="aos-official-regiment__header">
-                <strong>Regiment {regimentIndex + 1}</strong>
+                <strong>{getGeneralRegimentId(list) === regiment.id ? "General’s Regiment" : `Regiment ${regimentIndex + 1}`}</strong>
                 <span>{regimentPoints} Points</span>
                 <details className="aos-official-action-menu">
                   <summary aria-label={`Regiment ${regimentIndex + 1} options`}>⋮</summary>
@@ -178,6 +178,7 @@ function RegimentSection({
               <UnitCard
                 unit={regiment.hero}
                 isLeader
+                isGeneral={getGeneralRegimentId(list) === regiment.id}
                 points={getUnitPoints(
                   regiment.hero
                 )}
@@ -319,6 +320,7 @@ function RegimentSection({
 export function UnitCard({
   unit,
   isLeader = false,
+  isGeneral = false,
   points,
   pointsLabel,
   locked = false,
@@ -388,6 +390,7 @@ export function UnitCard({
         <strong>
           {unit.name}
         </strong>
+        {isGeneral && <span className="aos-unit-enhancement aos-unit-general">GENERAL</span>}
         <span className="aos-official-roster-unit__points">
           {pointsLabel ?? `${points}pts`}
         </span>
@@ -404,7 +407,7 @@ export function UnitCard({
         )}
       </div>
 
-      {!locked && (
+      {!locked && !isLeader && (
         <details className="aos-official-action-menu aos-official-action-menu--unit">
           <summary aria-label={`${unit.name} options`}>⋮</summary>
           <div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ArmyListActions from "../components/ArmyListActions";
 import ChevronIcon from "../components/ChevronIcon";
 import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
@@ -12,6 +13,8 @@ function MyLists({
   lists = [],
   onOpenList,
   onDeleteList,
+  onUpdateList,
+  onDuplicateList,
   storageStatus = "saved",
   onLists,
   onCreate,
@@ -21,6 +24,7 @@ function MyLists({
   deletedList,
   onUndoDelete,
 }) {
+  const [actionList, setActionList] = useState(null);
   const [showImporter, setShowImporter] = useState(false);
   const [importText, setImportText] = useState("");
   const [importResult, setImportResult] = useState(null);
@@ -46,7 +50,7 @@ function MyLists({
       <header className="aos-screen-header aos-official-header aos-official-header--root">
         <span aria-hidden="true" />
         <h1 className="aos-screen-header__title">STORM FORGE</h1>
-        <span aria-hidden="true" />
+        <button type="button" aria-label="Importar lista de la app oficial" onClick={() => setShowImporter(true)}><OfficialIcon name="document" size={27} /></button>
       </header>
 
       <div className="aos-screen-content">
@@ -61,7 +65,7 @@ function MyLists({
           )}
         </header>
 
-        <section className="aos-list-import">
+        <section className={`aos-list-import${showImporter ? " is-visible" : ""}`}>
           <button
             type="button"
             className="aos-secondary-action aos-list-import__toggle"
@@ -79,6 +83,13 @@ function MyLists({
           {showImporter && (
             <div id="official-list-import" className="aos-list-import__panel">
               <label htmlFor="official-list-text">Lista exportada</label>
+              <p>En la app oficial, abre el menú del ejército y elige Export. Copia el texto completo y pégalo aquí, o abre su archivo de texto.</p>
+              <input type="file" accept=".txt,text/plain" aria-label="Abrir exportación de texto" onChange={async (event) => {
+                const file = event.target.files?.[0];
+                if (!file) return;
+                if (file.size > 60000) { setImportError("El archivo supera el límite de 60 KB."); return; }
+                try { setImportText(await file.text()); setImportError(""); } catch { setImportError("No se ha podido leer el archivo."); }
+              }} />
               <textarea
                 id="official-list-text"
                 value={importText}
@@ -223,9 +234,9 @@ function MyLists({
                     <button
                       type="button"
                       className="aos-list-card__delete"
-                      onClick={() => onDeleteList(list.id)}
-                      aria-label={`Eliminar la lista ${list.name}`}
-                      title="Eliminar lista"
+                      onClick={() => setActionList(list)}
+                      aria-label={`Opciones de ${list.name}`}
+                      title="Opciones del ejército"
                     >
                       <OfficialIcon name="menu" size={28} strokeWidth={3} />
                     </button>
@@ -235,6 +246,8 @@ function MyLists({
           </section>
         )}
       </div>
+
+      {actionList && <ArmyListActions list={actionList} onClose={() => setActionList(null)} onUpdate={onUpdateList} onDuplicate={onDuplicateList} onDelete={onDeleteList} onSettings={onSettings} />}
 
       {deletedList && (
         <div className="aos-undo-toast" role="status">

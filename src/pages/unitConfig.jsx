@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import ArmyValidationPanel from "../components/armybuilder/ArmyValidationPanel";
+import { validateArmyList } from "../utils/armyValidation";
+import { getGeneralRegimentId } from "../utils/armyComposition";
 import BackButton from "../components/BackButton";
 import MainNav from "../components/MainNav";
 import OfficialIcon from "../components/OfficialIcon";
@@ -27,6 +30,8 @@ function UnitConfig({
   mode,
   list,
   isGeneral = false,
+  canBeGeneral = true,
+  regimentId,
   goBack,
   onConfirm,
   onView,
@@ -34,6 +39,7 @@ function UnitConfig({
   onLists,
   onSettings,
 }) {
+  const [validationOpen, setValidationOpen] = useState(false);
   const [general, setGeneral] = useState(Boolean(isGeneral));
 
   const [reinforced, setReinforced] =
@@ -411,14 +417,9 @@ function UnitConfig({
       0
     );
 
-  function handleConfirm() {
-    if (
-      typeof onConfirm !== "function"
-    ) {
-      return;
-    }
-
-    onConfirm({
+  function handleConfirm() { onConfirm?.(configuredUnit()); }
+  function configuredUnit() {
+    return {
       ...unit,
 
       isGeneral: general,
@@ -529,7 +530,7 @@ function UnitConfig({
         hasExactEnhancementEligibility
           ? specialEnhancements
           : unit?.specialEnhancements ?? {},
-    });
+    };
   }
 
   function toggleExclusiveOption(
@@ -638,6 +639,23 @@ function UnitConfig({
       (mode === "editUnit" ? totalPoints - getUnitPoints(unit) : totalPoints)
     : totalPoints;
   const pointsLimit = Number(list?.pointsLimit ?? list?.points) || 0;
+  const edited = configuredUnit();
+  const editedRegiment = list?.regiments?.find((r) => r.hero?.instanceId === unit.instanceId);
+  let previewList = list ? { ...list,
+    generalRegimentId: editedRegiment ? general ? editedRegiment.id : getGeneralRegimentId(list) === editedRegiment.id ? null : getGeneralRegimentId(list) : getGeneralRegimentId(list),
+    regiments: list.regiments.map((r) => ({ ...r, hero: r.hero?.instanceId === unit.instanceId ? edited : r.hero, units: r.units.map((u) => u.instanceId === unit.instanceId ? edited : u) })),
+    auxiliaries: (list.auxiliaries ?? []).map((u) => u.instanceId === unit.instanceId ? edited : u),
+  } : null;
+  if (previewList && mode === "newRegiment") {
+    const draftId = "draft-regiment";
+    previewList = { ...previewList, generalRegimentId: general ? draftId : getGeneralRegimentId(list), regiments: [...previewList.regiments, { id: draftId, hero: { ...edited, instanceId: "draft-hero" }, units: [] }] };
+  } else if (previewList && mode === "newUnit") {
+    previewList = { ...previewList, regiments: previewList.regiments.map((r) => r.id === regimentId ? { ...r, units: [...r.units, { ...edited, instanceId: "draft-unit" }] } : r) };
+  } else if (previewList && mode === "newAuxiliary") {
+    previewList = { ...previewList, auxiliaries: [...previewList.auxiliaries, { ...edited, instanceId: "draft-auxiliary" }] };
+  }
+  const validation = validateArmyList(previewList);
+  const hasIssues = validation.errors.length > 0 || validation.warnings.length > 0;
   const weapons = Array.isArray(unit.weapons) ? unit.weapons : [];
 
   function saveAndGoBack() {
@@ -663,7 +681,7 @@ function UnitConfig({
       </section>
 
       <div className="aos-official-config-content">
-        {isHero && (
+        {isHero && canBeGeneral && (
           <label className="aos-official-config-toggle">
             <strong>GENERAL</strong>
             <input
@@ -723,14 +741,20 @@ function UnitConfig({
 
       <button
         type="button"
-        className={`aos-official-points aos-official-config-points${pointsLimit > 0 && listPoints > pointsLimit ? " is-invalid" : ""}`}
-        aria-label={`${listPoints} of ${pointsLimit} points`}
+        className={`aos-official-points aos-official-config-points${hasIssues ? " is-invalid" : ""}`}
+        aria-label={`${listPoints} of ${pointsLimit} points. Ver validación`}
+        onClick={() => setValidationOpen((open) => !open)}
+        aria-expanded={validationOpen}
       >
-        <span><OfficialIcon name="warning" size={24} strokeWidth={2.4} /></span>
+        <span>{hasIssues ? <OfficialIcon name="warning" size={24} strokeWidth={2.4} /> : "✓"}</span>
         <strong>{listPoints}/{pointsLimit || "—"}</strong>
         <small>POINTS</small>
       </button>
 
+      {validationOpen && <div className="aos-dialog-backdrop" onClick={() => setValidationOpen(false)}><section className="aos-action-dialog" role="dialog" aria-modal="true" aria-label="Validación del ejército" onClick={(event) => event.stopPropagation()}>
+        <header><h2>Validación del ejército</h2><button type="button" onClick={() => setValidationOpen(false)} aria-label="Cerrar">×</button></header>
+        <ArmyValidationPanel validation={validation} expanded onExpandedChange={() => setValidationOpen(false)} />
+      </section></div>}
       <MainNav
         active="storm-forge"
         onReference={onRules}

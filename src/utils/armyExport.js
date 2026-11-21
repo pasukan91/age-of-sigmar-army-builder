@@ -1,5 +1,6 @@
 import { calculateArmyPoints } from "./armyPoints.js";
 import { validateArmyList } from "./armyValidation.js";
+import { getGeneralRegimentId } from "./armyComposition.js";
 
 const ENHANCEMENTS = [
   ["heroicTrait", "Rasgo heroico"],
@@ -76,7 +77,7 @@ export function formatArmyListText(list) {
   if (lines.at(-1) !== "") lines.push("");
 
   (list?.regiments ?? []).forEach((regiment, index) => {
-    lines.push(`REGIMIENTO ${index + 1}${index === 0 ? " — GENERAL" : ""}`);
+    lines.push(`REGIMIENTO ${index + 1}${regiment.id === getGeneralRegimentId(list) ? " — GENERAL" : ""}`);
     if (regiment.hero) lines.push(...formatUnit(regiment.hero));
     (regiment.units ?? []).forEach((unit) => lines.push(...formatUnit(unit)));
     lines.push("");

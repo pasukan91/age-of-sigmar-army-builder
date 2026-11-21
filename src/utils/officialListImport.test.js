@@ -119,3 +119,27 @@ test("rejects text that is not an official list-shaped export", () => {
 function unit(id, name, points, models) {
   return { id, name, points, details: { models }, keywords: [] };
 }
+
+test("imports auxiliaries, explicit general, battlepack and tactics", () => {
+  const text = exportedList.replace("Faction Terrain", "Auxiliary Units\nHobgrot Slittaz (70)\n• Reinforced\n\nFaction Terrain").replace("Drops: 4", "Drops: 4\nBattle Tactics - Test Card");
+  const result = importOfficialArmyList(text, { factions: [kruleboyz], battleTactics: [{ id: "test-card", name: "Test Card" }] });
+  assert.equal(result.list.generalRegimentId, result.list.regiments[0].id);
+  assert.equal(result.list.battlepack.id, "ghb-2026-27");
+  assert.equal(result.list.auxiliaries.length, 1);
+  assert.equal(result.list.auxiliaries[0].configuredModels, 20);
+  assert.equal(result.list.battleTactics[0].id, "test-card");
+});
+
+test("imports a renown regiment and does not replace an absent general", () => {
+  const text = exportedList.replace("General's Regiment", "Regiment 0").replace("&#x20;• General", "").replace("Faction Terrain", "Regiments of Renown\nTest Regiment (100)\nTest Unit (100)\n\nFaction Terrain");
+  const result = importOfficialArmyList(text, { factions: [kruleboyz], regimentsOfRenown: [{ id: "test-renown", name: "Test Regiment", points: 100, organisation: ["1 Test Unit"] }] });
+  assert.equal(result.list.generalRegimentId, null);
+  assert.equal(result.list.regimentsOfRenown[0].id, "test-renown");
+  assert.equal(result.list.regiments.length, 4);
+});
+
+test("finds an Army of Renown when the official header uses its name", () => {
+  const faction = { ...kruleboyz, armiesOfRenown: [{ id: "test-army", name: "Test Army", rules: {} }] };
+  const result = importOfficialArmyList(exportedList.replace("Orruk Warclans | Kruleboyz", "Test Army"), { factions: [faction] });
+  assert.equal(result.list.armyOfRenown.id, "test-army");
+});

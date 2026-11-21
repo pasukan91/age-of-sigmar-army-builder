@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { getUserPreferences } from "../utils/userPreferences";
 import ChevronIcon from "./ChevronIcon";
 
 function Accordion({
   title,
   subtitle,
   children,
-  defaultOpen = false,
+  defaultOpen = getUserPreferences().expandSections ?? false,
   variant = "light",
   storageKey,
 }) {

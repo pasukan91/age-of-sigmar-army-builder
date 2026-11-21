@@ -1,5 +1,6 @@
 import { getDisplayKeywords } from "../utils/displayKeywords";
 
+import MainNav from "../components/MainNav";
 import Accordion from "../components/Accordion";
 import AbilityCard from "../components/AbilityCard";
 import OfficialIcon from "../components/OfficialIcon";
@@ -14,11 +15,15 @@ import "../styles/aos-app.css";
 function UnitWarscroll({
   unit,
   onBack,
+  onRules,
+  onLists,
+  onSettings,
+  navActive = "reference",
 }) {
   if (!unit) {
     return (
-      <main className="aos-page aos-warscroll-page">
-        <header className="aos-topbar">
+      <main className="aos-page aos-official-page aos-warscroll-page">
+        <header className="aos-official-header">
           <button
             type="button"
             className="aos-icon-button"
@@ -41,7 +46,8 @@ function UnitWarscroll({
             unidad.
           </p>
         </div>
-      </main>
+        <MainNav active="reference" onReference={onRules ?? onBack} onStormForge={onLists ?? onBack} onProfile={onSettings ?? onBack} />
+    </main>
     );
   }
 
@@ -50,8 +56,8 @@ function UnitWarscroll({
   const accordionPrefix = `storm-forge:warscroll:${unit.id ?? unit.name}`;
 
   return (
-    <main className="aos-page aos-warscroll-page">
-      <header className="aos-topbar">
+    <main className="aos-page aos-official-page aos-warscroll-page">
+      <header className="aos-official-header">
         <button
           type="button"
           className="aos-icon-button"
@@ -206,6 +212,7 @@ function UnitWarscroll({
           </Accordion>
         )}
       </div>
+      <MainNav active={navActive} onReference={onRules ?? onBack} onStormForge={onLists ?? onBack} onProfile={onSettings ?? onBack} />
     </main>
   );
 }

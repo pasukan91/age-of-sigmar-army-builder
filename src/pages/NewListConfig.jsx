@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import AbilityCard from "../components/AbilityCard";
 import OfficialIcon from "../components/OfficialIcon";
 import { createArmyList } from "../models/ArmyList";
 import { getFactionArtwork, getFactionArtworkPosition } from "../utils/factionArtwork";
@@ -87,7 +88,7 @@ function NewListConfig({ army, setArmy, setLists, setCurrentList, setPage, onLis
   return (
     <main
       className={`aos-official-page aos-create-config-page aos-creation-flow aos-create-step--${step}`}
-      style={step === "summary" && artwork ? {
+      style={["summary", "formation"].includes(step) && artwork ? {
         "--official-faction-art": `url("${artwork}")`,
         "--official-faction-position": getFactionArtworkPosition(army.faction, "builder") ?? "center",
       } : undefined}
@@ -95,7 +96,7 @@ function NewListConfig({ army, setArmy, setLists, setCurrentList, setPage, onLis
       <header className="aos-official-header">
         <button type="button" onClick={handleBack} aria-label="Back"><OfficialIcon name="back" size={25} strokeWidth={2.5} /></button>
         <h1>{title}</h1>
-        {step === "summary" ? <button type="button" onClick={onCancel} aria-label="Cancel army creation" className="aos-create-close">×</button> : <span aria-hidden="true" />}
+        <button type="button" onClick={onCancel} aria-label="Cancel army creation" className="aos-create-close">×</button>
       </header>
 
       {step === "battlepack" && (
@@ -111,8 +112,10 @@ function NewListConfig({ army, setArmy, setLists, setCurrentList, setPage, onLis
         </section>
       )}
 
-      {step === "points" && <ChoiceList values={POINT_LIMITS} format={(points) => `${points.toLocaleString("es-ES")} Points`} onChoose={choosePoints} />}
-      {step === "formation" && <ChoiceList values={formations} format={(formation) => formation.name} onChoose={chooseFormation} />}
+      {step === "points" && <ChoiceList values={POINT_LIMITS} format={(points) => `${points.toLocaleString("es-ES", { useGrouping: "always" })} Points`} onChoose={choosePoints} />}
+      {step === "formation" && <section className="aos-create-choice-page"><div className="aos-formation-choices">
+        {formations.map((formation) => <FormationChoice key={formation.id} formation={formation} onChoose={chooseFormation} />)}
+      </div></section>}
 
       {step === "summary" && (
         <section className="aos-create-summary-page">
@@ -124,7 +127,7 @@ function NewListConfig({ army, setArmy, setLists, setCurrentList, setPage, onLis
             <h2>ARMY</h2>
             <div className="aos-create-summary-faction"><strong>{army.armyOfRenown?.name ?? army.faction?.name}</strong></div>
             <button type="button" onClick={() => goToStep("battlepack")}>{army.battlepack?.name}</button>
-            <button type="button" onClick={() => goToStep("points")}>{Number(army.points).toLocaleString("es-ES")} Points</button>
+            <button type="button" onClick={() => goToStep("points")}>{Number(army.points).toLocaleString("es-ES", { useGrouping: "always" })} Points</button>
             {army.battleFormation && <button type="button" onClick={() => goToStep("formation")}>{army.battleFormation.name}</button>}
           </section>
           <button type="button" className="aos-create-submit" onClick={handleCreateList}>CREATE ARMY</button>
@@ -144,6 +147,18 @@ function ChoiceList({ values, format, onChoose }) {
       </div>
     </section>
   );
+}
+
+function FormationChoice({ formation, onChoose }) {
+  const [open, setOpen] = useState(false);
+  const abilities = formation.abilities?.length ? formation.abilities : formation.ability ? [formation.ability] : [formation];
+  return <article>
+    <header>
+      <button type="button" aria-label={`Reglas de ${formation.name}`} aria-expanded={open} onClick={() => setOpen((value) => !value)}><OfficialIcon name={open ? "chevronUp" : "chevronDown"} size={20} /></button>
+      <button type="button" onClick={() => onChoose(formation)}><strong>{formation.name}</strong></button>
+    </header>
+    {open && <div>{abilities.map((ability, index) => <AbilityCard key={ability.id ?? index} ability={ability} variant="reference" defaultOpen />)}</div>}
+  </article>;
 }
 
 export default NewListConfig;

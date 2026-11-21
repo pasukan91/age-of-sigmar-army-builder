@@ -6,6 +6,7 @@ import {
 } from "./regimentRules.js";
 import {
   getRegimentUnitLimit,
+  getGeneralRegimentId,
   MAX_REGIMENTS_OF_RENOWN,
   MAX_REGIMENTS_PER_ARMY,
 } from "./armyComposition.js";
@@ -184,10 +185,18 @@ export function validateArmyList(list) {
     }
   });
 
+  const generalId = getGeneralRegimentId(list);
+  if (!regiments.some((regiment) => regiment.id === generalId && regiment.hero)) {
+    issues.push(issue("missing-general", "error", "Falta el general", "Selecciona como GENERAL a un héroe que lidere un regimiento.", "regiments", "regiments-section"));
+  }
+  const tactics = Array.isArray(list.battleTactics) ? list.battleTactics : list.battleTactics ? [list.battleTactics] : [];
+  if (tactics.length === 0) issues.push(issue("missing-battle-tactics", "error", "Faltan las tácticas de batalla", "Selecciona tus cartas de tácticas de batalla.", "list", "battle-tactics-option"));
+  if (tactics.length > 2) issues.push(issue("battle-tactics-limit", "error", "Demasiadas tácticas", "Solo puedes seleccionar dos cartas de tácticas de batalla.", "list", "battle-tactics-option"));
+
   regiments.forEach((regiment, regimentIndex) => {
     const targetId = `regiment-${regiment.id}`;
     const regimentLabel = regiment.hero?.name ?? `Regimiento ${regimentIndex + 1}`;
-    const limit = getRegimentUnitLimit(regimentIndex);
+    const limit = getRegimentUnitLimit(regimentIndex, list);
     const slotCount = (regiment.units ?? []).filter(countsTowardRegimentLimit).length;
 
     if (!regiment.hero) {
@@ -360,7 +369,7 @@ export function validateArmyList(list) {
   });
 
   (list.armyOfRenown?.requiredGeneralUnitGroups ?? []).forEach((unitIds, index) => {
-    if (unitIds.includes(regiments[0]?.hero?.id)) return;
+    if (unitIds.includes(regiments.find((regiment) => regiment.id === generalId)?.hero?.id)) return;
     const names = unitIds.map((unitId) =>
       effectiveFaction.units?.find((unit) => unit.id === unitId)?.name ?? unitId
     );

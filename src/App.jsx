@@ -13,6 +13,7 @@ import Settings from "./pages/Settings";
 import RulesReference from "./pages/RulesReference";
 import ReferenceOverlay from "./components/ReferenceOverlay";
 import factions from "./data/factions";
+import { getGeneralRegimentId } from "./utils/armyComposition";
 import alliances from "./data/alliances";
 
 import {
@@ -25,6 +26,8 @@ import {
 } from "./storage/armyListStorage";
 import { isUniqueUnit } from "./utils/unitIdentity";
 import createId from "./utils/createId";
+import { ghb2026BattleTacticsCards } from "./data/ghb2026";
+import regimentsOfRenown from "./data/regimentsOfRenown";
 import { importOfficialArmyList } from "./utils/officialListImport";
 
 const EMPTY_SELECTOR = {
@@ -1296,6 +1299,7 @@ function App() {
 
         newRegiment,
       ],
+      generalRegimentId: configuredHero.isGeneral ? newRegiment.id : getGeneralRegimentId(currentList),
     };
 
     saveUpdatedList(updatedList);
@@ -1538,6 +1542,9 @@ function App() {
       ...currentList,
       regiments:
         orderedRegiments,
+      generalRegimentId: unitEditor.isLeader
+        ? configuredUnit.isGeneral ? unitEditor.regimentId : getGeneralRegimentId(currentList) === unitEditor.regimentId ? null : getGeneralRegimentId(currentList)
+        : getGeneralRegimentId(currentList),
     };
 
     saveUpdatedList(updatedList);
@@ -1816,7 +1823,7 @@ function App() {
   }
 
   function handleImportOfficialList(text) {
-    const result = importOfficialArmyList(text, { factions, alliances });
+    const result = importOfficialArmyList(text, { factions, alliances, battleTactics: ghb2026BattleTacticsCards, regimentsOfRenown });
 
     setLists((previousLists) => [...previousLists, result.list]);
     return result;
@@ -1843,6 +1850,8 @@ function App() {
 
             navigate("builder", { listId: list.id });
           }}
+          onUpdateList={saveUpdatedList}
+          onDuplicateList={(list) => setLists((previous) => [...previous, list])}
           onDeleteList={handleDeleteList}
           deletedList={deletedList}
           onUndoDelete={restoreDeletedList}
@@ -1927,6 +1936,7 @@ function App() {
         <>
         <ArmyBuilder
           list={currentList}
+          onUpdateList={saveUpdatedList}
           notice={selectorNotice}
           onUndoNotice={undoLastSelectorAddition}
           storageStatus={storageStatus}
@@ -1970,6 +1980,10 @@ function App() {
           >
             {builderReference.type === "unit" ? (
               <UnitWarscroll
+                navActive="storm-forge"
+                onRules={() => { setBuilderReference(null); navigate("home", { listId: null }); }}
+                onLists={() => { setBuilderReference(null); openLists(); }}
+                onSettings={() => { setBuilderReference(null); openSettings(); }}
                 unit={builderReference.unit}
                 list={currentList}
                 onBack={closeBuilderReference}
@@ -2068,6 +2082,10 @@ function App() {
 
       return (
         <UnitWarscroll
+          navActive={currentList && (unitEditor || builderReference) ? "storm-forge" : "reference"}
+                onRules={() => { setBuilderReference(null); navigate("home", { listId: null }); }}
+                onLists={() => { setBuilderReference(null); openLists(); }}
+                onSettings={() => { setBuilderReference(null); openSettings(); }}
           unit={selectedUnit}
           list={currentList}
           onBack={
@@ -2102,9 +2120,11 @@ function App() {
         <UnitConfig
           unit={selectedUnit}
           list={currentList}
+          regimentId={unitEditor?.regimentId ?? selector?.regimentId}
+          canBeGeneral={unitEditor ? Boolean(unitEditor.isLeader) : selector?.property === "newRegiment"}
           isGeneral={Boolean(
             unitEditor?.isLeader &&
-            currentList?.regiments?.[0]?.id === unitEditor?.regimentId
+            getGeneralRegimentId(currentList) === unitEditor?.regimentId
           )}
           enhancementOwners={{
             artefact: findEnhancementOwner("artefact"),

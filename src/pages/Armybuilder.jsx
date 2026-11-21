@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import ArmyListActions from "../components/ArmyListActions";
 import OfficialIcon from "../components/OfficialIcon";
 import MainNav from "../components/MainNav";
 import AbilityCard from "../components/AbilityCard";
@@ -22,6 +23,7 @@ import "../styles/official-app.css";
 
 function ArmyBuilder({
   list,
+  onUpdateList,
   setSelector,
   navigate,
   onBack,
@@ -40,6 +42,7 @@ function ArmyBuilder({
   section = "units",
   onSectionChange,
 }) {
+  const [actionsOpen, setActionsOpen] = useState(false);
   const [validationExpanded, setValidationExpanded] = useState(false);
   const [loreSettingsOpen, setLoreSettingsOpen] = useState(false);
   const baseFaction = list?.faction ?? {};
@@ -79,7 +82,6 @@ function ArmyBuilder({
   ].filter((group) => (group.options ?? []).length > 0)
     .map((group) => ({ ...group, ui: { variant: "lores" } }));
 
-  const formationSelector = { title: "Battle Formation", property: "battleFormation", options: faction.battleFormations ?? [] };
   const tacticsSelector = { title: "Battle Tactics", property: "battleTactics", options: ghb2026BattleTacticsCards, ui: { maxSelections: 2, variant: "battleTactics" } };
   const terrainSelector = { title: "Faction Terrain", property: "terrain", options: faction.terrain ?? [] };
   const playing = section === "game";
@@ -91,12 +93,13 @@ function ArmyBuilder({
 
   return (
     <main className="aos-official-page aos-official-builder">
+      {actionsOpen && <ArmyListActions list={list} onUpdate={onUpdateList} onClose={() => setActionsOpen(false)} onSettings={onSettings} />}
       <header className="aos-official-header">
         <button type="button" onClick={playing ? () => changeMode("units") : onBack} aria-label="Back"><OfficialIcon name="back" size={25} strokeWidth={2.5} /></button>
         <h1>{playing ? "REALMGATE" : list?.name ?? "STORM FORGE"}</h1>
         <div className="aos-official-header__actions">
           <button type="button" className={playing ? "is-active" : ""} onClick={() => changeMode(playing ? "units" : "game")} aria-label={playing ? "Volver al constructor" : "Abrir modo partida"} aria-pressed={playing}><OfficialIcon name="battleMode" size={28} strokeWidth={1.8} /></button>
-          <OfficialIcon name="menu" size={28} strokeWidth={2.4} />
+          <button type="button" aria-label="Opciones del ejército" onClick={() => setActionsOpen(true)}><OfficialIcon name="menu" size={28} strokeWidth={2.4} /></button>
         </div>
       </header>
 
@@ -111,13 +114,6 @@ function ArmyBuilder({
       )}
 
       {playing ? <Realmgate list={list} onViewUnit={onViewWarscroll} onViewRule={onViewRule} /> : <div className="aos-official-builder-content">
-        {formationSelector.options.length > 0 && (
-          <OfficialSection title="Battle Formation" action="settings" onAction={() => openSelector(formationSelector)}>
-            <button type="button" className="aos-official-current-selection" onClick={() => openSelector(formationSelector)}>
-              {list.battleFormation?.name ?? "Choose Battle Formation"}
-            </button>
-          </OfficialSection>
-        )}
         <OfficialSection
           title="Regiments"
           open
@@ -172,7 +168,7 @@ function ArmyBuilder({
               <article key={unit.instanceId ?? unit.id}>
                 <button type="button" onClick={() => onViewWarscroll(unit)}>{unit.name}</button>
                 <strong>{unit.points} pts</strong>
-                <button type="button" onClick={() => onRemoveAuxiliary?.(unit.instanceId)} aria-label={`Remove ${unit.name}`}>⋮</button>
+                <details className="aos-official-action-menu"><summary aria-label={`Opciones de ${unit.name}`}>⋮</summary><div><button type="button" onClick={() => onRemoveAuxiliary?.(unit.instanceId)}>Remove</button></div></details>
               </article>
             ))}
           </div>

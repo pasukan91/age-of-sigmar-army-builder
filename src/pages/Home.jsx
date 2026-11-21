@@ -18,6 +18,7 @@ const FEATURED_DOCUMENTS = [
 ];
 
 function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
+  const [library, setLibrary] = useState(null);
   const [view, setView] = useState("root");
   const [faction, setFaction] = useState(null);
   const [query, setQuery] = useState("");
@@ -60,12 +61,14 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
       setQuery("");
       return;
     }
+    if (library && !["Legends", "Spearhead Battlepacks"].includes(library)) { openBook(nextFaction, library === "Rules of Renown" ? "renown" : library === "Scourge of Ghyran" ? "ghyran" : "aqshy"); return; }
     setFaction(nextFaction);
     setView("faction");
     setQuery("");
   }
 
   function openBook(nextFaction, nextPublication = "battletome") {
+    if (nextPublication === "spearhead") { setLibrary("Spearhead Battlepacks"); setView("library"); return; }
     setFaction(nextFaction);
     setPublication(nextPublication);
     setSection(null);
@@ -75,6 +78,8 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
 
   function goBack() {
     setQuery("");
+    if (view === "library") { setLibrary(null); setView("root"); return; }
+    if (view === "book" && library) { setView("library"); return; }
     if (view === "warscrolls" || view === "section") {
       setSection(null);
       setView("book");
@@ -159,7 +164,7 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
                 <button
                   key={document}
                   type="button"
-                  onClick={document === "Core Documents" ? onRules : undefined}
+                  onClick={() => { if (document === "Core Documents") { onRules(); return; } setLibrary(document); setView("library"); }}
                 >
                   <strong>{document}</strong><OfficialIcon name="chevronRight" size={22} strokeWidth={3} />
                 </button>
@@ -176,6 +181,10 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
           </>
         )}
 
+        {view === "library" && <section className="aos-official-link-list">
+          <h2>{library}</h2>
+          {["Legends", "Spearhead Battlepacks"].includes(library) ? <div className="aos-preferences-panel"><p>Consulta los documentos de {library} en las descargas oficiales. Este catálogo de Storm Forge está preparado para juego equilibrado.</p><a href="https://www.warhammer-community.com/en-gb/downloads/warhammer-age-of-sigmar/" target="_blank" rel="noreferrer">Abrir descargas de Warhammer Community ↗</a></div> : factions.filter((item) => library !== "Rules of Renown" || item.armiesOfRenown?.length).map((item) => <button type="button" key={item.id} onClick={() => openBook(item, library === "Rules of Renown" ? "renown" : library === "Scourge of Ghyran" ? "ghyran" : "aqshy")}><strong>{item.name}</strong><OfficialIcon name="chevronRight" /></button>)}
+        </section>}
         {view === "faction" && (
           <section className="aos-official-link-list">
             <button type="button" onClick={() => openBook(faction, "battletome")}>
@@ -353,7 +362,7 @@ function getReferenceTitle(view, faction, publication, section) {
   if (view === "book") {
     if (publication === "aqshy") return `SCOURGE OF AQSHY: ${faction?.name ?? ""}`;
     if (publication === "ghyran") return `SCOURGE OF GHYRAN: ${faction?.name ?? ""}`;
-    if (publication === "renown") return "ORRUK WARCLANS RULES OF RENOWN";
+    if (publication === "renown") return `${faction?.name ?? ""} RULES OF RENOWN`;
     if (publication === "spearhead") return "SPEARHEAD ARMIES";
     const alliance = String(faction?.alliance ?? "").toUpperCase();
     return `${alliance} BATTLETOME: ${faction?.name ?? ""}`.trim();

@@ -108,6 +108,8 @@ test("keeps SigDex enhancement categories after saving and reloading", async () 
     assert.equal(storageModule.saveArmyLists([{
       id: "enhancement-list",
       name: "Enhancements",
+      generalRegimentId: null,
+      battlepack: { id: "ghb-2026-27", name: "General's Handbook 2026-27" },
       allianceId: "destruction",
       faction,
       regiments: [{
@@ -122,6 +124,8 @@ test("keeps SigDex enhancement categories after saving and reloading", async () 
     }]), true);
 
     const [restored] = storageModule.loadArmyLists();
+    assert.equal(restored.generalRegimentId, null);
+    assert.equal(restored.battlepack.id, "ghb-2026-27");
     const restoredUnit = restored.regiments[0].units[0];
     assert.equal(restoredUnit.specialEnhancements["Special Knick-knacks"].id, "fizzcap");
   } finally {

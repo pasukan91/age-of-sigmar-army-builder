@@ -60,9 +60,9 @@ function ArmyValidationPanel({
                 <strong>{item.title}</strong>
                 <p>{item.message}</p>
               </div>
-              <button type="button" onClick={() => onNavigateIssue?.(item)}>
+              {onNavigateIssue && <button type="button" onClick={() => onNavigateIssue(item)}>
                 Ir al problema
-              </button>
+              </button>}
             </article>
           ))}
         </div>

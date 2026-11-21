@@ -54,6 +54,7 @@ export function createArmyList({
     terrain: null,
 
     regiments: requiredRegiments,
+    generalRegimentId: null,
 
     regimentsOfRenown: [],
 

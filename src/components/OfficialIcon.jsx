@@ -16,6 +16,7 @@ function OfficialIcon({ name, size = 24, strokeWidth = 2, className = "" }) {
     search: <><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></>,
     chevronRight: <path d="m9 18 6-6-6-6"/>,
     chevronDown: <path d="m6 9 6 6 6-6"/>,
+    chevronUp: <path d="m6 15 6-6 6 6"/>,
     back: <path d="m15 18-6-6 6-6"/>,
     plus: <path d="M12 5v14M5 12h14"/>,
     menu: <><circle cx="12" cy="5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></>,

@@ -33,7 +33,7 @@ export class OfficialListImportError extends Error {
   }
 }
 
-export function importOfficialArmyList(rawText, { factions = [], alliances = [] } = {}) {
+export function importOfficialArmyList(rawText, { factions = [], alliances = [], battleTactics = [], regimentsOfRenown = [] } = {}) {
   const text = decodeExportText(rawText);
   const lines = text.split(/\r?\n/).map((line) => line.trim());
   const content = lines.filter(Boolean);
@@ -45,7 +45,7 @@ export function importOfficialArmyList(rawText, { factions = [], alliances = [] 
     );
   }
 
-  const firstRegimentIndex = lines.findIndex((line) => REGIMENT_HEADING.test(line));
+  const firstRegimentIndex = lines.findIndex((line) => REGIMENT_HEADING.test(line) || /^Auxiliary Units$|^Regiments? of Renown$/i.test(line));
   if (firstRegimentIndex < 0) {
     throw new OfficialListImportError("No encuentro ningún regimiento en el texto exportado.");
   }
@@ -75,16 +75,18 @@ export function importOfficialArmyList(rawText, { factions = [], alliances = [] 
     pointsLimit: Number(heading[3]),
     armyOfRenown: armyOfRenown ?? null,
     battleFormation: findNamedItem(headerLines, rules.battleFormations),
+    battlepack: parseBattlepack(headerLines),
+    generalRegimentId: null,
     battleplan: null,
     spellLore: findPrefixedItem(headerLines, "Spell Lore", rules.spellLores, warnings),
-    prayerLore: findPrefixedItem(headerLines, "Prayer Lore", rules.prayerLores, warnings),
+    prayerLore: findPrefixedItem(headerLines.map((line) => line.replace(/^Chant(?:ing)? Lore/i, "Prayer Lore")), "Prayer Lore", rules.prayerLores, warnings),
     manifestationLore: findPrefixedItem(
       headerLines,
       "Manifestation Lore",
       rules.manifestationLores,
       warnings
     ),
-    battleTactics: [],
+    battleTactics: battleTactics.filter((card) => headerLines.some((line) => normalizeName(line.replace(/^Battle Tactics?\s*[-:]\s*/i, "")).split(/\s+and\s+|\s*,\s*/).includes(normalizeName(card.name)) || normalizeName(line).includes(normalizeName(card.name)))),
     terrain: null,
     regiments: [],
     regimentsOfRenown: [],
@@ -93,16 +95,21 @@ export function importOfficialArmyList(rawText, { factions = [], alliances = [] 
     updatedAt: now,
   };
 
-  parseRegiments(lines, firstRegimentIndex, rules, list, warnings);
+  parseRegiments(lines, firstRegimentIndex, rules, list, warnings, regimentsOfRenown);
   list.terrain = parseTerrain(lines, rules.terrain, warnings);
+  headerLines.filter((line) => /^Battle Tactics?\s*[-:]/i.test(line)).forEach((line) => {
+    const names = normalizeName(line.replace(/^Battle Tactics?\s*[-:]\s*/i, ""));
+    if (!battleTactics.some((card) => names.includes(normalizeName(card.name)))) warnings.push(`Táctica de batalla no encontrada: “${line}”.`);
+  });
 
-  if (list.regiments.length === 0) {
+  if (list.regiments.length === 0 && list.auxiliaries.length === 0 && list.regimentsOfRenown.length === 0) {
     throw new OfficialListImportError(
-      "No se ha podido crear ningún regimiento. Revisa los nombres indicados en los avisos."
+      `No se ha podido crear ningún regimiento. ${warnings.join(" ")}`
     );
   }
 
   const generalIndex = list.regiments.findIndex((regiment) => regiment.isGeneralRegiment);
+  list.generalRegimentId = list.regiments[generalIndex]?.id ?? null;
   if (generalIndex > 0) {
     const [generalRegiment] = list.regiments.splice(generalIndex, 1);
     list.regiments.unshift(generalRegiment);
@@ -132,10 +139,11 @@ export function importOfficialArmyList(rawText, { factions = [], alliances = [] 
   };
 }
 
-function parseRegiments(lines, startIndex, rules, list, warnings) {
+function parseRegiments(lines, startIndex, rules, list, warnings, renownCatalogue) {
   let currentRegiment = null;
   let currentUnit = null;
   let inTerrain = false;
+  let section = "regiments";
 
   for (let index = startIndex; index < lines.length; index += 1) {
     const line = lines[index];
@@ -150,7 +158,25 @@ function parseRegiments(lines, startIndex, rules, list, warnings) {
     if (/^Created with Warhammer/i.test(line) || /^App:\s*/i.test(line)) break;
     if (inTerrain) continue;
 
+    if (/^Auxiliary Units$/i.test(line)) {
+      section = "auxiliaries"; currentRegiment = null; currentUnit = null; continue;
+    }
+    if (/^Regiments? of Renown$/i.test(line)) {
+      section = "renown"; currentRegiment = null; currentUnit = null; continue;
+    }
+    const renown = findByName(line.replace(/\s*\(\d+\)\s*$/, ""), renownCatalogue);
+    if (renown) {
+      if (currentRegiment && !currentRegiment.hero) list.regiments = list.regiments.filter((item) => item !== currentRegiment);
+      list.regimentsOfRenown.push({ ...renown, instanceId: makeId("renown") });
+      section = "renown"; currentRegiment = null; currentUnit = null; continue;
+    }
+    if (section === "renown" && !REGIMENT_HEADING.test(line)) {
+      if (!list.regimentsOfRenown.length || (!UNIT_LINE.test(line) && !line.startsWith("•"))) warnings.push(`Regimiento de renombre u opción no encontrada: “${line}”.`);
+      continue;
+    }
+
     if (REGIMENT_HEADING.test(line)) {
+      section = "regiments";
       currentRegiment = {
         id: makeId("regiment"),
         hero: null,
@@ -164,11 +190,12 @@ function parseRegiments(lines, startIndex, rules, list, warnings) {
 
     if (line.startsWith("•")) {
       if (currentUnit) applyBullet(line, currentUnit, rules, warnings);
+      if (currentUnit?.isGeneral && currentRegiment?.hero === currentUnit) currentRegiment.isGeneralRegiment = true;
       continue;
     }
 
     const unitMatch = line.match(UNIT_LINE);
-    if (!unitMatch || !currentRegiment) continue;
+    if (!unitMatch || (!currentRegiment && section !== "auxiliaries")) continue;
 
     const unit = findByName(unitMatch[1], rules.units);
     if (!unit) {
@@ -179,9 +206,10 @@ function parseRegiments(lines, startIndex, rules, list, warnings) {
 
     const instance = {
       ...unit,
-      instanceId: makeId(currentRegiment.hero ? "unit" : "hero"),
+      instanceId: makeId(currentRegiment?.hero ? "unit" : "hero"),
     };
-    if (!currentRegiment.hero) currentRegiment.hero = instance;
+    if (section === "auxiliaries") list.auxiliaries.push(instance);
+    else if (!currentRegiment.hero) currentRegiment.hero = instance;
     else currentRegiment.units.push(instance);
     currentUnit = instance;
   }
@@ -199,7 +227,7 @@ function applyBullet(rawLine, unit, rules, warnings) {
     .replace(/\s*-\s*\(\d+\)\s*Points?\s*$/i, "")
     .trim();
 
-  if (/^General$/i.test(value)) return;
+  if (/^General$/i.test(value)) { unit.isGeneral = true; return; }
   if (/^Reinforced$/i.test(value)) {
     unit.reinforced = true;
     const models = Number(unit.details?.models);
@@ -237,7 +265,7 @@ function parseTerrain(lines, terrain, warnings) {
   );
   if (!terrainName) return null;
 
-  const match = findByName(terrainName, terrain);
+  const match = findByName(terrainName.replace(/\s*\(\d+\)\s*$/, ""), terrain);
   if (!match) warnings.push(`Elemento de terreno no encontrado: “${terrainName}”.`);
   return match ?? null;
 }
@@ -247,7 +275,7 @@ function findFaction(headerLines, factions) {
   return factions.find((faction) =>
     segments.some((segment) => {
       const candidate = normalizeName(segment);
-      return candidate === normalizeName(faction.name) || candidate === normalizeName(faction.id);
+      return candidate === normalizeName(faction.name) || candidate === normalizeName(faction.id) || (faction.armiesOfRenown ?? []).some((army) => candidate === normalizeName(army.name));
     })
   ) ?? null;
 }
@@ -299,4 +327,9 @@ function decodeExportText(value = "") {
 function makeId(prefix) {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function parseBattlepack(lines) {
+  const match = lines.join("\n").match(/General['’]s Handbook\s+(20\d{2})\s*[-–/]\s*(\d{2,4})/i);
+  return match ? { id: `ghb-${match[1]}-${match[2].slice(-2)}`, name: `General's Handbook ${match[1]}-${match[2].slice(-2)}` } : null;
 }
