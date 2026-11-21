@@ -69,11 +69,19 @@ export async function requestPwaInstall() {
     return false;
   }
 
-  await deferredInstallPrompt.prompt();
-  const result = await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt = null;
-  dispatchPwaEvent("storm-forge:installable", false);
-  return result.outcome === "accepted";
+  const prompt = deferredInstallPrompt;
+  try {
+    await prompt.prompt();
+    const result = await prompt.userChoice;
+    return result.outcome === "accepted";
+  } finally {
+    deferredInstallPrompt = null;
+    dispatchPwaEvent("storm-forge:installable", false);
+  }
+}
+
+export function canRequestPwaInstall() {
+  return deferredInstallPrompt !== null;
 }
 
 function activatePwaUpdate(registration) {

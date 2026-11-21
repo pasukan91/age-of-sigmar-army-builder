@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MainNav from "../components/MainNav";
+import PwaInstall from "../components/PwaInstall";
 import OfficialIcon from "../components/OfficialIcon";
 import { getUserPreferences, saveUserPreferences } from "../utils/userPreferences";
 
@@ -27,6 +28,7 @@ function Settings({ onLists, onSettings, onRules }) {
       </header>
 
       <div className="aos-official-content aos-profile-content">
+        <PwaInstall />
         <section className="aos-official-link-list aos-profile-links">
           {PROFILE_LINKS.map(([icon, label]) => (
             <button key={label} type="button" onClick={() => { setView(view === icon ? null : icon); setMessage(""); }} aria-expanded={view === icon}>

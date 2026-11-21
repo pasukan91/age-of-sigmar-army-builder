@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import MainNav from "../components/MainNav";
+import PwaInstall from "../components/PwaInstall";
 import AbilityCard from "../components/AbilityCard";
 import FormattedRulesText from "../components/FormattedRulesText";
 import OfficialIcon from "../components/OfficialIcon";
@@ -159,6 +160,7 @@ function Home({ onMyLists, onSettings, onRules, onViewWarscroll }) {
       <div className="aos-official-content">
         {view === "root" && (
           <>
+            <PwaInstall banner />
             <section className="aos-official-link-list is-featured">
               {FEATURED_DOCUMENTS.map((document) => (
                 <button
