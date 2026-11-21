@@ -783,7 +783,7 @@ function OfficialSelectionPanel({
             </summary>
             {group.options[0]?.restrictionText && (
               <p className="aos-official-config-restriction">
-                <FormattedRulesText text={group.options[0].restrictionText} />
+                <span><FormattedRulesText text={group.options[0].restrictionText} /></span>
               </p>
             )}
             <div className="aos-official-config-options">

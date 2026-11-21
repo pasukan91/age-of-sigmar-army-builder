@@ -5,6 +5,7 @@ import OfficialIcon from "../components/OfficialIcon";
 import RuleCopyBlocks from "../components/RuleCopyBlocks";
 import UnitArtwork from "../components/UnitArtwork";
 import AbilityCard from "../components/AbilityCard";
+import FormattedRulesText from "../components/FormattedRulesText";
 import { getManifestationLoreContents } from "../utils/optionSummaries";
 import { calculateArmyPoints } from "../utils/armyPoints";
 import { validateArmyList } from "../utils/armyValidation";
@@ -444,7 +445,7 @@ function BattleTacticsOptions({
           >
             <button
               type="button"
-              className="aos-option-card__button aos-option-card__button--select aos-battle-tactics-selector__card-button"
+              className="aos-option-card__button aos-battle-tactics-selector__card-button"
               disabled={limitReached}
               aria-pressed={isSelected}
               onClick={() => onToggle?.(card)}
@@ -454,7 +455,7 @@ function BattleTacticsOptions({
 
           {card.introduction && (
             <p className="aos-battle-tactics-selector__introduction">
-              {card.introduction}
+              <FormattedRulesText text={card.introduction} />
             </p>
           )}
 
@@ -463,7 +464,7 @@ function BattleTacticsOptions({
               <div className="aos-game-rule-panel__label">
                 <span>Preparación de batalla</span>
               </div>
-              <p>{card.setup}</p>
+              <p><FormattedRulesText text={card.setup} /></p>
             </section>
           )}
 

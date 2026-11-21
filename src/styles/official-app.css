@@ -984,6 +984,33 @@ body {
 .aos-official-points:not(.is-invalid) > span { color: #fff; background: #3d8b43; }
 
 /* Official option selectors. */
+.aos-battle-tactics-selector .aos-battle-tactics-selector__card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  height: auto;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 4px;
+  color: #111;
+  background: var(--official-yellow);
+  font: 700 14px/1.35 var(--official-serif);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.aos-battle-tactics-selector__card-button[aria-pressed="true"] {
+  color: #fff;
+  background: var(--official-red);
+}
+.aos-battle-tactics-selector .aos-game-rule-panel > p {
+  margin: 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
 .aos-official-selector .aos-screen-content {
   padding: 33px 24px 125px;
   background: var(--official-paper);
