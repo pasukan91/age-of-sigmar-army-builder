@@ -387,13 +387,12 @@ export function UnitCard({
       </button>
 
       <div className="aos-official-roster-unit__info">
+        <div className="aos-official-roster-unit__identity">
         <strong>
           {unit.name}
         </strong>
-        {isGeneral && <span className="aos-unit-enhancement aos-unit-general">GENERAL</span>}
-        <span className="aos-official-roster-unit__points">
-          {pointsLabel ?? `${points}pts`}
-        </span>
+        {isGeneral && <span className="aos-unit-general">GENERAL</span>}
+        {unit.reinforced && <span className="aos-unit-reinforced">REINFORCED</span>}
 
         {assignedEnhancements.length > 0 && (
           <div className="aos-unit-enhancements" aria-label="Mejoras asignadas">
@@ -405,6 +404,10 @@ export function UnitCard({
             ))}
           </div>
         )}
+        </div>
+        <span className="aos-official-roster-unit__points">
+          {pointsLabel ?? `${points}pts`}
+        </span>
       </div>
 
       {!locked && !isLeader && (

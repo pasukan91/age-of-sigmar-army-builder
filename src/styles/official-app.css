@@ -771,7 +771,14 @@ body {
   min-width: 0;
 }
 
-.aos-official-roster-unit__info > strong {
+.aos-official-roster-unit__identity {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  justify-items: start;
+}
+
+.aos-official-roster-unit__identity > strong {
   min-width: 0;
   color: #111;
   font: 700 18px/1.3 var(--official-serif);
@@ -779,6 +786,11 @@ body {
 }
 
 .aos-official-roster-unit__points {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  width: max-content;
   padding: 5px 9px;
   border-radius: 4px;
   color: #fff;
@@ -788,10 +800,10 @@ body {
 }
 
 .aos-official-roster-unit .aos-unit-enhancements {
-  grid-column: 1 / -1;
   display: grid;
   gap: 1px;
-  margin: -5px 0 0;
+  min-width: 0;
+  margin: 0;
 }
 
 .aos-official-roster-unit .aos-unit-enhancement {
@@ -2080,7 +2092,16 @@ body {
 .aos-reference-overlay__sheet:has(> .aos-warscroll-page) { width: min(100%, var(--official-width)); height: 100dvh; max-height: 100dvh; border: 0; border-radius: 0; }
 .aos-reference-overlay__sheet > .aos-warscroll-page { padding-bottom: calc(var(--official-nav-height) + env(safe-area-inset-bottom)); }
 .aos-action-dialog select { width: 100%; padding: 10px; font: inherit; }
-.aos-unit-general { justify-self: start; color: white; background: var(--official-red); }
+.aos-unit-general,
+.aos-unit-reinforced {
+  justify-self: start;
+  padding: 4px 8px;
+  border-radius: 2px;
+  color: #fff;
+  background: var(--official-red);
+  font: 700 11px/1.2 var(--official-serif);
+}
+.aos-unit-reinforced { color: #111; background: var(--official-gold); }
 .aos-formation-choices > article > header { display: grid; grid-template-columns: 44px 1fr; align-items: stretch; min-height: 50px; padding-inline: 8px; }
 .aos-formation-choices > article > header > button { display: flex; align-items: center; padding: 12px 4px; border: 0; color: #111; background: transparent; text-align: left; font: 700 17px/1.3 var(--official-serif); }
 .aos-formation-choices > article > header > button:first-child { justify-content: center; }
